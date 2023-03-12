@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgressServiceService } from '../../service/progress-service.service';
+import * as moment from 'moment';
+import { Basic } from 'src/app/models/patient/basic.info.model';
+import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
+import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
+import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
+
 
 @Component({
   selector: 'app-questionnaire-add',
@@ -17,16 +22,33 @@ export class QuestionnaireAddComponent implements OnInit {
 
   counter: number = 1;
   progressValue: number = 0;
-  constructor(private progressService: ProgressServiceService) { }
+  validator: ValidatorContainer = new ValidatorContainer();
+  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
 
   ngOnInit(): void {
+    this.pateintModelRequesterService.currentValue.subscribe(model => {
+      if (model !== '') {
+        var pateintBasicInfo: Basic = JSON.parse(model);
+        var validator: PatientEssentialValidator = new PatientEssentialValidator();
+        pateintBasicInfo.birthDate = Number(moment(pateintBasicInfo.birthDate_date).format("x"));
+
+        pateintBasicInfo.ideffective_from = Number(moment(pateintBasicInfo.id_effective_from_date).format("x"))
+        pateintBasicInfo.ideffective_to = Number(moment(pateintBasicInfo.id_effective_to_date).format("x"))
+        validator.setModel(pateintBasicInfo);
+        this.validator = validator.validate();
+        //console.log(JSON.stringify(this.validator))
+      }
+    });
 
   }
 
-  next() {
-    this.calculatePercentage(this.counter, 'next')
-    this.counter++;
-    ;
+  next(patientModel: string) {
+    this.pateintModelRequesterService.requestPateintModel(patientModel);
+    if (this.validator.isValid) {
+      this.calculatePercentage(this.counter, 'next')
+      this.counter++;
+      ;
+    }
   }
   back() {
     this.counter--;

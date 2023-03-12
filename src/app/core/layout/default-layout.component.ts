@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ProgressServiceService } from 'src/app/modules/patient.questionnaire/service/progress-service.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -8,10 +7,9 @@ import { ProgressServiceService } from 'src/app/modules/patient.questionnaire/se
 })
 export class DefaultLayoutComponent implements OnInit {
   progressValue: string = '';
-  constructor(private progressService: ProgressServiceService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.progressService.currentProgressValue.subscribe(val => this.progressValue = val);
   }
 
 }

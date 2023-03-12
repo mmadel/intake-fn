@@ -7,6 +7,29 @@
 <c-progress class="mb-3">
     <c-progress-bar animated #progressBar [value]="progressValue">{{progressValue}}%</c-progress-bar>
 </c-progress>
+<div class="row alert alert-danger" *ngIf="!validator.isValid " role="alert">
+    <div class="col-12" *ngIf="validator.missing.length > 0">
+        <div class="row">
+            <div class="col-12">
+                <h4>Missing Fields</h4>
+            </div>
+        </div>
+        <div class="col-12" *ngFor="let propertyValidator of validator.missing">
+            {{propertyValidator.property}}
+        </div>
+    </div>
+    <div class="col-12" *ngIf="validator.wrong.length > 0">
+        <div class="row">
+            <div class="col-12">
+                <h4>Wrong Fields</h4>
+            </div>
+        </div>
+        <div class="col-12" *ngFor="let propertyValidator of validator.wrong">
+            {{propertyValidator.property}}
+            {{propertyValidator.message}}
+        </div>
+    </div>
+</div>
 <c-card *ngIf="counter === 1 " class="mb-3">
     <c-card-header>
         <h3>{{cards[0].name}}</h3>
@@ -15,7 +38,7 @@
         <app-essential-info></app-essential-info>
     </c-card-body>
     <c-card-footer>
-        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">
+        <button cButton (click)="next('basic')" size="sm" color="primary" variant="outline" class="col-1 me-1">
             next
         </button>
     </c-card-footer>
@@ -32,7 +55,7 @@
         <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">
             Back
         </button>
-        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
+        <button cButton (click)="next('address')" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
     </c-card-footer>
 </c-card>
 
@@ -45,7 +68,7 @@
     </c-card-body>
     <c-card-footer>
         <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
-        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
+        <button cButton (click)="next('medical')" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
     </c-card-footer>
 </c-card>
 
@@ -58,7 +81,7 @@
     </c-card-body>
     <c-card-footer>
         <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
-        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
+        <button cButton (click)="next('insurance')" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
     </c-card-footer>
 </c-card>
 
