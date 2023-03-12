@@ -28,7 +28,7 @@ import {
   NavModule,
   DateRangePickerModule,
   TimePickerModule,
-  ProgressModule
+  ProgressModule,
 } from '@coreui/angular-pro';
 
 import {

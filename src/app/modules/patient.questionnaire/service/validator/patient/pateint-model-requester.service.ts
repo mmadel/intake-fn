@@ -17,4 +17,7 @@ export class PateintModelRequesterService {
   sendPateintModel(model: string) {
     this.payload.next(model);
   }
+  backPateintModel(model:string){
+    this.payload.next(model);
+  }
 }

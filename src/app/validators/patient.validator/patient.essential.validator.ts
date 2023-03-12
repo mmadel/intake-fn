@@ -43,7 +43,7 @@ export class PatientEssentialValidator {
 
     private inCorrectDate(validatorContainer: ValidatorContainer) {
         var validators: PropertyValidator[] = new Array();
-        if (this.pateintBasicInfo.id_effective_from_date > this.pateintBasicInfo.id_effective_to_date) {
+        if ((this.pateintBasicInfo.id_effective_from_date > this.pateintBasicInfo.id_effective_to_date)) {
             validators.push({ property: " ID Effective Date", message: "From Date Can\'t be greater than to Date" });
         }
         if (validators.length > 0) {

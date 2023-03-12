@@ -7,29 +7,33 @@
 <c-progress class="mb-3">
     <c-progress-bar animated #progressBar [value]="progressValue">{{progressValue}}%</c-progress-bar>
 </c-progress>
-<div class="row alert alert-danger" *ngIf="!validator.isValid " role="alert">
-    <div class="col-12" *ngIf="validator.missing.length > 0">
-        <div class="row">
-            <div class="col-12">
-                <h4>Missing Fields</h4>
+<c-alert
+         [dismissible]="false"
+         color="warning"
+         fade
+         *ngIf="!validator.isValid ">
+         <div class="col-12" *ngIf="validator.missing.length > 0">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Missing Fields</h4>
+                </div>
+            </div>
+            <div class="col-12" *ngFor="let propertyValidator of validator.missing">
+                {{propertyValidator.property}}
             </div>
         </div>
-        <div class="col-12" *ngFor="let propertyValidator of validator.missing">
-            {{propertyValidator.property}}
-        </div>
-    </div>
-    <div class="col-12" *ngIf="validator.wrong.length > 0">
-        <div class="row">
-            <div class="col-12">
-                <h4>Wrong Fields</h4>
+        <div class="col-12" *ngIf="validator.wrong.length > 0">
+            <div class="row">
+                <div class="col-12">
+                    <h4>Wrong Fields</h4>
+                </div>
+            </div>
+            <div class="col-12" *ngFor="let propertyValidator of validator.wrong">
+                {{propertyValidator.property}}
+                {{propertyValidator.message}}
             </div>
         </div>
-        <div class="col-12" *ngFor="let propertyValidator of validator.wrong">
-            {{propertyValidator.property}}
-            {{propertyValidator.message}}
-        </div>
-    </div>
-</div>
+</c-alert>
 <c-card *ngIf="counter === 1 " class="mb-3">
     <c-card-header>
         <h3>{{cards[0].name}}</h3>

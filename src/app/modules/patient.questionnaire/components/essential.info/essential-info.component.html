@@ -34,10 +34,10 @@
         <c-input-group sizing="sm">
             <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                 [(ngModel)]="pateintBasicInfo.phoneType">
-                <option>Select Phone Type</option>
-                <option value="1">Home</option>
-                <option value="2">Work</option>
-                <option value="3">Other</option>
+                <option value="">Select Phone Type</option>
+                <option value="Home">Home</option>
+                <option value="Work">Work</option>
+                <option value="Other">Other</option>
             </select>
             <input cFormControl placeholder="Phone" [(ngModel)]="pateintBasicInfo.phoneNumber" />
         </c-input-group>
@@ -52,18 +52,21 @@
     <c-col xs="6" class="mb-2">
         <c-input-group class="mb-2" sizing="sm">
             <select cSelect sizing="sm" style="line-height: 15px;" cFormControl [(ngModel)]="pateintBasicInfo.idType">
-                <option>Select ID Type</option>
-                <option value="1">SSN</option>
-                <option value="2">Drive licence</option>
-                <option value="3">Other</option>
+                <option value="">Select ID Type</option>
+                <option value="SSN">SSN</option>
+                <option value="Drive licence">Drive licence</option>
+                <option value="Other">Other</option>
             </select>
             <input cFormControl placeholder="ID" [(ngModel)]="pateintBasicInfo.id" />
         </c-input-group>
     </c-col>
-    <c-col xs="6" class="mb-2">
-        <c-date-range-picker size="sm" [placeholder]="['ID Effective From', 'ID Effective To']"
-            [startDate]="pateintBasicInfo.id_effective_from_date"
-            [endDate]="pateintBasicInfo.id_effective_to_date"></c-date-range-picker>
+    <c-col xs="3" class="mb-2">
+        <c-date-picker closeOnSelect placeholder="ID Effective From" size="sm" cFormControl
+            [(ngModel)]="pateintBasicInfo.id_effective_from_date"></c-date-picker>
+    </c-col>
+    <c-col xs="3" class="mb-2">
+        <c-date-picker closeOnSelect placeholder="ID Effective To" size="sm" cFormControl
+            [(ngModel)]="pateintBasicInfo.id_effective_to_date"></c-date-picker>
     </c-col>
     <c-col xs="6" class="mb-2">
         <c-input-group class="mb-2" sizing="sm">
@@ -75,11 +78,10 @@
     <c-col xs="6" class="mb-2">
         <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
             [(ngModel)]="pateintBasicInfo.employmentStatus">
-            <option>Select Employment status</option>
-            <option value="1">Employed</option>
-            <option value="2">Retired</option>
-            <option value="3">Other</option>
+            <option value="">Select Employment status</option>
+            <option value="Employed">Employed</option>
+            <option value="Retired">Retired</option>
+            <option value="Other">Other</option>
         </select>
     </c-col>
 </c-row>
-<button cButton (click)="validate()"></button>
