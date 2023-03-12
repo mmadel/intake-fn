@@ -1,0 +1,75 @@
+<c-row>
+    <c-col xs="12">
+        <h1>Patient Information</h1>
+    </c-col>
+</c-row>
+<hr />
+<c-progress class="mb-3">
+    <c-progress-bar animated #progressBar [value]="progressValue">{{progressValue}}%</c-progress-bar>
+</c-progress>
+<c-card *ngIf="counter === 1 " class="mb-3">
+    <c-card-header>
+        <h3>{{cards[0].name}}</h3>
+    </c-card-header>
+    <c-card-body>
+        <app-essential-info></app-essential-info>
+    </c-card-body>
+    <c-card-footer>
+        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">
+            next
+        </button>
+    </c-card-footer>
+</c-card>
+
+<c-card *ngIf="counter === 2 " class="mb-3">
+    <c-card-header>
+        <h3>{{cards[1].name}}</h3>
+    </c-card-header>
+    <c-card-body>
+        <app-address-information></app-address-information>
+    </c-card-body>
+    <c-card-footer>
+        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">
+            Back
+        </button>
+        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
+    </c-card-footer>
+</c-card>
+
+<c-card *ngIf="counter === 3 " class="mb-3">
+    <c-card-header>
+        <h3>{{cards[2].name}}</h3>
+    </c-card-header>
+    <c-card-body>
+        <app-medical-info></app-medical-info>
+    </c-card-body>
+    <c-card-footer>
+        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
+        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
+    </c-card-footer>
+</c-card>
+
+<c-card *ngIf="counter === 4 " class="mb-3">
+    <c-card-header>
+        <h3>{{cards[3].name}}</h3>
+    </c-card-header>
+    <c-card-body>
+        <app-insurance-information></app-insurance-information>
+    </c-card-body>
+    <c-card-footer>
+        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
+        <button cButton (click)="next()" size="sm" color="primary" variant="outline" class="col-1 me-1">next</button>
+    </c-card-footer>
+</c-card>
+
+<c-card *ngIf="counter === 5 " class="mb-3">
+    <c-card-header>
+        <h3>Done</h3>
+    </c-card-header>
+    <c-card-body>
+        DONE
+    </c-card-body>
+    <c-card-footer>
+        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
+    </c-card-footer>
+</c-card>

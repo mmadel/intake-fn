@@ -1,0 +1,76 @@
+<c-row>
+    <c-col xs="12" class="mb-2">
+        <c-input-group sizing="sm">
+            <span cInputGroupText>Patient Name</span>
+            <input aria-label="First name" cFormControl placeholder="First" />
+            <input aria-label="Middle name" cFormControl placeholder="Middle" />
+            <input aria-label="Last name" cFormControl placeholder="Last" />
+        </c-input-group>
+    </c-col>
+    <c-col xs="12" class="mb-2">
+        <c-date-picker closeOnSelect placeholder="Date Of Birth" size="sm"></c-date-picker>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+            <option>Select Gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Other</option>
+        </select>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+            <option>Select Marital Status</option>
+            <option value="1">Single</option>
+            <option value="2">Married</option>
+            <option value="3">Widowed</option>
+            <option value="4">Divorced</option>
+        </select>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <c-input-group sizing="sm">
+            <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+                <option>Select Phone Type</option>
+                <option value="1">Home</option>
+                <option value="2">Work</option>
+                <option value="3">Other</option>
+            </select>
+            <input cFormControl placeholder="Phone" />
+        </c-input-group>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <c-input-group class="mb-2" sizing="sm">
+            <input aria-describedby="basic-addon2" cFormControl placeholder="Email" />
+            <span cInputGroupText id="basic-addon2">@mail.com</span>
+        </c-input-group>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <c-input-group class="mb-2" sizing="sm">
+            <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+                <option>Select ID Type</option>
+                <option value="1">SSN</option>
+                <option value="2">Drive licence</option>
+                <option value="3">Other</option>
+            </select>
+            <input cFormControl placeholder="ID" />
+        </c-input-group>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <c-date-range-picker size="sm" [placeholder]="['ID Effective From', 'ID Effective To']"></c-date-range-picker>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <c-input-group class="mb-2" sizing="sm">
+            <span cInputGroupText>Emergency Contact</span>
+            <input cFormControl placeholder="Name" />
+            <input cFormControl placeholder="Phone" />
+        </c-input-group>
+    </c-col>
+    <c-col xs="6" class="mb-2">
+        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+            <option>Select Employment status</option>
+            <option value="1">Employed</option>
+            <option value="2">Retired</option>
+            <option value="3">Other</option>
+        </select>
+    </c-col>
+</c-row>

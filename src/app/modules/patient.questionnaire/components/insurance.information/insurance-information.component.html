@@ -1,0 +1,95 @@
+<c-card class="mb-3">
+    <c-card-header>
+        <h6>Is it, worker's comp/No fault?</h6>
+    </c-card-header>
+    <c-card-body>
+        <c-col xs="12" class="mb-1">
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('yes')" value="Yes"
+                    name="flexRadioDefault" size="sm" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('no')" value="no"
+                    name="flexRadioDefault" size="sm" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </c-col>
+    </c-card-body>
+</c-card>
+<c-card class="mb-3" *ngIf="isWorkerCompNoFault === 'yes'" >
+    <c-card-body>
+        <c-col xs="4" class="mb-3">
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="relatedInjuryAutoAccidentChange('ri')" value="related-injury"
+                    name="workerinjury" size="sm" />
+                <label cFormCheckLabel>Work related injury</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="relatedInjuryAutoAccidentChange('aa')" value="auto-accident"
+                    name="workerinjury" size="sm" />
+                <label cFormCheckLabel>Auto accident (No fault)</label>
+            </c-form-check>
+        </c-col>
+        <c-col xs="2" class="mb-3" *ngIf="accidentType === 'ri'">
+            <form cForm>
+                <div class="mb-1">
+                    <c-date-picker closeOnSelect placeholder="Date of Accident" size="sm" cFormControl></c-date-picker>
+                </div>
+            </form>
+        </c-col>
+        <c-col xs="4" class="mb-3" *ngIf="accidentType === 'aa'">
+            <form cForm>
+                <div class="mb-1">
+                    <c-date-picker closeOnSelect placeholder="Date of Accident" size="sm" cFormControl></c-date-picker>
+                </div>
+                <div class="mb-1">
+                    <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+                        <option>Select States</option>
+                    </select>
+                </div>
+            </form>
+        </c-col>
+        <c-col  xs="4" class="mb-3">
+            <form cForm>
+                <div class="mb-1">
+                    <c-input-group sizing="sm">
+                        <span cInputGroupText>Policy Holder’s Name</span>
+                        <input aria-label="First name" cFormControl placeholder="First" />
+                        <input aria-label="Last name" cFormControl placeholder="Last" />
+                    </c-input-group>
+                </div>
+                <div class="mb-1">
+                    <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+                        <option>Insurance Company</option>
+                        <option value="1">Aetna</option>
+                        <option value="2">Aetna Better Health</option>
+                        <option value="3">Affinity by Molina Healthcare</option>
+                        <option value="4">Agewell</option>
+                        <option value="4">All Automobile/No-fault insurance</option>
+                        <option value="4">All workers' compensation insurance</option>
+                        <option value="4">Amida Care</option>
+                        <option value="4">Anthem BCBS</option>
+                        <option value="4">Archcare</option>
+                        <option value="4">BCBS health plus (Amerigroup)</option>
+                    </select>
+                </div>
+                <div class="mb-1">
+                    <input cFormControl placeholder="Member ID" sizing="sm"/>
+                </div>
+                <div class="mb-1">
+                    <input cFormControl placeholder="Policy Group ID"  sizing="sm"/>
+                </div>
+                <div class="mb-1">
+                    <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+                        <option>Select Policyholders Relationship</option>
+                        <option value="1">Self</option>
+                        <option value="2">Spouse</option>
+                        <option value="3">Child</option>
+                        <option value="3">Other</option>
+                    </select>
+                </div>
+            </form>
+        </c-col>
+    </c-card-body>
+</c-card>
