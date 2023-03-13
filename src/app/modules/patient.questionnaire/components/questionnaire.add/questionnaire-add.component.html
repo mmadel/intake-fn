@@ -7,7 +7,7 @@
 <c-progress class="mb-3">
     <c-progress-bar animated #progressBar [value]="progressValue">{{progressValue}}%</c-progress-bar>
 </c-progress>
-<c-alert [dismissible]="false" color="warning" fade *ngIf="!validator.isValid ">
+<c-alert [dismissible]="false" color="danger" fade *ngIf="!validator.isValid ">
     <div class="col-12" *ngIf="validator.missing.length > 0">
         <div class="row">
             <div class="col-12">
