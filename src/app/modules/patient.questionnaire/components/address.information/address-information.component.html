@@ -1,6 +1,6 @@
 <c-row>
     <form cForm [gutter]="{gy: 2, gx: 4}">
-        <c-col xs="12" class="mb-3">
+        <c-col xs="auto" class="mb-3">
             <div [ngClass]="{ 'form-group required':isRequiredField('addresstype') }">
                 <label for="addresstype" class="form-label">Address Type</label>
                 <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.type"
@@ -12,21 +12,21 @@
                 </select>
             </div>
         </c-col>
-        <c-col xs="12" class="mb-3">
+        <c-col xs="auto" class="mb-3">
             <div [ngClass]="{ 'form-group required':isRequiredField('firstaddress') }">
                 <label for="firstaddress" class="form-label">First Address</label>
                 <input aria-label="First Address" cFormControl placeholder="First Address" sizing="sm"
                     [(ngModel)]="pateintAddressInfo.first" name="firstaddress" />
             </div>
         </c-col>
-        <c-col xs="12" class="mb-3">
+        <c-col xs="auto" class="mb-3">
             <div [ngClass]="{ 'form-group required':isRequiredField('secondaddress') }">
                 <label for="secondaddress" class="form-label">Second Address</label>
                 <input aria-label="First Address" cFormControl placeholder="Second Address" sizing="sm"
                     [(ngModel)]="pateintAddressInfo.second" name="secondaddress" />
             </div>
         </c-col>
-        <c-col xs="4" class="mb-3">
+        <c-col xs="auto" class="mb-3">
             <div [ngClass]="{ 'form-group required':isRequiredField('country') }">
                 <label for="country" class="form-label">Country</label>
                 <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.country"
@@ -36,10 +36,7 @@
                 </select>
             </div>
         </c-col>
-        <c-col xs="4" class="mb-3">
-            <input cFormControl placeholder="Settlement" sizing="sm" />
-        </c-col>
-        <c-col xs="4" class="mb-3">
+        <c-col xs="auto" class="mb-3">
             <div [ngClass]="{ 'form-group required':isRequiredField('zipcode') }">
                 <label for="zipCode" class="form-label">Zip Code</label>
                 <input cFormControl placeholder="Zip Code" sizing="sm" [(ngModel)]="pateintAddressInfo.zipCode"
