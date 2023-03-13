@@ -3,7 +3,7 @@ import { RecommendationDoctor } from "./medical/recommendation.doctor";
 import { RecommendationEntity } from "./medical/recommendation.entity";
 
 export class MedicalQuestionnaireInfo {
-    doctorRecommendation: boolean = false;
+    doctorRecommendation: boolean;
     appointmentBooking: string = '';
     primaryDoctor: string = '';
     familyResultSubmission: boolean = false;

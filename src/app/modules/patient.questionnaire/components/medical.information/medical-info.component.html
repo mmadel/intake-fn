@@ -6,12 +6,12 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" name="doctorRecommendation"
-                    size="sm"  checked="medicalQuestionnaireInfo.doctorRecommendation"/>
+                    size="sm" [checked]="isReferringDoctor === 'yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" name="doctorRecommendation"
-                    size="sm" />
+                    size="sm" [checked]="isReferringDoctor === 'no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
@@ -63,9 +63,10 @@
         <c-col xs="4">
             <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                 [(ngModel)]="medicalQuestionnaireInfo.appointmentBooking" name="appointmentbooking">
-                <option>Website</option>
-                <option>Zocdoc</option>
-                <option>Calls</option>
+                <option value="">Select</option>
+                <option value="Website">Website</option>
+                <option value="Zocdoc">Zocdoc</option>
+                <option value="Calls">Calls</option>
             </select>
         </c-col>
     </c-card-body>
@@ -90,12 +91,12 @@
             <c-col xs="12" class="mb-1">
                 <c-form-check>
                     <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
-                        (change)="resultsfamilyQChange('yes')" />
+                        (change)="resultsfamilyQChange('yes')" [checked]="isfamilyResultSubmission === 'yes'" />
                     <label cFormCheckLabel>Yes</label>
                 </c-form-check>
                 <c-form-check>
                     <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
-                        (change)="resultsfamilyQChange('no')" />
+                        (change)="resultsfamilyQChange('no')" [checked]="isfamilyResultSubmission === 'no'" />
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </c-col>
@@ -110,12 +111,12 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="physicalTherapyQChange('yes')" name="physicaltherapy"
-                    size="sm" />
+                    size="sm" [checked]="isphysicalTherapy === 'yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" value="no" (change)="physicalTherapyQChange('no')"
-                    name="physicaltherapy" size="sm" />
+                    name="physicaltherapy" size="sm" [checked]="isphysicalTherapy === 'no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>

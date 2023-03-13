@@ -11,6 +11,7 @@ import { PateintModelRequesterService } from '../../service/validator/patient/pa
 export class MedicalInfoComponent implements OnInit {
   isReferringDoctor: string = '';
   isphysicalTherapy: string = '';
+  isfamilyResultSubmission: string = '';
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
   constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
 
@@ -20,16 +21,22 @@ export class MedicalInfoComponent implements OnInit {
   }
   physicalTherapyQChange(val: string) {
     this.isphysicalTherapy = val;
-    val === 'yes' ? this.medicalQuestionnaireInfo.physicalTherapyReceiving =true : this.medicalQuestionnaireInfo.physicalTherapyReceiving = false;
+    val === 'yes' ? this.medicalQuestionnaireInfo.physicalTherapyReceiving = true : this.medicalQuestionnaireInfo.physicalTherapyReceiving = false;
   }
   resultsfamilyQChange(val: string) {
+    this.isfamilyResultSubmission = val;
     val === 'yes' ? this.medicalQuestionnaireInfo.familyResultSubmission = true : this.medicalQuestionnaireInfo.familyResultSubmission = false;
   }
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.medicalQuestionnaireInfo !== undefined)
+      if (pateint.medicalQuestionnaireInfo !== undefined) {
         this.medicalQuestionnaireInfo = pateint.medicalQuestionnaireInfo;
+        pateint.medicalQuestionnaireInfo.doctorRecommendation ? this.isReferringDoctor = 'yes' : this.isReferringDoctor = 'no';
+        pateint.medicalQuestionnaireInfo.physicalTherapyReceiving ? this.isphysicalTherapy = 'yes' : this.isphysicalTherapy = 'no';
+        pateint.medicalQuestionnaireInfo.familyResultSubmission ? this.isfamilyResultSubmission = 'yes' : this.isfamilyResultSubmission = 'no';
+      }
+
     }
 
     this.pateintModelRequesterService.currentModelName.subscribe(msg => {

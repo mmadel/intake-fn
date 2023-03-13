@@ -100,12 +100,15 @@ export class QuestionnaireAddComponent implements OnInit {
   }
 
   cachePatient() {
-    localStorage.removeItem('patient');
     var patient: Patient = new Patient();
     patient = JSON.parse(localStorage.getItem('patient') || '{}');
-    patient.basicInfo = this.patientEssentialInfo;
-    patient.addressInfo = this.patientAddressInfo;
-    patient.medicalQuestionnaireInfo = this.medicalQuestionnaireInfo 
+    if (this.modelName === 'basic')
+      patient.basicInfo = this.patientEssentialInfo;
+    if (this.modelName === 'address')
+      patient.addressInfo = this.patientAddressInfo;
+    if (this.modelName === 'medical')
+      patient.medicalQuestionnaireInfo = this.medicalQuestionnaireInfo
+
     localStorage.setItem('patient', JSON.stringify(patient));
   }
 }

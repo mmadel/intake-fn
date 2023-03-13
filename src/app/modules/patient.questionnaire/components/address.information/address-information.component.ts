@@ -10,13 +10,13 @@ import * as _ from 'lodash';
   styleUrls: ['./address-information.component.css']
 })
 export class AddressInformationComponent implements OnInit {
-  pateintAddressInfo: Address = new Address()
+  pateintAddressInfo: Address;
   constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      this.pateintAddressInfo = pateint.addressInfo;
+      this.pateintAddressInfo = pateint.addressInfo !== undefined ? pateint.addressInfo : new Address();
     }
 
     this.pateintModelRequesterService.currentModelName.subscribe(msg => {
