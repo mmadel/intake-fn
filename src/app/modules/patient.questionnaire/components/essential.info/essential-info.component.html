@@ -1,87 +1,175 @@
 <c-row>
-    <c-col xs="12" class="mb-2">
-        <c-input-group sizing="sm">
-            <span cInputGroupText>Patient Name</span>
-            <input aria-label="First name" cFormControl placeholder="First" [(ngModel)]="pateintBasicInfo.firstName">
-            <input aria-label="Middle name" cFormControl placeholder="Middle"
-                [(ngModel)]="pateintBasicInfo.middleName" />
-            <input aria-label="Last name" cFormControl placeholder="Last" [(ngModel)]="pateintBasicInfo.lastName" />
-        </c-input-group>
-    </c-col>
-    <c-col xs="12" class="mb-2">
-        <c-date-picker closeOnSelect placeholder="Date Of Birth" size="sm"
-            [(ngModel)]="pateintBasicInfo.birthDate_date"></c-date-picker>
-    </c-col>
-    <c-col xs="6" class="mb-2">
-        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl [(ngModel)]="pateintBasicInfo.geneder">
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select>
-    </c-col>
-    <c-col xs="6" class="mb-2">
-        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
-            [(ngModel)]="pateintBasicInfo.maritalStatus">
-            <option value="">Select Marital Status</option>
-            <option value="Single">Single</option>
-            <option value="Married">Married</option>
-            <option value="Widowed">Widowed</option>
-            <option value="Divorced">Divorced</option>
-        </select>
-    </c-col>
-    <c-col xs="6" class="mb-2">
-        <c-input-group sizing="sm">
-            <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
-                [(ngModel)]="pateintBasicInfo.phoneType">
-                <option value="">Select Phone Type</option>
-                <option value="Home">Home</option>
-                <option value="Work">Work</option>
-                <option value="Other">Other</option>
-            </select>
-            <input cFormControl placeholder="Phone" [(ngModel)]="pateintBasicInfo.phoneNumber" />
-        </c-input-group>
-    </c-col>
-    <c-col xs="6" class="mb-2">
-        <c-input-group class="mb-2" sizing="sm">
-            <input aria-describedby="basic-addon2" cFormControl placeholder="Email"
-                [(ngModel)]="pateintBasicInfo.email" />
-            <span cInputGroupText id="basic-addon2">@mail.com</span>
-        </c-input-group>
-    </c-col>
-    <c-col xs="6" class="mb-2">
-        <c-input-group class="mb-2" sizing="sm">
-            <select cSelect sizing="sm" style="line-height: 15px;" cFormControl [(ngModel)]="pateintBasicInfo.idType">
-                <option value="">Select ID Type</option>
-                <option value="SSN">SSN</option>
-                <option value="Drive licence">Drive licence</option>
-                <option value="Other">Other</option>
-            </select>
-            <input cFormControl placeholder="ID" [(ngModel)]="pateintBasicInfo.id" />
-        </c-input-group>
-    </c-col>
-    <c-col xs="3" class="mb-2">
-        <c-date-picker closeOnSelect placeholder="ID Effective From" size="sm" cFormControl
-            [(ngModel)]="pateintBasicInfo.id_effective_from_date"></c-date-picker>
-    </c-col>
-    <c-col xs="3" class="mb-2">
-        <c-date-picker closeOnSelect placeholder="ID Effective To" size="sm" cFormControl
-            [(ngModel)]="pateintBasicInfo.id_effective_to_date"></c-date-picker>
-    </c-col>
-    <c-col xs="6" class="mb-2">
-        <c-input-group class="mb-2" sizing="sm">
-            <span cInputGroupText>Emergency Contact</span>
-            <input cFormControl placeholder="Name" [(ngModel)]="pateintBasicInfo.emergencyName" />
-            <input cFormControl placeholder="Phone" [(ngModel)]="pateintBasicInfo.emergencyPhone" />
-        </c-input-group>
-    </c-col>
-    <c-col xs="6" class="mb-2">
-        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
-            [(ngModel)]="pateintBasicInfo.employmentStatus">
-            <option value="">Select Employment status</option>
-            <option value="Employed">Employed</option>
-            <option value="Retired">Retired</option>
-            <option value="Other">Other</option>
-        </select>
-    </c-col>
+    <form cForm [gutter]="{gy: 2, gx: 4}">
+        <c-col xs="auto" class="mb-2">
+
+            <div [ngClass]="{ 'form-group required':isRequiredField('name') }">
+                <label for="fname" class="form-label">First Name</label>
+                <input aria-label="First name" cFormControl [(ngModel)]="pateintBasicInfo.firstName" name="fname"
+                    sizing="sm">
+            </div>
+        </c-col>
+
+        <c-col xs="auto" class="mb-2">
+
+            <div [ngClass]="{ 'form-group required':isRequiredField('name') }">
+                <label for="mname" class="form-label">Middle Name</label>
+                <input aria-label="Middle name" cFormControl [(ngModel)]="pateintBasicInfo.middleName" name="mname"
+                    sizing="sm" />
+            </div>
+
+        </c-col>
+        <c-col xs="auto" class="mb-2">
+
+            <div [ngClass]="{ 'form-group required':isRequiredField('name') }">
+                <label for="lname" class="form-label">Last Name</label>
+                <input aria-label="Last name" cFormControl [(ngModel)]="pateintBasicInfo.lastName" name="lname"
+                    sizing="sm" />
+            </div>
+
+        </c-col>
+
+        <c-col xs="auto" class="mb-2">
+            <div [ngClass]="{ 'form-group required':isRequiredField('birthDate') }">
+                <label for="dob" class="form-label">Date Of Birth</label>
+                <c-date-picker closeOnSelect placeholder="Date Of Birth" size="sm" name="dob"
+                    [(ngModel)]="pateintBasicInfo.birthDate_date"></c-date-picker>
+            </div>
+        </c-col>
+
+        <c-col xs="auto" class="mb-2">
+
+            <div [ngClass]="{ 'form-group required':isRequiredField('gender') }">
+                <label for="gender" class="form-label">Gender</label>
+                <select cSelect sizing="sm" name="gender" style="line-height: 15px;" cFormControl
+                    [(ngModel)]="pateintBasicInfo.geneder">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </c-col>
+
+        <c-col xs="auto" class="mb-2">
+
+            <div [ngClass]="{ 'form-group required':isRequiredField('maritalStatus') }">
+                <label for="maritalStatus" class="form-label">Marital Status</label>
+                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                    [(ngModel)]="pateintBasicInfo.maritalStatus" name="maritalStatus">
+                    <option value="">Select Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+            </div>
+
+        </c-col>
+
+        <div cRow>
+            <c-col xs="6" class="mb-2">
+                <div [ngClass]="{ 'form-group required':isRequiredField('phoneType') }">
+                    <label for="phonetype" class="form-label">Phone Type</label>
+                    <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                        [(ngModel)]="pateintBasicInfo.phoneType" name="phonetype">
+                        <option value="">Select Phone Type</option>
+                        <option value="Home">Home</option>
+                        <option value="Work">Work</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </c-col>
+            <c-col xs="6" class="mb-2">
+                <div [ngClass]="{ 'form-group required':isRequiredField('phoneNumber') }">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input cFormControl placeholder="Phone" [(ngModel)]="pateintBasicInfo.phoneNumber" sizing="sm"
+                        name="phone" />
+                </div>
+            </c-col>
+        </div>
+
+        <c-col xs="auto" class="mb-2">
+            <div [ngClass]="{ 'form-group required':isRequiredField('email') }">
+                <label for="email" class="form-label">Email</label>
+                <input aria-describedby="basic-addon2" cFormControl sizing="sm" [(ngModel)]="pateintBasicInfo.email"
+                    name="email" />
+            </div>
+
+        </c-col>
+
+        <div cRow>
+            <c-col xs="3" class="mb-2">
+
+                <div [ngClass]="{ 'form-group required':isRequiredField('idType') }">
+                    <label for="pIdType" class="form-label">ID Type</label>
+                    <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                        [(ngModel)]="pateintBasicInfo.idType" name="pIdType">
+                        <option value="">Select ID Type</option>
+                        <option value="SSN">SSN</option>
+                        <option value="Drive licence">Drive licence</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+            </c-col>
+            <c-col xs="3" class="mb-2">
+
+                <div [ngClass]="{ 'form-group required':isRequiredField('id') }">
+                    <label for="pId" class="form-label">ID</label>
+                    <input cFormControl [(ngModel)]="pateintBasicInfo.id" sizing="sm" name="pId" />
+                </div>
+
+            </c-col>
+            <c-col xs="3" class="mb-2">
+
+                <div [ngClass]="{ 'form-group required':isRequiredField('ideffective_from') }">
+                    <label for="ideffictivefrom" class="form-label">ID Effective From</label>
+                    <c-date-picker closeOnSelect size="sm" cFormControl
+                        [(ngModel)]="pateintBasicInfo.id_effective_from_date" name="ideffictivefrom"></c-date-picker>
+                </div>
+
+            </c-col>
+            <c-col xs="3" class="mb-2">
+
+                <div [ngClass]="{ 'form-group required':isRequiredField('ideffective_to') }">
+                    <label for="ideffictiveto" class="form-label">ID Effective To</label>
+                    <c-date-picker closeOnSelect size="sm" cFormControl
+                        [(ngModel)]="pateintBasicInfo.id_effective_to_date" name="ideffictiveto"></c-date-picker>
+                </div>
+
+            </c-col>
+        </div>
+
+        <div cRow>
+            <c-col xs="6" class="mb-2">
+
+                <div [ngClass]="{ 'form-group required':isRequiredField('emergencyName') }">
+                    <label for="emergencyName" class="form-label">Emergency Name</label>
+                    <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyName" name="emergencyName" sizing="sm" />
+                </div>
+
+            </c-col>
+            <c-col xs="6" class="mb-2">
+
+                <div [ngClass]="{ 'form-group required':isRequiredField('emergencyPhone') }">
+                    <label for="emergencyphone" class="form-label">Emergency Phone</label>
+                    <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyPhone" name="emergencyphone"
+                        sizing="sm" />
+                </div>
+
+            </c-col>
+        </div>
+        <c-col xs="auto" class="mb-2">
+            <div [ngClass]="{ 'form-group required':isRequiredField('employmentStatus') }">
+                <label for="employmentStatus" class="form-label">Employment Status</label>
+                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                    [(ngModel)]="pateintBasicInfo.employmentStatus" name="employmentStatus">
+                    <option value="">Select Employment status</option>
+                    <option value="Employed">Employed</option>
+                    <option value="Retired">Retired</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </c-col>
+    </form>
 </c-row>

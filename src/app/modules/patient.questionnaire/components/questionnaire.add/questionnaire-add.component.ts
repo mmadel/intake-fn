@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Basic } from 'src/app/models/patient/basic.info.model';
 import { Patient } from 'src/app/models/patient/patient.model';
@@ -23,10 +23,19 @@ export class QuestionnaireAddComponent implements OnInit {
 
   counter: number = 1;
   progressValue: number = 0;
+  windowScrolled: boolean =true;
   validator: ValidatorContainer = new ValidatorContainer();
   patient: Patient = new Patient();
   constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
-
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+      if (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop > 100) {
+          this.windowScrolled = true;
+      } 
+     else if (this.windowScrolled && window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop < 10) {
+          this.windowScrolled = false;
+      }
+  }
   ngOnInit(): void {
     this.pateintModelRequesterService.currentValue.subscribe(model => {
       if (model !== '') {
@@ -52,6 +61,14 @@ export class QuestionnaireAddComponent implements OnInit {
       this.calculatePercentage(this.counter, 'next')
       this.counter++;
       ;
+    }else{
+      (function smoothscroll() {
+        var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            
+            window.scrollTo(0,0);
+        }
+    })();
     }
   }
   back() {
