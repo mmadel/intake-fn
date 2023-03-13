@@ -3,8 +3,10 @@ import * as moment from 'moment';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { Basic } from 'src/app/models/patient/basic.info.model';
 import { Patient } from 'src/app/models/patient/patient.model';
+import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
+import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
 
@@ -29,6 +31,7 @@ export class QuestionnaireAddComponent implements OnInit {
   validator: ValidatorContainer = new ValidatorContainer();
   patientEssentialInfo: Basic = new Basic();
   patientAddressInfo: Address = new Address();
+  medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
   modelName: string = '';
   constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
 
@@ -52,6 +55,13 @@ export class QuestionnaireAddComponent implements OnInit {
           patientAddressValidator.setModel(this.patientAddressInfo);
           this.validator = new ValidatorContainer();
           this.validator = patientAddressValidator.validate();
+        }
+        if (this.modelName === 'medical') {
+          this.medicalQuestionnaireInfo = JSON.parse(model);
+          var patientMedicalQuestionnaireValidator: PatientMedicalQuestionnaireValidator = new PatientMedicalQuestionnaireValidator();
+          patientMedicalQuestionnaireValidator.setModel(this.medicalQuestionnaireInfo);
+          this.validator = new ValidatorContainer();
+          this.validator = patientMedicalQuestionnaireValidator.validate();
         }
       }
     });
@@ -78,7 +88,7 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   back() {
 
-    
+
     this.counter--;
     this.calculatePercentage(this.counter, 'back');
     this.validator = new ValidatorContainer();
@@ -95,6 +105,7 @@ export class QuestionnaireAddComponent implements OnInit {
     patient = JSON.parse(localStorage.getItem('patient') || '{}');
     patient.basicInfo = this.patientEssentialInfo;
     patient.addressInfo = this.patientAddressInfo;
+    patient.medicalQuestionnaireInfo = this.medicalQuestionnaireInfo 
     localStorage.setItem('patient', JSON.stringify(patient));
   }
 }

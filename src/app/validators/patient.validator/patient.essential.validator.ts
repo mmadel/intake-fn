@@ -76,7 +76,7 @@ export class PatientEssentialValidator {
                 validator.push({ property: " Marital Status", message: '' });
         }
 
-        if (this.isRequiredField('phoneType') && this.isRequiredField('phoneNumber')) {
+        if (this.isRequiredField('phoneType') || this.isRequiredField('phoneNumber')) {
             if ((this.pateintBasicInfo.phoneType === '' || this.pateintBasicInfo.phoneType === undefined)
                 && (this.pateintBasicInfo.phoneNumber === '' || this.pateintBasicInfo.phoneNumber === undefined)) {
                 validator.push({ property: " Phone Type", message: '' });
