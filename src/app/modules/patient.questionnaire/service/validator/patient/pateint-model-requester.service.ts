@@ -6,18 +6,21 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PateintModelRequesterService {
 
-  private payload = new BehaviorSubject('');
-  currentValue = this.payload.asObservable();
+  private modelName = new BehaviorSubject('');
+  currentModelName = this.modelName.asObservable();
+
+  private modelValue = new BehaviorSubject('');
+  currentModel = this.modelValue.asObservable();
   constructor() { }
 
   requestPateintModel(modelName: string) {
-    this.payload.next(modelName);
+    this.modelName.next(modelName);
   }
 
   sendPateintModel(model: string) {
-    this.payload.next(model);
+    this.modelValue.next(model);
   }
   backPateintModel(model:string){
-    this.payload.next(model);
+    this.modelValue.next(model);
   }
 }

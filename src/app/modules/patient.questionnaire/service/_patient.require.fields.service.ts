@@ -13,6 +13,12 @@ const patientRequiredFields = [
     { id: 12, field: 'emergencyName', required: false },
     { id: 13, field: 'emergencyPhone', required: false },
     { id: 14, field: 'employmentStatus', required: false },
+
+    { id: 15, field: 'addresstype', required: true },
+    { id: 16, field: 'firstaddress', required: false },
+    { id: 17, field: 'secondaddress', required: false },
+    { id: 18, field: 'country', required: false },
+    { id: 19, field: 'zipcode', required: false },
 ]
 
 export default patientRequiredFields

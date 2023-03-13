@@ -1,27 +1,31 @@
 <c-row>
     <c-col xs="12" class="mb-3">
-        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
-            <option>Select Address Type</option>
-            <option value="1">Home</option>
-            <option value="2">Work</option>
-            <option value="3">Other</option>
+        <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.type" name="type"
+            cFormControl>
+            <option value="">Select Address Type</option>
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+            <option value="Other">Other</option>
         </select>
     </c-col>
     <c-col xs="12" class="mb-3">
-        <input aria-label="First Address" cFormControl placeholder="First Address"  sizing="sm"/>
+        <input aria-label="First Address" cFormControl placeholder="First Address" sizing="sm"
+            [(ngModel)]="pateintAddressInfo.first" name="firstaddress" />
     </c-col>
     <c-col xs="12" class="mb-3">
-        <input aria-label="First Address" cFormControl placeholder="Second Address"  sizing="sm"/>
+        <input aria-label="First Address" cFormControl placeholder="Second Address" sizing="sm"
+            [(ngModel)]="pateintAddressInfo.second" name="secondaddress" />
     </c-col>
     <c-col xs="4" class="mb-3">
-        <select cSelect sizing="sm" style="line-height: 15px;">
+        <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.country" name="country">
             <option>Select Country</option>
         </select>
     </c-col>
     <c-col xs="4" class="mb-3">
-        <input cFormControl placeholder="Settlement"  sizing="sm"/>
+        <input cFormControl placeholder="Settlement" sizing="sm" />
     </c-col>
     <c-col xs="4" class="mb-3">
-        <input cFormControl placeholder="Zip Code" sizing="sm"/>
+        <input cFormControl placeholder="Zip Code" sizing="sm" [(ngModel)]="pateintAddressInfo.zipCode"
+            name="zipCode" />
     </c-col>
 </c-row>
