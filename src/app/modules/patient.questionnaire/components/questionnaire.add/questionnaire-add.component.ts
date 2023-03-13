@@ -43,14 +43,15 @@ export class QuestionnaireAddComponent implements OnInit {
           this.patientEssentialInfo.ideffective_from = Number(moment(this.patientEssentialInfo.id_effective_from_date).format("x"))
           this.patientEssentialInfo.ideffective_to = Number(moment(this.patientEssentialInfo.id_effective_to_date).format("x"))
           atientEssentialValidator.setModel(this.patientEssentialInfo);
+          this.validator = new ValidatorContainer();
           this.validator = atientEssentialValidator.validate();
         }
         if (this.modelName === 'address') {
           this.patientAddressInfo = JSON.parse(model);
           var patientAddressValidator: PatientAddressValidator = new PatientAddressValidator();
           patientAddressValidator.setModel(this.patientAddressInfo);
+          this.validator = new ValidatorContainer();
           this.validator = patientAddressValidator.validate();
-          console.log(JSON.stringify(this.validator))
         }
       }
     });
@@ -76,10 +77,11 @@ export class QuestionnaireAddComponent implements OnInit {
     }
   }
   back() {
-    this.pateintModelRequesterService.backPateintModel(localStorage.getItem('patient') || '{}');
+
+    
     this.counter--;
     this.calculatePercentage(this.counter, 'back');
-
+    this.validator = new ValidatorContainer();
   }
   calculatePercentage(index: number, action: string) {
     if (action === 'back')
