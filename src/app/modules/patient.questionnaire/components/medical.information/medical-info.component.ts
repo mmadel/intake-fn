@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
 import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
-
+import requiredFields from '../../service/_patient.require.fields.service';
 @Component({
   selector: 'app-medical-info',
   templateUrl: './medical-info.component.html',
@@ -45,5 +46,8 @@ export class MedicalInfoComponent implements OnInit {
       }
     });
   }
-
+  isRequiredField(name: string): boolean {
+    var field = _.find(requiredFields, { field: name })
+    return field !== undefined ? field.required : false;
+  }
 }
