@@ -1,32 +1,50 @@
 <c-row>
-    <c-col xs="12" class="mb-3">
-        <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.type" name="type"
-            cFormControl>
-            <option value="">Select Address Type</option>
-            <option value="Home">Home</option>
-            <option value="Work">Work</option>
-            <option value="Other">Other</option>
-        </select>
-    </c-col>
-    <c-col xs="12" class="mb-3">
-        <input aria-label="First Address" cFormControl placeholder="First Address" sizing="sm"
-            [(ngModel)]="pateintAddressInfo.first" name="firstaddress" />
-    </c-col>
-    <c-col xs="12" class="mb-3">
-        <input aria-label="First Address" cFormControl placeholder="Second Address" sizing="sm"
-            [(ngModel)]="pateintAddressInfo.second" name="secondaddress" />
-    </c-col>
-    <c-col xs="4" class="mb-3">
-        <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.country" name="country">
-            <option value="">Select Country</option>
-            <option value="usa">USA</option>
-        </select>
-    </c-col>
-    <c-col xs="4" class="mb-3">
-        <input cFormControl placeholder="Settlement" sizing="sm" />
-    </c-col>
-    <c-col xs="4" class="mb-3">
-        <input cFormControl placeholder="Zip Code" sizing="sm" [(ngModel)]="pateintAddressInfo.zipCode"
-            name="zipCode" />
-    </c-col>
+    <form cForm [gutter]="{gy: 2, gx: 4}">
+        <c-col xs="12" class="mb-3">
+            <div [ngClass]="{ 'form-group required':isRequiredField('addresstype') }">
+                <label for="addresstype" class="form-label">Address Type</label>
+                <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.type"
+                    name="addresstype" cFormControl>
+                    <option value="">Select Address Type</option>
+                    <option value="Home">Home</option>
+                    <option value="Work">Work</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </c-col>
+        <c-col xs="12" class="mb-3">
+            <div [ngClass]="{ 'form-group required':isRequiredField('firstaddress') }">
+                <label for="firstaddress" class="form-label">First Address</label>
+                <input aria-label="First Address" cFormControl placeholder="First Address" sizing="sm"
+                    [(ngModel)]="pateintAddressInfo.first" name="firstaddress" />
+            </div>
+        </c-col>
+        <c-col xs="12" class="mb-3">
+            <div [ngClass]="{ 'form-group required':isRequiredField('secondaddress') }">
+                <label for="secondaddress" class="form-label">Second Address</label>
+                <input aria-label="First Address" cFormControl placeholder="Second Address" sizing="sm"
+                    [(ngModel)]="pateintAddressInfo.second" name="secondaddress" />
+            </div>
+        </c-col>
+        <c-col xs="4" class="mb-3">
+            <div [ngClass]="{ 'form-group required':isRequiredField('country') }">
+                <label for="country" class="form-label">Country</label>
+                <select cSelect sizing="sm" style="line-height: 15px;" [(ngModel)]="pateintAddressInfo.country"
+                    name="country">
+                    <option value="">Select Country</option>
+                    <option value="usa">USA</option>
+                </select>
+            </div>
+        </c-col>
+        <c-col xs="4" class="mb-3">
+            <input cFormControl placeholder="Settlement" sizing="sm" />
+        </c-col>
+        <c-col xs="4" class="mb-3">
+            <div [ngClass]="{ 'form-group required':isRequiredField('zipcode') }">
+                <label for="zipCode" class="form-label">Zip Code</label>
+                <input cFormControl placeholder="Zip Code" sizing="sm" [(ngModel)]="pateintAddressInfo.zipCode"
+                    name="zipCode" />
+            </div>
+        </c-col>
+    </form>
 </c-row>
