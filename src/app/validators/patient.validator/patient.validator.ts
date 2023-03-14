@@ -7,6 +7,7 @@ import { MedicalQuestionnaireInfo } from "src/app/models/questionnaire/medical.q
 import { ValidatorContainer } from "../ValidatorContainer";
 import { PatientAddressValidator } from "./patient.address.validator";
 import { PatientEssentialValidator } from "./patient.essential.validator";
+import { PatientInsuranceQuestionnaireValidator } from "./patient.insurance.questionnaire.validator";
 import { PatientMedicalQuestionnaireValidator } from "./patient.medical.questionnaire.validator";
 
 export class PatientValidator {
@@ -45,6 +46,10 @@ export class PatientValidator {
             }
             if (modelName === 'insurance') {
                 this.insuranceQuestionnaireInfo = JSON.parse(model);
+                var patientInsuranceQuestionnaireValidator: PatientInsuranceQuestionnaireValidator = new PatientInsuranceQuestionnaireValidator();
+                patientInsuranceQuestionnaireValidator.setModel(this.insuranceQuestionnaireInfo)
+                this.validator = new ValidatorContainer();
+                this.validator = patientInsuranceQuestionnaireValidator.validate();
             }
         }
         return this.validator;

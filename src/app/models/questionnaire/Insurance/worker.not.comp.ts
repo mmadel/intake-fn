@@ -12,7 +12,7 @@ export class WrokerNotComp {
     secondaryInsurancePolicyHolderFirstName: string;
     secondaryInsurancePolicyHolderMiddleName: string;
     secondaryInsurancePolicyHolderLastName: string;
-    secondaryInsuranceCompanyName: string;
+    secondaryInsuranceCompanyName: string ='';
     secondaryInsuranceMemberId: string;
     medicareCoverage: boolean;
     secondaryInsurancePolicyHolderEmployerFirstName: string;

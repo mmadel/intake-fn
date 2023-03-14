@@ -1,12 +1,9 @@
 
-import * as _ from 'lodash'
-import { Basic } from 'src/app/models/patient/basic.info.model';
+import * as _ from 'lodash';
+import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
+import requiredFields from '../../modules/patient.questionnaire/service/_patient.require.fields.service';
 import { PropertyValidator } from '../PropertyValidator';
 import { ValidatorContainer } from '../ValidatorContainer';
-import requiredFields from '../../modules/patient.questionnaire/service/_patient.require.fields.service';
-import { Address } from 'src/app/models/patient/address.info.model';
-import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
-import { PhysicalTherapy } from 'src/app/models/questionnaire/medical/physical.therapy';
 
 
 export class PatientMedicalQuestionnaireValidator {

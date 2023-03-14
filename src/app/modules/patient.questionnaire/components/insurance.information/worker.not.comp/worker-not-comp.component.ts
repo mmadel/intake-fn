@@ -23,8 +23,16 @@ export class WorkerNotCompComponent implements OnInit {
   }
   isSecondaryInsuranceChange(val: string) {
     this.isSecondaryInsurance = val;
+    if (val === 'yes')
+      this.model.secondaryInsurance = true
+    if (val === 'no')
+      this.model.secondaryInsurance = false
   }
   isMedicareCoverageChange(val: string) {
     this.isMedicareCoverage = val;
+    if (val === 'yes')
+      this.model.medicareCoverage = true
+    if (val === 'no')
+      this.model.medicareCoverage = false
   }
 }

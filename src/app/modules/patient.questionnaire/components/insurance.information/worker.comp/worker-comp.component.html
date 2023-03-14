@@ -2,8 +2,8 @@
     <form cForm [gutter]="{gy: 2, gx: 4}">
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('') }">
-                <label for="injury" class="form-label">Worker Related Injury/Auto-Accident</label>
-                <select cSelect sizing="sm" name="injury" style="line-height: 15px;" cFormControl
+                <label for="injuryType" class="form-label">Worker Related Injury/Auto-Accident</label>
+                <select cSelect sizing="sm" name="injuryType" style="line-height: 15px;" cFormControl
                     [(ngModel)]="model.injuryType">
                     <option value="">Select</option>
                     <option value="workingInjury">Worker Related Injury</option>
@@ -92,7 +92,7 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="casestatus" class="form-label">Case Status</label>
                     <select cSelect sizing="sm" name="caseStatus" style="line-height: 15px;" cFormControl
-                        [(ngModel)]="model.wrokerStatus">
+                        [(ngModel)]="model.caseStatus">
                         <option value="">Select</option>
                         <option value="active">active</option>
                         <option value="inactive">In-Active</option>
