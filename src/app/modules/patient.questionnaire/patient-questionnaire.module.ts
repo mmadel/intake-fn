@@ -35,10 +35,13 @@ import {
   EssentialInfoComponent,
   AddressInformationComponent,
   MedicalInfoComponent,
-  InsuranceInformationComponent
+  InsuranceInformationComponent,
+  WorkerCompComponent,
+  WorkerNotCompComponent
 
 } from './index';
 import { QuestionnaireAddComponent } from './components/questionnaire.add/questionnaire-add.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     AddressInformationComponent,
     InsuranceInformationComponent,
     QuestionnaireAddComponent,
-    MedicalInfoComponent
+    MedicalInfoComponent,
+    WorkerCompComponent,
+    WorkerNotCompComponent
   ],
   imports: [
     CommonModule,

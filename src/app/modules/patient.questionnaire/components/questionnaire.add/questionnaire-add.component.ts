@@ -25,7 +25,7 @@ export class QuestionnaireAddComponent implements OnInit {
     { "id": 4, "name": "Insurance" },
   ];
 
-  counter: number = 1;
+  counter: number = 4;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer = new ValidatorContainer();
