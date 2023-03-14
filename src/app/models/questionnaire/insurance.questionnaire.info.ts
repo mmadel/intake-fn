@@ -1,3 +1,3 @@
 export class InsuranceQuestionnaireInfo {
-    workerType: boolean = false;
+    isWrokerComp: boolean;
 }
