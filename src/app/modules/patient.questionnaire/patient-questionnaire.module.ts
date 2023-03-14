@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { IconModule } from '@coreui/icons-angular';
 
 import { PatientQuestionnaireRoutingModule } from './patient-questionnaire-routing.module';
@@ -27,7 +28,7 @@ import {
   NavModule,
   DateRangePickerModule,
   TimePickerModule,
-  ProgressModule
+  ProgressModule,
 } from '@coreui/angular-pro';
 
 import {
@@ -73,7 +74,8 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     DateRangePickerModule,
     TimePickerModule,
     ProgressModule,
-    IconModule
+    IconModule,
+    FormsModule
   ]
 })
 export class PatientQuestionnaireModule { }

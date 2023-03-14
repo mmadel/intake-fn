@@ -35,7 +35,7 @@ import {
   DefaultHeaderComponent,
   DefaultFooterComponent,
 } from './core';
-import { ProgressServiceService } from './modules/patient.questionnaire/service/progress-service.service';
+import { PateintModelRequesterService } from './modules/patient.questionnaire/service/validator/patient/pateint-model-requester.service';
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
@@ -78,7 +78,7 @@ const APP_CONTAINERS = [
     },
     IconSetService,
     Title,
-    ProgressServiceService
+    PateintModelRequesterService
   ],
   bootstrap: [AppComponent]
 })
