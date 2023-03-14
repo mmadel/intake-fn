@@ -18,6 +18,7 @@ export class PatientValidator {
     private validator: ValidatorContainer = new ValidatorContainer();
 
     public validate(modelName: string, model: string, patient: Patient): ValidatorContainer {
+
         if (modelName !== '') {
             if (modelName === 'basic') {
                 this.patientEssentialInfo = JSON.parse(model);
@@ -29,6 +30,8 @@ export class PatientValidator {
                 atientEssentialValidator.setModel(this.patientEssentialInfo);
                 this.validator = new ValidatorContainer();
                 this.validator = atientEssentialValidator.validate();
+                if (this.validator)
+                    patient.basicInfo = this.patientEssentialInfo
             }
             if (modelName === 'address') {
                 this.patientAddressInfo = JSON.parse(model);
@@ -36,6 +39,8 @@ export class PatientValidator {
                 patientAddressValidator.setModel(this.patientAddressInfo);
                 this.validator = new ValidatorContainer();
                 this.validator = patientAddressValidator.validate();
+                if (this.validator)
+                    patient.addressInfo = this.patientAddressInfo
             }
             if (modelName === 'medical') {
                 this.medicalQuestionnaireInfo = JSON.parse(model);
@@ -43,13 +48,18 @@ export class PatientValidator {
                 patientMedicalQuestionnaireValidator.setModel(this.medicalQuestionnaireInfo);
                 this.validator = new ValidatorContainer();
                 this.validator = patientMedicalQuestionnaireValidator.validate();
+                if (this.validator)
+                    patient.medicalQuestionnaireInfo = this.medicalQuestionnaireInfo
             }
             if (modelName === 'insurance') {
                 this.insuranceQuestionnaireInfo = JSON.parse(model);
+                this.insuranceQuestionnaireInfo.wrokerCompModel.accidentDateTimeStamp = Number(moment(this.insuranceQuestionnaireInfo.wrokerCompModel.accidentDate).format("x"));
                 var patientInsuranceQuestionnaireValidator: PatientInsuranceQuestionnaireValidator = new PatientInsuranceQuestionnaireValidator();
                 patientInsuranceQuestionnaireValidator.setModel(this.insuranceQuestionnaireInfo)
                 this.validator = new ValidatorContainer();
                 this.validator = patientInsuranceQuestionnaireValidator.validate();
+                if (this.validator)
+                    patient.insuranceQuestionnaireInfo = this.insuranceQuestionnaireInfo
             }
         }
         return this.validator;

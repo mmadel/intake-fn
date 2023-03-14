@@ -18,7 +18,6 @@ export class PatientInsuranceQuestionnaireValidator {
     }
 
     private validateInfo(validator: PropertyValidator[]) {
-        console.log(this.model.isWrokerComp)
         if (this.model.isWrokerComp === null || this.model.isWrokerComp === undefined)
             validator.push({ property: "worker's comp/No fault", message: '' });
         else if (this.model.isWrokerComp) {

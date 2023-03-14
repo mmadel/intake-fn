@@ -11,7 +11,7 @@ export class PateintModelRequesterService {
 
   private modelValue = new BehaviorSubject('');
   currentModel = this.modelValue.asObservable();
-  constructor() { }
+  constructor() {}
 
   requestPateintModel(modelName: string) {
     this.modelName.next(modelName);

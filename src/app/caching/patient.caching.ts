@@ -1,17 +1,17 @@
 import { Patient } from "../models/patient/patient.model";
 
 export class Patientcache {
-    public static cache(modelName: string, pateint: Patient) {
+    public static cache(modelName: string, pateintHolder: Patient) {
         var patient: Patient = new Patient();
         patient = JSON.parse(localStorage.getItem('patient') || '{}');
         if (modelName === 'basic')
-            patient.basicInfo = pateint.basicInfo;
+            patient.basicInfo = pateintHolder.basicInfo;
         if (modelName === 'address')
-            patient.addressInfo = pateint.addressInfo;
+            patient.addressInfo = pateintHolder.addressInfo;
         if (modelName === 'medical')
-            patient.medicalQuestionnaireInfo = pateint.medicalQuestionnaireInfo
+            patient.medicalQuestionnaireInfo = pateintHolder.medicalQuestionnaireInfo
         if (modelName === 'insurance')
-            patient.insuranceQuestionnaireInfo = pateint.insuranceQuestionnaireInfo;
+            patient.insuranceQuestionnaireInfo = pateintHolder.insuranceQuestionnaireInfo;
 
         localStorage.setItem('patient', JSON.stringify(patient));
     }

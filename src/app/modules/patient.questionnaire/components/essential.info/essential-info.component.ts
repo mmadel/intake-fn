@@ -18,6 +18,8 @@ export class EssentialInfoComponent implements OnInit {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       this.pateintBasicInfo = pateint.basicInfo;
+    }else{
+      this.pateintBasicInfo = new Basic();
     }
 
     this.pateintModelRequesterService.currentModelName.subscribe(msg => {

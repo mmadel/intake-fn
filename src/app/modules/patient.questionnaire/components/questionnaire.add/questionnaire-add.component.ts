@@ -28,7 +28,7 @@ export class QuestionnaireAddComponent implements OnInit {
     { "id": 4, "name": "Insurance" },
   ];
 
-  counter: number = 4;
+  counter: number = 1;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -39,19 +39,20 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.pateintModelRequesterService.currentModel.subscribe(model => {
-      this.validator = this.patientValidator.validate(this.modelName, model, this.patient)
+      if (model !== '' || model !== undefined) {
+        this.validator = this.patientValidator.validate(this.modelName, model, this.patient)
+      }
     });
-
   }
+
 
   next(patientModel: string) {
     this.modelName = patientModel;
     this.pateintModelRequesterService.requestPateintModel(patientModel);
     if (this.validator.isValid) {
-      Patientcache.cache(this.modelName,this.patient)
+      Patientcache.cache(this.modelName, this.patient)
       this.calculatePercentage(this.counter, 'next')
       this.counter++;
-      ;
     } else {
       (function smoothscroll() {
         var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
