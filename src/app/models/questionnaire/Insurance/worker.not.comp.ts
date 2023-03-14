@@ -1,15 +1,22 @@
 export class WrokerNotComp {
-    insuranceCompanyName: string;
+    insuranceCompanyName: string ='';
     memberId: string;
     ploicyId: string;
-    policyRelationship: string;
-    policyRelationshipName: string;
+    policyRelationship: string='';
+    policyRelationshipFirstName: string;
+    policyRelationshipMiddleName: string;
+    policyRelationshipLastName: string;
     policyRelationshipPhone: string;
     policyRelationshipEmployerName: string;
     secondaryInsurance: boolean;
-    secondaryInsurancePolicyHolderName: string;
+    secondaryInsurancePolicyHolderFirstName: string;
+    secondaryInsurancePolicyHolderMiddleName: string;
+    secondaryInsurancePolicyHolderLastName: string;
     secondaryInsuranceCompanyName: string;
     secondaryInsuranceMemberId: string;
     medicareCoverage: boolean;
-    secondaryInsurancePolicyHolderEmployerName: string;
+    secondaryInsurancePolicyHolderEmployerFirstName: string;
+    secondaryInsurancePolicyHolderEmployerMiddleName: string;
+    secondaryInsurancePolicyHolderEmployerLastName: string;
+    secondaryInsurancePolicyHolderEmployerPhone: string;
 }
