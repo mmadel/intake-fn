@@ -32,15 +32,16 @@ import {
 } from '@coreui/angular-pro';
 
 import {
+  QuestionnaireAddComponent,
   EssentialInfoComponent,
   AddressInformationComponent,
   MedicalInfoComponent,
   InsuranceInformationComponent,
   WorkerCompComponent,
-  WorkerNotCompComponent
+  WorkerNotCompComponent,
+  MedicalHistoryInformationComponent
 
 } from './index';
-import { QuestionnaireAddComponent } from './components/questionnaire.add/questionnaire-add.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     QuestionnaireAddComponent,
     MedicalInfoComponent,
     WorkerCompComponent,
-    WorkerNotCompComponent
+    WorkerNotCompComponent,
+    MedicalHistoryInformationComponent
   ],
   imports: [
     CommonModule,
