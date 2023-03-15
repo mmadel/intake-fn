@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as moment from 'moment';
 @Component({
   selector: 'app-aggreements',
   templateUrl: './aggreements.component.html',
@@ -7,8 +8,19 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AggreementsComponent implements OnInit {
   patientName: string = 'mohamed Adel '
+  acceptReleaseAgreements: boolean = false
+  acceptFinancialResponsibilityAgreements: boolean = false
+  acceptFinancialAgreementAgreements: boolean = false
+  acceptInsuranceAgreement: boolean = false
+  acceptHIPAAAgreements: boolean = false
+  acceptCuppingAgreements: boolean = false
+  acceptPelvicAgreements: boolean = false
+  acceptPhotoVideoAgreements: boolean = false
+  nowDate = moment().format("MM.DD.YYYY");
   constructor(private sanitizer: DomSanitizer) { }
+  test() {
 
+  }
   ngOnInit(): void {
   }
   getReleaseInformationParagraph() {
@@ -70,7 +82,7 @@ devices or fitting examinations.</p>
 The Notice provides information about how we may use and disclose the medical information that we 
 maintain about you. We encourage you to read the full Notice. I understand that a copy of the current 
 Notice will be posted in the reception area, the website (if applicable) and that any revised Notice 
-of Privacy Practices will be made available.</p>
+of Privacy Practices will be made available.<br/>I have read and agree to the terms above:<br/>Signature of Patient or Legal Representative:&#160;<b>${this.patientName}</b> &#160;Date: ${this.nowDate} </p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
 
@@ -110,7 +122,7 @@ of Privacy Practices will be made available.</p>
     sugary and processed foods.</span></li>
     <li><span style="font-family:Lucida Handwriting"> It has been </span><span style="color:DodgerBlue;font-family:Lucida Handwriting">highly recommended </span> <span style="font-family:Lucida Handwriting">that before and after treatments that I consume an 
     abundance of water.</span></li>
-    </ul>
+    </ul><br/><p style="font-family:Lucida Handwriting">Patient/Guardian Name:&#160; <b>${this.patientName}</b> &#160; Date ${this.nowDate}<br/> Signature of Patient/Guardian:&#160; <b>${this.patientName}</b> &#160; Date ${this.nowDate}</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
@@ -124,7 +136,7 @@ provider’s gloved hand or instrumentation. For purposes of this consent, vagin
 might be included. By signing this consent, I <b>${this.patientName}</b> authorize 
 PT of The City Team to perform a pelvic examination, including vaginal sonography , as 
 described above. By my signature below I acknowledge that I have read and understand 
-the contents of this form..</p>
+the contents of this form. <br/>Patient Name: &#160; <b>${this.patientName}</b><br/>Patient Signature: &#160; <b>${this.patientName}</b> &#160;Date :${this.nowDate}</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
@@ -137,7 +149,7 @@ purpose of publication, promotion, illustration, advertising, or trade, in any m
 medium. I hereby release PT of The City , and its legalRepresentatives for all claims and 
 liability relating to said images or video . Furthermore , I grant permission to use my 
 statements that were given during an interview or guest lecture,With or without my name, 
-for the purpose of advertising and publicity without restriction. I Waive my right to any<br/>I acknowledge that I am <b>${this.patientName}</b> over the age of 18</p>
+for the purpose of advertising and publicity without restriction. I Waive my right to any<br/>I acknowledge that I am <b>${this.patientName}</b>&#160; over the age of 18 <br/><br/>Date: ${this.nowDate}&#160; &#160; &#160; signature:<b>${this.patientName}</b></p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }

@@ -6,8 +6,20 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div [innerHTML]="getReleaseInformationParagraph()" cBgColor="info" class="accordion-body" gradient="true">
-            </div>
+            <c-row>
+                <c-col xs="auto">
+                    <div [innerHTML]="getReleaseInformationParagraph()" cBgColor="info" class="accordion-body"
+                        gradient="true">
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="acceptReleaseAgreements" />
+                        <label cFormCheckLabel for="stackOne">I Accept The Release of Information Agreements</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
+
         </ng-template>
     </c-accordion-item>
     <c-accordion-item #item1="cAccordionItem" [visible]="false">
@@ -17,8 +29,21 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div [innerHTML]="getFinancialResponsibility()" cBgColor="info" class="accordion-body" gradient="true">
-            </div>
+            <c-row>
+                <c-col xs="auto">
+                    <div [innerHTML]="getFinancialResponsibility()" cBgColor="info" class="accordion-body"
+                        gradient="true">
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox"
+                            [(ngModel)]="acceptFinancialResponsibilityAgreements" />
+                        <label cFormCheckLabel for="stackOne">I Accept The Financial Responsibility Agreement by Other
+                            than Patient’s Legal Representative</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
         </ng-template>
     </c-accordion-item>
     <c-accordion-item #item2="cAccordionItem" [visible]="false">
@@ -28,9 +53,20 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div class="accordion-body">
-                <span [innerHTML]="getFinancialAgreement()"></span>
-            </div>
+            <c-row>
+                <c-col xs="auto">
+                    <div class="accordion-body">
+                        <span [innerHTML]="getFinancialAgreement()"></span>
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox"
+                            [(ngModel)]="acceptFinancialAgreementAgreements" />
+                        <label cFormCheckLabel for="stackOne">I Accept The Financial Agreement</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
         </ng-template>
     </c-accordion-item>
     <c-accordion-item #item3="cAccordionItem" [visible]="false">
@@ -40,9 +76,20 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div class="accordion-body">
-                <span [innerHTML]="getInsurance()"></span>
-            </div>
+
+            <c-row>
+                <c-col xs="auto">
+                    <div class="accordion-body">
+                        <span [innerHTML]="getInsurance()"></span>
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="acceptInsuranceAgreement" />
+                        <label cFormCheckLabel for="stackOne">I Accept The Assignment of Insurance Beneﬁts</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
         </ng-template>
     </c-accordion-item>
     <c-accordion-item #item4="cAccordionItem" [visible]="false">
@@ -52,9 +99,20 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div class="accordion-body">
-                <span [innerHTML]="getHIPAAAcknowledgement()"></span>
-            </div>
+
+            <c-row>
+                <c-col xs="auto">
+                    <div class="accordion-body">
+                        <span [innerHTML]="getHIPAAAcknowledgement()"></span>
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="acceptHIPAAAgreements" />
+                        <label cFormCheckLabel for="stackOne">I Accept The HIPAA Acknowledgement</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
         </ng-template>
     </c-accordion-item>
     <c-accordion-item #item5="cAccordionItem" [visible]="false">
@@ -64,9 +122,20 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div class="accordion-body">
-                <span [innerHTML]="getCupping()"></span>
-            </div>
+
+            <c-row>
+                <c-col xs="auto">
+                    <div class="accordion-body">
+                        <span [innerHTML]="getCupping()"></span>
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="acceptCuppingAgreements" />
+                        <label cFormCheckLabel for="stackOne">I Accept The Cupping Consent Form</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
         </ng-template>
     </c-accordion-item>
     <c-accordion-item #item6="cAccordionItem" [visible]="false">
@@ -76,9 +145,21 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div class="accordion-body">
-                <span [innerHTML]="getPelvic()"></span>
-            </div>
+
+            <c-row>
+                <c-col xs="auto">
+                    <div class="accordion-body">
+                        <span [innerHTML]="getPelvic()"></span>
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="acceptPelvicAgreements" />
+                        <label cFormCheckLabel for="stackOne">I Accept The Pelvic Examination & Treatment Consent
+                            Form</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
         </ng-template>
     </c-accordion-item>
     <c-accordion-item #item7="cAccordionItem" [visible]="false">
@@ -88,9 +169,20 @@
             </button>
         </ng-template>
         <ng-template cTemplateId="accordionBodyTemplate">
-            <div class="accordion-body">
-                <span [innerHTML]="getPhotoVideo()"></span>
-            </div>
+
+            <c-row>
+                <c-col xs="auto">
+                    <div class="accordion-body">
+                        <span [innerHTML]="getPhotoVideo()"></span>
+                    </div>
+                </c-col>
+                <c-col xs="auto" class="ms-3">
+                    <c-form-check>
+                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="acceptPhotoVideoAgreements" />
+                        <label cFormCheckLabel for="stackOne">I Accept The Photo / Video Release Form</label>
+                    </c-form-check>
+                </c-col>
+            </c-row>
         </ng-template>
     </c-accordion-item>
 </c-accordion>
