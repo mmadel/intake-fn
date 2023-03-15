@@ -20,12 +20,11 @@ export class AddressInformationComponent implements OnInit {
         this.pateintAddressInfo = pateint.addressInfo;
       else
         this.pateintAddressInfo = new Address();
+    } else {
+      this.pateintAddressInfo = new Address();
     }
-    this.pateintModelRequesterService.currentModelName.subscribe(msg => {
-      if (msg === 'address') {
-        this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.pateintAddressInfo))
-      }
-    });
+
+
   }
   isRequiredField(name: string): boolean {
     var field = _.find(requiredFields, { field: name })

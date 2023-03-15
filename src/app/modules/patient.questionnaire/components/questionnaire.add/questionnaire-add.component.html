@@ -30,89 +30,115 @@
         </div>
     </div>
 </c-alert>
-<c-card *ngIf="counter === 1 " class="mb-3">
-    <c-card-header>
-        <h3>{{cards[0].name}}</h3>
-    </c-card-header>
-    <c-card-body>
-        <app-essential-info></app-essential-info>
-    </c-card-body>
-    <c-card-footer>
-        <button cButton (click)="next('basic')" size="sm" color="primary" variant="outline" class="auto me-1">
-            next
-        </button>
-    </c-card-footer>
-</c-card>
-<c-card *ngIf="counter === 2 " class="mb-3">
-    <c-card-header>
-        <h3>{{cards[1].name}}</h3>
-    </c-card-header>
-    <c-card-body>
-        <app-address-information></app-address-information>
-    </c-card-body>
-    <c-card-footer>
-        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="auto me-1">
-            Back
-        </button>
-        <button cButton (click)="next('address')" size="sm" color="primary" variant="outline"
-            class="auto me-1">next</button>
-    </c-card-footer>
-</c-card>
+<c-row class="justify-content-center">
+    <c-col xs="auto">
+        <c-card *ngIf="counter === 1 " class="mb-3 ustify-content-center">
+            <c-card-header>
+                <h3>{{cards[0].name}}</h3>
+            </c-card-header>
+            <c-card-body>
+                <app-essential-info></app-essential-info>
+            </c-card-body>
+            <c-card-footer>
+                <button cButton (click)="next('basic')" size="sm" color="primary" variant="outline" class="auto me-1">
+                    next
+                </button>
+            </c-card-footer>
+        </c-card>
+    </c-col>
+</c-row>
+<c-row class="justify-content-center">
+    <c-col xs="8">
+        <c-card *ngIf="counter === 2 " class="mb-3">
+            <c-card-header>
+                <h3>{{cards[1].name}}</h3>
+            </c-card-header>
+            <c-card-body>
+                <app-address-information></app-address-information>
+            </c-card-body>
+            <c-card-footer>
+                <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="auto me-1">
+                    Back
+                </button>
+                <button cButton (click)="next('address')" size="sm" color="primary" variant="outline"
+                    class="auto me-1">next</button>
+            </c-card-footer>
+        </c-card>
+    </c-col>
+</c-row>
+<c-row class="justify-content-center">
+    <c-col xs="8">
+        <c-card *ngIf="counter === 3 " class="mb-3">
+            <c-card-header>
+                <h3>{{cards[2].name}}</h3>
+            </c-card-header>
+            <c-card-body>
+                <app-medical-info></app-medical-info>
+            </c-card-body>
+            <c-card-footer>
+                <button cButton (click)="back()" size="sm" color="primary" variant="outline"
+                    class="auto me-1">Back</button>
+                <button cButton (click)="next('medical')" size="sm" color="primary" variant="outline"
+                    class="auto me-1">next</button>
+            </c-card-footer>
+        </c-card>
+    </c-col>
+</c-row>
+<c-row class="justify-content-center">
+    <c-col xs="8">
+        <c-card *ngIf="counter === 4 " class="mb-3">
+            <c-card-header>
+                <h3>{{cards[3].name}}</h3>
+            </c-card-header>
+            <c-card-body>
+                <app-medical-history-information></app-medical-history-information>
+            </c-card-body>
+            <c-card-footer>
+                <button cButton (click)="back()" size="sm" color="primary" variant="outline"
+                    class="auto me-1">Back</button>
+                <button cButton (click)="next('medical-history')" size="sm" color="primary" variant="outline"
+                    class="auto me-1">next</button>
+            </c-card-footer>
+        </c-card>
+    </c-col>
+</c-row>
 
-<c-card *ngIf="counter === 3 " class="mb-3">
-    <c-card-header>
-        <h3>{{cards[2].name}}</h3>
-    </c-card-header>
-    <c-card-body>
-        <app-medical-info></app-medical-info>
-    </c-card-body>
-    <c-card-footer>
-        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
-        <button cButton (click)="next('medical')" size="sm" color="primary" variant="outline"
-            class="col-1 me-1">next</button>
-    </c-card-footer>
-</c-card>
-
-<c-card *ngIf="counter === 4 " class="mb-3">
-    <c-card-header>
-        <h3>{{cards[3].name}}</h3>
-    </c-card-header>
-    <c-card-body>
-        <app-medical-history-information></app-medical-history-information>
-    </c-card-body>
-    <c-card-footer>
-        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
-        <button cButton (click)="next('medical-history')" size="sm" color="primary" variant="outline"
-            class="col-1 me-1">next</button>
-    </c-card-footer>
-</c-card>
-
-<c-card *ngIf="counter === 5 " class="mb-3">
-    <c-card-header>
-        <h3>{{cards[4].name}}</h3>
-    </c-card-header>
-    <c-card-body>
-        <app-insurance-information></app-insurance-information>
-    </c-card-body>
-    <c-card-footer>
-        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
-        <button cButton (click)="next('insurance')" size="sm" color="primary" variant="outline"
-            class="col-1 me-1">next</button>
-    </c-card-footer>
-</c-card>
-<c-card *ngIf="counter === 6 " class="mb-3">
-    <c-card-header>
-        <h3>{{cards[5].name}}</h3>
-    </c-card-header>
-    <c-card-body>
-        <app-aggreements></app-aggreements>
-    </c-card-body>
-    <c-card-footer>
-        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
-        <button cButton (click)="next('aggreements')" size="sm" color="primary" variant="outline"
-            class="col-1 me-1">next</button>
-    </c-card-footer>
-</c-card>
+<c-row class="justify-content-center">
+    <c-col xs="8">
+        <c-card *ngIf="counter === 5 " class="mb-3">
+            <c-card-header>
+                <h3>{{cards[4].name}}</h3>
+            </c-card-header>
+            <c-card-body>
+                <app-insurance-information></app-insurance-information>
+            </c-card-body>
+            <c-card-footer>
+                <button cButton (click)="back()" size="sm" color="primary" variant="outline"
+                    class="auto me-1">Back</button>
+                <button cButton (click)="next('insurance')" size="sm" color="primary" variant="outline"
+                    class="auto me-1">next</button>
+            </c-card-footer>
+        </c-card>
+    </c-col>
+</c-row>
+<c-row class="justify-content-center">
+    
+        <c-card *ngIf="counter === 6 " class="mb-3">
+            <c-card-header>
+                <h3>{{cards[5].name}}</h3>
+            </c-card-header>
+            <c-card-body>
+                <app-aggreements></app-aggreements>
+            </c-card-body>
+            <c-card-footer>
+                <button cButton (click)="back()" size="sm" color="primary" variant="outline"
+                    class="auto me-1">Back</button>
+                <button cButton (click)="next('aggreements')" size="sm" color="primary" variant="outline"
+                    class="auto me-1">next</button>
+            </c-card-footer>
+        </c-card>
+    
+</c-row>
 <c-card *ngIf="counter === 7 " class="mb-3">
     <c-card-header>
         <h3>Done</h3>
@@ -121,6 +147,6 @@
         DONE
     </c-card-body>
     <c-card-footer>
-        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="col-1 me-1">Back</button>
+        <button cButton (click)="back()" size="sm" color="primary" variant="outline" class="auto me-1">Back</button>
     </c-card-footer>
 </c-card>

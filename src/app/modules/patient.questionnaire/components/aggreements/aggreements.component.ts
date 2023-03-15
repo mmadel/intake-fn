@@ -20,10 +20,15 @@ export class AggreementsComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.agreements !== undefined)
+      if (pateint.agreements !== undefined) {
         this.model = pateint.agreements;
-      else
+        var fName = pateint.basicInfo.firstName.charAt(0).toUpperCase() + pateint.basicInfo.firstName.slice(1);
+        var mName = pateint.basicInfo.middleName.charAt(0).toUpperCase();
+        var lName = pateint.basicInfo.lastName.charAt(0).toUpperCase() + pateint.basicInfo.lastName.slice(1);
+        this.patientName = fName + ',' + mName + '.,' + lName
+      } else {
         this.model = new Agreements();
+      }
     } else {
       this.model = new Agreements();
     }
