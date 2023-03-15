@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import { Address } from "src/app/models/patient/address.info.model";
+import { Agreements } from "src/app/models/patient/agreements/agreements.model";
 import { Basic } from "src/app/models/patient/basic.info.model";
 import { Patient } from "src/app/models/patient/patient.model";
 import { InsuranceQuestionnaireInfo } from "src/app/models/questionnaire/insurance.questionnaire.info";
@@ -7,6 +8,7 @@ import { MedicalQuestionnaireInfo } from "src/app/models/questionnaire/medical.q
 import { MedicalHistroyInformation } from "src/app/models/questionnaire/medical/history/medical.history.info";
 import { ValidatorContainer } from "../ValidatorContainer";
 import { PatientAddressValidator } from "./patient.address.validator";
+import { PatientAggreementsValidator } from "./patient.aggreements.validator";
 import { PatientEssentialValidator } from "./patient.essential.validator";
 import { PatientInsuranceQuestionnaireValidator } from "./patient.insurance.questionnaire.validator";
 import { MdicalHistoryValidator } from "./patient.medical.history.validator";
@@ -18,6 +20,7 @@ export class PatientValidator {
     private insuranceQuestionnaireInfo: InsuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
     private medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
     private medicalHistroyInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
+    private agreements: Agreements = new Agreements();
     private validator: ValidatorContainer = new ValidatorContainer();
 
     public validate(modelName: string, model: string, patient: Patient): ValidatorContainer {
@@ -72,6 +75,15 @@ export class PatientValidator {
                 this.validator = mdicalHistoryValidator.validate();
                 if (this.validator)
                     patient.medicalHistroyInformation = this.medicalHistroyInformation
+            }
+            if (modelName === 'aggreements') {
+                this.agreements = JSON.parse(model);
+                var patientAggreementsValidator: PatientAggreementsValidator = new PatientAggreementsValidator();
+                patientAggreementsValidator.setModel(this.agreements);
+                this.validator = new ValidatorContainer();
+                this.validator = patientAggreementsValidator.validate();
+                if (this.validator)
+                    patient.agreements = this.agreements;
             }
         }
         return this.validator;
