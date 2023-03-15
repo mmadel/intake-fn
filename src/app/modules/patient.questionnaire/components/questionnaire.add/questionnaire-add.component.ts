@@ -19,10 +19,11 @@ export class QuestionnaireAddComponent implements OnInit {
     { "id": 3, "name": "Medicial Information" },
     { "id": 4, "name": "Medicial History Information" },
     { "id": 5, "name": "Insurance Information" },
+    { "id": 6, "name": "Aggreements" },
     
   ];
 
-  counter: number = 4;
+  counter: number = 6;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;

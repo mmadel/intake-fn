@@ -39,9 +39,10 @@ import {
   InsuranceInformationComponent,
   WorkerCompComponent,
   WorkerNotCompComponent,
-  MedicalHistoryInformationComponent
-
+  MedicalHistoryInformationComponent,
+  AggreementsComponent
 } from './index';
+
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {
     MedicalInfoComponent,
     WorkerCompComponent,
     WorkerNotCompComponent,
-    MedicalHistoryInformationComponent
+    MedicalHistoryInformationComponent,
+    AggreementsComponent
   ],
   imports: [
     CommonModule,
