@@ -16,9 +16,11 @@ export class AddressInformationComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      this.pateintAddressInfo = pateint.addressInfo !== undefined ? pateint.addressInfo : new Address();
+      if (pateint.addressInfo !== undefined)
+        this.pateintAddressInfo = pateint.addressInfo;
+      else
+        this.pateintAddressInfo = new Address();
     }
-
     this.pateintModelRequesterService.currentModelName.subscribe(msg => {
       if (msg === 'address') {
         this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.pateintAddressInfo))

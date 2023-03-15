@@ -31,7 +31,33 @@ const patientRequiredFields = [
     { id: 26, field: 'primarydoctor', required: false, type: 'MQ' },
 
     { id: 19, field: 'physicaltherapy-where', required: true, type: 'MQ' },
-    { id: 19, field: 'physicaltherapy-number-visit', required: true, type: 'MQ' },
+    { id: 20, field: 'physicaltherapy-number-visit', required: true, type: 'MQ' },
+
+    { id: 21, field: 'insuranceCompanyName-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 22, field: 'memberId-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 23, field: 'ploicyId-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 24, field: 'policyRelationship-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 25, field: 'secondaryInsuranceMemberId-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 26, field: 'secondaryInsuranceCompanyName-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 27, field: 'secondaryInsurancePolicyHolderFirstName-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 28, field: 'secondaryInsurancePolicyHolderMiddleName-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 29, field: 'secondaryInsurancePolicyHolderLastName-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 30, field: 'secondaryInsurancePolicyHolderEmployerFirstName-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 31, field: 'secondaryInsurancePolicyHolderEmployerMiddleName-wrokernotcomp', required: true, type: 'IQ' },
+    { id: 32, field: 'secondaryInsurancePolicyHolderEmployerLastName-wrokernotcomp', required: true, type: 'IQ' },
+
+    { id: 33, field: 'accidentDate-wrokercomp', required: true, type: 'IQ' },
+    { id: 34, field: 'wrokerStatus-wrokercomp', required: true, type: 'IQ' },
+    { id: 35, field: 'address-wrokercomp', required: true, type: 'IQ' },
+    { id: 36, field: 'fax-wrokercomp', required: true, type: 'IQ' },
+    { id: 37, field: 'insuranceName-wrokercomp', required: true, type: 'IQ' },
+    { id: 38, field: 'claimNumber-wrokercomp', required: true, type: 'IQ' },
+    { id: 39, field: 'adjusterInfoName-wrokercomp', required: true, type: 'IQ' },
+    { id: 40, field: 'adjusterInfoPhone-wrokercomp', required: true, type: 'IQ' },
+    { id: 41, field: 'attorneyInfoName-wrokercomp', required: true, type: 'IQ' },
+    { id: 42, field: 'attorneyInfoPhone-wrokercomp', required: true, type: 'IQ' },
+    { id: 43, field: 'caseStatus-wrokercomp', required: true, type: 'IQ' },
+
 
 ]
 

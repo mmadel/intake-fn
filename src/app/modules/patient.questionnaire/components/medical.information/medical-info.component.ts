@@ -13,7 +13,7 @@ export class MedicalInfoComponent implements OnInit {
   isReferringDoctor: string = '';
   isphysicalTherapy: string = '';
   isfamilyResultSubmission: string = '';
-  medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
+  medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
   constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
 
   referringDoctorQChange(val: string) {
@@ -36,6 +36,8 @@ export class MedicalInfoComponent implements OnInit {
         pateint.medicalQuestionnaireInfo.doctorRecommendation ? this.isReferringDoctor = 'yes' : this.isReferringDoctor = 'no';
         pateint.medicalQuestionnaireInfo.physicalTherapyReceiving ? this.isphysicalTherapy = 'yes' : this.isphysicalTherapy = 'no';
         pateint.medicalQuestionnaireInfo.familyResultSubmission ? this.isfamilyResultSubmission = 'yes' : this.isfamilyResultSubmission = 'no';
+      } else {
+        this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
       }
 
     }
