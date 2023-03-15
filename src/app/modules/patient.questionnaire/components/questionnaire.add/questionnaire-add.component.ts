@@ -22,7 +22,7 @@ export class QuestionnaireAddComponent implements OnInit {
     
   ];
 
-  counter: number = 1;
+  counter: number = 4;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
