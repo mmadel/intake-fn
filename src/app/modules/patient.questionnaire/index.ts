@@ -7,5 +7,8 @@ export * from './components/medical.information/medical-info.component'
 export * from './components/insurance.information/insurance-information.component'
 export * from './components/insurance.information/worker.comp/worker-comp.component'
 export * from './components/insurance.information/worker.not.comp/worker-not-comp.component'
+export * from './components/medical.history.information/medical-history-information.component'
+
+export * from './components/aggreements/aggreements.component'
 
 export * from './patient-questionnaire.module'

@@ -16,7 +16,6 @@ import {
   CollapseModule,
   GridModule,
   SharedModule,
-  SmartTableModule,
   TableModule,
   FormModule,
   DatePickerModule,
@@ -29,18 +28,21 @@ import {
   DateRangePickerModule,
   TimePickerModule,
   ProgressModule,
+  MultiSelectModule
 } from '@coreui/angular-pro';
 
 import {
+  QuestionnaireAddComponent,
   EssentialInfoComponent,
   AddressInformationComponent,
   MedicalInfoComponent,
   InsuranceInformationComponent,
   WorkerCompComponent,
-  WorkerNotCompComponent
-
+  WorkerNotCompComponent,
+  MedicalHistoryInformationComponent,
+  AggreementsComponent
 } from './index';
-import { QuestionnaireAddComponent } from './components/questionnaire.add/questionnaire-add.component';
+
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     QuestionnaireAddComponent,
     MedicalInfoComponent,
     WorkerCompComponent,
-    WorkerNotCompComponent
+    WorkerNotCompComponent,
+    MedicalHistoryInformationComponent,
+    AggreementsComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +70,6 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     CollapseModule,
     GridModule,
     SharedModule,
-    SmartTableModule,
     TableModule,
     FormModule,
     DatePickerModule,
@@ -80,7 +83,8 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     TimePickerModule,
     ProgressModule,
     IconModule,
-    FormsModule
+    FormsModule,
+    MultiSelectModule
   ]
 })
 export class PatientQuestionnaireModule { }

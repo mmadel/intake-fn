@@ -12,6 +12,8 @@ export class Patientcache {
             patient.medicalQuestionnaireInfo = pateintHolder.medicalQuestionnaireInfo
         if (modelName === 'insurance')
             patient.insuranceQuestionnaireInfo = pateintHolder.insuranceQuestionnaireInfo;
+        if (modelName === 'medical-history')
+            patient.medicalHistroyInformation = pateintHolder.medicalHistroyInformation;
 
         localStorage.setItem('patient', JSON.stringify(patient));
     }

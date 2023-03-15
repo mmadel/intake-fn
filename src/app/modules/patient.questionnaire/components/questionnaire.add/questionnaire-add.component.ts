@@ -1,14 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import { Component, OnInit } from '@angular/core';
 import { Patientcache } from 'src/app/caching/patient.caching';
-import { Address } from 'src/app/models/patient/address.info.model';
-import { Basic } from 'src/app/models/patient/basic.info.model';
 import { Patient } from 'src/app/models/patient/patient.model';
-import { InsuranceQuestionnaireInfo } from 'src/app/models/questionnaire/insurance.questionnaire.info';
-import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
-import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
-import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
-import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
@@ -22,13 +14,16 @@ import { PateintModelRequesterService } from '../../service/validator/patient/pa
 export class QuestionnaireAddComponent implements OnInit {
 
   cards: { id: number, name: string }[] = [
-    { "id": 1, "name": "Essential" },
-    { "id": 2, "name": "Address" },
-    { "id": 3, "name": "Medicial" },
-    { "id": 4, "name": "Insurance" },
+    { "id": 1, "name": "Basic Information" },
+    { "id": 2, "name": "Address Information" },
+    { "id": 3, "name": "Medicial Information" },
+    { "id": 4, "name": "Medicial History Information" },
+    { "id": 5, "name": "Insurance Information" },
+    { "id": 6, "name": "Aggreements" },
+    
   ];
 
-  counter: number = 1;
+  counter: number = 6;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
