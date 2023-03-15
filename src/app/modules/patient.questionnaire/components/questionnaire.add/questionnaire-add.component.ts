@@ -48,13 +48,9 @@ export class QuestionnaireAddComponent implements OnInit {
       Patientcache.cache(this.modelName, this.patient)
       this.calculatePercentage(this.counter, 'next')
       this.counter++;
+      this.scrollUp();
     } else {
-      (function smoothscroll() {
-        var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        if (currentScroll > 0) {
-          window.scrollTo(0, 0);
-        }
-      })();
+      this.scrollUp();
     }
   }
   back() {
@@ -66,5 +62,13 @@ export class QuestionnaireAddComponent implements OnInit {
     if (action === 'back')
       index--;
     this.progressValue = Math.round(((index / this.cards.length) / 100) * 10000);
+  }
+  scrollUp(){
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.scrollTo(0, 0);
+      }
+    })();
   }
 }
