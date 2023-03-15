@@ -16,7 +16,6 @@ import {
   CollapseModule,
   GridModule,
   SharedModule,
-  SmartTableModule,
   TableModule,
   FormModule,
   DatePickerModule,
@@ -29,6 +28,7 @@ import {
   DateRangePickerModule,
   TimePickerModule,
   ProgressModule,
+  MultiSelectModule
 } from '@coreui/angular-pro';
 
 import {
@@ -68,7 +68,6 @@ import {
     CollapseModule,
     GridModule,
     SharedModule,
-    SmartTableModule,
     TableModule,
     FormModule,
     DatePickerModule,
@@ -82,7 +81,8 @@ import {
     TimePickerModule,
     ProgressModule,
     IconModule,
-    FormsModule
+    FormsModule,
+    MultiSelectModule
   ]
 })
 export class PatientQuestionnaireModule { }

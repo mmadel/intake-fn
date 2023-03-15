@@ -59,6 +59,16 @@ const patientRequiredFields = [
     { id: 43, field: 'caseStatus-wrokercomp', required: true, type: 'IQ' },
 
 
+    { id: 44, field: 'height', required: true, type: 'MHQ' },
+    { id: 45, field: 'weight', required: true, type: 'MHQ' },
+    { id: 46, field: 'evaluationReason', required: true, type: 'MHQ' },
+    { id: 47, field: 'medicationPrescription', required: true, type: 'MHQ' },
+    { id: 48, field: 'medicationsList', required: true, type: 'MHQ' },
+    { id: 49, field: 'patientCondition', required: true, type: 'MHQ' },
+    { id: 50, field: 'isScannig', required: true, type: 'MHQ' },
+    { id: 51, field: 'isMetalImplantation', required: true, type: 'MHQ' },
+    { id: 52, field: 'isPacemaker', required: true, type: 'MHQ' },
+    { id: 53, field: 'surgeriesList', required: true, type: 'MHQ' }
 ]
 
 export default patientRequiredFields

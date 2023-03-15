@@ -35,21 +35,12 @@
         <h6>Please select each condition that you have been told you have (or had)</h6>
     </c-card-header>
     <c-card-body>
-        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl [(ngModel)]="model.medicationsList">
-            <option value="">Select</option>
-            <option value="Google ads">Google ads</option>
-            <option value="Zocdoc">Zocdoc</option>
-            <option value="Social media">Social media</option>
-            <option value="Flyers">Flyers</option>
-            <option value="Mailed flyers">Mailed flyers</option>
-            <option value="Friend/Family member">Friend/Family member</option>
-            <option value="TV">TV</option>
-            <option value="Ads screen">Ads screen</option>
-            <option value="I've had PT here before">I've had PT here before</option>
-            <option value="Direct mail">Direct mail</option>
-            <option value="Website">Website</option>
-            <option value="Other">Other</option>
-        </select>
+        <c-multi-select multiple [(ngModel)]="model.medicationsList">
+            <c-multi-select-option>Angular</c-multi-select-option>
+            <c-multi-select-option>Bootstrap</c-multi-select-option>
+            <c-multi-select-option>React.js</c-multi-select-option>
+            <c-multi-select-option>Vue.js</c-multi-select-option>
+          </c-multi-select>
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -120,8 +111,6 @@
         <h6>Please list any Surgeries you may have had or any other conditions not listed above</h6>
     </c-card-header>
     <c-card-body>
-        <textarea cFormControl sizing="sm" [(ngModel)]="model.patientCondition"></textarea>
+        <textarea cFormControl sizing="sm" [(ngModel)]="model.surgeriesList"></textarea>
     </c-card-body>
 </c-card>
-
-<button cButton (click)="test()">ddd</button>

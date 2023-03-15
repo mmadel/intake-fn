@@ -4,10 +4,12 @@ import { Basic } from "src/app/models/patient/basic.info.model";
 import { Patient } from "src/app/models/patient/patient.model";
 import { InsuranceQuestionnaireInfo } from "src/app/models/questionnaire/insurance.questionnaire.info";
 import { MedicalQuestionnaireInfo } from "src/app/models/questionnaire/medical.questionnaire.info";
+import { MedicalHistroyInformation } from "src/app/models/questionnaire/medical/history/medical.history.info";
 import { ValidatorContainer } from "../ValidatorContainer";
 import { PatientAddressValidator } from "./patient.address.validator";
 import { PatientEssentialValidator } from "./patient.essential.validator";
 import { PatientInsuranceQuestionnaireValidator } from "./patient.insurance.questionnaire.validator";
+import { MdicalHistoryValidator } from "./patient.medical.history.validator";
 import { PatientMedicalQuestionnaireValidator } from "./patient.medical.questionnaire.validator";
 
 export class PatientValidator {
@@ -15,6 +17,7 @@ export class PatientValidator {
     private patientAddressInfo: Address = new Address();
     private insuranceQuestionnaireInfo: InsuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
     private medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
+    private medicalHistroyInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
     private validator: ValidatorContainer = new ValidatorContainer();
 
     public validate(modelName: string, model: string, patient: Patient): ValidatorContainer {
@@ -60,6 +63,15 @@ export class PatientValidator {
                 this.validator = patientInsuranceQuestionnaireValidator.validate();
                 if (this.validator)
                     patient.insuranceQuestionnaireInfo = this.insuranceQuestionnaireInfo
+            }
+            if (modelName === 'medical-history') {
+                this.medicalHistroyInformation = JSON.parse(model);
+                var mdicalHistoryValidator: MdicalHistoryValidator = new MdicalHistoryValidator();
+                mdicalHistoryValidator.setModel(this.medicalHistroyInformation)
+                this.validator = new ValidatorContainer();
+                this.validator = mdicalHistoryValidator.validate();
+                if (this.validator)
+                    patient.medicalHistroyInformation = this.medicalHistroyInformation
             }
         }
         return this.validator;
