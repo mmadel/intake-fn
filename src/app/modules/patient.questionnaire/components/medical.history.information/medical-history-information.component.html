@@ -3,7 +3,7 @@
         <h6>What is your Height </h6>
     </c-card-header>
     <c-card-body>
-        <input cFormControl sizing="sm" />
+        <input cFormControl sizing="sm" [(ngModel)]="model.height" />
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -11,7 +11,7 @@
         <h6>What is your Weight </h6>
     </c-card-header>
     <c-card-body>
-        <input cFormControl sizing="sm" />
+        <input cFormControl sizing="sm" [(ngModel)]="model.weight" />
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -19,7 +19,7 @@
         <h6>What is your primary reason for today’s evaluation </h6>
     </c-card-header>
     <c-card-body>
-        <input cFormControl sizing="sm" />
+        <input cFormControl sizing="sm" [(ngModel)]="model.evaluationReason" />
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -27,7 +27,7 @@
         <h6>Please list any prescription or non-prescription medication you are taking? </h6>
     </c-card-header>
     <c-card-body>
-        <textarea cFormControl sizing="sm"></textarea>
+        <textarea cFormControl sizing="sm" [(ngModel)]="model.medicationPrescription"></textarea>
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -35,7 +35,7 @@
         <h6>Please select each condition that you have been told you have (or had)</h6>
     </c-card-header>
     <c-card-body>
-        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl [(ngModel)]="model.medicationsList">
             <option value="">Select</option>
             <option value="Google ads">Google ads</option>
             <option value="Zocdoc">Zocdoc</option>
@@ -57,21 +57,62 @@
         <h6>MRI, CT scan and X-Ray</h6>
     </c-card-header>
     <c-card-body>
-        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
-            <option value="">Select</option>
-            <option value="Google ads">Google ads</option>
-            <option value="Zocdoc">Zocdoc</option>
-            <option value="Social media">Social media</option>
-            <option value="Flyers">Flyers</option>
-            <option value="Mailed flyers">Mailed flyers</option>
-            <option value="Friend/Family member">Friend/Family member</option>
-            <option value="TV">TV</option>
-            <option value="Ads screen">Ads screen</option>
-            <option value="I've had PT here before">I've had PT here before</option>
-            <option value="Direct mail">Direct mail</option>
-            <option value="Website">Website</option>
-            <option value="Other">Other</option>
-        </select>
+        <c-col xs="12" class="mb-1">
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="scanningChange('yes')" value="Yes" name="scanning"
+                    size="sm" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="scanningChange('no')" value="no" name="scanning"
+                    size="sm" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </c-col>
+        <c-col xs="6">
+            <c-card class="mb-3" *ngIf="isScanning === 'yes'">
+                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl [(ngModel)]="model.ScannigValue">
+                    <option value="">Select</option>
+                    <option value="MRI">MRI</option>
+                    <option value="CT">CT scan</option>
+                    <option value="X-ray">X-ray</option>
+                </select> 
+            </c-card>
+        </c-col>
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <h6>Metal Implants</h6>
+    </c-card-header>
+    <c-card-body>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="metalImplantsChange('yes')" value="Yes"
+                name="metalimplants" size="sm" />
+            <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="metalImplantsChange('no')" value="no"
+                name="metalimplants" size="sm" />
+            <label cFormCheckLabel>No</label>
+        </c-form-check>
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <h6>Pacemaker</h6>
+    </c-card-header>
+    <c-card-body>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="paceMakerChange('yes')" value="Yes"
+                name="pacemaker" size="sm" />
+            <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="paceMakerChange('no')" value="no"
+                name="pacemaker" size="sm" />
+            <label cFormCheckLabel>No</label>
+        </c-form-check>
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -79,6 +120,8 @@
         <h6>Please list any Surgeries you may have had or any other conditions not listed above</h6>
     </c-card-header>
     <c-card-body>
-        <textarea cFormControl sizing="sm"></textarea>
+        <textarea cFormControl sizing="sm" [(ngModel)]="model.patientCondition"></textarea>
     </c-card-body>
 </c-card>
+
+<button cButton (click)="test()">ddd</button>
