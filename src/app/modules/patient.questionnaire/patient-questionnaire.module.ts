@@ -28,7 +28,8 @@ import {
   DateRangePickerModule,
   TimePickerModule,
   ProgressModule,
-  MultiSelectModule
+  MultiSelectModule,
+  AccordionModule
 } from '@coreui/angular-pro';
 
 import {
@@ -84,7 +85,8 @@ import {
     ProgressModule,
     IconModule,
     FormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    AccordionModule
   ]
 })
 export class PatientQuestionnaireModule { }

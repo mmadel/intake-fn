@@ -1,1 +1,96 @@
-<p>aggreements works!</p>
+<c-accordion [alwaysOpen]="false" [flush]="false" class="shadow">
+    <c-accordion-item #item0="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton cBgColor="info">
+                <h5>Release of Information</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div [innerHTML]="getReleaseInformationParagraph()" cBgColor="info" class="accordion-body" gradient="true">
+            </div>
+        </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item1="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
+                <h5>Financial Responsibility Agreement by Other than Patient’s Legal Representative</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div [innerHTML]="getFinancialResponsibility()" cBgColor="info" class="accordion-body" gradient="true">
+            </div>
+        </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item2="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
+                <h5>Financial Agreement</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+                <span [innerHTML]="getFinancialAgreement()"></span>
+            </div>
+        </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item3="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item3.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
+                <h5>Assignment of Insurance Beneﬁts</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+                <span [innerHTML]="getInsurance()"></span>
+            </div>
+        </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item4="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item4.toggleItem()" [collapsed]="!item4.visible" cAccordionButton>
+                <h5>HIPAA Acknowledgement</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+                <span [innerHTML]="getHIPAAAcknowledgement()"></span>
+            </div>
+        </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item5="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item5.toggleItem()" [collapsed]="!item5.visible" cAccordionButton>
+                <h5>Cupping Consent Form</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+                <span [innerHTML]="getCupping()"></span>
+            </div>
+        </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item6="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item6.toggleItem()" [collapsed]="!item6.visible" cAccordionButton>
+                <h5>Pelvic Examination & Treatment Consent Form</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+                <span [innerHTML]="getPelvic()"></span>
+            </div>
+        </ng-template>
+    </c-accordion-item>
+    <c-accordion-item #item7="cAccordionItem" [visible]="false">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+            <button (click)="item7.toggleItem()" [collapsed]="!item7.visible" cAccordionButton>
+                <h5>Photo / Video Release Form</h5>
+            </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+            <div class="accordion-body">
+                <span [innerHTML]="getPhotoVideo()"></span>
+            </div>
+        </ng-template>
+    </c-accordion-item>
+</c-accordion>
