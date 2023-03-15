@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
+import { Agreements } from 'src/app/models/patient/agreements/agreements.model';
 @Component({
   selector: 'app-aggreements',
   templateUrl: './aggreements.component.html',
@@ -8,14 +9,7 @@ import * as moment from 'moment';
 })
 export class AggreementsComponent implements OnInit {
   patientName: string = 'mohamed Adel '
-  acceptReleaseAgreements: boolean = false
-  acceptFinancialResponsibilityAgreements: boolean = false
-  acceptFinancialAgreementAgreements: boolean = false
-  acceptInsuranceAgreement: boolean = false
-  acceptHIPAAAgreements: boolean = false
-  acceptCuppingAgreements: boolean = false
-  acceptPelvicAgreements: boolean = false
-  acceptPhotoVideoAgreements: boolean = false
+  model: Agreements = new Agreements();
   nowDate = moment().format("MM.DD.YYYY");
   constructor(private sanitizer: DomSanitizer) { }
   test() {
