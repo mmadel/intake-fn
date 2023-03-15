@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { Agreements } from 'src/app/models/patient/agreements/agreements.model';
+import { Patient } from 'src/app/models/patient/patient.model';
+import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
 @Component({
   selector: 'app-aggreements',
   templateUrl: './aggreements.component.html',
@@ -9,13 +11,27 @@ import { Agreements } from 'src/app/models/patient/agreements/agreements.model';
 })
 export class AggreementsComponent implements OnInit {
   patientName: string = 'mohamed Adel '
-  model: Agreements = new Agreements();
+  model: Agreements
   nowDate = moment().format("MM.DD.YYYY");
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer, private pateintModelRequesterService: PateintModelRequesterService) { }
   test() {
 
   }
   ngOnInit(): void {
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+      if (pateint.agreements !== undefined)
+        this.model = pateint.agreements;
+      else
+        this.model = new Agreements();
+    } else {
+      this.model = new Agreements();
+    }
+    this.pateintModelRequesterService.currentModelName.subscribe(msg => {
+      if (msg === 'aggreements') {
+        this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.model))
+      }
+    });
   }
   getReleaseInformationParagraph() {
     const paragraph = `<p style="font-family:Lucida Handwriting">
@@ -130,7 +146,7 @@ provider’s gloved hand or instrumentation. For purposes of this consent, vagin
 might be included. By signing this consent, I <b>${this.patientName}</b> authorize 
 PT of The City Team to perform a pelvic examination, including vaginal sonography , as 
 described above. By my signature below I acknowledge that I have read and understand 
-the contents of this form. <br/>Patient Name: &#160; <b>${this.patientName}</b><br/>Patient Signature: &#160; <b>${this.patientName}</b> &#160;Date :${this.nowDate}</p>
+the contents of this form. <br/><br/><br/>Patient Name: &#160; <b>${this.patientName}</b><br/>Patient Signature: &#160; <b>${this.patientName}</b> &#160;Date :${this.nowDate}</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
@@ -143,7 +159,7 @@ purpose of publication, promotion, illustration, advertising, or trade, in any m
 medium. I hereby release PT of The City , and its legalRepresentatives for all claims and 
 liability relating to said images or video . Furthermore , I grant permission to use my 
 statements that were given during an interview or guest lecture,With or without my name, 
-for the purpose of advertising and publicity without restriction. I Waive my right to any<br/>I acknowledge that I am <b>${this.patientName}</b>&#160; over the age of 18 <br/><br/>Date: ${this.nowDate}&#160; &#160; &#160; signature:<b>${this.patientName}</b></p>
+for the purpose of advertising and publicity without restriction. I Waive my right to any<br/><br/>I acknowledge that I am <b>${this.patientName}</b>&#160; over the age of 18 <br/><br/>Date: ${this.nowDate}&#160; &#160; &#160; signature:<b>${this.patientName}</b></p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
