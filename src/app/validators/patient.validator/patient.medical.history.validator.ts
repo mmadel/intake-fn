@@ -52,15 +52,16 @@ export class MdicalHistoryValidator {
         }
         if (this.isRequiredField('evaluationReason')) {
             if (this.model.evaluationReason === '' || this.model.evaluationReason === undefined)
-                validator.push({ property: "Evaluation Reason", message: '' });
+                validator.push({ property: "What is your primary reason for today’s evaluation", message: '' });
         }
         if (this.isRequiredField('medicationPrescription')) {
             if (this.model.medicationPrescription === '' || this.model.medicationPrescription === undefined)
-                validator.push({ property: "Prescription or non-prescription medication", message: '' });
+                validator.push({ property: "Please list any prescription or non-prescription medication you are taking", message: '' });
         }
+       
         if (this.isRequiredField('patientCondition')) {
-            if (this.model.patientCondition === '' || this.model.patientCondition === undefined)
-                validator.push({ property: "Please select : each condition", message: '' });
+            if (this.model.patientCondition.length < 1  || this.model.patientCondition === undefined)
+                validator.push({ property: "Please select each condition that you have been", message: '' });
         }
         if (this.isRequiredField('isScannig')) {
             if (this.model.isScannig === undefined)

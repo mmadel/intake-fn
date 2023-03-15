@@ -31,7 +31,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
   }
 
   test() {
-    console.log(JSON.stringify(this.model.medicationsList))
+    console.log(JSON.stringify(this.model))
   }
   scanningChange(val: string) {
     this.isScanning = val;
