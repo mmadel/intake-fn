@@ -18,7 +18,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.insuranceQuestionnaireInfo !== undefined)
+      if (pateint.medicalHistroyInformation !== undefined)
         this.model = pateint.medicalHistroyInformation;
       else
         this.model = new MedicalHistroyInformation();

@@ -26,6 +26,8 @@ export class InsuranceInformationComponent implements OnInit {
         this.insuranceQuestionnaireInfo = pateint.insuranceQuestionnaireInfo;
       else
         this.insuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
+    } else {
+      this.insuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
     }
     this.pateintModelRequesterService.currentModelName.subscribe(msg => {
       if (msg === 'insurance') {

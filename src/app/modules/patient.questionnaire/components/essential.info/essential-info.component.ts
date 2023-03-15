@@ -14,11 +14,15 @@ export class EssentialInfoComponent implements OnInit {
   constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
 
   ngOnInit(): void {
-
+    console.log(localStorage.getItem('patient'))
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      this.pateintBasicInfo = pateint.basicInfo;
-    }else{
+      if (pateint.basicInfo !== undefined) {
+        this.pateintBasicInfo = pateint.basicInfo;
+      } else {
+        this.pateintBasicInfo = new Basic();
+      }
+    } else {
       this.pateintBasicInfo = new Basic();
     }
 

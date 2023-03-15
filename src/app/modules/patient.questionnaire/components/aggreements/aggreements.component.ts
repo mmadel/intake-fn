@@ -10,7 +10,7 @@ import { PateintModelRequesterService } from '../../service/validator/patient/pa
   styleUrls: ['./aggreements.component.css']
 })
 export class AggreementsComponent implements OnInit {
-  patientName: string = 'mohamed Adel '
+  patientName: string = ''
   model: Agreements
   nowDate = moment().format("MM.DD.YYYY");
   constructor(private sanitizer: DomSanitizer, private pateintModelRequesterService: PateintModelRequesterService) { }
