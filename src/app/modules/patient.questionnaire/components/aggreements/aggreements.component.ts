@@ -20,12 +20,9 @@ export class AggreementsComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+      this.constructorPatientName(pateint);
       if (pateint.agreements !== undefined) {
         this.model = pateint.agreements;
-        var fName = pateint.basicInfo.firstName.charAt(0).toUpperCase() + pateint.basicInfo.firstName.slice(1);
-        var mName = pateint.basicInfo.middleName.charAt(0).toUpperCase();
-        var lName = pateint.basicInfo.lastName.charAt(0).toUpperCase() + pateint.basicInfo.lastName.slice(1);
-        this.patientName = fName + ',' + mName + '.,' + lName
       } else {
         this.model = new Agreements();
       }
@@ -91,6 +88,12 @@ devices or fitting examinations.</p>
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
 
+  constructorPatientName(pateint: Patient) {
+    var fName = pateint.basicInfo.firstName.charAt(0).toUpperCase() + pateint.basicInfo.firstName.slice(1);
+    var mName = pateint.basicInfo.middleName.charAt(0).toUpperCase();
+    var lName = pateint.basicInfo.lastName.charAt(0).toUpperCase() + pateint.basicInfo.lastName.slice(1);
+    this.patientName = fName + ',' + mName + '.,' + lName
+  }
   getHIPAAAcknowledgement() {
     const paragraph = `<p style="font-family:Lucida Handwriting">
     By signing below, I acknowledge that I received a copy of Hearing Health’s Notice of Privacy Practices. 
