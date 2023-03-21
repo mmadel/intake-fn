@@ -26,7 +26,7 @@ export class MedicalInfoComponent implements OnInit {
       this.medicalQuestionnaireInfo.isDoctorRecommended = true
       this.medicalQuestionnaireInfo.recommendationEntity = undefined;
       this.medicalQuestionnaireInfo.recommendationDoctor = new RecommendationDoctor();
-    } else {
+    } if (val === 'no') {
       this.medicalQuestionnaireInfo.isDoctorRecommended = false
       this.medicalQuestionnaireInfo.recommendationDoctor = undefined;
       this.medicalQuestionnaireInfo.recommendationEntity = new RecommendationEntity();
@@ -38,7 +38,7 @@ export class MedicalInfoComponent implements OnInit {
     if (val === 'yes') {
       this.medicalQuestionnaireInfo.physicalTherapyReceiving = true
       this.medicalQuestionnaireInfo.physicalTherapy = new PhysicalTherapy;
-    } else {
+    } if (val === 'no') {
       this.medicalQuestionnaireInfo.physicalTherapyReceiving = false;
       this.medicalQuestionnaireInfo.physicalTherapy = undefined;
     }
