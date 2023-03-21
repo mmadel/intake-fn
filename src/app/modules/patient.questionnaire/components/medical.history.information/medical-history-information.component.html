@@ -36,26 +36,9 @@
     </c-card-header>
     <c-card-body>
         <c-multi-select multiple [(ngModel)]="model.patientCondition">
-            <c-multi-select-option>Alzheimer's</c-multi-select-option>
-            <c-multi-select-option>Cardiovascular Disease</c-multi-select-option>
-            <c-multi-select-option>Cauda Equina Syndrome</c-multi-select-option>
-            <c-multi-select-option>Cerebral Vascular Accident</c-multi-select-option>
-            <c-multi-select-option>Current Infection</c-multi-select-option>
-            <c-multi-select-option>Diabetes Mellitus Type 1</c-multi-select-option>
-            <c-multi-select-option>Diabetes Mellitus Type 2</c-multi-select-option>
-            <c-multi-select-option>Fibromyalgia</c-multi-select-option>
-            <c-multi-select-option>Fracture</c-multi-select-option>
-            <c-multi-select-option>History of Cancer</c-multi-select-option>
-            <c-multi-select-option>Huntington's</c-multi-select-option>
-            <c-multi-select-option>Immunosuppression</c-multi-select-option>
-            <c-multi-select-option>Lupus</c-multi-select-option>
-            <c-multi-select-option>Muscular Dystrophy</c-multi-select-option>
-            <c-multi-select-option>Parkinson's</c-multi-select-option>
-            <c-multi-select-option>Obesity</c-multi-select-option>
-            <c-multi-select-option>Osteoarthritis</c-multi-select-option>
-            <c-multi-select-option>Rheumatoid Arthritis</c-multi-select-option>
-            <c-multi-select-option>Traumatic Brain Injury</c-multi-select-option>
-          </c-multi-select>
+            <c-multi-select-option *ngFor="let option of patientConditions" [value]="option.name"
+                [selected]="option.selected">{{option.name}}</c-multi-select-option>
+        </c-multi-select>
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -66,23 +49,24 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="scanningChange('yes')" value="Yes" name="scanning"
-                    size="sm" />
+                    size="sm" [checked]="isScanning === 'yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
-                <input cFormCheckInput type="radio" (change)="scanningChange('no')" value="no" name="scanning"
-                    size="sm" />
+                <input cFormCheckInput type="radio" (change)="scanningChange('no')" value="no" name="scanning" size="sm"
+                    [checked]="isScanning === 'no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
         <c-col xs="6">
             <c-card class="mb-3" *ngIf="isScanning === 'yes'">
-                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl [(ngModel)]="model.ScannigValue">
+                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                    [(ngModel)]="model.scanningTestValue">
                     <option value="">Select</option>
                     <option value="MRI">MRI</option>
                     <option value="CT">CT scan</option>
                     <option value="X-ray">X-ray</option>
-                </select> 
+                </select>
             </c-card>
         </c-col>
     </c-card-body>
@@ -93,13 +77,13 @@
     </c-card-header>
     <c-card-body>
         <c-form-check>
-            <input cFormCheckInput type="radio" (change)="metalImplantsChange('yes')" value="Yes"
-                name="metalimplants" size="sm" />
+            <input cFormCheckInput type="radio" (change)="metalImplantsChange('yes')" value="Yes" name="metalimplants"
+                size="sm" [checked]="isMetalImplantation === 'yes'" />
             <label cFormCheckLabel>Yes</label>
         </c-form-check>
         <c-form-check>
-            <input cFormCheckInput type="radio" (change)="metalImplantsChange('no')" value="no"
-                name="metalimplants" size="sm" />
+            <input cFormCheckInput type="radio" (change)="metalImplantsChange('no')" value="no" name="metalimplants"
+                size="sm" [checked]="isMetalImplantation === 'no'" />
             <label cFormCheckLabel>No</label>
         </c-form-check>
     </c-card-body>
@@ -110,13 +94,13 @@
     </c-card-header>
     <c-card-body>
         <c-form-check>
-            <input cFormCheckInput type="radio" (change)="paceMakerChange('yes')" value="Yes"
-                name="pacemaker" size="sm" />
+            <input cFormCheckInput type="radio" (change)="paceMakerChange('yes')" value="Yes" name="pacemaker" size="sm"
+                [checked]="isPacemaker === 'yes'" />
             <label cFormCheckLabel>Yes</label>
         </c-form-check>
         <c-form-check>
-            <input cFormCheckInput type="radio" (change)="paceMakerChange('no')" value="no"
-                name="pacemaker" size="sm" />
+            <input cFormCheckInput type="radio" (change)="paceMakerChange('no')" value="no" name="pacemaker" size="sm"
+                [checked]="isPacemaker === 'no'" />
             <label cFormCheckLabel>No</label>
         </c-form-check>
     </c-card-body>

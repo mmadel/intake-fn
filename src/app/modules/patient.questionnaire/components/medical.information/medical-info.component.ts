@@ -58,7 +58,8 @@ export class MedicalInfoComponent implements OnInit {
       } else {
         this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
       }
-
+    } else {
+      this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
     }
 
     this.pateintModelRequesterService.currentModelName.subscribe(msg => {

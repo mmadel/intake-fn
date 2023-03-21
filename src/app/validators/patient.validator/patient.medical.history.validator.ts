@@ -64,19 +64,19 @@ export class MdicalHistoryValidator {
                 validator.push({ property: "Please select each condition that you have been", message: '' });
         }
         if (this.isRequiredField('isScannig')) {
-            if (this.model.isScannig === undefined)
+            if (this.model.scanningTest === undefined)
                 validator.push({ property: "Please Select : MRI , CT Or X-Ray", message: '' });
 
-            else if (this.model.ScannigValue === '' || this.model.ScannigValue === undefined)
+            else if (this.model.scanningTestValue === '' || this.model.scanningTestValue === undefined)
                 validator.push({ property: "MRI , CT Or X-Ray Values", message: '' });
         }
 
         if (this.isRequiredField('isMetalImplantation')) {
-            if (this.model.isMetalImplantation === undefined)
+            if (this.model.metalImplantation === undefined)
                 validator.push({ property: "Please Select : Metal Implants", message: '' });
         }
         if (this.isRequiredField('isPacemaker')) {
-            if (this.model.isPacemaker === undefined)
+            if (this.model.pacemaker === undefined)
                 validator.push({ property: "Please Select : Pacemaker", message: '' });
         }
         if (this.isRequiredField('surgeriesList')) {

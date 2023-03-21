@@ -3,10 +3,10 @@ export class MedicalHistroyInformation {
     weight: string;
     evaluationReason: string;
     medicationPrescription: string;
-    patientCondition: string[] = [];
-    isScannig: boolean;
-    ScannigValue: string = '';
-    isMetalImplantation: boolean;
-    isPacemaker: boolean;
+    patientCondition: string[];
+    scanningTest: boolean;
+    scanningTestValue: string = '';
+    metalImplantation: boolean;
+    pacemaker: boolean;
     surgeriesList: string;
 }
