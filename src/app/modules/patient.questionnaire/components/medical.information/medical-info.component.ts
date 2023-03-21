@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
+import { PhysicalTherapy } from 'src/app/models/questionnaire/medical/physical.therapy';
+import { RecommendationDoctor } from 'src/app/models/questionnaire/medical/recommendation.doctor';
+import { RecommendationEntity } from 'src/app/models/questionnaire/medical/recommendation.entity';
 import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
 import requiredFields from '../../service/_patient.require.fields.service';
 @Component({
@@ -18,11 +21,27 @@ export class MedicalInfoComponent implements OnInit {
 
   referringDoctorQChange(val: string) {
     this.isReferringDoctor = val;
-    val === 'yes' ? this.medicalQuestionnaireInfo.doctorRecommendation = true : this.medicalQuestionnaireInfo.doctorRecommendation = false;
+
+    if (val === 'yes') {
+      this.medicalQuestionnaireInfo.isDoctorRecommended = true
+      this.medicalQuestionnaireInfo.recommendationEntity = undefined;
+      this.medicalQuestionnaireInfo.recommendationDoctor = new RecommendationDoctor();
+    } else {
+      this.medicalQuestionnaireInfo.isDoctorRecommended = false
+      this.medicalQuestionnaireInfo.recommendationDoctor = undefined;
+      this.medicalQuestionnaireInfo.recommendationEntity = new RecommendationEntity();
+    }
   }
   physicalTherapyQChange(val: string) {
     this.isphysicalTherapy = val;
-    val === 'yes' ? this.medicalQuestionnaireInfo.physicalTherapyReceiving = true : this.medicalQuestionnaireInfo.physicalTherapyReceiving = false;
+
+    if (val === 'yes') {
+      this.medicalQuestionnaireInfo.physicalTherapyReceiving = true
+      this.medicalQuestionnaireInfo.physicalTherapy = new PhysicalTherapy;
+    } else {
+      this.medicalQuestionnaireInfo.physicalTherapyReceiving = false;
+      this.medicalQuestionnaireInfo.physicalTherapy = undefined;
+    }
   }
   resultsfamilyQChange(val: string) {
     this.isfamilyResultSubmission = val;
@@ -33,7 +52,7 @@ export class MedicalInfoComponent implements OnInit {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.medicalQuestionnaireInfo !== undefined) {
         this.medicalQuestionnaireInfo = pateint.medicalQuestionnaireInfo;
-        pateint.medicalQuestionnaireInfo.doctorRecommendation ? this.isReferringDoctor = 'yes' : this.isReferringDoctor = 'no';
+        pateint.medicalQuestionnaireInfo.isDoctorRecommended ? this.isReferringDoctor = 'yes' : this.isReferringDoctor = 'no';
         pateint.medicalQuestionnaireInfo.physicalTherapyReceiving ? this.isphysicalTherapy = 'yes' : this.isphysicalTherapy = 'no';
         pateint.medicalQuestionnaireInfo.familyResultSubmission ? this.isfamilyResultSubmission = 'yes' : this.isfamilyResultSubmission = 'no';
       } else {

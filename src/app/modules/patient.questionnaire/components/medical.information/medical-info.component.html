@@ -20,21 +20,25 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('name-recommendeddoctor') }" class="mb-1">
                     <label for="doctorname" class="form-label">Doctor Name</label>
                     <input cFormControl [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.name"
-                        name="doctorname" placeholder="Doctor Name" sizing="sm" />
+                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor" name="doctorname"
+                        placeholder="Doctor Name" sizing="sm" />
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('npi-recommendeddoctor') }" class="mb-1">
                     <label for="doctornpi" class="form-label">Doctor NPI</label>
                     <input cFormControl placeholder="Doctor NPI" sizing="sm"
+                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.npi" name="doctornpi" />
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('fax-recommendeddoctor') }" class="mb-1">
                     <label for="doctorfax" class="form-label">Doctor Fax</label>
                     <input cFormControl placeholder="Fax #" sizing="sm"
+                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.fax" name="doctorfax" />
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('address-recommendeddoctor') }" class="mb-1">
                     <label for="doctoraddress" class="form-label">Doctor Fax</label>
                     <input cFormControl placeholder="Address" sizing="sm"
+                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.address" name="doctoraddress" />
                 </div>
             </form>
@@ -44,6 +48,7 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('name-recommendedentity') }" class="mb-1">
                     <label for="entityname" class="form-label">Entity Name</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                        *ngIf="medicalQuestionnaireInfo.recommendationEntity"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationEntity.name" name="entityname">
                         <option value="">Select</option>
                         <option value="Google ads">Google ads</option>
@@ -143,13 +148,13 @@
             <form cForm>
                 <div [ngClass]="{ 'form-group required':isRequiredField('physicaltherapy-where') }" class="mb-1">
                     <label for="physicalTherapywhere" class="form-label">Where </label>
-                    <input cFormControl placeholder="Where" sizing="sm"
+                    <input cFormControl placeholder="Where" sizing="sm" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
                         [(ngModel)]="medicalQuestionnaireInfo.physicalTherapy.location" name="physicalTherapywhere" />
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('physicaltherapy-number-visit') }" class="mb-1">
                     <label for="physicalTherapywheretimes" class="form-label">How many visits</label>
                     <input cFormControl type="number" name="physicalTherapywheretimes" min="1" sizing="sm"
-                        placeholder="How many visits"
+                        placeholder="How many visits" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
                         [(ngModel)]="medicalQuestionnaireInfo.physicalTherapy.numberOfVisit"
                         name="physicalTherapywheretimes" />
                 </div>

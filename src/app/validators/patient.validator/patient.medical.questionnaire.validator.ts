@@ -45,43 +45,49 @@ export class PatientMedicalQuestionnaireValidator {
 
     }
     private validateRecommendationDoctor(validator: PropertyValidator[]) {
-        if (this.isRequiredField('name-recommendeddoctor')) {
-            if (this.medicalQuestionnaireInfo.recommendationDoctor.name === '' || this.medicalQuestionnaireInfo.recommendationDoctor.name === undefined)
-                validator.push({ property: " Recommendation Doctor name", message: '' });
-        }
-        if (this.isRequiredField('npi-recommendeddoctor')) {
-            if (this.medicalQuestionnaireInfo.recommendationDoctor.npi === '' || this.medicalQuestionnaireInfo.recommendationDoctor.npi === undefined)
-                validator.push({ property: " Recommendation Doctor NPI", message: '' });
-        }
-        if (this.isRequiredField('fax-recommendeddoctor')) {
-            if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
-                validator.push({ property: " Recommendation Doctor Fax", message: '' });
-        }
-        if (this.isRequiredField('address-recommendeddoctor')) {
-            if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
-                validator.push({ property: " Recommendation Doctor Address", message: '' });
+        if (this.medicalQuestionnaireInfo.recommendationDoctor !== undefined) {
+            if (this.isRequiredField('name-recommendeddoctor')) {
+                if (this.medicalQuestionnaireInfo.recommendationDoctor.name === '' || this.medicalQuestionnaireInfo.recommendationDoctor.name === undefined)
+                    validator.push({ property: " Recommendation Doctor name", message: '' });
+            }
+            if (this.isRequiredField('npi-recommendeddoctor')) {
+                if (this.medicalQuestionnaireInfo.recommendationDoctor.npi === '' || this.medicalQuestionnaireInfo.recommendationDoctor.npi === undefined)
+                    validator.push({ property: " Recommendation Doctor NPI", message: '' });
+            }
+            if (this.isRequiredField('fax-recommendeddoctor')) {
+                if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
+                    validator.push({ property: " Recommendation Doctor Fax", message: '' });
+            }
+            if (this.isRequiredField('address-recommendeddoctor')) {
+                if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
+                    validator.push({ property: " Recommendation Doctor Address", message: '' });
+            }
         }
     }
 
     private validateRecommendationEntity(validator: PropertyValidator[]) {
-        if (this.isRequiredField('name-recommendedentity')) {
-            if (this.medicalQuestionnaireInfo.recommendationEntity.name === '' || this.medicalQuestionnaireInfo.recommendationEntity.name === undefined)
-                validator.push({ property: " Recommendation Entity Name", message: '' });
+        if (this.medicalQuestionnaireInfo.recommendationEntity !== undefined) {
+            if (this.isRequiredField('name-recommendedentity')) {
+                if (this.medicalQuestionnaireInfo.recommendationEntity.name === '' || this.medicalQuestionnaireInfo.recommendationEntity.name === undefined)
+                    validator.push({ property: " Recommendation Entity Name", message: '' });
+            }
         }
     }
 
     private validatephysicalTherapyReceiving(validator: PropertyValidator[]) {
-        if (this.isRequiredField('physicaltherapy-where')) {
-            if (this.medicalQuestionnaireInfo.physicalTherapy.location === '' || this.medicalQuestionnaireInfo.physicalTherapy.location === undefined)
-                validator.push({ property: "Location of physical therapy", message: '' });
-        }
-        if (this.isRequiredField('physicaltherapy-number-visit')) {
-            if (this.medicalQuestionnaireInfo.physicalTherapy.numberOfVisit === 0 || this.medicalQuestionnaireInfo.physicalTherapy.numberOfVisit === undefined)
-                validator.push({ property: "Number of visits of physical therapy", message: '' });
+        if (this.medicalQuestionnaireInfo.physicalTherapy !== undefined) {
+            if (this.isRequiredField('physicaltherapy-where')) {
+                if (this.medicalQuestionnaireInfo.physicalTherapy.location === '' || this.medicalQuestionnaireInfo.physicalTherapy.location === undefined)
+                    validator.push({ property: "Location of physical therapy", message: '' });
+            }
+            if (this.isRequiredField('physicaltherapy-number-visit')) {
+                if (this.medicalQuestionnaireInfo.physicalTherapy.numberOfVisit === 0 || this.medicalQuestionnaireInfo.physicalTherapy.numberOfVisit === undefined)
+                    validator.push({ property: "Number of visits of physical therapy", message: '' });
+            }
         }
     }
     private validateInfo(validator: PropertyValidator[]) {
-        if (this.medicalQuestionnaireInfo.doctorRecommendation)
+        if (this.medicalQuestionnaireInfo.isDoctorRecommended)
             this.validateRecommendationDoctor(validator);
         else
             this.validateRecommendationEntity(validator);
