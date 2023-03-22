@@ -1,22 +1,17 @@
+import { MedicareCoverage } from "./medicare.coverage";
+import { PatientRelationship } from "./patient.relationship";
+import { SecondaryInsurance } from "./secondary.Insurance";
+
 export class WrokerNotComp {
-    insuranceCompanyName: string ='';
+    insuranceCompanyName: string = '';
     memberId: string;
     ploicyId: string;
-    policyRelationship: string='';
-    policyRelationshipFirstName: string;
-    policyRelationshipMiddleName: string;
-    policyRelationshipLastName: string;
-    policyRelationshipPhone: string;
-    policyRelationshipEmployerName: string;
-    secondaryInsurance: boolean;
-    secondaryInsurancePolicyHolderFirstName: string;
-    secondaryInsurancePolicyHolderMiddleName: string;
-    secondaryInsurancePolicyHolderLastName: string;
-    secondaryInsuranceCompanyName: string ='';
-    secondaryInsuranceMemberId: string;
-    medicareCoverage: boolean;
-    secondaryInsurancePolicyHolderEmployerFirstName: string;
-    secondaryInsurancePolicyHolderEmployerMiddleName: string;
-    secondaryInsurancePolicyHolderEmployerLastName: string;
-    secondaryInsurancePolicyHolderEmployerPhone: string;
+    relationship: string =''
+    isSecondaryInsurance: boolean;
+    isMedicareCoverage: boolean |undefined;
+    insuranceCompanyId: string
+    secondaryInsuranceDTO: SecondaryInsurance | undefined
+    medicareCoverageDTO: MedicareCoverage | undefined
+    patientRelationshipDTO: PatientRelationship | undefined
+
 }

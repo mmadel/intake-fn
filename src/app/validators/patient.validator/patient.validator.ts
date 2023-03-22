@@ -59,7 +59,7 @@ export class PatientValidator {
             }
             if (modelName === 'insurance') {
                 this.insuranceQuestionnaireInfo = JSON.parse(model);
-                this.insuranceQuestionnaireInfo.wrokerCompModel.accidentDateTimeStamp = Number(moment(this.insuranceQuestionnaireInfo.wrokerCompModel.accidentDate).format("x"));
+                this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault.accidentDateTimeStamp = Number(moment(this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault.accidentDate).format("x"));
                 var patientInsuranceQuestionnaireValidator: PatientInsuranceQuestionnaireValidator = new PatientInsuranceQuestionnaireValidator();
                 patientInsuranceQuestionnaireValidator.setModel(this.insuranceQuestionnaireInfo)
                 this.validator = new ValidatorContainer();

@@ -6,12 +6,12 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('yes')" value="Yes"
-                    name="flexRadioDefault" size="sm" />
+                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='yes'"/>
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('no')" value="no"
-                    name="flexRadioDefault" size="sm" />
+                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='no'"/>
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
