@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultLayoutComponent } from './core';
+import { DefaultAdminLayoutComponent, DefaultLayoutComponent } from './core';
 
 const routes: Routes = [
   {
@@ -16,7 +16,22 @@ const routes: Routes = [
           import('./modules/patient.questionnaire/patient-questionnaire.module').then((m) => m.PatientQuestionnaireModule)
       },
     ]
-  }
+  },
+  {
+    path: '',
+    component: DefaultAdminLayoutComponent,
+    data: {
+      title: 'Admin-Home'
+    },
+    children: [
+      {
+        path: 'admin',
+        loadChildren: () =>
+          import('./modules/patient.admin/patient-admin.module').then((m) => m.PatientAdminModule)
+      }
+    ]
+  },
+
 ];
 
 @NgModule({
