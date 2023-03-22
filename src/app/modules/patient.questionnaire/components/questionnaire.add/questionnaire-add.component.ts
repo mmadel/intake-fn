@@ -44,6 +44,7 @@ export class QuestionnaireAddComponent implements OnInit {
   next(patientModel: string) {
     this.modelName = patientModel;
     this.pateintModelRequesterService.requestPateintModel(patientModel);
+    
     if (this.validator.isValid) {
       Patientcache.cache(this.modelName, this.patient)
       this.calculatePercentage(this.counter, 'next')

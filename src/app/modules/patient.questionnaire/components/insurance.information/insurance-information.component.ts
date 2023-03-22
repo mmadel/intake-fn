@@ -26,7 +26,13 @@ export class InsuranceInformationComponent implements OnInit {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.insuranceQuestionnaireInfo !== undefined) {
         this.insuranceQuestionnaireInfo = pateint.insuranceQuestionnaireInfo;
-        this.insuranceQuestionnaireInfo.isCompNoFault ? this.isWorkerCompNoFault = 'yes' : this.isWorkerCompNoFault = 'no'
+        this.insuranceQuestionnaireInfo.isCompNoFault === true ? this.isWorkerCompNoFault = 'yes' : this.isWorkerCompNoFault = 'no'
+        if (pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault !== undefined) {
+          this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault
+        }
+        if (pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial !== undefined) {
+          this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial;
+        }
       } else {
         this.insuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
       }
@@ -36,11 +42,13 @@ export class InsuranceInformationComponent implements OnInit {
     }
     this.pateintModelRequesterService.currentModelName.subscribe(msg => {
       if (msg === 'insurance') {
-        if (this.isWorkerCompNoFault === 'yes')
+        console.log(this.workerNotCompComponent)
+        if (this.isWorkerCompNoFault === 'yes' && this.workerCompComponent !== undefined) {
           this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.workerCompComponent.model;
-        if (this.isWorkerCompNoFault === 'no')
+        }
+        if (this.isWorkerCompNoFault === 'no' && this.workerNotCompComponent !== undefined) {
           this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.workerNotCompComponent.model;
-
+        }
         this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.insuranceQuestionnaireInfo))
       }
     });
@@ -51,12 +59,14 @@ export class InsuranceInformationComponent implements OnInit {
       this.insuranceQuestionnaireInfo.isCompNoFault = true;
       this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = new WrokerComp();
       this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = undefined;
+
     }
 
     if (val === 'no') {
       this.insuranceQuestionnaireInfo.isCompNoFault = false;
       this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = new WrokerNotComp();
       this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = undefined
+
     }
 
   }

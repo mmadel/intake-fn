@@ -6,6 +6,7 @@ import { SecondaryInsurance } from 'src/app/models/questionnaire/Insurance/secon
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
 import { Patient } from 'src/app/models/patient/patient.model';
+import { PateintModelRequesterService } from '../../../service/validator/patient/pateint-model-requester.service';
 
 @Component({
   selector: 'app-worker-not-comp',
@@ -16,7 +17,7 @@ export class WorkerNotCompComponent implements OnInit {
   model: WrokerNotComp
   isSecondaryInsurance: string;
   isMedicareCoverage: string;
-  constructor() { }
+  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
