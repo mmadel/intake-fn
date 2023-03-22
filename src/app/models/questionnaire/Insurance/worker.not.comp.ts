@@ -5,7 +5,7 @@ import { SecondaryInsurance } from "./secondary.Insurance";
 export class WrokerNotComp {
     insuranceCompanyName: string = '';
     memberId: string;
-    ploicyId: string;
+    policyId: string;
     relationship: string =''
     isSecondaryInsurance: boolean;
     isMedicareCoverage: boolean |undefined;

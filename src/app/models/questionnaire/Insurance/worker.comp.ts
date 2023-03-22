@@ -1,7 +1,7 @@
 export class WrokerComp {
     injuryType: string ="";
     accidentDate: Date;
-    accidentDateTimeStamp: number = 0;
+    accidentDateTimeStamp: number;
     wrokerStatus: string ='';
     address: string;
     fax: string;

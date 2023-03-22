@@ -11,8 +11,7 @@
                 </select>
             </div>
         </c-col>
-        <!--workingInjury  -->
-        <c-col xs="auto" class="mb-2" *ngIf="model.injuryType === 'workingInjury'">
+        <c-col xs="auto" class="mb-2">
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="autoAccidentDate" class="form-label">Accident Date</label>
@@ -99,14 +98,6 @@
                     </select>
                 </div>
             </c-col>
-        </c-col>
-        <!--autoAccident -->
-        <c-col xs="auto" class="mb-2" *ngIf="model.injuryType === 'autoAccident'">
-            <div [ngClass]="{ 'form-group required':isRequiredField('') }">
-                <label for="autoAccidentDate" class="form-label">Accident Date</label>
-                <c-date-picker closeOnSelect size="sm" cFormControl [(ngModel)]="model.accidentDate"
-                    name="autoAccidentDate" placeholder="Accident Date"></c-date-picker>
-            </div>
         </c-col>
     </form>
 </c-row>

@@ -3,6 +3,6 @@ import { WrokerNotComp } from "./Insurance/worker.not.comp";
 
 export class InsuranceQuestionnaireInfo {
     isCompNoFault: boolean;
-    insuranceWorkerCompNoFault: WrokerComp = new WrokerComp();
-    insuranceWorkerCommercial: WrokerNotComp = new WrokerNotComp();
+    insuranceWorkerCompNoFault: WrokerComp | undefined
+    insuranceWorkerCommercial: WrokerNotComp | undefined
 }

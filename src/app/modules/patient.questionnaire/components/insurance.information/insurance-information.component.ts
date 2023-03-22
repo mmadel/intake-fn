@@ -50,11 +50,13 @@ export class InsuranceInformationComponent implements OnInit {
     if (val === 'yes') {
       this.insuranceQuestionnaireInfo.isCompNoFault = true;
       this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = new WrokerComp();
+      this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = undefined;
     }
 
     if (val === 'no') {
       this.insuranceQuestionnaireInfo.isCompNoFault = false;
       this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = new WrokerNotComp();
+      this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = undefined
     }
 
   }
