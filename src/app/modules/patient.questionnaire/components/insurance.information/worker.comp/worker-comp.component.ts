@@ -4,6 +4,7 @@ import requiredFields from '../../../service/_patient.require.fields.service';
 import * as _ from 'lodash';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PateintModelRequesterService } from '../../../service/validator/patient/pateint-model-requester.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-worker-comp',
@@ -30,5 +31,8 @@ export class WorkerCompComponent implements OnInit {
   isRequiredField(name: string): boolean {
     var field = _.find(requiredFields, { field: name })
     return field !== undefined ? field.required : false;
+  }
+  accidentDate() {
+    this.model.accidentDate = Number(moment(this.model.accidentDate_date).format("x"))
   }
 }

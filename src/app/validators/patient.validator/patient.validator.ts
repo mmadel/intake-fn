@@ -31,8 +31,8 @@ export class PatientValidator {
                 var atientEssentialValidator: PatientEssentialValidator = new PatientEssentialValidator();
                 this.patientEssentialInfo.birthDate = Number(moment(this.patientEssentialInfo.birthDate_date).format("x"));
 
-                this.patientEssentialInfo.ideffective_from = Number(moment(this.patientEssentialInfo.id_effective_from_date).format("x"))
-                this.patientEssentialInfo.ideffective_to = Number(moment(this.patientEssentialInfo.id_effective_to_date).format("x"))
+                this.patientEssentialInfo.idEffectiveFrom = Number(moment(this.patientEssentialInfo.id_effective_from_date).format("x"))
+                this.patientEssentialInfo.idEffectiveTo = Number(moment(this.patientEssentialInfo.id_effective_to_date).format("x"))
                 atientEssentialValidator.setModel(this.patientEssentialInfo);
                 this.validator = new ValidatorContainer();
                 this.validator = atientEssentialValidator.validate();
@@ -73,7 +73,7 @@ export class PatientValidator {
                 this.validator = new ValidatorContainer();
                 this.validator = mdicalHistoryValidator.validate();
                 if (this.validator)
-                    patient.medicalHistroyInformation = this.medicalHistroyInformation
+                    patient.medicalHistoryInformation = this.medicalHistroyInformation
             }
             if (modelName === 'aggreements') {
                 this.agreements = JSON.parse(model);

@@ -10,6 +10,6 @@ export class Patient {
     addressInfo: Address = new Address();
     medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
     insuranceQuestionnaireInfo: InsuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
-    medicalHistroyInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
+    medicalHistoryInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
     agreements:Agreements= new Agreements();
 }

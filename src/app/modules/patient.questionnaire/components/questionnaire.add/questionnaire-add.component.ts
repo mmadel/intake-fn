@@ -3,6 +3,7 @@ import { Patientcache } from 'src/app/caching/patient.caching';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
+import { PatientService } from '../../service/patient.service';
 import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
 
 
@@ -23,14 +24,14 @@ export class QuestionnaireAddComponent implements OnInit {
     
   ];
 
-  counter: number = 5;
+  counter: number = 7;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
   patientValidator: PatientValidator = new PatientValidator();
   modelName: string = '';
   patient: Patient = new Patient();
-  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
+  constructor(private pateintModelRequesterService: PateintModelRequesterService,private patientService:PatientService) { }
 
   ngOnInit(): void {
     this.pateintModelRequesterService.currentModel.subscribe(model => {
@@ -71,5 +72,10 @@ export class QuestionnaireAddComponent implements OnInit {
         window.scrollTo(0, 0);
       }
     })();
+  }
+
+  submit(){
+    var pateint:string = localStorage.getItem('patient') || '';
+    this.patientService.createPatient(pateint)
   }
 }

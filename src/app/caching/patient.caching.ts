@@ -13,7 +13,7 @@ export class Patientcache {
         if (modelName === 'insurance')
             patient.insuranceQuestionnaireInfo = pateintHolder.insuranceQuestionnaireInfo;
         if (modelName === 'medical-history')
-            patient.medicalHistroyInformation = pateintHolder.medicalHistroyInformation;
+            patient.medicalHistoryInformation = pateintHolder.medicalHistoryInformation;
         if (modelName === 'aggreements')
             patient.agreements = pateintHolder.agreements;
 

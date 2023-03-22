@@ -1,8 +1,8 @@
 export class WrokerComp {
     injuryType: string ="";
-    accidentDate: Date;
-    accidentDateTimeStamp: number;
-    wrokerStatus: string ='';
+    accidentDate_date: Date;
+    accidentDate: number;
+    workerStatus: string ='';
     address: string;
     fax: string;
     insuranceName: string;

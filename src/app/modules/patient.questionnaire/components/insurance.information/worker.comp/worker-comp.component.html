@@ -15,7 +15,8 @@
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="autoAccidentDate" class="form-label">Accident Date</label>
-                    <c-date-picker closeOnSelect size="sm" cFormControl [(ngModel)]="model.accidentDate"
+                    <c-date-picker closeOnSelect size="sm" cFormControl [(ngModel)]="model.accidentDate_date"
+                    (dateChange)="accidentDate()"
                         name="autoAccidentDate" placeholder="Accident Date"></c-date-picker>
                 </div>
             </c-col>
@@ -23,11 +24,11 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="injury" class="form-label">Worker Status</label>
                     <select cSelect sizing="sm" name="injury" style="line-height: 15px;" cFormControl
-                        [(ngModel)]="model.wrokerStatus">
+                        [(ngModel)]="model.workerStatus">
                         <option value="">Select</option>
-                        <option value="fulltime">Full-Time</option>
-                        <option value="parttime">Part-Time</option>
-                        <option value="notwork">Not-Work</option>
+                        <option value="FullTime">Full-Time</option>
+                        <option value="PartTime">Part-Time</option>
+                        <option value="NotWork">Not-Work</option>
                     </select>
                 </div>
             </c-col>
@@ -93,8 +94,8 @@
                     <select cSelect sizing="sm" name="caseStatus" style="line-height: 15px;" cFormControl
                         [(ngModel)]="model.caseStatus">
                         <option value="">Select</option>
-                        <option value="active">active</option>
-                        <option value="inactive">In-Active</option>
+                        <option value="Active">active</option>
+                        <option value="InActive">In-Active</option>
                     </select>
                 </div>
             </c-col>

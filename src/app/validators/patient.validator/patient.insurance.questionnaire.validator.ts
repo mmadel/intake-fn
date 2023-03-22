@@ -125,11 +125,11 @@ export class PatientInsuranceQuestionnaireValidator {
     }
     private validateworkingInjury(validator: PropertyValidator[]) {
         if (this.isRequiredField('accidentDate-wrokercomp')) {
-            if (Number.isNaN(this.model.insuranceWorkerCompNoFault?.accidentDateTimeStamp) || this.model.insuranceWorkerCompNoFault?.accidentDateTimeStamp === 0)
+            if (Number.isNaN(this.model.insuranceWorkerCompNoFault?.accidentDate_date) || this.model.insuranceWorkerCompNoFault?.accidentDate === 0)
                 validator.push({ property: " Accident Date", message: '' });
         }
         if (this.isRequiredField('wrokerStatus-wrokercomp')) {
-            if (this.model.insuranceWorkerCompNoFault?.wrokerStatus === '' || this.model.insuranceWorkerCompNoFault?.wrokerStatus === undefined)
+            if (this.model.insuranceWorkerCompNoFault?.workerStatus === '' || this.model.insuranceWorkerCompNoFault?.workerStatus === undefined)
                 validator.push({ property: " Wroker Status", message: '' });
         }
         if (this.isRequiredField('address-wrokercomp')) {
@@ -172,7 +172,7 @@ export class PatientInsuranceQuestionnaireValidator {
 
     private validateAutoAccident(validator: PropertyValidator[]) {
         if (this.isRequiredField('accidentDate-wrokercomp')) {
-            if (Number.isNaN(this.model.insuranceWorkerCompNoFault?.accidentDateTimeStamp))
+            if (Number.isNaN(this.model.insuranceWorkerCompNoFault?.accidentDate_date))
                 validator.push({ property: " Accident Date", message: '' });
         }
     }

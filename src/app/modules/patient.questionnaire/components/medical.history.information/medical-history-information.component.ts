@@ -21,11 +21,11 @@ export class MedicalHistoryInformationComponent implements OnInit {
     this.createPatientConditions();
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.medicalHistroyInformation !== undefined) {
-        this.model = pateint.medicalHistroyInformation;
-        pateint.medicalHistroyInformation.metalImplantation ? this.isMetalImplantation = 'yes' : this.isMetalImplantation = 'no'
-        pateint.medicalHistroyInformation.pacemaker ? this.isPacemaker = 'yes' : this.isPacemaker = 'no'
-        pateint.medicalHistroyInformation.scanningTest ? this.isScanning = 'yes' : this.isScanning = 'no'
+      if (pateint.medicalHistoryInformation !== undefined) {
+        this.model = pateint.medicalHistoryInformation;
+        pateint.medicalHistoryInformation.metalImplantation ? this.isMetalImplantation = 'yes' : this.isMetalImplantation = 'no'
+        pateint.medicalHistoryInformation.pacemaker ? this.isPacemaker = 'yes' : this.isPacemaker = 'no'
+        pateint.medicalHistoryInformation.scanningTest ? this.isScanning = 'yes' : this.isScanning = 'no'
         this.model.patientCondition.forEach(name => {
           this.patientConditions.forEach(condition => {
             if (name === condition.name)

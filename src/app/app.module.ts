@@ -36,6 +36,8 @@ import {
   DefaultFooterComponent,
 } from './core';
 import { PateintModelRequesterService } from './modules/patient.questionnaire/service/validator/patient/pateint-model-requester.service';
+import { PatientService } from './modules/patient.questionnaire/service/patient.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
@@ -47,6 +49,7 @@ const APP_CONTAINERS = [
   declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     AvatarModule,
     BadgeModule,
@@ -78,7 +81,8 @@ const APP_CONTAINERS = [
     },
     IconSetService,
     Title,
-    PateintModelRequesterService
+    PateintModelRequesterService,
+    PatientService
   ],
   bootstrap: [AppComponent]
 })

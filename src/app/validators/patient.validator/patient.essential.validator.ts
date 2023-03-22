@@ -67,7 +67,7 @@ export class PatientEssentialValidator {
                 validator.push({ property: " Birth Date", message: '' });
         }
         if (this.isRequiredField('gender')) {
-            if (this.pateintBasicInfo.geneder === null || this.pateintBasicInfo.geneder === undefined)
+            if (this.pateintBasicInfo.gender === null || this.pateintBasicInfo.gender === undefined)
                 validator.push({ property: " Gender", message: '' });
         }
         if (this.isRequiredField('maritalStatus')) {
@@ -89,14 +89,14 @@ export class PatientEssentialValidator {
         }
         if (this.isRequiredField('idType') && this.isRequiredField('id')) {
             if ((this.pateintBasicInfo.idType === '' || this.pateintBasicInfo.idType === undefined) &&
-                (this.pateintBasicInfo.id === '' || this.pateintBasicInfo.id === undefined)) {
+                (this.pateintBasicInfo.patientId === '' || this.pateintBasicInfo.patientId === undefined)) {
                 validator.push({ property: " ID Type", message: '' });
                 validator.push({ property: "ID", message: '' });
             }
         }
         if (this.isRequiredField('ideffective_from') && this.isRequiredField('ideffective_to')) {
-            if ((Number.isNaN(this.pateintBasicInfo.ideffective_from)) &&
-                (Number.isNaN(this.pateintBasicInfo.ideffective_to))) {
+            if ((Number.isNaN(this.pateintBasicInfo.idEffectiveFrom)) &&
+                (Number.isNaN(this.pateintBasicInfo.idEffectiveTo))) {
                 validator.push({ property: "Id effective From", message: '' });
                 validator.push({ property: "Id effective To", message: '' });
             }
