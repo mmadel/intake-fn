@@ -11,7 +11,7 @@ export class SubmitionComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    if(localStorage.getItem('patient') !== undefined){
+    if (localStorage.getItem('patient') !== null) {
       this.router.navigate(['/questionnaire/add']);
     }
   }

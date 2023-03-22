@@ -25,7 +25,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 7;
+  counter: number = 1;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -81,6 +81,7 @@ export class QuestionnaireAddComponent implements OnInit {
     var pateint: string = localStorage.getItem('patient') || '';
     this.patientService.createPatient(pateint).subscribe(
       (response) => {
+        localStorage.removeItem('patient');
         this.router.navigate(['/questionnaire/submitted']);
       },
       (error) => { console.log(error); });
