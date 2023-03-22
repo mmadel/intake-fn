@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   QuestionnaireAddComponent,
-  EssentialInfoComponent,
-  AddressInformationComponent,
-  InsuranceInformationComponent,
+  SubmitionComponent,
 } from './index';
 const routes: Routes = [
   {
@@ -21,26 +19,12 @@ const routes: Routes = [
         },
       },
       {
-        path: 'essential',
-        component: EssentialInfoComponent,
+        path: 'submitted',
+        component: SubmitionComponent,
         data: {
-          title: 'Essential Info',
+          title: 'Submition',
         },
-      },
-      {
-        path: 'address',
-        component: AddressInformationComponent,
-        data: {
-          title: 'Address Info',
-        },
-      },
-      {
-        path: 'insurance',
-        component: InsuranceInformationComponent,
-        data: {
-          title: 'Insurance Info',
-        },
-      },
+      }
     ]
   }
 ];

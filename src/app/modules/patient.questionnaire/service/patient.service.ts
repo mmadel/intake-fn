@@ -11,8 +11,6 @@ export class PatientService {
     console.log('createPatient')
     const createPatientURL = this.baseUrl + 'patient';
     const headers = { 'content-type': 'application/json' }
-    this.http.post(createPatientURL, patient, { 'headers': headers, observe: 'response' }).subscribe(data => {
-      console.log(data);
-    });
+    return this.http.post(createPatientURL, patient, { 'headers': headers, observe: 'response' })   
   }
 }

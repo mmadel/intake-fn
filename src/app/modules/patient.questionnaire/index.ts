@@ -11,4 +11,6 @@ export * from './components/medical.history.information/medical-history-informat
 
 export * from './components/aggreements/aggreements.component'
 
+export * from './components/submition/submition.component'
+
 export * from './patient-questionnaire.module'

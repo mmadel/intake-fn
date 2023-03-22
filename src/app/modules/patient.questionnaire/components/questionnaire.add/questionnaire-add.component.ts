@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Patientcache } from 'src/app/caching/patient.caching';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
@@ -21,7 +22,7 @@ export class QuestionnaireAddComponent implements OnInit {
     { "id": 4, "name": "Medicial History Information" },
     { "id": 5, "name": "Insurance Information" },
     { "id": 6, "name": "Aggreements" },
-    
+
   ];
 
   counter: number = 7;
@@ -31,7 +32,9 @@ export class QuestionnaireAddComponent implements OnInit {
   patientValidator: PatientValidator = new PatientValidator();
   modelName: string = '';
   patient: Patient = new Patient();
-  constructor(private pateintModelRequesterService: PateintModelRequesterService,private patientService:PatientService) { }
+  constructor(private pateintModelRequesterService: PateintModelRequesterService, 
+    private patientService: PatientService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.pateintModelRequesterService.currentModel.subscribe(model => {
@@ -45,7 +48,7 @@ export class QuestionnaireAddComponent implements OnInit {
   next(patientModel: string) {
     this.modelName = patientModel;
     this.pateintModelRequesterService.requestPateintModel(patientModel);
-    
+
     if (this.validator.isValid) {
       Patientcache.cache(this.modelName, this.patient)
       this.calculatePercentage(this.counter, 'next')
@@ -65,7 +68,7 @@ export class QuestionnaireAddComponent implements OnInit {
       index--;
     this.progressValue = Math.round(((index / this.cards.length) / 100) * 10000);
   }
-  scrollUp(){
+  scrollUp() {
     (function smoothscroll() {
       var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
       if (currentScroll > 0) {
@@ -74,8 +77,12 @@ export class QuestionnaireAddComponent implements OnInit {
     })();
   }
 
-  submit(){
-    var pateint:string = localStorage.getItem('patient') || '';
-    this.patientService.createPatient(pateint)
+  submit() {
+    var pateint: string = localStorage.getItem('patient') || '';
+    this.patientService.createPatient(pateint).subscribe(
+      (response) => {
+        this.router.navigate(['/questionnaire/submitted']);
+      },
+      (error) => { console.log(error); });
   }
 }
