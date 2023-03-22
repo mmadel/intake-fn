@@ -13,4 +13,5 @@ export * from './components/aggreements/aggreements.component'
 
 export * from './components/submition/submition.component'
 
+export * from './components/summary/summary.component'
 export * from './patient-questionnaire.module'

@@ -42,7 +42,8 @@ import {
   WorkerNotCompComponent,
   MedicalHistoryInformationComponent,
   AggreementsComponent,
-  SubmitionComponent
+  SubmitionComponent,
+  SummaryComponent
 } from './index';
 
 
@@ -58,7 +59,8 @@ import {
     WorkerNotCompComponent,
     MedicalHistoryInformationComponent,
     AggreementsComponent,
-    SubmitionComponent
+    SubmitionComponent,
+    SummaryComponent
   ],
   imports: [
     CommonModule,

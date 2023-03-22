@@ -14,9 +14,7 @@ export class AggreementsComponent implements OnInit {
   model: Agreements
   nowDate = moment().format("MM.DD.YYYY");
   constructor(private sanitizer: DomSanitizer, private pateintModelRequesterService: PateintModelRequesterService) { }
-  test() {
-
-  }
+  
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')

@@ -94,7 +94,7 @@
         <c-col xs="auto" class="mb-2" *ngIf="isSecondaryInsurance === 'yes'">
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
-                    <label for="secondaryInsurancePolicyHolderFirstName" class="form-label">Policy Holder’s Name</label>
+                    <label for="secondaryInsurancePolicyHolderFirstName" class="form-label">Policy Holder’s First Name</label>
                     <input cFormControl *ngIf="model.secondaryInsuranceDTO"
                         [(ngModel)]="model.secondaryInsuranceDTO.policyHolderFirstName" sizing="sm"
                         name="secondaryInsurancePolicyHolderFirstName" />
