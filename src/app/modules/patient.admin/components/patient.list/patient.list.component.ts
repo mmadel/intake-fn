@@ -15,7 +15,7 @@ export interface IParams {
   templateUrl: './patient.list.component.html',
   styleUrls: ['./patient.list.component.css']
 })
-export class PatientListComponent implements OnInit, OnDestroy  {
+export class PatientListComponent implements OnInit, OnDestroy {
 
   constructor(
     private patientListService: PatientListService
@@ -26,40 +26,46 @@ export class PatientListComponent implements OnInit, OnDestroy  {
   readonly columns: (string | IColumn)[] = [
     {
       key: 'firstName',
-      label:'First Name'
+      label: 'First Name'
     },
     {
       key: 'middleName',
-      label:'Middle Name'
+      label: 'Middle Name'
     },
     {
       key: 'lastName',
-      label:'Last Name'
+      label: 'Last Name'
     },
     {
       key: 'email',
-      label:'Email'
+      label: 'Email'
     },
     {
       key: 'country',
-      label:'Country'
+      label: 'Country'
     },
     {
       key: 'phoneType',
-      label:'Phone Type'
+      label: 'Phone Type'
     },
     {
       key: 'phoneNumber',
-      label:'Phone Number'
+      label: 'Phone Number'
     },
     {
       key: 'idType',
-      label:'Id Type'
+      label: 'Id Type'
     },
     {
       key: 'patientId',
-      label:'Id'
+      label: 'Id'
     },
+    {
+      key: 'actions',
+      label: 'Actions',
+      filter: false,
+      sorter: false
+    }
   ];
   readonly activePage$ = new BehaviorSubject(0);
   readonly columnFilterValue$ = new BehaviorSubject({});
@@ -124,7 +130,7 @@ export class PatientListComponent implements OnInit, OnDestroy  {
       takeUntil(this.#destroy$)
     ).subscribe((page) => {
       const limit = this.itemsPerPage$.value;
-      const offset = page -1;
+      const offset = page - 1;
       this.apiParams = { offset, limit };
     });
 
