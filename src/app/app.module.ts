@@ -46,6 +46,7 @@ import {
 import { PateintModelRequesterService } from './modules/patient.questionnaire/service/validator/patient/pateint-model-requester.service';
 import { PatientService } from './modules/patient.questionnaire/service/patient.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PatientListService } from './modules/patient.admin/services/patient-list.service';
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
@@ -97,6 +98,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     Title,
     PateintModelRequesterService,
     PatientService,
+    PatientListService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,

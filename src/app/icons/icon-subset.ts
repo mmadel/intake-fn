@@ -108,7 +108,10 @@ import {
   cilArrowThickFromLeft,
   cilArrowThickFromRight,
   cilArrowCircleLeft,
-  cilArrowCircleRight
+  cilArrowCircleRight,
+  cilViewColumn,
+  cilEyedropper,
+  cilControl
   
   
 } from '@coreui/icons';
@@ -223,7 +226,10 @@ export const iconSubset = {
   cilArrowThickFromLeft,
   cilArrowThickFromRight,
   cilArrowCircleLeft,
-  cilArrowCircleRight
+  cilArrowCircleRight,
+  cilViewColumn,
+  cilEyedropper,
+  cilControl
 };
 
 export enum IconSubset {
