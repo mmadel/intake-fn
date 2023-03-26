@@ -4,7 +4,7 @@ export interface BasicInfo {
     birthDate: boolean
     gender: boolean
     maritalStatus: boolean
-    Phone: boolean
+    phone: boolean
     email: boolean
     patientId: boolean
     emergencyContact: boolean

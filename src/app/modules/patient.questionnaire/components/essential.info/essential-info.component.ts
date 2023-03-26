@@ -4,6 +4,8 @@ import { PateintModelRequesterService } from '../../service/validator/patient/pa
 import requiredFields from '../../service/_patient.require.fields.service';
 import { Patient } from 'src/app/models/patient/patient.model';
 import * as _ from 'lodash';
+import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
+import { BasicInfo } from 'src/app/models/validation/basic.info';
 @Component({
   selector: 'app-essential-info',
   templateUrl: './essential-info.component.html',
@@ -11,7 +13,9 @@ import * as _ from 'lodash';
 })
 export class EssentialInfoComponent implements OnInit {
   pateintBasicInfo: Basic = new Basic()
-  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
+  basicInfo: BasicInfo;
+  constructor(private pateintModelRequesterService: PateintModelRequesterService,
+    private patientRequiredFieldsService: PatientRequiredFieldsService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
@@ -30,9 +34,19 @@ export class EssentialInfoComponent implements OnInit {
         this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.pateintBasicInfo))
       }
     });
+    this.patientRequiredFieldsService.retrieveRequiredBasisInfo().subscribe(patientFields => {
+      this.basicInfo = <BasicInfo>patientFields;
+    });
   }
   isRequiredField(name: string): boolean {
-    var field = _.find(requiredFields, { field: name })
-    return field !== undefined ? field.required : false;
+    var field: boolean = false;
+    Object.entries(this.basicInfo)
+      .forEach(([key, value]) => {
+        if (key === name) {
+          field = value;
+        }
+        console.log(`${key}: ${value}`)
+      })
+    return field;
   }
 }

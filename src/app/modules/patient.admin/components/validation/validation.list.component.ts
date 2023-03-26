@@ -43,7 +43,7 @@ export class ValidationListComponent implements OnInit {
           birthDate: true,
           gender: true,
           maritalStatus: true,
-          Phone: true,
+          phone: true,
           email: true,
           patientId: true,
           emergencyContact: true

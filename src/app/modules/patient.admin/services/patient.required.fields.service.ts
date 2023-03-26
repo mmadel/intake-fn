@@ -21,4 +21,10 @@ export class PatientRequiredFieldsService {
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }
+
+  retrieveRequiredBasisInfo(){
+    const retrievePatientRequiredFieldsURL = this.baseUrl + '/retrieve/requires/basic/fields';
+    const headers = { 'content-type': 'application/json' }
+    return this.httpClient.get(retrievePatientRequiredFieldsURL)
+  }
 }
