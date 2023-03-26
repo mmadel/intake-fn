@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PatientAdminRoutingModule } from './patient-admin-routing.module';
 
 import {
-  PatientListComponent
+  PatientListComponent,
+  ValidationListComponent
 } from './index';
 import { IconModule } from '@coreui/icons-angular';
 import {
@@ -31,7 +32,8 @@ import {
 } from '@coreui/angular-pro';
 @NgModule({
   declarations: [
-    PatientListComponent
+    PatientListComponent,
+    ValidationListComponent
   ],
   imports: [
     CommonModule,
