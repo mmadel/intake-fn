@@ -1,1 +1,143 @@
-<p>validation.list works!</p>
+<c-row>
+    <c-col xs="12" class="mb-2">
+        <h1>Validation Fields List</h1>
+    </c-col>
+</c-row>
+<hr />
+<c-container [fluid]="true" class="mt-3">
+    <c-row>
+        <c-col xs="6" class="mb-3">
+            <c-card>
+                <c-card-header>
+                    <h4>Basic Fields</h4>
+                    <c-callout color="success" *ngIf="isSuccuess">
+                            Patient Basic Fields updating successfully
+                    </c-callout>
+                </c-card-header>
+                <c-card-body>
+                    <form cForm *ngIf="patientFields">
+                        <c-form-check sizing="lg" switch>
+                            <input [checked]="patientFields.basicInfo.name"
+                                (change)="patientFields.basicInfo.name = !patientFields.basicInfo.name" cFormCheckInput
+                                checked type="checkbox" />
+                            <label cFormCheckLabel>Name</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput [checked]="patientFields.basicInfo.birthDate"
+                                (change)="patientFields.basicInfo.birthDate = !patientFields.basicInfo.birthDate"
+                                type="checkbox" />
+                            <label cFormCheckLabel>Birth Date</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput [checked]="patientFields.basicInfo.gender"
+                                (change)="patientFields.basicInfo.gender= !patientFields.basicInfo.gender"
+                                type="checkbox" />
+                            <label cFormCheckLabel>Gender</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput [checked]="patientFields.basicInfo.maritalStatus"
+                                (change)="patientFields.basicInfo.maritalStatus= !patientFields.basicInfo.maritalStatus"
+                                type="checkbox" />
+                            <label cFormCheckLabel>MaritalStatus</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput [checked]="patientFields.basicInfo.Phone"
+                                (change)="patientFields.basicInfo.Phone= !patientFields.basicInfo.Phone"
+                                type="checkbox" />
+                            <label cFormCheckLabel>Phone</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput [checked]="patientFields.basicInfo.email"
+                                (change)="patientFields.basicInfo.email= !patientFields.basicInfo.email"
+                                type="checkbox" />
+                            <label cFormCheckLabel>Email</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput cFormCheckInput [checked]="patientFields.basicInfo.patientId"
+                                (change)="patientFields.basicInfo.patientId= !patientFields.basicInfo.patientId"
+                                type="checkbox" />
+                            <label cFormCheckLabel>Id</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput cFormCheckInput [checked]="patientFields.basicInfo.emergencyContact"
+                                (change)="patientFields.basicInfo.emergencyContact= !patientFields.basicInfo.emergencyContact"
+                                type="checkbox" />
+                            <label cFormCheckLabel>Emergency Contact</label>
+                        </c-form-check>
+                    </form>
+                </c-card-body>
+                <c-card-footer>
+                    <button cButton color="primary" (click)="changeBaiscInfoRequiredFields()"
+                        variant="outline">Save</button>
+                </c-card-footer>
+            </c-card>
+        </c-col>
+        <c-col xs="6" class="mb-3">
+            <c-card>
+                <c-card-header>
+                    <h4>Medical Fields</h4>
+                </c-card-header>
+                <c-card-body>
+                    <form cForm>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Did the doctor recommend us or referred you to us?</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Recommended Doctor Name</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Recommended Doctor NPI</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Recommended Doctor Fax</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Recommended Doctor Address</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput type="checkbox" />
+                            <label cFormCheckLabel>How did you book your appointment
+                            </label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>What is your primary doctor name</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Would you like your results sent to your family doctor?</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch>
+                            <input cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Have you received physical therapy this year somewhere else?</label>
+                        </c-form-check>
+                    </form>
+                </c-card-body>
+                <c-card-footer>
+                    <button cButton color="primary" variant="outline">Save</button>
+                </c-card-footer>
+            </c-card>
+        </c-col>
+        <c-col xs="12" class="mb-3">
+            <c-card>
+                <c-card-header>
+                    <h4>Insurance Fields</h4>
+                </c-card-header>
+                <c-card-body>
+                    <form cForm>
+
+                    </form>
+                </c-card-body>
+                <c-card-footer>
+                    <button cButton color="primary" variant="outline">Save</button>
+                </c-card-footer>
+            </c-card>
+
+        </c-col>
+    </c-row>
+</c-container>

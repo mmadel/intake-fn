@@ -28,8 +28,11 @@ import {
   NavModule,
   DateRangePickerModule,
   TimePickerModule,
-  SmartPaginationModule
+  SmartPaginationModule,
+  ToastModule ,
+  CalloutModule
 } from '@coreui/angular-pro';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     PatientListComponent,
@@ -37,6 +40,7 @@ import {
   ],
   imports: [
     CommonModule,
+    FormsModule,
     PatientAdminRoutingModule,
     AlertModule,
     BadgeModule,
@@ -58,7 +62,9 @@ import {
     DateRangePickerModule,
     TimePickerModule,
     IconModule,
-    SmartPaginationModule
+    SmartPaginationModule,
+    ToastModule,
+    CalloutModule
   ]
 })
 export class PatientAdminModule { }
