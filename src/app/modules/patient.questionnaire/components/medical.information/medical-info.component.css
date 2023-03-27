@@ -5,3 +5,7 @@
   .form-label{
     font-size: small;
   }
+  .h6.required .h6::after{
+    content:"*";color:red;
+    margin-right: 1px;
+  }

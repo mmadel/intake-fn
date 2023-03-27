@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
+import { Component, Input, OnInit } from '@angular/core';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
 import { PhysicalTherapy } from 'src/app/models/questionnaire/medical/physical.therapy';
 import { RecommendationDoctor } from 'src/app/models/questionnaire/medical/recommendation.doctor';
 import { RecommendationEntity } from 'src/app/models/questionnaire/medical/recommendation.entity';
-import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
-import requiredFields from '../../service/_patient.require.fields.service';
+import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
 @Component({
   selector: 'app-medical-info',
   templateUrl: './medical-info.component.html',
@@ -17,7 +15,8 @@ export class MedicalInfoComponent implements OnInit {
   isphysicalTherapy: string = '';
   isfamilyResultSubmission: string = '';
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
-  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
+  @Input() requiredFields: MedicalInfoRequired;
+  constructor() { }
 
   referringDoctorQChange(val: string) {
     this.isReferringDoctor = val;
@@ -61,15 +60,15 @@ export class MedicalInfoComponent implements OnInit {
     } else {
       this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
     }
-
-    this.pateintModelRequesterService.currentModelName.subscribe(msg => {
-      if (msg === 'medical') {
-        this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.medicalQuestionnaireInfo))
-      }
-    });
   }
   isRequiredField(name: string): boolean {
-    var field = _.find(requiredFields, { field: name })
-    return field !== undefined ? field.required : false;
+    var field: boolean = false;
+    Object.entries(this.requiredFields)
+      .forEach(([key, value]) => {
+        if (key === name) {
+          field = value;
+        }
+      })
+    return field;
   }
 }

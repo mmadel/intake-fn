@@ -1,8 +1,12 @@
-import { BasicInfo } from "./basic.info";
+import { AddressInfoRequired } from "./address.info.required";
+import { BasicInfoRequired } from "./basic.info";
+import { MedicalInfoRequired } from "./medical.info.required";
 
 
-export class PatientFields {
-    id:number
-    basicInfo: BasicInfo;
+export class PatientRequiredFields {
+    id: number
+    basicInfo: BasicInfoRequired;
+    addressInfoRequired: AddressInfoRequired;
+    medicalInfoRequired:MedicalInfoRequired;
 
 }

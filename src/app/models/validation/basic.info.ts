@@ -1,5 +1,5 @@
-export interface BasicInfo {
-    id:number
+export interface BasicInfoRequired {
+    id:number|null
     name: boolean;
     birthDate: boolean
     gender: boolean

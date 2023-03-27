@@ -43,7 +43,6 @@ import {
   DefaultFooterComponent,
   DefaultAdminLayoutComponent
 } from './core';
-import { PateintModelRequesterService } from './modules/patient.questionnaire/service/validator/patient/pateint-model-requester.service';
 import { PatientService } from './modules/patient.questionnaire/service/patient.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PatientListService } from './modules/patient.admin/services/patient-list.service';
@@ -96,7 +95,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     IconSetService,
     Title,
-    PateintModelRequesterService,
     PatientService,
     PatientListService,
     {

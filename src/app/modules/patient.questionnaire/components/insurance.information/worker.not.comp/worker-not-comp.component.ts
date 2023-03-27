@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
-import requiredFields from '../../../service/_patient.require.fields.service';
 import * as _ from 'lodash';
-import { SecondaryInsurance } from 'src/app/models/questionnaire/Insurance/secondary.Insurance';
+import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
-import { Patient } from 'src/app/models/patient/patient.model';
-import { PateintModelRequesterService } from '../../../service/validator/patient/pateint-model-requester.service';
+import { SecondaryInsurance } from 'src/app/models/questionnaire/Insurance/secondary.Insurance';
+import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
+import requiredFields from '../../../service/_patient.require.fields.service';
 
 @Component({
   selector: 'app-worker-not-comp',
@@ -17,7 +16,7 @@ export class WorkerNotCompComponent implements OnInit {
   model: WrokerNotComp
   isSecondaryInsurance: string;
   isMedicareCoverage: string;
-  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
+  constructor() { }
 
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {

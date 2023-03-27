@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalHistroyInformation } from 'src/app/models/questionnaire/medical/history/medical.history.info';
-import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
 import { IPatientCondition } from './patient.condition';
 
 @Component({
@@ -15,7 +14,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
   isMetalImplantation: string = '';
   isPacemaker: string = ''
   patientConditions: IPatientCondition[];
-  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.createPatientConditions();
@@ -38,11 +37,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
     } else {
       this.model = new MedicalHistroyInformation();
     }
-    this.pateintModelRequesterService.currentModelName.subscribe(msg => {
-      if (msg === 'medical-history') {
-        this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.model))
-      }
-    });
+    
   }
 
 

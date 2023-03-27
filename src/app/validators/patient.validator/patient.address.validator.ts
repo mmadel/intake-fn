@@ -1,37 +1,25 @@
 
-import * as _ from 'lodash'
+import * as _ from 'lodash';
+import { Address } from 'src/app/models/patient/address.info.model';
 import { Basic } from 'src/app/models/patient/basic.info.model';
+import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
+import requiredFields from '../../modules/patient.questionnaire/service/_patient.require.fields.service';
 import { PropertyValidator } from '../PropertyValidator';
 import { ValidatorContainer } from '../ValidatorContainer';
-import requiredFields from '../../modules/patient.questionnaire/service/_patient.require.fields.service';
-import { Address } from 'src/app/models/patient/address.info.model';
+import { PatientValidator } from './patient.validator';
 
 
-export class PatientAddressValidator {
-    pateintAddressInfo: Address = new Address();
-    public validate(): ValidatorContainer {
-        var validatorContainer: ValidatorContainer = { isValid: true, missing: new Array(), wrong: new Array() }
-        this.missingFields(validatorContainer)
-        this.inCorrectDate(validatorContainer);
-        return validatorContainer;
-
+export class PatientAddressValidator extends PatientValidator {
+    pateintAddressInfo: Address;
+    requiredFields: AddressInfoRequired;
+    constructor(requiredFields: AddressInfoRequired, addressInfo: Address) {
+        super();
+        this.pateintAddressInfo = addressInfo
+        this.requiredFields = requiredFields;
     }
-    public setModel(pateintAddressInfo: Address) {
-        this.pateintAddressInfo = pateintAddressInfo;
-    }
-    public validatorAsHTML(validator: PropertyValidator[]): string {
 
-        var html: string = "";
-        for (var i = 0; i < validator.length; ++i) {
-            html = html + validator[i].property;
-            var msg: string = validator[i].message != '' ? validator[i].message : ''
-            if (msg !== null)
-                html = html + "<br>" + msg;
-            html = html + "<br>"
-        }
-        return html;
-    }
-    private missingFields(validatorContainer: ValidatorContainer) {
+
+    protected missingFields(validatorContainer: ValidatorContainer) {
         var validators: PropertyValidator[] = new Array();
         this.validateInfo(validators);
         if (validators.length > 0) {
@@ -42,22 +30,21 @@ export class PatientAddressValidator {
         }
     }
 
-    private inCorrectDate(validatorContainer: ValidatorContainer) {
-        
+    protected inCorrectDate(validatorContainer: ValidatorContainer) {
+
     }
-    private validateInfo(validator: PropertyValidator[]) {
-        if (this.isRequiredField('addresstype')) {
+    protected validateInfo(validator: PropertyValidator[]) {
+        if (this.isRequiredField('type')) {
             if (this.pateintAddressInfo.type === '' || this.pateintAddressInfo.type === undefined)
                 validator.push({ property: " Address Type", message: '' });
         }
-        if (this.isRequiredField('firstaddress')) {
-            if (this.pateintAddressInfo.first === null || this.pateintAddressInfo.first === undefined)
+        if (this.isRequiredField('first')) {
+            if (this.pateintAddressInfo.first === '' || this.pateintAddressInfo.first === undefined)
                 validator.push({ property: "First Address", message: '' });
         }
-        if (this.isRequiredField('secondaddress')) {
-
+        if (this.isRequiredField('second')) {
             if (this.pateintAddressInfo.second === '' || this.pateintAddressInfo.second === undefined)
-                validator.push({ property: "First Address", message: '' });
+                validator.push({ property: "Second Address", message: '' });
         }
 
         if (this.isRequiredField('country')) {
@@ -65,15 +52,21 @@ export class PatientAddressValidator {
                 validator.push({ property: " Country", message: '' });
             }
         }
-        if (this.isRequiredField('zipcode')) {
+        if (this.isRequiredField('zipCode')) {
             if (this.pateintAddressInfo.zipCode === '' || this.pateintAddressInfo.zipCode === undefined)
-                validator.push({ property: " Email ", message: '' });
+                validator.push({ property: " zipCode ", message: '' });
         }
     }
 
     isRequiredField(name: string): boolean {
-        var field = _.find(requiredFields, { field: name })
-        return field !== undefined ? field.required : false;
+        var field: boolean = false;
+        Object.entries(this.requiredFields)
+            .forEach(([key, value]) => {
+                if (key === name) {
+                    field = value;
+                }
+            })
+        return field;
     }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientFields } from 'src/app/models/validation/patient.fields';
+import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { PatientRequiredFieldsService } from '../../services/patient.required.fields.service';
 
 @Component({
@@ -8,37 +8,41 @@ import { PatientRequiredFieldsService } from '../../services/patient.required.fi
   styleUrls: ['./validation.list.component.css']
 })
 export class ValidationListComponent implements OnInit {
-  patientFields: PatientFields;
-  isSuccuess: boolean = false;
+  patientFields: PatientRequiredFields;
+  isBasicInfoReuqiredChanged: boolean = false;
+  isMedicalInfoReuqiredChanged: boolean = false;
   constructor(private patientRequiredFieldsService: PatientRequiredFieldsService) { }
 
   ngOnInit(): void {
     this.retrieveBaiscInfoRequiredFields();
   }
-  changeBaiscInfoRequiredFields() {
+  changeRequiredFields(model: string) {
     this.patientRequiredFieldsService.change(this.patientFields).subscribe(
       (response) => {
-        this.isSuccuess = true
+        this.handleInfoFlags(model,true);
         setTimeout(() => {
-          this.isSuccuess = false
+          this.handleInfoFlags(model , false);
         }, 2000);
       },
       (error) => {
-        this.isSuccuess = false
+        this.handleInfoFlags(model,false);
         console.log(error);
       });
   }
-
+  handleInfoFlags(model: string, value:boolean) {
+    if (model === 'basic')
+      this.isBasicInfoReuqiredChanged = value
+    if (model === 'medical')
+      this.isMedicalInfoReuqiredChanged = value
+  }
   retrieveBaiscInfoRequiredFields() {
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
-      var result: PatientFields = <PatientFields>patientFields;
-      console.log(result)
       if (patientFields !== null) {
-        this.patientFields = result;
+        this.patientFields = <PatientRequiredFields>patientFields;;
       } else {
-        this.patientFields = new PatientFields();
+        this.patientFields = new PatientRequiredFields();
         this.patientFields.basicInfo = {
-          id: 0,
+          id: null,
           name: true,
           birthDate: true,
           gender: true,
@@ -47,7 +51,30 @@ export class ValidationListComponent implements OnInit {
           email: true,
           patientId: true,
           emergencyContact: true
+        }
 
+        this.patientFields.addressInfoRequired = {
+          id: null,
+          type: true,
+          first: true,
+          second: true,
+          country: true,
+          zipCode: true
+        }
+        this.patientFields.medicalInfoRequired = {
+          id: null,
+          recommendation: false,
+          recommendedDoctorName: false,
+          recommendedDoctorNpi: false,
+          recommendedDoctorFax: false,
+          recommendedDoctorAddress: false,
+          recommendedEntityName: false,
+          physicalTherapy: false,
+          physicalTherapyLocation: false,
+          physicalTherapyNumberOfVisit: false,
+          appointmentBooking: false,
+          resultSubmissionFamily: false,
+          primaryDoctor: false,
         }
       }
     });

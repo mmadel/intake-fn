@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Patientcache } from 'src/app/caching/patient.caching';
 import { Patient } from 'src/app/models/patient/patient.model';
+import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
+import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
+import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
+import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
+import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientService } from '../../service/patient.service';
-import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
+import { AddressInformationComponent } from '../address.information/address-information.component';
+import { EssentialInfoComponent } from '../essential.info/essential-info.component';
+import { MedicalInfoComponent } from '../medical.information/medical-info.component';
 
 
 @Component({
@@ -29,34 +36,55 @@ export class QuestionnaireAddComponent implements OnInit {
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
-  patientValidator: PatientValidator = new PatientValidator();
+  patientValidator: PatientValidator;
   modelName: string = '';
   patient: Patient = new Patient();
-  constructor(private pateintModelRequesterService: PateintModelRequesterService, 
+  obj: any;
+  patientFields: PatientRequiredFields;
+  @ViewChild(EssentialInfoComponent) essentialInfoComponent: EssentialInfoComponent;
+  @ViewChild(AddressInformationComponent) addressInformationComponent: AddressInformationComponent;
+  @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
+  constructor(
     private patientService: PatientService,
+    private patientRequiredFieldsService: PatientRequiredFieldsService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.pateintModelRequesterService.currentModel.subscribe(model => {
-      if (model !== '' || model !== undefined) {
-        this.validator = this.patientValidator.validate(this.modelName, model, this.patient)
-      }
-    });
+    this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
+      this.patientFields = <PatientRequiredFields>patientFields;
+    })
   }
 
 
   next(patientModel: string) {
-    this.modelName = patientModel;
-    this.pateintModelRequesterService.requestPateintModel(patientModel);
-
+    this.validator = new ValidatorContainer();
+    if (patientModel === 'basic') {
+      this.patientValidator = new PatientEssentialValidator(this.patientFields.basicInfo
+        , this.essentialInfoComponent.pateintBasicInfo);
+    }
+    if (patientModel === 'address') {
+      this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
+        this.addressInformationComponent.pateintAddressInfo);
+    }
+    if (patientModel === 'medical') {
+      this.patientValidator = new PatientMedicalQuestionnaireValidator(this.medicalInfoComponent.medicalQuestionnaireInfo,
+        this.patientFields.medicalInfoRequired);
+    }
+    this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
-      Patientcache.cache(this.modelName, this.patient)
-      this.calculatePercentage(this.counter, 'next')
-      this.counter++;
-      this.scrollUp();
+      this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
+      this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
+      this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
+      this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();
     }
+  }
+  proceedToNextStep(modelName: string) {
+    Patientcache.cache(modelName, this.patient)
+    this.calculatePercentage(this.counter, 'next')
+    this.counter++;
+    this.scrollUp();
   }
   back() {
     this.counter--;
