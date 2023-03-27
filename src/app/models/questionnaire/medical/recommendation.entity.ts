@@ -1,3 +1,3 @@
 export class RecommendationEntity {
-    name: string = '';
+    name: string ;
 }

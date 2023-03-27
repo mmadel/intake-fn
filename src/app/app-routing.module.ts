@@ -18,14 +18,14 @@ const routes: Routes = [
     ]
   },
   {
-    path: '',
+    path: 'admin',
     component: DefaultAdminLayoutComponent,
     data: {
       title: 'Admin-Home'
     },
     children: [
       {
-        path: 'admin',
+        path: '',
         loadChildren: () =>
           import('./modules/patient.admin/patient-admin.module').then((m) => m.PatientAdminModule)
       }

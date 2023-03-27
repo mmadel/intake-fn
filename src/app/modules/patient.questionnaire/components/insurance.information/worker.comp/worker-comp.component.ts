@@ -3,7 +3,6 @@ import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
 import requiredFields from '../../../service/_patient.require.fields.service';
 import * as _ from 'lodash';
 import { Patient } from 'src/app/models/patient/patient.model';
-import { PateintModelRequesterService } from '../../../service/validator/patient/pateint-model-requester.service';
 import * as moment from 'moment';
 
 @Component({
@@ -13,7 +12,7 @@ import * as moment from 'moment';
 })
 export class WorkerCompComponent implements OnInit {
   model: WrokerComp
-  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
+  constructor() { }
 
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {

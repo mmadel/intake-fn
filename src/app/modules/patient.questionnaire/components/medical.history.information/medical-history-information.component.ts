@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalHistroyInformation } from 'src/app/models/questionnaire/medical/history/medical.history.info';
-import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
+import { MedicalHistoryInfoRequired } from 'src/app/models/validation/medical.history.info.required';
 import { IPatientCondition } from './patient.condition';
 
 @Component({
@@ -11,11 +11,12 @@ import { IPatientCondition } from './patient.condition';
 })
 export class MedicalHistoryInformationComponent implements OnInit {
   model: MedicalHistroyInformation = new MedicalHistroyInformation();
+  @Input() requiredFields: MedicalHistoryInfoRequired;
   isScanning: string = '';
   isMetalImplantation: string = '';
   isPacemaker: string = ''
   patientConditions: IPatientCondition[];
-  constructor(private pateintModelRequesterService: PateintModelRequesterService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.createPatientConditions();
@@ -38,11 +39,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
     } else {
       this.model = new MedicalHistroyInformation();
     }
-    this.pateintModelRequesterService.currentModelName.subscribe(msg => {
-      if (msg === 'medical-history') {
-        this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.model))
-      }
-    });
+
   }
 
 
@@ -131,5 +128,14 @@ export class MedicalHistoryInformationComponent implements OnInit {
       }
       ]
   }
-
+  isRequiredField(name: string): boolean {
+    var field: boolean = false;
+    Object.entries(this.requiredFields)
+      .forEach(([key, value]) => {
+        if (key === name) {
+          field = value;
+        }
+      })
+    return field;
+  }
 }

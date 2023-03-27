@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PatientAdminRoutingModule } from './patient-admin-routing.module';
 
 import {
-  PatientListComponent
+  PatientListComponent,
+  ValidationListComponent
 } from './index';
 import { IconModule } from '@coreui/icons-angular';
 import {
@@ -27,14 +28,19 @@ import {
   NavModule,
   DateRangePickerModule,
   TimePickerModule,
-  SmartPaginationModule
+  SmartPaginationModule,
+  ToastModule ,
+  CalloutModule
 } from '@coreui/angular-pro';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
-    PatientListComponent
+    PatientListComponent,
+    ValidationListComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     PatientAdminRoutingModule,
     AlertModule,
     BadgeModule,
@@ -56,7 +62,9 @@ import {
     DateRangePickerModule,
     TimePickerModule,
     IconModule,
-    SmartPaginationModule
+    SmartPaginationModule,
+    ToastModule,
+    CalloutModule
   ]
 })
 export class PatientAdminModule { }

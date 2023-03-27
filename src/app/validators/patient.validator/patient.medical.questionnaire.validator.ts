@@ -1,36 +1,25 @@
 
 import * as _ from 'lodash';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
-import requiredFields from '../../modules/patient.questionnaire/service/_patient.require.fields.service';
+import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
 import { PropertyValidator } from '../PropertyValidator';
 import { ValidatorContainer } from '../ValidatorContainer';
+import { PatientValidator } from './patient.validator';
 
 
-export class PatientMedicalQuestionnaireValidator {
-    medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
-    public validate(): ValidatorContainer {
-        var validatorContainer: ValidatorContainer = { isValid: true, missing: new Array(), wrong: new Array() }
-        this.missingFields(validatorContainer)
-        this.inCorrectDate(validatorContainer);
-        return validatorContainer;
+export class PatientMedicalQuestionnaireValidator extends PatientValidator {
+    medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
+    requiredFields: MedicalInfoRequired;
 
-    }
-    public setModel(medicalQuestionnaireInfo: MedicalQuestionnaireInfo) {
+    constructor(medicalQuestionnaireInfo: MedicalQuestionnaireInfo,
+        requiredFields: MedicalInfoRequired) {
+        super();
         this.medicalQuestionnaireInfo = medicalQuestionnaireInfo;
+        this.requiredFields = requiredFields;
     }
-    public validatorAsHTML(validator: PropertyValidator[]): string {
 
-        var html: string = "";
-        for (var i = 0; i < validator.length; ++i) {
-            html = html + validator[i].property;
-            var msg: string = validator[i].message != '' ? validator[i].message : ''
-            if (msg !== null)
-                html = html + "<br>" + msg;
-            html = html + "<br>"
-        }
-        return html;
-    }
-    private missingFields(validatorContainer: ValidatorContainer) {
+
+    protected missingFields(validatorContainer: ValidatorContainer) {
         var validators: PropertyValidator[] = new Array();
         this.validateInfo(validators);
         if (validators.length > 0) {
@@ -41,24 +30,24 @@ export class PatientMedicalQuestionnaireValidator {
         }
     }
 
-    private inCorrectDate(validatorContainer: ValidatorContainer) {
+    protected inCorrectDate(validatorContainer: ValidatorContainer) {
 
     }
     private validateRecommendationDoctor(validator: PropertyValidator[]) {
         if (this.medicalQuestionnaireInfo.recommendationDoctor !== undefined) {
-            if (this.isRequiredField('name-recommendeddoctor')) {
+            if (this.isRequiredField('recommendedDoctorName')) {
                 if (this.medicalQuestionnaireInfo.recommendationDoctor.name === '' || this.medicalQuestionnaireInfo.recommendationDoctor.name === undefined)
                     validator.push({ property: " Recommendation Doctor name", message: '' });
             }
-            if (this.isRequiredField('npi-recommendeddoctor')) {
+            if (this.isRequiredField('recommendedDoctorNpi')) {
                 if (this.medicalQuestionnaireInfo.recommendationDoctor.npi === '' || this.medicalQuestionnaireInfo.recommendationDoctor.npi === undefined)
                     validator.push({ property: " Recommendation Doctor NPI", message: '' });
             }
-            if (this.isRequiredField('fax-recommendeddoctor')) {
+            if (this.isRequiredField('recommendedDoctorFax')) {
                 if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
                     validator.push({ property: " Recommendation Doctor Fax", message: '' });
             }
-            if (this.isRequiredField('address-recommendeddoctor')) {
+            if (this.isRequiredField('recommendedDoctorAddress')) {
                 if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
                     validator.push({ property: " Recommendation Doctor Address", message: '' });
             }
@@ -67,7 +56,7 @@ export class PatientMedicalQuestionnaireValidator {
 
     private validateRecommendationEntity(validator: PropertyValidator[]) {
         if (this.medicalQuestionnaireInfo.recommendationEntity !== undefined) {
-            if (this.isRequiredField('name-recommendedentity')) {
+            if (this.isRequiredField('recommendedEntityName')) {
                 if (this.medicalQuestionnaireInfo.recommendationEntity.name === '' || this.medicalQuestionnaireInfo.recommendationEntity.name === undefined)
                     validator.push({ property: " Recommendation Entity Name", message: '' });
             }
@@ -76,17 +65,17 @@ export class PatientMedicalQuestionnaireValidator {
 
     private validatephysicalTherapyReceiving(validator: PropertyValidator[]) {
         if (this.medicalQuestionnaireInfo.physicalTherapy !== undefined) {
-            if (this.isRequiredField('physicaltherapy-where')) {
+            if (this.isRequiredField('physicalTherapyLocation')) {
                 if (this.medicalQuestionnaireInfo.physicalTherapy.location === '' || this.medicalQuestionnaireInfo.physicalTherapy.location === undefined)
                     validator.push({ property: "Location of physical therapy", message: '' });
             }
-            if (this.isRequiredField('physicaltherapy-number-visit')) {
+            if (this.isRequiredField('physicalTherapyNumberOfVisit')) {
                 if (this.medicalQuestionnaireInfo.physicalTherapy.numberOfVisit === 0 || this.medicalQuestionnaireInfo.physicalTherapy.numberOfVisit === undefined)
                     validator.push({ property: "Number of visits of physical therapy", message: '' });
             }
         }
     }
-    private validateInfo(validator: PropertyValidator[]) {
+    protected validateInfo(validator: PropertyValidator[]) {
         if (this.medicalQuestionnaireInfo.isDoctorRecommended)
             this.validateRecommendationDoctor(validator);
         else
@@ -94,19 +83,39 @@ export class PatientMedicalQuestionnaireValidator {
         if (this.medicalQuestionnaireInfo.physicalTherapyReceiving)
             this.validatephysicalTherapyReceiving(validator);
 
-        if (this.isRequiredField('appointmentbooking')) {
+        if (this.isRequiredField('recommendation')) {
+            console.log(this.medicalQuestionnaireInfo.recommendationDoctor === null)
+            if (this.medicalQuestionnaireInfo.recommendationDoctor === null || this.medicalQuestionnaireInfo.recommendationEntity === null)
+                validator.push({ property: "Answer : Did the doctor recommend us or referred you to us", message: '' });
+
+        }
+
+        if (this.isRequiredField('appointmentBooking')) {
             if (this.medicalQuestionnaireInfo.appointmentBooking === '' || this.medicalQuestionnaireInfo.appointmentBooking === undefined)
                 validator.push({ property: "Appointment Booking", message: '' });
         }
-        if (this.isRequiredField('primarydoctor')) {
+        if (this.isRequiredField('primaryDoctor')) {
             if (this.medicalQuestionnaireInfo.appointmentBooking === '' || this.medicalQuestionnaireInfo.appointmentBooking === undefined)
-                validator.push({ property: "Number of visits of physical therapy", message: '' });
+                validator.push({ property: "Primary Doctor", message: '' });
+        }
+        if (this.isRequiredField('resultSubmissionFamily')) {
+            if (this.medicalQuestionnaireInfo.familyResultSubmission === undefined)
+                validator.push({ property: "Answer : Would you like your results sent to your family doctor?", message: '' });
+        }
+        if (this.isRequiredField('physicalTherapy')) {
+            if (this.medicalQuestionnaireInfo.physicalTherapyReceiving === undefined)
+                validator.push({ property: "Answer : Have you received physical therapy this year somewhere else?", message: '' });
         }
     }
 
     isRequiredField(name: string): boolean {
-        var field = _.find(requiredFields, { field: name })
-        return field !== undefined ? field.required : false;
+        var field: boolean = false;
+        Object.entries(this.requiredFields)
+            .forEach(([key, value]) => {
+                if (key === name) {
+                    field = value;
+                }
+            })
+        return field;
     }
-
 }

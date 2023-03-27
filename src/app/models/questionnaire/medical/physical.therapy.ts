@@ -1,4 +1,4 @@
 export class PhysicalTherapy {
-    location: string = '';
-    numberOfVisit: number = 0;
+    location: string;
+    numberOfVisit: number;
 }

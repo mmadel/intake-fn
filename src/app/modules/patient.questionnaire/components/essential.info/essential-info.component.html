@@ -70,7 +70,7 @@
 
         <div cRow>
             <c-col xs="6" class="mb-2">
-                <div [ngClass]="{ 'form-group required':isRequiredField('phoneType') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('phone') }">
                     <label for="phonetype" class="form-label">Phone Type</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         [(ngModel)]="pateintBasicInfo.phoneType" name="phonetype">
@@ -82,7 +82,7 @@
                 </div>
             </c-col>
             <c-col xs="6" class="mb-2">
-                <div [ngClass]="{ 'form-group required':isRequiredField('phoneNumber') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('phone') }">
                     <label for="phone" class="form-label">Phone</label>
                     <input cFormControl placeholder="Phone" [(ngModel)]="pateintBasicInfo.phoneNumber" sizing="sm"
                         name="phone" />
@@ -102,7 +102,7 @@
         <div cRow>
             <c-col xs="3" class="mb-2">
 
-                <div [ngClass]="{ 'form-group required':isRequiredField('idType') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
                     <label for="pIdType" class="form-label">ID Type</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         [(ngModel)]="pateintBasicInfo.idType" name="pIdType">
@@ -116,7 +116,7 @@
             </c-col>
             <c-col xs="3" class="mb-2">
 
-                <div [ngClass]="{ 'form-group required':isRequiredField('id') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
                     <label for="pId" class="form-label">ID</label>
                     <input cFormControl [(ngModel)]="pateintBasicInfo.patientId" sizing="sm" name="pId" />
                 </div>
@@ -124,7 +124,7 @@
             </c-col>
             <c-col xs="3" class="mb-2">
 
-                <div [ngClass]="{ 'form-group required':isRequiredField('ideffective_from') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
                     <label for="ideffictivefrom" class="form-label">ID Effective From</label>
                     <c-date-picker closeOnSelect size="sm" cFormControl
                         [(ngModel)]="pateintBasicInfo.id_effective_from_date" name="ideffictivefrom"></c-date-picker>
@@ -133,7 +133,7 @@
             </c-col>
             <c-col xs="3" class="mb-2">
 
-                <div [ngClass]="{ 'form-group required':isRequiredField('ideffective_to') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
                     <label for="ideffictiveto" class="form-label">ID Effective To</label>
                     <c-date-picker closeOnSelect size="sm" cFormControl
                         [(ngModel)]="pateintBasicInfo.id_effective_to_date" name="ideffictiveto"></c-date-picker>
@@ -145,7 +145,7 @@
         <div cRow>
             <c-col xs="6" class="mb-2">
 
-                <div [ngClass]="{ 'form-group required':isRequiredField('emergencyName') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('emergencyContact') }">
                     <label for="emergencyName" class="form-label">Emergency Name</label>
                     <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyName" name="emergencyName" sizing="sm" />
                 </div>
@@ -153,7 +153,7 @@
             </c-col>
             <c-col xs="6" class="mb-2">
 
-                <div [ngClass]="{ 'form-group required':isRequiredField('emergencyPhone') }">
+                <div [ngClass]="{ 'form-group required':isRequiredField('emergencyContact') }">
                     <label for="emergencyphone" class="form-label">Emergency Phone</label>
                     <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyPhone" name="emergencyphone"
                         sizing="sm" />

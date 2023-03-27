@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { Agreements } from 'src/app/models/patient/agreements/agreements.model';
 import { Patient } from 'src/app/models/patient/patient.model';
-import { PateintModelRequesterService } from '../../service/validator/patient/pateint-model-requester.service';
 @Component({
   selector: 'app-aggreements',
   templateUrl: './aggreements.component.html',
@@ -13,7 +12,7 @@ export class AggreementsComponent implements OnInit {
   patientName: string = ''
   model: Agreements
   nowDate = moment().format("MM.DD.YYYY");
-  constructor(private sanitizer: DomSanitizer, private pateintModelRequesterService: PateintModelRequesterService) { }
+  constructor(private sanitizer: DomSanitizer) { }
   
   ngOnInit(): void {
     if (localStorage.getItem('patient') !== null) {
@@ -27,11 +26,7 @@ export class AggreementsComponent implements OnInit {
     } else {
       this.model = new Agreements();
     }
-    this.pateintModelRequesterService.currentModelName.subscribe(msg => {
-      if (msg === 'aggreements') {
-        this.pateintModelRequesterService.sendPateintModel(JSON.stringify(this.model))
-      }
-    });
+    
   }
   getReleaseInformationParagraph() {
     const paragraph = `<p style="font-family:Lucida Handwriting">

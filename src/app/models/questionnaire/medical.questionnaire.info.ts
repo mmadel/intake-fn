@@ -7,7 +7,7 @@ export class MedicalQuestionnaireInfo {
     appointmentBooking: string;
     primaryDoctor: string;
     familyResultSubmission: boolean;
-    physicalTherapyReceiving: boolean;
+    physicalTherapyReceiving: boolean | undefined;
     recommendationDoctor: RecommendationDoctor | undefined;
     recommendationEntity: RecommendationEntity | undefined;
     physicalTherapy: PhysicalTherapy | undefined;
