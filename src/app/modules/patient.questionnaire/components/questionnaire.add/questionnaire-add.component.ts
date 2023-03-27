@@ -13,6 +13,7 @@ import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
+import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
 
@@ -47,6 +48,7 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(AddressInformationComponent) addressInformationComponent: AddressInformationComponent;
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
   @ViewChild(MedicalHistoryInformationComponent) medicalHistoryInformationComponent: MedicalHistoryInformationComponent;
+  @ViewChild(InsuranceInformationComponent) insuranceInformationComponent: InsuranceInformationComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -77,13 +79,18 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patientValidator = new MdicalHistoryValidator(this.medicalHistoryInformationComponent.model,
         this.patientFields.medicalHistoryInfoRequired)
     }
+    if (patientModel === 'insurance') {
+      /*ToDo
+        impl validation for insurance
+      */
+    }
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
       this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
       this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
       this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
-      
+      this.patient.insuranceQuestionnaireInfo = this.insuranceInformationComponent?.insuranceQuestionnaireInfo
       this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();
