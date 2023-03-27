@@ -1,33 +1,19 @@
+import * as _ from "lodash";
 import { MedicalHistroyInformation } from "src/app/models/questionnaire/medical/history/medical.history.info";
+import { MedicalHistoryInfoRequired } from "src/app/models/validation/medical.history.info.required";
 import { PropertyValidator } from "../PropertyValidator";
 import { ValidatorContainer } from "../ValidatorContainer";
-import requiredFields from '../../modules/patient.questionnaire/service/_patient.require.fields.service';
-import * as _ from "lodash";
-export class MdicalHistoryValidator {
-    model: MedicalHistroyInformation = new MedicalHistroyInformation();
-    public validate(): ValidatorContainer {
-        var validatorContainer: ValidatorContainer = { isValid: true, missing: new Array(), wrong: new Array() }
-        this.missingFields(validatorContainer)
-        this.inCorrectDate(validatorContainer);
-        return validatorContainer;
-    }
-
-    public setModel(model: MedicalHistroyInformation) {
+import { PatientValidator } from "./patient.validator";
+export class MdicalHistoryValidator extends PatientValidator {
+    model: MedicalHistroyInformation;
+    requiredFields: MedicalHistoryInfoRequired;
+    constructor(model: MedicalHistroyInformation, requiredFields: MedicalHistoryInfoRequired) {
+        super();
         this.model = model;
+        this.requiredFields = requiredFields;
     }
-    public validatorAsHTML(validator: PropertyValidator[]): string {
 
-        var html: string = "";
-        for (var i = 0; i < validator.length; ++i) {
-            html = html + validator[i].property;
-            var msg: string = validator[i].message != '' ? validator[i].message : ''
-            if (msg !== null)
-                html = html + "<br>" + msg;
-            html = html + "<br>"
-        }
-        return html;
-    }
-    private missingFields(validatorContainer: ValidatorContainer) {
+    protected missingFields(validatorContainer: ValidatorContainer) {
         var validators: PropertyValidator[] = new Array();
         this.validateInfo(validators);
         if (validators.length > 0) {
@@ -38,10 +24,10 @@ export class MdicalHistoryValidator {
         }
     }
 
-    private inCorrectDate(validatorContainer: ValidatorContainer) {
+    protected inCorrectDate(validatorContainer: ValidatorContainer) {
 
     }
-    private validateInfo(validator: PropertyValidator[]) {
+    protected validateInfo(validator: PropertyValidator[]) {
         if (this.isRequiredField('height')) {
             if (this.model.height === '' || this.model.height === undefined)
                 validator.push({ property: "Height", message: '' });
@@ -58,12 +44,15 @@ export class MdicalHistoryValidator {
             if (this.model.medicationPrescription === '' || this.model.medicationPrescription === undefined)
                 validator.push({ property: "Please list any prescription or non-prescription medication you are taking", message: '' });
         }
-       
+
         if (this.isRequiredField('patientCondition')) {
-            if (this.model.patientCondition.length < 1  || this.model.patientCondition === undefined)
+            if (this.model.patientCondition === undefined)
                 validator.push({ property: "Please select each condition that you have been", message: '' });
+            else if (this.model.patientCondition.length < 1)
+                validator.push({ property: "Please select each condition that you have been", message: '' });
+
         }
-        if (this.isRequiredField('isScannig')) {
+        if (this.isRequiredField('scanningTest')) {
             if (this.model.scanningTest === undefined)
                 validator.push({ property: "Please Select : MRI , CT Or X-Ray", message: '' });
 
@@ -71,11 +60,11 @@ export class MdicalHistoryValidator {
                 validator.push({ property: "MRI , CT Or X-Ray Values", message: '' });
         }
 
-        if (this.isRequiredField('isMetalImplantation')) {
+        if (this.isRequiredField('metalImplantation')) {
             if (this.model.metalImplantation === undefined)
                 validator.push({ property: "Please Select : Metal Implants", message: '' });
         }
-        if (this.isRequiredField('isPacemaker')) {
+        if (this.isRequiredField('pacemaker')) {
             if (this.model.pacemaker === undefined)
                 validator.push({ property: "Please Select : Pacemaker", message: '' });
         }
@@ -85,7 +74,13 @@ export class MdicalHistoryValidator {
         }
     }
     isRequiredField(name: string): boolean {
-        var field = _.find(requiredFields, { field: name })
-        return field !== undefined ? field.required : false;
+        var field: boolean = false;
+        Object.entries(this.requiredFields)
+            .forEach(([key, value]) => {
+                if (key === name) {
+                    field = value;
+                }
+            })
+        return field;
     }
 }

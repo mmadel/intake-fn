@@ -6,12 +6,14 @@ import { PatientRequiredFields } from 'src/app/models/validation/patient.fields'
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
+import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/patient.medical.history.validator';
 import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
+import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
 
 
@@ -44,6 +46,7 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(EssentialInfoComponent) essentialInfoComponent: EssentialInfoComponent;
   @ViewChild(AddressInformationComponent) addressInformationComponent: AddressInformationComponent;
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
+  @ViewChild(MedicalHistoryInformationComponent) medicalHistoryInformationComponent: MedicalHistoryInformationComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -70,11 +73,17 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patientValidator = new PatientMedicalQuestionnaireValidator(this.medicalInfoComponent.medicalQuestionnaireInfo,
         this.patientFields.medicalInfoRequired);
     }
+    if (patientModel === 'medical-history') {
+      this.patientValidator = new MdicalHistoryValidator(this.medicalHistoryInformationComponent.model,
+        this.patientFields.medicalHistoryInfoRequired)
+    }
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
       this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
       this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
+      this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
+      
       this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();

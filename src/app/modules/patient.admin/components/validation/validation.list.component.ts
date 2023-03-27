@@ -11,6 +11,7 @@ export class ValidationListComponent implements OnInit {
   patientFields: PatientRequiredFields;
   isBasicInfoReuqiredChanged: boolean = false;
   isMedicalInfoReuqiredChanged: boolean = false;
+  isMedicalHistoryInfoReuqiredChanged: boolean = false;
   constructor(private patientRequiredFieldsService: PatientRequiredFieldsService) { }
 
   ngOnInit(): void {
@@ -19,21 +20,23 @@ export class ValidationListComponent implements OnInit {
   changeRequiredFields(model: string) {
     this.patientRequiredFieldsService.change(this.patientFields).subscribe(
       (response) => {
-        this.handleInfoFlags(model,true);
+        this.handleInfoFlags(model, true);
         setTimeout(() => {
-          this.handleInfoFlags(model , false);
+          this.handleInfoFlags(model, false);
         }, 2000);
       },
       (error) => {
-        this.handleInfoFlags(model,false);
+        this.handleInfoFlags(model, false);
         console.log(error);
       });
   }
-  handleInfoFlags(model: string, value:boolean) {
+  handleInfoFlags(model: string, value: boolean) {
     if (model === 'basic')
       this.isBasicInfoReuqiredChanged = value
     if (model === 'medical')
       this.isMedicalInfoReuqiredChanged = value
+    if (model === 'medical-history')
+      this.isMedicalHistoryInfoReuqiredChanged = value;
   }
   retrieveBaiscInfoRequiredFields() {
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
@@ -76,9 +79,20 @@ export class ValidationListComponent implements OnInit {
           resultSubmissionFamily: false,
           primaryDoctor: false,
         }
+        this.patientFields.medicalHistoryInfoRequired = {
+          id: null,
+          height: false,
+          weight: false,
+          evaluationReason: false,
+          medicationPrescription: false,
+          patientCondition: false,
+          scanningTest: false,
+          scanningTestValue: false,
+          metalImplantation: false,
+          pacemaker: false,
+          surgeriesList: false,
+        }
       }
     });
   }
-
-
 }

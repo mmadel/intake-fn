@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalHistroyInformation } from 'src/app/models/questionnaire/medical/history/medical.history.info';
+import { MedicalHistoryInfoRequired } from 'src/app/models/validation/medical.history.info.required';
 import { IPatientCondition } from './patient.condition';
 
 @Component({
@@ -10,6 +11,7 @@ import { IPatientCondition } from './patient.condition';
 })
 export class MedicalHistoryInformationComponent implements OnInit {
   model: MedicalHistroyInformation = new MedicalHistroyInformation();
+  @Input() requiredFields: MedicalHistoryInfoRequired;
   isScanning: string = '';
   isMetalImplantation: string = '';
   isPacemaker: string = ''
@@ -37,7 +39,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
     } else {
       this.model = new MedicalHistroyInformation();
     }
-    
+
   }
 
 
@@ -126,5 +128,14 @@ export class MedicalHistoryInformationComponent implements OnInit {
       }
       ]
   }
-
+  isRequiredField(name: string): boolean {
+    var field: boolean = false;
+    Object.entries(this.requiredFields)
+      .forEach(([key, value]) => {
+        if (key === name) {
+          field = value;
+        }
+      })
+    return field;
+  }
 }
