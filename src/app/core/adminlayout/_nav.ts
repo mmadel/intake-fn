@@ -27,5 +27,16 @@ export const navItems: INavData[] = [
         url: 'validation/list'
       }
     ]
+  },
+  {
+    name: 'Reports',
+    url: '',
+    iconComponent: { name: 'cil-search' },
+    children: [
+      {
+        name: 'Recommendation',
+        url: 'report/recommendation'
+      }
+    ]
   }
 ];

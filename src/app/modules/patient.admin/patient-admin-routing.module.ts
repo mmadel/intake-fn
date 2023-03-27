@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientListComponent } from './components/patient.list/patient.list.component';
+import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
 import { ValidationListComponent } from './components/validation/validation.list.component';
 
 const routes: Routes = [{
@@ -21,6 +22,13 @@ const routes: Routes = [{
       component: ValidationListComponent,
       data: {
         title: 'List Validation Fields',
+      },
+    },
+    {
+      path: 'report/recommendation',
+      component: RecommendationReportComponent,
+      data: {
+        title: 'Recommendation Report',
       },
     }
   ]

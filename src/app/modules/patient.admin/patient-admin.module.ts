@@ -5,7 +5,8 @@ import { PatientAdminRoutingModule } from './patient-admin-routing.module';
 
 import {
   PatientListComponent,
-  ValidationListComponent
+  ValidationListComponent,
+  RecommendationReportComponent
 } from './index';
 import { IconModule } from '@coreui/icons-angular';
 import {
@@ -29,14 +30,16 @@ import {
   DateRangePickerModule,
   TimePickerModule,
   SmartPaginationModule,
-  ToastModule ,
+  ToastModule,
   CalloutModule
 } from '@coreui/angular-pro';
 import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     PatientListComponent,
-    ValidationListComponent
+    ValidationListComponent,
+    RecommendationReportComponent
   ],
   imports: [
     CommonModule,
