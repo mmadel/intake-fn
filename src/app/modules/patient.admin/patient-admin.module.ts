@@ -31,7 +31,9 @@ import {
   TimePickerModule,
   SmartPaginationModule,
   ToastModule,
-  CalloutModule
+  CalloutModule,
+  MultiSelectModule,
+  
 } from '@coreui/angular-pro';
 import { FormsModule } from '@angular/forms';
 
@@ -67,7 +69,8 @@ import { FormsModule } from '@angular/forms';
     IconModule,
     SmartPaginationModule,
     ToastModule,
-    CalloutModule
+    CalloutModule,
+    MultiSelectModule,
   ]
 })
 export class PatientAdminModule { }
