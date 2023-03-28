@@ -8,8 +8,8 @@ export interface IPatientResult {
   country: string;
   phoneType: string;
   phoneNumber: string;
-  idType:string,
-  patientId:string
+  idType: string,
+  patientId: string
 }
 export interface ISearchResult {
   resultCount: number;
@@ -22,9 +22,15 @@ export class PatientReportingService {
   private baseUrl = "http://localhost:8080/reports"
   constructor(private httpClient: HttpClient) { }
 
-  search(searchCriteria:PatientSearchCriteria){
+  search(searchCriteria: PatientSearchCriteria) {
     const changePatientRequiredFieldsURL = this.baseUrl + '/recommendation';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(searchCriteria), { 'headers': headers })
+  }
+
+  export(result: IPatientResult[]) {
+    const headers = { 'content-type': 'application/json' }
+    const changePatientRequiredFieldsURL = this.baseUrl + '/generator/excel';
+    return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(result), { 'headers': headers, responseType: 'blob' })
   }
 }

@@ -1,6 +1,6 @@
 <c-row>
 
-    <c-col xs="12" class="mb-2">
+    <c-col xs="12" class="mb-4">
         <c-card>
             <c-card-header ngPreserveWhitespaces>
                 <strong>Recommendation Reports</strong> <small>From patient list</small>
@@ -77,7 +77,8 @@
                                 <c-card-body>
                                     <c-col class="mb-2" xs="12">
                                         <c-date-range-picker [(startDate)]="patientSearchCriteria.startDate_date"
-                                            [(endDate)]="patientSearchCriteria.endDate_date"></c-date-range-picker>
+                                            [(endDate)]="patientSearchCriteria.endDate_date"
+                                            [ranges]="customRanges"></c-date-range-picker>
                                     </c-col>
                                 </c-card-body>
                             </c-card>
@@ -93,6 +94,11 @@
             </c-card-body>
         </c-card>
     </c-col>
+    <c-container class="text-end">
+        <button cButton [disabled]="result.result.length < 1" (click)="exportResult()" variant="outline">Export Result
+            <svg cIcon name="cilCloudDownload"></svg>
+        </button>
+    </c-container>
     <c-col xs="12">
 
         <c-smart-table [columnSorter]="true" [columns]="columns" [items]="result.result" [activePage]="1"
