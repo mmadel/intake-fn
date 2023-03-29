@@ -8,7 +8,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Patient',
-    url: '',
+    url: 'patient',
     iconComponent: { name: 'cil-disabled' },
     children: [
       {
@@ -19,7 +19,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Administration',
-    url: '',
+    url: '/validation',
     iconComponent: { name: 'cil-applicationsSettings' },
     children: [
       {
@@ -30,11 +30,11 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Reports',
-    url: '',
+    url: '/report',
     iconComponent: { name: 'cil-search' },
     children: [
       {
-        name: 'Recommendation',
+        name: 'Patient Source',
         url: 'report/recommendation'
       }
     ]
