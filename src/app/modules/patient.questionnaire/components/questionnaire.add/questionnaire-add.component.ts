@@ -6,6 +6,7 @@ import { PatientRequiredFields } from 'src/app/models/validation/patient.fields'
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
+import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
 import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/patient.medical.history.validator';
 import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
@@ -14,6 +15,8 @@ import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
 import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
+import { WorkerCompComponent } from '../insurance.information/worker.comp/worker-comp.component';
+import { WorkerNotCompComponent } from '../insurance.information/worker.not.comp/worker-not-comp.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
 
@@ -80,17 +83,18 @@ export class QuestionnaireAddComponent implements OnInit {
         this.patientFields.medicalHistoryInfoRequired)
     }
     if (patientModel === 'insurance') {
-      /*ToDo
-        impl validation for insurance
-      */
+      if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault)
+        this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent.workerCompComponent.model
+      if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault)
+        this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent.workerNotCompComponent.model
+      this.patientValidator = new PatientInsuranceQuestionnaireValidator(
+        this.insuranceInformationComponent.insuranceQuestionnaireInfo
+        , this.patientFields.insurnaceCompInfoRequired
+        , this.patientFields.insurnacecommerialInfoRequired)
     }
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
-      this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
-      this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
-      this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
-      this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
-      this.patient.insuranceQuestionnaireInfo = this.insuranceInformationComponent?.insuranceQuestionnaireInfo
+      this.fillModel()
       this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();
@@ -129,5 +133,21 @@ export class QuestionnaireAddComponent implements OnInit {
         this.router.navigate(['/questionnaire/submitted']);
       },
       (error) => { console.log(error); });
+  }
+  fillModel() {
+    this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
+    this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
+    this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
+    this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
+    this.fillInsuranceInformationModel()
+
+  }
+
+  fillInsuranceInformationModel() {
+    this.patient.insuranceQuestionnaireInfo.isCompNoFault = this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault;
+    if (this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
+      this.patient.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent?.workerCompComponent.model
+    if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
+      this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
   }
 }

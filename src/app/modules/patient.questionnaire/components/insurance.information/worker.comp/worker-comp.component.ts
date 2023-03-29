@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
 import requiredFields from '../../../service/_patient.require.fields.service';
 import * as _ from 'lodash';
 import { Patient } from 'src/app/models/patient/patient.model';
 import * as moment from 'moment';
+import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
 
 @Component({
   selector: 'app-worker-comp',
@@ -12,6 +13,7 @@ import * as moment from 'moment';
 })
 export class WorkerCompComponent implements OnInit {
   model: WrokerComp
+  @Input() insurnaceCompInfoRequired:InsurnaceCompInfoRequired;
   constructor() { }
 
   ngOnInit(): void {
@@ -27,11 +29,18 @@ export class WorkerCompComponent implements OnInit {
     }
   }
 
-  isRequiredField(name: string): boolean {
-    var field = _.find(requiredFields, { field: name })
-    return field !== undefined ? field.required : false;
-  }
+ 
   accidentDate() {
     this.model.accidentDate = Number(moment(this.model.accidentDate_date).format("x"))
+  }
+  isRequiredField(name: string): boolean {
+    var field: boolean = false;
+    Object.entries(this.insurnaceCompInfoRequired)
+      .forEach(([key, value]) => {
+        if (key === name) {
+          field = value;
+        }
+      })
+    return field;
   }
 }

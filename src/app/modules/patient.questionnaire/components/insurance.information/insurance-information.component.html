@@ -6,12 +6,12 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('yes')" value="Yes"
-                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='yes'"/>
+                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('no')" value="no"
-                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='no'"/>
+                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
@@ -21,7 +21,7 @@
     <c-col xs="6">
         <c-card class="mb-3" *ngIf="isWorkerCompNoFault === 'yes'">
             <c-card-body>
-                <app-worker-comp></app-worker-comp>
+                <app-worker-comp [insurnaceCompInfoRequired]="insurnaceCompInfoRequired"></app-worker-comp>
             </c-card-body>
         </c-card>
     </c-col>
@@ -30,7 +30,7 @@
     <c-col xs="6">
         <c-card class="mb-3" *ngIf="isWorkerCompNoFault === 'no'">
             <c-card-body>
-                <app-worker-not-comp></app-worker-not-comp>
+                <app-worker-not-comp [insurnacecommerialInfoRequired]="insurnacecommerialInfoRequired"></app-worker-not-comp>
             </c-card-body>
         </c-card>
     </c-col>

@@ -93,8 +93,12 @@ export class RecommendationReportComponent implements OnInit {
   }
 
   private requestSearchService() {
+
     if (this.patientSearchCriteria.type !== '') {
       this.searchInputNotValid = false
+      if (this.patientSearchCriteria.doctorName === '')
+        this.patientSearchCriteria.doctorName = null;
+      console.log(JSON.stringify(this.patientSearchCriteria))
       this.patientReportingService.search(this.patientSearchCriteria).subscribe(
         (response) => {
           this.result = <ISearchResult>response;

@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { PatientRequiredFieldsService } from '../../services/patient.required.fields.service';
-
+export interface WorkerTypes {
+  typeName: string,
+  typeValue: string
+}
 @Component({
   selector: 'app-validation.list',
   templateUrl: './validation.list.component.html',
   styleUrls: ['./validation.list.component.css']
 })
+
 export class ValidationListComponent implements OnInit {
   patientFields: PatientRequiredFields;
   isBasicInfoReuqiredChanged: boolean = false;
   isMedicalInfoReuqiredChanged: boolean = false;
   isMedicalHistoryInfoReuqiredChanged: boolean = false;
+  isInsuranceInfoReuqiredChanged: boolean = false;
+  workersTypes: WorkerTypes[] = [
+    { typeName: 'CompNoFault-Worker', typeValue: 'comp' },
+    { typeName: 'Commercial-Worker', typeValue: 'commercial' }
+  ]
+  workerType: string = '';
   constructor(private patientRequiredFieldsService: PatientRequiredFieldsService) { }
 
   ngOnInit(): void {
     this.retrieveBaiscInfoRequiredFields();
   }
   changeRequiredFields(model: string) {
+    console.log(JSON.stringify(this.patientFields))
     this.patientRequiredFieldsService.change(this.patientFields).subscribe(
       (response) => {
         this.handleInfoFlags(model, true);
@@ -37,6 +48,8 @@ export class ValidationListComponent implements OnInit {
       this.isMedicalInfoReuqiredChanged = value
     if (model === 'medical-history')
       this.isMedicalHistoryInfoReuqiredChanged = value;
+    if (model === 'insurance')
+      this.isInsuranceInfoReuqiredChanged = value;
   }
   retrieveBaiscInfoRequiredFields() {
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
@@ -91,6 +104,38 @@ export class ValidationListComponent implements OnInit {
           metalImplantation: false,
           pacemaker: false,
           surgeriesList: false,
+        }
+        this.patientFields.insurnaceCompInfoRequired = {
+          compNoFault: true,
+          relatedInjury: false,
+          accidentDate: false,
+          workerStatus: false,
+          address: false,
+          fax: false,
+          insuranceName: false,
+          claimNumber: false,
+          adjusterName: false,
+          adjusterPhone: false,
+          attorneyName: false,
+          attorneyPhone: false,
+          caseStatus: false
+        }
+        this.patientFields.insurnacecommerialInfoRequired = {
+          insuranceCompany: false,
+          memberId: false,
+          ploicyId: false,
+          relationship: false,
+          secondryInsurance: false,
+          policyHolderFirstName: false,
+          policyHolderMiddleName: false,
+          policyHolderLastName: false,
+          secondryInsuranceCompany: false,
+          secondryInsuranceMemberId: false,
+          medicareCoverage: false,
+          employerFirstName: false,
+          employerMiddleName: false,
+          employerLastName: false,
+          employerPhone: false
         }
       }
     });

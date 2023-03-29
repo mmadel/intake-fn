@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
 import { SecondaryInsurance } from 'src/app/models/questionnaire/Insurance/secondary.Insurance';
 import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
+import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurnace.commerial.info.required';
 import requiredFields from '../../../service/_patient.require.fields.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class WorkerNotCompComponent implements OnInit {
   model: WrokerNotComp
   isSecondaryInsurance: string;
   isMedicareCoverage: string;
+  @Input() insurnacecommerialInfoRequired:InsurnacecommerialInfoRequired
   constructor() { }
 
   ngOnInit(): void {
@@ -35,11 +37,6 @@ export class WorkerNotCompComponent implements OnInit {
     } else {
       this.model = new WrokerNotComp();
     }
-  }
-
-  isRequiredField(name: string): boolean {
-    var field = _.find(requiredFields, { field: name })
-    return field !== undefined ? field.required : false;
   }
   isSecondaryInsuranceChange(val: string) {
     this.isSecondaryInsurance = val;
@@ -72,5 +69,15 @@ export class WorkerNotCompComponent implements OnInit {
     } else {
       this.model.patientRelationshipDTO = undefined
     }
+  }
+  isRequiredField(name: string): boolean {
+    var field: boolean = false;
+    Object.entries(this.insurnacecommerialInfoRequired)
+      .forEach(([key, value]) => {
+        if (key === name) {
+          field = value;
+        }
+      })
+    return field;
   }
 }
