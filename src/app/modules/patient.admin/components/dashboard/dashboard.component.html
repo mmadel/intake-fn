@@ -1,6 +1,6 @@
 <c-row>
   <c-col md="12" xl="3">
-    <c-widget-stat-b [title]="'Widget title'" class="mb-4" text="Lorem ipsum dolor sit amet enim." value="75.9%">
+    <c-widget-stat-b [title]="'Clinic A'" class="mb-4" text="" value="75.9%">
       <br><br><br>
       <c-progress class="my-2" thin>
         <c-progress-bar [value]="75.9" color="success"></c-progress-bar>
@@ -8,29 +8,29 @@
     </c-widget-stat-b>
   </c-col>
   <c-col md="12" xl="3">
-    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Widget title'" class="mb-4" color="primary" inverse
-      text="Lorem ipsum dolor sit amet enim." value="75.9%">
+    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Clinic B'" class="mb-4" color="primary" inverse
+      text="" value="40.2%">
       <br><br><br>
       <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
-        <c-progress-bar [value]="75.9"></c-progress-bar>
+        <c-progress-bar [value]="40.2"></c-progress-bar>
       </c-progress>
     </c-widget-stat-b>
   </c-col>
   <c-col md="12" xl="3">
-    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Widget title'" class="mb-4" color="success" inverse
-      text="Lorem ipsum dolor sit amet enim." value="75.9%">
+    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Clinic C'" class="mb-4" color="success" inverse
+      text="" value="90.9%">
       <br><br><br>
       <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
-        <c-progress-bar [value]="75.9"></c-progress-bar>
+        <c-progress-bar [value]="90.9"></c-progress-bar>
       </c-progress>
     </c-widget-stat-b>
   </c-col>
   <c-col md="12" xl="3">
-    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Widget title'" class="mb-4" color="danger" inverse
-      text="Lorem ipsum dolor sit amet enim." value="75.9%">
+    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Clinic D'" class="mb-4" color="danger" inverse
+      text="" value="20.9%">
       <br><br><br>
       <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
-        <c-progress-bar [value]="75.9"></c-progress-bar>
+        <c-progress-bar [value]="20.9"></c-progress-bar>
       </c-progress>
     </c-widget-stat-b>
   </c-col>
@@ -212,57 +212,71 @@
 
             <div class="progress-group">
               <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibGoogle"></svg>
-                <span>Organic Search</span>
+                <svg cIcon class="icon icon-lg me-2" name="cilUserFollow"></svg>
+                <span>Doctor Source</span>
                 <span class="ms-auto font-semibold">
-                  191,235 <span class="text-medium-emphasis small">(56%)</span>
+                  <span class="text-medium-emphasis small">{{dashboardDataContainer.patientSourceContainer.doctorPercentage}}%</span>
                 </span>
               </div>
               <div class="progress-group-bars">
                 <c-progress thin>
-                  <c-progress-bar color="success-gradient" value="56"></c-progress-bar>
+                  <c-progress-bar color="success-gradient" [value]="dashboardDataContainer.patientSourceContainer.doctorPercentage"></c-progress-bar>
+                </c-progress>
+              </div>
+            </div>
+            <div class="progress-group">
+              <div class="progress-group-header">
+                <svg cIcon class="icon icon-lg me-2" name="cibZulip"></svg>
+                <span>Zocdoc</span>
+                <span class="ms-auto font-semibold">
+                  <span class="text-medium-emphasis small">{{dashboardDataContainer.patientSourceContainer.zocdocPercentage}}%</span>
+                </span>
+              </div>
+              <div class="progress-group-bars">
+                <c-progress thin>
+                  <c-progress-bar color="success-gradient" [value]="dashboardDataContainer.patientSourceContainer.zocdocPercentage"></c-progress-bar>
                 </c-progress>
               </div>
             </div>
             <div class="progress-group">
               <div class="progress-group-header">
                 <svg cIcon class="icon icon-lg me-2" name="cibFacebook"></svg>
-                <span>Facebook</span>
+                <span>Social Media</span>
                 <span class="ms-auto font-semibold">
-                  51,223 <span class="text-medium-emphasis small">(15%)</span>
+                  <span class="text-medium-emphasis small">{{dashboardDataContainer.patientSourceContainer.socialMediaPercentage}}%</span>
                 </span>
               </div>
               <div class="progress-group-bars">
                 <c-progress thin>
-                  <c-progress-bar color="success-gradient" value="15"></c-progress-bar>
+                  <c-progress-bar color="success-gradient" [value]="dashboardDataContainer.patientSourceContainer.socialMediaPercentage"></c-progress-bar>
                 </c-progress>
               </div>
             </div>
             <div class="progress-group">
               <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibTwitter"></svg>
-                <span>Twitter</span>
+                <svg cIcon class="icon icon-lg me-2" name="cibInternetExplorer"></svg>
+                <span>Website</span>
                 <span class="ms-auto font-semibold">
-                  37,564 <span class="text-medium-emphasis small">(11%)</span>
+                  <span class="text-medium-emphasis small">{{dashboardDataContainer.patientSourceContainer.websitePercentage}}%</span>
                 </span>
               </div>
               <div class="progress-group-bars">
                 <c-progress thin>
-                  <c-progress-bar color="success-gradient" value="11"></c-progress-bar>
+                  <c-progress-bar color="success-gradient" [value]="dashboardDataContainer.patientSourceContainer.websitePercentage"></c-progress-bar>
                 </c-progress>
               </div>
             </div>
             <div class="progress-group">
               <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibLinkedin"></svg>
-                <span>LinkedIn</span>
+                <svg cIcon class="icon icon-lg me-2" name="cilTv"></svg>
+                <span>TV</span>
                 <span class="ms-auto font-semibold">
-                  27,319 <span class="text-medium-emphasis small">(8%)</span>
+                  <span class="text-medium-emphasis small">{{dashboardDataContainer.patientSourceContainer.tvPercentage}}%</span>
                 </span>
               </div>
               <div class="progress-group-bars">
                 <c-progress thin>
-                  <c-progress-bar color="success-gradient" value="8"></c-progress-bar>
+                  <c-progress-bar color="success-gradient" [value]="dashboardDataContainer.patientSourceContainer.tvPercentage"></c-progress-bar>
                 </c-progress>
               </div>
             </div>
