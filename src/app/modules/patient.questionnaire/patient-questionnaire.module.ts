@@ -45,6 +45,7 @@ import {
   SubmitionComponent,
   SummaryComponent
 } from './index';
+import { PatientCommonModule } from '../common';
 
 
 
@@ -60,7 +61,7 @@ import {
     MedicalHistoryInformationComponent,
     AggreementsComponent,
     SubmitionComponent,
-    SummaryComponent
+    SummaryComponent,
   ],
   imports: [
     CommonModule,
@@ -90,7 +91,8 @@ import {
     IconModule,
     FormsModule,
     MultiSelectModule,
-    AccordionModule
+    AccordionModule,
+    PatientCommonModule
   ]
 })
 export class PatientQuestionnaireModule { }
