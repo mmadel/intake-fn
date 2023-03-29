@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PatientAdminRoutingModule } from './patient-admin-routing.module';
-
 import {
   PatientListComponent,
   ValidationListComponent,
@@ -34,6 +33,8 @@ import {
   ToastModule,
   CalloutModule,
   MultiSelectModule,
+  WidgetModule,
+  ProgressModule
   
 } from '@coreui/angular-pro';
 import { FormsModule } from '@angular/forms';
@@ -73,6 +74,8 @@ import { FormsModule } from '@angular/forms';
     ToastModule,
     CalloutModule,
     MultiSelectModule,
+    WidgetModule,
+    ProgressModule
   ]
 })
 export class PatientAdminModule { }

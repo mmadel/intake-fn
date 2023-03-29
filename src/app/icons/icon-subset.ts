@@ -112,9 +112,10 @@ import {
   cilViewColumn,
   cilEyedropper,
   cilControl,
-  cilSearch,
-  
-  
+  cilSearch, 
+  cibZulip,
+  cibInternetExplorer,
+  cilTv
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -231,7 +232,10 @@ export const iconSubset = {
   cilViewColumn,
   cilEyedropper,
   cilControl,
-  cilSearch
+  cilSearch,
+  cibZulip,
+  cibInternetExplorer,
+  cilTv
 };
 
 export enum IconSubset {

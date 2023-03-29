@@ -43,7 +43,6 @@ export class PatientListService {
   constructor(private httpClient: HttpClient) { }
 
   getPatients(config$: BehaviorSubject<IApiParams>): Observable<any> {
-    console.log(JSON.stringify(config$));
     return config$.pipe(
       debounceTime(100),
       distinctUntilChanged(
