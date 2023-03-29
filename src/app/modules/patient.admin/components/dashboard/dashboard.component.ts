@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
+  dashboardDataContainer: DashboardDataContainer;
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+    this.dashboardService.getDate().subscribe(data => {
+      this.dashboardDataContainer = <DashboardDataContainer>data;
+    })
   }
   data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
