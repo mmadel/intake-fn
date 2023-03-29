@@ -3,7 +3,7 @@ import { INavData } from '@coreui/angular-pro';
 export const navItems: INavData[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: '/admin/dashboard',
     iconComponent: { name: 'cil-speedometer' }
   },
   {

@@ -6,7 +6,8 @@ import { PatientAdminRoutingModule } from './patient-admin-routing.module';
 import {
   PatientListComponent,
   ValidationListComponent,
-  RecommendationReportComponent
+  RecommendationReportComponent,
+  DashboardComponent
 } from './index';
 import { IconModule } from '@coreui/icons-angular';
 import {
@@ -41,7 +42,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     PatientListComponent,
     ValidationListComponent,
-    RecommendationReportComponent
+    RecommendationReportComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

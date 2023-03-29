@@ -1,10 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PatientListComponent } from './components/patient.list/patient.list.component';
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
 import { ValidationListComponent } from './components/validation/validation.list.component';
 
 const routes: Routes = [{
+  path: 'dashboard',
+  component: DashboardComponent,
+  data: {
+    title: 'Dashboard'
+  }
+}, 
+{
   path: '',
   data: {
     title: 'Administration Console',
