@@ -114,7 +114,9 @@
                 <h3>{{cards[4].name}}</h3>
             </c-card-header>
             <c-card-body>
-                <app-insurance-information></app-insurance-information>
+                <app-insurance-information *ngIf="patientFields"
+                    [insurnaceCompInfoRequired]="patientFields.insurnaceCompInfoRequired"
+                    [insurnacecommerialInfoRequired]="patientFields.insurnacecommerialInfoRequired"></app-insurance-information>
             </c-card-body>
             <c-card-footer>
                 <button cButton (click)="back()" size="sm" color="primary" variant="outline"

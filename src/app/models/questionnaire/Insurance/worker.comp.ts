@@ -11,5 +11,5 @@ export class WrokerComp {
     adjusterInfoPhone: string;
     attorneyInfoName: string;
     attorneyInfoPhone: string;
-    caseStatus: string;
+    caseStatus: string='';
 }

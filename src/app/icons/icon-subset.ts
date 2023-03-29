@@ -112,7 +112,7 @@ import {
   cilViewColumn,
   cilEyedropper,
   cilControl,
-  
+  cilSearch,
   
   
 } from '@coreui/icons';
@@ -230,7 +230,8 @@ export const iconSubset = {
   cilArrowCircleRight,
   cilViewColumn,
   cilEyedropper,
-  cilControl
+  cilControl,
+  cilSearch
 };
 
 export enum IconSubset {

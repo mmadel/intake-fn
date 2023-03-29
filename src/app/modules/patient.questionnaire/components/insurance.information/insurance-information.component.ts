@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { InsuranceQuestionnaireInfo } from 'src/app/models/questionnaire/insurance.questionnaire.info';
 import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
 import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
+import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurnace.commerial.info.required';
+import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
 import { WorkerCompComponent } from './worker.comp/worker-comp.component';
 import { WorkerNotCompComponent } from './worker.not.comp/worker-not-comp.component';
 
@@ -16,7 +18,8 @@ export class InsuranceInformationComponent implements OnInit {
   accidentType: string = '';
   @ViewChild(WorkerCompComponent) workerCompComponent: WorkerCompComponent;
   @ViewChild(WorkerNotCompComponent) workerNotCompComponent: WorkerNotCompComponent;
-
+  @Input() insurnaceCompInfoRequired:InsurnaceCompInfoRequired;
+  @Input() insurnacecommerialInfoRequired:InsurnacecommerialInfoRequired
   insuranceQuestionnaireInfo: InsuranceQuestionnaireInfo;
   constructor() { }
 
@@ -44,6 +47,7 @@ export class InsuranceInformationComponent implements OnInit {
   workerCompNoFaultQChange(val: string) {
     this.isWorkerCompNoFault = val;
     if (val === 'yes') {
+      
       this.insuranceQuestionnaireInfo.isCompNoFault = true;
       this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = new WrokerComp();
       this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = undefined;

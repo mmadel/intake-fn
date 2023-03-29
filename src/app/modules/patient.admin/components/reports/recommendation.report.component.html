@@ -1,0 +1,120 @@
+<c-row>
+
+    <c-col xs="12" class="mb-4">
+        <c-card>
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Recommendation Reports</strong> <small>From patient list</small>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    The Abiltiy to create patient reports using his/her recommendation inputs,
+                    the recommendation may be doctor or another entity
+                </p>
+                <c-callout color="danger" *ngIf="searchInputNotValid">
+                    {{errorMsg}}
+                </c-callout>
+                <!--
+              <div style="float: left;margin-top: 4%;">
+              <svg cIcon name="cilFindInPage" title="cilFindInPage" size="7xl"></svg>
+            </div>
+          -->
+                <form cForm>
+                    <c-row>
+                        <c-col xs="6" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        Patient Recommendation
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <c-col class="mb-2" xs="12">
+                                        <form cForm>
+                                            <select cSelect cFormControl name="recommendation"
+                                                [(ngModel)]="patientSearchCriteria.type">
+                                                <option value="">Select Patient Recommendation</option>
+                                                <option value="Doctor">Doctor</option>
+                                                <option value="Entity">Entity</option>
+                                            </select>
+                                        </form>
+                                    </c-col>
+                                    <div *ngIf="patientSearchCriteria.type === 'Doctor'">
+                                        <c-col class="mb-2" xs="12">
+                                            <form cForm>
+                                                <label for="doctor-name" class="form-label"> Doctor Name</label>
+                                                <input cFormControl placeholder="Doctor Name" name="doctor-name"
+                                                    [(ngModel)]="patientSearchCriteria.doctorName" />
+                                            </form>
+                                        </c-col>
+                                        <c-col class="mb-2" xs="12">
+                                            <form cForm>
+                                                <label for="doctor-npi" class="form-label"> Doctor NPI</label>
+                                                <input cFormControl placeholder="Doctor NPI" name="doctor-npi"
+                                                    [(ngModel)]="patientSearchCriteria.doctorNPI" />
+                                            </form>
+                                        </c-col>
+                                    </div>
+                                    <div *ngIf="patientSearchCriteria.type === 'Entity'">
+                                        <c-col class="mb-2" xs="12">
+                                            <form cForm>
+                                                <c-multi-select multiple [(ngModel)]="patientSearchCriteria.entityNames"
+                                                    name="sssss">
+                                                    <c-multi-select-option *ngFor="let entity of entityValues"
+                                                        [value]="entity.entityValue"
+                                                        [selected]="entity.selected">{{entity.entityName}}</c-multi-select-option>
+                                                </c-multi-select>
+                                            </form>
+                                        </c-col>
+                                    </div>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col xs="6" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>Date Range</h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <c-col class="mb-2" xs="12">
+                                        <c-date-range-picker [(startDate)]="patientSearchCriteria.startDate_date"
+                                            [(endDate)]="patientSearchCriteria.endDate_date"
+                                            [ranges]="customRanges"></c-date-range-picker>
+                                    </c-col>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col xs="12" class="text-center">
+                            <button cButton class="me-1" (click)="search()" color="primary" variant="outline"
+                                style="width: 15%;">
+                                Search
+                            </button>
+                        </c-col>
+                    </c-row>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+    <c-container class="text-end">
+        <button cButton [disabled]="result.result.length < 1" (click)="exportResult()" variant="outline">Export Result
+            <svg cIcon name="cilCloudDownload"></svg>
+        </button>
+    </c-container>
+    <c-col xs="12">
+
+        <c-smart-table [columnSorter]="true" [columns]="columns" [items]="result.result" [activePage]="1"
+            [itemsPerPage]="5" [itemsPerPageSelect]="true" [itemsPerPage]="5"
+            [sorterValue]="{ column: 'name', state: 'asc' }" [tableHeadProps]="{color: ''}"
+            [tableProps]="{ hover: true, striped: true, responsive: true }" header pagination>
+            <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+                <td>
+                    <ng-container [ngSwitch]="columnName">
+
+                        <ng-container *ngSwitchDefault>
+                            {{tdContent}}
+                        </ng-container>
+                    </ng-container>
+                </td>
+            </ng-template>
+        </c-smart-table>
+    </c-col>
+</c-row>
