@@ -9,9 +9,11 @@ import {
   CardModule,
   CollapseModule, DateRangePickerModule, FormModule, GridModule, MultiSelectModule, SharedModule, TimePickerModule
 } from '@coreui/angular-pro';
-import { NumberonlyDirective } from '../directives/numberonly.directive';
-import { ZipcodeDirective } from '../directives/zipcode.directive';
+
 import { AddressComponent } from './components/address/address.component';
+import { NumberonlyDirective } from './directives/numberonly.directive';
+import { ZipcodeDirective } from './directives/zipcode.directive';
+import { PhonePipe } from './pipes/phone.pipe';
 
 
 
@@ -20,7 +22,8 @@ import { AddressComponent } from './components/address/address.component';
   declarations: [
     AddressComponent,
     NumberonlyDirective,
-    ZipcodeDirective
+    ZipcodeDirective,
+    PhonePipe
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import { AddressComponent } from './components/address/address.component';
   exports: [
     AddressComponent,
     NumberonlyDirective,
-    ZipcodeDirective
+    ZipcodeDirective,
+    PhonePipe
   ]
 })
 export class PatientCommonModule { }

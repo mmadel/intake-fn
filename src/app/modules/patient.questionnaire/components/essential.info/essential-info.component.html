@@ -69,9 +69,9 @@
         </c-col>
 
         <div cRow>
-            <c-col xs="6" class="mb-2">
+            <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('phone') }">
-                    <label for="phonetype" class="form-label">Phone Type</label>
+                    <label for="phonetype" class="form-label">Phone</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         [(ngModel)]="pateintBasicInfo.phoneType" name="phonetype">
                         <option value="">Select Phone Type</option>
@@ -81,11 +81,15 @@
                     </select>
                 </div>
             </c-col>
-            <c-col xs="6" class="mb-2">
+            <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('phone') }">
-                    <label for="phone" class="form-label">Phone</label>
-                    <input cFormControl placeholder="Phone" [(ngModel)]="pateintBasicInfo.phoneNumber" sizing="sm"
-                        name="phone" />
+                    <c-input-group class="mb-3" sizing="sm">
+                        <span cInputGroupText id="basic-addon1">+1</span>
+                        <input numbers aria-label="Username" cFormControl 
+                            [ngModel]="pateintBasicInfo.phoneNumber | phone"
+                            (ngModelChange)="pateintBasicInfo.phoneNumber=$event" name="phone"
+                            maxlength="15" />
+                    </c-input-group>
                 </div>
             </c-col>
         </div>
