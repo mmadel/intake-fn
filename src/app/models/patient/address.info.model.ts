@@ -6,5 +6,5 @@ export class Address {
     state: string = '';
     province: string = '';
     city: string = '';
-    zipCode: string = '';
+    zipCode: string = '';    
 }

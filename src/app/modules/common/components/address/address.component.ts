@@ -12,8 +12,8 @@ import { states } from './state-data-store';
 })
 export class AddressComponent implements OnInit {
   countries: Countries[] = countries;
-  states:string[] = states;
-  @Input() pateintAddressInfo: Address;
+  states: string[] = states;
+  @Input() pateintAddressInfo: Address
   @Input() requiredFields: AddressInfoRequired;
   constructor() { }
 

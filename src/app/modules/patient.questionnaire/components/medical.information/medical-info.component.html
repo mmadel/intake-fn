@@ -41,12 +41,9 @@
                         *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.fax" name="doctorfax" />
                 </div>
-                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorAddress') }" class="mb-1">
-                    <label for="doctoraddress" class="form-label">Doctor Fax</label>
-                    <input cFormControl placeholder="Address" sizing="sm"
-                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
-                        [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.address" name="doctoraddress" />
-                </div>
+                <app-address *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
+                    [pateintAddressInfo]="medicalQuestionnaireInfo.recommendationDoctor.doctorAddress"
+                    [requiredFields]="addressInfoRequired"></app-address>
             </form>
         </c-col>
         <c-col xs="4" *ngIf="isReferringDoctor === 'no'">
@@ -56,7 +53,7 @@
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         *ngIf="medicalQuestionnaireInfo.recommendationEntity"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationEntity.name" name="entityname">
-                        <option >Select</option>
+                        <option>Select</option>
                         <option value="Google ads">Google ads</option>
                         <option value="Zocdoc">Zocdoc</option>
                         <option value="Social media">Social media</option>
@@ -140,11 +137,12 @@
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
-    <c-card-header>        
+    <c-card-header>
         <form cForm>
             <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapy') }">
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere else?</strong>
+                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere
+                        else?</strong>
                 </label>
             </div>
         </form>
