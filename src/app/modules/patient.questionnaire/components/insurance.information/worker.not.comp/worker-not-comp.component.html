@@ -63,10 +63,14 @@
             </c-col>
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
-                    <label for="policyRelationshipPhone" class="form-label">Policy Holder’s Phone</label>
-                    <input cFormControl *ngIf="model.patientRelationshipDTO"
-                        [(ngModel)]="model.patientRelationshipDTO.patientRelationshipPhone" sizing="sm"
-                        name="policyRelationshipPhone" />
+                    <label for="policyRelationshipLastPhone" class="form-label">Policy Holder’s Phone</label>
+                    <c-input-group class="mb-3" sizing="sm" name="policyRelationshipLastPhone">
+                        <span cInputGroupText id="basic-addon1">+1</span>
+                        <input numbers cFormControl *ngIf="model.patientRelationshipDTO"
+                            [ngModel]="model.patientRelationshipDTO.patientRelationshipPhone | phone"
+                            (ngModelChange)="model.patientRelationshipDTO.patientRelationshipPhone=$event" name="phone"
+                            maxlength="15" />
+                    </c-input-group>
                 </div>
             </c-col>
             <c-col xs="auto" class="mb-1">
@@ -180,11 +184,14 @@
                 </c-col>
                 <c-col xs="auto" class="mb-1">
                     <div [ngClass]="{ 'form-group required':isRequiredField('employerPhone') }">
-                        <label for="secondaryInsurancePolicyHolderEmployerPhone" class="form-label">Policy Holder’s
-                            Employer Phone</label>
-                        <input cFormControl *ngIf="model.medicareCoverageDTO"
-                            [(ngModel)]="model.medicareCoverageDTO.employerPhone" sizing="sm"
-                            name="secondaryInsurancePolicyHolderEmployerPhone" />
+                        <label for="mcphone" class="form-label">Policy Holder’s Phone</label>
+                        <c-input-group class="mb-3" sizing="sm" name="mcphone">
+                            <span cInputGroupText id="basic-addon1">+1</span>
+                            <input numbers cFormControl *ngIf="model.medicareCoverageDTO" 
+                                [ngModel]="model.medicareCoverageDTO.employerPhone | phone"
+                                (ngModelChange)="model.medicareCoverageDTO.employerPhone=$event" name="phone"
+                                maxlength="15" />
+                        </c-input-group>
                     </div>
                 </c-col>
             </c-col>
