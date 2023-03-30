@@ -24,15 +24,5 @@ export class AddressInformationComponent implements OnInit {
     }
 
   }
-  isRequiredField(name: string): boolean {
-    var field: boolean = false;
-    Object.entries(this.requiredFields)
-      .forEach(([key, value]) => {
-        if (key === name) {
-          field = value;
-        }
-      })
-    return field;
-  }
 
 }
