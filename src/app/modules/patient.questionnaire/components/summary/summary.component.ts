@@ -104,7 +104,12 @@ export class SummaryComponent implements OnInit {
       <b style="font-family:Cursive">- Worker Related Injury/Auto-Accident</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.injuryType} </i></br>
       <b style="font-family:Cursive">- Accident Date</b> : <i style="font-family:Cursive"> ${moment(this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.accidentDate_date).format("MM/DD/YYYY")} </i></br>
       <b style="font-family:Cursive">- Worker Status</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerStatus} </i></br>
-      <b style="font-family:Cursive">- Address</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.address} </i></br>
+      <b style="font-family:Cursive">- Address</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.type} ,
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.first},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.second},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.country},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.city},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.zipCode} </i></br>
       <b style="font-family:Cursive">- Fax</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.fax} </i></br>
       <b style="font-family:Cursive">- Insurance Company Name</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.insuranceName} </i></br>
       <b style="font-family:Cursive">- Claim Number/ WC Case Number</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.claimNumber} </i></br>

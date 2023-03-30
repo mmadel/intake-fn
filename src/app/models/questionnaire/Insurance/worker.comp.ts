@@ -1,9 +1,11 @@
+import { Address } from "../../patient/address.info.model";
+
 export class WrokerComp {
-    injuryType: string ="";
+    injuryType: string = "";
     accidentDate_date: Date;
     accidentDate: number;
-    workerStatus: string ='';
-    address: string;
+    workerStatus: string = '';
+    workerCompAddress: Address;
     fax: string;
     insuranceName: string;
     claimNumber: number;
@@ -11,5 +13,5 @@ export class WrokerComp {
     adjusterInfoPhone: string;
     attorneyInfoName: string;
     attorneyInfoPhone: string;
-    caseStatus: string='';
+    caseStatus: string = '';
 }

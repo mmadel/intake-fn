@@ -67,8 +67,18 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
                 validator.push({ property: " Wroker Status", message: '' });
         }
         if (this.isRequiredField('address')) {
-            if (this.model.insuranceWorkerCompNoFault?.address === '' || this.model.insuranceWorkerCompNoFault?.address === undefined)
-                validator.push({ property: " Address", message: '' });
+            if (this.model.insuranceWorkerCompNoFault?.workerCompAddress.first === '' || this.model.insuranceWorkerCompNoFault?.workerCompAddress.first === undefined)
+                validator.push({ property: "First Address ", message: '' });
+            if (this.model.insuranceWorkerCompNoFault?.workerCompAddress.second === '' || this.model.insuranceWorkerCompNoFault?.workerCompAddress.second === undefined)
+                validator.push({ property: "Second Address", message: '' });
+            if (this.model.insuranceWorkerCompNoFault?.workerCompAddress.type === '' || this.model.insuranceWorkerCompNoFault?.workerCompAddress.type === undefined)
+                validator.push({ property: "Address Type", message: '' });
+            if (this.model.insuranceWorkerCompNoFault?.workerCompAddress.country === '' || this.model.insuranceWorkerCompNoFault?.workerCompAddress.country === undefined)
+                validator.push({ property: "Address country", message: '' });
+            if (this.model.insuranceWorkerCompNoFault?.workerCompAddress.city === '' || this.model.insuranceWorkerCompNoFault?.workerCompAddress.city === undefined)
+                validator.push({ property: "Address city", message: '' });
+            if (this.model.insuranceWorkerCompNoFault?.workerCompAddress.zipCode === '' || this.model.insuranceWorkerCompNoFault?.workerCompAddress.zipCode === undefined)
+                validator.push({ property: "Address zipCode", message: '' });
         }
         if (this.isRequiredField('fax')) {
             if (this.model.insuranceWorkerCompNoFault?.fax === '' || this.model.insuranceWorkerCompNoFault?.fax === undefined)

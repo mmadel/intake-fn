@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
-import requiredFields from '../../../service/_patient.require.fields.service';
-import * as _ from 'lodash';
-import { Patient } from 'src/app/models/patient/patient.model';
 import * as moment from 'moment';
+import { Address } from 'src/app/models/patient/address.info.model';
+import { Patient } from 'src/app/models/patient/patient.model';
+import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
+import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
 
 @Component({
@@ -13,7 +13,8 @@ import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.c
 })
 export class WorkerCompComponent implements OnInit {
   model: WrokerComp
-  @Input() insurnaceCompInfoRequired:InsurnaceCompInfoRequired;
+  requiredFields: AddressInfoRequired;
+  @Input() insurnaceCompInfoRequired: InsurnaceCompInfoRequired;
   constructor() { }
 
   ngOnInit(): void {
@@ -23,13 +24,23 @@ export class WorkerCompComponent implements OnInit {
         this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault;
       } else {
         this.model = new WrokerComp();;
+        this.model.workerCompAddress = new Address()
       }
     } else {
-      this.model = new WrokerComp();;
+      this.model = new WrokerComp();
+      this.model.workerCompAddress = new Address()
+    }
+    this.requiredFields = {
+      id: null,
+      type: true,
+      first: true,
+      second: true,
+      country: true,
+      zipCode: true
     }
   }
 
- 
+
   accidentDate() {
     this.model.accidentDate = Number(moment(this.model.accidentDate_date).format("x"))
   }
