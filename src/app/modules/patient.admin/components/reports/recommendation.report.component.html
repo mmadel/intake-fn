@@ -49,8 +49,8 @@
                                         <c-col class="mb-2" xs="12">
                                             <form cForm>
                                                 <label for="doctor-npi" class="form-label"> Doctor NPI</label>
-                                                <input cFormControl placeholder="Doctor NPI" name="doctor-npi"
-                                                    [(ngModel)]="patientSearchCriteria.doctorNPI" />
+                                                <input numbers cFormControl placeholder="Doctor NPI" name="doctor-npi"
+                                                    [(ngModel)]="patientSearchCriteria.doctorNPI"  maxlength="10"/>
                                             </form>
                                         </c-col>
                                     </div>

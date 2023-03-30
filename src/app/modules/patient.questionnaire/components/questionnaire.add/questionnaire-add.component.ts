@@ -38,7 +38,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 1;
+  counter: number = 2;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;

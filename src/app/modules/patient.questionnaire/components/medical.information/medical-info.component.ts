@@ -7,6 +7,7 @@ import { RecommendationDoctor } from 'src/app/models/questionnaire/medical/recom
 import { RecommendationEntity } from 'src/app/models/questionnaire/medical/recommendation.entity';
 import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
+import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 @Component({
   selector: 'app-medical-info',
   templateUrl: './medical-info.component.html',
@@ -19,6 +20,7 @@ export class MedicalInfoComponent implements OnInit {
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
   addressInfoRequired: AddressInfoRequired
   @Input() requiredFields: MedicalInfoRequired;
+  entityValues = entityValues;
   constructor() { }
 
   referringDoctorQChange(val: string) {

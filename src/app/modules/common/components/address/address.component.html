@@ -65,7 +65,7 @@
         <c-col xs="auto" class="mb-3">
             <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                 <label for="zipcode" class="form-label">ZipCode</label>
-                <input  cFormControl placeholder="Zipcode" sizing="sm"
+                <input zipcode cFormControl placeholder="Zipcode" sizing="sm"
                     [(ngModel)]="pateintAddressInfo.zipCode" name="zipcode" />
             </div>
         </c-col>

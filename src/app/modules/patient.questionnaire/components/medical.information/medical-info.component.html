@@ -31,15 +31,15 @@
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorNpi') }" class="mb-1">
                     <label for="doctornpi" class="form-label">Doctor NPI</label>
-                    <input cFormControl placeholder="Doctor NPI" sizing="sm"
+                    <input numbers cFormControl placeholder="Doctor NPI" sizing="sm"
                         *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
-                        [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.npi" name="doctornpi" />
+                        [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.npi" name="doctornpi" maxlength="10"/>
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorFax') }" class="mb-1">
                     <label for="doctorfax" class="form-label">Doctor Fax</label>
-                    <input cFormControl placeholder="Fax #" sizing="sm"
+                    <input numbers cFormControl placeholder="Fax #" sizing="sm"
                         *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
-                        [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.fax" name="doctorfax" />
+                        [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.fax" name="doctorfax" maxlength="9" />
                 </div>
                 <app-address *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
                     [pateintAddressInfo]="medicalQuestionnaireInfo.recommendationDoctor.doctorAddress"
@@ -53,19 +53,9 @@
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         *ngIf="medicalQuestionnaireInfo.recommendationEntity"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationEntity.name" name="entityname">
-                        <option>Select</option>
-                        <option value="Google ads">Google ads</option>
-                        <option value="Zocdoc">Zocdoc</option>
-                        <option value="Social media">Social media</option>
-                        <option value="Flyers">Flyers</option>
-                        <option value="Mailed flyers">Mailed flyers</option>
-                        <option value="Friend/Family member">Friend/Family member</option>
-                        <option value="TV">TV</option>
-                        <option value="Ads screen">Ads screen</option>
-                        <option value="I've had PT here before">I've had PT here before</option>
-                        <option value="Direct mail">Direct mail</option>
-                        <option value="Website">Website</option>
-                        <option value="Other">Other</option>
+                        <option value="">Select</option>
+                        <option *ngFor="let entity of entityValues" [value]="entity.entityValue"
+                            [selected]="entity.selected">{{entity.entityName}}</option>
                     </select>
                 </div>
             </form>
