@@ -93,11 +93,15 @@ export class RecommendationReportComponent implements OnInit {
   }
 
   private requestSearchService() {
-
-    if (this.patientSearchCriteria.type !== '') {
+    console.log(this.patientSearchCriteria.startDate)
+    if (this.patientSearchCriteria.type !== '' || (this.patientSearchCriteria.startDate > 0 && this.patientSearchCriteria.endDate > 0)) {
       this.searchInputNotValid = false
       if (this.patientSearchCriteria.doctorName === '')
         this.patientSearchCriteria.doctorName = null;
+      if (this.patientSearchCriteria.doctorNPI === '')
+        this.patientSearchCriteria.doctorNPI = null;
+      if (this.patientSearchCriteria.type === '')
+        this.patientSearchCriteria.type = null;
       console.log(JSON.stringify(this.patientSearchCriteria))
       this.patientReportingService.search(this.patientSearchCriteria).subscribe(
         (response) => {

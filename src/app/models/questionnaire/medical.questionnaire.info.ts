@@ -4,7 +4,7 @@ import { RecommendationEntity } from "./medical/recommendation.entity";
 
 export class MedicalQuestionnaireInfo {
     isDoctorRecommended: boolean;
-    appointmentBooking: string;
+    appointmentBooking: string='';
     primaryDoctor: string;
     familyResultSubmission: boolean;
     physicalTherapyReceiving: boolean | undefined;

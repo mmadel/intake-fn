@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Address } from 'src/app/models/patient/address.info.model';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
 import { PhysicalTherapy } from 'src/app/models/questionnaire/medical/physical.therapy';
 import { RecommendationDoctor } from 'src/app/models/questionnaire/medical/recommendation.doctor';
 import { RecommendationEntity } from 'src/app/models/questionnaire/medical/recommendation.entity';
+import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
+import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 @Component({
   selector: 'app-medical-info',
   templateUrl: './medical-info.component.html',
@@ -15,7 +18,9 @@ export class MedicalInfoComponent implements OnInit {
   isphysicalTherapy: string = '';
   isfamilyResultSubmission: string = '';
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
+  addressInfoRequired: AddressInfoRequired
   @Input() requiredFields: MedicalInfoRequired;
+  entityValues = entityValues;
   constructor() { }
 
   referringDoctorQChange(val: string) {
@@ -25,6 +30,7 @@ export class MedicalInfoComponent implements OnInit {
       this.medicalQuestionnaireInfo.isDoctorRecommended = true
       this.medicalQuestionnaireInfo.recommendationEntity = undefined;
       this.medicalQuestionnaireInfo.recommendationDoctor = new RecommendationDoctor();
+      this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress = new Address();
     } if (val === 'no') {
       this.medicalQuestionnaireInfo.isDoctorRecommended = false
       this.medicalQuestionnaireInfo.recommendationDoctor = undefined;
@@ -59,6 +65,16 @@ export class MedicalInfoComponent implements OnInit {
       }
     } else {
       this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
+    }
+    if (this.requiredFields.recommendedDoctorAddress) {
+      this.addressInfoRequired = {
+        id: null,
+        type: true,
+        first: true,
+        second: true,
+        country: true,
+        zipCode: true
+      }
     }
   }
   isRequiredField(name: string): boolean {

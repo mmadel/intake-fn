@@ -9,6 +9,7 @@ import {
   DashboardComponent
 } from './index';
 import { IconModule } from '@coreui/icons-angular';
+import { PatientCommonModule } from '../common';
 import {
   AlertModule,
   BadgeModule,
@@ -34,8 +35,9 @@ import {
   CalloutModule,
   MultiSelectModule,
   WidgetModule,
-  ProgressModule
-  
+  ProgressModule,
+
+
 } from '@coreui/angular-pro';
 import { FormsModule } from '@angular/forms';
 
@@ -75,7 +77,8 @@ import { FormsModule } from '@angular/forms';
     CalloutModule,
     MultiSelectModule,
     WidgetModule,
-    ProgressModule
+    ProgressModule,
+    PatientCommonModule
   ]
 })
 export class PatientAdminModule { }

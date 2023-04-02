@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Address } from 'src/app/models/patient/address.info.model';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { InsuranceQuestionnaireInfo } from 'src/app/models/questionnaire/insurance.questionnaire.info';
 import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
@@ -50,6 +51,7 @@ export class InsuranceInformationComponent implements OnInit {
       
       this.insuranceQuestionnaireInfo.isCompNoFault = true;
       this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = new WrokerComp();
+      this.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault.workerCompAddress = new Address();
       this.insuranceQuestionnaireInfo.insuranceWorkerCommercial = undefined;
 
     }

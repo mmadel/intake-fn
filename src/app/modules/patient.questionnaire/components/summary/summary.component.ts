@@ -57,7 +57,12 @@ export class SummaryComponent implements OnInit {
     if (this.pateint.medicalQuestionnaireInfo.isDoctorRecommended) {
       paragraph +=
         `<b style="font-family:Cursive">Recommendation Doctor Name</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.name} </i></br>
-      <b style="font-family:Cursive">Recommendation Doctor Address</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.address} </i></br>
+      <b style="font-family:Cursive">Recommendation Doctor Address</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.first} , 
+      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.second},
+      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.country}
+      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.state}
+      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.zipCode}
+      </i></br>
       <b style="font-family:Cursive">Recommendation Doctor Fax</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.fax} </i></br>
       <b style="font-family:Cursive">Recommendation Doctor Fax</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.npi} </i></br>`
     } else {
@@ -99,7 +104,12 @@ export class SummaryComponent implements OnInit {
       <b style="font-family:Cursive">- Worker Related Injury/Auto-Accident</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.injuryType} </i></br>
       <b style="font-family:Cursive">- Accident Date</b> : <i style="font-family:Cursive"> ${moment(this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.accidentDate_date).format("MM/DD/YYYY")} </i></br>
       <b style="font-family:Cursive">- Worker Status</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerStatus} </i></br>
-      <b style="font-family:Cursive">- Address</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.address} </i></br>
+      <b style="font-family:Cursive">- Address</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.type} ,
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.first},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.second},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.country},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.city},
+      ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.workerCompAddress.zipCode} </i></br>
       <b style="font-family:Cursive">- Fax</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.fax} </i></br>
       <b style="font-family:Cursive">- Insurance Company Name</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.insuranceName} </i></br>
       <b style="font-family:Cursive">- Claim Number/ WC Case Number</b> : <i style="font-family:Cursive"> ${this.pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault?.claimNumber} </i></br>

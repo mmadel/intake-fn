@@ -16,8 +16,8 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('accidentDate') }">
                     <label for="autoAccidentDate" class="form-label">Accident Date</label>
                     <c-date-picker closeOnSelect size="sm" cFormControl [(ngModel)]="model.accidentDate_date"
-                    (dateChange)="accidentDate()"
-                        name="autoAccidentDate" placeholder="Accident Date"></c-date-picker>
+                        (dateChange)="accidentDate()" name="autoAccidentDate"
+                        placeholder="Accident Date"></c-date-picker>
                 </div>
             </c-col>
             <c-col xs="auto" class="mb-1">
@@ -33,10 +33,8 @@
                 </div>
             </c-col>
             <c-col xs="auto" class="mb-1">
-                <div [ngClass]="{ 'form-group required':isRequiredField('address') }">
-                    <label for="address" class="form-label">Address</label>
-                    <input cFormControl [(ngModel)]="model.address" sizing="sm" name="address" />
-                </div>
+                <app-address *ngIf="model.workerCompAddress" [pateintAddressInfo]="model.workerCompAddress"
+                    [requiredFields]="requiredFields"></app-address>
             </c-col>
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('fax') }">
@@ -57,34 +55,44 @@
                 </div>
             </c-col>
             <c-row>
-                <c-col xs="6" class="mb-1">
+                <c-col xs="12" class="mb-1">
                     <div [ngClass]="{ 'form-group required':isRequiredField('adjusterName') }">
-                        <label for="adjusterInfoName" class="form-label">Adjuster Name</label>
-                        <input cFormControl [(ngModel)]="model.adjusterInfoName" sizing="sm" name="adjusterInfoName" />
+                        <label for="adjusterInfoName" class="form-label">Adjuster</label>
+                        <input cFormControl [(ngModel)]="model.adjusterInfoName" sizing="sm" placeholder="Name"
+                            name="adjusterInfoName" />
                     </div>
                 </c-col>
 
-                <c-col xs="6" class="mb-1">
+                <c-col xs="12" class="mb-1">
                     <div [ngClass]="{ 'form-group required':isRequiredField('adjusterPhone') }">
-                        <label for="adjusterInfoPhone" class="form-label">Adjuster Number</label>
-                        <input cFormControl [(ngModel)]="model.adjusterInfoPhone" sizing="sm"
-                            name="adjusterInfoPhone" />
+                        <c-input-group class="mb-3" sizing="sm">
+                            <span cInputGroupText id="basic-addon1">+1</span>
+                            <input numbers aria-label="Username" cFormControl
+                                [ngModel]="model.adjusterInfoPhone | phone"
+                                (ngModelChange)="model.adjusterInfoPhone=$event" name="phone" maxlength="15"
+                                placeholder="Phone" />
+                        </c-input-group>
                     </div>
                 </c-col>
             </c-row>
             <c-row>
-                <c-col xs="6" class="mb-1">
+                <c-col xs="12" class="mb-1">
                     <div [ngClass]="{ 'form-group required':isRequiredField('attorneyName') }">
-                        <label for="attorneyInfoName" class="form-label">Attorney Name</label>
-                        <input cFormControl [(ngModel)]="model.attorneyInfoName" sizing="sm" name="attorneyInfoName" />
+                        <label for="attorneyInfoName" class="form-label">Attorney</label>
+                        <input cFormControl [(ngModel)]="model.attorneyInfoName" sizing="sm" name="attorneyInfoName"
+                            placeholder="Name" />
                     </div>
                 </c-col>
 
-                <c-col xs="6" class="mb-1">
+                <c-col xs="12" class="mb-1">
                     <div [ngClass]="{ 'form-group required':isRequiredField('attorneyPhone') }">
-                        <label for="attorneyInfoPhone" class="form-label">Attorney Phone</label>
-                        <input cFormControl [(ngModel)]="model.attorneyInfoPhone" sizing="sm"
-                            name="attorneyInfoPhone" />
+                        <c-input-group class="mb-3" sizing="sm">
+                            <span cInputGroupText id="basic-addon1">+1</span>
+                            <input numbers aria-label="Username" cFormControl
+                                [ngModel]="model.attorneyInfoPhone | phone"
+                                (ngModelChange)="model.attorneyInfoPhone=$event" name="phone" maxlength="15"
+                                placeholder="Phone" />
+                        </c-input-group>
                     </div>
                 </c-col>
             </c-row>
