@@ -1,1 +1,39 @@
-<p>upload-photo works!</p>
+<c-card class="mb-4">
+    <c-card-header>
+        <div>
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">Please Upload Id Photo Front and Back</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <div class="mb-3">
+            <label cLabel for="pIdfront">Patient Id Front</label>
+            <input cFormControl id="pIdfront" (change)="onImageUpload($event)" type="file" />
+            <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">
+        </div>
+        <div class="mb-3">
+            <label cLabel for="pIdback">Patient Id Back</label>
+            <input cFormControl id="pIdback" type="file" />
+        </div>
+    </c-card-body>
+</c-card>
+<c-card class="mb-4">
+    <c-card-header>
+        <div>
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">Please Insurance Id Photo Fron and Back</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <div class="mb-3">
+            <label cLabel for="pinsurancefront">Patient Insurance Id Front</label>
+            <input cFormControl id="pinsurancefront" type="file" />
+        </div>
+        <div class="mb-3">
+            <label cLabel for="pinsuranceback">Patient Insurance Id Back</label>
+            <input cFormControl id="pinsuranceback" type="file" />
+        </div>
+    </c-card-body>
+</c-card>
