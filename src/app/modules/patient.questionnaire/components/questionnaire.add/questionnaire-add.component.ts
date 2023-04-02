@@ -15,8 +15,6 @@ import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
 import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
-import { WorkerCompComponent } from '../insurance.information/worker.comp/worker-comp.component';
-import { WorkerNotCompComponent } from '../insurance.information/worker.not.comp/worker-not-comp.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
 
@@ -34,11 +32,12 @@ export class QuestionnaireAddComponent implements OnInit {
     { "id": 3, "name": "Medicial Information" },
     { "id": 4, "name": "Medicial History Information" },
     { "id": 5, "name": "Insurance Information" },
-    { "id": 6, "name": "Aggreements" },
+    { "id": 6, "name": "Upload Photos" },
+    { "id": 7, "name": "Aggreements" },
 
   ];
 
-  counter: number = 5;
+  counter: number = 6;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -83,9 +82,11 @@ export class QuestionnaireAddComponent implements OnInit {
         this.patientFields.medicalHistoryInfoRequired)
     }
     if (patientModel === 'insurance') {
-      if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault)
+      if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
+        && this.insuranceInformationComponent.workerCompComponent !== undefined)
         this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent.workerCompComponent.model
-      if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault)
+      if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
+        && this.insuranceInformationComponent.workerNotCompComponent !== undefined)
         this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent.workerNotCompComponent.model
       this.patientValidator = new PatientInsuranceQuestionnaireValidator(
         this.insuranceInformationComponent.insuranceQuestionnaireInfo

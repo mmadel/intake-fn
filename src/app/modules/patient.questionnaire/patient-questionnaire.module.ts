@@ -42,11 +42,11 @@ import {
   WorkerNotCompComponent,
   MedicalHistoryInformationComponent,
   AggreementsComponent,
+  UploadPhotoComponent,
   SubmitionComponent,
   SummaryComponent
 } from './index';
 import { PatientCommonModule } from '../common';
-
 
 
 @NgModule({
@@ -62,6 +62,7 @@ import { PatientCommonModule } from '../common';
     AggreementsComponent,
     SubmitionComponent,
     SummaryComponent,
+    UploadPhotoComponent,
   ],
   imports: [
     CommonModule,
