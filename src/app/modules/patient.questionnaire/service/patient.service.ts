@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Patient } from 'src/app/models/patient/patient.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,8 +13,10 @@ export class PatientService {
     return this.http.post(createPatientURL, patient, { 'headers': headers, observe: 'response' })
   }
 
-  upload(imageFormData: FormData) {
+  upload(imageFormData: FormData, pateintId: number) {
     const createPatientURL = this.baseUrl + 'patient/upload';
-    return this.http.post(createPatientURL, imageFormData, { observe: 'response' })
+    let headers = new HttpHeaders({ 'patientId': pateintId.toString() });
+
+    return this.http.post(createPatientURL, imageFormData, { 'headers': headers, observe: 'response' })
   }
 }

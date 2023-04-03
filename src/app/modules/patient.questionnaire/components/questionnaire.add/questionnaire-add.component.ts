@@ -4,6 +4,7 @@ import { Patientcache } from 'src/app/caching/patient.caching';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
+import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
 import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
@@ -17,6 +18,7 @@ import { EssentialInfoComponent } from '../essential.info/essential-info.compone
 import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
+import { UploadPhotoComponent } from '../upload.photos/upload-photo.component';
 
 
 @Component({
@@ -25,7 +27,6 @@ import { MedicalInfoComponent } from '../medical.information/medical-info.compon
   styleUrls: ['./questionnaire-add.component.css']
 })
 export class QuestionnaireAddComponent implements OnInit {
-
   cards: { id: number, name: string }[] = [
     { "id": 1, "name": "Basic Information" },
     { "id": 2, "name": "Address Information" },
@@ -37,7 +38,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 6;
+  counter: number = 1;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -51,6 +52,7 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
   @ViewChild(MedicalHistoryInformationComponent) medicalHistoryInformationComponent: MedicalHistoryInformationComponent;
   @ViewChild(InsuranceInformationComponent) insuranceInformationComponent: InsuranceInformationComponent;
+  @ViewChild(UploadPhotoComponent) uploadPhotoComponent: UploadPhotoComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -93,6 +95,9 @@ export class QuestionnaireAddComponent implements OnInit {
         , this.patientFields.insurnaceCompInfoRequired
         , this.patientFields.insurnacecommerialInfoRequired)
     }
+    if (patientModel === 'upload') {
+      this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
+    }
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
@@ -130,6 +135,12 @@ export class QuestionnaireAddComponent implements OnInit {
     var pateint: string = localStorage.getItem('patient') || '';
     this.patientService.createPatient(pateint).subscribe(
       (response) => {
+        console.log('this.patient.files ' + this.patient.files)
+        this.patientService.upload(this.patient.files, <number>response.body).subscribe(
+          (response) => {
+            console.log('uploaded..')
+          },
+          (error) => { console.log(error); });
         localStorage.removeItem('patient');
         this.router.navigate(['/questionnaire/submitted']);
       },
@@ -140,6 +151,7 @@ export class QuestionnaireAddComponent implements OnInit {
     this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
+    this.patient.files = this.uploadPhotoComponent ? this.uploadPhotoComponent.imageFormData : this.patient.files;
     this.fillInsuranceInformationModel()
 
   }

@@ -9,19 +9,12 @@
     <c-card-body>
         <div class="mb-3">
             <label cLabel for="pIdfront">Patient Id Front</label>
-            <input cFormControl id="pIdfront" (change)="onImageUpload($event)" type="file" class="mb-1" />
-            <button cButton (click)="imageUploadAction()" size="sm" value="Upload" color="secondary" variant="outline">
-                Upload
-                <svg cIcon name="cilCloudUpload"></svg>
-            </button>
+            <input cFormControl id="pIdfront" (change)="onImageUpload($event ,'pIdfront')" type="file" class="mb-1" />
         </div>
         <div class="mb-3">
             <label cLabel for="pIdback">Patient Id Back</label>
-            <input cFormControl id="pIdback" type="file" class="mb-1" />
-            <button cButton (click)="imageUploadAction()" size="sm" value="Upload" color="secondary" variant="outline">
-                Upload
-                <svg cIcon name="cilCloudUpload"></svg>
-            </button>
+            <input cFormControl id="pIdback" (change)="onImageUpload($event ,'pIdback')" type="file" class="mb-1" />
+
         </div>
     </c-card-body>
 </c-card>
@@ -36,19 +29,13 @@
     <c-card-body>
         <div class="mb-3">
             <label cLabel for="pinsurancefront">Patient Insurance Id Front</label>
-            <input cFormControl id="pinsurancefront" type="file" class="mb-1"/>
-            <button cButton (click)="imageUploadAction()" size="sm" value="Upload" color="secondary" variant="outline">
-                Upload
-                <svg cIcon name="cilCloudUpload"></svg>
-            </button>
+            <input cFormControl id="pinsurancefront" (change)="onImageUpload($event ,'pinsurancefront')" type="file"
+                class="mb-1" />
         </div>
         <div class="mb-3">
             <label cLabel for="pinsuranceback">Patient Insurance Id Back</label>
-            <input cFormControl id="pinsuranceback" type="file" class="mb-1"/>
-            <button cButton (click)="imageUploadAction()" size="sm" value="Upload" color="secondary" variant="outline">
-                Upload
-                <svg cIcon name="cilCloudUpload"></svg>
-            </button>
+            <input cFormControl id="pinsuranceback" (change)="onImageUpload($event ,'pinsuranceback')" type="file"
+                class="mb-1" />
         </div>
     </c-card-body>
 </c-card>

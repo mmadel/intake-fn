@@ -1,9 +1,7 @@
 
 import * as _ from 'lodash';
 import { Address } from 'src/app/models/patient/address.info.model';
-import { Basic } from 'src/app/models/patient/basic.info.model';
 import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
-import requiredFields from '../../modules/patient.questionnaire/service/_patient.require.fields.service';
 import { PropertyValidator } from '../PropertyValidator';
 import { ValidatorContainer } from '../ValidatorContainer';
 import { PatientValidator } from './patient.validator';
