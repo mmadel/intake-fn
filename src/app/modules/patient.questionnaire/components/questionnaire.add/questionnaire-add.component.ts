@@ -4,6 +4,7 @@ import { Patientcache } from 'src/app/caching/patient.caching';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
+import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
 import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
@@ -15,10 +16,9 @@ import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
 import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
-import { WorkerCompComponent } from '../insurance.information/worker.comp/worker-comp.component';
-import { WorkerNotCompComponent } from '../insurance.information/worker.not.comp/worker-not-comp.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
+import { UploadPhotoComponent } from '../upload.photos/upload-photo.component';
 
 
 @Component({
@@ -27,18 +27,18 @@ import { MedicalInfoComponent } from '../medical.information/medical-info.compon
   styleUrls: ['./questionnaire-add.component.css']
 })
 export class QuestionnaireAddComponent implements OnInit {
-
   cards: { id: number, name: string }[] = [
     { "id": 1, "name": "Basic Information" },
     { "id": 2, "name": "Address Information" },
     { "id": 3, "name": "Medicial Information" },
     { "id": 4, "name": "Medicial History Information" },
     { "id": 5, "name": "Insurance Information" },
-    { "id": 6, "name": "Aggreements" },
+    { "id": 6, "name": "Upload Photos" },
+    { "id": 7, "name": "Aggreements" },
 
   ];
 
-  counter: number = 5;
+  counter: number = 1;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -52,6 +52,7 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
   @ViewChild(MedicalHistoryInformationComponent) medicalHistoryInformationComponent: MedicalHistoryInformationComponent;
   @ViewChild(InsuranceInformationComponent) insuranceInformationComponent: InsuranceInformationComponent;
+  @ViewChild(UploadPhotoComponent) uploadPhotoComponent: UploadPhotoComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -83,14 +84,19 @@ export class QuestionnaireAddComponent implements OnInit {
         this.patientFields.medicalHistoryInfoRequired)
     }
     if (patientModel === 'insurance') {
-      if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault)
+      if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
+        && this.insuranceInformationComponent.workerCompComponent !== undefined)
         this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent.workerCompComponent.model
-      if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault)
+      if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
+        && this.insuranceInformationComponent.workerNotCompComponent !== undefined)
         this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent.workerNotCompComponent.model
       this.patientValidator = new PatientInsuranceQuestionnaireValidator(
         this.insuranceInformationComponent.insuranceQuestionnaireInfo
         , this.patientFields.insurnaceCompInfoRequired
         , this.patientFields.insurnacecommerialInfoRequired)
+    }
+    if (patientModel === 'upload') {
+      this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
     }
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
@@ -129,6 +135,12 @@ export class QuestionnaireAddComponent implements OnInit {
     var pateint: string = localStorage.getItem('patient') || '';
     this.patientService.createPatient(pateint).subscribe(
       (response) => {
+        console.log('this.patient.files ' + this.patient.files)
+        this.patientService.upload(this.patient.files, <number>response.body).subscribe(
+          (response) => {
+            console.log('uploaded..')
+          },
+          (error) => { console.log(error); });
         localStorage.removeItem('patient');
         this.router.navigate(['/questionnaire/submitted']);
       },
@@ -139,6 +151,7 @@ export class QuestionnaireAddComponent implements OnInit {
     this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
+    this.patient.files = this.uploadPhotoComponent ? this.uploadPhotoComponent.imageFormData : this.patient.files;
     this.fillInsuranceInformationModel()
 
   }

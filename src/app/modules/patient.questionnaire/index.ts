@@ -10,6 +10,7 @@ export * from './components/insurance.information/worker.not.comp/worker-not-com
 export * from './components/medical.history.information/medical-history-information.component'
 
 export * from './components/aggreements/aggreements.component'
+export * from './components/upload.photos/upload-photo.component'
 
 export * from './components/submition/submition.component'
 

@@ -128,10 +128,28 @@
     </c-col>
 </c-row>
 <c-row class="justify-content-center">
+    <c-col xs="8">
+        <c-card *ngIf="counter === 6 " class="mb-3">
+            <c-card-header>
+                <h3>{{cards[5].name}}</h3>
+            </c-card-header>
+            <c-card-body>
+                <app-upload-photo></app-upload-photo>
+            </c-card-body>
+            <c-card-footer>
+                <button cButton (click)="back()" size="sm" color="primary" variant="outline"
+                    class="auto me-1">Back</button>
+                <button cButton (click)="next('upload')" size="sm" color="primary" variant="outline"
+                    class="auto me-1">next</button>
+            </c-card-footer>
+        </c-card>
+    </c-col>
+</c-row>
+<c-row class="justify-content-center">
 
-    <c-card *ngIf="counter === 6 " class="mb-3">
+    <c-card *ngIf="counter === 7 " class="mb-3">
         <c-card-header>
-            <h3>{{cards[5].name}}</h3>
+            <h3>{{cards[6].name}}</h3>
         </c-card-header>
         <c-card-body>
             <app-aggreements></app-aggreements>
@@ -144,7 +162,7 @@
     </c-card>
 
 </c-row>
-<c-card *ngIf="counter === 7 " class="mb-3">
+<c-card *ngIf="counter === 8 " class="mb-3">
     <c-card-header>
         <h3>Summary</h3>
     </c-card-header>

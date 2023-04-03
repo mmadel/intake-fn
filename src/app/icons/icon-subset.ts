@@ -115,7 +115,8 @@ import {
   cilSearch, 
   cibZulip,
   cibInternetExplorer,
-  cilTv
+  cilTv,
+  cilCloudUpload
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -235,7 +236,8 @@ export const iconSubset = {
   cilSearch,
   cibZulip,
   cibInternetExplorer,
-  cilTv
+  cilTv,
+  cilCloudUpload
 };
 
 export enum IconSubset {

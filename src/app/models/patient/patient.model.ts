@@ -11,5 +11,6 @@ export class Patient {
     medicalQuestionnaireInfo: MedicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
     insuranceQuestionnaireInfo: InsuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
     medicalHistoryInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
-    agreements:Agreements= new Agreements();
+    files: FormData = new FormData();
+    agreements: Agreements = new Agreements();
 }
