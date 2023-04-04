@@ -10,6 +10,7 @@ export interface IPatientResult {
   phoneNumber: string;
   idType: string,
   patientId: string
+  createdAt:number
 }
 export interface ISearchResult {
   resultCount: number;

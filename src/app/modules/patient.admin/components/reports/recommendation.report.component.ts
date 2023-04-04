@@ -47,6 +47,10 @@ export class RecommendationReportComponent implements OnInit {
       key: 'patientId',
       label: 'patientId'
     },
+    {
+      key: 'createdAt',
+      label: 'created'
+    },
   ];
   colors = { color: 'primary', textColor: 'primary' };
   public customRanges = {

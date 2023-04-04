@@ -108,7 +108,9 @@
             <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
                 <td>
                     <ng-container [ngSwitch]="columnName">
-
+                        <ng-container *ngSwitchCase="'createdAt'">
+                              {{(item[columnName]) | date}}
+                          </ng-container>
                         <ng-container *ngSwitchDefault>
                             {{tdContent}}
                         </ng-container>
