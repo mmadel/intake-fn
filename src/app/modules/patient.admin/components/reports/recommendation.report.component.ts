@@ -47,6 +47,10 @@ export class RecommendationReportComponent implements OnInit {
       key: 'patientId',
       label: 'patientId'
     },
+    {
+      key: 'createdAt',
+      label: 'created'
+    },
   ];
   colors = { color: 'primary', textColor: 'primary' };
   public customRanges = {
@@ -87,9 +91,9 @@ export class RecommendationReportComponent implements OnInit {
 
   private formatDate() {
     if (this.patientSearchCriteria.startDate_date !== undefined)
-      this.patientSearchCriteria.startDate = Number(moment(this.patientSearchCriteria.startDate_date).format("x"))
+      this.patientSearchCriteria.startDate = Number(moment(this.patientSearchCriteria.startDate_date).startOf('day').format("x"))
     if (this.patientSearchCriteria.endDate_date !== undefined)
-      this.patientSearchCriteria.endDate = Number(moment(this.patientSearchCriteria.endDate_date).format("x"))
+      this.patientSearchCriteria.endDate = Number(moment(this.patientSearchCriteria.endDate_date).startOf('day').format("x"))
   }
 
   private requestSearchService() {
