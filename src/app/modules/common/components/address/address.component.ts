@@ -20,7 +20,6 @@ export class AddressComponent implements OnInit {
   ngOnInit(): void {
   }
   isRequiredField(name: string): boolean {
-    console.log(JSON.stringify(this.requiredFields))
     var field: boolean = false;
     Object.entries(this.requiredFields)
       .forEach(([key, value]) => {

@@ -10,8 +10,8 @@ export class WrokerComp {
     insuranceName: string;
     claimNumber: number;
     adjusterInfoName: string;
-    adjusterInfoPhone: string;
+    adjusterInfoPhone: string='';
     attorneyInfoName: string;
-    attorneyInfoPhone: string;
+    attorneyInfoPhone: string='';
     caseStatus: string = '';
 }
