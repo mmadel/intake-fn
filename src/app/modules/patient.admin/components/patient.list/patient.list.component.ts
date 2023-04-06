@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IColumn, IColumnFilterValue, ISorterValue } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
+import * as moment from 'moment';
 import { combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { IApiParams, IUsers, PatientListService } from '../../services/patient-list.service';
+import { PatientReportingService } from '../../services/patient.reporting.service';
 export interface IParams {
   activePage?: number;
   columnFilterValue?: IColumnFilterValue;
@@ -17,9 +19,7 @@ export interface IParams {
 })
 export class PatientListComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private patientListService: PatientListService
-  ) {
+  constructor(private patientListService: PatientListService, private reportingService: PatientReportingService) {
   }
 
   title = 'CoreUI Angular Smart Table Example';
@@ -123,7 +123,23 @@ export class PatientListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.#destroy$.next(true);
   }
-
+  exportPDF(data: IUsers) {
+    var physicalTherapy: boolean = data.hasPhysicalTherapy === null ? false : data.hasPhysicalTherapy;
+    this.reportingService.exportPDF(data.insuranceWorkerType,
+      data.patientSourceType, physicalTherapy, data.tableId).subscribe(
+        (response: any) => {
+          const a = document.createElement('a')
+          const objectUrl = URL.createObjectURL(response)
+          a.href = objectUrl
+          var nameDatePart = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+          a.download = 'patient-' + nameDatePart + '';
+          a.click();
+          URL.revokeObjectURL(objectUrl);
+        },
+        (error) => {
+          console.log('@@@@@@@@@@@@@@@@ ' + JSON.stringify(error))
+        });
+  }
   ngOnInit(): void {
 
     this.activePage$.pipe(

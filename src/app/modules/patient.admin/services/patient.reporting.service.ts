@@ -10,7 +10,7 @@ export interface IPatientResult {
   phoneNumber: string;
   idType: string,
   patientId: string
-  createdAt:number
+  createdAt: number
 }
 export interface ISearchResult {
   resultCount: number;
@@ -33,5 +33,17 @@ export class PatientReportingService {
     const headers = { 'content-type': 'application/json' }
     const changePatientRequiredFieldsURL = this.baseUrl + '/generator/excel';
     return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(result), { 'headers': headers, responseType: 'blob' })
+  }
+
+  exportPDF(insuranceWorkerType: string, patientSourceType: string, hasPhysicalTherapy: boolean, patientId: number) {
+    const exportPDFURL = this.baseUrl + '/generator/pdf?insuranceWorkerType=' + insuranceWorkerType
+      + '&patientSourceType=' + patientSourceType + '&hasPhysicalTherapy=' + hasPhysicalTherapy
+      + '&patientId=' + patientId;
+    return this.httpClient.post(exportPDFURL, {
+      headers: {
+        "Accept": "application/pdf"
+      },
+      responseType: "blob"
+    })
   }
 }

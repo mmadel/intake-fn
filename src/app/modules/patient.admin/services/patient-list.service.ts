@@ -24,7 +24,11 @@ export interface IUsers {
   phoneType: string;
   phoneNumber: string;
   idType:string,
-  patientId:string
+  patientId:string,
+  tableId:number,
+  patientSourceType:string,
+  insuranceWorkerType:string,
+  hasPhysicalTherapy:boolean
 }
 
 export interface IApiParams {
