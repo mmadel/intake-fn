@@ -25,19 +25,19 @@ export class PatientReportingService {
   constructor(private httpClient: HttpClient) { }
 
   search(searchCriteria: PatientSearchCriteria) {
-    const changePatientRequiredFieldsURL = this.baseUrl + '/recommendation';
+    const changePatientRequiredFieldsURL = this.baseUrl + 'recommendation';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(searchCriteria), { 'headers': headers })
   }
 
   export(result: IPatientResult[]) {
     const headers = { 'content-type': 'application/json' }
-    const changePatientRequiredFieldsURL = this.baseUrl + '/generator/excel';
+    const changePatientRequiredFieldsURL = this.baseUrl + 'generator/excel';
     return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(result), { 'headers': headers, responseType: 'blob' })
   }
 
   exportPDF(insuranceWorkerType: string, patientSourceType: string, hasPhysicalTherapy: boolean, patientId: number) {
-    const exportPDFURL = this.baseUrl + '/generator/pdf?insuranceWorkerType=' + insuranceWorkerType
+    const exportPDFURL = this.baseUrl + 'generator/pdf?insuranceWorkerType=' + insuranceWorkerType
       + '&patientSourceType=' + patientSourceType + '&hasPhysicalTherapy=' + hasPhysicalTherapy
       + '&patientId=' + patientId;
     return this.httpClient.post(exportPDFURL, {

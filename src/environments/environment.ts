@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  dashboardBaseUrl: '/dashboard',
-  patientBaseUrl: '/patient',
-  reportingBaseUrl: '/reports',
-  patientAdminBaseUrl: '/patient/admin'
+  dashboardBaseUrl: '/dashboard/',
+  patientBaseUrl: '/patient/',
+  reportingBaseUrl: '/reports/',
+  patientAdminBaseUrl: '/patient/admin/'
 };
 
 /*

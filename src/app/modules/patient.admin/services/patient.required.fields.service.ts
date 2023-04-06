@@ -12,19 +12,19 @@ export class PatientRequiredFieldsService {
   constructor(private httpClient: HttpClient) { }
 
   change(patientFields: PatientRequiredFields) {
-    const changePatientRequiredFieldsURL = this.baseUrl + '/change/requires/fields';
+    const changePatientRequiredFieldsURL = this.baseUrl + 'change/requires/fields';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(patientFields), { 'headers': headers, observe: 'response' })
   }
 
   retrieve(){
-    const retrievePatientRequiredFieldsURL = this.baseUrl + '/retrieve/requires/fields';
+    const retrievePatientRequiredFieldsURL = this.baseUrl + 'retrieve/requires/fields';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }
 
   retrieveRequiredBasisInfo(){
-    const retrievePatientRequiredFieldsURL = this.baseUrl + '/retrieve/requires/basic/fields';
+    const retrievePatientRequiredFieldsURL = this.baseUrl + 'retrieve/requires/basic/fields';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }

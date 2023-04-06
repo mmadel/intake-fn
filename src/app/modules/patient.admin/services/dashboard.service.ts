@@ -10,7 +10,7 @@ export class DashboardService {
   constructor(private httpClient: HttpClient) { }
 
   public getDate(){
-    const retrievePatientRequiredFieldsURL = this.baseUrl + '/data';
+    const retrievePatientRequiredFieldsURL = this.baseUrl + 'data';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }
