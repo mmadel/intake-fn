@@ -1,4 +1,7 @@
 export const environment = {
   production: true,
-  adminBaseUrl: '/clinical-service/api/',
+  dashboardBaseUrl: '/dashboard/',
+  patientBaseUrl: '/patient/',
+  reportingBaseUrl: '/reports/',
+  patientAdminBaseUrl: '/patient/admin/'
 };

@@ -7,7 +7,7 @@ export const environment = {
   dashboardBaseUrl: '/dashboard/',
   patientBaseUrl: '/patient/',
   reportingBaseUrl: '/reports/',
-  patientAdminBaseUrl: '/patient/admin/',
+  patientAdminBaseUrl: '/patient/admin/'
 };
 
 /*
