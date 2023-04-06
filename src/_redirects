@@ -1,11 +1,15 @@
-http://localhost:8080/patient/admin/change/requires/fields https://patientintake-app.herokuapp.com/patient/admin/change/requires/fields 200
-http://localhost:8080/patient/admin/retrieve/requires/fields https://patientintake-app.herokuapp.com/patient/admin/retrieve/requires/fields 200
-http://localhost:8080/patient/admin/retrieve/requires/basic/fields https://patientintake-app.herokuapp.com/patient/admin/retrieve/requires/basic/fields 200
-http://localhost:8080/patient https://patientintake-app.herokuapp.com/patient 200
-http://localhost:8080/dashboard/data https://patientintake-app.herokuapp.com/dashboard/data 200
-http://localhost:8080/reports/recommendation https://patientintake-app.herokuapp.com/reports/recommendation 200
-http://localhost:8080/reports/generator/excel https://patientintake-app.herokuapp.com/reports/generator/excel 200
-http://localhost:8080/reports/generator/pdf?insuranceWorkerType=:insuranceWorkerType&patientSourceType=:patientSourceType&hasPhysicalTherapy=:hasPhysicalTherap&patientId=:patientId https://patientintake-app.herokuapp.com/reports/generator/pdf?insuranceWorkerType=:insuranceWorkerType&patientSourceType=:patientSourceType&hasPhysicalTherapy=:hasPhysicalTherap&patientId=:patientId 200
-http://localhost:8080/patient/upload https://patientintake-app.herokuapp.com/patient/upload 200
+/patient/admin/change/requires/fields https://patientintake-app.herokuapp.com/patient/admin/change/requires/fields 200
+/patient/admin/retrieve/requires/fields https://patientintake-app.herokuapp.com/patient/admin/retrieve/requires/fields 200
+/patient/admin/retrieve/requires/basic/fields https://patientintake-app.herokuapp.com/patient/admin/retrieve/requires/basic/fields 200
+
+/patient https://patientintake-app.herokuapp.com/patient 200
+/patient/upload https://patientintake-app.herokuapp.com/patient/upload 200
+
+/dashboard/data https://patientintake-app.herokuapp.com/dashboard/data 200
+
+/reports/recommendation https://patientintake-app.herokuapp.com/reports/recommendation 200
+/reports/generator/excel https://patientintake-app.herokuapp.com/reports/generator/excel 200
+/reports/generator/pdf?insuranceWorkerType=:insuranceWorkerType&patientSourceType=:patientSourceType&hasPhysicalTherapy=:hasPhysicalTherap&patientId=:patientId https://patientintake-app.herokuapp.com/reports/generator/pdf?insuranceWorkerType=:insuranceWorkerType&patientSourceType=:patientSourceType&hasPhysicalTherapy=:hasPhysicalTherap&patientId=:patientId 200
+
 
 /*  /index.html   200

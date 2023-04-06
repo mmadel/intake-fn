@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PatientSearchCriteria } from 'src/app/models/reporting/patient.search.criteria';
+import { environment } from 'src/environments/environment';
 export interface IPatientResult {
   firstName: string;
   middleName: string;
@@ -20,7 +21,7 @@ export interface ISearchResult {
   providedIn: 'root'
 })
 export class PatientReportingService {
-  private baseUrl = "http://localhost:8080/reports"
+  private baseUrl =environment.reportingBaseUrl;
   constructor(private httpClient: HttpClient) { }
 
   search(searchCriteria: PatientSearchCriteria) {

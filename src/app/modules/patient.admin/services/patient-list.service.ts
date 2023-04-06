@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, Observable, retry, switchMap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   // headers: new HttpHeaders({
@@ -43,7 +44,7 @@ export interface IApiParams {
   providedIn: 'root'
 })
 export class PatientListService {
-  private baseUrl = "http://localhost:8080/patient"
+  private baseUrl = environment.patientBaseUrl;
   constructor(private httpClient: HttpClient) { }
 
   getPatients(config$: BehaviorSubject<IApiParams>): Observable<any> {
