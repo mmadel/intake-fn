@@ -6,11 +6,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DashboardService {
-  private baseUrl = environment.dashboardBaseUrl
   constructor(private httpClient: HttpClient) { }
 
-  public getDate(){
-    const retrievePatientRequiredFieldsURL = this.baseUrl + 'data';
+  public getDate() {
+    const retrievePatientRequiredFieldsURL = environment.baseURL + 'dashboard/data';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }

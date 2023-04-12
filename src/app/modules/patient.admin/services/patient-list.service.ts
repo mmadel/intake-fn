@@ -24,12 +24,12 @@ export interface IUsers {
   country: string;
   phoneType: string;
   phoneNumber: string;
-  idType:string,
-  patientId:string,
-  tableId:number,
-  patientSourceType:string,
-  insuranceWorkerType:string,
-  hasPhysicalTherapy:boolean
+  idType: string,
+  patientId: string,
+  tableId: number,
+  patientSourceType: string,
+  insuranceWorkerType: string,
+  hasPhysicalTherapy: boolean
 }
 
 export interface IApiParams {
@@ -44,7 +44,7 @@ export interface IApiParams {
   providedIn: 'root'
 })
 export class PatientListService {
-  private baseUrl = environment.patientBaseUrl;
+  private baseUrl = environment.baseURL + 'patient'
   constructor(private httpClient: HttpClient) { }
 
   getPatients(config$: BehaviorSubject<IApiParams>): Observable<any> {

@@ -4,11 +4,7 @@
 
 export const environment = {
   production: false,
-  authUrl: 'http://localhost:8080/auth',
-  dashboardBaseUrl: '/dashboard/',
-  patientBaseUrl: '/patient/',
-  reportingBaseUrl: '/reports/',
-  patientAdminBaseUrl: '/patient/admin/'
+  baseURL:"http://localhost:8080/intake-service/api/",
 };
 
 /*

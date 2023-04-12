@@ -21,7 +21,7 @@ export interface ISearchResult {
   providedIn: 'root'
 })
 export class PatientReportingService {
-  private baseUrl =environment.reportingBaseUrl;
+  private baseUrl = environment.baseURL + 'reports/';
   constructor(private httpClient: HttpClient) { }
 
   search(searchCriteria: PatientSearchCriteria) {

@@ -10,15 +10,17 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class AuthService {
+  private authUrl = environment.baseURL + 'auth'
+  private userUrl = environment.baseURL + 'user'
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   constructor(private http: HttpClient) { }
-  login(form: { username: string; password: string }): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${environment.authUrl}/login`, form)
+  login(form: { userName: string | null; password: string | null }): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.authUrl}/login`, form)
       .pipe(
         tap(response => {
-          this.user$.next(response.user);
           this.setToken('token', response.accessToken);
           this.setToken('refreshToken', response.refreshToken);
+          localStorage.setItem('userId', response.userId?.toString() || '{}');
         })
       );
   }
@@ -26,7 +28,8 @@ export class AuthService {
     localStorage.setItem(key, JSON.stringify(token));
   }
   fetchCurrentUser(): Observable<User> {
-    return this.http.get<User>(`${environment.authUrl}/current-user`)
+    var userId: string | null = localStorage.getItem('userId');
+    return this.http.get<User>(`${this.userUrl}/find/loggedIn/` + userId)
       .pipe(
         tap(user => {
           this.user$.next(user);
@@ -36,7 +39,7 @@ export class AuthService {
   getCurrentUser(): Observable<User | null> {
     return this.user$.pipe(
       switchMap(user => {
-        // check if we already have user data
+        // check if we already have user data        
         if (user) {
           return of(user);
         }

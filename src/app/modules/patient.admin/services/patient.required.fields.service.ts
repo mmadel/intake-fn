@@ -8,23 +8,23 @@ import { environment } from 'src/environments/environment';
 })
 export class PatientRequiredFieldsService {
 
-  private baseUrl = environment.patientAdminBaseUrl;
+  private baseUrl = environment.baseURL + 'requires/fields/';
   constructor(private httpClient: HttpClient) { }
 
   change(patientFields: PatientRequiredFields) {
-    const changePatientRequiredFieldsURL = this.baseUrl + 'change/requires/fields';
+    const changePatientRequiredFieldsURL = this.baseUrl + 'change';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(patientFields), { 'headers': headers, observe: 'response' })
   }
 
-  retrieve(){
-    const retrievePatientRequiredFieldsURL = this.baseUrl + 'retrieve/requires/fields';
+  retrieve() {
+    const retrievePatientRequiredFieldsURL = this.baseUrl + 'retrieve';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }
 
-  retrieveRequiredBasisInfo(){
-    const retrievePatientRequiredFieldsURL = this.baseUrl + 'retrieve/requires/basic/fields';
+  retrieveRequiredBasisInfo() {
+    const retrievePatientRequiredFieldsURL = this.baseUrl + 'retrieve/basic';
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }
