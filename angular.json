@@ -71,7 +71,8 @@
               "browserTarget": "intake-fn:build:production"
             },
             "development": {
-              "browserTarget": "intake-fn:build:development"
+              "browserTarget": "intake-fn:build:development",
+              "proxyConfig": "proxy-local.config.json"
             }
           },
           "defaultConfiguration": "development"

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,19 +13,20 @@ export class AuthService {
   private authUrl = environment.baseURL + 'auth'
   private userUrl = environment.baseURL + 'user'
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, handler: HttpBackend) {
+    this.http = new HttpClient(handler);
+  }
   login(form: { userName: string | null; password: string | null }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.authUrl}/login`, form)
       .pipe(
         tap(response => {
           this.setToken('token', response.accessToken);
-          this.setToken('refreshToken', response.refreshToken);
           localStorage.setItem('userId', response.userId?.toString() || '{}');
         })
       );
   }
   private setToken(key: string, token: string): void {
-    localStorage.setItem(key, JSON.stringify(token));
+    localStorage.setItem(key, token);
   }
   fetchCurrentUser(): Observable<User> {
     var userId: string | null = localStorage.getItem('userId');
@@ -53,5 +54,10 @@ export class AuthService {
         return of(null);
       })
     );
+  }
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    this.user$.next(null);
   }
 }
