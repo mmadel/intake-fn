@@ -41,12 +41,14 @@ import {
   DefaultLayoutComponent,
   DefaultHeaderComponent,
   DefaultFooterComponent,
-  DefaultAdminLayoutComponent
+  DefaultAdminLayoutComponent,
+  AdminHeaderComponent
 } from './core';
 import { PatientService } from './modules/patient.questionnaire/service/patient.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PatientListService } from './modules/patient.admin/services/patient-list.service';
 import { AuthInterceptor } from './modules/security';
+
 
 
 const APP_CONTAINERS = [
@@ -56,13 +58,14 @@ const APP_CONTAINERS = [
 ];
 
 const ADMIN_APP_CONTAINERS = [
-  DefaultAdminLayoutComponent
+  DefaultAdminLayoutComponent,
+  AdminHeaderComponent
 ]
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ...ADMIN_APP_CONTAINERS],
+  declarations: [AppComponent, ...APP_CONTAINERS, ...ADMIN_APP_CONTAINERS, AdminHeaderComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
