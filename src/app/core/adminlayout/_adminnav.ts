@@ -1,6 +1,6 @@
 import { INavData } from '@coreui/angular-pro';
 
-export const navItems: INavData[] = [
+export const adminNavItems: INavData[] = [
   {
     name: 'Dashboard',
     url: '/admin/dashboard',

@@ -1,6 +1,9 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { INavData } from '@coreui/angular-pro';
 import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
+import { adminNavItems } from 'src/app/core/adminlayout/_adminnav';
+import { userNavItems } from 'src/app/core/adminlayout/_usernav';
 import { environment } from 'src/environments/environment';
 import { LoginResponse } from '../model/login.response';
 import { User } from '../model/user';
@@ -13,6 +16,7 @@ export class AuthService {
   private authUrl = environment.baseURL + 'auth'
   private userUrl = environment.baseURL + 'user'
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public navItems$: BehaviorSubject<INavData[] | null> = new BehaviorSubject<INavData[] | null>(null);
   constructor(private http: HttpClient, handler: HttpBackend) {
     this.http = new HttpClient(handler);
   }
@@ -22,7 +26,7 @@ export class AuthService {
         tap(response => {
           this.setToken('token', response.accessToken);
           localStorage.setItem('userId', response.userId?.toString() || '{}');
-        })
+        }),
       );
   }
   private setToken(key: string, token: string): void {
@@ -34,13 +38,16 @@ export class AuthService {
       .pipe(
         tap(user => {
           this.user$.next(user);
-        })
+          if (user.userRole === 'USER')
+          this.navItems$.next(userNavItems)
+        if (user.userRole === 'ADMIN')
+          this.navItems$.next(adminNavItems)
+        }),
       );
   }
   getCurrentUser(): Observable<User | null> {
     return this.user$.pipe(
       switchMap(user => {
-        // check if we already have user data        
         if (user) {
           return of(user);
         }
@@ -55,6 +62,7 @@ export class AuthService {
       })
     );
   }
+
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');

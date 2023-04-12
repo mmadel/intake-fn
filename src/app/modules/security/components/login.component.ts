@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.form).subscribe(() => {
         this.authService.getCurrentUser().subscribe(user => {
-          console.log(JSON.stringify(user))
           if (user?.userRole === 'ADMIN')
             this.router.navigateByUrl('/admin');
           if (user?.userRole === 'USER')
