@@ -11,6 +11,11 @@ const routes: Routes = [
   },
   {
     path: '',
+    redirectTo: 'admin',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
