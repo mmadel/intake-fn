@@ -33,7 +33,7 @@ const routes: Routes = [
     component: DefaultAdminLayoutComponent,
     canActivateChild: [AuthGuard],
     data: {
-      title: 'Admin-Home'
+      title: ''
     },
     children: [
       {

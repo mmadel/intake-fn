@@ -19,18 +19,22 @@ export const adminNavItems: INavData[] = [
   },
   {
     name: 'Administration',
-    url: '/validation',
+    url: '',
     iconComponent: { name: 'cil-applicationsSettings' },
     children: [
       {
         name: 'Validation List',
         url: 'validation/list'
+      },
+      {
+        name: 'Clinic List',
+        url: 'clinic/list'
       }
-    ]
+    ],
   },
   {
     name: 'Reports',
-    url: '/report',
+    url: '',
     iconComponent: { name: 'cil-search' },
     children: [
       {
