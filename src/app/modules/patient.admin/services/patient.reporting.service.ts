@@ -21,13 +21,12 @@ export interface ISearchResult {
   providedIn: 'root'
 })
 export class PatientReportingService {
-  private baseUrl =environment.reportingBaseUrl;
+  private baseUrl = environment.baseURL + 'reports/';
   constructor(private httpClient: HttpClient) { }
 
   search(searchCriteria: PatientSearchCriteria) {
     const changePatientRequiredFieldsURL = this.baseUrl + 'recommendation';
-    const headers = { 'content-type': 'application/json' }
-    return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(searchCriteria), { 'headers': headers })
+    return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(searchCriteria))
   }
 
   export(result: IPatientResult[]) {

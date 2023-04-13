@@ -1,0 +1,65 @@
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container breakpoint="md">
+    <c-row class="justify-content-center">
+      <c-col lg="10" xl="8">
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <form cForm #loginForm="ngForm" (ngSubmit)="login()" (change)="resetError()">
+                <h1>Login</h1>
+                <p class="text-medium-emphasis">Sign In to your account</p>
+                <div class="form-group">
+                  <small *ngIf="username.invalid && (username.dirty || username.touched)" class="form-text text-danger">
+                    Username is required
+                  </small>
+                  <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+
+                    <input autoComplete="username" cFormControl id="userName" name="userName"
+                      placeholder="Enter username" required
+                      [ngClass]="{'is-invalid': username.invalid && (username.dirty || username.touched)}"
+                      [(ngModel)]="form.userName" #username="ngModel" />
+                  </c-input-group>
+                </div>
+                <div class="form-group">
+                  <small *ngIf="password.invalid && (password.dirty || password.touched)" class="form-text text-danger">
+                    Password is required
+                  </small>
+                  <c-input-group class="mb-4">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilLockLocked"></svg>
+                    </span>
+                    <input autoComplete="current-password" class="form-control" cFormControl placeholder="Password"
+                      type="password" id="password" name="password" placeholder="Password" required
+                      [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched)}"
+                      [(ngModel)]="form.password" #password="ngModel" />
+                  </c-input-group>
+                </div>
+                <c-row>
+                  <c-col xs="6">
+                    <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+                    <button cButton type="submit" class="px-4" color="primary">
+                      Login
+                    </button>
+                  </c-col>
+                  <c-col class="text-right" xs="6">
+                    <button cButton class="px-0" color="link">
+                      Forgot password?
+                    </button>
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+          <c-card [ngStyle]="{'minWidth.%': 44}" class="text-white bg-primary py-5">
+            <c-card-body class="text-center">
+
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

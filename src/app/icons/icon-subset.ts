@@ -112,11 +112,11 @@ import {
   cilViewColumn,
   cilEyedropper,
   cilControl,
-  cilSearch, 
+  cilSearch,
   cibZulip,
   cibInternetExplorer,
   cilTv,
-  cilCloudUpload
+  cilCloudUpload, cilAccountLogout
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -237,7 +237,8 @@ export const iconSubset = {
   cibZulip,
   cibInternetExplorer,
   cilTv,
-  cilCloudUpload
+  cilCloudUpload,
+  cilAccountLogout
 };
 
 export enum IconSubset {
@@ -273,7 +274,7 @@ export enum IconSubset {
   cilCalendar = 'cilCalendar',
   cilChart = 'cilChart',
   cilChartPie = 'cilChartPie',
-  cilCheck='cilCheck',
+  cilCheck = 'cilCheck',
   cilChevronLeft = 'cilChevronLeft',
   cilChevronRight = 'cilChevronRight',
   cilCloudDownload = 'cilCloudDownload',

@@ -1,0 +1,83 @@
+<!--<c-header class="mb-4 d-print-none" position="sticky">-->
+<ng-container>
+  <c-container [fluid]="true">
+    <button toggle="visible" cHeaderToggler [cSidebarToggle]="sidebarId" class="ps-1">
+      <svg cIcon name="cilMenu" size="lg"></svg>
+    </button>
+    <c-header-nav class="d-none d-lg-flex me-auto">
+      <!--Clinic Select Here!!!-->
+    </c-header-nav>
+
+    <c-header-nav class="ms-auto me-4">
+      <form [formGroup]="themeSwitch" cForm>
+        <c-button-group aria-label="Theme switch">
+          <input class="btn-check" formControlName="themeSwitchRadio" id="btn-light-theme" type="radio" value="light" />
+          <label (click)="setTheme('light')" cButton cFormCheckLabel color="primary">
+            <svg cIcon name="cilSun"></svg>
+          </label>
+          <input class="btn-check" formControlName="themeSwitchRadio" id="btn-dark-theme" type="radio" value="dark" />
+          <label (click)="setTheme('dark')" cButton cFormCheckLabel color="primary">
+            <svg cIcon name="cilMoon"></svg>
+          </label>
+        </c-button-group>
+      </form>
+    </c-header-nav>
+
+    <!-- todo: header nav dropdown menus  -->
+
+    <c-header-nav class="ms-3 me-sm-4">
+      <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+    </c-header-nav>
+
+    <!--aside toggler-->
+    <button toggle="visible" cHeaderToggler cSidebarToggle="aside1" class="px-md-0 me-md-3 d-none d-sm-block">
+      <svg cIcon name="cilApplicationsSettings" size="lg"></svg>
+    </button>
+  </c-container>
+  <c-header-divider></c-header-divider>
+  <c-container [fluid]="true">
+    <c-breadcrumb-router class="ms-2"></c-breadcrumb-router>
+  </c-container>
+</ng-container>
+<!--</c-header>-->
+
+<ng-template #userDropdown>
+  <c-dropdown alignment="end" variant="nav-item">
+    <a href [caret]="false" cDropdownToggle class="py-0">
+      <c-avatar cTextColor="primary" shape="rounded-1" size="md" src="./assets/img/avatars/8.jpg" status="success">
+      </c-avatar>
+    </a>
+    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+      <li>
+        <h6 cDropdownHeader class="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Account</h6>
+      </li>
+
+      <li>
+        <h6 cDropdownHeader class="bg-light dark:bg-white dark:bg-opacity-10 fw-semibold py-2">Settings</h6>
+      </li>
+      <li></li>
+      <li>
+        <a [routerLink]="[]" cDropdownItem>
+          <svg cIcon class="me-2" name="cilUser"></svg>
+          Profile
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="[]" cDropdownItem>
+          <svg cIcon class="me-2" name="cilSettings"></svg>
+          Settings
+        </a>
+      </li>
+      <li>
+        <hr cDropdownDivider />
+      </li>
+      <li>
+        <a (click)="logout()" cDropdownItem>
+          <svg cIcon class="me-2" name="cilLockLocked"></svg>
+          Logout
+        </a>
+      </li>
+      <li></li>
+    </ul>
+  </c-dropdown>
+</ng-template>

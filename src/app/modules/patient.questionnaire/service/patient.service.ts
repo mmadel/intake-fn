@@ -6,19 +6,19 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PatientService {
-  private baseUrl = environment.patientBaseUrl
+  private baseUrl = environment.baseURL + 'patient'
   constructor(private http: HttpClient) { }
   createPatient(patient: string) {
-    const createPatientURL = this.baseUrl + 'patient';
+    const createPatientURL = this.baseUrl;
     const headers = { 'content-type': 'application/json' }
     console.log(patient);
     return this.http.post(createPatientURL, patient, { 'headers': headers, observe: 'response' })
   }
 
   upload(imageFormData: FormData, pateintId: number) {
-    const createPatientURL = this.baseUrl + 'upload';
+    const uploadURL = environment.baseURL  + '/upload';
     let headers = new HttpHeaders({ 'patientId': pateintId.toString() });
 
-    return this.http.post(createPatientURL, imageFormData, { 'headers': headers, observe: 'response' })
+    return this.http.post(uploadURL, imageFormData, { 'headers': headers, observe: 'response' })
   }
 }

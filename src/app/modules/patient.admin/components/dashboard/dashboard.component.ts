@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
+import { AuthService } from 'src/app/modules/security/service/auth.service';
 import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   dashboardDataContainer: DashboardDataContainer;
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.dashboardService.getDate().subscribe(data => {

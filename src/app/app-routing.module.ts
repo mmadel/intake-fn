@@ -1,8 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultAdminLayoutComponent, DefaultLayoutComponent } from './core';
+import { AuthGuard, LoginComponent } from './modules/security';
+
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    redirectTo: 'admin',
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: DefaultLayoutComponent,
@@ -20,6 +31,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DefaultAdminLayoutComponent,
+    canActivateChild: [AuthGuard],
     data: {
       title: 'Admin-Home'
     },
