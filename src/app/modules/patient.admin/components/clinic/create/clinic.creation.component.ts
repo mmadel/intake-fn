@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { countries } from 'src/app/modules/common/components/address/country-data-store';
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
@@ -26,7 +27,11 @@ export class ClinicCreationComponent implements OnInit {
     clinicaddresszipcode: null
   };
   errorMessage: string | null;
-  constructor(private clinicService: ClinicService) { }
+  constructor(private clinicService: ClinicService,
+    private router: Router) { }
+  position = 'top-end';
+  visible = false;
+  percentage = 0;
 
   ngOnInit(): void {
   }
@@ -41,8 +46,7 @@ export class ClinicCreationComponent implements OnInit {
     if (this.clinicCreateForm.valid) {
       this.clinicService.create(clinic).subscribe(
         (response) => {
-          console.log('created..')
-         
+          this.router.navigateByUrl('admin/clinic/list')
         },
         (error) => { console.log(error); });
     } else {
@@ -56,13 +60,13 @@ export class ClinicCreationComponent implements OnInit {
   }
   convertAddressToString(): string {
     let address: string = ""
-    address = address + "address " + this.form.clinicaddressvalue + ",";
-    address = address + "country " + this.form.clinicaddresscountry + ",";
+    address = address + this.form.clinicaddressvalue + ",";
+    address = address + this.form.clinicaddresscountry + ",";
     if (this.form.clinicaddressstate)
-      address = address + "state " + this.form.clinicaddressstate + ",";
+      address = address + this.form.clinicaddressstate + ",";
     if (this.form.clinicaddressprovince)
-      address = address + "province " + this.form.clinicaddressprovince + ",";
-    address = address + "zipcode " + this.form.clinicaddresszipcode;
+      address = address + this.form.clinicaddressprovince + ",";
+    address = address + this.form.clinicaddresszipcode;
     return address
   }
 }
