@@ -1,0 +1,37 @@
+<c-row>
+    <c-col xs="12">
+        <h1>User List</h1>
+    </c-col>
+    <c-col xs="12">
+        <div style="float: right;">
+            <button cButton color="primary" variant="outline" (click)="create()">
+                Create User
+            </button>
+        </div>
+    </c-col>
+</c-row>
+<hr />
+<table cTable *ngIf="users">
+    <thead cTableColor="light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Use Name</th>
+            <th scope="col">User Role</th>
+            <th scope="col">User Clinics</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; index as i;">
+            <td>{{user.id}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.userRole}}</td>
+            <td>
+                <ul>
+                    <li *ngFor="let clinic of user.clinics">{{clinic.name}}</li>
+                </ul>
+
+            </td>
+        </tr>
+
+    </tbody>
+</table>

@@ -5,6 +5,8 @@ import { ClinicListComponent } from './components/clinic/list/clinic.list.compon
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PatientListComponent } from './components/patient.list/patient.list.component';
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
+import { UserCreationComponent } from './components/user/create/user-creation.component';
+import { UserListComponent } from './components/user/list/user-list.component';
 import { ValidationListComponent } from './components/validation/validation.list.component';
 
 const routes: Routes = [{
@@ -59,6 +61,20 @@ const routes: Routes = [{
       component: ClinicCreationComponent,
       data: {
         title: 'clinic-Creation',
+      },
+    },
+    {
+      path: 'user/list',
+      component: UserListComponent,
+      data: {
+        title: 'users-list',
+      },
+    },
+    {
+      path: 'user/creation',
+      component: UserCreationComponent,
+      data: {
+        title: 'user-Creation',
       },
     }
   ]

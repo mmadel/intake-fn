@@ -40,7 +40,8 @@ export class ClinicCreationComponent implements OnInit {
     var clinic: Clinic = {
       id: null,
       name: this.form.name,
-      address: this.convertAddressToString()
+      address: this.convertAddressToString(),
+      selected:false
     }
 
     if (this.clinicCreateForm.valid) {

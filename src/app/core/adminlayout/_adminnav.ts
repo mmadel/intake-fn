@@ -8,7 +8,7 @@ export const adminNavItems: INavData[] = [
   },
   {
     name: 'Patient',
-    url: 'patient',
+    url: '',
     iconComponent: { name: 'cil-disabled' },
     children: [
       {
@@ -27,8 +27,12 @@ export const adminNavItems: INavData[] = [
         url: 'validation/list'
       },
       {
-        name: 'Clinic List',
+        name: 'Clinics',
         url: 'clinic/list'
+      },
+      {
+        name: 'Users',
+        url: 'user/list'
       }
     ],
   },
