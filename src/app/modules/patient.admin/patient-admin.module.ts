@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IconModule } from '@coreui/icons-angular';
+import { FormsModule } from '@angular/forms';
 
 import { PatientAdminRoutingModule } from './patient-admin-routing.module';
 import {
@@ -8,9 +10,11 @@ import {
   RecommendationReportComponent,
   DashboardComponent,
   ClinicCreationComponent,
-  ClinicListComponent
+  ClinicListComponent,
+  UserCreationComponent,
+  UserListComponent
 } from './index';
-import { IconModule } from '@coreui/icons-angular';
+
 import { PatientCommonModule } from '../common';
 import {
   AlertModule,
@@ -41,7 +45,7 @@ import {
 
 
 } from '@coreui/angular-pro';
-import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +54,9 @@ import { FormsModule } from '@angular/forms';
     RecommendationReportComponent,
     DashboardComponent,
     ClinicCreationComponent,
-    ClinicListComponent
+    ClinicListComponent,
+    UserListComponent,
+    UserCreationComponent
   ],
   imports: [
     CommonModule,
