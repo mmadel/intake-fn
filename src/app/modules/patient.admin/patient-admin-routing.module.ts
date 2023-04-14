@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
+import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PatientListComponent } from './components/patient.list/patient.list.component';
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
@@ -11,7 +13,7 @@ const routes: Routes = [{
   data: {
     title: 'Dashboard'
   }
-}, 
+},
 {
   path: '',
   redirectTo: 'dashboard',
@@ -20,32 +22,63 @@ const routes: Routes = [{
 {
   path: '',
   data: {
-    title: 'Administration Console',
+    title: 'pateint',
   },
   children: [
     {
       path: 'patient/list',
       component: PatientListComponent,
       data: {
-        title: 'List Patient Intake',
+        title: 'Patients',
       },
-    },
+    }
+  ]
+},
+{
+  path: '',
+  data: {
+    title: 'administration',
+  },
+  children: [
     {
       path: 'validation/list',
       component: ValidationListComponent,
       data: {
-        title: 'List Validation Fields',
+        title: 'validation-fields',
       },
     },
+    {
+      path: 'clinic/list',
+      component: ClinicListComponent,
+      data: {
+        title: 'clinics-list',
+      },
+    },
+    {
+      path: 'clinic/creation',
+      component: ClinicCreationComponent,
+      data: {
+        title: 'clinic-Creation',
+      },
+    }
+  ]
+},
+{
+  path: '',
+  data: {
+    title: 'Reports',
+  },
+  children: [
     {
       path: 'report/recommendation',
       component: RecommendationReportComponent,
       data: {
-        title: 'Recommendation Report',
+        title: 'patient-source',
       },
     }
   ]
-}];
+}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

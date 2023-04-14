@@ -6,7 +6,9 @@ import {
   PatientListComponent,
   ValidationListComponent,
   RecommendationReportComponent,
-  DashboardComponent
+  DashboardComponent,
+  ClinicCreationComponent,
+  ClinicListComponent
 } from './index';
 import { IconModule } from '@coreui/icons-angular';
 import { PatientCommonModule } from '../common';
@@ -46,7 +48,9 @@ import { FormsModule } from '@angular/forms';
     PatientListComponent,
     ValidationListComponent,
     RecommendationReportComponent,
-    DashboardComponent
+    DashboardComponent,
+    ClinicCreationComponent,
+    ClinicListComponent
   ],
   imports: [
     CommonModule,
