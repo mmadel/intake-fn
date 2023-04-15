@@ -1,7 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, Observable, retry, switchMap, throwError } from 'rxjs';
+import { result } from 'lodash';
+import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, mergeMap, Observable, retry, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ClinicService } from './clinic/clinic.service';
 
 const httpOptions = {
   // headers: new HttpHeaders({
@@ -35,6 +37,7 @@ export interface IUsers {
 export interface IApiParams {
   offset?: number;
   limit?: number;
+  clinicId?: number
   columnFilter?: string;
   columnSorter?: string;
   sort?: string;
@@ -45,7 +48,7 @@ export interface IApiParams {
 })
 export class PatientListService {
   private baseUrl = environment.baseURL + 'patient'
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private clinicService: ClinicService) { }
 
   getPatients(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return config$.pipe(
@@ -59,6 +62,7 @@ export class PatientListService {
     );
   }
   private fetchData(params: IApiParams): Observable<IData> {
+
     const apiParams = {
       ...params
     };
@@ -67,13 +71,15 @@ export class PatientListService {
     const options = Object.keys(httpParams).length
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
-
-    return this.httpClient
-      .get<IData>(this.baseUrl, options)
-      .pipe(
-        retry({ count: 1, delay: 1000, resetOnSuccess: true }),
-        catchError(this.handleHttpError)
-      );
+    return this.clinicService.selectedClinic$.pipe(
+      mergeMap(clinicId =>  
+        this.httpClient
+          .get<IData>(this.baseUrl + "/" + clinicId, options)
+          .pipe(
+            retry({ count: 1, delay: 100000, resetOnSuccess: true }),
+            catchError(this.handleHttpError)
+          )
+      ))
   }
   private handleHttpError(error: HttpErrorResponse) {
     return throwError(() => error);

@@ -5,7 +5,12 @@
       <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
     <c-header-nav class="d-none d-lg-flex me-auto">
-      <!--Clinic Select Here!!!-->
+      <select *ngIf="clinics" #userClinics cSelect sizing="sm" style="line-height: 15px;" 
+        (change)="setSelectedClinic($event)">
+        <option *ngFor="let clinic of clinics" [value]="clinic.id">
+          {{clinic.name}}
+        </option>
+      </select>
     </c-header-nav>
 
     <c-header-nav class="ms-auto me-4">
