@@ -16,7 +16,6 @@ export class AuthService {
   private authUrl = environment.baseURL + 'auth'
   private userUrl = environment.baseURL + 'user'
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  public navItems$: BehaviorSubject<INavData[] | null> = new BehaviorSubject<INavData[] | null>(null);
   constructor(private http: HttpClient, handler: HttpBackend) {
     this.http = new HttpClient(handler);
   }
