@@ -27,10 +27,6 @@ export class AuthService {
           this.setToken('token', response.accessToken);
           localStorage.setItem('userId', response.userId?.toString() || '{}');
           localStorage.setItem('userRole', response.userRole || '{}');
-          if (response.userRole === 'USER')
-            this.navItems$.next(userNavItems)
-          if (response.userRole === 'ADMIN')
-            this.navItems$.next(adminNavItems)
         }),
       );
   }

@@ -8,15 +8,16 @@ import { DashboardService } from '../../services/dashboard.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   dashboardDataContainer: DashboardDataContainer;
   constructor(private dashboardService: DashboardService, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-    this.clinicService.selectedAdminClinic$.subscribe(id => {
-      this.dashboardService.getDate(id, Number(localStorage.getItem("userId") || '{}')).subscribe(data => {
-        this.dashboardDataContainer = <DashboardDataContainer>data;
-      })
+    this.clinicService.selectedAdminClinic$.subscribe(clinicId => {
+      if (clinicId !== null)
+        this.dashboardService.getDate(clinicId, Number(localStorage.getItem("userId") || '{}')).subscribe(data => {
+          this.dashboardDataContainer = <DashboardDataContainer>data;
+        })
     })
   }
   data = {
@@ -43,7 +44,6 @@ export class DashboardComponent implements OnInit{
 
   handleChartRef($chartRef: any) {
     if ($chartRef) {
-      console.log('handleChartRef', $chartRef);
       this.data.labels.push('August');
       this.data.datasets[0].data.push(60);
       this.data.datasets[1].data.push(20);

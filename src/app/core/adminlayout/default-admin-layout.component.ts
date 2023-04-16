@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { INavData } from '@coreui/angular-pro';
 import { AuthService } from 'src/app/modules/security/service/auth.service';
+import { adminNavItems } from './_adminnav';
+import { userNavItems } from './_usernav';
 
 @Component({
   selector: 'app-default-admin-layout',
@@ -14,10 +16,15 @@ export class DefaultAdminLayoutComponent implements OnInit {
     suppressScrollX: true,
   };
   ngOnInit(): void {
-    this.authService.navItems$.subscribe(navItems => {
-      console.log(JSON.stringify(navItems))
-      this.navItems = navItems ;
-    })
+    var userRolestring = localStorage.getItem('userRole' || '{}');
+    if (userRolestring === 'USER')
+      this.navItems = userNavItems
+    if (userRolestring === 'ADMIN')
+      this.navItems = adminNavItems;
+  }
+
+  checkUserRole() {
+    return localStorage.getItem('userRole' || '{}');
   }
 
 }
