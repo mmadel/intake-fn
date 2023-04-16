@@ -23,13 +23,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      this.authService.login(this.form).subscribe(() => {
-        this.authService.getCurrentUser().subscribe(user => {
-          if (user?.userRole === 'ADMIN')
-            this.router.navigateByUrl('/admin');
-          if (user?.userRole === 'USER')
-            this.router.navigateByUrl('/admin/patient/list');
-        });
+      this.authService.login(this.form).subscribe(response => {
+        if (response.userRole === 'ADMIN')
+          this.router.navigateByUrl('/admin');
+        if (response.userRole === 'USER')
+          this.router.navigateByUrl('/admin/patient/list');
+
 
       }, err => {
         this.errorMessage = err && err.error;

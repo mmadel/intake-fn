@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -32,6 +32,7 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
+  
 
 
 } from '@coreui/angular-pro';
@@ -92,6 +93,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     IconModule,
     BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [
     {

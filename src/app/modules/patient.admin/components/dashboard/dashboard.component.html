@@ -1,43 +1,23 @@
-<c-row>
-  <c-col md="12" xl="3">
-    <c-widget-stat-b [title]="'Clinic A'" class="mb-4" text="" value="75.9%">
+<c-row *ngIf="dashboardDataContainer">
+  <c-col md="12" xl="3" *ngFor="let recipient of dashboardDataContainer.clinicsData | keyvalue">
+    <c-widget-stat-a [title]="recipient.key" [color]="getColor(recipient.value[0])" class="mb-4" text="">
       <br><br><br>
+      <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
+        {{recipient.value[1]}}
+        <span class="fs-6 fw-normal">({{recipient.value[0]}}%)</span>
+        <span class="fs-6 fw-normal">
+          Patients <svg size="lg" cIcon name="cilDisabled"></svg>
+        </span>
+      </ng-template>
       <c-progress class="my-2" thin>
-        <c-progress-bar [value]="75.9" color="success"></c-progress-bar>
+        <c-progress-bar [value]="recipient.value[1]" color="success"></c-progress-bar>
       </c-progress>
-    </c-widget-stat-b>
-  </c-col>
-  <c-col md="12" xl="3">
-    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Clinic B'" class="mb-4" color="primary" inverse text=""
-      value="40.2%">
-      <br><br><br>
-      <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
-        <c-progress-bar [value]="40.2"></c-progress-bar>
-      </c-progress>
-    </c-widget-stat-b>
-  </c-col>
-  <c-col md="12" xl="3">
-    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Clinic C'" class="mb-4" color="success" inverse text=""
-      value="90.9%">
-      <br><br><br>
-      <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
-        <c-progress-bar [value]="90.9"></c-progress-bar>
-      </c-progress>
-    </c-widget-stat-b>
-  </c-col>
-  <c-col md="12" xl="3">
-    <c-widget-stat-b #widgetStatB1inv="cWidgetStatB" [title]="'Clinic D'" class="mb-4" color="danger" inverse text=""
-      value="20.9%">
-      <br><br><br>
-      <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
-        <c-progress-bar [value]="20.9"></c-progress-bar>
-      </c-progress>
-    </c-widget-stat-b>
+    </c-widget-stat-a>
   </c-col>
 </c-row>
 <c-row>
   <c-col xs>
-    <c-card class="mb-4">
+    <c-card class="mb-4" *ngIf="dashboardDataContainer">
       <c-card-header>Traffic {{ "&" }} Sales</c-card-header>
       <c-card-body>
         <c-row>

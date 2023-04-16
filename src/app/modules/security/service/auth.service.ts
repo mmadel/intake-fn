@@ -26,6 +26,11 @@ export class AuthService {
         tap(response => {
           this.setToken('token', response.accessToken);
           localStorage.setItem('userId', response.userId?.toString() || '{}');
+          localStorage.setItem('userRole', response.userRole || '{}');
+          if (response.userRole === 'USER')
+            this.navItems$.next(userNavItems)
+          if (response.userRole === 'ADMIN')
+            this.navItems$.next(adminNavItems)
         }),
       );
   }
@@ -38,10 +43,6 @@ export class AuthService {
       .pipe(
         tap(user => {
           this.user$.next(user);
-          if (user.userRole === 'USER')
-          this.navItems$.next(userNavItems)
-        if (user.userRole === 'ADMIN')
-          this.navItems$.next(adminNavItems)
         }),
       );
   }

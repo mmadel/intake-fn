@@ -8,9 +8,8 @@ import { environment } from 'src/environments/environment';
 export class DashboardService {
   constructor(private httpClient: HttpClient) { }
 
-  public getDate() {
-    const retrievePatientRequiredFieldsURL = environment.baseURL + 'dashboard/data';
-    const headers = { 'content-type': 'application/json' }
+  public getDate(clinicId: number | null, userId: number) {
+    const retrievePatientRequiredFieldsURL = environment.baseURL + 'dashboard/data'+'/clinicId/' + clinicId + "/userId/" + userId;
     return this.httpClient.get(retrievePatientRequiredFieldsURL)
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
-import { AuthService } from 'src/app/modules/security/service/auth.service';
+import { ClinicService } from '../../services/clinic/clinic.service';
 import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
@@ -9,13 +8,15 @@ import { DashboardService } from '../../services/dashboard.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit{
   dashboardDataContainer: DashboardDataContainer;
-  constructor(private dashboardService: DashboardService, private authService: AuthService) { }
+  constructor(private dashboardService: DashboardService, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getDate().subscribe(data => {
-      this.dashboardDataContainer = <DashboardDataContainer>data;
+    this.clinicService.selectedAdminClinic$.subscribe(id => {
+      this.dashboardService.getDate(id, Number(localStorage.getItem("userId") || '{}')).subscribe(data => {
+        this.dashboardDataContainer = <DashboardDataContainer>data;
+      })
     })
   }
   data = {
@@ -51,5 +52,16 @@ export class DashboardComponent implements OnInit {
       }, 3000);
     }
   }
-
+  getColor(percentage: number): string {
+    var color: string = "";
+    if (percentage > 1 && percentage < 10)
+      color = "danger"
+    if (percentage > 10 && percentage < 30)
+      color = "primary"
+    if (percentage > 30 && percentage < 70)
+      color = "success"
+    if (percentage > 70)
+      color = "success"
+    return color;
+  }
 }
