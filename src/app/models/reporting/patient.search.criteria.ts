@@ -1,5 +1,5 @@
 export class PatientSearchCriteria {
-    type: string |null;
+    type: string |null = null;
     entityNames: string[];
     doctorName: string | null;
     doctorNPI: string |null;
@@ -7,4 +7,5 @@ export class PatientSearchCriteria {
     endDate_date: Date | null;
     startDate: number;
     endDate: number;
+    clinicId:number|null;
 }

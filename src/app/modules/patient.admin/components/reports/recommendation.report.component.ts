@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import * as moment from 'moment';
 import { PatientSearchCriteria } from 'src/app/models/reporting/patient.search.criteria';
+import { ClinicService } from '../../services/clinic/clinic.service';
 import { ISearchResult, PatientReportingService } from '../../services/patient.reporting.service';
 import entityValues from './_entity.values';
+interface PateintSourceSelects {
+  name: string | null,
+  value: string | null;
+}
 
 @Component({
   selector: 'app-recommendation.report',
@@ -15,9 +20,21 @@ export class RecommendationReportComponent implements OnInit {
   errorMsg: string;
   patientSearchCriteria: PatientSearchCriteria = new PatientSearchCriteria();
   result: ISearchResult;
-  constructor(private patientReportingService: PatientReportingService) { }
+  constructor(private patientReportingService: PatientReportingService,
+    private clinicService: ClinicService) { }
 
   entityValues = entityValues;
+  pateintSourceSelects: PateintSourceSelects[] = [
+    {
+      name: "Doctor",
+      value: "Doctor"
+    },
+    {
+      name: "Entity",
+      value: "Entity"
+    }
+
+  ]
   readonly columns: (string | IColumn)[] = [
     {
       key: 'firstName',
@@ -81,7 +98,6 @@ export class RecommendationReportComponent implements OnInit {
       resultCount: 0,
       result: []
     }
-    console.log(this.result.result.length)
   }
   search() {
     this.formatDate();
@@ -96,29 +112,35 @@ export class RecommendationReportComponent implements OnInit {
       this.patientSearchCriteria.endDate = Number(moment(this.patientSearchCriteria.endDate_date).startOf('day').format("x"))
   }
 
+
   private requestSearchService() {
-    console.log(this.patientSearchCriteria.startDate)
-    if (this.patientSearchCriteria.type !== '' || (this.patientSearchCriteria.startDate > 0 && this.patientSearchCriteria.endDate > 0)) {
+    if (!this.checkEmptyOfpatientSearchCriteria()) {
       this.searchInputNotValid = false
-      if (this.patientSearchCriteria.doctorName === '')
-        this.patientSearchCriteria.doctorName = null;
-      if (this.patientSearchCriteria.doctorNPI === '')
-        this.patientSearchCriteria.doctorNPI = null;
-      if (this.patientSearchCriteria.type === '')
-        this.patientSearchCriteria.type = null;
-      console.log(JSON.stringify(this.patientSearchCriteria))
-      this.patientReportingService.search(this.patientSearchCriteria).subscribe(
-        (response) => {
-          this.result = <ISearchResult>response;
-        },
-        (error) => {
-          this.errorMsg = 'Server is down please contact the administrator';
-          this.searchInputNotValid = true
-        });
+      this.privateFillEmptyFieldsInSearchCriteria();
+      this.clinicService.selectedAdminClinic$.subscribe(id => {
+        this.patientSearchCriteria.clinicId = id;
+        this.patientReportingService.search(this.patientSearchCriteria).subscribe(
+          (response) => {
+            this.result = <ISearchResult>response;
+          },
+          (error) => {
+            this.errorMsg = 'Server is down please contact the administrator';
+            this.searchInputNotValid = true
+            this.result = {
+              resultCount: 0,
+              result: []
+            }
+          });
+
+      })
     }
     else {
-      this.errorMsg = 'Please select patient Source Doctor/Entity input';
+      this.errorMsg = 'Please select patient Source Doctor/Entity input Or Date Range';
       this.searchInputNotValid = true
+      this.result = {
+        resultCount: 0,
+        result: []
+      }
     }
   }
   exportResult() {
@@ -135,5 +157,30 @@ export class RecommendationReportComponent implements OnInit {
       (error) => {
         console.log(error)
       });
+  }
+
+  privateFillEmptyFieldsInSearchCriteria() {
+
+    if (this.patientSearchCriteria.doctorName === '')
+      this.patientSearchCriteria.doctorName = null;
+    if (this.patientSearchCriteria.doctorNPI === '')
+      this.patientSearchCriteria.doctorNPI = null;
+    if (this.patientSearchCriteria.type === '' || this.patientSearchCriteria.type === undefined)
+      this.patientSearchCriteria.type = null;
+
+    console.log("this.patientSearchCriteria.type " + this.patientSearchCriteria.type)
+  }
+
+  private checkEmptyOfpatientSearchCriteria() {
+    var source: boolean = this.patientSearchCriteria.type === '' || this.patientSearchCriteria.type === null || this.patientSearchCriteria.type === 'null';
+    var dateRange: boolean =
+      (this.patientSearchCriteria.startDate === undefined || this.patientSearchCriteria.startDate === null || Number.isNaN(this.patientSearchCriteria.startDate))
+      ||
+      (this.patientSearchCriteria.endDate === undefined || this.patientSearchCriteria.endDate === null || Number.isNaN(this.patientSearchCriteria.endDate))
+    console.log(source + '  '+dateRange)
+    if (source && dateRange)
+      return true
+    else
+      return false;
   }
 }
