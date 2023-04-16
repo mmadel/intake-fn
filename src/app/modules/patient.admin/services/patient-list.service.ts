@@ -72,7 +72,7 @@ export class PatientListService {
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
     return this.clinicService.selectedClinic$.pipe(
-      mergeMap(clinicId =>  
+      switchMap(clinicId =>  
         this.httpClient
           .get<IData>(this.baseUrl + "/" + clinicId, options)
           .pipe(

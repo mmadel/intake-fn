@@ -7,4 +7,5 @@ export interface DashboardDataContainer {
     totalNumberOfCommercialPatient: number;
     genderContainer: GenderContainer;
     patientSourceContainer: PatientSourceContainer;
+    clinicsData: Map<string, number[]>
 }

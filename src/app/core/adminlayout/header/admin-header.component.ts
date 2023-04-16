@@ -41,8 +41,11 @@ export class AdminHeaderComponent extends HeaderComponent {
       response.body?.forEach(element => {
         this.clinics.push(element);
       });
-
-      this.clinicService.selectedClinic$.next(this.clinics[0].id)
+      var userRole: string = localStorage.getItem("userRole") || '{}';
+      if (userRole === 'USER')
+        this.clinicService.selectedClinic$.next(this.clinics[0].id)
+      if (userRole === 'ADMIN')
+        this.clinicService.selectedAdminClinic$.next(this.clinics[0].id)
     })
   }
 
@@ -55,7 +58,10 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.router.navigateByUrl('/login');
   }
   setSelectedClinic(event: any) {
-    console.log(event.target.value)
-    this.clinicService.selectedClinic$.next(event.target.value);
+    var userRole: string = localStorage.getItem("userRole") || '{}';
+    if (userRole === 'USER')
+      this.clinicService.selectedClinic$.next(event.target.value)
+    if (userRole === 'ADMIN')
+      this.clinicService.selectedAdminClinic$.next(event.target.value)
   }
 }

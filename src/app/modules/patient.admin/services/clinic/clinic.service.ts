@@ -11,6 +11,7 @@ export class ClinicService {
   private clinicUrl = environment.baseURL + 'clinic'
   private userUrl = environment.baseURL + 'user'
   public selectedClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  public selectedAdminClinic$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   constructor(private http: HttpClient) { }
 
   create(clinic: Clinic) {

@@ -49,7 +49,12 @@ export class AuthInterceptor implements HttpInterceptor {
         headers = headers.append('Content-Type', 'application/json')
       return request.clone({ headers });
     }
-
+    request.clone({
+      setHeaders: {
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
+      }
+    });
     return request;
   }
 
