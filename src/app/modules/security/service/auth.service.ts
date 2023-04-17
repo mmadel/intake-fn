@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { adminNavItems } from 'src/app/core/adminlayout/_adminnav';
 import { userNavItems } from 'src/app/core/adminlayout/_usernav';
 import { environment } from 'src/environments/environment';
+import { LocalService } from '../../common';
 import { LoginResponse } from '../model/login.response';
 import { User } from '../model/user';
 
@@ -16,7 +17,8 @@ export class AuthService {
   private authUrl = environment.baseURL + 'auth'
   private userUrl = environment.baseURL + 'user'
   public user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  constructor(private http: HttpClient, handler: HttpBackend) {
+  constructor(private http: HttpClient, handler: HttpBackend
+    , private localService: LocalService) {
     this.http = new HttpClient(handler);
   }
   login(form: { userName: string | null; password: string | null }): Observable<LoginResponse> {
@@ -24,16 +26,16 @@ export class AuthService {
       .pipe(
         tap(response => {
           this.setToken('token', response.accessToken);
-          localStorage.setItem('userId', response.userId?.toString() || '{}');
-          localStorage.setItem('userRole', response.userRole || '{}');
+          this.localService.saveData('userId', response.userId?.toString() || '{}')
+          this.localService.saveData('userRole', response.userRole || '{}')
         }),
       );
   }
   private setToken(key: string, token: string): void {
-    localStorage.setItem(key, token);
+    this.localService.saveData(key, token)
   }
   fetchCurrentUser(): Observable<User> {
-    var userId: string | null = localStorage.getItem('userId');
+    var userId: string | null = this.localService.getData('userId');
     return this.http.get<User>(`${this.userUrl}/find/loggedIn/` + userId)
       .pipe(
         tap(user => {
@@ -48,7 +50,7 @@ export class AuthService {
           return of(user);
         }
 
-        const token = localStorage.getItem('token');
+        const token = this.localService.getData('token');
         // if there is token then fetch the current user
         if (token) {
           return this.fetchCurrentUser();
@@ -60,8 +62,9 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
+    this.localService.removeData('token');
+    this.localService.removeData('userId');
+    this.localService.removeData('userRole');
     this.user$.next(null);
   }
 }

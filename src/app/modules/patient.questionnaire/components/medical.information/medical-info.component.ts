@@ -7,6 +7,7 @@ import { RecommendationDoctor } from 'src/app/models/questionnaire/medical/recom
 import { RecommendationEntity } from 'src/app/models/questionnaire/medical/recommendation.entity';
 import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
+import { LocalService } from 'src/app/modules/common';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 @Component({
   selector: 'app-medical-info',
@@ -21,7 +22,7 @@ export class MedicalInfoComponent implements OnInit {
   addressInfoRequired: AddressInfoRequired
   @Input() requiredFields: MedicalInfoRequired;
   entityValues = entityValues;
-  constructor() { }
+  constructor(private localService:LocalService) { }
 
   referringDoctorQChange(val: string) {
     this.isReferringDoctor = val;
@@ -53,8 +54,8 @@ export class MedicalInfoComponent implements OnInit {
     val === 'yes' ? this.medicalQuestionnaireInfo.familyResultSubmission = true : this.medicalQuestionnaireInfo.familyResultSubmission = false;
   }
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+    if (this.localService.getData('patient') !== null) {
+      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
       if (pateint.medicalQuestionnaireInfo !== undefined) {
         this.medicalQuestionnaireInfo = pateint.medicalQuestionnaireInfo;
         pateint.medicalQuestionnaireInfo.isDoctorRecommended ? this.isReferringDoctor = 'yes' : this.isReferringDoctor = 'no';

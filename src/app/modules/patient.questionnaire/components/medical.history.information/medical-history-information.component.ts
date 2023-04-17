@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalHistroyInformation } from 'src/app/models/questionnaire/medical/history/medical.history.info';
 import { MedicalHistoryInfoRequired } from 'src/app/models/validation/medical.history.info.required';
+import { LocalService } from 'src/app/modules/common';
 import { IPatientCondition } from './patient.condition';
 
 @Component({
@@ -16,12 +17,12 @@ export class MedicalHistoryInformationComponent implements OnInit {
   isMetalImplantation: string = '';
   isPacemaker: string = ''
   patientConditions: IPatientCondition[];
-  constructor() { }
+  constructor(private localService:LocalService) { }
 
   ngOnInit(): void {
     this.createPatientConditions();
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+    if (this.localService.getData('patient') !== null) {
+      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
       if (pateint.medicalHistoryInformation !== undefined) {
         this.model = pateint.medicalHistoryInformation;
         pateint.medicalHistoryInformation.metalImplantation ? this.isMetalImplantation = 'yes' : this.isMetalImplantation = 'no'

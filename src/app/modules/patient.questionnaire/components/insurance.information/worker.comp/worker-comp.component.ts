@@ -5,6 +5,7 @@ import { Patient } from 'src/app/models/patient/patient.model';
 import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
 import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
+import { LocalService } from 'src/app/modules/common';
 
 @Component({
   selector: 'app-worker-comp',
@@ -15,11 +16,11 @@ export class WorkerCompComponent implements OnInit {
   model: WrokerComp
   requiredFields: AddressInfoRequired;
   @Input() insurnaceCompInfoRequired: InsurnaceCompInfoRequired;
-  constructor() { }
+  constructor(private localService:LocalService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+    if (this.localService.getData('patient') !== null) {
+      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
       if (pateint.insuranceQuestionnaireInfo !== undefined && pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault !== undefined) {
         this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault;
       } else {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalService } from 'src/app/modules/common';
 
 @Component({
   selector: 'app-submition',
@@ -8,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class SubmitionComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private localService: LocalService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
+    if (this.localService.getData('patient') !== null) {
       this.router.navigate(['/questionnaire/add']);
     }
   }

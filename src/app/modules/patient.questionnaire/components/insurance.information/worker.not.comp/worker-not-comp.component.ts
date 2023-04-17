@@ -6,6 +6,7 @@ import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/pati
 import { SecondaryInsurance } from 'src/app/models/questionnaire/Insurance/secondary.Insurance';
 import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
 import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurnace.commerial.info.required';
+import { LocalService } from 'src/app/modules/common';
 import requiredFields from '../../../service/_patient.require.fields.service';
 
 @Component({
@@ -18,11 +19,11 @@ export class WorkerNotCompComponent implements OnInit {
   isSecondaryInsurance: string;
   isMedicareCoverage: string;
   @Input() insurnacecommerialInfoRequired:InsurnacecommerialInfoRequired
-  constructor() { }
+  constructor(private localService:LocalService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+    if (this.localService.getData('patient') !== null) {
+      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
       if (pateint.insuranceQuestionnaireInfo !== undefined && pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial !== undefined) {
         this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial;
         

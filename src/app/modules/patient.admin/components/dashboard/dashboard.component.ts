@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
+import { LocalService } from 'src/app/modules/common';
 import { ClinicService } from '../../services/clinic/clinic.service';
 import { DashboardService } from '../../services/dashboard.service';
 
@@ -10,12 +11,13 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   dashboardDataContainer: DashboardDataContainer;
-  constructor(private dashboardService: DashboardService, private clinicService: ClinicService) { }
+  constructor(private dashboardService: DashboardService, private clinicService: ClinicService
+    , private localService: LocalService) { }
 
   ngOnInit(): void {
-    this.clinicService.selectedAdminClinic$.subscribe(clinicId => {
-      if (clinicId !== null)
-        this.dashboardService.getDate(clinicId, Number(localStorage.getItem("userId") || '{}')).subscribe(data => {
+    this.clinicService.selectedClinic$.subscribe(clinicId => {
+      if ( clinicId !== null)
+        this.dashboardService.getDate(clinicId, Number(this.localService.getData("userId") || '{}')).subscribe(data => {
           this.dashboardDataContainer = <DashboardDataContainer>data;
         })
     })

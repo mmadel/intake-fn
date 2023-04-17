@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { Agreements } from 'src/app/models/patient/agreements/agreements.model';
 import { Patient } from 'src/app/models/patient/patient.model';
+import { LocalService } from 'src/app/modules/common';
 @Component({
   selector: 'app-aggreements',
   templateUrl: './aggreements.component.html',
@@ -12,11 +13,12 @@ export class AggreementsComponent implements OnInit {
   patientName: string = ''
   model: Agreements
   nowDate = moment().format("MM.DD.YYYY");
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer
+    ,private localService:LocalService) { }
   
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+    if (this.localService.getData('patient') !== null) {
+      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
       this.constructorPatientName(pateint);
       if (pateint.agreements !== undefined) {
         this.model = pateint.agreements;

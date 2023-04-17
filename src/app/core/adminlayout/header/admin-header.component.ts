@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 import { result } from 'lodash';
 import { mergeMap, tap } from 'rxjs';
+import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';
 import { AuthService } from 'src/app/modules/security/service/auth.service';
@@ -33,19 +34,16 @@ export class AdminHeaderComponent extends HeaderComponent {
   });
 
   constructor(private _classToggler: ClassToggleService, private authService: AuthService, private router: Router
-    , private clinicService: ClinicService) {
+    , private clinicService: ClinicService
+    , private localService: LocalService) {
     super();
   }
   ngOnInit(): void {
-    this.clinicService.getByUserId(Number(localStorage.getItem('userId') || {})).subscribe(response => {
+    this.clinicService.getByUserId(Number(this.localService.getData('userId') || {})).subscribe(response => {
       response.body?.forEach(element => {
         this.clinics.push(element);
       });
-      var userRole: string = localStorage.getItem("userRole") || '{}';
-      if (userRole === 'USER')
-        this.clinicService.selectedClinic$.next(this.clinics[0].id)
-      if (userRole === 'ADMIN')
-        this.clinicService.selectedAdminClinic$.next(this.clinics[0].id)
+      this.clinicService.selectedClinic$.next(this.clinics[0].id)
     })
   }
 
@@ -58,10 +56,6 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.router.navigateByUrl('/login');
   }
   setSelectedClinic(event: any) {
-    var userRole: string = localStorage.getItem("userRole") || '{}';
-    if (userRole === 'USER')
-      this.clinicService.selectedClinic$.next(event.target.value)
-    if (userRole === 'ADMIN')
-      this.clinicService.selectedAdminClinic$.next(event.target.value)
+    this.clinicService.selectedClinic$.next(event.target.value)
   }
 }

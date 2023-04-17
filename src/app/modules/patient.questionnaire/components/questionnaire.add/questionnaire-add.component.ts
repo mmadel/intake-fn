@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Patientcache } from 'src/app/caching/patient.caching';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
+import { LocalService } from 'src/app/modules/common';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
 import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
@@ -56,7 +56,8 @@ export class QuestionnaireAddComponent implements OnInit {
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
-    private router: Router) { }
+    private router: Router,
+    private localService: LocalService) { }
 
   ngOnInit(): void {
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
@@ -107,7 +108,7 @@ export class QuestionnaireAddComponent implements OnInit {
     }
   }
   proceedToNextStep(modelName: string) {
-    Patientcache.cache(modelName, this.patient)
+    this.cachePatient(modelName, this.patient)
     this.calculatePercentage(this.counter, 'next')
     this.counter++;
     this.scrollUp();
@@ -132,7 +133,7 @@ export class QuestionnaireAddComponent implements OnInit {
   }
 
   submit() {
-    var pateint: string = localStorage.getItem('patient') || '';
+    var pateint: string = this.localService.getData('patient') || '';
     this.patientService.createPatient(pateint).subscribe(
       (response) => {
         console.log('this.patient.files ' + this.patient.files)
@@ -141,7 +142,7 @@ export class QuestionnaireAddComponent implements OnInit {
             console.log('uploaded..')
           },
           (error) => { console.log(error); });
-        localStorage.removeItem('patient');
+        this.localService.removeData('patient');
         this.router.navigate(['/questionnaire/submitted']);
       },
       (error) => { console.log(error); });
@@ -162,5 +163,24 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patient.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent?.workerCompComponent.model
     if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
       this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
+  }
+
+  cachePatient(modelName: string, pateintHolder: Patient) {
+    var patient: Patient = new Patient();
+    patient = JSON.parse(this.localService.getData('patient') || '{}');
+    if (modelName === 'basic')
+      patient.basicInfo = pateintHolder.basicInfo;
+    if (modelName === 'address')
+      patient.addressInfo = pateintHolder.addressInfo;
+    if (modelName === 'medical')
+      patient.medicalQuestionnaireInfo = pateintHolder.medicalQuestionnaireInfo
+    if (modelName === 'insurance')
+      patient.insuranceQuestionnaireInfo = pateintHolder.insuranceQuestionnaireInfo;
+    if (modelName === 'medical-history')
+      patient.medicalHistoryInformation = pateintHolder.medicalHistoryInformation;
+    if (modelName === 'aggreements')
+      patient.agreements = pateintHolder.agreements;
+
+    this.localService.saveData('patient', JSON.stringify(patient));
   }
 }

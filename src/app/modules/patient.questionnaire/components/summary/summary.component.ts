@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import { Patient } from 'src/app/models/patient/patient.model';
+import { LocalService } from 'src/app/modules/common';
 
 @Component({
   selector: 'app-summary',
@@ -10,11 +11,11 @@ import { Patient } from 'src/app/models/patient/patient.model';
 })
 export class SummaryComponent implements OnInit {
   pateint: Patient
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer , private localService:LocalService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      this.pateint = JSON.parse(localStorage.getItem('patient') || '{}')
+    if (this.localService.getData('patient') !== null) {
+      this.pateint = JSON.parse(this.localService.getData('patient') || '{}')
     }
   }
 

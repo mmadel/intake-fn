@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import * as moment from 'moment';
 import { PatientSearchCriteria } from 'src/app/models/reporting/patient.search.criteria';
+import { LocalService } from 'src/app/modules/common';
 import { ClinicService } from '../../services/clinic/clinic.service';
 import { ISearchResult, PatientReportingService } from '../../services/patient.reporting.service';
 import entityValues from './_entity.values';
@@ -21,7 +22,8 @@ export class RecommendationReportComponent implements OnInit {
   patientSearchCriteria: PatientSearchCriteria = new PatientSearchCriteria();
   result: ISearchResult;
   constructor(private patientReportingService: PatientReportingService,
-    private clinicService: ClinicService) { }
+    private clinicService: ClinicService
+    , private localService: LocalService) { }
 
   entityValues = entityValues;
   pateintSourceSelects: PateintSourceSelects[] = [
@@ -116,8 +118,8 @@ export class RecommendationReportComponent implements OnInit {
   private requestSearchService() {
     if (!this.checkEmptyOfpatientSearchCriteria()) {
       this.searchInputNotValid = false
-      this.privateFillEmptyFieldsInSearchCriteria();
-      this.clinicService.selectedAdminClinic$.subscribe(id => {
+      this.FillEmptyFieldsInSearchCriteria();
+      this.clinicService.selectedClinic$.subscribe(id => {
         this.patientSearchCriteria.clinicId = id;
         this.patientReportingService.search(this.patientSearchCriteria).subscribe(
           (response) => {
@@ -131,7 +133,6 @@ export class RecommendationReportComponent implements OnInit {
               result: []
             }
           });
-
       })
     }
     else {
@@ -159,16 +160,13 @@ export class RecommendationReportComponent implements OnInit {
       });
   }
 
-  privateFillEmptyFieldsInSearchCriteria() {
-
-    if (this.patientSearchCriteria.doctorName === '')
-      this.patientSearchCriteria.doctorName = null;
-    if (this.patientSearchCriteria.doctorNPI === '')
-      this.patientSearchCriteria.doctorNPI = null;
-    if (this.patientSearchCriteria.type === '' || this.patientSearchCriteria.type === undefined)
-      this.patientSearchCriteria.type = null;
-
-    console.log("this.patientSearchCriteria.type " + this.patientSearchCriteria.type)
+  private FillEmptyFieldsInSearchCriteria() {
+    if (this.patientSearchCriteria.type === 'Doctor')
+      this.patientSearchCriteria.entityNames = null
+    if (this.patientSearchCriteria.type === 'Entity') {
+      this.patientSearchCriteria.doctorName = null
+      this.patientSearchCriteria.doctorNPI = null
+    }
   }
 
   private checkEmptyOfpatientSearchCriteria() {
@@ -177,7 +175,6 @@ export class RecommendationReportComponent implements OnInit {
       (this.patientSearchCriteria.startDate === undefined || this.patientSearchCriteria.startDate === null || Number.isNaN(this.patientSearchCriteria.startDate))
       ||
       (this.patientSearchCriteria.endDate === undefined || this.patientSearchCriteria.endDate === null || Number.isNaN(this.patientSearchCriteria.endDate))
-    console.log(source + '  '+dateRange)
     if (source && dateRange)
       return true
     else

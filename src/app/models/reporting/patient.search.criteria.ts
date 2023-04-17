@@ -1,6 +1,6 @@
 export class PatientSearchCriteria {
     type: string |null = null;
-    entityNames: string[];
+    entityNames: string[] | null;
     doctorName: string | null;
     doctorNPI: string |null;
     startDate_date: Date | null;
