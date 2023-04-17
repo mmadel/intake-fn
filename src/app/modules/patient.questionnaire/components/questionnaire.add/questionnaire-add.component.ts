@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { LocalService } from 'src/app/modules/common';
@@ -27,6 +27,7 @@ import { UploadPhotoComponent } from '../upload.photos/upload-photo.component';
   styleUrls: ['./questionnaire-add.component.css']
 })
 export class QuestionnaireAddComponent implements OnInit {
+  clinicId: number;
   cards: { id: number, name: string }[] = [
     { "id": 1, "name": "Basic Information" },
     { "id": 2, "name": "Address Information" },
@@ -57,11 +58,19 @@ export class QuestionnaireAddComponent implements OnInit {
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
     private router: Router,
-    private localService: LocalService) { }
+    private localService: LocalService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
       this.patientFields = <PatientRequiredFields>patientFields;
+    })
+    this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+    this.router.navigate([], {
+      queryParams: {
+        'clinicId': null,
+      },
+      queryParamsHandling: 'merge'
     })
   }
 
@@ -133,8 +142,9 @@ export class QuestionnaireAddComponent implements OnInit {
   }
 
   submit() {
-    var pateint: string = this.localService.getData('patient') || '';
-    this.patientService.createPatient(pateint).subscribe(
+    var pateint: Patient = JSON.parse(this.localService.getData('patient') || '');
+    pateint.clinicId = this.clinicId
+    this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
       (response) => {
         console.log('this.patient.files ' + this.patient.files)
         this.patientService.upload(this.patient.files, <number>response.body).subscribe(

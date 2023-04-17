@@ -19,6 +19,7 @@ interface UserRole {
   styleUrls: ['./user-creation.component.css']
 })
 export class UserCreationComponent implements OnInit {
+  public myAngularxQrCode: string = "http://localhost:4200/#/questionnaire/add/clinicId/30303";
   countries: Countries[] = countries;
   states: string[] = states;
   userRoles: UserRole[] = [

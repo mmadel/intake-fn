@@ -13,4 +13,5 @@ export class Patient {
     medicalHistoryInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
     files: FormData = new FormData();
     agreements: Agreements = new Agreements();
+    clinicId: number | null;
 }

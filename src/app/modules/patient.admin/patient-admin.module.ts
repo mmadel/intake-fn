@@ -45,6 +45,7 @@ import {
 
 
 } from '@coreui/angular-pro';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import {
     MultiSelectModule,
     WidgetModule,
     ProgressModule,
-    PatientCommonModule
+    PatientCommonModule,
+    QRCodeModule
   ]
 })
 export class PatientAdminModule { }
