@@ -46,14 +46,23 @@ export class AuthInterceptor implements HttpInterceptor {
 
   private addAuthorizationHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
     let headers: HttpHeaders = new HttpHeaders();
-    var permitedURLS: string[] = new Array();
+    var securedURLS: string[] = new Array();
+    var notSecuredURLS: string[] = new Array();
+    console.log(JSON.stringify(UserRoleURLS))
     UserRoleURLS.forEach(element => {
-      if (element.name === this.localService.getData('userRole'))
-        permitedURLS = element.urls
+      if (this.localService.getData('userRole') !== undefined &&
+        element.name === this.localService.getData('userRole'))
+        securedURLS = element.urls
+      if (element.name === 'PERMITTED')
+        notSecuredURLS = element.urls;
     });
-    console.log(JSON.stringify(permitedURLS))
-    console.log(request.url)
-    if (_.some(permitedURLS, (el) => _.includes(request.url, el))) {
+    if (_.some(notSecuredURLS, (el) => _.includes(request.url, el))){
+      console.log('not secured')
+      return request;
+    }
+      
+    if (_.some(securedURLS, (el) => _.includes(request.url, el))) {
+      console.log('not secured')
       if (token) {
         headers = headers.append('Authorization', `Bearer ${token}`)
         if (request.method === 'POST' || "PUT")
@@ -68,6 +77,7 @@ export class AuthInterceptor implements HttpInterceptor {
       });
       return request;
     }
+    console.log('rejected')
     return Observable.create(EMPTY);;
   }
 
