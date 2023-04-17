@@ -48,7 +48,7 @@ export class AuthInterceptor implements HttpInterceptor {
     let headers: HttpHeaders = new HttpHeaders();
     var securedURLS: string[] = new Array();
     var notSecuredURLS: string[] = new Array();
-    console.log(JSON.stringify(UserRoleURLS))
+    console.log('request.url ' + request.url)
     UserRoleURLS.forEach(element => {
       if (this.localService.getData('userRole') !== undefined &&
         element.name === this.localService.getData('userRole'))
@@ -56,13 +56,14 @@ export class AuthInterceptor implements HttpInterceptor {
       if (element.name === 'PERMITTED')
         notSecuredURLS = element.urls;
     });
-    if (_.some(notSecuredURLS, (el) => _.includes(request.url, el))){
+    console.log(JSON.stringify('securedURLS ' + securedURLS))
+    if (_.some(notSecuredURLS, (el) => _.includes(request.url, el))) {
       console.log('not secured')
       return request;
     }
-      
+
     if (_.some(securedURLS, (el) => _.includes(request.url, el))) {
-      console.log('not secured')
+      console.log('secured')
       if (token) {
         headers = headers.append('Authorization', `Bearer ${token}`)
         if (request.method === 'POST' || "PUT")

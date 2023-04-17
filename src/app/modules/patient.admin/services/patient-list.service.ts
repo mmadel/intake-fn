@@ -74,7 +74,7 @@ export class PatientListService {
     return this.clinicService.selectedClinic$.pipe(
       switchMap(clinicId =>  
         this.httpClient
-          .get<IData>(this.baseUrl + "/" + clinicId, options)
+          .get<IData>(this.baseUrl + "/find/clinic/" + clinicId, options)
           .pipe(
             retry({ count: 1, delay: 100000, resetOnSuccess: true }),
             catchError(this.handleHttpError)
