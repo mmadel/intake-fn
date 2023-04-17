@@ -1,5 +1,5 @@
-<c-accordion [alwaysOpen]="false" [flush]="false" class="shadow">
-    <c-accordion-item #item0="cAccordionItem" [visible]="false">
+<c-accordion [alwaysOpen]="false" [flush]="false" class="shadow" >
+    <c-accordion-item #item0="cAccordionItem" [visible]="false" >
         <ng-template cTemplateId="accordionHeaderTemplate">
             <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton cBgColor="info">
                 <h5>Release of Information</h5>
@@ -8,7 +8,7 @@
         <ng-template cTemplateId="accordionBodyTemplate">
             <c-row>
                 <c-col xs="auto">
-                    <div [innerHTML]="getReleaseInformationParagraph()" cBgColor="info" class="accordion-body"
+                    <div *ngIf="releaseInformationParagraph" [innerHTML]="getReleaseInformationParagraph()" cBgColor="info" class="accordion-body"
                         gradient="true">
                     </div>
                 </c-col>
@@ -71,7 +71,7 @@
     </c-accordion-item>
     <c-accordion-item #item3="cAccordionItem" [visible]="false">
         <ng-template cTemplateId="accordionHeaderTemplate">
-            <button (click)="item3.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
+            <button (click)="item3.toggleItem()" [collapsed]="!item3.visible" cAccordionButton>
                 <h5>Assignment of Insurance Beneﬁts</h5>
             </button>
         </ng-template>
