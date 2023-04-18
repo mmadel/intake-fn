@@ -6,6 +6,7 @@ import { LocalService } from 'src/app/modules/common';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
 import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
+import { PatientAggreementsValidator } from 'src/app/validators/patient.validator/patient.aggreements.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
 import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
 import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/patient.medical.history.validator';
@@ -14,6 +15,7 @@ import { PatientValidator } from 'src/app/validators/patient.validator/patient.v
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
+import { AggreementsComponent } from '../aggreements/aggreements.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
 import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
@@ -39,7 +41,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 7;
+  counter: number = 1;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -54,6 +56,7 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(MedicalHistoryInformationComponent) medicalHistoryInformationComponent: MedicalHistoryInformationComponent;
   @ViewChild(InsuranceInformationComponent) insuranceInformationComponent: InsuranceInformationComponent;
   @ViewChild(UploadPhotoComponent) uploadPhotoComponent: UploadPhotoComponent;
+  @ViewChild(AggreementsComponent) aggreementsComponent: AggreementsComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -107,6 +110,9 @@ export class QuestionnaireAddComponent implements OnInit {
     }
     if (patientModel === 'upload') {
       this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
+    }
+    if (patientModel === 'aggreements') {
+      this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     }
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
@@ -162,6 +168,7 @@ export class QuestionnaireAddComponent implements OnInit {
     this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
+    this.patient.agreements = this.aggreementsComponent?.model;
     this.patient.files = this.uploadPhotoComponent ? this.uploadPhotoComponent.imageFormData : this.patient.files;
     this.fillInsuranceInformationModel()
 

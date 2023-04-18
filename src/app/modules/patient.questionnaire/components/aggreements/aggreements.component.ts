@@ -43,25 +43,8 @@ export class AggreementsComponent implements OnInit {
     this.patientService.getAgreement().subscribe(response => {
       this.agreementHolder = response.body
       this.agreementHolder?.forEach(element => {
-        if (element.agreementName === 'ReleaseInformation')
-          this.releaseInformationParagraph = element.agreementText;
-        if (element.agreementName === 'FinancialResponsibility')
-          this.FinancialResponsibilityParagraph = element.agreementText;
-        if (element.agreementName === 'FinancialAgreement')
-          this.FinancialAgreementParagraph = element.agreementText;
-        if (element.agreementName === 'Insurance')
-          this.InsuranceAgreementParagraph = element.agreementText;
-        if (element.agreementName === 'HIPAAAcknowledgement')
-          this.HIPAAAcknowledgementParagraph = element.agreementText;
-        if (element.agreementName === 'Cupping')
-          this.CuppingParagraph = element.agreementText;
-        if (element.agreementName === 'Pelvic')
-          this.PelvicParagraph = element.agreementText;
-        if (element.agreementName === 'PhotoVideo')
-          this.PhotoVideoParagraph = element.agreementText;
-
+        this.fillAggrement(element);
       });
-
     })
   }
   getReleaseInformationParagraph() {
@@ -123,5 +106,25 @@ export class AggreementsComponent implements OnInit {
     I acknowledge that I am <b>${this.patientName}</b>  over the age of 18 <br/><br/>Date: ${this.nowDate}      signature:<b>${this.patientName}</b></p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+
+  fillAggrement(element: AgreementHolder) {
+    if (element.agreementName === 'ReleaseInformation')
+      this.releaseInformationParagraph = element.agreementText;
+    if (element.agreementName === 'FinancialResponsibility')
+      this.FinancialResponsibilityParagraph = element.agreementText;
+    if (element.agreementName === 'FinancialAgreement')
+      this.FinancialAgreementParagraph = element.agreementText;
+    if (element.agreementName === 'Insurance')
+      this.InsuranceAgreementParagraph = element.agreementText;
+    if (element.agreementName === 'HIPAAAcknowledgement')
+      this.HIPAAAcknowledgementParagraph = element.agreementText;
+    if (element.agreementName === 'Cupping')
+      this.CuppingParagraph = element.agreementText;
+    if (element.agreementName === 'Pelvic')
+      this.PelvicParagraph = element.agreementText;
+    if (element.agreementName === 'PhotoVideo')
+      this.PhotoVideoParagraph = element.agreementText;
+
   }
 }

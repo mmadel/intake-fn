@@ -2,19 +2,35 @@ import * as _ from "lodash";
 import { Agreements } from "src/app/models/patient/agreements/agreements.model";
 import { PropertyValidator } from "../PropertyValidator";
 import { ValidatorContainer } from "../ValidatorContainer";
+import { PatientValidator } from "./patient.validator";
 
-export class PatientAggreementsValidator {
-    model: Agreements = new Agreements();
-    public validate(): ValidatorContainer {
-        var validatorContainer: ValidatorContainer = { isValid: true, missing: new Array(), wrong: new Array() }
-        this.missingFields(validatorContainer)
-        this.inCorrectDate(validatorContainer);
-        return validatorContainer;
+export interface AggrementInfoRequired {
+    ReleaseInformation: boolean,
+    FinancialResponsibility: boolean,
+    FinancialAgreement: boolean,
+    Insurance: boolean
+    HIPAAAcknowledgement: boolean,
+    Cupping: boolean,
+    Pelvic: boolean,
+    PhotoVideo: boolean
+}
+export class PatientAggreementsValidator extends PatientValidator {
+    pateintAgreements: Agreements;
+    requiredFields: AggrementInfoRequired = {
+        ReleaseInformation: true,
+        FinancialResponsibility: true,
+        FinancialAgreement: true,
+        Insurance: true,
+        HIPAAAcknowledgement: false,
+        Cupping: false,
+        Pelvic: false,
+        PhotoVideo: false
     }
-    public setModel(model: Agreements) {
-        this.model = model;
+    constructor(pateintAgreements: Agreements) {
+        super();
+        this.pateintAgreements = pateintAgreements
     }
-    private missingFields(validatorContainer: ValidatorContainer) {
+    protected missingFields(validatorContainer: ValidatorContainer) {
         var validators: PropertyValidator[] = new Array();
         this.validateInfo(validators);
         if (validators.length > 0) {
@@ -24,25 +40,26 @@ export class PatientAggreementsValidator {
             });
         }
     }
-    private inCorrectDate(validatorContainer: ValidatorContainer) {
+    protected inCorrectDate(validatorContainer: ValidatorContainer) { }
 
-    }
-    private validateInfo(validator: PropertyValidator[]) {
-        if (!this.model.acceptReleaseAgreements)
+    protected validateInfo(validator: PropertyValidator[]) {
+        if (!this.pateintAgreements.acceptReleaseAgreements)
             validator.push({ property: "Release of Information", message: '' });
-        if (!this.model.acceptFinancialResponsibilityAgreements)
+        if (!this.pateintAgreements.acceptFinancialResponsibilityAgreements)
             validator.push({ property: "Financial Responsibility Agreement by Other than Patient’s Legal Representative", message: '' });
-        if (!this.model.acceptFinancialAgreementAgreements)
+        if (!this.pateintAgreements.acceptFinancialAgreementAgreements)
             validator.push({ property: "Financial Agreement", message: '' });
-        if (!this.model.acceptInsuranceAgreement)
+        if (!this.pateintAgreements.acceptInsuranceAgreement)
             validator.push({ property: "Assignment of Insurance Beneﬁts", message: '' });
-        if (!this.model.acceptHIPAAAgreements)
-            validator.push({ property: "HIPAA Acknowledgement", message: '' });
-        if (!this.model.acceptCuppingAgreements)
-            validator.push({ property: "Cupping Consent Form", message: '' });
-        if (!this.model.acceptPelvicAgreements)
-            validator.push({ property: "Pelvic Examination & Treatment Consent Form", message: '' });
-        if (!this.model.acceptPhotoVideoAgreements )
-            validator.push({ property: "Photo/Video Release Form", message: '' });
+    }
+    isRequiredField(name: string): boolean {
+        var field: boolean = false;
+        Object.entries(this.requiredFields)
+            .forEach(([key, value]) => {
+                if (key === name) {
+                    field = value;
+                }
+            })
+        return field;
     }
 }
