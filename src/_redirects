@@ -3,7 +3,7 @@
 /intake-service/api/requires/fields/retrieve/basic https://patientintake-app.herokuapp.com/intake-service/api/requires/fields/retrieve/basic 200
 
 /intake-service/api/patient/create https://patientintake-app.herokuapp.com/intake-service/api/patient/create 200
-/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit https://patientintake-app.herokuapp.com//intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit 200
+/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit https://patientintake-app.herokuapp.com/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit 200
 /intake-service/api/patient/upload https://patientintake-app.herokuapp.com/intake-service/api/patient/upload 200
 
 /intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId https://patientintake-app.herokuapp.com/intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId 200
