@@ -125,8 +125,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
   }
   exportPDF(data: IUsers) {
     var physicalTherapy: boolean = data.hasPhysicalTherapy === null ? false : data.hasPhysicalTherapy;
-    this.reportingService.exportPDF(data.insuranceWorkerType,
-      data.patientSourceType, physicalTherapy, data.tableId).subscribe(
+    this.reportingService.exportPDF( data.tableId).subscribe(
         (response: any) => {
           const a = document.createElement('a')
           const objectUrl = URL.createObjectURL(response)
