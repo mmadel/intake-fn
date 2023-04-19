@@ -15,4 +15,11 @@
 /intake-service/api/auth/login https://patientintake-app.herokuapp.com/intake-service/api/auth/login 200
 /intake-service/api/user/find/loggedIn/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/find/loggedIn/:userId 200
 
+/intake-service/api/clinic https://patientintake-app.herokuapp.com/intake-service/api/clinic  200
+/intake-service/api/clinic/find https://patientintake-app.herokuapp.com/intake-service/api/clinic/find  200
+/intake-service/api/user/find/clinics/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/find/clinics/:userId  200
+
+/intake-service/api/user https://patientintake-app.herokuapp.com/intake-service/api/user  200
+/intake-service/api/user/find https://patientintake-app.herokuapp.com/intake-service/api/user/find  200
+
 /*  /index.html   200
