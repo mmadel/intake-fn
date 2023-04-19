@@ -21,5 +21,6 @@
 
 /intake-service/api/user https://patientintake-app.herokuapp.com/intake-service/api/user  200
 /intake-service/api/user/find https://patientintake-app.herokuapp.com/intake-service/api/user/find  200
+/intake-service/api/agreement https://patientintake-app.herokuapp.com/intake-service/api/agreement  200
 
 /*  /index.html   200
