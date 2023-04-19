@@ -11,7 +11,8 @@
 /intake-service/api/reports/recommendation https://patientintake-app.herokuapp.com/intake-service/api/reports/recommendation 200
 /intake-service/api/reports/generator/excel https://patientintake-app.herokuapp.com/intake-service/api/reports/generator/excel 200
 /intake-service/api/reports/generator/pdf/patientId/:patientId https://patientintake-app.herokuapp.com/intake-service/api/reports/generator/pdf/patientId/:patientId 200
-/intake-service/api/auth/login https://patientintake-app.herokuapp.com/intake-service/api/intake-service/api/auth/login 200
+
+/intake-service/api/auth/login https://patientintake-app.herokuapp.com/intake-service/api/auth/login 200
 /intake-service/api/user/find/loggedIn/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/find/loggedIn/:userId 200
 
 /*  /index.html   200
