@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClinicService } from '../../services/clinic/clinic.service';
 
 @Component({
   selector: 'app-patient-create',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-create.component.css']
 })
 export class PatientCreateComponent implements OnInit {
-
-  constructor() { }
+  public createPatientURL: string
+  public clinicId:number | null = 222;
+  constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {
+    this.clinicService.selectedClinic$.subscribe(clinicId => {
+      this.clinicId = clinicId
+      this.createPatientURL = location.origin + '/#/questionnaire/add?clinicId=' + clinicId;
+    })
   }
 
 }
