@@ -12,7 +12,8 @@ import {
   ClinicCreationComponent,
   ClinicListComponent,
   UserCreationComponent,
-  UserListComponent
+  UserListComponent,
+  PatientCreateComponent
 } from './index';
 
 import { PatientCommonModule } from '../common';
@@ -47,7 +48,6 @@ import {
 } from '@coreui/angular-pro';
 import { QRCodeModule } from 'angularx-qrcode';
 
-
 @NgModule({
   declarations: [
     PatientListComponent,
@@ -57,7 +57,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     ClinicCreationComponent,
     ClinicListComponent,
     UserListComponent,
-    UserCreationComponent
+    UserCreationComponent,
+    PatientCreateComponent
   ],
   imports: [
     CommonModule,
