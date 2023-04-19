@@ -1,15 +1,16 @@
-/patient/admin/change/requires/fields https://patientintake-app.herokuapp.com/patient/admin/change/requires/fields 200
-/patient/admin/retrieve/requires/fields https://patientintake-app.herokuapp.com/patient/admin/retrieve/requires/fields 200
-/patient/admin/retrieve/requires/basic/fields https://patientintake-app.herokuapp.com/patient/admin/retrieve/requires/basic/fields 200
+/intake-service/api/requires/fields/change https://patientintake-app.herokuapp.com/intake-service/api/requires/fields/change 200
+/intake-service/api/requires/fields/retrieve https://patientintake-app.herokuapp.com/intake-service/api/requires/fields/retrieve 200
+/intake-service/api/requires/fields/retrieve/basic https://patientintake-app.herokuapp.com/intake-service/api/requires/fields/retrieve/basic 200
 
-/patient https://patientintake-app.herokuapp.com/patient 200
-/patient/upload https://patientintake-app.herokuapp.com/patient/upload 200
+/intake-service/api/patient/create https://patientintake-app.herokuapp.com/intake-service/api/patient/create 200
+/intake-service/api/patient/find/clinic/:clinicId https://patientintake-app.herokuapp.com//intake-service/api/patient/find/clinic/:clinicId 200
+/intake-service/api/patient/upload https://patientintake-app.herokuapp.com/intake-service/api/patient/upload 200
 
-/dashboard/data https://patientintake-app.herokuapp.com/dashboard/data 200
+/intake-service/api/dashboard/clinicId/:clinicId/userId/:userId https://patientintake-app.herokuapp.com/intake-service/api/dashboard/clinicId/:clinicId/userId/:userId 200
 
-/reports/recommendation https://patientintake-app.herokuapp.com/reports/recommendation 200
-/reports/generator/excel https://patientintake-app.herokuapp.com/reports/generator/excel 200
-/reports/generator/pdf?insuranceWorkerType=:insuranceWorkerType&patientSourceType=:patientSourceType&hasPhysicalTherapy=:hasPhysicalTherap&patientId=:patientId https://patientintake-app.herokuapp.com/reports/generator/pdf?insuranceWorkerType=:insuranceWorkerType&patientSourceType=:patientSourceType&hasPhysicalTherapy=:hasPhysicalTherap&patientId=:patientId 200
+/intake-service/api/reports/recommendation https://patientintake-app.herokuapp.com/intake-service/api/reports/recommendation 200
+/intake-service/api/reports/generator/excel https://patientintake-app.herokuapp.com/intake-service/api/reports/generator/excel 200
+/intake-service/api/reports/generator/pdf/patientId/:patientId https://patientintake-app.herokuapp.com/intake-service/api/reports/generator/pdf/patientId/:patientId 200
 
 
 /*  /index.html   200
