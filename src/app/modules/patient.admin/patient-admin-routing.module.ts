@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
 import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PatientCreateComponent } from './components/patient.create/patient-create.component';
 import { PatientListComponent } from './components/patient.list/patient.list.component';
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
 import { UserCreationComponent } from './components/user/create/user-creation.component';
@@ -31,7 +32,14 @@ const routes: Routes = [{
       path: 'patient/list',
       component: PatientListComponent,
       data: {
-        title: 'Patients',
+        title: 'list',
+      },
+    },
+    {
+      path: 'patient/create',
+      component: PatientCreateComponent,
+      data: {
+        title: 'create',
       },
     }
   ]
