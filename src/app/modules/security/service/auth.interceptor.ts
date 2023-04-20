@@ -7,12 +7,13 @@ import {
   HttpErrorResponse,
   HttpHeaders
 } from '@angular/common/http';
-import { BehaviorSubject, catchError, EMPTY, NEVER, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, finalize, NEVER, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { LocalService } from '../../common';
 import { UserRoleURLS } from 'src/app/core/adminlayout/header/user.role.urls';
 import * as _ from 'lodash';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -21,11 +22,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthService,
     private router: Router
-    , private localService: LocalService) { }
+    , private localService: LocalService
+    , private spinner: NgxSpinnerService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = this.localService.getData('token') || '{}';
+    this.spinner.show();
     return next.handle(this.addAuthorizationHeader(req, accessToken)).pipe(
+      finalize(() => {
+        this.spinner.hide();
+      }),
       catchError(err => {
         // in case of 401 http error
         if (err instanceof HttpErrorResponse && err.status === 401) {

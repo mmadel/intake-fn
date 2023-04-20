@@ -33,6 +33,7 @@ import {
 } from '@coreui/angular-pro';
 import { FormsModule } from '@angular/forms';
 import { IconModule } from '@coreui/icons-angular';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     LoginComponent
@@ -65,7 +66,8 @@ import { IconModule } from '@coreui/icons-angular';
     CalloutModule,
     MultiSelectModule,
     WidgetModule,
-    ProgressModule
+    ProgressModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class SecurityModule { }

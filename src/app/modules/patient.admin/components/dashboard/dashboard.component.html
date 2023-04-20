@@ -1,3 +1,4 @@
+<ngx-spinner></ngx-spinner>
 <c-row *ngIf="dashboardDataContainer">
   <c-col md="12" xl="3" *ngFor="let recipient of dashboardDataContainer.clinicsData | keyvalue">
     <c-widget-stat-a [title]="recipient.key" [color]="getColor(recipient.value[0])" class="mb-4" text="">
