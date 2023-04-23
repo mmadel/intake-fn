@@ -60,7 +60,6 @@ export class AuthInterceptor implements HttpInterceptor {
       if (element.name === 'PERMITTED')
         notSecuredURLS = element.urls;
     });
-    console.log(JSON.stringify('securedURLS ' + securedURLS))
     if (_.some(notSecuredURLS, (el) => _.includes(request.url, el))) {
       console.log('not secured')
       return request;

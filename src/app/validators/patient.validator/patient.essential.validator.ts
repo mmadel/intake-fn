@@ -16,13 +16,6 @@ export class PatientEssentialValidator extends PatientValidator {
         this.pateintBasicInfo = pateintBasicInfo
         this.requiredFields = requiredFields;
     }
-
-
-    private formatDate() {
-        this.pateintBasicInfo.birthDate = Number(moment(this.pateintBasicInfo.birthDate_date).format("x"));
-        this.pateintBasicInfo.idEffectiveFrom = Number(moment(this.pateintBasicInfo.id_effective_from_date).format("x"))
-        this.pateintBasicInfo.idEffectiveTo = Number(moment(this.pateintBasicInfo.id_effective_to_date).format("x"))
-    }
     protected missingFields(validatorContainer: ValidatorContainer) {
         var validators: PropertyValidator[] = new Array();
         this.validateInfo(validators);

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { LocalService } from 'src/app/modules/common';
@@ -83,6 +84,9 @@ export class QuestionnaireAddComponent implements OnInit {
     if (patientModel === 'basic') {
       this.patientValidator = new PatientEssentialValidator(this.patientFields.basicInfo
         , this.essentialInfoComponent.pateintBasicInfo);
+      this.essentialInfoComponent.pateintBasicInfo.birthDate = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.birthDate_date).format("x"));
+      this.essentialInfoComponent.pateintBasicInfo.idEffectiveFrom = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_from_date).format("x"))
+      this.essentialInfoComponent.pateintBasicInfo.idEffectiveTo = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_to_date).format("x"))
     }
     if (patientModel === 'address') {
       this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
@@ -117,6 +121,7 @@ export class QuestionnaireAddComponent implements OnInit {
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
+      console.log(JSON.stringify(this.patient.basicInfo))
       this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();
@@ -165,13 +170,13 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   fillModel() {
     this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
+
     this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
     this.patient.agreements = this.aggreementsComponent?.model;
     this.patient.files = this.uploadPhotoComponent ? this.uploadPhotoComponent.imageFormData : this.patient.files;
     this.fillInsuranceInformationModel()
-
   }
 
   fillInsuranceInformationModel() {

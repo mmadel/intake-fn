@@ -136,7 +136,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
           URL.revokeObjectURL(objectUrl);
         },
         (error) => {
-          console.log('@@@@@@@@@@@@@@@@ ' + JSON.stringify(error))
+          
         });
   }
   ngOnInit(): void {
