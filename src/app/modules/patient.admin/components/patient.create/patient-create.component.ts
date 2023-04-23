@@ -8,13 +8,14 @@ import { ClinicService } from '../../services/clinic/clinic.service';
 })
 export class PatientCreateComponent implements OnInit {
   public createPatientURL: string
-  public clinicId:number | null = 222;
+  public clinicId:number | null;
+  public baseURL:string = location.origin ;
   constructor(private clinicService: ClinicService) { }
 
   ngOnInit(): void {
     this.clinicService.selectedClinic$.subscribe(clinicId => {
       this.clinicId = clinicId
-      this.createPatientURL = location.origin + '/#/questionnaire/add?clinicId=' + clinicId;
+      this.createPatientURL = this.baseURL + '/#/questionnaire/add?clinicId=' + clinicId;
     })
   }
 

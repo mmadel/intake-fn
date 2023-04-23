@@ -51,7 +51,6 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private addAuthorizationHeader(request: HttpRequest<any>, token: string): HttpRequest<any> {
-    let headers: HttpHeaders = new HttpHeaders();
     var securedURLS: string[] = new Array();
     var notSecuredURLS: string[] = new Array();
     UserRoleURLS.forEach(element => {
@@ -66,21 +65,14 @@ export class AuthInterceptor implements HttpInterceptor {
       console.log('not secured')
       return request;
     }
-
+    console.log('request.url ' + request.url)
     if (_.some(securedURLS, (el) => _.includes(request.url, el))) {
       console.log('secured')
       if (token) {
-        headers = headers.append('Authorization', `Bearer ${token}`)
-        if (request.method === 'POST' || "PUT")
-          headers = headers.append('Content-Type', 'application/json')
-        return request.clone({ headers });
+        return request.clone({
+          setHeaders: { Authorization: `Bearer ${token}` }
+        });
       }
-      request.clone({
-        setHeaders: {
-          'Cache-Control': 'no-cache',
-          Pragma: 'no-cache'
-        }
-      });
       return request;
     }
     console.log('rejected')

@@ -8,7 +8,7 @@ import { AgreementHolder } from 'src/app/models/patient/agreements/agreements.ho
 })
 export class PatientService {
   private baseUrl = environment.baseURL + 'patient'
-  private agreementURL = environment.baseURL + '/agreement';
+  private agreementURL = environment.baseURL + 'agreement';
   constructor(private http: HttpClient) { }
   createPatient(patient: string) {
     const createPatientURL = this.baseUrl + '/create';
@@ -18,7 +18,7 @@ export class PatientService {
   }
 
   upload(imageFormData: FormData, pateintId: number) {
-    const uploadURL = environment.baseURL + '/upload';
+    const uploadURL = this.baseUrl + '/upload';
     let headers = new HttpHeaders({ 'patientId': pateintId.toString() });
 
     return this.http.post(uploadURL, imageFormData, { 'headers': headers, observe: 'response' })
