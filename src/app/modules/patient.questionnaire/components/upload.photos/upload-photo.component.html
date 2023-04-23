@@ -9,11 +9,11 @@
     <c-card-body>
         <div class="mb-3">
             <label cLabel for="pIdfront">Patient Id Front</label>
-            <input cFormControl id="pIdfront" (change)="onImageUpload($event ,'pIdfront')" type="file" class="mb-1" />
+            <input cFormControl id="pIdfront" accept="image/*" (change)="onImageUpload($event ,'pIdfront')" type="file" class="mb-1" />
         </div>
         <div class="mb-3">
             <label cLabel for="pIdback">Patient Id Back</label>
-            <input cFormControl id="pIdback" (change)="onImageUpload($event ,'pIdback')" type="file" class="mb-1" />
+            <input cFormControl id="pIdback" accept="image/*" (change)="onImageUpload($event ,'pIdback')" type="file" class="mb-1" />
 
         </div>
     </c-card-body>
@@ -29,12 +29,12 @@
     <c-card-body>
         <div class="mb-3">
             <label cLabel for="pinsurancefront">Patient Insurance Id Front</label>
-            <input cFormControl id="pinsurancefront" (change)="onImageUpload($event ,'pinsurancefront')" type="file"
+            <input cFormControl id="pinsurancefront" accept="image/*" (change)="onImageUpload($event ,'pinsurancefront')" type="file"
                 class="mb-1" />
         </div>
         <div class="mb-3">
             <label cLabel for="pinsuranceback">Patient Insurance Id Back</label>
-            <input cFormControl id="pinsuranceback" (change)="onImageUpload($event ,'pinsuranceback')" type="file"
+            <input cFormControl id="pinsuranceback" accept="image/*" (change)="onImageUpload($event ,'pinsuranceback')" type="file"
                 class="mb-1" />
         </div>
     </c-card-body>
