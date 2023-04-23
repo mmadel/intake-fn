@@ -47,6 +47,7 @@ import {
   SummaryComponent
 } from './index';
 import { PatientCommonModule } from '../common';
+import { WebcamModule } from 'ngx-webcam';
 
 
 @NgModule({
@@ -93,7 +94,8 @@ import { PatientCommonModule } from '../common';
     FormsModule,
     MultiSelectModule,
     AccordionModule,
-    PatientCommonModule
+    PatientCommonModule,
+    WebcamModule
   ]
 })
 export class PatientQuestionnaireModule { }

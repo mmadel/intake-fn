@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PatientService } from '../../service/patient.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-upload-photo',
@@ -8,9 +7,9 @@ import { PatientService } from '../../service/patient.service';
 })
 export class UploadPhotoComponent implements OnInit {
   imageFormData: FormData = new FormData();
-  constructor(private patientService: PatientService) { }
+  
+  ngOnInit() {
 
-  ngOnInit(): void {
   }
 
   public onImageUpload(event: any, photoType: string) {
