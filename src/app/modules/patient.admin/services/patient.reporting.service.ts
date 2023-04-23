@@ -25,8 +25,9 @@ export class PatientReportingService {
   constructor(private httpClient: HttpClient) { }
 
   search(searchCriteria: PatientSearchCriteria) {
+    const headers = { 'content-type': 'application/json' }
     const changePatientRequiredFieldsURL = this.baseUrl + 'recommendation';
-    return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(searchCriteria))
+    return this.httpClient.post(changePatientRequiredFieldsURL, JSON.stringify(searchCriteria), { 'headers': headers})
   }
 
   export(result: IPatientResult[]) {

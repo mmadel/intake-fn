@@ -14,7 +14,8 @@ export class ClinicService {
   constructor(private http: HttpClient) { }
 
   create(clinic: Clinic) {
-    return this.http.post(`${this.clinicUrl}`, JSON.stringify(clinic), { observe: 'response' })
+    const headers = { 'content-type': 'application/json' }
+    return this.http.post(`${this.clinicUrl}`, JSON.stringify(clinic), { 'headers': headers, observe: 'response' })
   }
   get() {
     return this.http.get<Clinic[]>(`${this.clinicUrl}` + '/find', { observe: 'response' })

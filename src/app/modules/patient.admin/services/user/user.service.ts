@@ -9,11 +9,12 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   private userUrl = environment.baseURL + 'user'
   constructor(private http: HttpClient) { }
-  create(user:User){
-    return this.http.post(`${this.userUrl}`, JSON.stringify(user), { observe: 'response' })
+  create(user: User) {
+    const headers = { 'content-type': 'application/json' }
+    return this.http.post(`${this.userUrl}`, JSON.stringify(user), { 'headers': headers, observe: 'response' })
   }
 
-  get(){
-    return this.http.get<User[]>(`${this.userUrl}`+'/find', { observe: 'response' })
+  get() {
+    return this.http.get<User[]>(`${this.userUrl}` + '/find', { observe: 'response' })
   }
 }
