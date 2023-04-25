@@ -48,6 +48,7 @@ import {
 } from '@coreui/angular-pro';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ChartjsModule } from '@coreui/angular-chartjs';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ProgressModule,
     PatientCommonModule,
     QRCodeModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    ChartjsModule
   ]
 })
 export class PatientAdminModule { }
