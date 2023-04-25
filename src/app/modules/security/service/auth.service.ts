@@ -47,9 +47,9 @@ export class AuthService {
     return this.user$.pipe(
       switchMap(user => {
         if (user) {
+          this.localService.saveData('userName', user.name || '{}')
           return of(user);
         }
-
         const token = this.localService.getData('token');
         // if there is token then fetch the current user
         if (token) {

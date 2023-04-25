@@ -15,6 +15,7 @@ import { AuthService } from 'src/app/modules/security/service/auth.service';
   styleUrls: ['./admin-header.component.css']
 })
 export class AdminHeaderComponent extends HeaderComponent {
+  userName:string;
   clinics: Clinic[] = new Array();
   selectedClinicId: number;
   @ViewChild('userClinics') userClinics: ElementRef;
@@ -39,6 +40,8 @@ export class AdminHeaderComponent extends HeaderComponent {
     super();
   }
   ngOnInit(): void {
+    this.userName = this.localService.getData('userName');
+    this.userName = this.userName.charAt(0).toUpperCase()
     this.clinicService.getByUserId(Number(this.localService.getData('userId') || {})).subscribe(response => {
       response.body?.forEach(element => {
         this.clinics.push(element);
