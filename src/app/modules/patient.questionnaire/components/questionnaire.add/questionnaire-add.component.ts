@@ -68,13 +68,17 @@ export class QuestionnaireAddComponent implements OnInit {
   ngOnInit(): void {
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
       this.patientFields = <PatientRequiredFields>patientFields;
-    })
-    this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
-    this.router.navigate([], {
-      queryParams: {
-        'clinicId': null,
-      },
-      queryParamsHandling: 'merge'
+      this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+      if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
+        this.router.navigate(['/admin/patient/create']);
+      } else {
+        this.router.navigate([], {
+          queryParams: {
+            'clinicId': null,
+          },
+          queryParamsHandling: 'merge'
+        })
+      }
     })
   }
 
