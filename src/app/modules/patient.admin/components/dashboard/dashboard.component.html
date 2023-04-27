@@ -4,8 +4,8 @@
     <c-widget-stat-a [title]="recipient.key" [color]="getColor(recipient.value[0])" class="mb-4" text="">
       <br><br><br>
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        {{recipient.value[1]}}
-        <span class="fs-6 fw-normal">({{recipient.value[0]}}%)</span>
+        {{recipient.value[0]}}
+        <span class="fs-6 fw-normal">({{recipient.value[1]}}%)</span>
         <span class="fs-6 fw-normal">
           Patients <svg size="lg" cIcon name="cilDisabled"></svg>
         </span>
