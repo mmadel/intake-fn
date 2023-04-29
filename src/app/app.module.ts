@@ -20,6 +20,7 @@ import {
   ButtonGroupModule,
   ButtonModule,
   CardModule,
+  DateRangePickerModule,
   DropdownModule,
   FooterModule,
   FormModule,
@@ -93,7 +94,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     IconModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    DateRangePickerModule,
   ],
   providers: [
     {

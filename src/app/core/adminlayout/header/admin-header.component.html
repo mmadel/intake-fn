@@ -5,14 +5,18 @@
       <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
     <c-header-nav class="d-none d-lg-flex me-auto">
-      <select *ngIf="clinics" #userClinics cSelect sizing="sm" style="line-height: 15px;" 
+      <select *ngIf="clinics" #userClinics cSelect sizing="sm" style="line-height: 15px;"
         (change)="setSelectedClinic($event)">
         <option *ngFor="let clinic of clinics" [value]="clinic.id">
           {{clinic.name}}
         </option>
       </select>
     </c-header-nav>
-
+    <c-header-nav class="ms-auto me-4">
+      <c-date-range-picker size="sm" [ranges]="customRanges"
+      (startDateChange)="startDateChange($event)" 
+      (endDateChange)="endDateChange($event)"></c-date-range-picker>
+    </c-header-nav>
     <c-header-nav class="ms-auto me-4">
       <form [formGroup]="themeSwitch" cForm>
         <c-button-group aria-label="Theme switch">
