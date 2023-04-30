@@ -3,6 +3,7 @@ import { IColumn, IColumnFilterValue, ISorterValue } from '@coreui/angular-pro/l
 import * as moment from 'moment';
 import { combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { PateintDocumentsService } from '../../services/documents/pateint-documents.service';
 import { IApiParams, IUsers, PatientListService } from '../../services/patient-list.service';
 import { PatientReportingService } from '../../services/patient.reporting.service';
 export interface IParams {
@@ -19,7 +20,9 @@ export interface IParams {
 })
 export class PatientListComponent implements OnInit, OnDestroy {
 
-  constructor(private patientListService: PatientListService, private reportingService: PatientReportingService) {
+  constructor(private patientListService: PatientListService
+    , private reportingService: PatientReportingService
+    , private pateintDocumentsService: PateintDocumentsService) {
   }
 
   title = 'CoreUI Angular Smart Table Example';
@@ -124,20 +127,46 @@ export class PatientListComponent implements OnInit, OnDestroy {
     this.#destroy$.next(true);
   }
   exportPDF(data: IUsers) {
-    var physicalTherapy: boolean = data.hasPhysicalTherapy === null ? false : data.hasPhysicalTherapy;
-    this.reportingService.exportPDF( data.tableId).subscribe(
-        (response: any) => {
-          const a = document.createElement('a')
-          const objectUrl = URL.createObjectURL(response)
-          a.href = objectUrl
-          var nameDatePart = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-          a.download = 'patient-' + nameDatePart + '';
-          a.click();
-          URL.revokeObjectURL(objectUrl);
-        },
-        (error) => {
-          
-        });
+    this.reportingService.exportPDF(data.tableId).subscribe(
+      (response: any) => {
+        this.constructExportedFile(response,'patient-')
+      },
+      (error) => {
+
+      });
+  }
+  exportPatientIDDocument(data: IUsers) {
+    console.log('patient-Id : ' + data.tableId);
+    this.pateintDocumentsService.exportPateintIdDocuments(data.tableId).subscribe(
+      (response: any) => {
+        this.constructExportedFile(response , 'patient-ID-Documents')
+      },
+      (error) => {
+
+      }
+    )
+
+  }
+  exportPatientInsuranceDocument(data: IUsers) {
+    console.log('patient-Id : ' + data.tableId);
+    this.pateintDocumentsService.exportPateintInsuranceDocuments(data.tableId).subscribe(
+      (response: any) => {
+        this.constructExportedFile(response, 'patient-Insurance-Documents')
+      },
+      (error) => {
+
+      }
+    )
+  }
+
+  constructExportedFile(response: any, fileName: string) {
+    const a = document.createElement('a')
+    const objectUrl = URL.createObjectURL(response)
+    a.href = objectUrl
+    var nameDatePart = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+    a.download = fileName + nameDatePart + '.zip';
+    a.click();
+    URL.revokeObjectURL(objectUrl);
   }
   ngOnInit(): void {
 
