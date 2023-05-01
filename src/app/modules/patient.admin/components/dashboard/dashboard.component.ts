@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, filter, switchMap, tap, zip } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
 import { LocalService } from 'src/app/modules/common';
@@ -10,7 +10,7 @@ import { DashboardService } from '../../services/dashboard.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   dashboardDataContainer: DashboardDataContainer | null;
 
   clinicId: number | null;
@@ -31,11 +31,11 @@ export class DashboardComponent implements OnInit {
         switchMap(result => this.dashboardService.getDate(result[0], Number(this.localService.getData("userId") || '{}')
           , result[1] === null ? 0 : result[1][0]
           , result[1] === null ? 0 : result[1][1])
-        )).subscribe(data => this.dashboardDataContainer = <DashboardDataContainer>data);
+        )).subscribe(data => this.dashboardDataContainer = <DashboardDataContainer>data,
+          (err)=> console.log(err))
   }
   ngOnDestroy() {
-    this.clinicService.selectedClinic$
-    this.clinicService.filterDate$
+    this.clinicService.filterDate$.next(null)
   }
   getColor(percentage: number): string {
     var color: string = "";
