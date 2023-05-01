@@ -1,10 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { NgSelectOption, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
-import { result } from 'lodash';
 import * as moment from 'moment';
-import { mergeMap, tap } from 'rxjs';
 import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';
@@ -42,9 +40,9 @@ export class AdminHeaderComponent extends HeaderComponent {
       new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1),
       new Date(new Date().getFullYear(), new Date().getMonth(), 0)
     ],
-    'Clear':[
-      null,
-      null
+    'Clear': [
+      0,
+      0
     ]
   };
   userName: string;
@@ -94,11 +92,11 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.clinicService.selectedClinic$.next(event.target.value)
   }
   startDateChange(event: any) {
-    this.startDate = Number(moment(new Date(event)).format("x"))
+    this.startDate = event ? moment(new Date(event)).startOf('day').valueOf() : 0;
 
   }
   endDateChange(event: any) {
-    this.endDate = Number(moment(new Date(event)).format("x"))
+    this.endDate = event ? moment(new Date(event)).endOf('day').valueOf() : 0;
     this.emitFilterDate(this.startDate, this.endDate)
   }
   emitFilterDate(startDate: number, endDate: number) {
