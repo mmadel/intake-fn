@@ -39,12 +39,12 @@ export class DashboardComponent implements OnInit {
   }
   getColor(percentage: number): string {
     var color: string = "";
-    if (percentage > 1 && percentage < 10)
+    if (percentage >= 1 && percentage <= 10)
       color = "danger"
-    if (percentage > 10 && percentage < 30)
+    if (percentage > 10 && percentage <= 30)
+      color = "warning"
+    if (percentage > 30 && percentage <= 70)
       color = "primary"
-    if (percentage > 30 && percentage < 70)
-      color = "success"
     if (percentage > 70)
       color = "success"
     return color;
