@@ -108,10 +108,11 @@ export class RecommendationReportComponent implements OnInit {
   }
 
   private formatDate() {
+    
     if (this.patientSearchCriteria.startDate_date !== undefined)
-      this.patientSearchCriteria.startDate = Number(moment(this.patientSearchCriteria.startDate_date).startOf('day').format("x"))
+      this.patientSearchCriteria.startDate = this.patientSearchCriteria.startDate_date ? moment(new Date(this.patientSearchCriteria.startDate_date)).startOf('day').valueOf() : 0;
     if (this.patientSearchCriteria.endDate_date !== undefined)
-      this.patientSearchCriteria.endDate = Number(moment(this.patientSearchCriteria.endDate_date).startOf('day').format("x"))
+      this.patientSearchCriteria.endDate = this.patientSearchCriteria.endDate_date ? moment(new Date(this.patientSearchCriteria.endDate_date)).endOf('day').valueOf() : 0;
   }
 
 
