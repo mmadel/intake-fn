@@ -92,14 +92,17 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.clinicService.selectedClinic$.next(event.target.value)
   }
   startDateChange(event: any) {
+    console.log('startDateChange');
     this.startDate = event ? moment(new Date(event)).startOf('day').valueOf() : 0;
 
   }
   endDateChange(event: any) {
+    console.log('endDateChange');
     this.endDate = event ? moment(new Date(event)).endOf('day').valueOf() : 0;
     this.emitFilterDate(this.startDate, this.endDate)
   }
   emitFilterDate(startDate: number, endDate: number) {
+    console.log('emitFilterDate');
     var validDate = this.validateDateCriteria(startDate, endDate)
     if (validDate) {
       var dates: number[] = [startDate, endDate]
