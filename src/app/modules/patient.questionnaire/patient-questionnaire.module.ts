@@ -47,6 +47,7 @@ import {
   SummaryComponent
 } from './index';
 import { PatientCommonModule } from '../common';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -93,7 +94,8 @@ import { PatientCommonModule } from '../common';
     FormsModule,
     MultiSelectModule,
     AccordionModule,
-    PatientCommonModule
+    PatientCommonModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class PatientQuestionnaireModule { }
