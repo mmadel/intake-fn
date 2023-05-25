@@ -51,7 +51,7 @@
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('claimNumber') }">
                     <label for="claimNumber" class="form-label">Claim Number/ WC Case Number</label>
-                    <input cFormControl [(ngModel)]="model.claimNumber" sizing="sm" name="claimNumber" />
+                    <input cFormControl [(ngModel)]="model.claimNumber" sizing="sm" name="claimNumber" type="number"/>
                 </div>
             </c-col>
             <c-row>
