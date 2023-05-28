@@ -68,6 +68,7 @@ export class QuestionnaireAddComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.localService.removeData('patient')
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
       this.patientFields = <PatientRequiredFields>patientFields;
       this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
