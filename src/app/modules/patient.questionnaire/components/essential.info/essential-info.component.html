@@ -2,7 +2,7 @@
     <form cForm [gutter]="{gy: 2, gx: 4}">
         <c-col xs="auto" class="mb-2">
 
-            <div [ngClass]="{ 'form-group required':isRequiredField('name') }">
+            <div [ngClass]="{ 'form-group required':isRequiredField('firstName') }">
                 <label for="fname" class="form-label">First Name</label>
                 <input aria-label="First name" cFormControl [(ngModel)]="pateintBasicInfo.firstName" name="fname"
                     sizing="sm">
@@ -11,7 +11,7 @@
 
         <c-col xs="auto" class="mb-2">
 
-            <div [ngClass]="{ 'form-group required':isRequiredField('name') }">
+            <div [ngClass]="{ 'form-group required':isRequiredField('middleName') }">
                 <label for="mname" class="form-label">Middle Name</label>
                 <input aria-label="Middle name" cFormControl [(ngModel)]="pateintBasicInfo.middleName" name="mname"
                     sizing="sm" />
@@ -20,7 +20,7 @@
         </c-col>
         <c-col xs="auto" class="mb-2">
 
-            <div [ngClass]="{ 'form-group required':isRequiredField('name') }">
+            <div [ngClass]="{ 'form-group required':isRequiredField('lastName') }">
                 <label for="lname" class="form-label">Last Name</label>
                 <input aria-label="Last name" cFormControl [(ngModel)]="pateintBasicInfo.lastName" name="lname"
                     sizing="sm" />
