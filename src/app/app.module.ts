@@ -33,9 +33,6 @@ import {
   SidebarModule,
   TabsModule,
   UtilitiesModule,
-  
-
-
 } from '@coreui/angular-pro';
 
 
@@ -50,6 +47,7 @@ import { PatientService } from './modules/patient.questionnaire/service/patient.
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PatientListService } from './modules/patient.admin/services/patient-list.service';
 import { AuthInterceptor } from './modules/security';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -96,6 +94,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BrowserAnimationsModule,
     FormsModule,
     DateRangePickerModule,
+    ToastrModule.forRoot({
+      timeOut: 15000, // 15 seconds
+      closeButton: true,
+      progressBar: true,
+    })
   ],
   providers: [
     {

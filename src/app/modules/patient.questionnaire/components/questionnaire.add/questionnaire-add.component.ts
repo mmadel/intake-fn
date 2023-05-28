@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { LocalService } from 'src/app/modules/common';
@@ -63,6 +64,7 @@ export class QuestionnaireAddComponent implements OnInit {
     private patientRequiredFieldsService: PatientRequiredFieldsService,
     private router: Router,
     private localService: LocalService,
+    private toastr:ToastrService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -166,11 +168,17 @@ export class QuestionnaireAddComponent implements OnInit {
           (response) => {
             console.log('uploaded..')
           },
-          (error) => { console.log(error); });
+          (error) => { 
+            this.scrollUp();
+            this.toastr.error(error, 'Error In Upload Images');
+          });
         this.localService.removeData('patient');
         this.router.navigate(['/questionnaire/submitted']);
       },
-      (error) => { console.log(error); });
+      (error) => { 
+        this.toastr.error(JSON.stringify(error), 'Error In Creation'); 
+        this.scrollUp();
+      });
   }
   fillModel() {
     this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
