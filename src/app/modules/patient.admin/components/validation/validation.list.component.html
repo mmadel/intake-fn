@@ -23,6 +23,24 @@
                                 checked type="checkbox" />
                             <label cFormCheckLabel>Name</label>
                         </c-form-check>
+                        <c-form-check sizing="lg" switch *ngIf="patientFields.basicInfo.name">
+                            <input [checked]="patientFields.basicInfo.firstName"
+                                (change)="patientFields.basicInfo.firstName = !patientFields.basicInfo.firstName"
+                                cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>First Name</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch *ngIf="patientFields.basicInfo.name">
+                            <input [checked]="patientFields.basicInfo.middleName"
+                                (change)="patientFields.basicInfo.middleName = !patientFields.basicInfo.middleName"
+                                cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Middle Name</label>
+                        </c-form-check>
+                        <c-form-check sizing="lg" switch *ngIf="patientFields.basicInfo.name">
+                            <input [checked]="patientFields.basicInfo.lastName"
+                                (change)="patientFields.basicInfo.lastName = !patientFields.basicInfo.lastName"
+                                cFormCheckInput checked type="checkbox" />
+                            <label cFormCheckLabel>Last Name</label>
+                        </c-form-check>
                         <c-form-check sizing="lg" switch>
                             <input cFormCheckInput [checked]="patientFields.basicInfo.birthDate"
                                 (change)="patientFields.basicInfo.birthDate = !patientFields.basicInfo.birthDate"
