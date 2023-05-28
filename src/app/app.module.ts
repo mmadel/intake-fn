@@ -95,7 +95,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     DateRangePickerModule,
     ToastrModule.forRoot({
-      timeOut: 15000, // 15 seconds
+      timeOut: 600000,
       closeButton: true,
       progressBar: true,
     })

@@ -170,13 +170,14 @@ export class QuestionnaireAddComponent implements OnInit {
           },
           (error) => { 
             this.scrollUp();
-            this.toastr.error(error, 'Error In Upload Images');
+            this.toastr.error(error.error.message, 'Error In Upload Images');
           });
         this.localService.removeData('patient');
         this.router.navigate(['/questionnaire/submitted']);
       },
       (error) => { 
-        this.toastr.error(JSON.stringify(error), 'Error In Creation'); 
+        console.log(JSON.stringify(error))
+        this.toastr.error(error.error.message, 'Error In Creation'); 
         this.scrollUp();
       });
   }
