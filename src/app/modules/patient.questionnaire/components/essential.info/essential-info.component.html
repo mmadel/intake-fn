@@ -45,9 +45,9 @@
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="binary">Binary</option>
-                    <option value="to-self">To self describe</option>
-                    <option value="not-say">Prefer not to say</option>
+                    <option value="Binary">Binary</option>
+                    <option value="Self_Describe">To self describe</option>
+                    <option value="Not_Prefer">Prefer not to say</option>
                 </select>
             </div>
         </c-col>
@@ -147,22 +147,23 @@
         </div>
 
         <div cRow>
-            <c-col xs="6" class="mb-2">
-
+            <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('emergencyContact') }">
-                    <label for="emergencyName" class="form-label">Emergency Name</label>
-                    <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyName" name="emergencyName" sizing="sm" />
+                    <label for="emergencyName" class="form-label">Emergency Contact</label>
+                    <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyName" name="emergencyName" sizing="sm"
+                    placeholder="Emergency Name" />
                 </div>
-
             </c-col>
-            <c-col xs="6" class="mb-2">
-
+            <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('emergencyContact') }">
-                    <label for="emergencyphone" class="form-label">Emergency Phone</label>
-                    <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyPhone" name="emergencyphone"
-                        sizing="sm" />
+                    <c-input-group class="mb-3" sizing="sm">
+                        <span cInputGroupText id="basic-addon1">+1</span>
+                        <input numbers aria-label="" cFormControl 
+                            [ngModel]="pateintBasicInfo.emergencyPhone | phone"
+                            (ngModelChange)="pateintBasicInfo.emergencyPhone=$event" name="emergencyphone"
+                            maxlength="15" />
+                    </c-input-group>
                 </div>
-
             </c-col>
         </div>
         <c-col xs="auto" class="mb-2">
