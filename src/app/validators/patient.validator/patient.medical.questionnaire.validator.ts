@@ -103,7 +103,7 @@ export class PatientMedicalQuestionnaireValidator extends PatientValidator {
                 validator.push({ property: "Appointment Booking", message: '' });
         }
         if (this.isRequiredField('primaryDoctor')) {
-            if (this.medicalQuestionnaireInfo.appointmentBooking === '' || this.medicalQuestionnaireInfo.appointmentBooking === undefined)
+            if (this.medicalQuestionnaireInfo.primaryDoctor === '' || this.medicalQuestionnaireInfo.primaryDoctor === undefined)
                 validator.push({ property: "Primary Doctor", message: '' });
         }
         if (this.isRequiredField('resultSubmissionFamily')) {
