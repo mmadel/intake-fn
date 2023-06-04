@@ -75,10 +75,14 @@ export class PatientEssentialValidator extends PatientValidator {
             if (this.pateintBasicInfo.email === '' || this.pateintBasicInfo.email === undefined)
                 validator.push({ property: " Email ", message: '' });
         }
-        if (this.isRequiredField('patientId') && this.isRequiredField('patientId')) {
-            if ((this.pateintBasicInfo.idType === '' || this.pateintBasicInfo.idType === undefined) &&
-                (this.pateintBasicInfo.patientId === '' || this.pateintBasicInfo.patientId === undefined)) {
+        if (this.isRequiredField('patientId')) {
+            if ((this.pateintBasicInfo.idType === '' || this.pateintBasicInfo.idType === undefined)) {
                 validator.push({ property: " ID Type", message: '' });
+
+            }
+        }
+        if (this.isRequiredField('patientId')) {
+            if (this.pateintBasicInfo.patientId === '' || this.pateintBasicInfo.patientId === undefined) {
                 validator.push({ property: "ID", message: '' });
             }
         }
