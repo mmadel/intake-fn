@@ -35,8 +35,8 @@ export class QuestionnaireAddComponent implements OnInit {
   cards: { id: number, name: string }[] = [
     { "id": 1, "name": "Basic Information" },
     { "id": 2, "name": "Address Information" },
-    { "id": 3, "name": "Medicial Information" },
-    { "id": 4, "name": "Medicial History Information" },
+    { "id": 3, "name": "Medical Information" },
+    { "id": 4, "name": "Medical History Information" },
     { "id": 5, "name": "Insurance Information" },
     { "id": 6, "name": "Upload Photos" },
     { "id": 7, "name": "Aggreements" },
