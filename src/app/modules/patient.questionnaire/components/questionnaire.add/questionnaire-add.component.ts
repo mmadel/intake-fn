@@ -128,7 +128,6 @@ export class QuestionnaireAddComponent implements OnInit {
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
-      console.log(JSON.stringify(this.patient.basicInfo))
       this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();
