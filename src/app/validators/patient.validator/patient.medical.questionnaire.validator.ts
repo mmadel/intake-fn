@@ -43,22 +43,22 @@ export class PatientMedicalQuestionnaireValidator extends PatientValidator {
                 if (this.medicalQuestionnaireInfo.recommendationDoctor.npi === '' || this.medicalQuestionnaireInfo.recommendationDoctor.npi === undefined)
                     validator.push({ property: " Recommendation Doctor NPI", message: '' });
             }
-            if (this.isRequiredField('recommendedDoctorFax')) {
-                if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
-                    validator.push({ property: " Recommendation Doctor Fax", message: '' });
-            }
-            if (this.isRequiredField('recommendedDoctorAddress')) {
-                if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.type === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.type === undefined)
-                    validator.push({ property: " Recommendation Doctor Address Type", message: '' });
-                if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.first === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.first === undefined)
-                    validator.push({ property: " Recommendation Doctor Address first ", message: '' });
-                if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.second === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.second === undefined)
-                    validator.push({ property: " Recommendation Doctor Address second ", message: '' });
-                if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.country === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.country === undefined)
-                    validator.push({ property: " Recommendation Doctor Address country ", message: '' });
-                if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.zipCode === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.zipCode === undefined)
-                    validator.push({ property: " Recommendation Doctor Address zipCode ", message: '' });
-            }
+            // if (this.isRequiredField('recommendedDoctorFax')) {
+            //     if (this.medicalQuestionnaireInfo.recommendationDoctor.fax === '' || this.medicalQuestionnaireInfo.recommendationDoctor.fax === undefined)
+            //         validator.push({ property: " Recommendation Doctor Fax", message: '' });
+            // }
+            // if (this.isRequiredField('recommendedDoctorAddress')) {
+            //     if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.type === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.type === undefined)
+            //         validator.push({ property: " Recommendation Doctor Address Type", message: '' });
+            //     if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.first === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.first === undefined)
+            //         validator.push({ property: " Recommendation Doctor Address first ", message: '' });
+            //     if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.second === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.second === undefined)
+            //         validator.push({ property: " Recommendation Doctor Address second ", message: '' });
+            //     if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.country === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.country === undefined)
+            //         validator.push({ property: " Recommendation Doctor Address country ", message: '' });
+            //     if (this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.zipCode === '' || this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress?.zipCode === undefined)
+            //         validator.push({ property: " Recommendation Doctor Address zipCode ", message: '' });
+            // }
         }
     }
 

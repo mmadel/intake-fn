@@ -31,7 +31,7 @@ export class MedicalInfoComponent implements OnInit {
       this.medicalQuestionnaireInfo.isDoctorRecommended = true
       this.medicalQuestionnaireInfo.recommendationEntity = undefined;
       this.medicalQuestionnaireInfo.recommendationDoctor = new RecommendationDoctor();
-      this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress = new Address();
+      //this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress = new Address();
     } if (val === 'no') {
       this.medicalQuestionnaireInfo.isDoctorRecommended = false
       this.medicalQuestionnaireInfo.recommendationDoctor = undefined;

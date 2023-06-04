@@ -58,13 +58,7 @@ export class SummaryComponent implements OnInit {
     if (this.pateint.medicalQuestionnaireInfo.isDoctorRecommended) {
       paragraph +=
         `<b style="font-family:Cursive">Recommendation Doctor Name</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.name} </i></br>
-      <b style="font-family:Cursive">Recommendation Doctor Address</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.first} , 
-      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.second},
-      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.country}
-      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.state}
-      ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.doctorAddress?.zipCode}
       </i></br>
-      <b style="font-family:Cursive">Recommendation Doctor Fax</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.fax} </i></br>
       <b style="font-family:Cursive">Recommendation Doctor Fax</b> : <i style="font-family:Cursive"> ${this.pateint.medicalQuestionnaireInfo.recommendationDoctor?.npi} </i></br>`
     } else {
       paragraph +=
