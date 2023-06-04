@@ -1,6 +1,9 @@
 export interface BasicInfoRequired {
     id:number|null
     name: boolean;
+    firstName:boolean;
+    middleName:boolean;
+    lastName:boolean;
     birthDate: boolean
     gender: boolean
     maritalStatus: boolean

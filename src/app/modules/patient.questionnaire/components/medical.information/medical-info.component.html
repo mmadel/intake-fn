@@ -35,7 +35,7 @@
                         *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
                         [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.npi" name="doctornpi" maxlength="10"/>
                 </div>
-                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorFax') }" class="mb-1">
+                <!-- <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorFax') }" class="mb-1">
                     <label for="doctorfax" class="form-label">Doctor Fax</label>
                     <input numbers cFormControl placeholder="Fax #" sizing="sm"
                         *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
@@ -43,7 +43,7 @@
                 </div>
                 <app-address *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
                     [pateintAddressInfo]="medicalQuestionnaireInfo.recommendationDoctor.doctorAddress"
-                    [requiredFields]="addressInfoRequired"></app-address>
+                    [requiredFields]="addressInfoRequired"></app-address> -->
             </form>
         </c-col>
         <c-col xs="4" *ngIf="isReferringDoctor === 'no'">

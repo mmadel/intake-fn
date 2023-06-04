@@ -56,7 +56,7 @@ export class MdicalHistoryValidator extends PatientValidator {
             if (this.model.scanningTest === undefined)
                 validator.push({ property: "Please Select : MRI , CT Or X-Ray", message: '' });
 
-            else if (this.model.scanningTestValue === '' || this.model.scanningTestValue === undefined)
+            else if ((this.model.scanningTestValue === '' || this.model.scanningTestValue === undefined) && (this.model.scanningTest))
                 validator.push({ property: "MRI , CT Or X-Ray Values", message: '' });
         }
 

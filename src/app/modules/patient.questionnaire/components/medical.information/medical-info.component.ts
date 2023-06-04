@@ -22,7 +22,7 @@ export class MedicalInfoComponent implements OnInit {
   addressInfoRequired: AddressInfoRequired
   @Input() requiredFields: MedicalInfoRequired;
   entityValues = entityValues;
-  constructor(private localService:LocalService) { }
+  constructor(private localService: LocalService) { }
 
   referringDoctorQChange(val: string) {
     this.isReferringDoctor = val;
@@ -31,7 +31,7 @@ export class MedicalInfoComponent implements OnInit {
       this.medicalQuestionnaireInfo.isDoctorRecommended = true
       this.medicalQuestionnaireInfo.recommendationEntity = undefined;
       this.medicalQuestionnaireInfo.recommendationDoctor = new RecommendationDoctor();
-      this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress = new Address();
+      //this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress = new Address();
     } if (val === 'no') {
       this.medicalQuestionnaireInfo.isDoctorRecommended = false
       this.medicalQuestionnaireInfo.recommendationDoctor = undefined;
@@ -67,15 +67,13 @@ export class MedicalInfoComponent implements OnInit {
     } else {
       this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
     }
-    if (this.requiredFields.recommendedDoctorAddress) {
-      this.addressInfoRequired = {
-        id: null,
-        type: true,
-        first: true,
-        second: true,
-        country: true,
-        zipCode: true
-      }
+    this.addressInfoRequired = {
+      id: null,
+      type: true,
+      first: true,
+      second: true,
+      country: true,
+      zipCode: true
     }
   }
   isRequiredField(name: string): boolean {

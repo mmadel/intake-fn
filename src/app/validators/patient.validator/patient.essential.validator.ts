@@ -40,14 +40,16 @@ export class PatientEssentialValidator extends PatientValidator {
         }
     }
     protected validateInfo(validator: PropertyValidator[]) {
-        if (this.isRequiredField('name')) {
+        if (this.isRequiredField('firstName'))
             if (this.pateintBasicInfo.firstName === '' || this.pateintBasicInfo.firstName === undefined)
                 validator.push({ property: " First Name", message: '' });
+        if (this.isRequiredField('middleName'))
             if (this.pateintBasicInfo.middleName === '' || this.pateintBasicInfo.middleName === undefined)
                 validator.push({ property: " Middle Name", message: '' });
+        if (this.isRequiredField('lastName'))
             if (this.pateintBasicInfo.lastName === '' || this.pateintBasicInfo.lastName === undefined)
                 validator.push({ property: " Last Name", message: '' });
-        }
+
         if (this.isRequiredField('birthDate')) {
             if (Number.isNaN(this.pateintBasicInfo.birthDate))
                 validator.push({ property: " Birth Date", message: '' });
@@ -73,10 +75,14 @@ export class PatientEssentialValidator extends PatientValidator {
             if (this.pateintBasicInfo.email === '' || this.pateintBasicInfo.email === undefined)
                 validator.push({ property: " Email ", message: '' });
         }
-        if (this.isRequiredField('patientId') && this.isRequiredField('patientId')) {
-            if ((this.pateintBasicInfo.idType === '' || this.pateintBasicInfo.idType === undefined) &&
-                (this.pateintBasicInfo.patientId === '' || this.pateintBasicInfo.patientId === undefined)) {
+        if (this.isRequiredField('patientId')) {
+            if ((this.pateintBasicInfo.idType === '' || this.pateintBasicInfo.idType === undefined)) {
                 validator.push({ property: " ID Type", message: '' });
+
+            }
+        }
+        if (this.isRequiredField('patientId')) {
+            if (this.pateintBasicInfo.patientId === '' || this.pateintBasicInfo.patientId === undefined) {
                 validator.push({ property: "ID", message: '' });
             }
         }

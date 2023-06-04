@@ -17,7 +17,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
   isMetalImplantation: string = '';
   isPacemaker: string = ''
   patientConditions: IPatientCondition[];
-  constructor(private localService:LocalService) { }
+  constructor(private localService: LocalService) { }
 
   ngOnInit(): void {
     this.createPatientConditions();
@@ -25,15 +25,28 @@ export class MedicalHistoryInformationComponent implements OnInit {
       var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
       if (pateint.medicalHistoryInformation !== undefined) {
         this.model = pateint.medicalHistoryInformation;
-        pateint.medicalHistoryInformation.metalImplantation ? this.isMetalImplantation = 'yes' : this.isMetalImplantation = 'no'
-        pateint.medicalHistoryInformation.pacemaker ? this.isPacemaker = 'yes' : this.isPacemaker = 'no'
-        pateint.medicalHistoryInformation.scanningTest ? this.isScanning = 'yes' : this.isScanning = 'no'
-        this.model.patientCondition.forEach(name => {
-          this.patientConditions.forEach(condition => {
-            if (name === condition.name)
-              condition.selected = true
-          })
-        });
+        if (pateint.medicalHistoryInformation.metalImplantation)
+          this.isMetalImplantation = 'yes'
+        else if (pateint.medicalHistoryInformation.metalImplantation === false)
+          this.isMetalImplantation = 'no'
+        //pateint.medicalHistoryInformation.metalImplantation ? this.isMetalImplantation = 'yes' : this.isMetalImplantation = 'no'
+        if (pateint.medicalHistoryInformation.pacemaker)
+          this.isPacemaker = 'yes'
+        else if (pateint.medicalHistoryInformation.pacemaker === false)
+          this.isPacemaker = 'no'
+        //pateint.medicalHistoryInformation.pacemaker ? this.isPacemaker = 'yes' : this.isPacemaker = 'no'
+        if (pateint.medicalHistoryInformation.scanningTest)
+          this.isScanning = 'yes'
+        else if (pateint.medicalHistoryInformation.scanningTest === false)
+          this.isScanning = 'no'
+        //pateint.medicalHistoryInformation.scanningTest ? this.isScanning = 'yes' : this.isScanning = 'no'
+        if (this.model.patientCondition !== undefined)
+          this.model.patientCondition.forEach(name => {
+            this.patientConditions.forEach(condition => {
+              if (name === condition.name)
+                condition.selected = true
+            })
+          });
       }
       else
         this.model = new MedicalHistroyInformation();

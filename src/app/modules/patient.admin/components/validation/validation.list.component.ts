@@ -59,7 +59,10 @@ export class ValidationListComponent implements OnInit {
         this.patientFields = new PatientRequiredFields();
         this.patientFields.basicInfo = {
           id: null,
-          name: true,
+          name:true,
+          firstName: true,
+          middleName:true,
+          lastName:true,
           birthDate: true,
           gender: true,
           maritalStatus: true,
