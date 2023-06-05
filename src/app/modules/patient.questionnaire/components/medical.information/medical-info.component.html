@@ -154,14 +154,12 @@
         <c-col xs="4" *ngIf="isphysicalTherapy === 'yes'">
             <form cForm>
                 <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapyLocation') }" class="mb-1">
-                    <label for="physicalTherapywhere" class="form-label">Where </label>
                     <input cFormControl placeholder="Where" sizing="sm" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
                         [(ngModel)]="medicalQuestionnaireInfo.physicalTherapy.location" name="physicalTherapywhere" />
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapyNumberOfVisit') }" class="mb-1">
-                    <label for="physicalTherapywheretimes" class="form-label">How many visits</label>
                     <input cFormControl type="number" name="physicalTherapywheretimes" min="1" sizing="sm"
-                        placeholder="How many visits" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
+                        placeholder="How many visits?" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
                         [(ngModel)]="medicalQuestionnaireInfo.physicalTherapy.numberOfVisit"
                         name="physicalTherapywheretimes" />
                 </div>
