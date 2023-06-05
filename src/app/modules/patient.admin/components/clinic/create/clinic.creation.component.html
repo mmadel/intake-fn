@@ -95,11 +95,11 @@
                             <small
                                 *ngIf="clinicaddresszipcode.invalid && (clinicaddresszipcode.dirty || clinicaddresszipcode.touched)"
                                 class="form-text text-danger">
-                                Clinic Address ZipCode is required
+                                Clinic Address Zip Code is required
                             </small>
                             <c-input-group class="mb-3">
                                 <input zipcode autoComplete="clinicaddresszipcode" cFormControl id="clinicaddresszipcode"
-                                    name="clinicaddresszipcode" placeholder="Enter ZipCode" required
+                                    name="clinicaddresszipcode" placeholder="Enter Zip Code" required
                                     [ngClass]="{'is-invalid': clinicaddresszipcode.invalid && (clinicaddresszipcode.dirty || clinicaddresszipcode.touched)}"
                                     [(ngModel)]="form.clinicaddresszipcode" #clinicaddresszipcode="ngModel" />
                             </c-input-group>
