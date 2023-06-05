@@ -1,3 +1,5 @@
+import { EmergencyRelation } from "src/app/modules/patient.questionnaire/models/patient/emergency.relation";
+
 export class Basic {
     firstName: string = '';
     middleName: string = '';
@@ -11,11 +13,12 @@ export class Basic {
     email: string = '';
     idType: string = '';
     patientId: string = '';
-    id_effective_from_date= new Date();
+    id_effective_from_date = new Date();
     idEffectiveFrom: number = 0;
     id_effective_to_date = new Date();
     idEffectiveTo: number = 0;
     emergencyName: string = '';
+    emergencyRelation: EmergencyRelation;
     emergencyPhone: string = '';
     employmentStatus: string = '';
 
