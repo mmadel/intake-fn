@@ -50,14 +50,14 @@
                             <small
                                 *ngIf="useraddresscountry.invalid && (useraddresscountry.dirty || useraddresscountry.touched)"
                                 class="form-text text-danger">
-                                clinic Country is required
+                                clinic County is required
                             </small>
                             <c-input-group class="mb-3">
                                 <select cSelect sizing="sm" cFormControl autoComplete="useraddresscountry"
                                     name="useraddresscountry" id="useraddresscountry"
                                     [ngClass]="{'is-invalid': useraddresscountry.invalid && (useraddresscountry.dirty || useraddresscountry.touched )}"
                                     [(ngModel)]="form.useraddresscountry" #useraddresscountry="ngModel">
-                                    <option value="null">Select Country</option>
+                                    <option value="null">Select County</option>
                                     <option *ngFor="let country of countries" [value]="country.name">
                                         {{country.name}}
                                     </option>
