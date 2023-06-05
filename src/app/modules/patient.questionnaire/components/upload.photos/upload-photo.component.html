@@ -7,13 +7,15 @@
         </div>
     </c-card-header>
     <c-card-body>
-        <div class="mb-3">
+        <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pIdfront">Patient ID Front</label>
-            <input cFormControl id="pIdfront" accept="image/*" (change)="onImageUpload($event ,'pIdfront')" type="file" class="mb-1" />
+            <input cFormControl id="pIdfront" accept="image/*" (change)="onImageUpload($event ,'pIdfront')" type="file"
+                class="mb-1" />
         </div>
-        <div class="mb-3">
+        <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pIdback">Patient ID Back</label>
-            <input cFormControl id="pIdback" accept="image/*" (change)="onImageUpload($event ,'pIdback')" type="file" class="mb-1" />
+            <input cFormControl id="pIdback" accept="image/*" (change)="onImageUpload($event ,'pIdback')" type="file"
+                class="mb-1" />
 
         </div>
     </c-card-body>
@@ -27,15 +29,15 @@
         </div>
     </c-card-header>
     <c-card-body>
-        <div class="mb-3">
+        <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pinsurancefront">Patient Insurance ID Front</label>
-            <input cFormControl id="pinsurancefront" accept="image/*" (change)="onImageUpload($event ,'pinsurancefront')" type="file"
-                class="mb-1" />
+            <input cFormControl id="pinsurancefront" accept="image/*"
+                (change)="onImageUpload($event ,'pinsurancefront')" type="file" class="mb-1" />
         </div>
-        <div class="mb-3">
+        <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pinsuranceback">Patient Insurance ID Back</label>
-            <input cFormControl id="pinsuranceback" accept="image/*" (change)="onImageUpload($event ,'pinsuranceback')" type="file"
-                class="mb-1" />
+            <input cFormControl id="pinsuranceback" accept="image/*" (change)="onImageUpload($event ,'pinsuranceback')"
+                type="file" class="mb-1" />
         </div>
     </c-card-body>
 </c-card>
