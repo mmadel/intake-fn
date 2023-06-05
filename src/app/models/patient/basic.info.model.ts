@@ -18,8 +18,9 @@ export class Basic {
     id_effective_to_date = new Date();
     idEffectiveTo: number = 0;
     emergencyName: string = '';
-    emergencyRelation: EmergencyRelation;
+    emergencyRelation: EmergencyRelation | null = null;
     emergencyPhone: string = '';
     employmentStatus: string = '';
+    employmentCompany :string = ''
 
 }
