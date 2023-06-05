@@ -7,7 +7,13 @@
         </div>
     </c-card-header>
     <c-card-body>
-        <input cFormControl sizing="sm" [(ngModel)]="model.height" type="number" step="1"/>
+        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+            <input cFormCheckInput type="checkbox" [(ngModel)]="heightUnit" (change)="changeHeightUnit($event)"/>
+            <label cFormCheckLabel>
+                <span  [ngClass]="{ 'fw-bold':!heightUnit }">Inch</span>/<span [ngClass]="{ 'fw-bold':heightUnit }">Centimeter</span>
+            </label>
+        </c-form-check>
+        <input cFormControl sizing="sm" [(ngModel)]="model.height" type="number" step="1" />
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
@@ -19,7 +25,7 @@
         </div>
     </c-card-header>
     <c-card-body>
-        <input cFormControl sizing="sm" [(ngModel)]="model.weight" type="number" step="1"/>
+        <input cFormControl sizing="sm" [(ngModel)]="model.weight" type="number" step="1" class="mb-3" />
     </c-card-body>
 </c-card>
 <c-card class="mb-2">

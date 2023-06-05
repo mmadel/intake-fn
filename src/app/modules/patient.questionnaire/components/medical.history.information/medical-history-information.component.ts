@@ -17,6 +17,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
   isMetalImplantation: string = '';
   isPacemaker: string = ''
   patientConditions: IPatientCondition[];
+  heightUnit: boolean = false;
   constructor(private localService: LocalService) { }
 
   ngOnInit(): void {
@@ -75,7 +76,6 @@ export class MedicalHistoryInformationComponent implements OnInit {
     this.isPacemaker = val;
     val === 'yes' ? this.model.pacemaker = true : this.model.pacemaker = false;
   }
-
   createPatientConditions() {
     this.patientConditions =
       [{
@@ -141,6 +141,15 @@ export class MedicalHistoryInformationComponent implements OnInit {
         selected: false
       }
       ]
+  }
+  changeHeightUnit(event: any) {
+    if (this.heightUnit) {
+      this.model.height = (Number(this.model.height) / 0.3937 ).toFixed(2)+ '';
+    }
+    if (!this.heightUnit) {
+      this.model.height = (Number(this.model.height) * 0.3937 ).toFixed(2)+ '';
+    }
+
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;
