@@ -148,8 +148,16 @@
 
         <div cRow>
             <c-col xs="12" class="mb-2">
+                <label for="emergencyName" class="form-label">Emergency Contact</label>
+                <select cFormControl cSelect class="mb-2" sizing="sm" id="EmergencyRelation" name="EmergencyRelation" >
+                    <option [ngValue]="null" disabled selected>Select Relation</option>
+                    <option *ngFor="let  relation of emergencyRelations" [value]="relation">
+                        {{relation}}
+                    </option>
+                </select>
+            </c-col>
+            <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('emergencyContact') }">
-                    <label for="emergencyName" class="form-label">Emergency Contact</label>
                     <input cFormControl [(ngModel)]="pateintBasicInfo.emergencyName" name="emergencyName" sizing="sm"
                     placeholder="Emergency Name" />
                 </div>
