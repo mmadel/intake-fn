@@ -1,37 +1,19 @@
-<c-card class="mb-3">
-    <c-card-header>
-        <h6>Is it, worker's comp/No fault?</h6>
-    </c-card-header>
-    <c-card-body>
-        <c-col xs="12" class="mb-1">
-            <c-form-check>
-                <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('yes')" value="Yes"
-                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='yes'" />
-                <label cFormCheckLabel>Yes</label>
-            </c-form-check>
-            <c-form-check>
-                <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('no')" value="no"
-                    name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='no'" />
-                <label cFormCheckLabel>No</label>
-            </c-form-check>
-        </c-col>
-    </c-card-body>
-</c-card>
-<c-row class="justify-content-center">
-    <c-col xs="6">
-        <c-card class="mb-3" *ngIf="isWorkerCompNoFault === 'yes'">
-            <c-card-body>
-                <app-worker-comp [insurnaceCompInfoRequired]="insurnaceCompInfoRequired"></app-worker-comp>
-            </c-card-body>
-        </c-card>
-    </c-col>
-</c-row>
-<c-row class="justify-content-center">
-    <c-col xs="6">
-        <c-card class="mb-3" *ngIf="isWorkerCompNoFault === 'no'">
-            <c-card-body>
-                <app-worker-not-comp [insurnacecommerialInfoRequired]="insurnacecommerialInfoRequired"></app-worker-not-comp>
-            </c-card-body>
-        </c-card>
-    </c-col>
-</c-row>
+<c-col xs="auto" class="mb-3">
+    <h5>Is it, worker's comp/No fault?</h5>
+    <c-form-check>
+        <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('yes')" value="Yes"
+            name="flexRadioDefault" size="sm" [checked]="isWorkerCompNoFault ==='yes'" />
+        <label cFormCheckLabel>Yes</label>
+    </c-form-check>
+    <c-form-check>
+        <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('no')" value="no" name="flexRadioDefault"
+            size="sm" [checked]="isWorkerCompNoFault ==='no'" />
+        <label cFormCheckLabel>No</label>
+    </c-form-check>
+</c-col>
+<c-col xs="auto" *ngIf="isWorkerCompNoFault === 'yes'" class="mb-3">
+    <app-worker-comp [insurnaceCompInfoRequired]="insurnaceCompInfoRequired"></app-worker-comp>
+</c-col>
+<c-col xs="auto" *ngIf="isWorkerCompNoFault === 'no'" class="mb-3">
+    <app-worker-not-comp [insurnacecommerialInfoRequired]="insurnacecommerialInfoRequired"></app-worker-not-comp>
+</c-col>
