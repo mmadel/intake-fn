@@ -38,14 +38,14 @@
                             <small
                                 *ngIf="clinicaddresscountry.invalid && (clinicaddresscountry.dirty || clinicaddresscountry.touched)"
                                 class="form-text text-danger">
-                                clinic Country is required
+                                clinic County is required
                             </small>
                             <c-input-group class="mb-3">
                                 <select cSelect sizing="sm" cFormControl autoComplete="clinicaddresscountry"
                                     name="clinicaddresscountry" id="clinicaddresscountry"
                                     [ngClass]="{'is-invalid': clinicaddresscountry.invalid && (clinicaddresscountry.dirty || clinicaddresscountry.touched )}"
                                     [(ngModel)]="form.clinicaddresscountry" #clinicaddresscountry="ngModel">
-                                    <option value="null">Select Country</option>
+                                    <option value="null">Select County</option>
                                     <option *ngFor="let country of countries" [value]="country.name">
                                         {{country.name}}
                                     </option>
@@ -95,11 +95,11 @@
                             <small
                                 *ngIf="clinicaddresszipcode.invalid && (clinicaddresszipcode.dirty || clinicaddresszipcode.touched)"
                                 class="form-text text-danger">
-                                Clinic Address ZipCode is required
+                                Clinic Address Zip Code is required
                             </small>
                             <c-input-group class="mb-3">
                                 <input zipcode autoComplete="clinicaddresszipcode" cFormControl id="clinicaddresszipcode"
-                                    name="clinicaddresszipcode" placeholder="Enter ZipCode" required
+                                    name="clinicaddresszipcode" placeholder="Enter Zip Code" required
                                     [ngClass]="{'is-invalid': clinicaddresszipcode.invalid && (clinicaddresszipcode.dirty || clinicaddresszipcode.touched)}"
                                     [(ngModel)]="form.clinicaddresszipcode" #clinicaddresszipcode="ngModel" />
                             </c-input-group>
