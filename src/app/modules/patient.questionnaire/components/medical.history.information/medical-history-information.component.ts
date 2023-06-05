@@ -144,9 +144,11 @@ export class MedicalHistoryInformationComponent implements OnInit {
   }
   changeHeightUnit(event: any) {
     if (this.heightUnit) {
+      this.model.heightUnit = 'cm'
       this.model.height = (Number(this.model.height) / 0.3937 ).toFixed(2)+ '';
     }
     if (!this.heightUnit) {
+      this.model.heightUnit = 'inch'
       this.model.height = (Number(this.model.height) * 0.3937 ).toFixed(2)+ '';
     }
 
