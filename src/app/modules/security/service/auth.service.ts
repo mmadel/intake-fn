@@ -1,9 +1,6 @@
 import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { INavData } from '@coreui/angular-pro';
 import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
-import { adminNavItems } from 'src/app/core/adminlayout/_adminnav';
-import { userNavItems } from 'src/app/core/adminlayout/_usernav';
 import { environment } from 'src/environments/environment';
 import { LocalService } from '../../common';
 import { LoginResponse } from '../model/login.response';

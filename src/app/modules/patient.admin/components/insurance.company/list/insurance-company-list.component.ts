@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InsuranceCompany } from '../../../models/insurance.company.model';
+import { InsuranceCompanyService } from '../../../services/insurance.company/insurance-company.service';
 
 @Component({
   selector: 'app-insurance-company-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsuranceCompanyListComponent implements OnInit {
 
-  constructor() { }
+  InsuranceCompanies: InsuranceCompany[] = new Array();
+  constructor(private insuranceCompanyService: InsuranceCompanyService) { }
 
   ngOnInit(): void {
+    this.insuranceCompanyService.get().subscribe((response) => {
+      console.log(JSON.stringify(response));
+      response.body?.forEach(element => {
+        this.InsuranceCompanies?.push(element);
+      });
+    })
+  }
+  create() {
+
   }
 
 }
