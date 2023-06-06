@@ -7,7 +7,9 @@
                     <h3>Insurance Company Creation</h3>
                 </c-card-header>
                 <c-card-body>
-                    
+                    <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p><form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+                        
+                    </form>
 
                 </c-card-body>
             </c-card>

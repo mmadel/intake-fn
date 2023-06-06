@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./insurance-company-create.component.css']
 })
 export class InsuranceCompanyCreateComponent implements OnInit {
-
+  errorMessage: string | null;
   constructor() { }
 
   ngOnInit(): void {
   }
+  create(){
 
+  }
+  resetError(){
+    
+  }
 }
