@@ -128,21 +128,23 @@
                         </div>
                         <div class="form-group">
                             <c-input-group class="mb-3">
-                                <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm" autoComplete="selectedClinics" name="selectedClinics"
-                                    id="selectedClinics" [(ngModel)]="form.selectedClinics" #selectedClinics="ngModel">
+                                <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm"
+                                    autoComplete="selectedClinics" name="selectedClinics" id="selectedClinics"
+                                    [(ngModel)]="form.selectedClinics" #selectedClinics="ngModel">
                                     <c-multi-select-option *ngFor="let clinic of returnClinics"
                                         [value]="clinic.id?.toString()"
                                         [selected]="clinic.selected">{{clinic.name}}</c-multi-select-option>
                                 </c-multi-select>
                             </c-input-group>
                         </div>
-                        <button cButton type="submit" size="sm" color="primary" variant="outline"
-                            class="mb-3 ustify-content-center">
-                            Save
-                        </button>
+                        <div class="text-center">
+                            <button cButton type="submit" size="sm" color="primary" variant="outline">
+                                Create
+                            </button>
+                        </div>
                     </form>
                 </c-card-body>
-                
+
             </c-card>
         </c-col>
     </c-row>

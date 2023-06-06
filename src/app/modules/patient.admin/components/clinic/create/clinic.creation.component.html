@@ -10,8 +10,7 @@
                     <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
                     <form cForm #clinicCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
                         <div class="form-group">
-                            <small *ngIf="name.invalid && (name.dirty || name.touched)"
-                                class="form-text text-danger">
+                            <small *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text text-danger">
                                 clinic name is required
                             </small>
                             <c-input-group class="mb-3">
@@ -98,16 +97,18 @@
                                 Clinic Address Zip Code is required
                             </small>
                             <c-input-group class="mb-3">
-                                <input zipcode autoComplete="clinicaddresszipcode" cFormControl id="clinicaddresszipcode"
-                                    name="clinicaddresszipcode" placeholder="Enter Zip Code" required
+                                <input zipcode autoComplete="clinicaddresszipcode" cFormControl
+                                    id="clinicaddresszipcode" name="clinicaddresszipcode" placeholder="Enter Zip Code"
+                                    required
                                     [ngClass]="{'is-invalid': clinicaddresszipcode.invalid && (clinicaddresszipcode.dirty || clinicaddresszipcode.touched)}"
                                     [(ngModel)]="form.clinicaddresszipcode" #clinicaddresszipcode="ngModel" />
                             </c-input-group>
                         </div>
-                        <button cButton type="submit" size="sm" color="primary" variant="outline"
-                            class="mb-3 ustify-content-center">
-                            Save
-                        </button>
+                        <div class="text-center">
+                            <button cButton type="submit" size="sm" color="primary" variant="outline">
+                                Create
+                            </button>
+                        </div>
                     </form>
                 </c-card-body>
 
