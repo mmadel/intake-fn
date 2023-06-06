@@ -68,7 +68,7 @@
 
         </c-col>
 
-        <div cRow>
+        
             <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('phone') }">
                     <label for="phonetype" class="form-label">Phone</label>
@@ -91,22 +91,17 @@
                     </c-input-group>
                 </div>
             </c-col>
-        </div>
 
-        <c-col xs="auto" class="mb-2">
+        <c-col xs="12" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('email') }">
                 <label for="email" class="form-label">Email</label>
                 <input aria-describedby="basic-addon2" cFormControl sizing="sm" [(ngModel)]="pateintBasicInfo.email"
                     name="email" />
             </div>
-
-        </c-col>
-
-        <div cRow>
-            <c-col xs="3" class="mb-2">
-
-                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
-                    <label for="pIdType" class="form-label">ID Type</label>
+        </c-col>        
+            <c-col xs="12" class="mb-2">
+                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }" class="mb-1">
+                    <label for="pIdType" class="form-label">Patient ID</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         [(ngModel)]="pateintBasicInfo.idType" name="pIdType">
                         <option value="">Select ID Type</option>
@@ -115,26 +110,18 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
-
-            </c-col>
-            <c-col xs="3" class="mb-2">
-
-                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
-                    <label for="pId" class="form-label">ID</label>
+                <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }" class="mb-2">
                     <input cFormControl [(ngModel)]="pateintBasicInfo.patientId" sizing="sm" name="pId" />
                 </div>
-
             </c-col>
-            <c-col xs="3" class="mb-2">
-
+            <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
                     <label for="ideffictivefrom" class="form-label">ID Effective From</label>
                     <c-date-picker closeOnSelect size="sm" cFormControl
                         [(ngModel)]="pateintBasicInfo.id_effective_from_date" name="ideffictivefrom"></c-date-picker>
                 </div>
-
             </c-col>
-            <c-col xs="3" class="mb-2">
+            <c-col xs="12" class="mb-2">
 
                 <div [ngClass]="{ 'form-group required':isRequiredField('patientId') }">
                     <label for="ideffictiveto" class="form-label">ID Effective To</label>
@@ -143,7 +130,6 @@
                 </div>
 
             </c-col>
-        </div>
 
         <div cRow>
             <c-col xs="12" class="mb-2">
@@ -188,7 +174,7 @@
         </c-col>
         <c-col xs="auto" class="mb-2" *ngIf="pateintBasicInfo.employmentStatus === 'Employed'">
             <input cFormControl [(ngModel)]="pateintBasicInfo.employmentCompany" sizing="sm" name="employedcompnay"
-            placeholder="Company" />
+                placeholder="Company" />
         </c-col>
     </form>
 </c-row>
