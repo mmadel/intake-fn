@@ -62,6 +62,7 @@ export class AuthService {
     this.localService.removeData('token');
     this.localService.removeData('userId');
     this.localService.removeData('userRole');
+    this.localService.removeData('userName');
     this.user$.next(null);
   }
 }
