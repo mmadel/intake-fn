@@ -5,8 +5,10 @@
                 <label for="insuranceCompanyName" class="form-label">Insurance Company</label>
                 <select cSelect sizing="sm" name="insuranceCompanyName" style="line-height: 15px;" cFormControl
                     [(ngModel)]="model.insuranceCompanyId">
-                    <option value="">Select</option>
-                    <option value="3838">comp1</option>
+                    <option value="" disabled selected>Select insurance Company</option>
+                    <option *ngFor="let InsuranceCompany of InsuranceCompanies"
+                        [value]="InsuranceCompany.id?.toString()">
+                        {{InsuranceCompany.name}}</option>
                 </select>
             </div>
         </c-col>
@@ -187,7 +189,7 @@
                         <label for="mcphone" class="form-label">Policy Holder’s Phone</label>
                         <c-input-group class="mb-3" sizing="sm" name="mcphone">
                             <span cInputGroupText id="basic-addon1">+1</span>
-                            <input numbers cFormControl *ngIf="model.medicareCoverageDTO" 
+                            <input numbers cFormControl *ngIf="model.medicareCoverageDTO"
                                 [ngModel]="model.medicareCoverageDTO.employerPhone | phone"
                                 (ngModelChange)="model.medicareCoverageDTO.employerPhone=$event" name="phone"
                                 maxlength="15" />

@@ -9,7 +9,7 @@ export class WrokerNotComp {
     relationship: string =''
     isSecondaryInsurance: boolean;
     isMedicareCoverage: boolean |undefined;
-    insuranceCompanyId: string
+    insuranceCompanyId: string ='';
     secondaryInsuranceDTO: SecondaryInsurance | undefined
     medicareCoverageDTO: MedicareCoverage | undefined
     patientRelationshipDTO: PatientRelationship | undefined
