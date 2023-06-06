@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { InsuranceCompany } from '../../../models/insurance.company.model';
 import { InsuranceCompanyService } from '../../../services/insurance.company/insurance-company.service';
 
@@ -10,7 +11,7 @@ import { InsuranceCompanyService } from '../../../services/insurance.company/ins
 export class InsuranceCompanyListComponent implements OnInit {
 
   InsuranceCompanies: InsuranceCompany[] = new Array();
-  constructor(private insuranceCompanyService: InsuranceCompanyService) { }
+  constructor(private router: Router,private insuranceCompanyService: InsuranceCompanyService) { }
 
   ngOnInit(): void {
     this.insuranceCompanyService.get().subscribe((response) => {
@@ -21,7 +22,7 @@ export class InsuranceCompanyListComponent implements OnInit {
     })
   }
   create() {
-
+    this.router.navigateByUrl('/admin/insurance/company/create');
   }
 
 }
