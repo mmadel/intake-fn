@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import * as _ from 'lodash';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
@@ -7,7 +6,8 @@ import { SecondaryInsurance } from 'src/app/models/questionnaire/Insurance/secon
 import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
 import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurnace.commerial.info.required';
 import { LocalService } from 'src/app/modules/common';
-import requiredFields from '../../../service/_patient.require.fields.service';
+import { InsuranceCompany } from 'src/app/modules/patient.admin/models/insurance.company.model';
+import { InsuranceCompanyService } from 'src/app/modules/patient.admin/services/insurance.company/insurance-company.service';
 
 @Component({
   selector: 'app-worker-not-comp',
@@ -15,18 +15,24 @@ import requiredFields from '../../../service/_patient.require.fields.service';
   styleUrls: ['./worker-not-comp.component.css']
 })
 export class WorkerNotCompComponent implements OnInit {
+  InsuranceCompanies: InsuranceCompany[] = new Array();
   model: WrokerNotComp
   isSecondaryInsurance: string;
   isMedicareCoverage: string;
-  @Input() insurnacecommerialInfoRequired:InsurnacecommerialInfoRequired
-  constructor(private localService:LocalService) { }
+  @Input() insurnacecommerialInfoRequired: InsurnacecommerialInfoRequired
+  constructor(private localService: LocalService, private insuranceCompanyService:InsuranceCompanyService) { }
 
   ngOnInit(): void {
+    this.insuranceCompanyService.get().subscribe((response) => {
+      response.body?.forEach(element => {
+        this.InsuranceCompanies?.push(element);
+      });
+    })
     if (this.localService.getData('patient') !== null) {
       var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
       if (pateint.insuranceQuestionnaireInfo !== undefined && pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial !== undefined) {
         this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial;
-        
+
         pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial.isSecondaryInsurance ? this.isSecondaryInsurance = 'yes' :
           this.isSecondaryInsurance = 'no'
 

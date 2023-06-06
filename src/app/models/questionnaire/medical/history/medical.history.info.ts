@@ -1,5 +1,6 @@
 export class MedicalHistroyInformation {
     height: string;
+    heightUnit: string;
     weight: string;
     evaluationReason: string;
     medicationPrescription: string;

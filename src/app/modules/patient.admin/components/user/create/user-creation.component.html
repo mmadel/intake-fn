@@ -50,14 +50,14 @@
                             <small
                                 *ngIf="useraddresscountry.invalid && (useraddresscountry.dirty || useraddresscountry.touched)"
                                 class="form-text text-danger">
-                                clinic Country is required
+                                clinic County is required
                             </small>
                             <c-input-group class="mb-3">
                                 <select cSelect sizing="sm" cFormControl autoComplete="useraddresscountry"
                                     name="useraddresscountry" id="useraddresscountry"
                                     [ngClass]="{'is-invalid': useraddresscountry.invalid && (useraddresscountry.dirty || useraddresscountry.touched )}"
                                     [(ngModel)]="form.useraddresscountry" #useraddresscountry="ngModel">
-                                    <option value="null">Select Country</option>
+                                    <option value="null">Select County</option>
                                     <option *ngFor="let country of countries" [value]="country.name">
                                         {{country.name}}
                                     </option>
@@ -106,11 +106,11 @@
                             <small
                                 *ngIf="useraddresszipcode.invalid && (useraddresszipcode.dirty || useraddresszipcode.touched)"
                                 class="form-text text-danger">
-                                User Address ZipCode is required
+                                User Address Zip Code is required
                             </small>
                             <c-input-group class="mb-3">
                                 <input zipcode autoComplete="useraddresszipcode" cFormControl id="useraddresszipcode"
-                                    name="useraddresszipcode" placeholder="Enter ZipCode" required
+                                    name="useraddresszipcode" placeholder="Enter Zip Code" required
                                     [ngClass]="{'is-invalid': useraddresszipcode.invalid && (useraddresszipcode.dirty || useraddresszipcode.touched)}"
                                     [(ngModel)]="form.useraddresszipcode" #useraddresszipcode="ngModel" />
                             </c-input-group>
@@ -128,21 +128,23 @@
                         </div>
                         <div class="form-group">
                             <c-input-group class="mb-3">
-                                <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm" autoComplete="selectedClinics" name="selectedClinics"
-                                    id="selectedClinics" [(ngModel)]="form.selectedClinics" #selectedClinics="ngModel">
+                                <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm"
+                                    autoComplete="selectedClinics" name="selectedClinics" id="selectedClinics"
+                                    [(ngModel)]="form.selectedClinics" #selectedClinics="ngModel">
                                     <c-multi-select-option *ngFor="let clinic of returnClinics"
                                         [value]="clinic.id?.toString()"
                                         [selected]="clinic.selected">{{clinic.name}}</c-multi-select-option>
                                 </c-multi-select>
                             </c-input-group>
                         </div>
-                        <button cButton type="submit" size="sm" color="primary" variant="outline"
-                            class="mb-3 ustify-content-center">
-                            Save
-                        </button>
+                        <div class="text-center">
+                            <button cButton type="submit" size="sm" color="primary" variant="outline">
+                                Create
+                            </button>
+                        </div>
                     </form>
                 </c-card-body>
-                
+
             </c-card>
         </c-col>
     </c-row>

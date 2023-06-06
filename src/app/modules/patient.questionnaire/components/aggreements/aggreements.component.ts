@@ -48,26 +48,26 @@ export class AggreementsComponent implements OnInit {
     })
   }
   getReleaseInformationParagraph() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">${this.releaseInformationParagraph}</p>
+    const paragraph = `<p style="font-family:Lucida ">${this.releaseInformationParagraph}</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph)
   }
   getFinancialResponsibility() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">
+    const paragraph = `<p style="font-family:Lucida">
     ${this.FinancialResponsibilityParagraph}.</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph)
   }
 
   getFinancialAgreement() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">
+    const paragraph = `<p style="font-family:Lucida">
     ${this.FinancialAgreementParagraph}</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph)
   }
 
   getInsurance() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">
+    const paragraph = `<p style="font-family:Lucida ">
     ${this.InsuranceAgreementParagraph}.</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
@@ -80,7 +80,7 @@ export class AggreementsComponent implements OnInit {
     this.patientName = fName + ',' + mName + '.,' + lName
   }
   getHIPAAAcknowledgement() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">
+    const paragraph = `<p style="font-family:Lucida ">
     ${this.HIPAAAcknowledgementParagraph}Signature of Patient or Legal Representative:&#160;<b>${this.patientName}</b> &#160;Date: ${this.nowDate} </p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
@@ -88,21 +88,21 @@ export class AggreementsComponent implements OnInit {
   }
 
   getCupping() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">
-    ${this.CuppingParagraph}<p style="font-family:Lucida Handwriting">Patient/Guardian Name:&#160; <b>${this.patientName}</b> &#160; Date ${this.nowDate}<br/> Signature of Patient/Guardian:&#160; <b>${this.patientName}</b> &#160; Date ${this.nowDate}</p>
+    const paragraph = `<p style="font-family:Lucida ">
+    ${this.CuppingParagraph}<p style="font-family:Lucida ">Patient/Guardian Name:&#160; <b>${this.patientName}</b> &#160; Date ${this.nowDate}<br/> Signature of Patient/Guardian:&#160; <b>${this.patientName}</b> &#160; Date ${this.nowDate}</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
 
   getPelvic() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">
+    const paragraph = `<p style="font-family:Lucida">
     ${this.PelvicParagraph}Patient Name: &#160; <b>${this.patientName}</b><br/>Patient Signature: &#160; <b>${this.patientName}</b> &#160;Date :${this.nowDate}</p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
 
   getPhotoVideo() {
-    const paragraph = `<p style="font-family:Lucida Handwriting">I,<b>${this.patientName}</b><br/>  ${this.PhotoVideoParagraph}
+    const paragraph = `<p style="font-family:Lucida">I,<b>${this.patientName}</b><br/>  ${this.PhotoVideoParagraph}
     I acknowledge that I am <b>${this.patientName}</b>  over the age of 18 <br/><br/>Date: ${this.nowDate}      signature:<b>${this.patientName}</b></p>
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
