@@ -25,4 +25,7 @@
 /intake-service/api/document/id/patientId/:patientId https://patientintake-app.herokuapp.com/intake-service/api/document/id/patientId/:patientId  200
 /intake-service/api/document/insurance/patientId/:patientId https://patientintake-app.herokuapp.com/intake-service/api/document/insurance/patientId/:patientId  200
 
+
+/intake-service/api/insurance/company https://patientintake-app.herokuapp.com/intake-service/api/insurance/company 200
+/intake-service/api/insurance/company/find https://patientintake-app.herokuapp.com/intake-service/api/insurance/company/find 200
 /*  /index.html   200
