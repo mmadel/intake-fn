@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
 import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { InsuranceCompanyCreateComponent } from './components/insurance.company/create/insurance-company-create.component';
+import { InsuranceCompanyListComponent } from './components/insurance.company/list/insurance-company-list.component';
 import { PatientCreateComponent } from './components/patient.create/patient-create.component';
 import { PatientListComponent } from './components/patient.list/patient.list.component';
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
@@ -84,7 +86,21 @@ const routes: Routes = [{
       data: {
         title: 'user-Creation',
       },
-    }
+    },
+    {
+      path: 'insurance/company/list',
+      component: InsuranceCompanyListComponent,
+      data: {
+        title: 'insurance-company-list',
+      }
+    },
+    {
+      path: 'insurance/company/create',
+      component: InsuranceCompanyCreateComponent,
+      data: {
+        title: 'insurance-company-create',
+      }
+    },
   ]
 },
 {

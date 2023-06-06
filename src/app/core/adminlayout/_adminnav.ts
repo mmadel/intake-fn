@@ -37,6 +37,10 @@ export const adminNavItems: INavData[] = [
       {
         name: 'Users',
         url: 'user/list'
+      },
+      {
+        name: 'Insurance Company',
+        url: 'insurance/company/list'
       }
     ],
   },
