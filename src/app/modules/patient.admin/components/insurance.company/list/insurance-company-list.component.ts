@@ -15,7 +15,6 @@ export class InsuranceCompanyListComponent implements OnInit {
 
   ngOnInit(): void {
     this.insuranceCompanyService.get().subscribe((response) => {
-      console.log(JSON.stringify(response));
       response.body?.forEach(element => {
         this.InsuranceCompanies?.push(element);
       });

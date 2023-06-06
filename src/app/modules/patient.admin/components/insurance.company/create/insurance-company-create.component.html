@@ -7,8 +7,34 @@
                     <h3>Insurance Company Creation</h3>
                 </c-card-header>
                 <c-card-body>
-                    <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p><form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
-                        
+                    <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+                    <form cForm #insuranceCompanyCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+                        <div class="form-group">
+                            <small *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text text-danger">
+                                Insurance Company name is required
+                            </small>
+                            <c-input-group class="mb-3">
+                                <input autoComplete="name" cFormControl id="name" name="name"
+                                    placeholder="Enter Insurance Company name" required
+                                    [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
+                                    [(ngModel)]="form.name" #name="ngModel" />
+                            </c-input-group>
+                        </div>
+                        <div class="form-group">
+                            <c-input-group class="mb-3">
+                                <select *ngIf="returnClinics" cSelect sizing="sm" autoComplete="selectedClinic"
+                                    name="selectedClinic" id="selectedClinic" [(ngModel)]="form.selectedClinic"
+                                    #selectedClinic="ngModel">
+                                    <option value="null" disabled selected>Select Clinic</option>
+                                    <option *ngFor="let clinic of returnClinics" [value]="clinic.id?.toString()"
+                                        [selected]="clinic.selected">{{clinic.name}}</option>
+                                </select>
+                            </c-input-group>
+                        </div>
+                        <button cButton type="submit" size="sm" color="primary" variant="outline"
+                            class="mb-3 ustify-content-center">
+                            Save
+                        </button>
                     </form>
 
                 </c-card-body>
