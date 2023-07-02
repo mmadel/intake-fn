@@ -9,12 +9,12 @@
     <c-card-body>
         <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pIdfront">Patient ID Front</label>
-            <input cFormControl id="pIdfront" accept="image/*" (change)="onImageUpload($event ,'pIdfront')" type="file"
+            <input cFormControl id="pIdfront" accept="image/*" (change)="onImageUpload($event ,'pIdfront')" type="file" capture="environment"
                 class="mb-1" />
         </div>
         <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pIdback">Patient ID Back</label>
-            <input cFormControl id="pIdback" accept="image/*" (change)="onImageUpload($event ,'pIdback')" type="file"
+            <input cFormControl id="pIdback" accept="image/*" (change)="onImageUpload($event ,'pIdback')" type="file" capture="environment"
                 class="mb-1" />
 
         </div>

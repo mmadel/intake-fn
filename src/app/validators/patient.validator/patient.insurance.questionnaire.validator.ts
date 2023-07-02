@@ -120,11 +120,11 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
                 validator.push({ property: "Insurance Company", message: '' });
         }
         if (this.isRequiredField('memberId')) {
-            if (this.model.insuranceWorkerCommercial?.memberId === '' || this.model.insuranceWorkerCommercial?.memberId === undefined)
+            if (this.model.insuranceWorkerCommercial?.memberId === 0 || this.model.insuranceWorkerCommercial?.memberId === undefined)
                 validator.push({ property: "Member ID", message: '' });
         }
         if (this.isRequiredField('ploicyId')) {
-            if (this.model.insuranceWorkerCommercial?.policyId === '' || this.model.insuranceWorkerCommercial?.policyId === undefined)
+            if (this.model.insuranceWorkerCommercial?.policyId === 0 || this.model.insuranceWorkerCommercial?.policyId === undefined)
                 validator.push({ property: "Ploicy ID", message: '' });
         }
         if (this.isRequiredField('relationship')) {
