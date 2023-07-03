@@ -1,22 +1,26 @@
-export class  Basic{
-    firstName:string = '';
-    middleName:string='';
-    lastName:string='';
+import { EmergencyRelation } from "src/app/modules/patient.questionnaire/models/patient/emergency.relation";
+
+export class Basic {
+    firstName: string = '';
+    middleName: string = '';
+    lastName: string = '';
     birthDate_date: Date = new Date();
-    birthDate: number=0;
-    geneder: string='';
-    maritalStatus: string='';
-    phoneType: string='';
-    phoneNumber: string='';
-    email:string='';
-    idType:string='';
-    id:string='';
-    id_effective_from_date: Date = new Date();
-    ideffective_from: number=0;
-    id_effective_to_date: Date = new Date();
-    ideffective_to: number=0;
-    emergencyName:string='';
-    emergencyPhone:string='';
-    employmentStatus:string='';
-    
+    birthDate: number = 0;
+    gender: string = '';
+    maritalStatus: string = '';
+    phoneType: string = '';
+    phoneNumber: string = '';
+    email: string = '';
+    idType: string = '';
+    patientId: string = '';
+    id_effective_from_date = new Date();
+    idEffectiveFrom: number = 0;
+    id_effective_to_date = new Date();
+    idEffectiveTo: number = 0;
+    emergencyName: string = '';
+    emergencyRelation: EmergencyRelation | null = null;
+    emergencyPhone: string = '';
+    employmentStatus: string = '';
+    employmentCompany :string = ''
+
 }

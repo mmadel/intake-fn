@@ -1,51 +1,64 @@
 <c-card class="mb-2">
     <c-card-header>
-        <h6>Did the doctor recommend us or referred you to us?</h6>
+        <form cForm>
+            <div [ngClass]="{ 'form-group required':isRequiredField('recommendation') }">
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">The doctor recommend us or referred you to us?</strong>
+                </label>
+            </div>
+        </form>
     </c-card-header>
     <c-card-body>
         <c-col xs="12" class="mb-1">
             <c-form-check>
-                <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" value="Yes"
-                    name="flexRadioDefault" size="sm" />
+                <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" name="doctorRecommendation"
+                    size="sm" [checked]="isReferringDoctor === 'yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
-                <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" value="no"
-                    name="flexRadioDefault" size="sm" />
+                <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" name="doctorRecommendation"
+                    size="sm" [checked]="isReferringDoctor === 'no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
-        <c-col xs="4" *ngIf="isReferringDoctor === 'yes'">
+        <c-col xs="12" *ngIf="isReferringDoctor === 'yes'">
             <form cForm>
-                <div class="mb-1">
-                    <input cFormControl id="exampleFormControlInput1" placeholder="Doctor Name" sizing="sm" />
+                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorName') }" class="mb-1">
+                    <label for="doctorname" class="form-label">Doctor Name</label>
+                    <input cFormControl [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.name"
+                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor" name="doctorname"
+                        placeholder="Doctor Name" sizing="sm" />
                 </div>
-                <div class="mb-1">
-                    <input cFormControl id="exampleFormControlInput1" placeholder="Doctor NPI" sizing="sm" />
+                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorNpi') }" class="mb-1">
+                    <label for="doctornpi" class="form-label">Doctor NPI</label>
+                    <input numbers cFormControl placeholder="Doctor NPI" sizing="sm"
+                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
+                        [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.npi" name="doctornpi" maxlength="10"/>
                 </div>
-                <div class="mb-1">
-                    <input cFormControl id="exampleFormControlInput1" placeholder="Fax #" sizing="sm" />
+                <!-- <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorFax') }" class="mb-1">
+                    <label for="doctorfax" class="form-label">Doctor Fax</label>
+                    <input numbers cFormControl placeholder="Fax #" sizing="sm"
+                        *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
+                        [(ngModel)]="medicalQuestionnaireInfo.recommendationDoctor.fax" name="doctorfax" maxlength="9" />
                 </div>
-                <div class="mb-1">
-                    <input cFormControl id="exampleFormControlInput1" placeholder="Address" sizing="sm" />
-                </div>
+                <app-address *ngIf="medicalQuestionnaireInfo.recommendationDoctor"
+                    [pateintAddressInfo]="medicalQuestionnaireInfo.recommendationDoctor.doctorAddress"
+                    [requiredFields]="addressInfoRequired"></app-address> -->
             </form>
         </c-col>
-        <c-col xs="4" *ngIf="isReferringDoctor === 'no'">
-            <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
-                <option>Google ads</option>
-                <option>Zocdoc</option>
-                <option>Social media</option>
-                <option>Flyers</option>
-                <option>Mailed flyers</option>
-                <option>Friend/Family member</option>
-                <option>TV</option>
-                <option>Ads screen</option>
-                <option>I've had PT here before</option>
-                <option>Direct mail</option>
-                <option>Website</option>
-                <option>Other</option>
-            </select>
+        <c-col xs="12" *ngIf="isReferringDoctor === 'no'">
+            <form cForm>
+                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedEntityName') }" class="mb-1">
+                    <label for="entityname" class="form-label">Entity Name</label>
+                    <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                        *ngIf="medicalQuestionnaireInfo.recommendationEntity"
+                        [(ngModel)]="medicalQuestionnaireInfo.recommendationEntity.name" name="entityname">
+                        <option value="">Select</option>
+                        <option *ngFor="let entity of entityValues" [value]="entity.entityValue"
+                            [selected]="entity.selected">{{entity.entityName}}</option>
+                    </select>
+                </div>
+            </form>
         </c-col>
     </c-card-body>
 </c-card>
@@ -54,12 +67,19 @@
         <h6>How did you book your appointment?</h6>
     </c-card-header>
     <c-card-body>
-        <c-col xs="4">
-            <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
-                <option>Website</option>
-                <option>Zocdoc</option>
-                <option>Calls</option>
-            </select>
+        <c-col xs="12">
+            <form cForm>
+                <div [ngClass]="{ 'form-group required':isRequiredField('appointmentBooking') }" class="mb-1">
+                    <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                        [(ngModel)]="medicalQuestionnaireInfo.appointmentBooking" name="appointmentbooking">
+                        <option value="">Select Appointment Booking</option>
+                        <option value="Website">Website</option>
+                        <option value="Zocdoc">Zocdoc</option>
+                        <option value="Calls">Calls</option>
+                        <option value="Walkin">Walk-in</option>
+                    </select>
+                </div>
+            </form>
         </c-col>
     </c-card-body>
 </c-card>
@@ -68,24 +88,37 @@
         <h6>What is your primary doctor name?</h6>
     </c-card-header>
     <c-card-body>
-        <c-col xs="4">
-            <input cFormControl placeholder="Primary Doctor Name" sizing="sm" />
+        <c-col xs="12">
+            <form cForm>
+                <div [ngClass]="{ 'form-group required':isRequiredField('primaryDoctor') }" class="mb-1">
+                    <input cFormControl placeholder="Primary Doctor Name" sizing="sm"
+                        [(ngModel)]="medicalQuestionnaireInfo.primaryDoctor" name="primarydoctor" />
+                </div>
+            </form>
         </c-col>
     </c-card-body>
 </c-card>
 <c-card class="mb-2">
     <c-card-header>
-        <h6>Would you like your results sent to your family doctor?</h6>
+        <form cForm>
+            <div [ngClass]="{ 'form-group required':isRequiredField('resultSubmissionFamily') }">
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Would you like your results sent to your family doctor?</strong>
+                </label>
+            </div>
+        </form>
     </c-card-header>
     <c-card-body>
         <c-col xs="4">
             <c-col xs="12" class="mb-1">
                 <c-form-check>
-                    <input cFormCheckInput type="radio" value="Yes" name="resultsfamily" size="sm" />
+                    <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
+                        (change)="resultsfamilyQChange('yes')" [checked]="isfamilyResultSubmission === 'yes'" />
                     <label cFormCheckLabel>Yes</label>
                 </c-form-check>
                 <c-form-check>
-                    <input cFormCheckInput type="radio" value="no" name="resultsfamily" size="sm" />
+                    <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
+                        (change)="resultsfamilyQChange('no')" [checked]="isfamilyResultSubmission === 'no'" />
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </c-col>
@@ -94,26 +127,39 @@
 </c-card>
 <c-card class="mb-2">
     <c-card-header>
-        <h6>Have you received physical therapy this year somewhere else?</h6>
+        <form cForm>
+            <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapy') }">
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere
+                        else?</strong>
+                </label>
+            </div>
+        </form>
     </c-card-header>
     <c-card-body>
         <c-col xs="12" class="mb-1">
             <c-form-check>
-                <input cFormCheckInput type="radio" value="Yes" (change)="physicalTherapyQChange('yes')" name="physicaltherapy" size="sm" />
+                <input cFormCheckInput type="radio" (change)="physicalTherapyQChange('yes')" name="physicaltherapy"
+                    size="sm" [checked]="isphysicalTherapy === 'yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
-                <input cFormCheckInput type="radio" value="no" (change)="physicalTherapyQChange('no')" name="physicaltherapy" size="sm" />
+                <input cFormCheckInput type="radio" value="no" (change)="physicalTherapyQChange('no')"
+                    name="physicaltherapy" size="sm" [checked]="isphysicalTherapy === 'no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
         <c-col xs="4" *ngIf="isphysicalTherapy === 'yes'">
             <form cForm>
-                <div class="mb-1">
-                    <input cFormControl id="physicalTherapywhere" placeholder="Where" sizing="sm" />
+                <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapyLocation') }" class="mb-1">
+                    <input cFormControl placeholder="Where" sizing="sm" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
+                        [(ngModel)]="medicalQuestionnaireInfo.physicalTherapy.location" name="physicalTherapywhere" />
                 </div>
-                <div class="mb-1">
-                    <input cFormControl type="number" id="physicalTherapywheretimes" min="1" sizing="sm"  placeholder="How many visits"/>
+                <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapyNumberOfVisit') }" class="mb-1">
+                    <input cFormControl type="number" name="physicalTherapywheretimes" min="1" sizing="sm"
+                        placeholder="How many visits?" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
+                        [(ngModel)]="medicalQuestionnaireInfo.physicalTherapy.numberOfVisit"
+                        name="physicalTherapywheretimes" />
                 </div>
             </form>
         </c-col>

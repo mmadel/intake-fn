@@ -1,0 +1,31 @@
+/intake-service/api/requires/fields/change https://patientintake-app.herokuapp.com/intake-service/api/requires/fields/change 200
+/intake-service/api/requires/fields/retrieve https://patientintake-app.herokuapp.com/intake-service/api/requires/fields/retrieve 200
+/intake-service/api/requires/fields/retrieve/basic https://patientintake-app.herokuapp.com/intake-service/api/requires/fields/retrieve/basic 200
+
+/intake-service/api/patient/create https://patientintake-app.herokuapp.com/intake-service/api/patient/create 200
+/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit https://patientintake-app.herokuapp.com/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit 200
+/intake-service/api/patient/upload https://patientintake-app.herokuapp.com/intake-service/api/patient/upload 200
+
+/intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId/startDate/:startDate/endDate/:endDate https://patientintake-app.herokuapp.com/intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId/startDate/:startDate/endDate/:endDate 200
+
+/intake-service/api/reports/recommendation https://patientintake-app.herokuapp.com/intake-service/api/reports/recommendation 200
+/intake-service/api/reports/generator/excel https://patientintake-app.herokuapp.com/intake-service/api/reports/generator/excel 200
+/intake-service/api/reports/generator/pdf/patientId/:patientId https://patientintake-app.herokuapp.com/intake-service/api/reports/generator/pdf/patientId/:patientId 200
+
+/intake-service/api/auth/login https://patientintake-app.herokuapp.com/intake-service/api/auth/login 200
+/intake-service/api/user/find/loggedIn/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/find/loggedIn/:userId 200
+
+/intake-service/api/clinic https://patientintake-app.herokuapp.com/intake-service/api/clinic  200
+/intake-service/api/clinic/find https://patientintake-app.herokuapp.com/intake-service/api/clinic/find  200
+/intake-service/api/user/find/clinics/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/find/clinics/:userId  200
+
+/intake-service/api/user https://patientintake-app.herokuapp.com/intake-service/api/user  200
+/intake-service/api/user/find https://patientintake-app.herokuapp.com/intake-service/api/user/find  200
+/intake-service/api/agreement https://patientintake-app.herokuapp.com/intake-service/api/agreement  200
+/intake-service/api/document/id/patientId/:patientId https://patientintake-app.herokuapp.com/intake-service/api/document/id/patientId/:patientId  200
+/intake-service/api/document/insurance/patientId/:patientId https://patientintake-app.herokuapp.com/intake-service/api/document/insurance/patientId/:patientId  200
+
+
+/intake-service/api/insurance/company/create https://patientintake-app.herokuapp.com/intake-service/api/insurance/company/create 200
+/intake-service/api/insurance/company/find https://patientintake-app.herokuapp.com/intake-service/api/insurance/company/find 200
+/*  /index.html   200

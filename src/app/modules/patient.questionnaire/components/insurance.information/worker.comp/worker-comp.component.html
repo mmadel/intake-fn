@@ -1,0 +1,108 @@
+<c-row>
+    <form cForm [gutter]="{gy: 2, gx: 4}">
+        <c-col xs="auto" class="mb-2">
+            <div [ngClass]="{ 'form-group required':isRequiredField('relatedInjury') }">
+                <label for="injuryType" class="form-label">Worker Related Injury/Auto-Accident</label>
+                <select cSelect sizing="sm" name="injuryType" style="line-height: 15px;" cFormControl
+                    [(ngModel)]="model.injuryType">
+                    <option value="">Select</option>
+                    <option value="workingInjury">Worker Related Injury</option>
+                    <option value="autoAccident">Auto-Accident</option>
+                </select>
+            </div>
+        </c-col>
+        <c-col xs="auto" class="mb-2">
+            <c-col xs="auto" class="mb-1">
+                <div [ngClass]="{ 'form-group required':isRequiredField('accidentDate') }">
+                    <label for="autoAccidentDate" class="form-label">Accident Date</label>
+                    <c-date-picker closeOnSelect size="sm" cFormControl [(ngModel)]="model.accidentDate_date"
+                        (dateChange)="accidentDate()" name="autoAccidentDate"
+                        placeholder="Accident Date"></c-date-picker>
+                </div>
+            </c-col>
+            <c-col xs="auto" class="mb-1">
+                <div [ngClass]="{ 'form-group required':isRequiredField('workerStatus') }">
+                    <label for="injury" class="form-label">Worker Status</label>
+                    <select cSelect sizing="sm" name="injury" style="line-height: 15px;" cFormControl
+                        [(ngModel)]="model.workerStatus">
+                        <option value="">Select</option>
+                        <option value="FullTime">Full-Time</option>
+                        <option value="PartTime">Part-Time</option>
+                        <option value="NotWork">Not-Work</option>
+                    </select>
+                </div>
+            </c-col>
+            <c-col xs="auto" class="mb-1">
+                <app-address *ngIf="model.workerCompAddress" [pateintAddressInfo]="model.workerCompAddress"
+                    [requiredFields]="requiredFields"></app-address>
+            </c-col>
+            <c-col xs="auto" class="mb-1">
+                <div [ngClass]="{ 'form-group required':isRequiredField('fax') }">
+                    <label for="fax" class="form-label">Fax</label>
+                    <input cFormControl [(ngModel)]="model.fax" sizing="sm" name="fax" />
+                </div>
+            </c-col>
+            <c-col xs="auto" class="mb-1">
+                <div [ngClass]="{ 'form-group required':isRequiredField('insuranceName') }">
+                    <label for="insuranceName" class="form-label">Insurance Name</label>
+                    <input cFormControl [(ngModel)]="model.insuranceName" sizing="sm" name="insuranceName" />
+                </div>
+            </c-col>
+            <c-col xs="auto" class="mb-1">
+                <div [ngClass]="{ 'form-group required':isRequiredField('claimNumber') }">
+                    <label for="claimNumber" class="form-label">Claim Number/ WC Case Number</label>
+                    <input cFormControl [(ngModel)]="model.claimNumber" sizing="sm" name="claimNumber" type="number"/>
+                </div>
+            </c-col>
+            <c-row>
+                <c-col xs="12" class="mb-1">
+                    <div [ngClass]="{ 'form-group required':isRequiredField('adjusterName') }">
+                        <label for="adjusterInfoName" class="form-label">Adjuster</label>
+                        <input cFormControl [(ngModel)]="model.adjusterInfoName" sizing="sm" name="adjusterInfoName"
+                            placeholder="Name" name="adjusterInfoName" />
+                    </div>
+                </c-col>
+
+                <c-col xs="12" class="mb-1">
+                    <div [ngClass]="{ 'form-group required':isRequiredField('adjusterPhone') }">
+                        <c-input-group class="mb-3" sizing="sm">
+                            <span cInputGroupText id="basic-addon1">+1</span>
+                            <input numbers cFormControl [ngModel]="model.adjusterInfoPhone | phone"
+                                (ngModelChange)="model.adjusterInfoPhone=$event" maxlength="15"  name="adjusterInfoPhone" placeholder="Phone" />
+                        </c-input-group>
+                    </div>
+                </c-col>
+            </c-row>
+            <c-row>
+                <c-col xs="12" class="mb-1">
+                    <div [ngClass]="{ 'form-group required':isRequiredField('attorneyName') }">
+                        <label for="attorneyInfoName" class="form-label">Attorney</label>
+                        <input cFormControl [(ngModel)]="model.attorneyInfoName" sizing="sm" name="attorneyInfoName"
+                            placeholder="Name" />
+                    </div>
+                </c-col>
+
+                <c-col xs="12" class="mb-1">
+                    <div [ngClass]="{ 'form-group required':isRequiredField('attorneyPhone') }">
+                        <c-input-group class="mb-3" sizing="sm">
+                            <span cInputGroupText id="basic-addon1">+1</span>
+                            <input numbers cFormControl [ngModel]="model.attorneyInfoPhone | phone"
+                                (ngModelChange)="model.attorneyInfoPhone=$event" maxlength="15" name="attorneyInfoPhone" placeholder="Phone" />
+                        </c-input-group>
+                    </div>
+                </c-col>
+            </c-row>
+            <c-col xs="auto" class="mb-1">
+                <div [ngClass]="{ 'form-group required':isRequiredField('caseStatus') }">
+                    <label for="casestatus" class="form-label">Case Status</label>
+                    <select cSelect sizing="sm" name="caseStatus" style="line-height: 15px;"
+                        [(ngModel)]="model.caseStatus">
+                        <option value="">Select</option>
+                        <option value="Active">active</option>
+                        <option value="InActive">In-Active</option>
+                    </select>
+                </div>
+            </c-col>
+        </c-col>
+    </form>
+</c-row>

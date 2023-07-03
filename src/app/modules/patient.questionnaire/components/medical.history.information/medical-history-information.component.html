@@ -1,0 +1,161 @@
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('height') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">What is your Height ?</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+            <input cFormCheckInput type="checkbox" [(ngModel)]="heightUnit" (change)="changeHeightUnit($event)"/>
+            <label cFormCheckLabel>
+                <span  [ngClass]="{ 'fw-bold':!heightUnit }">Inch</span>/<span [ngClass]="{ 'fw-bold':heightUnit }">Centimeter</span>
+            </label>
+        </c-form-check>
+        <input cFormControl sizing="sm" [(ngModel)]="model.height" type="number" step="1" />
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('weight') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">What is your Weight ?</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <input cFormControl sizing="sm" [(ngModel)]="model.weight" type="number" step="1" class="mb-3" />
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('evaluationReason') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">What is your primary reason for today’s evaluation ?</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <input cFormControl sizing="sm" [(ngModel)]="model.evaluationReason" />
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('medicationPrescription') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">Please list any prescription or non-prescription medication you are
+                    taking</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <textarea cFormControl sizing="sm" [(ngModel)]="model.medicationPrescription"></textarea>
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('patientCondition') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">Please select each condition that you have been told you have (or
+                    had)</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <c-multi-select multiple [(ngModel)]="model.patientCondition">
+            <c-multi-select-option *ngFor="let option of patientConditions" [value]="option.name"
+                [selected]="option.selected">{{option.name}}</c-multi-select-option>
+        </c-multi-select>
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('scanningTest') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">MRI, CT scan and X-Ray</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <c-col xs="12" class="mb-1">
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="scanningChange('yes')" value="Yes" name="scanning"
+                    size="sm" [checked]="isScanning === 'yes'" />
+                <label cFormCheckLabel>Yes</label>
+            </c-form-check>
+            <c-form-check>
+                <input cFormCheckInput type="radio" (change)="scanningChange('no')" value="no" name="scanning" size="sm"
+                    [checked]="isScanning === 'no'" />
+                <label cFormCheckLabel>No</label>
+            </c-form-check>
+        </c-col>
+        <c-col xs="6">
+            <c-card class="mb-3" *ngIf="isScanning === 'yes'">
+                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                    [(ngModel)]="model.scanningTestValue">
+                    <option value="">Select</option>
+                    <option value="MRI">MRI</option>
+                    <option value="CT">CT scan</option>
+                    <option value="X-ray">X-ray</option>
+                </select>
+            </c-card>
+        </c-col>
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('metalImplantation') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">Metal Implants</strong>
+            </label>
+        </div>
+
+    </c-card-header>
+    <c-card-body>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="metalImplantsChange('yes')" value="Yes" name="metalimplants"
+                size="sm" [checked]="isMetalImplantation === 'yes'" />
+            <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="metalImplantsChange('no')" value="no" name="metalimplants"
+                size="sm" [checked]="isMetalImplantation === 'no'" />
+            <label cFormCheckLabel>No</label>
+        </c-form-check>
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('pacemaker') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">Pacemaker</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="paceMakerChange('yes')" value="Yes" name="pacemaker" size="sm"
+                [checked]="isPacemaker === 'yes'" />
+            <label cFormCheckLabel>Yes</label>
+        </c-form-check>
+        <c-form-check>
+            <input cFormCheckInput type="radio" (change)="paceMakerChange('no')" value="no" name="pacemaker" size="sm"
+                [checked]="isPacemaker === 'no'" />
+            <label cFormCheckLabel>No</label>
+        </c-form-check>
+    </c-card-body>
+</c-card>
+<c-card class="mb-2">
+    <c-card-header>
+        <div [ngClass]="{ 'form-group required':isRequiredField('surgeriesList') }">
+            <label for="dsds" class="form-label">
+                <strong style="font-size: medium;">Please list any surgeries you may have had or any other conditions
+                    not listed above</strong>
+            </label>
+        </div>
+    </c-card-header>
+    <c-card-body>
+        <textarea cFormControl sizing="sm" [(ngModel)]="model.surgeriesList"></textarea>
+    </c-card-body>
+</c-card>

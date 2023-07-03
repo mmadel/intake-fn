@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { IconModule } from '@coreui/icons-angular';
 
 import { PatientQuestionnaireRoutingModule } from './patient-questionnaire-routing.module';
@@ -15,7 +16,6 @@ import {
   CollapseModule,
   GridModule,
   SharedModule,
-  SmartTableModule,
   TableModule,
   FormModule,
   DatePickerModule,
@@ -27,17 +27,27 @@ import {
   NavModule,
   DateRangePickerModule,
   TimePickerModule,
-  ProgressModule
+  ProgressModule,
+  MultiSelectModule,
+  AccordionModule
 } from '@coreui/angular-pro';
 
 import {
+  QuestionnaireAddComponent,
   EssentialInfoComponent,
   AddressInformationComponent,
   MedicalInfoComponent,
-  InsuranceInformationComponent
-
+  InsuranceInformationComponent,
+  WorkerCompComponent,
+  WorkerNotCompComponent,
+  MedicalHistoryInformationComponent,
+  AggreementsComponent,
+  UploadPhotoComponent,
+  SummaryComponent,
 } from './index';
-import { QuestionnaireAddComponent } from './components/questionnaire.add/questionnaire-add.component';
+import { PatientCommonModule } from '../common';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +55,13 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     AddressInformationComponent,
     InsuranceInformationComponent,
     QuestionnaireAddComponent,
-    MedicalInfoComponent
+    MedicalInfoComponent,
+    WorkerCompComponent,
+    WorkerNotCompComponent,
+    MedicalHistoryInformationComponent,
+    AggreementsComponent,
+    SummaryComponent,
+    UploadPhotoComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +76,6 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     CollapseModule,
     GridModule,
     SharedModule,
-    SmartTableModule,
     TableModule,
     FormModule,
     DatePickerModule,
@@ -73,7 +88,12 @@ import { QuestionnaireAddComponent } from './components/questionnaire.add/questi
     DateRangePickerModule,
     TimePickerModule,
     ProgressModule,
-    IconModule
+    IconModule,
+    FormsModule,
+    MultiSelectModule,
+    AccordionModule,
+    PatientCommonModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class PatientQuestionnaireModule { }

@@ -108,9 +108,17 @@ import {
   cilArrowThickFromLeft,
   cilArrowThickFromRight,
   cilArrowCircleLeft,
-  cilArrowCircleRight
-  
-  
+  cilArrowCircleRight,
+  cilViewColumn,
+  cilEyedropper,
+  cilControl,
+  cilSearch,
+  cibZulip,
+  cibInternetExplorer,
+  cilTv,
+  cilCloudUpload, cilAccountLogout,
+  cilSad,
+  cilSmile
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -223,7 +231,18 @@ export const iconSubset = {
   cilArrowThickFromLeft,
   cilArrowThickFromRight,
   cilArrowCircleLeft,
-  cilArrowCircleRight
+  cilArrowCircleRight,
+  cilViewColumn,
+  cilEyedropper,
+  cilControl,
+  cilSearch,
+  cibZulip,
+  cibInternetExplorer,
+  cilTv,
+  cilCloudUpload,
+  cilAccountLogout,
+  cilSad,
+  cilSmile
 };
 
 export enum IconSubset {
@@ -259,7 +278,7 @@ export enum IconSubset {
   cilCalendar = 'cilCalendar',
   cilChart = 'cilChart',
   cilChartPie = 'cilChartPie',
-  cilCheck='cilCheck',
+  cilCheck = 'cilCheck',
   cilChevronLeft = 'cilChevronLeft',
   cilChevronRight = 'cilChevronRight',
   cilCloudDownload = 'cilCloudDownload',

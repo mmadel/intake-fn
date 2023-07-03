@@ -3,5 +3,8 @@ export class Address {
     first: string = '';
     second: string = '';
     country: string = '';
-    zipCode: string = '';
+    state: string = '';
+    province: string = '';
+    city: string = '';
+    zipCode: string = '';    
 }

@@ -20,11 +20,14 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/_redirects"
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "src/scss/styles.scss"
             ],
             "scripts": [
@@ -35,8 +38,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2m",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -70,7 +73,8 @@
               "browserTarget": "intake-fn:build:production"
             },
             "development": {
-              "browserTarget": "intake-fn:build:development"
+              "browserTarget": "intake-fn:build:development",
+              "proxyConfig": "proxy-local.config.json"
             }
           },
           "defaultConfiguration": "development"
@@ -94,7 +98,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }

@@ -1,0 +1,45 @@
+<ngx-spinner></ngx-spinner>
+<c-row>
+  <c-col xs="12" class="mb-2">
+    <h1>Patient List</h1>
+  </c-col>
+</c-row>
+<hr />
+<ng-container *ngIf="props$ | async as props" fluid="true">
+  <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [columnFilter]="true"
+    [items]="(usersData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+    (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
+    [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
+    [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
+    [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
+    (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
+    <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+      <td>
+        <ng-container [ngSwitch]="columnName">
+          <ng-container *ngSwitchCase="'actions'" class="py-2">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button cButton  variant="outline" (click)="exportPDF(item)" cTooltip="patient PDF File">
+                <svg cIcon name="cibAdobeAcrobatReader" class="text-danger"></svg>
+              </button>
+              <button cButton  variant="outline" (click)="exportPatientIDDocument(item)" cTooltip="patient Id Document">
+                <svg cIcon name="cilUser"></svg>
+              </button>
+              <button cButton  variant="outline" (click)="exportPatientInsuranceDocument(item)" cTooltip="patient Insurance Document">
+                <svg cIcon name="cilPaperPlane"></svg>
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            {{tdContent}}
+          </ng-container>
+        </ng-container>
+      </td>
+    </ng-template>
+  </c-smart-table>
+  <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
+    (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+</ng-container>
+<ng-container *ngIf="errorMessage$ | async as errorMessage">
+  <hr>
+  <c-alert>{{errorMessage}}</c-alert>
+</ng-container>
