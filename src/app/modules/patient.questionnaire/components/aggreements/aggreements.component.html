@@ -14,8 +14,8 @@
                 </c-col>
                 <c-col xs="auto" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="model.acceptReleaseAgreements" />
-                        <label cFormCheckLabel for="stackOne">I Accept The Release of Information Agreements</label>
+                        <input cFormCheckInput id="release" type="checkbox" [(ngModel)]="model.acceptReleaseAgreements" />
+                        <label cFormCheckLabel for="release">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
@@ -35,12 +35,10 @@
                         gradient="true">
                     </div>
                 </c-col>
-                <c-col xs="auto" class="ms-3">
+                <c-col xs="12" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox"
-                            [(ngModel)]="model.acceptFinancialResponsibilityAgreements" />
-                        <label cFormCheckLabel for="stackOne">I Accept The Financial Responsibility Agreement by Other
-                            than Patient’s Legal Representative</label>
+                        <input cFormCheckInput id="Financial" type="checkbox" [(ngModel)]="model.acceptFinancialResponsibilityAgreements"/>
+                        <label cFormCheckLabel for="Financial">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
@@ -61,9 +59,9 @@
                 </c-col>
                 <c-col xs="auto" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox"
+                        <input cFormCheckInput id="fagreement" type="checkbox"
                             [(ngModel)]="model.acceptFinancialAgreementAgreements" />
-                        <label cFormCheckLabel for="stackOne">I Accept The Financial Agreement</label>
+                        <label cFormCheckLabel for="fagreement">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
@@ -85,8 +83,8 @@
                 </c-col>
                 <c-col xs="auto" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="model.acceptInsuranceAgreement" />
-                        <label cFormCheckLabel for="stackOne">I Accept The Assignment of Insurance Beneﬁts</label>
+                        <input cFormCheckInput id="insurancebeneﬁts" type="checkbox" [(ngModel)]="model.acceptInsuranceAgreement" />
+                        <label cFormCheckLabel for="insurancebeneﬁts">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
@@ -108,8 +106,8 @@
                 </c-col>
                 <c-col xs="auto" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="model.acceptHIPAAAgreements" />
-                        <label cFormCheckLabel for="stackOne">I Accept The HIPAA Acknowledgement</label>
+                        <input cFormCheckInput id="HIPAA" type="checkbox" [(ngModel)]="model.acceptHIPAAAgreements" />
+                        <label cFormCheckLabel for="HIPAA">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
@@ -131,8 +129,8 @@
                 </c-col>
                 <c-col xs="auto" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="model.acceptCuppingAgreements" />
-                        <label cFormCheckLabel for="stackOne">I Accept The Cupping Consent Form</label>
+                        <input cFormCheckInput id="Cupping" type="checkbox" [(ngModel)]="model.acceptCuppingAgreements" />
+                        <label cFormCheckLabel for="Cupping">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
@@ -154,9 +152,8 @@
                 </c-col>
                 <c-col xs="auto" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="model.acceptPelvicAgreements" />
-                        <label cFormCheckLabel for="stackOne">I Accept The Pelvic Examination & Treatment Consent
-                            Form</label>
+                        <input cFormCheckInput id="Pelvic" type="checkbox" [(ngModel)]="model.acceptPelvicAgreements" />
+                        <label cFormCheckLabel for="Pelvic">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
@@ -178,8 +175,8 @@
                 </c-col>
                 <c-col xs="auto" class="ms-3">
                     <c-form-check>
-                        <input cFormCheckInput id="stackOne" type="checkbox" [(ngModel)]="model.acceptPhotoVideoAgreements" />
-                        <label cFormCheckLabel for="stackOne">I Accept The Photo / Video Release Form</label>
+                        <input cFormCheckInput id="photovideo" type="checkbox" [(ngModel)]="model.acceptPhotoVideoAgreements" />
+                        <label cFormCheckLabel for="photovideo">I accept</label>
                     </c-form-check>
                 </c-col>
             </c-row>
