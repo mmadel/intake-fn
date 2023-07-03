@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   QuestionnaireAddComponent,
-  SubmitionComponent,
 } from './index';
 const routes: Routes = [
   {
@@ -16,13 +15,6 @@ const routes: Routes = [
         component: QuestionnaireAddComponent,
         data: {
           title: 'Essential Info',
-        },
-      },
-      {
-        path: 'submitted',
-        component: SubmitionComponent,
-        data: {
-          title: 'Submition',
         },
       }
     ]

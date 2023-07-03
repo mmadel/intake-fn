@@ -43,8 +43,7 @@ import {
   MedicalHistoryInformationComponent,
   AggreementsComponent,
   UploadPhotoComponent,
-  SubmitionComponent,
-  SummaryComponent
+  SummaryComponent,
 } from './index';
 import { PatientCommonModule } from '../common';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -61,7 +60,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     WorkerNotCompComponent,
     MedicalHistoryInformationComponent,
     AggreementsComponent,
-    SubmitionComponent,
     SummaryComponent,
     UploadPhotoComponent,
   ],

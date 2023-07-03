@@ -32,6 +32,8 @@ import { UploadPhotoComponent } from '../upload.photos/upload-photo.component';
 })
 export class QuestionnaireAddComponent implements OnInit {
   clinicId: number;
+  isCreated: boolean = false;
+  isClinicIdEmpty: boolean = false;
   cards: { id: number, name: string }[] = [
     { "id": 1, "name": "Basic Information" },
     { "id": 2, "name": "Address Information" },
@@ -64,7 +66,7 @@ export class QuestionnaireAddComponent implements OnInit {
     private patientRequiredFieldsService: PatientRequiredFieldsService,
     private router: Router,
     private localService: LocalService,
-    private toastr:ToastrService,
+    private toastr: ToastrService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -73,7 +75,8 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patientFields = <PatientRequiredFields>patientFields;
       this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
       if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
-        this.router.navigate(['/admin/patient/create']);
+        //this.router.navigate(['/questionnaire/error']);
+        this.isClinicIdEmpty = true;
       } else {
         this.router.navigate([], {
           queryParams: {
@@ -166,18 +169,19 @@ export class QuestionnaireAddComponent implements OnInit {
         console.log('this.patient.files ' + this.patient.files)
         this.patientService.upload(this.patient.files, <number>response.body).subscribe(
           (response) => {
+
             console.log('uploaded..')
           },
-          (error) => { 
+          (error) => {
             this.scrollUp();
             this.toastr.error(error.error.message, 'Error In Upload Images');
           });
         this.localService.removeData('patient');
-        this.router.navigate(['/questionnaire/submitted']);
+        this.isCreated = true;
       },
-      (error) => { 
+      (error) => {
         console.log(JSON.stringify(error))
-        this.toastr.error(error.error.message, 'Error In Creation'); 
+        this.toastr.error(error.error.message, 'Error In Creation');
         this.scrollUp();
       });
   }
