@@ -17,4 +17,7 @@ export class UserService {
   get() {
     return this.http.get<User[]>(`${this.userUrl}` + '/find', { observe: 'response' })
   }
+  delete(id:string | null) {
+    return this.http.delete(`${this.userUrl}` + '/delete/userId/' + id)
+  }
 }
