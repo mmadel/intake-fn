@@ -15,7 +15,8 @@ import {
   UserListComponent,
   PatientCreateComponent,
   InsuranceCompanyCreateComponent,
-  InsuranceCompanyListComponent
+  InsuranceCompanyListComponent,
+  UserUpdateComponent
 } from './index';
 
 import { PatientCommonModule } from '../common';
@@ -51,6 +52,8 @@ import {
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+
+
 @NgModule({
   declarations: [
     PatientListComponent,
@@ -63,7 +66,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     UserCreationComponent,
     PatientCreateComponent,
     InsuranceCompanyCreateComponent,
-    InsuranceCompanyListComponent
+    InsuranceCompanyListComponent,    
+    UserUpdateComponent
   ],
   imports: [
     CommonModule,

@@ -34,7 +34,7 @@ export class UserListComponent implements OnInit {
     this.router.navigateByUrl('/admin/user/creation');
   }
   update(userId:string | undefined | null){
-
+    this.router.navigate(['/admin/user/update', userId])
   }
   delete(userId:string | undefined | null){
     this.userService.delete(userId || '{}').subscribe(() => {

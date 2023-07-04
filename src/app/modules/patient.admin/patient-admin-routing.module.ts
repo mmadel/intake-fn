@@ -10,6 +10,7 @@ import { PatientListComponent } from './components/patient.list/patient.list.com
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
 import { UserCreationComponent } from './components/user/create/user-creation.component';
 import { UserListComponent } from './components/user/list/user-list.component';
+import { UserUpdateComponent } from './components/user/update/user-update.component';
 import { ValidationListComponent } from './components/validation/validation.list.component';
 
 const routes: Routes = [{
@@ -87,6 +88,13 @@ const routes: Routes = [{
         title: 'user-Creation',
       },
     },
+    {
+      path: 'user/update/:userId',
+      component: UserUpdateComponent,
+      data: {
+        title: 'user-update',
+      }
+    }, 
     {
       path: 'insurance/company/list',
       component: InsuranceCompanyListComponent,
