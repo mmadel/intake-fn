@@ -95,8 +95,8 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patientValidator = new PatientEssentialValidator(this.patientFields.basicInfo
         , this.essentialInfoComponent.pateintBasicInfo);
       this.essentialInfoComponent.pateintBasicInfo.birthDate = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.birthDate_date).format("x"));
-      this.essentialInfoComponent.pateintBasicInfo.idEffectiveFrom = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_from_date).format("x"))
-      this.essentialInfoComponent.pateintBasicInfo.idEffectiveTo = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_to_date).format("x"))
+      // this.essentialInfoComponent.pateintBasicInfo.idEffectiveFrom = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_from_date).format("x"))
+      // this.essentialInfoComponent.pateintBasicInfo.idEffectiveTo = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_to_date).format("x"))
     }
     if (patientModel === 'address') {
       this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,

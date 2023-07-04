@@ -32,11 +32,7 @@ export class SummaryComponent implements OnInit {
     <b style="font-family:Lucida">Marital Status</b> : <i >${this.pateint.basicInfo.maritalStatus} </i><br/>
     <b style="font-family:Lucida">Phone Type</b> : <i >${this.pateint.basicInfo.phoneType} </i><br/>
     <b style="font-family:Lucida">Phone Number</b> : <i >${this.pateint.basicInfo.phoneNumber} </i><br/>
-    <b style="font-family:Lucida">Email</b> : <i >${this.pateint.basicInfo.email} </i><br/>
-    <bstyle="font-family:Lucida" >Id Type</b> : <i >${this.pateint.basicInfo.idType} </i> &#160 , 
-    <b style="font-family:Lucida">Id</b> : <i >${this.pateint.basicInfo.patientId} </i> &#160 ,
-    <b- style="font-family:Lucida">Id Effective From</b> : <i >${moment(this.pateint.basicInfo.id_effective_from_date).format("MM/DD/YYYY")} </i> &#160 ,
-    <b style="font-family:Lucida">Id Effective To</b> : <i >${moment(this.pateint.basicInfo.id_effective_to_date).format("MM/DD/YYYY")} </i> <br/>
+    <b style="font-family:Lucida">Email</b> : <i >${this.pateint.basicInfo.email} </i><br/>  
     <b style="font-family:Lucida">Emergency Name</b> : <i >${this.pateint.basicInfo.emergencyName} </i> <br/>
     <b style="font-family:Lucida">Emergency Phone</b> : <i > ${this.pateint.basicInfo.emergencyPhone} </i> <br/>
     <b style="font-family:Lucida">Employment Status</b> : <i >${this.pateint.basicInfo.employmentStatus} </i> <br/>`

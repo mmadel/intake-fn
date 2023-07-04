@@ -29,9 +29,9 @@ export class PatientEssentialValidator extends PatientValidator {
 
     protected inCorrectDate(validatorContainer: ValidatorContainer) {
         var validators: PropertyValidator[] = new Array();
-        if ((this.pateintBasicInfo.id_effective_from_date > this.pateintBasicInfo.id_effective_to_date)) {
-            validators.push({ property: " ID Effective Date", message: "From Date Can\'t be greater than to Date" });
-        }
+        // if ((this.pateintBasicInfo.id_effective_from_date > this.pateintBasicInfo.id_effective_to_date)) {
+        //     validators.push({ property: " ID Effective Date", message: "From Date Can\'t be greater than to Date" });
+        // }
         if (validators.length > 0) {
             validatorContainer.isValid = false;
             _.forEach(validators, validator => {
@@ -75,24 +75,24 @@ export class PatientEssentialValidator extends PatientValidator {
             if (this.pateintBasicInfo.email === '' || this.pateintBasicInfo.email === undefined)
                 validator.push({ property: " Email ", message: '' });
         }
-        if (this.isRequiredField('patientId')) {
-            if ((this.pateintBasicInfo.idType === '' || this.pateintBasicInfo.idType === undefined)) {
-                validator.push({ property: " ID Type", message: '' });
+        // if (this.isRequiredField('patientId')) {
+        //     if ((this.pateintBasicInfo.idType === '' || this.pateintBasicInfo.idType === undefined)) {
+        //         validator.push({ property: " ID Type", message: '' });
 
-            }
-        }
-        if (this.isRequiredField('patientId')) {
-            if (this.pateintBasicInfo.patientId === '' || this.pateintBasicInfo.patientId === undefined) {
-                validator.push({ property: "ID", message: '' });
-            }
-        }
-        if (this.isRequiredField('patientId') && this.isRequiredField('patientId')) {
-            if ((Number.isNaN(this.pateintBasicInfo.idEffectiveFrom)) &&
-                (Number.isNaN(this.pateintBasicInfo.idEffectiveTo))) {
-                validator.push({ property: "Id effective From", message: '' });
-                validator.push({ property: "Id effective To", message: '' });
-            }
-        }
+        //     }
+        // }
+        // if (this.isRequiredField('patientId')) {
+        //     if (this.pateintBasicInfo.patientId === '' || this.pateintBasicInfo.patientId === undefined) {
+        //         validator.push({ property: "ID", message: '' });
+        //     }
+        // }
+        // if (this.isRequiredField('patientId') && this.isRequiredField('patientId')) {
+        //     if ((Number.isNaN(this.pateintBasicInfo.idEffectiveFrom)) &&
+        //         (Number.isNaN(this.pateintBasicInfo.idEffectiveTo))) {
+        //         validator.push({ property: "Id effective From", message: '' });
+        //         validator.push({ property: "Id effective To", message: '' });
+        //     }
+        // }
         if (this.isRequiredField('emergencyContact') && this.isRequiredField('emergencyContact')) {
             if ((this.pateintBasicInfo.emergencyName === '' || this.pateintBasicInfo.emergencyName === undefined) &&
                 (this.pateintBasicInfo.emergencyPhone === '' || this.pateintBasicInfo.emergencyPhone === undefined)) {
