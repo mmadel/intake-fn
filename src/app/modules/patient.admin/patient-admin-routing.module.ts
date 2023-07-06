@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
 import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
+import { UpdateClinicComponent } from './components/clinic/update/update-clinic.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InsuranceCompanyCreateComponent } from './components/insurance.company/create/insurance-company-create.component';
 import { InsuranceCompanyListComponent } from './components/insurance.company/list/insurance-company-list.component';
@@ -75,6 +76,13 @@ const routes: Routes = [{
       },
     },
     {
+      path: 'clinic/update/:clinicId',
+      component: UpdateClinicComponent,
+      data: {
+        title: 'clinic-update',
+      },
+    },
+    {
       path: 'user/list',
       component: UserListComponent,
       data: {
@@ -94,7 +102,7 @@ const routes: Routes = [{
       data: {
         title: 'user-update',
       }
-    }, 
+    },
     {
       path: 'insurance/company/list',
       component: InsuranceCompanyListComponent,
