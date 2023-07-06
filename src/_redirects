@@ -17,12 +17,14 @@
 
 /intake-service/api/clinic https://patientintake-app.herokuapp.com/intake-service/api/clinic  200
 /intake-service/api/clinic/find https://patientintake-app.herokuapp.com/intake-service/api/clinic/find  200
+/intake-service/api/clinic/find/:clinicId https://patientintake-app.herokuapp.com/intake-service/api/clinic/find/:clinicId  200
 /intake-service/api/clinic/update https://patientintake-app.herokuapp.com/intake-service/api/clinic/update  200
 /intake-service/api/clinic/delete/clinicId/:clinicId https://patientintake-app.herokuapp.com/intake-service/api/clinic/delete/clinicId/:clinicId  200
 /intake-service/api/user/find/clinics/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/find/clinics/:userId  200
 
 /intake-service/api/user https://patientintake-app.herokuapp.com/intake-service/api/user  200
 /intake-service/api/user/find https://patientintake-app.herokuapp.com/intake-service/api/user/find  200
+/intake-service/api/user/find/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/find/:userId  200
 /intake-service/api/user/update https://patientintake-app.herokuapp.com/intake-service/api/user/update  200
 /intake-service/api/user/delete/userId/:userId https://patientintake-app.herokuapp.com/intake-service/api/user/delete/userId/:userId  200
 
