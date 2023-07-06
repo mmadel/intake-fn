@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
 import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
+import { UpdateClinicComponent } from './components/clinic/update/update-clinic.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InsuranceCompanyCreateComponent } from './components/insurance.company/create/insurance-company-create.component';
 import { InsuranceCompanyListComponent } from './components/insurance.company/list/insurance-company-list.component';
@@ -10,6 +11,7 @@ import { PatientListComponent } from './components/patient.list/patient.list.com
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
 import { UserCreationComponent } from './components/user/create/user-creation.component';
 import { UserListComponent } from './components/user/list/user-list.component';
+import { UserUpdateComponent } from './components/user/update/user-update.component';
 import { ValidationListComponent } from './components/validation/validation.list.component';
 
 const routes: Routes = [{
@@ -74,6 +76,13 @@ const routes: Routes = [{
       },
     },
     {
+      path: 'clinic/update/:clinicId',
+      component: UpdateClinicComponent,
+      data: {
+        title: 'clinic-update',
+      },
+    },
+    {
       path: 'user/list',
       component: UserListComponent,
       data: {
@@ -86,6 +95,13 @@ const routes: Routes = [{
       data: {
         title: 'user-Creation',
       },
+    },
+    {
+      path: 'user/update/:userId',
+      component: UserUpdateComponent,
+      data: {
+        title: 'user-update',
+      }
     },
     {
       path: 'insurance/company/list',

@@ -19,6 +19,7 @@
             <th scope="col">Use Name</th>
             <th scope="col">User Role</th>
             <th scope="col">User Clinics</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,14 @@
                     <li *ngFor="let clinic of user.clinics">{{clinic.name}}</li>
                 </ul>
 
+            </td>
+            <td>
+                <button cButton variant="outline" class="me-3" (click)="update(user.id)">
+                    <svg cIcon name="cilPen"></svg>
+                </button>
+                <button cButton variant="outline" (click)="delete(user.id)">
+                    <svg cIcon name="cilTrash"></svg>
+                </button>
             </td>
         </tr>
 
