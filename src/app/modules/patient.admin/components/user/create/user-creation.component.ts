@@ -57,7 +57,10 @@ export class UserCreationComponent implements OnInit {
     )
 
   }
-  create() {
+  create(event:any) {
+    if (event.submitter.innerHTML === ' Select all options '){
+      return;
+    }
     var user: User = {
       id: null,
       name: this.form.name,

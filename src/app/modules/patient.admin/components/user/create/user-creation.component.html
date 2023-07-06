@@ -8,7 +8,7 @@
                 </c-card-header>
                 <c-card-body>
                     <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
-                    <form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+                    <form cForm #userCreateForm="ngForm" (ngSubmit)="create($event)" (change)="resetError()">
                         <div class="form-group">
                             <small *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text text-danger">
                                 user name is required
