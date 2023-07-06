@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalService } from 'src/app/modules/common';
 import { User } from 'src/app/modules/security/model/user';
 import { UserService } from '../../../services/user/user.service';
 
@@ -9,8 +10,9 @@ import { UserService } from '../../../services/user/user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  isLoggedIn: boolean;
   users: User[] = new Array();
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService , private localService:LocalService) { }
 
   ngOnInit(): void {
     this.userService.get().subscribe(response => {
@@ -40,5 +42,10 @@ export class UserListComponent implements OnInit {
     this.userService.delete(userId || '{}').subscribe(() => {
       location.reload();
     })
+  }
+  isLoggedInUser(id: string | null | undefined) {
+    var userId: string = this.localService.getData('userId') || '{}';
+    this.isLoggedIn= userId == id ? true : false;
+    return this.isLoggedIn;
   }
 }

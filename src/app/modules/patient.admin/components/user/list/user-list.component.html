@@ -20,6 +20,7 @@
             <th scope="col">User Role</th>
             <th scope="col">User Clinics</th>
             <th scope="col">Action</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -34,12 +35,15 @@
 
             </td>
             <td>
-                <button cButton variant="outline" class="me-3" (click)="update(user.id)">
+                <button cButton variant="outline" class="me-3" (click)="update(user.id)" [disabled]="isLoggedInUser(user.id)">
                     <svg cIcon name="cilPen"></svg>
                 </button>
-                <button cButton variant="outline" (click)="delete(user.id)">
+                <button cButton variant="outline" (click)="delete(user.id)" [disabled]="isLoggedInUser(user.id)">
                     <svg cIcon name="cilTrash"></svg>
                 </button>
+            </td>
+            <td>
+                <span *ngIf="isLoggedIn">LoggedIn</span>
             </td>
         </tr>
 

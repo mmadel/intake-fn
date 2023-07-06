@@ -12,6 +12,7 @@
   </c-col>
 </c-row>
 <hr />
+<c-alert color="danger" *ngIf="errorMessage !== ''">{{ errorMessage }}</c-alert>
 <table cTable>
   <thead cTableColor="light">
     <tr>

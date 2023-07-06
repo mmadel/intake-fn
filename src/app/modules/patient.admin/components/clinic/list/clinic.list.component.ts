@@ -57,7 +57,7 @@ export class ClinicListComponent implements OnInit {
       this.errorMessage = ''
       location.reload();
     }, error => {
-      this.errorMessage = error.error.error;
+      this.errorMessage = error.error.message;
     },
     )
   }
