@@ -15,7 +15,7 @@
                             </small>
                             <c-input-group class="mb-3">
                                 <input autoComplete="name" cFormControl id="name" name="name"
-                                    placeholder="Enter User Name" required
+                                    placeholder="Enter User Name" disabled="true"
                                     [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
                                     [(ngModel)]="form.name" #name="ngModel" />
                             </c-input-group>

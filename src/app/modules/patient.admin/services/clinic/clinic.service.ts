@@ -28,5 +28,8 @@ export class ClinicService {
     var deleteClinicURL = this.clinicUrl +  '/delete/clinicId/';
     return this.http.delete(deleteClinicURL + id)
   }
+  getById(id: string | null) {
+    return this.http.get<Clinic>(`${this.clinicUrl}` + '/find/' + id)
+  }
 
 }
