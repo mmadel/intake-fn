@@ -24,7 +24,10 @@
         <tr *ngFor="let insuranceCompany of InsuranceCompanies; index as i;">
             <td>{{insuranceCompany.id}}</td>
             <td>{{insuranceCompany.name}}</td>
-            <td>{{insuranceCompany.clinic.name}}</td>
+            <!-- <td>{{insuranceCompany.clinic.name}}</td> -->
+            <td><ul>
+                <li *ngFor="let clinic of insuranceCompany.clinics">{{clinic.name}}</li>
+            </ul></td>
         </tr>
 
     </tbody>

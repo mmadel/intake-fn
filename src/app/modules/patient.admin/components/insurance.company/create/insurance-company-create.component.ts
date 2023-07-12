@@ -17,7 +17,7 @@ export class InsuranceCompanyCreateComponent implements OnInit {
   @ViewChild('insuranceCompanyCreateForm') insuranceCompanyCreateForm: NgForm;
   form = {
     name: null,
-    selectedClinic: null
+    selectedClinics: null
   };
   constructor(private router: Router,
     private clinicService: ClinicService,
@@ -39,12 +39,7 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       id: null,
       name: this.form.name,
       address: null,
-      clinic: {
-        id: this.form.selectedClinic,
-        name: null,
-        address: '',
-        selected: false
-      }
+      clinics:  this.createClinics(this.form.selectedClinics)
     }
     if (this.insuranceCompanyCreateForm.valid) {
       this.insuranceCompanyService.create(created).subscribe(
@@ -57,7 +52,24 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       this.errorMessage = 'Please enter valid data';
     }
   }
+
+  createClinics(ids: string[]|null) {
+    var clinics: Clinic[] = new Array();
+    ids?.forEach(element => {
+      var clinic: Clinic = {
+        id: Number(element),
+        name: null,
+        address: "",
+        selected: false,
+
+      }
+      clinics.push(clinic)
+    });
+    return clinics;
+  }
+
   resetError() {
 
   }
+
 }

@@ -22,15 +22,17 @@
                         </div>
                         <div class="form-group">
                             <c-input-group class="mb-3">
-                                <select *ngIf="returnClinics" cSelect sizing="sm" autoComplete="selectedClinic"
-                                    name="selectedClinic" id="selectedClinic" [(ngModel)]="form.selectedClinic"
-                                    #selectedClinic="ngModel">
-                                    <option value="null" disabled selected>Select Clinic</option>
-                                    <option *ngFor="let clinic of returnClinics" [value]="clinic.id?.toString()"
-                                        [selected]="clinic.selected">{{clinic.name}}</option>
-                                </select>
+                                <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm"
+                                    autoComplete="selectedClinics" name="selectedClinics" id="selectedClinics"
+                                    [(ngModel)]="form.selectedClinics" #selectedClinics="ngModel">
+                                    <c-multi-select-option *ngFor="let clinic of returnClinics"
+                                        [value]="clinic.id?.toString()" [selected]="clinic.selected">
+                                        {{clinic.name}}
+                                    </c-multi-select-option>
+                                </c-multi-select>
                             </c-input-group>
                         </div>
+                      
                         <div class="text-center">
                             <button cButton type="submit" size="sm" color="primary" variant="outline">
                                 Create
