@@ -27,7 +27,6 @@
             </div>
 
         </c-col>
-            {{patientAge}}
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('birthDate') }">
                 <label for="dob" class="form-label">Date Of Birth</label>
@@ -35,7 +34,36 @@
                     [(ngModel)]="pateintBasicInfo.birthDate_date" (dateChange)="checkAge($event)"></c-date-picker>
             </div>
         </c-col>
+        <span *ngIf="isPatientUnderage">
+            <c-col xs="auto" class="mb-2">
+                <label for="lname" class="form-label">Guarantor First Name</label>
+                <input aria-label="Guarantor First name" cFormControl name="g-lname" sizing="sm" />
+            </c-col>
+            <c-col xs="auto" class="mb-2">
+                <label for="lname" class="form-label">Guarantor Middle Name</label>
+                <input aria-label="Guarantor Middle name" cFormControl name="g-lname" sizing="sm" />
+            </c-col>
+            <c-col xs="auto" class="mb-2">
+                <label for="lname" class="form-label">Guarantor Last Name</label>
+                <input aria-label="Guarantor Last name" cFormControl name="g-lname" sizing="sm" />
+            </c-col>
+            <label for="emergencyName" class="form-label">guarantor Relationship</label>
+            <select cFormControl cSelect class="mb-2" sizing="sm" id="guarantor-relation" name="guarantor-relation">
+                <option value="null" disabled selected>Select Guarantor Relation</option>
+                <option *ngFor="let  relation of guarantorRelationship" [value]="relation">
+                    {{relation}}
+                </option>
+            </select>
+            <div class="mb-3">
+                <label cLabel for="pIdfront">Guarantor ID Front</label>
+                <input cFormControl id="g-pIdfront" accept="image/*" type="file" capture="environment" class="mb-1" />
+            </div>
+            <div class="mb-3">
+                <label cLabel for="pIdback">Guarantor ID Back</label>
+                <input cFormControl id="g-pIdback" accept="image/*" type="file" capture="environment" class="mb-1" />
 
+            </div>
+        </span>
         <c-col xs="auto" class="mb-2">
 
             <div [ngClass]="{ 'form-group required':isRequiredField('gender') }">

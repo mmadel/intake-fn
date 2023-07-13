@@ -13,7 +13,8 @@ import { EmergencyRelation } from '../../models/patient/emergency.relation';
 export class EssentialInfoComponent implements OnInit {
   pateintBasicInfo: Basic = new Basic()
   emergencyRelations: string[] = [];
-  patientAge:number;
+  isPatientUnderage: boolean = false;
+  guarantorRelationship:string[]= [];
   @Input() requiredFields: BasicInfoRequired;
   constructor(private localService: LocalService) { }
 
@@ -44,10 +45,11 @@ export class EssentialInfoComponent implements OnInit {
   fillEmergenctrelation() {
     for (var relation in EmergencyRelation) {
       this.emergencyRelations.push(relation)
+      this.guarantorRelationship.push(relation)
     }
   }
-  checkAge(event:any){
-    this.patientAge = moment().diff(event, 'y')
-    
+  checkAge(event: any) {
+    var patientAge = moment().diff(event, 'y')
+    this.isPatientUnderage = patientAge < 18 ? true : false;
   }
 }
