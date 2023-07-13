@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { Basic } from 'src/app/models/patient/basic.info.model';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { BasicInfoRequired } from 'src/app/models/validation/basic.info';
@@ -12,6 +13,7 @@ import { EmergencyRelation } from '../../models/patient/emergency.relation';
 export class EssentialInfoComponent implements OnInit {
   pateintBasicInfo: Basic = new Basic()
   emergencyRelations: string[] = [];
+  patientAge:number;
   @Input() requiredFields: BasicInfoRequired;
   constructor(private localService: LocalService) { }
 
@@ -43,5 +45,9 @@ export class EssentialInfoComponent implements OnInit {
     for (var relation in EmergencyRelation) {
       this.emergencyRelations.push(relation)
     }
+  }
+  checkAge(event:any){
+    this.patientAge = moment().diff(event, 'y')
+    
   }
 }

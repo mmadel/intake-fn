@@ -27,12 +27,12 @@
             </div>
 
         </c-col>
-
+            {{patientAge}}
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('birthDate') }">
                 <label for="dob" class="form-label">Date Of Birth</label>
                 <c-date-picker closeOnSelect placeholder="Date Of Birth" size="sm" name="dob"
-                    [(ngModel)]="pateintBasicInfo.birthDate_date"></c-date-picker>
+                    [(ngModel)]="pateintBasicInfo.birthDate_date" (dateChange)="checkAge($event)"></c-date-picker>
             </div>
         </c-col>
 
