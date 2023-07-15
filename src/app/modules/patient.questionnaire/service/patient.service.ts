@@ -24,6 +24,13 @@ export class PatientService {
     return this.http.post(uploadURL, imageFormData, { 'headers': headers, observe: 'response' })
   }
 
+  uploadG(imageFormData: FormData, gPateintId: number) {
+    const uploadURL = this.baseUrl + '/grantor/upload';
+    let headers = new HttpHeaders({ 'PgrantorPatientId': gPateintId.toString() });
+
+    return this.http.post(uploadURL, imageFormData, { 'headers': headers, observe: 'response' })
+  }
+
   getAgreement(){
     return this.http.get<AgreementHolder[]>(this.agreementURL, { observe: 'response' })
   }

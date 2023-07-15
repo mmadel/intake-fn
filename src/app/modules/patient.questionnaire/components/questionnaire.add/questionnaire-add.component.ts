@@ -169,7 +169,13 @@ export class QuestionnaireAddComponent implements OnInit {
         console.log('this.patient.files ' + this.patient.files)
         this.patientService.upload(this.patient.files, <number>response.body).subscribe(
           (response) => {
-
+            if(this.patient.patientGrantor.id){
+              this.patientService.uploadG(this.patient.patientGrantor.files,this.patient.patientGrantor.id).subscribe(
+                (response)=>{
+                  console.log('g files uploaded..')
+                }
+              );
+            }
             console.log('uploaded..')
           },
           (error) => {
@@ -187,12 +193,13 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   fillModel() {
     this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
-
+    this.patient.patientGrantor = this.essentialInfoComponent?.patientGrantor;
     this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
     this.patient.agreements = this.aggreementsComponent?.model;
     this.patient.files = this.uploadPhotoComponent ? this.uploadPhotoComponent.imageFormData : this.patient.files;
+    //this.patient.pateintGrantor.files = this.essentialInfoComponent ? this.essentialInfoComponent.gImageFormData : this.patient.patientGrantor.files;
     this.fillInsuranceInformationModel()
   }
 
@@ -207,8 +214,11 @@ export class QuestionnaireAddComponent implements OnInit {
   cachePatient(modelName: string, pateintHolder: Patient) {
     var patient: Patient = new Patient();
     patient = JSON.parse(this.localService.getData('patient') || '{}');
-    if (modelName === 'basic')
+    if (modelName === 'basic'){
       patient.basicInfo = pateintHolder.basicInfo;
+      patient.patientGrantor = pateintHolder.patientGrantor;
+    }
+      
     if (modelName === 'address')
       patient.addressInfo = pateintHolder.addressInfo;
     if (modelName === 'medical')

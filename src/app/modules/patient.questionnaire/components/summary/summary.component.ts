@@ -20,7 +20,11 @@ export class SummaryComponent implements OnInit {
   }
 
   getSummary() {
-    const paragraph = this.getPatientBaisInfo() + this.getPatientAddress() + this.getPatientMedicalInfo() + this.getPatientInsuranceInformation();
+    const paragraph = this.getPatientBaisInfo() +this.getPatientGrantor() +
+    this.getPatientAddress() + 
+    this.getPatientMedicalInfo() + 
+    this.getPatientInsuranceInformation();
+
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
 
@@ -38,7 +42,17 @@ export class SummaryComponent implements OnInit {
     <b style="font-family:Lucida">Employment Status</b> : <i >${this.pateint.basicInfo.employmentStatus} </i> <br/>`
     return paragraph;
   }
-
+  getPatientGrantor(){
+    var patientAge = moment().diff(this.pateint.basicInfo.birthDate_date, 'y')
+    var child = patientAge < 18 ? true : false;
+    if(child){
+    return `<u><h4 style="font-family:Lucida">Patient Grantor Information</h4></u>
+    <b style="font-family:Lucida">Name</b> : <i style="font-family:Lucida">${this.pateint.patientGrantor.firstName} , ${this.pateint.patientGrantor.middleName} , ${this.pateint.patientGrantor.lastName} </i></br>
+    <b style="font-family:Lucida">Relation</b> : <i style="font-family:Lucida"> ${this.pateint.patientGrantor.relation} </i></br>`
+    }else{
+      return '';
+    }
+  }
   getPatientAddress() {
     const paragraph = `<br/><u><h4 style="font-family:Lucida">Patient Address Information</h4></u>
     <b style="font-family:Lucida">Address Type</b> : <i style="font-family:Lucida"> ${this.pateint.addressInfo.type} </i></br>
