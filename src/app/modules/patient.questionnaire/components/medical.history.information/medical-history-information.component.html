@@ -25,9 +25,17 @@
         </div>
     </c-card-header>
     <c-card-body>
-        <input cFormControl sizing="sm" [(ngModel)]="model.weight" type="number" step="1" class="mb-3" />
+        <!-- <input cFormControl sizing="sm" [(ngModel)]="model.weight" type="number" step="1" class="mb-3" /> -->
+        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+            <input cFormCheckInput type="checkbox" [(ngModel)]="weightUnit" (change)="changeWeightUnit($event)"/>
+            <label cFormCheckLabel>
+                <span  [ngClass]="{ 'fw-bold':!weightUnit }">Pound</span>/<span [ngClass]="{ 'fw-bold':weightUnit }">kg</span>
+            </label>
+        </c-form-check>
+        <input cFormControl sizing="sm" [(ngModel)]="model.weight" type="number" step="1" />
     </c-card-body>
 </c-card>
+
 <c-card class="mb-2">
     <c-card-header>
         <div [ngClass]="{ 'form-group required':isRequiredField('evaluationReason') }">

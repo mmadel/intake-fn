@@ -2,6 +2,7 @@ export class MedicalHistroyInformation {
     height: string;
     heightUnit: string;
     weight: string;
+    weightUnit: string;
     evaluationReason: string;
     medicationPrescription: string;
     patientCondition: string[];
