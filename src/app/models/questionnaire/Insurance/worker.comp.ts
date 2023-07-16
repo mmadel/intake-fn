@@ -8,7 +8,7 @@ export class WrokerComp {
     workerCompAddress: Address;
     fax: string;
     insuranceName: string;
-    claimNumber: number;
+    claimNumber: string;
     adjusterInfoName: string;
     adjusterInfoPhone: string='';
     attorneyInfoName: string;
