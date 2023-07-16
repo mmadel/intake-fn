@@ -88,8 +88,12 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
             if (this.model.insuranceWorkerCompNoFault?.insuranceName === '' || this.model.insuranceWorkerCompNoFault?.insuranceName === undefined)
                 validator.push({ property: " Insurance Name", message: '' });
         }
-        if (this.isRequiredField('claimNumber')) {
-            if (this.model.insuranceWorkerCompNoFault?.claimNumber === 0 || this.model.insuranceWorkerCompNoFault?.claimNumber === undefined)
+        // if (this.isRequiredField('claimNumber')) {
+        //     if (this.model.insuranceWorkerCompNoFault?.claimNumber === 0 || this.model.insuranceWorkerCompNoFault?.claimNumber === undefined)
+        //         validator.push({ property: "Claim Number/ WC Case Number", message: '' });
+        // }
+         if (this.isRequiredField('claimNumber')) {
+            if (this.model.insuranceWorkerCompNoFault?.claimNumber === '' || this.model.insuranceWorkerCompNoFault?.claimNumber === undefined)
                 validator.push({ property: "Claim Number/ WC Case Number", message: '' });
         }
         if (this.isRequiredField('adjusterName')) {

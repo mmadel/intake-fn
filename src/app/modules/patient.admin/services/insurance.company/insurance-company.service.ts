@@ -11,7 +11,7 @@ export class InsuranceCompanyService {
   constructor(private http: HttpClient) { }
   create(insuranceCompany: InsuranceCompany) {
     const headers = { 'content-type': 'application/json' }
-    return this.http.post(`${this.userUrl}`, JSON.stringify(insuranceCompany), { 'headers': headers, observe: 'response' })
+    return this.http.post(`${this.userUrl}`+'/create', JSON.stringify(insuranceCompany), { 'headers': headers, observe: 'response' })
   }
   get() {
     return this.http.get<InsuranceCompany[]>(`${this.userUrl}` + '/find', { observe: 'response' })
