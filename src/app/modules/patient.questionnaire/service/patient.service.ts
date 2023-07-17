@@ -17,11 +17,11 @@ export class PatientService {
     return this.http.post(createPatientURL, patient, { 'headers': headers, observe: 'response' })
   }
 
-  upload(imageFormData: FormData, pateintId: number) {
+  upload(files: FormData, pateintId: number) {
     const uploadURL = this.baseUrl + '/upload';
     let headers = new HttpHeaders({ 'patientId': pateintId.toString() });
 
-    return this.http.post(uploadURL, imageFormData, { 'headers': headers, observe: 'response' })
+    return this.http.post(uploadURL, files, { 'headers': headers, observe: 'response' })
   }
 
   getAgreement(){

@@ -16,51 +16,17 @@ export class UploadPhotoComponent implements OnInit {
 
   public onImageUpload(event: any, photoType: string) {
 
-    if (photoType === 'pIdfront') {
-      var uploadedIDFrontImage: File = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        var localUrl = event.target.result;
-        this.compressFile(localUrl, uploadedIDFrontImage['name'],'pIdfront')
+    var uploadedIDFrontImage: File = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      var localUrl = event.target.result;
+      this.compressFile(localUrl, uploadedIDFrontImage['name'], photoType)
 
-      }
-      reader.readAsDataURL(uploadedIDFrontImage);
     }
-
-    if (photoType === 'pIdback') {
-      var uploadedIDBackImage: File = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        var localUrl = event.target.result;
-        this.compressFile(localUrl, uploadedIDBackImage['name'],'pIdback')
-
-      }
-      reader.readAsDataURL(uploadedIDBackImage);
-    }
-    if (photoType === 'pinsurancefront') {
-      var uploadedInsuranceFrontImage: File = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        var localUrl = event.target.result;
-        this.compressFile(localUrl, uploadedInsuranceFrontImage['name'],'pinsurancefront')
-
-      }
-      reader.readAsDataURL(uploadedInsuranceFrontImage);
-    }
-    if (photoType === 'pinsuranceback') {
-      var uploadedInsuranceBackImage: File = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        var localUrl = event.target.result;
-        this.compressFile(localUrl, uploadedInsuranceBackImage['name'],'pinsuranceback')
-
-      }
-      reader.readAsDataURL(uploadedInsuranceBackImage);
-    }
-
+    reader.readAsDataURL(uploadedIDFrontImage);
   }
-  
-  compressFile(image: any, fileName: any , fileSuffix:string) {
+
+  compressFile(image: any, fileName: any, fileSuffix: string) {
     var orientation = -1;
     var sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
     console.warn('Size in bytes is now:', sizeOfOriginalImage);
@@ -77,7 +43,7 @@ export class UploadPhotoComponent implements OnInit {
         const imageFile = new File([imageBlob], imageName, {
           type: 'image/jpeg'
         });
-        this.imageUploadAction(imageFile,fileSuffix);
+        this.imageUploadAction(imageFile, fileSuffix);
       });
   }
   dataURItoBlob(dataURI: any) {

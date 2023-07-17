@@ -1,10 +1,11 @@
 import { EmergencyRelation } from "src/app/modules/patient.questionnaire/models/patient/emergency.relation";
+import { PateintGrantorModel } from "./patient.grantor.model";
 
 export class Basic {
     firstName: string = '';
     middleName: string = '';
     lastName: string = '';
-    birthDate_date: Date = new Date();
+    birthDate_date: Date;
     birthDate: number = 0;
     gender: string = '';
     maritalStatus: string = '';
@@ -22,5 +23,6 @@ export class Basic {
     emergencyPhone: string = '';
     employmentStatus: string = '';
     employmentCompany :string = ''
+    pateintGrantor:PateintGrantorModel = new PateintGrantorModel();
 
 }
