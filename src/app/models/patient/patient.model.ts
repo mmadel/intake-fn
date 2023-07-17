@@ -13,7 +13,7 @@ export class Patient {
     insuranceQuestionnaireInfo: InsuranceQuestionnaireInfo = new InsuranceQuestionnaireInfo();
     medicalHistoryInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
     files: FormData = new FormData();
+    guarantorFiles : FormData = new FormData();
     agreements: Agreements = new Agreements();
-    PateintGrantorModel:PateintGrantorModel;
     clinicId: number | null;
 }

@@ -68,7 +68,7 @@ export class QuestionnaireAddComponent implements OnInit {
     private localService: LocalService,
     private toastr: ToastrService,
     private route: ActivatedRoute) { }
-
+  formFiles: FormData = new FormData();
   ngOnInit(): void {
     this.localService.removeData('patient')
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
@@ -122,13 +122,13 @@ export class QuestionnaireAddComponent implements OnInit {
         , this.patientFields.insurnaceCompInfoRequired
         , this.patientFields.insurnacecommerialInfoRequired)
     }
-    if (patientModel === 'upload') {
-      this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
-    }
+    // if (patientModel === 'upload') {
+    //   this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
+    // }
     if (patientModel === 'aggreements') {
       this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     }
-    this.validator = this.patientValidator.validate();
+    //this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
       this.proceedToNextStep(patientModel);
@@ -166,8 +166,10 @@ export class QuestionnaireAddComponent implements OnInit {
     pateint.clinicId = this.clinicId
     this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
       (response) => {
-        console.log('this.patient.files ' + this.patient.files)
-        this.patientService.upload(this.patient.files, <number>response.body).subscribe(
+        for (let dd of this.formFiles) {
+          console.log(dd)
+        }
+        this.patientService.upload(this.formFiles, <number>response.body).subscribe(
           (response) => {
 
             console.log('uploaded..')
@@ -187,15 +189,27 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   fillModel() {
     this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
-
     this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
-    this.patient.agreements = this.aggreementsComponent?.model;
-    this.patient.files = this.uploadPhotoComponent ? this.uploadPhotoComponent.imageFormData : this.patient.files;
     this.fillInsuranceInformationModel()
+    this.fillModelFiles();
+    this.patient.agreements = this.aggreementsComponent?.model;
   }
+  fillModelFiles() {
+    if (this.essentialInfoComponent) {
+      for (let guarantor of this.essentialInfoComponent.imageFormData) {
+        this.formFiles.append(guarantor[0], guarantor[1])
+      }
+    }
+    if (this.uploadPhotoComponent) {
+      for (let patientFiles of this.uploadPhotoComponent.imageFormData) {
+        console.log(patientFiles);
+        this.formFiles.append(patientFiles[0], patientFiles[1]);
+      }
+    }
 
+  }
   fillInsuranceInformationModel() {
     this.patient.insuranceQuestionnaireInfo.isCompNoFault = this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault;
     if (this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)

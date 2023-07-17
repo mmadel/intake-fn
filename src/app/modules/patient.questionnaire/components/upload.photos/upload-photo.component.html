@@ -9,12 +9,12 @@
     <c-card-body>
         <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pIdfront">Patient ID Front</label>
-            <input cFormControl id="pIdfront" accept="image/*" (change)="onImageUpload($event ,'pIdfront')" type="file" capture="environment"
+            <input cFormControl id="pIdfront" accept="image/*" (change)="onImageUpload($event ,'patientIdfront')" type="file" capture="environment"
                 class="mb-1" />
         </div>
         <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pIdback">Patient ID Back</label>
-            <input cFormControl id="pIdback" accept="image/*" (change)="onImageUpload($event ,'pIdback')" type="file" capture="environment"
+            <input cFormControl id="pIdback" accept="image/*" (change)="onImageUpload($event ,'patientIdback')" type="file" capture="environment"
                 class="mb-1" />
 
         </div>
@@ -30,13 +30,13 @@
     </c-card-header>
     <c-card-body>
         <div class="mb-3" [ngClass]="{ 'form-group required':true }">
-            <label cLabel for="pinsurancefront">Patient Insurance ID Front</label>
+            <label cLabel for="insurancefront">Patient Insurance ID Front</label>
             <input cFormControl id="pinsurancefront" accept="image/*"
-                (change)="onImageUpload($event ,'pinsurancefront')" type="file" class="mb-1" />
+                (change)="onImageUpload($event ,'patientinsurancefront')" type="file" class="mb-1" />
         </div>
         <div class="mb-3" [ngClass]="{ 'form-group required':true }">
             <label cLabel for="pinsuranceback">Patient Insurance ID Back</label>
-            <input cFormControl id="pinsuranceback" accept="image/*" (change)="onImageUpload($event ,'pinsuranceback')"
+            <input cFormControl id="pinsuranceback" accept="image/*" (change)="onImageUpload($event ,'patientinsuranceback')"
                 type="file" class="mb-1" />
         </div>
     </c-card-body>

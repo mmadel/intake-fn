@@ -2,10 +2,9 @@ import { EmergencyRelation } from "src/app/modules/patient.questionnaire/models/
 
 export class PateintGrantorModel {
     id: number;
-    firstName: number;
-    middleName: number;
-    lastName: number;
+    firstName: string;
+    middleName: string;
+    lastName: string;
     relation:EmergencyRelation;
-    idFront: FormData;
-    idBack: FormData 
+    files: FormData =  new FormData()
 }
