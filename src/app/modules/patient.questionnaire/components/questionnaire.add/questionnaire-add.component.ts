@@ -23,6 +23,7 @@ import { InsuranceInformationComponent } from '../insurance.information/insuranc
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
 import { UploadPhotoComponent } from '../upload.photos/upload-photo.component';
+import { PatientGrantorModel } from 'src/app/models/patient/patient.grantor.model';
 
 
 @Component({
@@ -97,6 +98,7 @@ export class QuestionnaireAddComponent implements OnInit {
       this.essentialInfoComponent.pateintBasicInfo.birthDate = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.birthDate_date).format("x"));
       // this.essentialInfoComponent.pateintBasicInfo.idEffectiveFrom = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_from_date).format("x"))
       // this.essentialInfoComponent.pateintBasicInfo.idEffectiveTo = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_to_date).format("x"))
+   
     }
     if (patientModel === 'address') {
       this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
@@ -169,7 +171,18 @@ export class QuestionnaireAddComponent implements OnInit {
         console.log('this.patient.files ' + this.patient.files)
         this.patientService.upload(this.patient.files, <number>response.body).subscribe(
           (response) => {
-
+            console.log('-----------------------------');
+            console.log('UPLOADED P');
+            console.log('------------------------------');
+            if (this.patient.patientGrantor.id) {
+              this.patientService.uploadG(this.patient.patientGrantor.files, this.patient.patientGrantor.id).subscribe(
+                (response) => {
+                  console.log('-----------------------------');
+                  console.log('UPLOADED G');
+                  console.log('------------------------------');
+                }
+              );
+            }
             console.log('uploaded..')
           },
           (error) => {
@@ -187,12 +200,13 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   fillModel() {
     this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
-
+    this.patient.patientGrantor = this.essentialInfoComponent?.patientGrantor;
     this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
     this.patient.agreements = this.aggreementsComponent?.model;
-    this.patient.files = this.uploadPhotoComponent ? this.uploadPhotoComponent.imageFormData : this.patient.files;
+    this.patient.files = this.uploadPhotoComponent ?
+      this.uploadPhotoComponent.imageFormData : this.patient.files;
     this.fillInsuranceInformationModel()
   }
 
@@ -207,8 +221,12 @@ export class QuestionnaireAddComponent implements OnInit {
   cachePatient(modelName: string, pateintHolder: Patient) {
     var patient: Patient = new Patient();
     patient = JSON.parse(this.localService.getData('patient') || '{}');
-    if (modelName === 'basic')
+    if (modelName === 'basic') {
       patient.basicInfo = pateintHolder.basicInfo;
+      patient.patientGrantor = pateintHolder.patientGrantor;
+      
+    }
+
     if (modelName === 'address')
       patient.addressInfo = pateintHolder.addressInfo;
     if (modelName === 'medical')

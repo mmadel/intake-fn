@@ -4,6 +4,7 @@ import { MedicalHistroyInformation } from "../questionnaire/medical/history/medi
 import { Address } from "./address.info.model";
 import { Agreements } from "./agreements/agreements.model";
 import { Basic } from "./basic.info.model";
+import { PatientGrantorModel } from "./patient.grantor.model";
 
 export class Patient {
     basicInfo: Basic = new Basic();
@@ -13,5 +14,6 @@ export class Patient {
     medicalHistoryInformation: MedicalHistroyInformation = new MedicalHistroyInformation();
     files: FormData = new FormData();
     agreements: Agreements = new Agreements();
+    patientGrantor:PatientGrantorModel=new PatientGrantorModel();
     clinicId: number | null;
 }

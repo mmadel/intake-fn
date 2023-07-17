@@ -4,7 +4,7 @@ export class Basic {
     firstName: string = '';
     middleName: string = '';
     lastName: string = '';
-    birthDate_date: Date = new Date();
+    birthDate_date: Date;
     birthDate: number = 0;
     gender: string = '';
     maritalStatus: string = '';
