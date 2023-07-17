@@ -48,9 +48,9 @@
                 <input aria-label="Guarantor Last name" cFormControl name="g-lname" sizing="sm" [(ngModel)]="pateintBasicInfo.pateintGrantor.lastName"/>
             </c-col>
             <label for="emergencyName" class="form-label">guarantor Relationship</label>
-            <select cFormControl cSelect class="mb-2" sizing="sm" id="guarantor-relation" name="guarantor-relation">
+            <select cFormControl cSelect class="mb-2" sizing="sm" id="guarantor-relation" name="guarantor-relation"  [(ngModel)]="pateintBasicInfo.pateintGrantor.relation">
                 <option value="null" disabled selected>Select Guarantor Relation</option>
-                <option *ngFor="let  relation of guarantorRelationship" [value]="pateintBasicInfo.pateintGrantor.relation">
+                <option *ngFor="let  relation of guarantorRelationship" [value]="relation">
                     {{relation}}
                 </option>
             </select>

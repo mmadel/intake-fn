@@ -166,9 +166,6 @@ export class QuestionnaireAddComponent implements OnInit {
     pateint.clinicId = this.clinicId
     this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
       (response) => {
-        for (let dd of this.formFiles) {
-          console.log(dd)
-        }
         this.patientService.upload(this.formFiles, <number>response.body).subscribe(
           (response) => {
 
