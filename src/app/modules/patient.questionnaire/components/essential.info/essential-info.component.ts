@@ -19,7 +19,7 @@ export class EssentialInfoComponent implements OnInit {
   isPatientUnderage: boolean = false;
   guarantorRelationship:string[]= [];
   @Input() requiredFields: BasicInfoRequired;
-  gImageFormData: FormData = new FormData();
+  imageFormData: FormData = new FormData();
   constructor(private localService: LocalService,private imageCompress: NgxImageCompressService) { }
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class EssentialInfoComponent implements OnInit {
   checkAge(event: any) {
     var patientAge = moment().diff(event, 'y')
     this.isPatientUnderage = patientAge < 18 ? true : false;
-    this.patientGrantor.id =moment().millisecond();
+    
   }
 
   //for upload grantor ID 
@@ -76,6 +76,7 @@ export class EssentialInfoComponent implements OnInit {
 
       }
       reader.readAsDataURL(uploadedGIDFrontImage);
+      
     }
 
     if (photoType === 'gIdBack') {
@@ -87,9 +88,10 @@ export class EssentialInfoComponent implements OnInit {
 
       }
       reader.readAsDataURL(uploadedGIDBackImage);
+      
     }
    
-
+    
   }
   
   compressFile(image: any, fileName: any , fileSuffix:string) {
@@ -112,6 +114,7 @@ export class EssentialInfoComponent implements OnInit {
         this.imageUploadAction(imageFile,fileSuffix);
       });
   }
+
   dataURItoBlob(dataURI: any) {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);
@@ -125,6 +128,6 @@ export class EssentialInfoComponent implements OnInit {
     return blob;
   }
   imageUploadAction(uploadedImage: File, imageName: string) {
-    this.gImageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
+    this.imageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
   }
 }
