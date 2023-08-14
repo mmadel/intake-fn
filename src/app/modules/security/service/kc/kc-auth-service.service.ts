@@ -39,4 +39,8 @@ export class KcAuthServiceService {
   public getRoles(): string[] {
     return this.keycloakService.getUserRoles();
   }
+
+  public isUserInRole(role:string):boolean{
+    return this.keycloakService.isUserInRole(role);
+  }
 }
