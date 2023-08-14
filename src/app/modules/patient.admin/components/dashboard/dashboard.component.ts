@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { combineLatest, filter, switchMap, tap, zip } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
 import { LocalService } from 'src/app/modules/common';
+import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 import { ClinicService } from '../../services/clinic/clinic.service';
 import { DashboardService } from '../../services/dashboard.service';
 
@@ -17,10 +18,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   startDate: number = 0;
   endDate: number = 0;
   constructor(private dashboardService: DashboardService, private clinicService: ClinicService
-    , private localService: LocalService) { }
+    , private localService: LocalService,private authServiceService: KcAuthServiceService) { }
 
 
   ngOnInit(): void {
+    
     //result[0] clinicId
     //result[1][0] startDate filter
     //result[1][1] endDate filter

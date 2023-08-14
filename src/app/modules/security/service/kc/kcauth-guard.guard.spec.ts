@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthGuard } from './auth.guard';
+import { KCAuthGuardGuard } from './kcauth-guard.guard';
 
-describe('AuthGuard', () => {
-  let guard: AuthGuard;
+describe('KCAuthGuardGuard', () => {
+  let guard: KCAuthGuardGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(AuthGuard);
+    guard = TestBed.inject(KCAuthGuardGuard);
   });
 
   it('should be created', () => {

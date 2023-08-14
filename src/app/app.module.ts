@@ -46,8 +46,8 @@ import {
 import { PatientService } from './modules/patient.questionnaire/service/patient.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PatientListService } from './modules/patient.admin/services/patient-list.service';
-import { AuthInterceptor } from './modules/security';
 import { ToastrModule } from 'ngx-toastr';
+import { SecurityModule } from './modules/security';
 
 
 
@@ -65,7 +65,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, ...ADMIN_APP_CONTAINERS, AdminHeaderComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, ...ADMIN_APP_CONTAINERS],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -98,7 +98,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       timeOut: 600000,
       closeButton: true,
       progressBar: true,
-    })
+    }),
+    SecurityModule
   ],
   providers: [
     {
@@ -112,8 +113,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    }
   ],
   bootstrap: [AppComponent]
 })

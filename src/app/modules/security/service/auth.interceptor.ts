@@ -8,7 +8,6 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 import { BehaviorSubject, catchError, EMPTY, finalize, NEVER, Observable, throwError } from 'rxjs';
-import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { LocalService } from '../../common';
 import { UserRoleURLS } from 'src/app/core/adminlayout/header/user.role.urls';
@@ -20,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
   private refreshingInProgress: boolean;
   private accessTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
-  constructor(private authService: AuthService,
+  constructor(
     private router: Router
     , private localService: LocalService
     , private spinner: NgxSpinnerService) { }
@@ -79,7 +78,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private logoutAndRedirect(err: any): Observable<HttpEvent<any>> {
-    this.authService.logout();
+    //this.authService.logout();
     this.router.navigateByUrl('/login');
 
     return throwError(err);

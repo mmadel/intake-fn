@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';
-import { AuthService } from 'src/app/modules/security/service/auth.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -64,7 +63,7 @@ export class AdminHeaderComponent extends HeaderComponent {
     themeSwitchRadio: new UntypedFormControl('light'),
   });
 
-  constructor(private _classToggler: ClassToggleService, private authService: AuthService, private router: Router
+  constructor(private _classToggler: ClassToggleService,private router: Router
     , private clinicService: ClinicService
     , private localService: LocalService) {
     super();
@@ -85,7 +84,6 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.classToggler.toggle('body', 'dark-theme');
   }
   logout() {
-    this.authService.logout();
     this.router.navigateByUrl('/login');
   }
   setSelectedClinic(event: any) {
