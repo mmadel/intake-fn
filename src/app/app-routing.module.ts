@@ -34,7 +34,8 @@ const routes: Routes = [
     component: DefaultAdminLayoutComponent,
     canActivate: [KCAuthGuardGuard],
     data: {
-      title: ''
+      title: '',
+      roles: ['administrator']
     },
     children: [
       {
