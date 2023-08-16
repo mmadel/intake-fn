@@ -18,10 +18,6 @@ export class UserListComponent implements OnInit {
     this.userService.get().subscribe(response => {
       response.body?.forEach(element => {
         if (element.clinics?.length !== undefined && element.clinics?.length > 0) {
-          if (element.userRole === 'ADMIN')
-            element.userRole = "Administrator";
-          if (element.userRole === 'USER')
-            element.userRole = "Normal User";
           this.users?.push(element)
         }
       });
