@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class DashboardService {
   constructor(private httpClient: HttpClient) { }
 
-  public getDate(clinicId: number | null, userId: number, startDate: number | null, endDate: number | null) {
+  public getDate(clinicId: number | null, userId: string | undefined, startDate: number | null, endDate: number | null) {
     const retrievePatientRequiredFieldsURL = environment.baseURL + 'dashboard/data'
       + '/clinicId/' + clinicId
       + "/userId/" + userId

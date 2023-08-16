@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   startDate: number = 0;
   endDate: number = 0;
   constructor(private dashboardService: DashboardService, private clinicService: ClinicService
-    , private localService: LocalService,private authServiceService: KcAuthServiceService) { }
+    , private localService: LocalService,private kcAuthServiceService: KcAuthServiceService) { }
 
 
   ngOnInit(): void {
@@ -26,15 +26,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     //result[0] clinicId
     //result[1][0] startDate filter
     //result[1][1] endDate filter
-    combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
+    this.kcAuthServiceService.loadUserProfile().then((userProfile)=>{
+      combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
       .pipe(
         tap((result) => console.log(result[0])),
         filter((result) => result[0] !== null),
-        switchMap(result => this.dashboardService.getDate(result[0], Number(this.localService.getData("userId") || '{}')
+        switchMap(result => this.dashboardService.getDate(result[0], userProfile.id
           , result[1] === null ? 0 : result[1][0]
           , result[1] === null ? 0 : result[1][1])
         )).subscribe(data => this.dashboardDataContainer = <DashboardDataContainer>data,
           (err)=> console.log(err))
+    })
   }
   ngOnDestroy() {
     this.clinicService.filterDate$.next(null)
