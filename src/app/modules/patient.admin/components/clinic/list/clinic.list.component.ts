@@ -44,7 +44,7 @@ export class ClinicListComponent implements OnInit {
       address: splitted[0],
       country: splitted[1],
       ps: splitted[2],
-      zipcode: splitted[3]
+      zipcode: splitted[4]
     }
     return renderedClinic;
   }
