@@ -3,9 +3,11 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 import * as moment from 'moment';
+import { from, mergeMap } from 'rxjs';
 import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';
+import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -44,7 +46,7 @@ export class AdminHeaderComponent extends HeaderComponent {
       0
     ]
   };
-  userName: string;
+  userName: string | undefined;
   clinics: Clinic[] = new Array();
   selectedClinicId: number;
   @ViewChild('userClinics') userClinics: ElementRef;
@@ -63,20 +65,23 @@ export class AdminHeaderComponent extends HeaderComponent {
     themeSwitchRadio: new UntypedFormControl('light'),
   });
 
-  constructor(private _classToggler: ClassToggleService,private router: Router
+  constructor(private _classToggler: ClassToggleService, private router: Router
     , private clinicService: ClinicService
-    , private localService: LocalService) {
+    , private localService: LocalService
+    , private ksAuthServiceService: KcAuthServiceService) {
     super();
   }
   ngOnInit(): void {
-    this.userName = this.localService.getData('userName');
-    this.userName = this.userName.charAt(0).toUpperCase()
-    this.clinicService.getByUserId(Number(this.localService.getData('userId') || {})).subscribe(response => {
-      response.body?.forEach(element => {
-        this.clinics.push(element);
-      });
-      this.clinicService.selectedClinic$.next(this.clinics[0].id)
-    })
+    this.ksAuthServiceService.loadUserProfile()
+      .then((userProfile) => {
+        this.userName = userProfile.username?.charAt(0).toUpperCase()
+        this.clinicService.getByUserId(userProfile.id).subscribe(response => {
+          response.body?.forEach(element => {
+            this.clinics.push(element);
+          });
+          this.clinicService.selectedClinic$.next(this.clinics[0].id)
+        })
+      })
   }
 
   setTheme(value: string): void {
