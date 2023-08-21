@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LocalService } from 'src/app/modules/common';
 import { countries } from 'src/app/modules/common/components/address/country-data-store';
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
@@ -44,14 +45,14 @@ export class UserCreationComponent implements OnInit {
   constructor(private clinicService: ClinicService,
     private userService: UserService,
     private router: Router,
-    private localService: LocalService) { }
+    private localService: LocalService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.clinicService.get().subscribe(response => {
       response.body?.forEach(element => {
         this.returnClinics?.push(element)
       });
-      console.log(this.returnClinics)
     },
       error => {
         console.log(error)
@@ -76,7 +77,10 @@ export class UserCreationComponent implements OnInit {
         (response) => {
           this.router.navigateByUrl('admin/user/list')
         },
-        (error) => { console.log(error); });
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In Creation');
+        });
     } else {
       console.log('not valid')
       this.errorMessage = 'Please enter valid data';
