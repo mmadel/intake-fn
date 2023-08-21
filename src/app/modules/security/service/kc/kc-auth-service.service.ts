@@ -37,10 +37,13 @@ export class KcAuthServiceService {
   }
 
   public getRoles(): string[] {
-    return this.keycloakService.getUserRoles();
+    return this.keycloakService.getUserRoles(false);
   }
 
-  public isUserInRole(role:string):boolean{
+  public isUserInRole(role: string): boolean {
     return this.keycloakService.isUserInRole(role);
+  }
+  public getToken(): Promise<string> {
+    return this.keycloakService.getToken();
   }
 }

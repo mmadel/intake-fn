@@ -48,6 +48,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PatientListService } from './modules/patient.admin/services/patient-list.service';
 import { ToastrModule } from 'ngx-toastr';
 import { SecurityModule } from './modules/security';
+import { AuthInterceptor } from './modules/security/service/auth.interceptor';
 
 
 
@@ -113,7 +114,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

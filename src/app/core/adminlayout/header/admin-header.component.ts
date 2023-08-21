@@ -89,7 +89,7 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.classToggler.toggle('body', 'dark-theme');
   }
   logout() {
-    this.router.navigateByUrl('/login');
+    this.ksAuthServiceService.logout()
   }
   setSelectedClinic(event: any) {
     this.clinicService.selectedClinic$.next(event.target.value)

@@ -11,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
   create(user: User) {
     const headers = { 'content-type': 'application/json' }
-    return this.http.post(`${this.userUrl}`, JSON.stringify(user), { 'headers': headers, observe: 'response' })
+    return this.http.post(`${this.userUrl}`+ '/create', JSON.stringify(user), { 'headers': headers, observe: 'response' })
   }
 
   get() {

@@ -18,8 +18,6 @@ export class DefaultAdminLayoutComponent implements OnInit {
     suppressScrollX: true,
   };
   ngOnInit(): void {
-    var userRolestring = this.localService.getData('userRole' || '{}');
-
     if (this.kcUserService.isUserInRole('normal'))
       this.navItems = userNavItems
     if (this.kcUserService.isUserInRole('administrator'))

@@ -35,7 +35,7 @@ const routes: Routes = [
     canActivate: [KCAuthGuardGuard],
     data: {
       title: '',
-      roles: ['administrator']
+      roles: ['administrator','normal']
     },
     children: [
       {
