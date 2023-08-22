@@ -35,7 +35,7 @@
 
             </td>
             <td>
-                <button cButton variant="outline" class="me-3" (click)="update(user.id)" [disabled]="isLoggedInUser(user.id)">
+                <button cButton variant="outline" class="me-3" (click)="update(user.uuid)" [disabled]="isLoggedInUser(user.id)">
                     <svg cIcon name="cilPen"></svg>
                 </button>
                 <button cButton variant="outline" (click)="delete(user.uuid)" [disabled]="isLoggedInUser(user.id)">
