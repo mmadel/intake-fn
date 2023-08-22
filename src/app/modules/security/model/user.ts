@@ -7,4 +7,5 @@ export interface User {
     address: string | null;
     userRole: string | null;
     clinics: Clinic[] | null;
+    uuid:string
 }

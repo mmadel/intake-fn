@@ -84,6 +84,7 @@ export class UserUpdateComponent implements OnInit {
   create() {
     var user: User = {
       id: this.userId,
+      uuid:'',
       name: this.form.name,
       password: this.form.password,
       address: this.convertAddressToString(),

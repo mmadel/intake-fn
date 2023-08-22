@@ -35,6 +35,7 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/admin/user/update', userId])
   }
   delete(userId:string | undefined | null){
+    console.log(userId);
     this.userService.delete(userId || '{}').subscribe(() => {
       location.reload();
     })

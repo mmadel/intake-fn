@@ -66,6 +66,7 @@ export class UserCreationComponent implements OnInit {
     }
     var user: User = {
       id: null,
+      uuid:'',
       name: this.form.name,
       password: this.localService.encrypt(this.form.password !== null ? this.form.password : ''),
       address: this.convertAddressToString(),
