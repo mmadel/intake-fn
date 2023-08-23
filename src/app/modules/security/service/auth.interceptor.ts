@@ -26,29 +26,24 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     //this.spinner.show();
-    return from(this.kcAuthServiceService.getToken())
-      .pipe(
-        mergeMap(token => {
-          //pass non-secured urls without access token enrichment
-          if (_.some(this.getNotSecuredURL(), (el) => _.includes(request.url, el))) {
-            console.log('not secured')
-            request;
-          }
-          //enrich secured urls with access token 
-          else if (token) {
-            console.log('secured');
-            request = request.clone({
-              setHeaders: { Authorization: `Bearer ${token}` }
-            });
-          }
-          //reject other requests 
-          else {
-            console.log('rejected');
-            Observable.create(EMPTY);
-          }
-          return next.handle(request);
-        })
-      )
+    let accessToken = this.kcAuthServiceService.getToken();
+    if (_.some(this.getNotSecuredURL(), (el) => _.includes(request.url, el))) {
+      console.log('not secured')
+      request;
+    }
+    //enrich secured urls with access token 
+    else if (accessToken) {
+      console.log('secured');
+      request = request.clone({
+        setHeaders: { Authorization: `Bearer ${accessToken}` }
+      });
+    }
+    //reject other requests 
+    else {
+      console.log('rejected');
+      Observable.create(EMPTY);
+    }
+    return next.handle(request);
   }
 
   private getNotSecuredURL(): string[] {

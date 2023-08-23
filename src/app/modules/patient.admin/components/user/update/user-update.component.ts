@@ -6,6 +6,7 @@ import { countries } from 'src/app/modules/common/components/address/country-dat
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
 import { states } from 'src/app/modules/common/components/address/state-data-store';
 import { User } from 'src/app/modules/security/model/user';
+import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 import { Clinic } from '../../../models/clinic.model';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { UserService } from '../../../services/user/user.service';
@@ -32,7 +33,8 @@ export class UserUpdateComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private clinicService: ClinicService,
-    private router: Router) { }
+    private router: Router,
+    private kcAuthServiceService: KcAuthServiceService) { }
   form = {
     name: '',
     password: '',
@@ -46,6 +48,9 @@ export class UserUpdateComponent implements OnInit {
     selectedClinics: [1]
   };
   ngOnInit(): void {
+    this.kcAuthServiceService.loadUserProfile().then((response) => {
+        console.log(JSON.stringify(response))
+    })
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId') !== null ? this.activatedRoute.snapshot.paramMap.get('userId') : '';
     this.userService.getById(this.userId).subscribe((result) => {
       var addressParts: string[] = this.converStringToAddress(result.address)
@@ -84,7 +89,7 @@ export class UserUpdateComponent implements OnInit {
   create() {
     var user: User = {
       id: this.userId,
-      uuid:'',
+      uuid: '',
       name: this.form.name,
       password: this.form.password,
       address: this.convertAddressToString(),
@@ -96,7 +101,7 @@ export class UserUpdateComponent implements OnInit {
         (response) => {
           this.router.navigateByUrl('admin/user/list')
         },
-        (error) => { this.errorMessage = error.error.error;});
+        (error) => { this.errorMessage = error.error.error; });
     } else {
       console.log('not valid')
       this.errorMessage = 'Please enter valid data';
