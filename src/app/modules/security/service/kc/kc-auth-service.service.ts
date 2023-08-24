@@ -6,10 +6,7 @@ import { KeycloakProfile, KeycloakTokenParsed } from 'keycloak-js';
 export class KcAuthServiceService {
 
   constructor(private keycloakService: KeycloakService) {
-    if (localStorage.getItem('access-token') === null)
-      this.keycloakService.getToken().then((token) => {
-        localStorage.setItem('access-token', token)
-      })
+
   }
   public getLoggedUser(): KeycloakTokenParsed | undefined {
     try {
@@ -30,7 +27,7 @@ export class KcAuthServiceService {
   }
 
   public login(): void {
-    
+    localStorage.removeItem('access-token')
     this.keycloakService.login();
   }
 
@@ -50,12 +47,7 @@ export class KcAuthServiceService {
   public isUserInRole(role: string): boolean {
     return this.keycloakService.isUserInRole(role);
   }
-  public getToken(): string {
-    if (this.keycloakService.isTokenExpired()){
-      console.log('###################### expired')
-      this.logout()
-    }
-      
-    return localStorage.getItem('access-token') || '{}';
+  public getToken(): Promise<string> {
+    return this.keycloakService.getToken()
   }
 }

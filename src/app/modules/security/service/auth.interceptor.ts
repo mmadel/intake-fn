@@ -25,25 +25,24 @@ export class AuthInterceptor implements HttpInterceptor {
     , private spinner: NgxSpinnerService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //this.spinner.show();
-    let accessToken = this.kcAuthServiceService.getToken();
-    if (_.some(this.getNotSecuredURL(), (el) => _.includes(request.url, el))) {
-      console.log('not secured')
-      request;
-    }
-    //enrich secured urls with access token 
-    else if (accessToken) {
-      console.log('secured');
-      request = request.clone({
-        setHeaders: { Authorization: `Bearer ${accessToken}` }
-      });
-    }
-    //reject other requests 
-    else {
-      console.log('rejected');
-      Observable.create(EMPTY);
-    }
-    return next.handle(request);
+    return from(this.kcAuthServiceService.getToken())
+      .pipe(
+        mergeMap(token => {
+          console.log(localStorage.getItem('access-token')===null)
+          if (localStorage.getItem('access-token') === null){
+            console.log('no cached acces token');
+            localStorage.setItem('access-token', token)
+          }
+          console.log(localStorage.getItem('access-token'))
+          request = request.clone({
+            setHeaders: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
+          });
+          return next.handle(request);
+        }
+        ), catchError(error => {
+          this.kcAuthServiceService.logout();
+          return [];
+        }))
   }
 
   private getNotSecuredURL(): string[] {
