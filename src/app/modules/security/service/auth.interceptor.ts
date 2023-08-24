@@ -35,10 +35,17 @@ export class AuthInterceptor implements HttpInterceptor {
           request = request.clone({
             setHeaders: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
           });
-
           return next.handle(request);
         }
-        ))
+        ), catchError(error => {
+          if (error.error.errorCode === 'UNAUTHORIZED') {
+            console.log('token is expired');
+            this.kcAuthServiceService.logout();
+          } else {
+            console.log('other error , please contact the administrator..!!');
+          }
+          return [];
+        }))
   }
 
   private getNotSecuredURL(): string[] {
