@@ -30,8 +30,6 @@ export class LocalService {
   private decrypt(txtToDecrypt: string) {
     var hash = CryptoJS.SHA1('0123456789123456');
     var key = CryptoJS.lib.WordArray.create(hash.words.slice(0, 16 / 4));
-    return CryptoJS.AES.decrypt(txtToDecrypt, key,{
-      mode: CryptoJS.mode.ECB,
-    }).toString();
+    return CryptoJS.AES.decrypt(txtToDecrypt, key).toString();
   }
 }

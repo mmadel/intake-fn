@@ -23,8 +23,8 @@ export class EssentialInfoComponent implements OnInit {
   ngOnInit(): void {
     this.fillEmergenctrelation();
 
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.basicInfo !== undefined) {
         this.pateintBasicInfo = pateint.basicInfo;
       } else {

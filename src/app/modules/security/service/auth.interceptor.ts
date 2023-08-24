@@ -15,6 +15,7 @@ import { UserRoleURLS } from 'src/app/core/adminlayout/header/user.role.urls';
 import * as _ from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { KcAuthServiceService } from './kc/kc-auth-service.service';
+import { ConstantPool } from '@angular/compiler';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -28,21 +29,16 @@ export class AuthInterceptor implements HttpInterceptor {
     return from(this.kcAuthServiceService.getToken())
       .pipe(
         mergeMap(token => {
-          console.log(localStorage.getItem('access-token')===null)
-          if (localStorage.getItem('access-token') === null){
-            console.log('no cached acces token');
+          if (localStorage.getItem('access-token') === null) {
             localStorage.setItem('access-token', token)
           }
-          console.log(localStorage.getItem('access-token'))
           request = request.clone({
             setHeaders: { Authorization: `Bearer ${localStorage.getItem('access-token')}` }
           });
+
           return next.handle(request);
         }
-        ), catchError(error => {
-          this.kcAuthServiceService.logout();
-          return [];
-        }))
+        ))
   }
 
   private getNotSecuredURL(): string[] {

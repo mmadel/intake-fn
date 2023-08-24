@@ -29,8 +29,8 @@ export class AggreementsComponent implements OnInit {
     private patientService: PatientService) { }
 
   ngOnInit(): void {
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       this.constructorPatientName(pateint);
       if (pateint.agreements !== undefined) {
         this.model = pateint.agreements;
