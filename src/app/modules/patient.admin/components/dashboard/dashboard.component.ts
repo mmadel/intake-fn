@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { combineLatest, filter, switchMap, tap, zip } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
 import { LocalService } from 'src/app/modules/common';
@@ -18,11 +19,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   startDate: number = 0;
   endDate: number = 0;
   constructor(private dashboardService: DashboardService, private clinicService: ClinicService
-    , private localService: LocalService,private kcAuthServiceService: KcAuthServiceService) { }
+    ,private kcAuthServiceService: KcAuthServiceService,private router: Router) { }
 
 
   ngOnInit(): void {
-    
+    if(this.kcAuthServiceService.isUserInRole('normal')){
+      this.router.navigateByUrl('admin/patient/list')
+    }
     //result[0] clinicId
     //result[1][0] startDate filter
     //result[1][1] endDate filter
