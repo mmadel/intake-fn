@@ -23,9 +23,4 @@ export class DefaultAdminLayoutComponent implements OnInit {
     if (this.kcUserService.isUserInRole('administrator'))
       this.navItems = adminNavItems;
   }
-
-  checkUserRole() {
-    return this.localService.getData('userRole' || '{}');
-  }
-
 }

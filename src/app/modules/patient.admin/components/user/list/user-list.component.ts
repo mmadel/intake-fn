@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalService } from 'src/app/modules/common';
 import { User } from 'src/app/modules/security/model/user';
+import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 import { UserService } from '../../../services/user/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from '../../../services/user/user.service';
 export class UserListComponent implements OnInit {
   isLoggedIn: boolean;
   users: User[] = new Array();
-  constructor(private router: Router, private userService: UserService , private localService:LocalService) { }
+  constructor(private router: Router, private userService: UserService , private kcAuthServiceService :KcAuthServiceService) { }
 
   ngOnInit(): void {
     this.userService.get().subscribe(response => {
@@ -41,7 +42,7 @@ export class UserListComponent implements OnInit {
     })
   }
   isLoggedInUser(id: string | null | undefined) {
-    var userId: string = this.localService.getData('userId') || '{}';
+    var userId: string | undefined = this.kcAuthServiceService.getLoggedUser()?.sub;
     this.isLoggedIn= userId == id ? true : false;
     return this.isLoggedIn;
   }
