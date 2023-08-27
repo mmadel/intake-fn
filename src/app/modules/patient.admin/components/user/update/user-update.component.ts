@@ -48,9 +48,6 @@ export class UserUpdateComponent implements OnInit {
     selectedClinics: [1]
   };
   ngOnInit(): void {
-    this.kcAuthServiceService.loadUserProfile().then((response) => {
-        console.log(JSON.stringify(response))
-    })
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId') !== null ? this.activatedRoute.snapshot.paramMap.get('userId') : '';
     this.userService.getById(this.userId).subscribe((result) => {
       var addressParts: string[] = this.converStringToAddress(result.address)
