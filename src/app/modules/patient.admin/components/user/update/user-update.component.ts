@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
+import { LocalService } from 'src/app/modules/common';
 import { countries } from 'src/app/modules/common/components/address/country-data-store';
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
 import { states } from 'src/app/modules/common/components/address/state-data-store';
 import { User } from 'src/app/modules/security/model/user';
-import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 import { Clinic } from '../../../models/clinic.model';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { UserService } from '../../../services/user/user.service';
@@ -26,6 +26,7 @@ export class UserUpdateComponent implements OnInit {
     { name: "Administrator", value: "Administrator" },
     { name: "Normal User", value: "Normal" }
   ]
+  resetpassword: boolean = false;
   userId: string | null;
   errorMessage: string | null;
   returnClinics: Clinic[] = new Array();
@@ -34,9 +35,10 @@ export class UserUpdateComponent implements OnInit {
     private userService: UserService,
     private clinicService: ClinicService,
     private router: Router,
-    private kcAuthServiceService: KcAuthServiceService) { }
+    private localService: LocalService) { }
+
   form = {
-    uuid:'',
+    uuid: '',
     name: '',
     password: '',
     useraddress: '',
@@ -49,10 +51,16 @@ export class UserUpdateComponent implements OnInit {
     selectedClinics: [1]
   };
   capitalizeFirstLetter(value: string) {
-    var v:string =value[0].toUpperCase() +
-    value.slice(1)
+    var v: string = value[0].toUpperCase() +
+      value.slice(1)
     console.log(v)
-    return  v;
+    return v;
+  }
+  minusculeFirstLetter(value: string) {
+    var v: string = value[0].toLowerCase() +
+      value.slice(1)
+    console.log(v)
+    return v;
   }
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId') !== null ? this.activatedRoute.snapshot.paramMap.get('userId') : '';
@@ -93,12 +101,12 @@ export class UserUpdateComponent implements OnInit {
   }
   create() {
     var user: User = {
-      id: this.userId,
-      uuid: '',
+      id: null,
+      uuid: this.form.uuid,
       name: this.form.name,
-      password: this.form.password,
+      password: this.localService.encrypt(this.form.password !== null ? this.form.password : ''),
       address: this.convertAddressToString(),
-      userRole: this.form.userrole,
+      userRole: this.minusculeFirstLetter(this.form.userrole),
       clinics: this.createClinics(this.form.selectedClinics)
     }
     if (this.userCreateForm.valid) {
