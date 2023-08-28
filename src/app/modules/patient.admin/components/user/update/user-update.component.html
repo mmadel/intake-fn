@@ -10,11 +10,16 @@
                     <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
                     <form cForm #userCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
                         <div class="form-group">
-                            <small *ngIf="name.invalid && (name.dirty || name.touched)" class="form-text text-danger">
-                                user name is required
-                            </small>
                             <c-input-group class="mb-3">
-                                <input autoComplete="name" cFormControl id="name" name="name"
+                                <input  cFormControl id="uuid" name="uuid"
+                                    placeholder="Enter User Name" disabled="true"
+                                    [ngClass]="{'is-invalid': uuid.invalid && (uuid.dirty || uuid.touched)}"
+                                    [(ngModel)]="form.uuid" #uuid="ngModel" />
+                            </c-input-group>
+                        </div>
+                        <div class="form-group">
+                            <c-input-group class="mb-3">
+                                <input  cFormControl id="name" name="name"
                                     placeholder="Enter User Name" disabled="true"
                                     [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
                                     [(ngModel)]="form.name" #name="ngModel" />

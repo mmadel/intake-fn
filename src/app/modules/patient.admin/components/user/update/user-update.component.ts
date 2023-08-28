@@ -36,6 +36,7 @@ export class UserUpdateComponent implements OnInit {
     private router: Router,
     private kcAuthServiceService: KcAuthServiceService) { }
   form = {
+    uuid:'',
     name: '',
     password: '',
     useraddress: '',
@@ -57,6 +58,7 @@ export class UserUpdateComponent implements OnInit {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId') !== null ? this.activatedRoute.snapshot.paramMap.get('userId') : '';
     this.userService.getById(this.userId).subscribe((result) => {
       var addressParts: string[] = this.converStringToAddress(result.address)
+      this.form.uuid = result.uuid;
       this.form.name = result.name !== null ? result.name : '';
       this.form.password = result.password !== null ? result.password : '';
       this.form.useraddress = result.address !== null ? addressParts[0] : '';
