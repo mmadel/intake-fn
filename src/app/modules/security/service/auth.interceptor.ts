@@ -42,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
             console.log('token is expired');
             this.kcAuthServiceService.logout();
           } else {
-            console.log('other error , please contact the administrator..!!');
+            return throwError(error);
           }
           return [];
         }))
