@@ -23,8 +23,8 @@ export class UserUpdateComponent implements OnInit {
   countries: Countries[] = countries;
   states: string[] = states;
   userRoles: UserRole[] = [
-    { name: "Administrator", value: "ADMIN" },
-    { name: "Normal User", value: "USER" }
+    { name: "Administrator", value: "Administrator" },
+    { name: "Normal User", value: "Normal" }
   ]
   userId: string | null;
   errorMessage: string | null;
@@ -47,6 +47,12 @@ export class UserUpdateComponent implements OnInit {
     userrole: '',
     selectedClinics: [1]
   };
+  capitalizeFirstLetter(value: string) {
+    var v:string =value[0].toUpperCase() +
+    value.slice(1)
+    console.log(v)
+    return  v;
+  }
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId') !== null ? this.activatedRoute.snapshot.paramMap.get('userId') : '';
     this.userService.getById(this.userId).subscribe((result) => {
@@ -61,7 +67,7 @@ export class UserUpdateComponent implements OnInit {
         this.form.useraddressstate = result.address !== null ? addressParts[2] : '';
       this.form.useraddresscity = result.address !== null ? addressParts[3] : '';
       this.form.useraddresszipcode = result.address !== null ? addressParts[4] : '';
-      this.form.userrole = result.userRole !== null ? result.userRole : '';
+      this.form.userrole = result.userRole !== null ? this.capitalizeFirstLetter(result.userRole) : '';
       var clinicIds: number[] = _.map(result.clinics, (clinic) => {
         return clinic.id !== null ? clinic.id : 0;
       });
