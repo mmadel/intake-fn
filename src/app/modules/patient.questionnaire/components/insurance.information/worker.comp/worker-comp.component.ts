@@ -19,8 +19,8 @@ export class WorkerCompComponent implements OnInit {
   constructor(private localService:LocalService) { }
 
   ngOnInit(): void {
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.insuranceQuestionnaireInfo !== undefined && pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault !== undefined) {
         this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault;
       } else {

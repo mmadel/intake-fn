@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
+import { LocalService } from 'src/app/modules/common';
 import { countries } from 'src/app/modules/common/components/address/country-data-store';
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
 import { states } from 'src/app/modules/common/components/address/state-data-store';
@@ -22,9 +23,10 @@ export class UserUpdateComponent implements OnInit {
   countries: Countries[] = countries;
   states: string[] = states;
   userRoles: UserRole[] = [
-    { name: "Administrator", value: "ADMIN" },
-    { name: "Normal User", value: "USER" }
+    { name: "Administrator", value: "Administrator" },
+    { name: "Normal User", value: "Normal" }
   ]
+  resetpassword: boolean = false;
   userId: string | null;
   errorMessage: string | null;
   returnClinics: Clinic[] = new Array();
@@ -32,8 +34,11 @@ export class UserUpdateComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private clinicService: ClinicService,
-    private router: Router) { }
+    private router: Router,
+    private localService: LocalService) { }
+
   form = {
+    uuid: '',
     name: '',
     password: '',
     useraddress: '',
@@ -45,10 +50,23 @@ export class UserUpdateComponent implements OnInit {
     userrole: '',
     selectedClinics: [1]
   };
+  capitalizeFirstLetter(value: string) {
+    var v: string = value[0].toUpperCase() +
+      value.slice(1)
+    console.log(v)
+    return v;
+  }
+  minusculeFirstLetter(value: string) {
+    var v: string = value[0].toLowerCase() +
+      value.slice(1)
+    console.log(v)
+    return v;
+  }
   ngOnInit(): void {
     this.userId = this.activatedRoute.snapshot.paramMap.get('userId') !== null ? this.activatedRoute.snapshot.paramMap.get('userId') : '';
     this.userService.getById(this.userId).subscribe((result) => {
       var addressParts: string[] = this.converStringToAddress(result.address)
+      this.form.uuid = result.uuid;
       this.form.name = result.name !== null ? result.name : '';
       this.form.password = result.password !== null ? result.password : '';
       this.form.useraddress = result.address !== null ? addressParts[0] : '';
@@ -59,7 +77,7 @@ export class UserUpdateComponent implements OnInit {
         this.form.useraddressstate = result.address !== null ? addressParts[2] : '';
       this.form.useraddresscity = result.address !== null ? addressParts[3] : '';
       this.form.useraddresszipcode = result.address !== null ? addressParts[4] : '';
-      this.form.userrole = result.userRole !== null ? result.userRole : '';
+      this.form.userrole = result.userRole !== null ? this.capitalizeFirstLetter(result.userRole) : '';
       var clinicIds: number[] = _.map(result.clinics, (clinic) => {
         return clinic.id !== null ? clinic.id : 0;
       });
@@ -83,11 +101,12 @@ export class UserUpdateComponent implements OnInit {
   }
   create() {
     var user: User = {
-      id: this.userId,
+      id: null,
+      uuid: this.form.uuid,
       name: this.form.name,
-      password: this.form.password,
+      password: this.localService.encrypt(this.form.password !== null ? this.form.password : ''),
       address: this.convertAddressToString(),
-      userRole: this.form.userrole,
+      userRole: this.minusculeFirstLetter(this.form.userrole),
       clinics: this.createClinics(this.form.selectedClinics)
     }
     if (this.userCreateForm.valid) {
@@ -95,7 +114,7 @@ export class UserUpdateComponent implements OnInit {
         (response) => {
           this.router.navigateByUrl('admin/user/list')
         },
-        (error) => { this.errorMessage = error.error.error;});
+        (error) => { this.errorMessage = error.error.error; });
     } else {
       console.log('not valid')
       this.errorMessage = 'Please enter valid data';

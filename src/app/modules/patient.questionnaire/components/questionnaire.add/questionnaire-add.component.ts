@@ -162,7 +162,7 @@ export class QuestionnaireAddComponent implements OnInit {
   }
 
   submit() {
-    var pateint: Patient = JSON.parse(this.localService.getData('patient') || '');
+    var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '');
     pateint.clinicId = this.clinicId
     this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
       (response) => {
@@ -217,7 +217,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   cachePatient(modelName: string, pateintHolder: Patient) {
     var patient: Patient = new Patient();
-    patient = JSON.parse(this.localService.getData('patient') || '{}');
+    patient = JSON.parse(localStorage.getItem('patient') || '{}');
     if (modelName === 'basic')
       patient.basicInfo = pateintHolder.basicInfo;
     if (modelName === 'address')
@@ -231,6 +231,6 @@ export class QuestionnaireAddComponent implements OnInit {
     if (modelName === 'aggreements')
       patient.agreements = pateintHolder.agreements;
 
-    this.localService.saveData('patient', JSON.stringify(patient));
+    localStorage.setItem('patient', JSON.stringify(patient));
   }
 }

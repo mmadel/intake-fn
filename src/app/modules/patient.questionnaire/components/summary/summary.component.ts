@@ -14,8 +14,8 @@ export class SummaryComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer , private localService:LocalService) { }
 
   ngOnInit(): void {
-    if (this.localService.getData('patient') !== null) {
-      this.pateint = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      this.pateint = JSON.parse(localStorage.getItem('patient') || '{}')
     }
   }
 

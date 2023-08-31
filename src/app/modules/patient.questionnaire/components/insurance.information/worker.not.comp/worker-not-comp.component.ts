@@ -28,8 +28,8 @@ export class WorkerNotCompComponent implements OnInit {
         this.InsuranceCompanies?.push(element);
       });
     })
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.insuranceQuestionnaireInfo !== undefined && pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial !== undefined) {
         this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial;
 

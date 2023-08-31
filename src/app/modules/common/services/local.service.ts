@@ -17,11 +17,19 @@ export class LocalService {
     localStorage.removeItem(key);
   }
 
-  private encrypt(txt: string): string {
-    return CryptoJS.AES.encrypt(txt, this.key).toString();
+  public encrypt(txt: string): string {
+    var hash = CryptoJS.SHA1('0123456789123456');
+    var key = CryptoJS.lib.WordArray.create(hash.words.slice(0, 16 / 4));
+    let encrypted = CryptoJS.AES.encrypt(txt, key, {
+      mode: CryptoJS.mode.ECB,
+    });
+    return encrypted.toString();
+    //return CryptoJS.AES.encrypt(txt, this.key).toString();
   }
 
   private decrypt(txtToDecrypt: string) {
-    return CryptoJS.AES.decrypt(txtToDecrypt, this.key).toString(CryptoJS.enc.Utf8);
+    var hash = CryptoJS.SHA1('0123456789123456');
+    var key = CryptoJS.lib.WordArray.create(hash.words.slice(0, 16 / 4));
+    return CryptoJS.AES.decrypt(txtToDecrypt, key).toString();
   }
 }

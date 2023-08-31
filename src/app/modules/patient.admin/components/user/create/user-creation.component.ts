@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LocalService } from 'src/app/modules/common';
 import { countries } from 'src/app/modules/common/components/address/country-data-store';
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
 import { states } from 'src/app/modules/common/components/address/state-data-store';
@@ -22,8 +24,8 @@ export class UserCreationComponent implements OnInit {
   countries: Countries[] = countries;
   states: string[] = states;
   userRoles: UserRole[] = [
-    { name: "Administrator", value: "ADMIN" },
-    { name: "Normal User", value: "USER" }
+    { name: "Administrator", value: "administrator" },
+    { name: "Normal User", value: "normal" }
   ]
   errorMessage: string | null;
   returnClinics: Clinic[] = new Array();
@@ -42,14 +44,15 @@ export class UserCreationComponent implements OnInit {
   };
   constructor(private clinicService: ClinicService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private localService: LocalService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.clinicService.get().subscribe(response => {
       response.body?.forEach(element => {
         this.returnClinics?.push(element)
       });
-      console.log(this.returnClinics)
     },
       error => {
         console.log(error)
@@ -57,14 +60,15 @@ export class UserCreationComponent implements OnInit {
     )
 
   }
-  create(event:any) {
-    if (event.submitter.innerHTML === ' Select all options '){
+  create(event: any) {
+    if (event.submitter.innerHTML === ' Select all options ') {
       return;
     }
     var user: User = {
       id: null,
+      uuid:'',
       name: this.form.name,
-      password: this.form.password,
+      password: this.localService.encrypt(this.form.password !== null ? this.form.password : ''),
       address: this.convertAddressToString(),
       userRole: this.form.userrole,
       clinics: this.createClinics(this.form.selectedClinics)
@@ -74,7 +78,10 @@ export class UserCreationComponent implements OnInit {
         (response) => {
           this.router.navigateByUrl('admin/user/list')
         },
-        (error) => { console.log(error); });
+        (error) => {
+          console.log(error);
+          this.toastr.error(error.error.message, 'Error In Creation');
+        });
     } else {
       console.log('not valid')
       this.errorMessage = 'Please enter valid data';
@@ -96,7 +103,7 @@ export class UserCreationComponent implements OnInit {
     return address
   }
 
-  createClinics(ids: string[]|null) {
+  createClinics(ids: string[] | null) {
     var clinics: Clinic[] = new Array();
     ids?.forEach(element => {
       var clinic: Clinic = {

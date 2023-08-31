@@ -21,7 +21,7 @@ export class ClinicService {
   get() {
     return this.http.get<Clinic[]>(`${this.clinicUrl}` + '/find', { observe: 'response' })
   }
-  getByUserId(userId: number) {
+  getByUserId(userId: string | undefined) {
     return this.http.get<Clinic[]>(`${this.userUrl}` + '/find/clinics/' + userId, { observe: 'response' })
   }
   delete(id: string | null) {

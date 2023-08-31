@@ -23,8 +23,8 @@ export class MedicalHistoryInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createPatientConditions();
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.medicalHistoryInformation !== undefined) {
         this.model = pateint.medicalHistoryInformation;
         if (pateint.medicalHistoryInformation.metalImplantation)

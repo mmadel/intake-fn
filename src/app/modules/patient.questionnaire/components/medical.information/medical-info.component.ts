@@ -54,8 +54,8 @@ export class MedicalInfoComponent implements OnInit {
     val === 'yes' ? this.medicalQuestionnaireInfo.familyResultSubmission = true : this.medicalQuestionnaireInfo.familyResultSubmission = false;
   }
   ngOnInit(): void {
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.medicalQuestionnaireInfo !== undefined) {
         this.medicalQuestionnaireInfo = pateint.medicalQuestionnaireInfo;
         pateint.medicalQuestionnaireInfo.isDoctorRecommended ? this.isReferringDoctor = 'yes' : this.isReferringDoctor = 'no';
