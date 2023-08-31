@@ -3,11 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 import keycloakConfig from "./keycloak.config";
+import keycloakConfigProd from "./keycloak.config.prod";
 
 export const environment = {
   production: false,
   baseURL:"/intake-service/api/",
-  keycloak: keycloakConfig,
+  keycloak: keycloakConfigProd,
 };
 
 /*
