@@ -13,7 +13,6 @@ export class AuditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  find(){
-    
-  }
+  find(){}
+  exportResult(){}
 }
