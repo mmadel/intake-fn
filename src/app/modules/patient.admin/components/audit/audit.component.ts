@@ -33,7 +33,11 @@ export class AuditComponent implements OnInit {
   }
 
   find() {
-    if (!this.isSearchCriteriaEmpty()) {
+    if (this.isSearchCriteriaEmpty()) {
+      this.errorMsg = 'Please select User Or Audit Entity ';
+      this.searchInputNotValid = true;
+    } else {
+      this.searchInputNotValid = false;
       if (this.selectedUser !== null && this.selectedEntity === 'clinic') {
         this.auditService.getClinicAuditDataByUUID(this.selectedUser).subscribe(response => {
           console.log(response)
@@ -50,18 +54,19 @@ export class AuditComponent implements OnInit {
           this.searchInputNotValid = true
         })
       }
+      if (this.selectedUser !== null && this.selectedEntity === null) {
+        this.auditService.getAllAuditDataByUUID(this.selectedUser).subscribe(response => {
+          console.log(response)
+        }, (error) => {
+          this.errorMsg = 'Server is down please contact the administrator';
+          this.searchInputNotValid = true
+        })
+      }
     }
   }
 
   exportResult() { }
   private isSearchCriteriaEmpty(): boolean {
-    if (this.selectedUser === null && this.selectedEntity === null) {
-      this.errorMsg = 'Please select User Or Audit Entity ';
-      this.searchInputNotValid = true;
-      return true;
-    } else {
-      this.searchInputNotValid = false;
-      return false;
-    }
+    return (this.selectedUser === null && this.selectedEntity === null)
   }
 }

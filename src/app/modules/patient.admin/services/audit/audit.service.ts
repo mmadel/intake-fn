@@ -22,4 +22,7 @@ export class AuditService {
   getInsuranceCompanyAuditData() {
     return this.http.get<Audit[]>(`${this.auditUrl}` + '/insurance/company/retrieve/', { observe: 'response' })
   }
+  getAllAuditDataByUUID(uuid: string) {
+    return this.http.get<Audit[]>(`${this.auditUrl}` + '/retrieve/uuid/' + uuid, { observe: 'response' })
+  }
 }

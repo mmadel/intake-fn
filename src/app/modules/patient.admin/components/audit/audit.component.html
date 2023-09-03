@@ -21,7 +21,6 @@
                                     </h6>
                                 </c-card-header>
                                 <c-card-body>
-                                    {{selectedUser}}
                                     <c-col class="mb-2" xs="12">
                                         <form cForm>
                                             <select cSelect cFormControl name="username" *ngIf="users.length > 0 "
@@ -43,7 +42,6 @@
                                     </h6>
                                 </c-card-header>
                                 <c-card-body>
-                                    {{selectedEntity}}
                                     <c-col class="mb-2" xs="12">
                                         <form cForm>
                                             <select cSelect cFormControl name="entityname" [(ngModel)]="selectedEntity">
