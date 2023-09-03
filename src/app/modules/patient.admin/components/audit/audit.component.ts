@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/modules/security/model/user';
+import { AuditService } from '../../services/audit/audit.service';
 import { UserService } from '../../services/user/user.service';
 
 @Component({
@@ -11,10 +12,10 @@ export class AuditComponent implements OnInit {
   searchInputNotValid: boolean = false;
   errorMsg: string;
   users: User[] = new Array();
-  selectedUser: String | null = null;
+  selectedUser: string | null = null;
   selectedEntity: string | null = null;;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private auditService: AuditService) { }
 
   ngOnInit(): void {
     this.userService.get().subscribe(response => {
@@ -32,7 +33,24 @@ export class AuditComponent implements OnInit {
   }
 
   find() {
-    this.isSearchCriteriaEmpty();
+    if (!this.isSearchCriteriaEmpty()) {
+      if (this.selectedUser !== null && this.selectedEntity === 'clinic') {
+        this.auditService.getClinicAuditDataByUUID(this.selectedUser).subscribe(response => {
+          console.log(response)
+        }, (error) => {
+          this.errorMsg = 'Server is down please contact the administrator';
+          this.searchInputNotValid = true
+        })
+      }
+      if (this.selectedUser !== null && this.selectedEntity === 'Insurance_company') {
+        this.auditService.getInsuranceCompanyAuditDataByUUID(this.selectedUser).subscribe(response => {
+          console.log(response)
+        }, (error) => {
+          this.errorMsg = 'Server is down please contact the administrator';
+          this.searchInputNotValid = true
+        })
+      }
+    }
   }
 
   exportResult() { }
