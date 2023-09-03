@@ -6,7 +6,7 @@
             </c-card-header>
             <c-card-body>
                 <p class="text-medium-emphasis small">
-                    The Ability find activities that have been done by any user on the audited entities
+                    The Ability to find the activities that have been done by any user on the audited entities
                 </p>
                 <c-callout color="danger" *ngIf="searchInputNotValid">
                     {{errorMsg}}
@@ -23,8 +23,10 @@
                                 <c-card-body>
                                     <c-col class="mb-2" xs="12">
                                         <form cForm>
-                                            <select cSelect cFormControl name="username">
+                                            <select cSelect cFormControl name="username" *ngIf="users.length > 0 ">
                                                 <option value=null>Select User</option>
+                                                <option *ngFor="let user of users" [value]="user.uuid">
+                                                    {{user.name}}</option>
                                             </select>
                                         </form>
                                     </c-col>
@@ -43,6 +45,8 @@
                                         <form cForm>
                                             <select cSelect cFormControl name="entityname">
                                                 <option value=null>Select Entity</option>
+                                                <option value="clinic">Clinic</option>
+                                                <option value="Insurance_company">Insurance Company</option>
                                             </select>
                                         </form>
                                     </c-col>
@@ -61,7 +65,7 @@
         </c-card>
     </c-col>
     <c-container class="text-end">
-        <button cButton  (click)="exportResult()" variant="outline">Export Result
+        <button cButton (click)="exportResult()" variant="outline">Export Result
             <svg cIcon name="cilCloudDownload"></svg>
         </button>
     </c-container>
