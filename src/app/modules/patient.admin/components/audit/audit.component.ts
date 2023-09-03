@@ -11,6 +11,8 @@ export class AuditComponent implements OnInit {
   searchInputNotValid: boolean = false;
   errorMsg: string;
   users: User[] = new Array();
+  selectedUser: String | null = null;
+  selectedEntity: string | null = null;;
 
   constructor(private userService: UserService) { }
 
@@ -29,6 +31,19 @@ export class AuditComponent implements OnInit {
     )
   }
 
-  find() { }
+  find() {
+    this.isSearchCriteriaEmpty();
+  }
+
   exportResult() { }
+  private isSearchCriteriaEmpty(): boolean {
+    if (this.selectedUser === null && this.selectedEntity === null) {
+      this.errorMsg = 'Please select User Or Audit Entity ';
+      this.searchInputNotValid = true;
+      return true;
+    } else {
+      this.searchInputNotValid = false;
+      return false;
+    }
+  }
 }

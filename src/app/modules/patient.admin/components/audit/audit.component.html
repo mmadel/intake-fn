@@ -21,9 +21,11 @@
                                     </h6>
                                 </c-card-header>
                                 <c-card-body>
+                                    {{selectedUser}}
                                     <c-col class="mb-2" xs="12">
                                         <form cForm>
-                                            <select cSelect cFormControl name="username" *ngIf="users.length > 0 ">
+                                            <select cSelect cFormControl name="username" *ngIf="users.length > 0 "
+                                                [(ngModel)]="selectedUser">
                                                 <option value=null>Select User</option>
                                                 <option *ngFor="let user of users" [value]="user.uuid">
                                                     {{user.name}}</option>
@@ -41,9 +43,10 @@
                                     </h6>
                                 </c-card-header>
                                 <c-card-body>
+                                    {{selectedEntity}}
                                     <c-col class="mb-2" xs="12">
                                         <form cForm>
-                                            <select cSelect cFormControl name="entityname">
+                                            <select cSelect cFormControl name="entityname" [(ngModel)]="selectedEntity">
                                                 <option value=null>Select Entity</option>
                                                 <option value="clinic">Clinic</option>
                                                 <option value="Insurance_company">Insurance Company</option>
