@@ -15,3 +15,5 @@ export * from './components/insurance.company/list/insurance-company-list.compon
 
 
 export * from './components/dashboard/dashboard.component'
+
+export * from './components/audit/audit.component'
