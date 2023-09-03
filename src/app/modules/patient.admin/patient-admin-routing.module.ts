@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuditComponent } from './components/audit/audit.component';
 import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
 import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
 import { UpdateClinicComponent } from './components/clinic/update/update-clinic.component';
@@ -130,6 +131,21 @@ const routes: Routes = [{
       component: RecommendationReportComponent,
       data: {
         title: 'patient-source',
+      },
+    }
+  ]
+},
+{
+  path: '',
+  data: {
+    title: 'Auditing',
+  },
+  children: [
+    {
+      path: 'audit/auditing',
+      component: AuditComponent,
+      data: {
+        title: 'auditing',
       },
     }
   ]

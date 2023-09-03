@@ -54,5 +54,16 @@ export const adminNavItems: INavData[] = [
         url: 'report/recommendation'
       }
     ]
+  },
+  {
+    name: 'Auditing',
+    url: '',
+    iconComponent: { name: 'cil-monitor' },
+    children: [
+      {
+        name: 'Patient Intake Entities',
+        url: 'audit/auditing'
+      }
+    ]
   }
 ];
