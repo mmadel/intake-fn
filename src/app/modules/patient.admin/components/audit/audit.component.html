@@ -1,1 +1,63 @@
-<p>audit works!</p>
+<c-row>
+    <c-col xs="12" class="mb-4">
+        <c-card>
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Patient Intake Auditing Entities</strong>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    The Ability find activities that have been done by any user on the audited entities
+                </p>
+                <c-callout color="danger" *ngIf="searchInputNotValid">
+                    {{errorMsg}}
+                </c-callout>
+                <form cForm>
+                    <c-row>
+                        <c-col xs="6" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        User
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <c-col class="mb-2" xs="12">
+                                        <form cForm>
+                                            <select cSelect cFormControl name="username">
+                                                <option value=null>Select User</option>
+                                            </select>
+                                        </form>
+                                    </c-col>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col xs="6" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        Entity
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <c-col class="mb-2" xs="12">
+                                        <form cForm>
+                                            <select cSelect cFormControl name="entityname">
+                                                <option value=null>Select Entity</option>
+                                            </select>
+                                        </form>
+                                    </c-col>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col xs="12" class="text-center">
+                            <button cButton class="me-1" (click)="find()" color="primary" variant="outline"
+                                style="width: 15%;">
+                                Search
+                            </button>
+                        </c-col>
+                    </c-row>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+</c-row>

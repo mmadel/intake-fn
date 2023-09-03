@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./audit.component.css']
 })
 export class AuditComponent implements OnInit {
-
+  searchInputNotValid: boolean = false;
+  errorMsg: string;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  find(){
+    
+  }
 }
