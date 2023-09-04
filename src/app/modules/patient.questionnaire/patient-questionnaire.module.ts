@@ -44,6 +44,7 @@ import {
   AggreementsComponent,
   UploadPhotoComponent,
   SummaryComponent,
+  PatientsignatureComponent
 } from './index';
 import { PatientCommonModule } from '../common';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -62,6 +63,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AggreementsComponent,
     SummaryComponent,
     UploadPhotoComponent,
+    PatientsignatureComponent,
   ],
   imports: [
     CommonModule,
