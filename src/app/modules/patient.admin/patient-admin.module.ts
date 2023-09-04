@@ -17,7 +17,8 @@ import {
   InsuranceCompanyCreateComponent,
   InsuranceCompanyListComponent,
   UserUpdateComponent,
-  UpdateClinicComponent
+  UpdateClinicComponent,
+  AuditComponent
 } from './index';
 
 import { PatientCommonModule } from '../common';
@@ -55,6 +56,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
+
 @NgModule({
   declarations: [
     PatientListComponent,
@@ -67,8 +69,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     UserCreationComponent,
     PatientCreateComponent,
     InsuranceCompanyCreateComponent,
-    InsuranceCompanyListComponent,    
-    UserUpdateComponent, UpdateClinicComponent
+    InsuranceCompanyListComponent,
+    UserUpdateComponent, UpdateClinicComponent, AuditComponent
   ],
   imports: [
     CommonModule,
