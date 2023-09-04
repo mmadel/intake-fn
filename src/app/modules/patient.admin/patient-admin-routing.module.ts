@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PatientsignatureComponent } from '../patient.questionnaire';
 import { AuditComponent } from './components/audit/audit.component';
 import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
 import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
@@ -147,6 +148,13 @@ const routes: Routes = [{
       data: {
         title: 'auditing',
       },
+    },
+    {
+      path: 'audit/etest',
+      component: PatientsignatureComponent,
+      data: {
+        title: 'Patientsignature',
+      }
     }
   ]
 }

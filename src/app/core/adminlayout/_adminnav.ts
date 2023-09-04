@@ -63,6 +63,10 @@ export const adminNavItems: INavData[] = [
       {
         name: 'Patient Intake Entities',
         url: 'audit/auditing'
+      },
+      {
+        name: 'etest',
+        url: 'audit/etest'
       }
     ]
   }
