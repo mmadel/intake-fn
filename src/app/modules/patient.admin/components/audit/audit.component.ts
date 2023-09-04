@@ -27,7 +27,7 @@ export class AuditComponent implements OnInit {
     },
     {
       label: 'Action',
-      key: 'revisionType',
+      key: 'actionType',
       _style: { width: '20%' },
     },
     { label: 'Action Date', key: 'actionDate', _style: { width: '15%' } },
@@ -43,11 +43,11 @@ export class AuditComponent implements OnInit {
   ]
   getBadge(status: string) {
     switch (status) {
-      case 'ADD':
+      case 'created':
         return 'primary'
-      case 'MOD':
+      case 'modified':
         return 'warning'
-      case 'Deleted':
+      case 'deleted':
         return 'danger'
     }
   }
@@ -78,6 +78,18 @@ export class AuditComponent implements OnInit {
           response[i].actionDate = moment(response[i].revisionDate).format("MM/DD/YYYY hh:mm A")
         }
         response[i].entityValueName = this.prepareEntityValue(response[i])
+
+        switch (response[i].revisionType) {
+          case 'ADD':
+            response[i].actionType = 'created'
+            break;
+          case 'MOD':
+            response[i].actionType = 'modified'
+            break;
+          case 'Deleted':
+            response[i].actionType ='deleted'
+            break;
+        }
         this.auditData.push(response[i])
       }
     }
@@ -152,7 +164,7 @@ export class AuditComponent implements OnInit {
     var entityvalue = audit.entityName.replace("Entity", "");
     for (const key in audit.entity) {
       if (key === 'name') {
-        entityvalue = entityvalue +' '+ audit.entity[key];
+        entityvalue = entityvalue + ' ' + audit.entity[key];
       }
     }
     console.log(entityvalue);
