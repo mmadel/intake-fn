@@ -1,1 +1,22 @@
-<p>patientsignature works!</p>
+<h4>Please Add your signature here</h4>
+<div   #modtest></div>
+<canvas
+  #canvas
+  (touchstart)="startDrawing($event)"
+  (touchmove)="moved($event)"
+  width="700"
+  height="200"
+></canvas>
+<p class="error-message" *ngIf="signatureNeeded">Signature is required</p>
+
+<div class="buttons flex justify-between">
+  <button cButton (click)="clearPad()">Clear</button>
+  <button cButton (click)="savePad()">Submit the signature</button>
+  <button cButton (click)="show()">Show</button>
+</div>
+
+<div *ngIf="signatureNeeded === false">
+  <p>Signature in Base64Encoded Format</p>
+  <img src="{{ signatureImg }}" alt="" srcset="" />
+</div>
+<img *ngIf="signatureImgTest" src="{{ signatureImgTest }}" alt="" srcset="" />
