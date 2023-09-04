@@ -104,7 +104,7 @@ export class UserUpdateComponent implements OnInit {
       id: null,
       uuid: this.form.uuid,
       name: this.form.name,
-      password: this.localService.encrypt(this.form.password !== null ? this.form.password : ''),
+      password: this.resetpassword ? this.localService.encrypt(this.form.password !== null ? this.form.password : '') : null,
       address: this.convertAddressToString(),
       userRole: this.minusculeFirstLetter(this.form.userrole),
       clinics: this.createClinics(this.form.selectedClinics)
