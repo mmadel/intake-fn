@@ -73,15 +73,17 @@
     <c-col xs="12">
         <c-smart-table #smartTable="cSmartTable" activePage="1"  clickableRows 
             [columnSorter]="true" [columns]="columns"  header [itemsPerPageSelect]="true" [itemsPerPage]="5"
-             [tableProps]="{ hover: true, striped: true, responsive: true }" [items]="auditData">
+             [tableProps]="{ hover: true, striped: false, responsive: true }" [items]="auditData">
              <ng-template cTemplateId="tableDetails" let-item="item">
                 <div [visible]="this.details_visible[item._id]===true" cCollapse>
                   <c-card class="rounded-0">
                     <c-card-body>
-                      <h5>{{item['name']}}</h5>
-                      <p class="text-muted">User since: {{item['registered']}}</p>
+                      <p [innerHTML]="showEntityData(item.entity)"></p>
+                      <p ><strong>Action has been taken at :</strong> {{item['actionDate']}}</p>
                     </c-card-body>
-                    
+                    <c-card-footer>
+                        
+                    </c-card-footer>
                   </c-card>
                 </div>
               </ng-template>
@@ -97,7 +99,7 @@
                       </c-badge>
                     </ng-container>
                     <ng-container *ngSwitchCase="'show'" class="py-2">
-                      <button (click)="toggleDetails(item['id'])" cButton color="primary" size="sm" variant="outline">
+                      <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
                         Show
                       </button>
                     </ng-container>
