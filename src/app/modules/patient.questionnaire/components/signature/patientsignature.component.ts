@@ -13,6 +13,7 @@ export class PatientsignatureComponent implements OnInit {
   @ViewChild('canvas') canvasEl!: ElementRef;
   signatureImg!: string;
   signatureImgTest: string | undefined = undefined;
+  model: PatientSignature = new PatientSignature();
   constructor(private patientService: PatientService) { }
 
   ngOnInit(): void {
@@ -38,12 +39,10 @@ export class PatientsignatureComponent implements OnInit {
     if (!this.signatureNeeded) {
       this.signatureNeeded = false;
     }
-    var model: PatientSignature = new PatientSignature();
-    model.signature = this.signatureImg;
-    model.patientId = '1230330'
-    this.patientService.test(model).subscribe(response => {
+    this.model.signature = this.signatureImg;
+    // this.patientService.test(model).subscribe(response => {
 
-    })
+    // })
   }
 
   show() {

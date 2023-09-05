@@ -15,6 +15,7 @@ import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/pat
 import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
+import { PatientSignature } from '../../models/patient/signature.model';
 import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { AggreementsComponent } from '../aggreements/aggreements.component';
@@ -22,6 +23,7 @@ import { EssentialInfoComponent } from '../essential.info/essential-info.compone
 import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
+import { PatientsignatureComponent } from '../signature/patientsignature.component';
 import { UploadPhotoComponent } from '../upload.photos/upload-photo.component';
 
 
@@ -52,9 +54,11 @@ export class QuestionnaireAddComponent implements OnInit {
   validator: ValidatorContainer;
   patientValidator: PatientValidator;
   modelName: string = '';
+  signatureImg: string;
   patient: Patient = new Patient();
   obj: any;
   patientFields: PatientRequiredFields;
+  patientSignature: PatientSignature = new PatientSignature();
   @ViewChild(EssentialInfoComponent) essentialInfoComponent: EssentialInfoComponent;
   @ViewChild(AddressInformationComponent) addressInformationComponent: AddressInformationComponent;
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
@@ -62,6 +66,7 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(InsuranceInformationComponent) insuranceInformationComponent: InsuranceInformationComponent;
   @ViewChild(UploadPhotoComponent) uploadPhotoComponent: UploadPhotoComponent;
   @ViewChild(AggreementsComponent) aggreementsComponent: AggreementsComponent;
+  @ViewChild(PatientsignatureComponent) patientsignatureComponent: PatientsignatureComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -129,7 +134,7 @@ export class QuestionnaireAddComponent implements OnInit {
     if (patientModel === 'aggreements') {
       this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     }
-    //this.validator = this.patientValidator.validate();
+    this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
       this.proceedToNextStep(patientModel);
@@ -176,6 +181,16 @@ export class QuestionnaireAddComponent implements OnInit {
             this.scrollUp();
             this.toastr.error(error.error.message, 'Error In Upload Images');
           });
+        this.patientSignature.patientId = <number>response.body
+        this.patientService.test(this.patientSignature).subscribe(
+          (response) => {
+
+            console.log('uploaded patient Signature..')
+          },
+          (error) => {
+            this.scrollUp();
+            this.toastr.error(error.error.message, 'Error In Upload Images');
+          });
         this.localService.removeData('patient');
         this.isCreated = true;
       },
@@ -192,6 +207,7 @@ export class QuestionnaireAddComponent implements OnInit {
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
     this.fillInsuranceInformationModel()
     this.fillModelFiles();
+    this.fillSignature();
     this.patient.agreements = this.aggreementsComponent?.model;
   }
   fillModelFiles() {
@@ -202,7 +218,6 @@ export class QuestionnaireAddComponent implements OnInit {
     }
     if (this.uploadPhotoComponent) {
       for (let patientFiles of this.uploadPhotoComponent.imageFormData) {
-        console.log(patientFiles);
         this.formFiles.append(patientFiles[0], patientFiles[1]);
       }
     }
@@ -214,6 +229,9 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patient.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent?.workerCompComponent.model
     if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
       this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
+  }
+  fillSignature() {
+    this.patientSignature = this.patientsignatureComponent?.model;
   }
 
   cachePatient(modelName: string, pateintHolder: Patient) {

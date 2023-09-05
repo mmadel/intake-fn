@@ -11,12 +11,11 @@
 
 <div class="buttons flex justify-between">
   <button cButton (click)="clearPad()">Clear</button>
-  <button cButton (click)="savePad()">Submit the signature</button>
-  <button cButton (click)="show()">Show</button>
+  <button cButton (click)="savePad()">Capture the signature</button>
+  <!-- <button cButton (click)="show()">Show</button> -->
 </div>
-
-<div *ngIf="signatureNeeded === false">
+<!-- <div *ngIf="signatureNeeded === false">
   <p>Signature in Base64Encoded Format</p>
   <img src="{{ signatureImg }}" alt="" srcset="" />
-</div>
+</div> -->
 <img *ngIf="signatureImgTest" src="{{ signatureImgTest }}" alt="" srcset="" />

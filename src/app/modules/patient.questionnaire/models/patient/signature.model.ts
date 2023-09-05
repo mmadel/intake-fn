@@ -1,4 +1,4 @@
 export class PatientSignature{
     signature:string;
-    patientId:string;
+    patientId:number |null;
 }
