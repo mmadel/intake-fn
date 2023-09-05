@@ -42,6 +42,7 @@ export class QuestionnaireAddComponent implements OnInit {
     { "id": 5, "name": "Insurance Information" },
     { "id": 6, "name": "Upload Photos" },
     { "id": 7, "name": "Aggreements" },
+    { "id": 8, "name": "Signature" },
 
   ];
 
