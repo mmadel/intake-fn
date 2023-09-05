@@ -45,7 +45,7 @@ export class PatientsignatureComponent implements OnInit {
   }
 
   show() {
-    this.patientService.getE().subscribe(response => {
+    this.patientService.getPatientSignature(4).subscribe(response => {
       if (response.body !== null) {
         this.signatureImgTest = 'data:image/png;base64,' + response.body.signature
       }

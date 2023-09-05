@@ -182,9 +182,8 @@ export class QuestionnaireAddComponent implements OnInit {
             this.toastr.error(error.error.message, 'Error In Upload Images');
           });
         this.patientSignature.patientId = <number>response.body
-        this.patientService.test(this.patientSignature).subscribe(
+        this.patientService.uploadPatientSignature(this.patientSignature).subscribe(
           (response) => {
-
             console.log('uploaded patient Signature..')
           },
           (error) => {

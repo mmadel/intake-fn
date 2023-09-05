@@ -29,13 +29,13 @@ export class PatientService {
     return this.http.get<AgreementHolder[]>(this.agreementURL, { observe: 'response' })
   }
 
-  test(model:PatientSignature){
+  uploadPatientSignature(model:PatientSignature){
     const headers = { 'content-type': 'application/json' }
-    const uploadURL = environment.baseURL + 'all';
+    const uploadURL = this.baseUrl + '/signature/upload';
     return this.http.post(uploadURL,JSON.stringify(model), {'headers': headers, observe: 'response' })
   }
-  getE(){
-    const uploadURL = environment.baseURL + 'test/7';
+  getPatientSignature(id:number){
+    const uploadURL = this.baseUrl + '/signature/patientId/'+id;
     return this.http.get<PatientSignature>(uploadURL, { observe: 'response' })
   }
 }
