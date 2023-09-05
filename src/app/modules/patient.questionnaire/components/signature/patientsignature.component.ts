@@ -8,7 +8,7 @@ import { PatientService } from '../../service/patient.service';
   styleUrls: ['./patientsignature.component.css']
 })
 export class PatientsignatureComponent implements OnInit {
-  signatureNeeded!: boolean;
+  signatureNeeded: boolean = true;
   signaturePad!: SignaturePad;
   @ViewChild('canvas') canvasEl!: ElementRef;
   signatureImg!: string;
@@ -29,6 +29,7 @@ export class PatientsignatureComponent implements OnInit {
     // works in device not in browser
   }
   clearPad() {
+    this.signatureNeeded = true;
     this.signaturePad.clear();
   }
 
@@ -39,10 +40,8 @@ export class PatientsignatureComponent implements OnInit {
     if (!this.signatureNeeded) {
       this.signatureNeeded = false;
     }
+    console.log(this.signatureNeeded)
     this.model.signature = this.signatureImg;
-    // this.patientService.test(model).subscribe(response => {
-
-    // })
   }
 
   show() {

@@ -10,8 +10,8 @@
 <p class="error-message" *ngIf="signatureNeeded">Signature is required</p>
 
 <div class="buttons flex justify-between">
-  <button cButton (click)="clearPad()">Clear</button>
-  <button cButton (click)="savePad()">Capture the signature</button>
+  <button cButton (click)="clearPad()" [disabled]="signatureNeeded">Clear</button>
+  <button cButton (click)="savePad()" [disabled]="!signatureNeeded">Capture the signature</button>
   <!-- <button cButton (click)="show()">Show</button> -->
 </div>
 <!-- <div *ngIf="signatureNeeded === false">
