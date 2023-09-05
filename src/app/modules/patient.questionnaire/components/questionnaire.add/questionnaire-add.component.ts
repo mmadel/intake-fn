@@ -13,6 +13,7 @@ import { PatientEssentialValidator } from 'src/app/validators/patient.validator/
 import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
 import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/patient.medical.history.validator';
 import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
+import { PatientSignatureValidator } from 'src/app/validators/patient.validator/patient.signature.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientSignature } from '../../models/patient/signature.model';
@@ -101,8 +102,6 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patientValidator = new PatientEssentialValidator(this.patientFields.basicInfo
         , this.essentialInfoComponent.pateintBasicInfo);
       this.essentialInfoComponent.pateintBasicInfo.birthDate = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.birthDate_date).format("x"));
-      // this.essentialInfoComponent.pateintBasicInfo.idEffectiveFrom = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_from_date).format("x"))
-      // this.essentialInfoComponent.pateintBasicInfo.idEffectiveTo = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_to_date).format("x"))
     }
     if (patientModel === 'address') {
       this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
@@ -134,6 +133,10 @@ export class QuestionnaireAddComponent implements OnInit {
     if (patientModel === 'aggreements') {
       this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     }
+    if (patientModel === 'signature') {
+      this.patientValidator = new PatientSignatureValidator(this.patientsignatureComponent.model);
+    }
+    
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
