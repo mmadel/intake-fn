@@ -6,15 +6,16 @@ import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { LocalService } from 'src/app/modules/common';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
-import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { PatientAggreementsValidator } from 'src/app/validators/patient.validator/patient.aggreements.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
 import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
 import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/patient.medical.history.validator';
 import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
+import { PatientSignatureValidator } from 'src/app/validators/patient.validator/patient.signature.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
+import { PatientSignature } from '../../models/patient/signature.model';
 import { PatientService } from '../../service/patient.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { AggreementsComponent } from '../aggreements/aggreements.component';
@@ -22,6 +23,7 @@ import { EssentialInfoComponent } from '../essential.info/essential-info.compone
 import { InsuranceInformationComponent } from '../insurance.information/insurance-information.component';
 import { MedicalHistoryInformationComponent } from '../medical.history.information/medical-history-information.component';
 import { MedicalInfoComponent } from '../medical.information/medical-info.component';
+import { PatientsignatureComponent } from '../signature/patientsignature.component';
 import { UploadPhotoComponent } from '../upload.photos/upload-photo.component';
 
 
@@ -42,6 +44,7 @@ export class QuestionnaireAddComponent implements OnInit {
     { "id": 5, "name": "Insurance Information" },
     { "id": 6, "name": "Upload Photos" },
     { "id": 7, "name": "Aggreements" },
+    { "id": 8, "name": "Signature" },
 
   ];
 
@@ -51,6 +54,7 @@ export class QuestionnaireAddComponent implements OnInit {
   validator: ValidatorContainer;
   patientValidator: PatientValidator;
   modelName: string = '';
+  signatureImg: string;
   patient: Patient = new Patient();
   obj: any;
   patientFields: PatientRequiredFields;
@@ -61,6 +65,8 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(InsuranceInformationComponent) insuranceInformationComponent: InsuranceInformationComponent;
   @ViewChild(UploadPhotoComponent) uploadPhotoComponent: UploadPhotoComponent;
   @ViewChild(AggreementsComponent) aggreementsComponent: AggreementsComponent;
+  @ViewChild(PatientsignatureComponent) patientsignatureComponent: PatientsignatureComponent;
+  PatientsignatureComponentTmp: PatientsignatureComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -95,8 +101,6 @@ export class QuestionnaireAddComponent implements OnInit {
       this.patientValidator = new PatientEssentialValidator(this.patientFields.basicInfo
         , this.essentialInfoComponent.pateintBasicInfo);
       this.essentialInfoComponent.pateintBasicInfo.birthDate = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.birthDate_date).format("x"));
-      // this.essentialInfoComponent.pateintBasicInfo.idEffectiveFrom = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_from_date).format("x"))
-      // this.essentialInfoComponent.pateintBasicInfo.idEffectiveTo = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.id_effective_to_date).format("x"))
     }
     if (patientModel === 'address') {
       this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
@@ -128,7 +132,8 @@ export class QuestionnaireAddComponent implements OnInit {
     if (patientModel === 'aggreements') {
       this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     }
-    //this.validator = this.patientValidator.validate();
+
+    this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
       this.proceedToNextStep(patientModel);
@@ -160,7 +165,38 @@ export class QuestionnaireAddComponent implements OnInit {
       }
     })();
   }
-
+  validateAndUploadsignature(patientId: number) {
+    if (this.PatientsignatureComponentTmp?.signatureType === 0) {
+      this.PatientsignatureComponentTmp?.draw();
+      var model: PatientSignature = this.PatientsignatureComponentTmp?.model;
+      model.patientId = patientId;
+      this.patientValidator = new PatientSignatureValidator(model);      
+      this.patientService.uploadPatientSignature(model).subscribe(
+        (response) => {
+          console.log('uploaded drawed  patient Signature..')
+        },
+        (error) => {
+          this.scrollUp();
+          this.toastr.error(error.error.message, 'Error In Upload Images');
+        });
+    }
+    if (this.PatientsignatureComponentTmp?.signatureType === 1) {
+      this.PatientsignatureComponentTmp?.generate().then(canvas => {
+        var model: PatientSignature = new PatientSignature();
+        model.signature = canvas.toDataURL();
+        model.patientId = patientId;
+        this.patientValidator = new PatientSignatureValidator(model);
+        this.patientService.uploadPatientSignature(model).subscribe(
+          (response) => {
+            console.log('uploaded generated patient Signature..')
+          },
+          (error) => {
+            this.scrollUp();
+            this.toastr.error(error.error.message, 'Error In Upload Images');
+          });
+      });;
+    }
+  }
   submit() {
     var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '');
     pateint.clinicId = this.clinicId
@@ -175,6 +211,7 @@ export class QuestionnaireAddComponent implements OnInit {
             this.scrollUp();
             this.toastr.error(error.error.message, 'Error In Upload Images');
           });
+        this.validateAndUploadsignature(<number>response.body);
         this.localService.removeData('patient');
         this.isCreated = true;
       },
@@ -183,6 +220,7 @@ export class QuestionnaireAddComponent implements OnInit {
         this.toastr.error(error.error.message, 'Error In Creation');
         this.scrollUp();
       });
+
   }
   fillModel() {
     this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
@@ -192,6 +230,8 @@ export class QuestionnaireAddComponent implements OnInit {
     this.fillInsuranceInformationModel()
     this.fillModelFiles();
     this.patient.agreements = this.aggreementsComponent?.model;
+    if (this.patientsignatureComponent !== undefined)
+      this.PatientsignatureComponentTmp = this.patientsignatureComponent
   }
   fillModelFiles() {
     if (this.essentialInfoComponent) {
@@ -201,7 +241,6 @@ export class QuestionnaireAddComponent implements OnInit {
     }
     if (this.uploadPhotoComponent) {
       for (let patientFiles of this.uploadPhotoComponent.imageFormData) {
-        console.log(patientFiles);
         this.formFiles.append(patientFiles[0], patientFiles[1]);
       }
     }
@@ -214,7 +253,6 @@ export class QuestionnaireAddComponent implements OnInit {
     if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
       this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
   }
-
   cachePatient(modelName: string, pateintHolder: Patient) {
     var patient: Patient = new Patient();
     patient = JSON.parse(localStorage.getItem('patient') || '{}');
