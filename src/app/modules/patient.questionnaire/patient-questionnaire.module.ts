@@ -31,6 +31,15 @@ import {
   MultiSelectModule,
   AccordionModule
 } from '@coreui/angular-pro';
+import {
+  faStar as fasStar
+  , faPhoneVolume as faPhoneVolume
+  , faCreditCard as faCreditCard
+  , faTimeline as faTimeline
+  , faChildReaching as faChildReaching
+  , faHospitalUser as faHospitalUser
+  , faCircleH as faCircleH
+} from '@fortawesome/free-solid-svg-icons';
 
 import {
   QuestionnaireAddComponent,
@@ -48,6 +57,7 @@ import {
 } from './index';
 import { PatientCommonModule } from '../common';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -95,6 +105,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MultiSelectModule,
     AccordionModule,
     PatientCommonModule,
+    FontAwesomeModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })

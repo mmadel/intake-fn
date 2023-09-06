@@ -6,7 +6,6 @@ import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { LocalService } from 'src/app/modules/common';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
-import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { PatientAggreementsValidator } from 'src/app/validators/patient.validator/patient.aggreements.validator';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
@@ -59,7 +58,6 @@ export class QuestionnaireAddComponent implements OnInit {
   patient: Patient = new Patient();
   obj: any;
   patientFields: PatientRequiredFields;
-  patientSignature: PatientSignature = new PatientSignature();
   @ViewChild(EssentialInfoComponent) essentialInfoComponent: EssentialInfoComponent;
   @ViewChild(AddressInformationComponent) addressInformationComponent: AddressInformationComponent;
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
@@ -68,6 +66,7 @@ export class QuestionnaireAddComponent implements OnInit {
   @ViewChild(UploadPhotoComponent) uploadPhotoComponent: UploadPhotoComponent;
   @ViewChild(AggreementsComponent) aggreementsComponent: AggreementsComponent;
   @ViewChild(PatientsignatureComponent) patientsignatureComponent: PatientsignatureComponent;
+  PatientsignatureComponentTmp: PatientsignatureComponent;
   constructor(
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
@@ -133,10 +132,7 @@ export class QuestionnaireAddComponent implements OnInit {
     if (patientModel === 'aggreements') {
       this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     }
-    if (patientModel === 'signature') {
-      this.patientValidator = new PatientSignatureValidator(this.patientsignatureComponent.model);
-    }
-    
+
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
       this.fillModel()
@@ -169,7 +165,38 @@ export class QuestionnaireAddComponent implements OnInit {
       }
     })();
   }
-
+  validateAndUploadsignature(patientId: number) {
+    if (this.PatientsignatureComponentTmp?.signatureType === 0) {
+      this.PatientsignatureComponentTmp?.draw();
+      var model: PatientSignature = this.PatientsignatureComponentTmp?.model;
+      model.patientId = patientId;
+      this.patientValidator = new PatientSignatureValidator(model);      
+      this.patientService.uploadPatientSignature(model).subscribe(
+        (response) => {
+          console.log('uploaded drawed  patient Signature..')
+        },
+        (error) => {
+          this.scrollUp();
+          this.toastr.error(error.error.message, 'Error In Upload Images');
+        });
+    }
+    if (this.PatientsignatureComponentTmp?.signatureType === 1) {
+      this.PatientsignatureComponentTmp?.generate().then(canvas => {
+        var model: PatientSignature = new PatientSignature();
+        model.signature = canvas.toDataURL();
+        model.patientId = patientId;
+        this.patientValidator = new PatientSignatureValidator(model);
+        this.patientService.uploadPatientSignature(model).subscribe(
+          (response) => {
+            console.log('uploaded generated patient Signature..')
+          },
+          (error) => {
+            this.scrollUp();
+            this.toastr.error(error.error.message, 'Error In Upload Images');
+          });
+      });;
+    }
+  }
   submit() {
     var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '');
     pateint.clinicId = this.clinicId
@@ -184,15 +211,7 @@ export class QuestionnaireAddComponent implements OnInit {
             this.scrollUp();
             this.toastr.error(error.error.message, 'Error In Upload Images');
           });
-        this.patientSignature.patientId = <number>response.body
-        this.patientService.uploadPatientSignature(this.patientSignature).subscribe(
-          (response) => {
-            console.log('uploaded patient Signature..')
-          },
-          (error) => {
-            this.scrollUp();
-            this.toastr.error(error.error.message, 'Error In Upload Images');
-          });
+        this.validateAndUploadsignature(<number>response.body);
         this.localService.removeData('patient');
         this.isCreated = true;
       },
@@ -201,6 +220,7 @@ export class QuestionnaireAddComponent implements OnInit {
         this.toastr.error(error.error.message, 'Error In Creation');
         this.scrollUp();
       });
+
   }
   fillModel() {
     this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
@@ -209,8 +229,9 @@ export class QuestionnaireAddComponent implements OnInit {
     this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
     this.fillInsuranceInformationModel()
     this.fillModelFiles();
-    this.fillSignature();
     this.patient.agreements = this.aggreementsComponent?.model;
+    if (this.patientsignatureComponent !== undefined)
+      this.PatientsignatureComponentTmp = this.patientsignatureComponent
   }
   fillModelFiles() {
     if (this.essentialInfoComponent) {
@@ -232,10 +253,6 @@ export class QuestionnaireAddComponent implements OnInit {
     if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
       this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
   }
-  fillSignature() {
-    this.patientSignature = this.patientsignatureComponent?.model;
-  }
-
   cachePatient(modelName: string, pateintHolder: Patient) {
     var patient: Patient = new Patient();
     patient = JSON.parse(localStorage.getItem('patient') || '{}');
