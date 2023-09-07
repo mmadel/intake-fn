@@ -148,13 +148,6 @@ const routes: Routes = [{
       data: {
         title: 'auditing',
       },
-    },
-    {
-      path: 'audit/etest',
-      component: PatientsignatureComponent,
-      data: {
-        title: 'Patientsignature',
-      }
     }
   ]
 }
