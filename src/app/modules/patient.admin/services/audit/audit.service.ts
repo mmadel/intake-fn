@@ -13,8 +13,14 @@ export class AuditService {
   getClinicAuditDataByUUID(uuid: string) {
     return this.http.get<Audit[]>(`${this.auditUrl}` + '/clinic/retrieve/uuid/' + uuid, { observe: 'response' })
   }
+  getPatientAuditDataByUUID(uuid: string) {
+    return this.http.get<Audit[]>(`${this.auditUrl}` + '/patient/retrieve/uuid/' + uuid, { observe: 'response' })
+  }
   getInsuranceCompanyAuditDataByUUID(uuid: string) {
     return this.http.get<Audit[]>(`${this.auditUrl}` + '/insurance/company/retrieve/uuid/' + uuid, { observe: 'response' })
+  }
+  getPatientAuditData() {
+    return this.http.get<Audit[]>(`${this.auditUrl}` + '/patient/retrieve', { observe: 'response' })
   }
   getClinicAuditData() {
     return this.http.get<Audit[]>(`${this.auditUrl}` + '/clinic/retrieve', { observe: 'response' })

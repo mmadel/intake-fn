@@ -118,8 +118,24 @@ export class AuditComponent implements OnInit {
           this.searchInputNotValid = true
         })
       }
+      if (this.selectedUser !== '' && this.selectedEntity === 'patient') {
+        this.auditService.getPatientAuditDataByUUID(this.selectedUser).subscribe(response => {
+          this.fillAuditDatatList(response.body);
+        }, (error) => {
+          this.errorMsg = 'Server is down please contact the administrator';
+          this.searchInputNotValid = true
+        })
+      }
       if (this.selectedUser !== '' && this.selectedEntity === '') {
         this.auditService.getAllAuditDataByUUID(this.selectedUser).subscribe(response => {
+          this.fillAuditDatatList(response.body);
+        }, (error) => {
+          this.errorMsg = 'Server is down please contact the administrator';
+          this.searchInputNotValid = true
+        })
+      }
+      if (this.selectedUser === '' && this.selectedEntity === 'patient') {
+        this.auditService.getPatientAuditData().subscribe(response => {
           this.fillAuditDatatList(response.body);
         }, (error) => {
           this.errorMsg = 'Server is down please contact the administrator';
