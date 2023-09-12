@@ -167,7 +167,6 @@ export class AuditComponent implements OnInit {
         entityvalue = entityvalue + ' ' + audit.entity[key];
       }
     }
-    console.log(entityvalue);
     return entityvalue
   }
 }

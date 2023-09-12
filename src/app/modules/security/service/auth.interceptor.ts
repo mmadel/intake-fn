@@ -1,31 +1,20 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse,
-  HttpHeaders
+  HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 } from '@angular/common/http';
-import { from, mergeMap } from 'rxjs';
-import { BehaviorSubject, catchError, EMPTY, finalize, NEVER, Observable, throwError } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalService } from '../../common';
-import { UserRoleURLS } from 'src/app/core/adminlayout/header/user.role.urls';
-import * as _ from 'lodash';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { catchError, finalize, from, mergeMap, Observable, throwError } from 'rxjs';
+import { UserRoleURLS } from 'src/app/core/adminlayout/header/user.role.urls';
 import { KcAuthServiceService } from './kc/kc-auth-service.service';
-import { ConstantPool } from '@angular/compiler';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(
-    private router: Router
-    , private localService: LocalService
-    , private kcAuthServiceService: KcAuthServiceService
+  constructor(private kcAuthServiceService: KcAuthServiceService
     , private spinner: NgxSpinnerService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.spinner.show();
     return from(this.kcAuthServiceService.getToken())
       .pipe(
         mergeMap(token => {
@@ -37,7 +26,11 @@ export class AuthInterceptor implements HttpInterceptor {
           });
           return next.handle(request);
         }
-        ), catchError(error => {
+        ),
+        finalize(() => {
+          this.spinner.hide();
+        }),
+        catchError(error => {
           if (error.error.errorCode === 'UNAUTHORIZED') {
             console.log('token is expired');
             this.kcAuthServiceService.logout();
