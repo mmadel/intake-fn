@@ -78,7 +78,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
   readonly sorterValue$ = new BehaviorSubject({});
   readonly totalItems$ = new BehaviorSubject(0);
 
-  readonly apiParams$ = new BehaviorSubject<IApiParams>({ limit: this.itemsPerPage$.value, offset: 0 });
+  readonly apiParams$ = new BehaviorSubject<IApiParams>({ pageSize: this.itemsPerPage$.value, currentPage: 0 });
   readonly errorMessage$ = new Subject<string>();
   readonly retry$ = new Subject<boolean>();
 

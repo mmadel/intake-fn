@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PatientsignatureComponent } from '../patient.questionnaire';
 import { AuditComponent } from './components/audit/audit.component';
+import { UserAuditComponent } from './components/audit/user.audit/user-audit.component';
 import { ClinicCreationComponent } from './components/clinic/create/clinic.creation.component';
 import { ClinicListComponent } from './components/clinic/list/clinic.list.component';
 import { UpdateClinicComponent } from './components/clinic/update/update-clinic.component';
@@ -143,10 +144,16 @@ const routes: Routes = [{
   },
   children: [
     {
-      path: 'audit/auditing',
+      path: 'audit/entity-audit',
       component: AuditComponent,
       data: {
-        title: 'auditing',
+        title: 'audit-entity',
+      },
+    },{
+      path: 'audit/user-audit',
+      component: UserAuditComponent,
+      data: {
+        title: 'audit-user',
       },
     }
   ]

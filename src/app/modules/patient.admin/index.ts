@@ -17,3 +17,7 @@ export * from './components/insurance.company/list/insurance-company-list.compon
 export * from './components/dashboard/dashboard.component'
 
 export * from './components/audit/audit.component'
+export * from './components/audit/user.audit/user-audit.component'
+export * from './components/audit/user.audit/user.clinic.audit/user-clinic-audit.component'
+export * from './components/audit/user.audit/user.insurance.company.audit/user-insurance-company-audit.component'
+export * from './components/audit/user.audit/user.patient.audit/user-patient-audit.component'

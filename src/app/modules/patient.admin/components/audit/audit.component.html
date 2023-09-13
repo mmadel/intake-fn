@@ -7,35 +7,14 @@
             </c-card-header>
             <c-card-body>
                 <p class="text-medium-emphasis small">
-                    The Ability to find the activities that have been done by any user on the audited entities
+                    The Ability to find the activities that have been taken on the audited entities
                 </p>
                 <c-callout color="danger" *ngIf="searchInputNotValid">
                     {{errorMsg}}
                 </c-callout>
                 <form cForm>
                     <c-row>
-                        <c-col xs="6" class="mb-2">
-                            <c-card>
-                                <c-card-header>
-                                    <h6>
-                                        User 
-                                    </h6>
-                                </c-card-header>
-                                <c-card-body>
-                                    <c-col class="mb-2" xs="12">
-                                        <form cForm>
-                                            <select cSelect cFormControl name="username" *ngIf="users.length > 0 "
-                                                [(ngModel)]="selectedUser">
-                                                <option value=''>Select User</option>
-                                                <option *ngFor="let user of users" [value]="user.uuid">
-                                                    {{user.name}}</option>
-                                            </select>
-                                        </form>
-                                    </c-col>
-                                </c-card-body>
-                            </c-card>
-                        </c-col>
-                        <c-col xs="6" class="mb-2">
+                        <c-col xs="12" class="mb-2">
                             <c-card>
                                 <c-card-header>
                                     <h6>
@@ -73,19 +52,19 @@
         </button>
     </c-container>
     <c-col xs="12">
-        <c-smart-table #smartTable="cSmartTable" activePage="1"  clickableRows 
-            [columnSorter]="true" [columns]="columns"  header [itemsPerPageSelect]="true" [itemsPerPage]="5"
-             [tableProps]="{ hover: true, striped: false, responsive: true }" [items]="auditData" pagination
-             [sorterValue]="{ column: 'name', state: 'asc' }"
-             [tableBodyProps]="{align: 'middle'}"
-             [tableFilter]="true"
-             [tableHeadProps]="{color: 'primary'}"
-             [tableProps]="{ hover: true, striped: true, responsive: true }">
-             <ng-template cTemplateId="tableDetails" let-item="item" >
+        <ng-container *ngIf="props$ | async as props" fluid="true">
+            <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [columnFilter]="true"
+              [items]="(auditData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+              (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
+              [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
+              [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
+              [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
+              (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
+              <ng-template cTemplateId="tableDetails" let-item="item" >
                 <div [visible]="this.details_visible[item._id]===true" cCollapse>
                   <c-card class="rounded-0">
                     <c-card-body>
-                      <p [innerHTML]="showEntityData(item.entity)"></p>
+                      <p [innerHTML]="showEntityData(item.entity, item.entityName)"></p>
                       <p ><strong>Action has been taken at :</strong> {{item['actionDate']}}</p>
                     </c-card-body>
                     <c-card-footer>
@@ -95,21 +74,18 @@
                 </div>
               </ng-template>
               <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
-                <td [cTableActive]="smartTable.tableDataCellProps(item, columnName)?.['active']"
-                    [cTableColor]="smartTable.tableDataCellProps(item, columnName)?.color"
-                    [ngClass]="smartTable.tableDataCellClasses(item, columnName)"
-                >
+                <td>
                   <ng-container [ngSwitch]="columnName">
                     <ng-container *ngSwitchCase="'actionType'">
-                      <c-badge [color]="getBadge(tdContent)">
-                        {{(item[columnName])}}
-                      </c-badge>
-                    </ng-container>
-                    <ng-container *ngSwitchCase="'show'" class="py-2">
-                      <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
-                        Show
-                      </button>
-                    </ng-container>
+                        <c-badge [color]="getBadge(tdContent)">
+                          {{(item[columnName])}}
+                        </c-badge>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'show'" class="py-2">
+                        <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
+                          Show
+                        </button>
+                      </ng-container>
                     <ng-container *ngSwitchDefault>
                       {{tdContent}}
                     </ng-container>
@@ -117,5 +93,8 @@
                 </td>
               </ng-template>
             </c-smart-table>
+            <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
+              (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+          </ng-container>
     </c-col>
 </c-row>

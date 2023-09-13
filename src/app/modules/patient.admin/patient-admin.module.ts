@@ -18,8 +18,13 @@ import {
   InsuranceCompanyListComponent,
   UserUpdateComponent,
   UpdateClinicComponent,
-  AuditComponent
+  AuditComponent,
+  UserAuditComponent,
+  UserClinicAuditComponent,
+  UserInsuranceCompanyAuditComponent,
+  UserPatientAuditComponent
 } from './index';
+
 
 import { PatientCommonModule } from '../common';
 import {
@@ -48,14 +53,11 @@ import {
   MultiSelectModule,
   WidgetModule,
   ProgressModule,
-
+  AccordionModule
 
 } from '@coreui/angular-pro';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
-
-
 
 @NgModule({
   declarations: [
@@ -70,7 +72,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     PatientCreateComponent,
     InsuranceCompanyCreateComponent,
     InsuranceCompanyListComponent,
-    UserUpdateComponent, UpdateClinicComponent, AuditComponent
+    UserUpdateComponent, UpdateClinicComponent, AuditComponent, UserAuditComponent, UserClinicAuditComponent, UserInsuranceCompanyAuditComponent, UserPatientAuditComponent
   ],
   imports: [
     CommonModule,
@@ -104,6 +106,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ProgressModule,
     PatientCommonModule,
     QRCodeModule,
+    AccordionModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })

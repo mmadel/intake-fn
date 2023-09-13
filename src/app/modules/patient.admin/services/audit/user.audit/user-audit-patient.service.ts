@@ -4,15 +4,17 @@ import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, Observ
 import { IApiParams } from 'src/app/modules/common/interfaces/api.params';
 import { IData } from 'src/app/modules/common/interfaces/idata';
 import { environment } from 'src/environments/environment';
+import { AbstractUserAudit } from './abstract.user.audit';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuditService {
+export class UserAuditPatientService extends AbstractUserAudit {
   private auditUrl = environment.baseURL + 'audit'
-  private offsetURL: string
-  constructor(private http: HttpClient) { }
-
+  private offsetURL:string = '/patient/retrieve/uuid/'
+  constructor(private http: HttpClient) { 
+    super();
+  }
   get(config$: BehaviorSubject<IApiParams>): Observable<any> {
     return config$.pipe(
       debounceTime(100),
@@ -24,7 +26,7 @@ export class AuditService {
       switchMap((config) => this.fetchData(config))
     );
   }
-  private fetchData(params: IApiParams): Observable<IData> {
+  fetchData(params: IApiParams): Observable<IData> {
     const apiParams = {
       ...params
     };
@@ -33,31 +35,10 @@ export class AuditService {
       ? { params: httpParams }
       : { params: {} };
     return this.http
-      .get<IData>(this.auditUrl + this.offsetURL, options)
+      .get<IData>(this.auditUrl + this.offsetURL+this.uuid, options)
       .pipe(
         retry({ count: 1, delay: 100000, resetOnSuccess: true }),
         catchError(this.handleHttpError)
       );
   }
-  constructOffsetURL(selectedEntity: string) {
-    if (selectedEntity === 'patient')
-      this.offsetURL = '/patient/retrieve'
-    if (selectedEntity === 'clinic')
-      this.offsetURL = '/clinic/retrieve';
-    if (selectedEntity === 'Insurance_company')
-      this.offsetURL = '/insurance/company/retrieve'
-  }
-  constructOffsetUUIDURL(selectedEntity: string, uuid: string) {
-    if (selectedEntity === 'patient')
-      this.offsetURL = '/patient/retrieve/uuid/' + uuid
-    if (selectedEntity === 'clinic')
-      this.offsetURL = '/clinic/retrieve/uuid/' + uuid
-    if (selectedEntity === 'Insurance_company')
-      this.offsetURL = '/insurance/company/retrieve/uuid/' + uuid
-    console.log(this.offsetURL)
-  }
-  private handleHttpError(error: HttpErrorResponse) {
-    return throwError(() => error);
-  }
-
 }
