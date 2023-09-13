@@ -48,5 +48,8 @@
 
 /intake-service/api/audit/clinic/retrieve/uuid/:uuid https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/audit/clinic/retrieve/uuid/:uuid 200
 /intake-service/api/audit/clinic/retrieve https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/audit/clinic/retrieve 200
-/intake-service/api/audit/retrieve/uuid/:uuid https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/audit/retrieve/uuid/:uuid 200
+
+/intake-service/api/audit/patient/retrieve/uuid/:uuid https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/audit/clinic/retrieve/uuid/:uuid 200
+/intake-service/api/audit/patient/retrieve https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/audit/clinic/retrieve 200
+
 /*  /index.html   200
