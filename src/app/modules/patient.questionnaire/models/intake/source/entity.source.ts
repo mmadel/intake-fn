@@ -1,0 +1,3 @@
+interface EntitySource {
+    organizationName: string;
+  }
