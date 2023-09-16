@@ -49,6 +49,8 @@ import { PatientListService } from './modules/patient.admin/services/patient-lis
 import { ToastrModule } from 'ngx-toastr';
 import { SecurityModule } from './modules/security';
 import { AuthInterceptor } from './modules/security/service/auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { Patientreducer } from './modules/patient.questionnaire/store/patient.reducer';
 
 
 
@@ -100,7 +102,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       closeButton: true,
       progressBar: true,
     }),
-    SecurityModule
+    SecurityModule,
+    StoreModule.forRoot({ todos: Patientreducer }),
   ],
   providers: [
     {

@@ -1,10 +1,10 @@
 import { Patient } from "../models/intake/patient";
 
 
-export class PatientState{
-    Patient:Patient
+export class PatientState {
+    patients: Patient[]
     PatientError: Error | null;
 }
 export const initializeState = (): PatientState => {
-    return { Patient: {}, PatientError: null };
-  };
+    return { patients: [], PatientError: null };
+};
