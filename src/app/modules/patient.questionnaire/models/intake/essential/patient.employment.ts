@@ -1,4 +1,4 @@
-interface PatientEmployment {
-    employmentStatus: string;
-    employmentCompany: string;
+export interface PatientEmployment {
+    employmentStatus?: string;
+    employmentCompany?: string;
   }

@@ -4,25 +4,30 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { Basic } from 'src/app/models/patient/basic.info.model';
 import { Patient } from 'src/app/models/patient/patient.model';
 import { BasicInfoRequired } from 'src/app/models/validation/basic.info';
-import { LocalService } from 'src/app/modules/common';
-import { EmergencyRelation } from '../../models/patient/emergency.relation';
+import { Relation } from '../../enums/emergency.relation';
+import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
+import { PatientGrantor } from '../../models/intake/patient.grantor';
 @Component({
   selector: 'app-essential-info',
   templateUrl: './essential-info.component.html',
   styleUrls: ['./essential-info.component.css']
 })
 export class EssentialInfoComponent implements OnInit {
+  patientEssentialInformation: PatientEssentialInformation = {
+    patientName: {},
+    patientAddress: {},
+    patientEmergencyContact: {},
+    patientEmployment: {}
+  }
+  patientGrantor: PatientGrantor = {}
+  relationShip = Relation;
   pateintBasicInfo: Basic = new Basic()
-  emergencyRelations: string[] = [];
   isPatientUnderage: boolean = false;
-  guarantorRelationship: string[] = [];
   imageFormData: FormData = new FormData();
   @Input() requiredFields: BasicInfoRequired;
-  constructor(private localService: LocalService, private imageCompress: NgxImageCompressService) { }
+  constructor(private imageCompress: NgxImageCompressService) { }
 
   ngOnInit(): void {
-    this.fillEmergenctrelation();
-
     if (localStorage.getItem('patient') !== null) {
       var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.basicInfo !== undefined) {
@@ -44,27 +49,21 @@ export class EssentialInfoComponent implements OnInit {
       })
     return field;
   }
-  fillEmergenctrelation() {
-    for (var relation in EmergencyRelation) {
-      this.emergencyRelations.push(relation)
-      this.guarantorRelationship.push(relation)
-    }
-  }
   checkAge(event: any) {
     var patientAge = moment().diff(event, 'y')
     this.isPatientUnderage = patientAge < 18 ? true : false;
   }
   public onImageUpload(event: any, photoType: string) {
-    
-      var uploadedIDFrontImage: File = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        var localUrl = event.target.result;
-        this.compressFile(localUrl, uploadedIDFrontImage['name'], photoType)
 
-      }
-      reader.readAsDataURL(uploadedIDFrontImage);
-    
+    var uploadedIDFrontImage: File = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      var localUrl = event.target.result;
+      this.compressFile(localUrl, uploadedIDFrontImage['name'], photoType)
+
+    }
+    reader.readAsDataURL(uploadedIDFrontImage);
+
   }
   compressFile(image: any, fileName: any, fileSuffix: string) {
     var orientation = -1;

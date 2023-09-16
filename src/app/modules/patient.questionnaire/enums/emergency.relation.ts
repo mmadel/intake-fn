@@ -1,4 +1,4 @@
-export enum EmergencyRelation{
+export enum Relation{
     Spouse = "spouse",
     Friend = "friend",
     Father = "father",

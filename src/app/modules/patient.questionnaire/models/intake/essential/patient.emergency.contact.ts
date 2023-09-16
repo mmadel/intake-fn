@@ -1,5 +1,5 @@
-interface PatientEmergencyContact {
-    emergencyName: string;
-    emergencyPhone: string;
-    emergencyRelation: string;
+export interface PatientEmergencyContact {
+    emergencyName?: string;
+    emergencyPhone?: string;
+    emergencyRelation?: string;
   }
