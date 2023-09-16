@@ -1,3 +1,6 @@
+import { PatientEssentialInformation } from "./essential/patient.essential.information";
+import { PatientGrantor } from "./patient.grantor";
+
 interface Patient {
     id: number;
     patientEssentialInformation?: PatientEssentialInformation;
