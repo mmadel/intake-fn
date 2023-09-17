@@ -9,39 +9,36 @@ import { Relation } from '../../enums/emergency.relation';
 import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
 import { Patient } from '../../models/intake/patient';
 import { PatientGrantor } from '../../models/intake/patient.grantor';
+import { PatientStoreService } from '../../service/store/patient-store.service';
 @Component({
   selector: 'app-essential-info',
   templateUrl: './essential-info.component.html',
   styleUrls: ['./essential-info.component.css']
 })
 export class EssentialInfoComponent implements OnInit {
-  patientEssentialInformation: PatientEssentialInformation = {
-    patientName: {},
-    patientEmergencyContact: {},
-    patientEmployment: {},
-    patientPhone: {}
-  }
+  patientEssentialInformation?: PatientEssentialInformation;
   patientGrantor: PatientGrantor = {}
   relationShip = Relation;
   pateintBasicInfo: Basic = new Basic()
   isPatientUnderage: boolean = false;
   imageFormData: FormData = new FormData();
-  patientList: Patient[] = [];
   @Input() requiredFields: BasicInfoRequired;
-  constructor(private imageCompress: NgxImageCompressService) {
+  constructor(private imageCompress: NgxImageCompressService,
+    private patientStoreService: PatientStoreService) {
   }
 
   ngOnInit(): void {
-    // if (localStorage.getItem('patient') !== null) {
-    //   var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-    //   if (pateint.basicInfo !== undefined) {
-    //     this.pateintBasicInfo = pateint.basicInfo;
-    //   } else {
-    //     this.pateintBasicInfo = new Basic();
-    //   }
-    // } else {
-    //   this.pateintBasicInfo = new Basic();
-    // }
+  
+    if (this.patientStoreService.patientEssentialInformation === undefined) {
+      this.patientEssentialInformation = {
+        patientName: {},
+        patientEmergencyContact: {},
+        patientEmployment: {},
+        patientPhone: {}
+      }
+    } else {
+      this.patientEssentialInformation = this.patientStoreService.patientEssentialInformation;
+    }
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;
@@ -105,10 +102,10 @@ export class EssentialInfoComponent implements OnInit {
     this.imageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
   }
   public validate(): ValidatorContainer {
-    var patientValidator = new PatientEssentialValidator(this.requiredFields, this.patientEssentialInformation);
+    var patientValidator = new PatientEssentialValidator(this.requiredFields, this.patientEssentialInformation || {});
     return patientValidator.validate();
   }
   formatDate() {
-    this.patientEssentialInformation.dateOfBirth = Number(moment(this.patientEssentialInformation.birthDate_date).format("x"));
+    this.patientEssentialInformation!.dateOfBirth = Number(moment(this.patientEssentialInformation?.birthDate_date).format("x"));
   }
 }

@@ -2,15 +2,16 @@
 import * as _ from 'lodash';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
+import { PatientAddress } from 'src/app/modules/patient.questionnaire/models/intake/essential/patienta.ddress';
 import { PropertyValidator } from '../PropertyValidator';
 import { ValidatorContainer } from '../ValidatorContainer';
 import { PatientValidator } from './patient.validator';
 
 
 export class PatientAddressValidator extends PatientValidator {
-    pateintAddressInfo: Address;
+    pateintAddressInfo: PatientAddress;
     requiredFields: AddressInfoRequired;
-    constructor(requiredFields: AddressInfoRequired, addressInfo: Address) {
+    constructor(requiredFields: AddressInfoRequired, addressInfo: PatientAddress) {
         super();
         this.pateintAddressInfo = addressInfo
         this.requiredFields = requiredFields;

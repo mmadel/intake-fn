@@ -92,11 +92,22 @@ export class QuestionnaireAddComponent implements OnInit {
     if (patientModel === 'basic') {
       this.essentialInfoComponent?.formatDate();
       this.validator = this.essentialInfoComponent?.validate();
+      if (this.validator.isValid) {
+        this.patientStoreService.patientEssentialInformation = this.essentialInfoComponent.patientEssentialInformation;
+        this.proceedToNextStep();
+      } else {
+        this.scrollUp();
+      }
     }
-    // if (patientModel === 'address') {
-    //   this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
-    //     this.addressInformationComponent.pateintAddressInfo);
-    // }
+    if (patientModel === 'address') {
+      this.validator = this.addressInformationComponent?.validate();
+      if (this.validator.isValid) {
+        this.patientStoreService.patientAddress = this.addressInformationComponent.patientAddress;
+        this.proceedToNextStep();
+      } else {
+        this.scrollUp();
+      }
+    }
     // if (patientModel === 'medical') {
     //   this.patientValidator = new PatientMedicalQuestionnaireValidator(this.medicalInfoComponent.medicalQuestionnaireInfo,
     //     this.patientFields.medicalInfoRequired);
@@ -123,15 +134,8 @@ export class QuestionnaireAddComponent implements OnInit {
     // if (patientModel === 'aggreements') {
     //   this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     // }
-
-    if (this.validator.isValid) {
-      this.fillModel();
-      this.proceedToNextStep(patientModel);
-    } else {
-      this.scrollUp();
-    }
   }
-  proceedToNextStep(modelName: string) {
+  proceedToNextStep() {
     this.calculatePercentage(this.counter, 'next')
     this.counter++;
     this.scrollUp();
@@ -210,8 +214,9 @@ export class QuestionnaireAddComponent implements OnInit {
 
   }
   fillModel() {
-    this.patientStoreService.pateint.patientEssentialInformation = this.essentialInfoComponent?.patientEssentialInformation;
-    // this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
+    if (this.essentialInfoComponent !== undefined)
+      this.patientStoreService.patientEssentialInformation = this.essentialInfoComponent.patientEssentialInformation;
+    //this.patientStoreService.patientAddress = this.addressInformationComponent?.patientAddress;
     // this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     // this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
     // this.fillInsuranceInformationModel()

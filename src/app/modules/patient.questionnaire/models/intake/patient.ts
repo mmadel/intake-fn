@@ -1,3 +1,4 @@
+import { Address } from "src/app/models/patient/address.info.model";
 import { PatientEssentialInformation } from "./essential/patient.essential.information";
 import { PatientAddress } from "./essential/patienta.ddress";
 import { PatientInsurance } from "./Insurance/patient.insurance";
@@ -10,7 +11,7 @@ import { PatientSource } from "./source/patient.source";
 export interface Patient {
     id?: number;
     patientEssentialInformation?: PatientEssentialInformation;
-    patientAddress?: PatientAddress;
+    patientAddress?: Address;
     patientMedical?: PatientMedical;
     patientInsurance?: PatientInsurance;
     patientGrantor?: PatientGrantor;
