@@ -1,4 +1,4 @@
-interface MedicareCoverage {
+export interface MedicareCoverage {
     employerName: string;
     employerFirstName: string;
     employerMiddleName: string;

@@ -1,4 +1,4 @@
-interface PatientPhysicalTherapy {
+export interface PatientPhysicalTherapy {
     location: string;
     numberOfVisit: number;
   }

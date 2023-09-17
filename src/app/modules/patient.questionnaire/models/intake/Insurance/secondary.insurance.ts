@@ -1,4 +1,4 @@
-interface SecondaryInsurance {
+export interface SecondaryInsurance {
     policyHolderName: string;
     insuranceCompanyName: string;
     policyHolderFirstName: string;

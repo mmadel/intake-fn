@@ -1,4 +1,4 @@
-interface PatientInsuranceCompensationNoFault {
+export interface PatientInsuranceCompensationNoFault {
     injuryType: string;
     accidentDate: number;
     workerStatus: string;

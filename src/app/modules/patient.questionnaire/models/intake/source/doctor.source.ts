@@ -1,4 +1,4 @@
-interface DoctorSource {
+export interface DoctorSource {
     doctorName: string;
     doctorNPI: string;
     doctorFax: number;

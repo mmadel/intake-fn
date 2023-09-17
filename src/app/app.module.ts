@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -50,7 +50,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { SecurityModule } from './modules/security';
 import { AuthInterceptor } from './modules/security/service/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
-import { Patientreducer } from './modules/patient.questionnaire/store/patient.reducer';
 
 
 
@@ -102,8 +101,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       closeButton: true,
       progressBar: true,
     }),
-    SecurityModule,
-    StoreModule.forRoot({ todos: Patientreducer }),
+    SecurityModule
   ],
   providers: [
     {

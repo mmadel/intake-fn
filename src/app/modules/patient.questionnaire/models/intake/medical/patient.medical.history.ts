@@ -1,4 +1,4 @@
-interface PatientMedicalHistory {
+export interface PatientMedicalHistory {
     height: number;
     heightUnit: string;
     weight: number;

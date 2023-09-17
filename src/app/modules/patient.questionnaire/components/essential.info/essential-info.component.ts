@@ -1,12 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { Basic } from 'src/app/models/patient/basic.info.model';
-import { Patient } from 'src/app/models/patient/patient.model';
+import { map, Observable, Subscription } from 'rxjs';
+import { Basic } from 'src/app/models/patient/basic.info.model'
 import { BasicInfoRequired } from 'src/app/models/validation/basic.info';
 import { Relation } from '../../enums/emergency.relation';
 import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
+import { Patient } from '../../models/intake/patient';
 import { PatientGrantor } from '../../models/intake/patient.grantor';
+import { PatientState } from '../../store/patient.state';
 @Component({
   selector: 'app-essential-info',
   templateUrl: './essential-info.component.html',
@@ -17,27 +20,30 @@ export class EssentialInfoComponent implements OnInit {
     patientName: {},
     patientAddress: {},
     patientEmergencyContact: {},
-    patientEmployment: {}
+    patientEmployment: {},
+    patientPhone:{}
   }
   patientGrantor: PatientGrantor = {}
   relationShip = Relation;
   pateintBasicInfo: Basic = new Basic()
   isPatientUnderage: boolean = false;
   imageFormData: FormData = new FormData();
+  patientList: Patient[] = [];
   @Input() requiredFields: BasicInfoRequired;
-  constructor(private imageCompress: NgxImageCompressService) { }
+  constructor(private imageCompress: NgxImageCompressService) { 
+    }
 
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.basicInfo !== undefined) {
-        this.pateintBasicInfo = pateint.basicInfo;
-      } else {
-        this.pateintBasicInfo = new Basic();
-      }
-    } else {
-      this.pateintBasicInfo = new Basic();
-    }
+    // if (localStorage.getItem('patient') !== null) {
+    //   var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
+    //   if (pateint.basicInfo !== undefined) {
+    //     this.pateintBasicInfo = pateint.basicInfo;
+    //   } else {
+    //     this.pateintBasicInfo = new Basic();
+    //   }
+    // } else {
+    //   this.pateintBasicInfo = new Basic();
+    // }
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;

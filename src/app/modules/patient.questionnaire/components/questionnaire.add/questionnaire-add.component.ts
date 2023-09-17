@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { Patient } from 'src/app/models/patient/patient.model';
+import { map, Observable, Subscription } from 'rxjs';
+//import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { LocalService } from 'src/app/modules/common';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
@@ -15,8 +17,12 @@ import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient
 import { PatientSignatureValidator } from 'src/app/validators/patient.validator/patient.signature.validator';
 import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
+import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
+import { Patient } from '../../models/intake/patient';
 import { PatientSignature } from '../../models/patient/signature.model';
 import { PatientService } from '../../service/patient.service';
+import * as PatientActions from '../../store/patient.action';
+import { PatientState } from '../../store/patient.state';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { AggreementsComponent } from '../aggreements/aggreements.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
@@ -55,7 +61,7 @@ export class QuestionnaireAddComponent implements OnInit {
   patientValidator: PatientValidator;
   modelName: string = '';
   signatureImg: string;
-  patient: Patient = new Patient();
+  //patient: Patient = new Patient();
   obj: any;
   patientFields: PatientRequiredFields;
   @ViewChild(EssentialInfoComponent) essentialInfoComponent: EssentialInfoComponent;
@@ -73,10 +79,17 @@ export class QuestionnaireAddComponent implements OnInit {
     private router: Router,
     private localService: LocalService,
     private toastr: ToastrService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private store: Store<PatientState>) {
+  }
   formFiles: FormData = new FormData();
+  patient$: Observable<any[]>;
+  patientSubscription: Subscription;
+  patientList: Patient[] = [];
+  pateint: Patient = {};
   ngOnInit(): void {
-    this.localService.removeData('patient')
+    this.patient$ = this.store.pipe(select("patientDependencies"));
+    // this.localService.removeData('patient')
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
       this.patientFields = <PatientRequiredFields>patientFields;
       this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
@@ -95,54 +108,60 @@ export class QuestionnaireAddComponent implements OnInit {
   }
 
 
-  next(patientModel: string) {
+  next(patientModel: string) {    
     this.validator = new ValidatorContainer();
     if (patientModel === 'basic') {
+      this.essentialInfoComponent.patientEssentialInformation.dateOfBirth = Number(moment(this.essentialInfoComponent?.patientEssentialInformation.birthDate_date).format("x"));
       this.patientValidator = new PatientEssentialValidator(this.patientFields.basicInfo
-        , this.essentialInfoComponent.pateintBasicInfo);
-      this.essentialInfoComponent.pateintBasicInfo.birthDate = Number(moment(this.essentialInfoComponent?.pateintBasicInfo.birthDate_date).format("x"));
+        , this.essentialInfoComponent.patientEssentialInformation);
+      
     }
-    if (patientModel === 'address') {
-      this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
-        this.addressInformationComponent.pateintAddressInfo);
-    }
-    if (patientModel === 'medical') {
-      this.patientValidator = new PatientMedicalQuestionnaireValidator(this.medicalInfoComponent.medicalQuestionnaireInfo,
-        this.patientFields.medicalInfoRequired);
-    }
-    if (patientModel === 'medical-history') {
-      this.patientValidator = new MdicalHistoryValidator(this.medicalHistoryInformationComponent.model,
-        this.patientFields.medicalHistoryInfoRequired)
-    }
-    if (patientModel === 'insurance') {
-      if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
-        && this.insuranceInformationComponent.workerCompComponent !== undefined)
-        this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent.workerCompComponent.model
-      if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
-        && this.insuranceInformationComponent.workerNotCompComponent !== undefined)
-        this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent.workerNotCompComponent.model
-      this.patientValidator = new PatientInsuranceQuestionnaireValidator(
-        this.insuranceInformationComponent.insuranceQuestionnaireInfo
-        , this.patientFields.insurnaceCompInfoRequired
-        , this.patientFields.insurnacecommerialInfoRequired)
-    }
+    // if (patientModel === 'address') {
+    //   this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
+    //     this.addressInformationComponent.pateintAddressInfo);
+    // }
+    // if (patientModel === 'medical') {
+    //   this.patientValidator = new PatientMedicalQuestionnaireValidator(this.medicalInfoComponent.medicalQuestionnaireInfo,
+    //     this.patientFields.medicalInfoRequired);
+    // }
+    // if (patientModel === 'medical-history') {
+    //   this.patientValidator = new MdicalHistoryValidator(this.medicalHistoryInformationComponent.model,
+    //     this.patientFields.medicalHistoryInfoRequired)
+    // }
+    // if (patientModel === 'insurance') {
+    //   if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
+    //     && this.insuranceInformationComponent.workerCompComponent !== undefined)
+    //     this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent.workerCompComponent.model
+    //   if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
+    //     && this.insuranceInformationComponent.workerNotCompComponent !== undefined)
+    //     this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent.workerNotCompComponent.model
+    //   this.patientValidator = new PatientInsuranceQuestionnaireValidator(
+    //     this.insuranceInformationComponent.insuranceQuestionnaireInfo
+    //     , this.patientFields.insurnaceCompInfoRequired
+    //     , this.patientFields.insurnacecommerialInfoRequired)
+    // }
     // if (patientModel === 'upload') {
     //   this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
     // }
-    if (patientModel === 'aggreements') {
-      this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
-    }
+    // if (patientModel === 'aggreements') {
+    //   this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
+    // }
 
     this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
-      this.fillModel()
-      this.proceedToNextStep(patientModel);
+      this.pateint.patientEssentialInformation = this.essentialInfoComponent.patientEssentialInformation;
+      this.store.dispatch(
+        PatientActions.CreateDependency({
+          patientDependency: this.pateint,
+        })
+      );
+      //this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();
     }
   }
   proceedToNextStep(modelName: string) {
-    this.cachePatient(modelName, this.patient)
+    // this.cachePatient(modelName, this.patient)
     this.calculatePercentage(this.counter, 'next')
     this.counter++;
     this.scrollUp();
@@ -170,7 +189,7 @@ export class QuestionnaireAddComponent implements OnInit {
       this.PatientsignatureComponentTmp?.draw();
       var model: PatientSignature = this.PatientsignatureComponentTmp?.model;
       model.patientId = patientId;
-      this.patientValidator = new PatientSignatureValidator(model);      
+      this.patientValidator = new PatientSignatureValidator(model);
       this.patientService.uploadPatientSignature(model).subscribe(
         (response) => {
           console.log('uploaded drawed  patient Signature..')
@@ -198,40 +217,40 @@ export class QuestionnaireAddComponent implements OnInit {
     }
   }
   submit() {
-    var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '');
-    pateint.clinicId = this.clinicId
-    this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
-      (response) => {
-        this.patientService.upload(this.formFiles, <number>response.body).subscribe(
-          (response) => {
+    // var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '');
+    // pateint.clinicId = this.clinicId
+    // this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
+    //   (response) => {
+    //     this.patientService.upload(this.formFiles, <number>response.body).subscribe(
+    //       (response) => {
 
-            console.log('uploaded..')
-          },
-          (error) => {
-            this.scrollUp();
-            this.toastr.error(error.error.message, 'Error In Upload Images');
-          });
-        this.validateAndUploadsignature(<number>response.body);
-        this.localService.removeData('patient');
-        this.isCreated = true;
-      },
-      (error) => {
-        console.log(JSON.stringify(error))
-        this.toastr.error(error.error.message, 'Error In Creation');
-        this.scrollUp();
-      });
+    //         console.log('uploaded..')
+    //       },
+    //       (error) => {
+    //         this.scrollUp();
+    //         this.toastr.error(error.error.message, 'Error In Upload Images');
+    //       });
+    //     this.validateAndUploadsignature(<number>response.body);
+    //     this.localService.removeData('patient');
+    //     this.isCreated = true;
+    //   },
+    //   (error) => {
+    //     console.log(JSON.stringify(error))
+    //     this.toastr.error(error.error.message, 'Error In Creation');
+    //     this.scrollUp();
+    //   });
 
   }
   fillModel() {
-    this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
-    this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
-    this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
-    this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
-    this.fillInsuranceInformationModel()
-    this.fillModelFiles();
-    this.patient.agreements = this.aggreementsComponent?.model;
-    if (this.patientsignatureComponent !== undefined)
-      this.PatientsignatureComponentTmp = this.patientsignatureComponent
+    // this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
+    // this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
+    // this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
+    // this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
+    // this.fillInsuranceInformationModel()
+    // this.fillModelFiles();
+    // this.patient.agreements = this.aggreementsComponent?.model;
+    // if (this.patientsignatureComponent !== undefined)
+    //   this.PatientsignatureComponentTmp = this.patientsignatureComponent
   }
   fillModelFiles() {
     if (this.essentialInfoComponent) {
@@ -247,28 +266,28 @@ export class QuestionnaireAddComponent implements OnInit {
 
   }
   fillInsuranceInformationModel() {
-    this.patient.insuranceQuestionnaireInfo.isCompNoFault = this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault;
-    if (this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
-      this.patient.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent?.workerCompComponent.model
-    if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
-      this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
+    // this.patient.insuranceQuestionnaireInfo.isCompNoFault = this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault;
+    // if (this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
+    //   this.patient.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent?.workerCompComponent.model
+    // if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
+    //   this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
   }
   cachePatient(modelName: string, pateintHolder: Patient) {
-    var patient: Patient = new Patient();
-    patient = JSON.parse(localStorage.getItem('patient') || '{}');
-    if (modelName === 'basic')
-      patient.basicInfo = pateintHolder.basicInfo;
-    if (modelName === 'address')
-      patient.addressInfo = pateintHolder.addressInfo;
-    if (modelName === 'medical')
-      patient.medicalQuestionnaireInfo = pateintHolder.medicalQuestionnaireInfo
-    if (modelName === 'insurance')
-      patient.insuranceQuestionnaireInfo = pateintHolder.insuranceQuestionnaireInfo;
-    if (modelName === 'medical-history')
-      patient.medicalHistoryInformation = pateintHolder.medicalHistoryInformation;
-    if (modelName === 'aggreements')
-      patient.agreements = pateintHolder.agreements;
+    // var patient: Patient = new Patient();
+    // patient = JSON.parse(localStorage.getItem('patient') || '{}');
+    // if (modelName === 'basic')
+    //   patient.basicInfo = pateintHolder.basicInfo;
+    // if (modelName === 'address')
+    //   patient.addressInfo = pateintHolder.addressInfo;
+    // if (modelName === 'medical')
+    //   patient.medicalQuestionnaireInfo = pateintHolder.medicalQuestionnaireInfo
+    // if (modelName === 'insurance')
+    //   patient.insuranceQuestionnaireInfo = pateintHolder.insuranceQuestionnaireInfo;
+    // if (modelName === 'medical-history')
+    //   patient.medicalHistoryInformation = pateintHolder.medicalHistoryInformation;
+    // if (modelName === 'aggreements')
+    //   patient.agreements = pateintHolder.agreements;
 
-    localStorage.setItem('patient', JSON.stringify(patient));
+    //localStorage.setItem('patient', JSON.stringify(patient));
   }
 }

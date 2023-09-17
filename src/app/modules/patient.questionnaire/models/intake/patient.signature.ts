@@ -1,4 +1,4 @@
-interface PatientSignature {
+export interface PatientSignature {
     signature: number[];
     patientId: number;
   }

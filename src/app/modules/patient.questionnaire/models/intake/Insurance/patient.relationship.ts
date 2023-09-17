@@ -1,4 +1,4 @@
-interface PatientRelationship {
+export interface PatientRelationship {
     patientRelationshipName: string;
     patientRelationshipFirstName: string;
     patientRelationshipMiddleName: string;

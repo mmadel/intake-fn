@@ -1,18 +1,19 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { Patient } from "../models/intake/patient";
-import * as PatientActions from './patient.action';
-import { initializeState, PatientState } from "./patient.state";
+import * as PateintActions from "./patient.action";
+import { initialState, PatientState } from "./patient.state";
 
-const initialState = initializeState();
-const reducer = createReducer(
-    initialState,
-    on(PatientActions.CreateToDoAction,
-        (state: PatientState, { patient }) =>
-        ({
-            ...state,
-            patients: [...state.patients, patient]
-        }))
+const reducers =  createReducer(
+  initialState,
+  on(PateintActions.CreateDependency, (state, { patientDependency }) => (
+    {
+    ...state,
+    patientDependencies: [...state.patientDependencies, patientDependency],
+  })),
+
 )
-export function Patientreducer(state: PatientState | undefined, action: Action): any {
-    return Patientreducer(state, action);
+
+export function Reducer(state: PatientState | undefined, action: Action) {
+  return reducers(state, action);
 }
+
+

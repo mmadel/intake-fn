@@ -1,3 +1,3 @@
-interface EntitySource {
+export interface EntitySource {
     organizationName: string;
   }

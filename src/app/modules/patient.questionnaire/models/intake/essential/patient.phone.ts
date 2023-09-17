@@ -1,4 +1,4 @@
 export interface PatientPhone {
-    phoneType: string;
-    phone: string;
+    phoneType?: string;
+    phone?: string;
   }

@@ -58,6 +58,8 @@ import {
 import { PatientCommonModule } from '../common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { StoreModule } from '@ngrx/store';
+import { Reducer } from './store/patient.reducer';
 
 
 @NgModule({
@@ -106,7 +108,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AccordionModule,
     PatientCommonModule,
     FontAwesomeModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    StoreModule.forRoot({ patientDependencies: Reducer }),
   ]
 })
 export class PatientQuestionnaireModule { }
