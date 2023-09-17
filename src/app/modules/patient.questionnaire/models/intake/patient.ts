@@ -1,4 +1,5 @@
 import { PatientEssentialInformation } from "./essential/patient.essential.information";
+import { PatientAddress } from "./essential/patienta.ddress";
 import { PatientInsurance } from "./Insurance/patient.insurance";
 import { PatientMedical } from "./medical/patient.medical";
 import { PatientAgreement } from "./patient.agreement";
@@ -9,6 +10,7 @@ import { PatientSource } from "./source/patient.source";
 export interface Patient {
     id?: number;
     patientEssentialInformation?: PatientEssentialInformation;
+    patientAddress?: PatientAddress;
     patientMedical?: PatientMedical;
     patientInsurance?: PatientInsurance;
     patientGrantor?: PatientGrantor;

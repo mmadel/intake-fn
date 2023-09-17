@@ -17,7 +17,6 @@ import { PatientGrantor } from '../../models/intake/patient.grantor';
 export class EssentialInfoComponent implements OnInit {
   patientEssentialInformation: PatientEssentialInformation = {
     patientName: {},
-    patientAddress: {},
     patientEmergencyContact: {},
     patientEmployment: {},
     patientPhone: {}
