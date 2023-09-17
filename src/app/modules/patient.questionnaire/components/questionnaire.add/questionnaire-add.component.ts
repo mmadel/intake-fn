@@ -1,28 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable, Subscription } from 'rxjs';
 //import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
-import { LocalService } from 'src/app/modules/common';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
-import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
-import { PatientAggreementsValidator } from 'src/app/validators/patient.validator/patient.aggreements.validator';
-import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
-import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
-import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/patient.medical.history.validator';
-import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
-import { PatientSignatureValidator } from 'src/app/validators/patient.validator/patient.signature.validator';
-import { PatientValidator } from 'src/app/validators/patient.validator/patient.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
-import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
 import { Patient } from '../../models/intake/patient';
 import { PatientSignature } from '../../models/patient/signature.model';
 import { PatientService } from '../../service/patient.service';
-import * as PatientActions from '../../store/patient.action';
-import { PatientState } from '../../store/patient.state';
+import { PatientStoreService } from '../../service/store/patient-store.service';
 import { AddressInformationComponent } from '../address.information/address-information.component';
 import { AggreementsComponent } from '../aggreements/aggreements.component';
 import { EssentialInfoComponent } from '../essential.info/essential-info.component';
@@ -58,7 +44,6 @@ export class QuestionnaireAddComponent implements OnInit {
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
-  patientValidator: PatientValidator;
   modelName: string = '';
   signatureImg: string;
   //patient: Patient = new Patient();
@@ -77,18 +62,12 @@ export class QuestionnaireAddComponent implements OnInit {
     private patientService: PatientService,
     private patientRequiredFieldsService: PatientRequiredFieldsService,
     private router: Router,
-    private localService: LocalService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
-    private store: Store<PatientState>) {
+    private patientStoreService: PatientStoreService) {
   }
   formFiles: FormData = new FormData();
-  patient$: Observable<any[]>;
-  patientSubscription: Subscription;
-  patientList: Patient[] = [];
-  pateint: Patient = {};
   ngOnInit(): void {
-    this.patient$ = this.store.pipe(select("patientDependencies"));
     // this.localService.removeData('patient')
     this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
       this.patientFields = <PatientRequiredFields>patientFields;
@@ -108,13 +87,11 @@ export class QuestionnaireAddComponent implements OnInit {
   }
 
 
-  next(patientModel: string) {    
+  next(patientModel: string) {
     this.validator = new ValidatorContainer();
     if (patientModel === 'basic') {
-      this.essentialInfoComponent.patientEssentialInformation.dateOfBirth = Number(moment(this.essentialInfoComponent?.patientEssentialInformation.birthDate_date).format("x"));
-      this.patientValidator = new PatientEssentialValidator(this.patientFields.basicInfo
-        , this.essentialInfoComponent.patientEssentialInformation);
-      
+      this.essentialInfoComponent?.formatDate();
+      this.validator = this.essentialInfoComponent?.validate();
     }
     // if (patientModel === 'address') {
     //   this.patientValidator = new PatientAddressValidator(this.patientFields.addressInfoRequired,
@@ -147,21 +124,14 @@ export class QuestionnaireAddComponent implements OnInit {
     //   this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
     // }
 
-    this.validator = this.patientValidator.validate();
     if (this.validator.isValid) {
-      this.pateint.patientEssentialInformation = this.essentialInfoComponent.patientEssentialInformation;
-      this.store.dispatch(
-        PatientActions.CreateDependency({
-          patientDependency: this.pateint,
-        })
-      );
-      //this.proceedToNextStep(patientModel);
+      this.fillModel();
+      this.proceedToNextStep(patientModel);
     } else {
       this.scrollUp();
     }
   }
   proceedToNextStep(modelName: string) {
-    // this.cachePatient(modelName, this.patient)
     this.calculatePercentage(this.counter, 'next')
     this.counter++;
     this.scrollUp();
@@ -189,7 +159,6 @@ export class QuestionnaireAddComponent implements OnInit {
       this.PatientsignatureComponentTmp?.draw();
       var model: PatientSignature = this.PatientsignatureComponentTmp?.model;
       model.patientId = patientId;
-      this.patientValidator = new PatientSignatureValidator(model);
       this.patientService.uploadPatientSignature(model).subscribe(
         (response) => {
           console.log('uploaded drawed  patient Signature..')
@@ -204,7 +173,6 @@ export class QuestionnaireAddComponent implements OnInit {
         var model: PatientSignature = new PatientSignature();
         model.signature = canvas.toDataURL();
         model.patientId = patientId;
-        this.patientValidator = new PatientSignatureValidator(model);
         this.patientService.uploadPatientSignature(model).subscribe(
           (response) => {
             console.log('uploaded generated patient Signature..')
@@ -242,7 +210,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   }
   fillModel() {
-    // this.patient.basicInfo = this.essentialInfoComponent?.pateintBasicInfo;
+    this.patientStoreService.pateint.patientEssentialInformation = this.essentialInfoComponent?.patientEssentialInformation;
     // this.patient.addressInfo = this.addressInformationComponent?.pateintAddressInfo
     // this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     // this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;

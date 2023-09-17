@@ -1,15 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { map, Observable, Subscription } from 'rxjs';
-import { Basic } from 'src/app/models/patient/basic.info.model'
+import { Basic } from 'src/app/models/patient/basic.info.model';
 import { BasicInfoRequired } from 'src/app/models/validation/basic.info';
+import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
+import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { Relation } from '../../enums/emergency.relation';
 import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
 import { Patient } from '../../models/intake/patient';
 import { PatientGrantor } from '../../models/intake/patient.grantor';
-import { PatientState } from '../../store/patient.state';
 @Component({
   selector: 'app-essential-info',
   templateUrl: './essential-info.component.html',
@@ -21,7 +20,7 @@ export class EssentialInfoComponent implements OnInit {
     patientAddress: {},
     patientEmergencyContact: {},
     patientEmployment: {},
-    patientPhone:{}
+    patientPhone: {}
   }
   patientGrantor: PatientGrantor = {}
   relationShip = Relation;
@@ -30,8 +29,8 @@ export class EssentialInfoComponent implements OnInit {
   imageFormData: FormData = new FormData();
   patientList: Patient[] = [];
   @Input() requiredFields: BasicInfoRequired;
-  constructor(private imageCompress: NgxImageCompressService) { 
-    }
+  constructor(private imageCompress: NgxImageCompressService) {
+  }
 
   ngOnInit(): void {
     // if (localStorage.getItem('patient') !== null) {
@@ -105,5 +104,12 @@ export class EssentialInfoComponent implements OnInit {
   }
   imageUploadAction(uploadedImage: File, imageName: string) {
     this.imageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
+  }
+  public validate(): ValidatorContainer {
+    var patientValidator = new PatientEssentialValidator(this.requiredFields, this.patientEssentialInformation);
+    return patientValidator.validate();
+  }
+  formatDate() {
+    this.patientEssentialInformation.dateOfBirth = Number(moment(this.patientEssentialInformation.birthDate_date).format("x"));
   }
 }
