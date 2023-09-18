@@ -9,6 +9,9 @@ import { AddressInfoRequired } from 'src/app/models/validation/address.info.requ
 import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
 import { LocalService } from 'src/app/modules/common';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
+import { PatientMedical } from '../../models/intake/medical/patient.medical';
+import { PatientSource } from '../../models/intake/source/patient.source';
+import { PatientStoreService } from '../../service/store/patient-store.service';
 @Component({
   selector: 'app-medical-info',
   templateUrl: './medical-info.component.html',
@@ -19,34 +22,30 @@ export class MedicalInfoComponent implements OnInit {
   isphysicalTherapy: string = '';
   isfamilyResultSubmission: string = '';
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
-  addressInfoRequired: AddressInfoRequired
+  patientMedical?: PatientMedical;
+  patientSource?: PatientSource = {};
   @Input() requiredFields: MedicalInfoRequired;
   entityValues = entityValues;
-  constructor(private localService: LocalService) { }
+  constructor(private patientStoreService: PatientStoreService) { }
 
   referringDoctorQChange(val: string) {
     this.isReferringDoctor = val;
-
+    val === 'yes' ? this.patientSource!.doctorSource = {} : this.patientSource!.entitySource = {};
     if (val === 'yes') {
-      this.medicalQuestionnaireInfo.isDoctorRecommended = true
-      this.medicalQuestionnaireInfo.recommendationEntity = undefined;
-      this.medicalQuestionnaireInfo.recommendationDoctor = new RecommendationDoctor();
-      //this.medicalQuestionnaireInfo.recommendationDoctor.doctorAddress = new Address();
-    } if (val === 'no') {
-      this.medicalQuestionnaireInfo.isDoctorRecommended = false
-      this.medicalQuestionnaireInfo.recommendationDoctor = undefined;
-      this.medicalQuestionnaireInfo.recommendationEntity = new RecommendationEntity();
+      this.patientSource!.doctorSource = {}
+      this.patientSource!.entitySource = undefined;
+    } else {
+      this.patientSource!.entitySource = {}
+      this.patientSource!.doctorSource = undefined;
     }
   }
   physicalTherapyQChange(val: string) {
     this.isphysicalTherapy = val;
 
     if (val === 'yes') {
-      this.medicalQuestionnaireInfo.physicalTherapyReceiving = true
-      this.medicalQuestionnaireInfo.physicalTherapy = new PhysicalTherapy;
+      this.patientMedical!.patientPhysicalTherapy = {};
     } if (val === 'no') {
-      this.medicalQuestionnaireInfo.physicalTherapyReceiving = false;
-      this.medicalQuestionnaireInfo.physicalTherapy = undefined;
+      this.patientMedical!.patientPhysicalTherapy = undefined;
     }
   }
   resultsfamilyQChange(val: string) {
@@ -54,26 +53,14 @@ export class MedicalInfoComponent implements OnInit {
     val === 'yes' ? this.medicalQuestionnaireInfo.familyResultSubmission = true : this.medicalQuestionnaireInfo.familyResultSubmission = false;
   }
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.medicalQuestionnaireInfo !== undefined) {
-        this.medicalQuestionnaireInfo = pateint.medicalQuestionnaireInfo;
-        pateint.medicalQuestionnaireInfo.isDoctorRecommended ? this.isReferringDoctor = 'yes' : this.isReferringDoctor = 'no';
-        pateint.medicalQuestionnaireInfo.physicalTherapyReceiving ? this.isphysicalTherapy = 'yes' : this.isphysicalTherapy = 'no';
-        pateint.medicalQuestionnaireInfo.familyResultSubmission ? this.isfamilyResultSubmission = 'yes' : this.isfamilyResultSubmission = 'no';
-      } else {
-        this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
+    if (this.patientStoreService.patientMedical === undefined) {
+      this.patientMedical = {
+        patientMedicalHistory: {},
+        patientPhysicalTherapy: {}
       }
     } else {
-      this.medicalQuestionnaireInfo = new MedicalQuestionnaireInfo();
-    }
-    this.addressInfoRequired = {
-      id: null,
-      type: true,
-      first: true,
-      second: true,
-      country: true,
-      zipCode: true
+      this.patientMedical = this.patientStoreService.patientMedical;
+      this.patientSource = this.patientStoreService.patientSource;
     }
   }
   isRequiredField(name: string): boolean {

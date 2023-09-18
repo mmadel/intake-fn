@@ -214,8 +214,6 @@ export class QuestionnaireAddComponent implements OnInit {
 
   }
   fillModel() {
-    if (this.essentialInfoComponent !== undefined)
-      this.patientStoreService.patientEssentialInformation = this.essentialInfoComponent.patientEssentialInformation;
     //this.patientStoreService.patientAddress = this.addressInformationComponent?.patientAddress;
     // this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     // this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
