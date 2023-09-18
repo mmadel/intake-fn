@@ -42,7 +42,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 7;
+  counter: number = 1;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -219,26 +219,26 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   submit() {
     var pateint: Patient = this.patientStoreService.getPatient();
-    pateint.clinicId = this.clinicId
-    this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
-      (response) => {
-        this.patientService.upload(this.formFiles, <number>response.body).subscribe(
-          (response) => {
+    // pateint.clinicId = this.clinicId
+    // this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
+    //   (response) => {
+    //     this.patientService.upload(this.formFiles, <number>response.body).subscribe(
+    //       (response) => {
 
-            console.log('uploaded..')
-          },
-          (error) => {
-            this.scrollUp();
-            this.toastr.error(error.error.message, 'Error In Upload Images');
-          });
-        this.validateAndUploadsignature(<number>response.body);
-        this.isCreated = true;
-      },
-      (error) => {
-        console.log(JSON.stringify(error))
-        this.toastr.error(error.error.message, 'Error In Creation');
-        this.scrollUp();
-      });
+    //         console.log('uploaded..')
+    //       },
+    //       (error) => {
+    //         this.scrollUp();
+    //         this.toastr.error(error.error.message, 'Error In Upload Images');
+    //       });
+    //     this.validateAndUploadsignature(<number>response.body);
+    //     this.isCreated = true;
+    //   },
+    //   (error) => {
+    //     console.log(JSON.stringify(error))
+    //     this.toastr.error(error.error.message, 'Error In Creation');
+    //     this.scrollUp();
+    //   });
 
   }
   fillModelFiles() {

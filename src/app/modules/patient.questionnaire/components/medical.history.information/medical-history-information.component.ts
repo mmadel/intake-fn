@@ -28,9 +28,14 @@ export class MedicalHistoryInformationComponent implements OnInit {
   ngOnInit(): void {
     this.createPatientConditions();
     if (this.patientStoreService.patientMedicalHistory === undefined) {
-      this.patientMedicalHistory = {}
+      this.patientMedicalHistory = {
+        scanningTestValue: ''
+      }
     } else {
       this.patientMedicalHistory = this.patientStoreService.patientMedicalHistory;
+      this.isScanning = this.patientStoreService.patientMedicalHistory.scanningTest ? 'yes' : 'no'
+      this.isMetalImplantation = this.patientStoreService.patientMedicalHistory.metalImplantation ? 'yes' : 'no'
+      this.isPacemaker = this.patientStoreService.patientMedicalHistory.pacemaker ? 'yes' : 'no'
     }
   }
 

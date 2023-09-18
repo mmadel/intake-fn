@@ -39,6 +39,18 @@ export class PatientStoreService {
 
   public getPatient(): Patient {
     var patient: Patient = {};
+    patient.patientEssentialInformation = this.patientEssentialInformation;
+    patient.patientAddress = this.patientAddress;
+    patient.patientMedical = this.patientMedical;
+    patient.patientMedical!.patientMedicalHistory = this.patientMedicalHistory;
+    patient.patientSource = this.patientSource;
+    patient.patientInsurance = {}
+    if (this.patientCommercialInsurance !== undefined)
+      patient.patientInsurance.patientCommercialInsurance = this.patientCommercialInsurance
+    if (this.patientInsuranceCompensationNoFault !== undefined)
+      patient.patientInsurance.patientInsuranceCompensationNoFault = this.patientInsuranceCompensationNoFault;
+    patient.patientAgreements = this.patientAgreements;
+    console.log(JSON.stringify(patient))
     return patient;
   }
 }

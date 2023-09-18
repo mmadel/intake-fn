@@ -22,7 +22,7 @@ export class WorkerCompComponent implements OnInit {
   constructor(private patientStoreService: PatientStoreService) { }
 
   ngOnInit(): void {
-    if (this.patientStoreService.patientCommercialInsurance === undefined) {
+    if (this.patientStoreService.patientInsuranceCompensationNoFault === undefined) {
       this.patientInsuranceCompensationNoFault = {
         address: new Address(),
         injuryType:'',
@@ -30,7 +30,7 @@ export class WorkerCompComponent implements OnInit {
         caseStatus:''
       }
 
-    } else {
+    } else {      
       this.patientInsuranceCompensationNoFault = this.patientStoreService.patientInsuranceCompensationNoFault;
     }
     this.requiredFields = {

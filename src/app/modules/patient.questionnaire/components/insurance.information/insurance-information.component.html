@@ -1,15 +1,15 @@
 <ngx-spinner></ngx-spinner>
 <c-col xs="auto" class="mb-3">
-    <h5>Is it, worker's comp/No fault?</h5>
+    <h5>Patient Insurance Type</h5>
     <c-form-check>
         <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('yes')" value="Yes"
             name="flexRadioDefault" size="sm" [checked]="patientInsuranceType === 'CompensationNoFault'" />
-        <label cFormCheckLabel>Yes</label>
+        <label cFormCheckLabel>Compensation/No Fault</label>
     </c-form-check>
     <c-form-check>
         <input cFormCheckInput type="radio" (change)="workerCompNoFaultQChange('no')" value="no" name="flexRadioDefault"
             size="sm" [checked]="patientInsuranceType === 'Commercial'" />
-        <label cFormCheckLabel>No</label>
+        <label cFormCheckLabel>Commercial Insurance</label>
     </c-form-check>
 </c-col>
 <c-col xs="auto" *ngIf="patientInsuranceType === 'CompensationNoFault'" class="mb-3">

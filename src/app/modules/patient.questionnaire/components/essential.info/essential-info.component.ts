@@ -32,9 +32,17 @@ export class EssentialInfoComponent implements OnInit {
     if (this.patientStoreService.patientEssentialInformation === undefined) {
       this.patientEssentialInformation = {
         patientName: {},
-        patientEmergencyContact: {},
-        patientEmployment: {},
-        patientPhone: {}
+        patientEmergencyContact: {
+          emergencyRelation:''
+        },
+        patientEmployment: {
+          employmentStatus:''
+        },
+        patientPhone: {
+          phoneType:''
+        },
+        gender:'',
+        maritalStatus :'',
       }
     } else {
       this.patientEssentialInformation = this.patientStoreService.patientEssentialInformation;

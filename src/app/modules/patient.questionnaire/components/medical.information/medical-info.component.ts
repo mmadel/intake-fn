@@ -13,8 +13,10 @@ import { PatientStoreService } from '../../service/store/patient-store.service';
   styleUrls: ['./medical-info.component.css']
 })
 export class MedicalInfoComponent implements OnInit {
-  isReferringDoctor: string = '';
-  isfamilyResultSubmission: string = '';
+  isReferringDoctor: string | undefined = undefined;
+  ispatientPhysicalTherapy: string | undefined = undefined;
+  isfamilyResultSubmission: string | undefined = undefined;
+  //isfamilyResultSubmission: string = '';
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
   patientMedical?: PatientMedical;
   patientSource?: PatientSource = {};
@@ -29,29 +31,33 @@ export class MedicalInfoComponent implements OnInit {
       this.patientSource!.doctorSource = {}
       this.patientSource!.entitySource = undefined;
     } else {
-      this.patientSource!.entitySource = {}
+      this.patientSource!.entitySource = {
+        organizationName:'',
+      }
       this.patientSource!.doctorSource = undefined;
     }
   }
-  physicalTherapyQChange(val: string) {
-    if (val === 'yes') {
-      this.patientMedical!.patientPhysicalTherapy = {};
-    } if (val === 'no') {
-      this.patientMedical!.patientPhysicalTherapy = undefined;
-    }
+  physicalTherapyQChange(value: string) {
+    this.patientMedical!.patientPhysicalTherapy = value === 'yes' ? {} : undefined
+    this.ispatientPhysicalTherapy = value;
+
   }
   resultsfamilyQChange(val: string) {
-    val === 'yes' ? this.patientMedical!.familyResultSubmission = true : this.patientMedical!.familyResultSubmission = false;
+    this.patientMedical!.familyResultSubmission = val === 'yes' ? true : false
+    this.isfamilyResultSubmission = val;
   }
   ngOnInit(): void {
     if (this.patientStoreService.patientMedical === undefined) {
       this.patientMedical = {
         patientMedicalHistory: {},
-        patientPhysicalTherapy: {}
+        appointmentBooking:''
       }
     } else {
       this.patientMedical = this.patientStoreService.patientMedical;
       this.patientSource = this.patientStoreService.patientSource;
+      this.isReferringDoctor = this.patientStoreService.patientSource?.doctorSource ? 'yes' : 'no'
+      this.ispatientPhysicalTherapy = this.patientStoreService.patientMedical.patientPhysicalTherapy ? 'yes' : 'no'
+      this.isfamilyResultSubmission = this.patientStoreService.patientMedical.familyResultSubmission ? 'yes' : 'no'
     }
   }
   isRequiredField(name: string): boolean {

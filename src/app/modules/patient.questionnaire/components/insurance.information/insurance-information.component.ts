@@ -29,31 +29,27 @@ export class InsuranceInformationComponent implements OnInit {
   }
   workerCompNoFaultQChange(val: string) {
     if (val === 'yes') {
-      this.patientInsurance!.patientInsuranceCompensationNoFault = {}
-      this.patientInsurance!.patientCommercialInsurance = undefined;
       this.patientStoreService.patientInsuranceType = 'CompensationNoFault'
       this.patientInsuranceType = 'CompensationNoFault'
     }
     if (val === 'no') {
-      this.patientInsurance!.patientCommercialInsurance = {}
-      this.patientInsurance!.patientInsuranceCompensationNoFault = undefined;
       this.patientStoreService.patientInsuranceType = 'Commercial';
       this.patientInsuranceType = 'Commercial';
 
     }
   }
   public validate(): ValidatorContainer {
-    console.log('this.workerCompComponent ' + this.workerCompComponent)
-    console.log('workerNotCompComponent ' + this.workerNotCompComponent)
     if (this.workerCompComponent)
       return this.workerCompComponent.validate()
-    else
+    if (this.workerNotCompComponent)
       return this.workerNotCompComponent.validate();
+    return new ValidatorContainer();
   }
   public store() {
-    if (this.workerCompComponent)
+    console.log(this.patientInsuranceType)
+    if (this.patientInsuranceType === 'CompensationNoFault')
       this.patientStoreService!.patientInsuranceCompensationNoFault = this.workerCompComponent.patientInsuranceCompensationNoFault;
-    if (this.workerNotCompComponent)
+    if (this.patientInsuranceType === 'Commercial')
       this.patientStoreService!.patientCommercialInsurance = this.workerNotCompComponent.patientCommercialInsurance;
 
   }

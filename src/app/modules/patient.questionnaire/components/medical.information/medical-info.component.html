@@ -12,16 +12,16 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" name="doctorRecommendation"
-                    size="sm" [checked]="patientSource!.doctorSource" />
+                    size="sm" [checked]="isReferringDoctor ==='yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" name="doctorRecommendation"
-                    size="sm" [checked]="patientSource!.entitySource" />
+                    size="sm" [checked]="isReferringDoctor ==='no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
-        <c-col xs="12" *ngIf="patientSource!.doctorSource">
+        <c-col xs="12" *ngIf="isReferringDoctor ==='yes'">
             <form cForm>
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorName') }" class="mb-1">
                     <label for="doctorname" class="form-label">Doctor Name</label>
@@ -35,13 +35,12 @@
                 </div>
             </form>
         </c-col>
-        <c-col xs="12" *ngIf="patientSource!.entitySource">
+        <c-col xs="12" *ngIf="isReferringDoctor ==='no'">
             <form cForm>
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedEntityName') }" class="mb-1">
                     <label for="entityname" class="form-label">Entity Name</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
-                        *ngIf="patientSource!.entitySource" [(ngModel)]="patientSource!.entitySource.organizationName"
-                        name="entityname">
+                        [(ngModel)]="patientSource!.entitySource!.organizationName" name="entityname">
                         <option value="">Select</option>
                         <option *ngFor="let entity of entityValues" [value]="entity.entityValue"
                             [selected]="entity.selected">{{entity.entityName}}</option>
@@ -102,12 +101,12 @@
             <c-col xs="12" class="mb-1">
                 <c-form-check>
                     <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
-                        (change)="resultsfamilyQChange('yes')" [checked]="patientMedical!.familyResultSubmission" />
+                        (change)="resultsfamilyQChange('yes')" [checked]="isfamilyResultSubmission === 'yes'" />
                     <label cFormCheckLabel>Yes</label>
                 </c-form-check>
                 <c-form-check>
                     <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
-                        (change)="resultsfamilyQChange('no')" [checked]="!patientMedical!.familyResultSubmission " />
+                        (change)="resultsfamilyQChange('no')" [checked]="isfamilyResultSubmission === 'no'" />
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </c-col>
@@ -129,12 +128,12 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="physicalTherapyQChange('yes')" name="physicaltherapy"
-                    size="sm" [checked]="patientMedical!.patientPhysicalTherapy" />
+                    size="sm" [checked]="ispatientPhysicalTherapy === 'yes'" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" value="no" (change)="physicalTherapyQChange('no')"
-                    name="physicaltherapy" size="sm" [checked]="!patientMedical!.patientPhysicalTherapy" />
+                    name="physicaltherapy" size="sm" [checked]="ispatientPhysicalTherapy === 'no'" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>

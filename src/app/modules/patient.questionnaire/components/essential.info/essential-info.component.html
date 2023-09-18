@@ -122,7 +122,8 @@
                     <span cInputGroupText id="basic-addon1">+1</span>
                     <input numbers aria-label="Username" cFormControl
                         [ngModel]="patientEssentialInformation!.patientPhone!.phone | phone"
-                        (ngModelChange)="pateintBasicInfo.phoneNumber=$event" name="phone" maxlength="15" />
+                        (ngModelChange)="patientEssentialInformation!.patientPhone!.phone=$event" name="phone"
+                        maxlength="15" />
                 </c-input-group>
             </div>
         </c-col>
@@ -140,7 +141,7 @@
                 <label for="emergencyName" class="form-label">Emergency Contact</label>
                 <select cFormControl cSelect class="mb-2" sizing="sm" id="EmergencyRelation" name="EmergencyRelation"
                     [(ngModel)]="patientEssentialInformation!.patientEmergencyContact!.emergencyRelation">
-                    <option value="null" disabled selected>Select Patient Emergency Relation</option>
+                    <option value="" disabled selected>Select Patient Emergency Relation</option>
                     <option *ngFor="let relation of relationShip | keyvalue" [value]="relation.value">
                         {{relation.key}}
                     </option>
@@ -148,7 +149,8 @@
             </c-col>
             <c-col xs="12" class="mb-2">
                 <div [ngClass]="{ 'form-group required':isRequiredField('emergencyContact') }">
-                    <input cFormControl [(ngModel)]="patientEssentialInformation!.patientEmergencyContact!.emergencyName"
+                    <input cFormControl
+                        [(ngModel)]="patientEssentialInformation!.patientEmergencyContact!.emergencyName"
                         name="emergencyName" sizing="sm" placeholder="Emergency Name" />
                 </div>
             </c-col>
@@ -158,8 +160,8 @@
                         <span cInputGroupText id="basic-addon1">+1</span>
                         <input numbers aria-label="" cFormControl
                             [ngModel]="patientEssentialInformation!.patientEmergencyContact!.emergencyPhone | phone"
-                            (ngModelChange)="pateintBasicInfo.emergencyPhone=$event" name="emergencyphone"
-                            maxlength="15" />
+                            (ngModelChange)="patientEssentialInformation!.patientEmergencyContact!.emergencyPhone=$event"
+                            name="emergencyphone" maxlength="15" />
                     </c-input-group>
                 </div>
             </c-col>

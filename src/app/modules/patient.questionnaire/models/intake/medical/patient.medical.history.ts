@@ -5,7 +5,7 @@ export interface PatientMedicalHistory {
     weightUnit?: string;
     evaluationSubmission?: string;
     medicationPrescription?: string;
-    patientCondition?: string;
+    patientCondition?: string[];
     scanningTest?: boolean;
     scanningTestValue?: string;
     metalImplantation?: boolean;
