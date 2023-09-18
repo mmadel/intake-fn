@@ -121,26 +121,24 @@ export class QuestionnaireAddComponent implements OnInit {
     }
     if (patientModel === 'medical-history') {
       this.validator = this.medicalHistoryInformationComponent?.validate();
-      console.log(this.validator.isValid)
+
       if (this.validator.isValid) {
-          this.patientStoreService.patientMedicalHistory = this.medicalHistoryInformationComponent.patientMedicalHistory;
-          this.proceedToNextStep();
+        this.patientStoreService.patientMedicalHistory = this.medicalHistoryInformationComponent.patientMedicalHistory;
+        this.proceedToNextStep();
       } else {
         this.scrollUp();
       }
     }
-    // if (patientModel === 'insurance') {
-    //   if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
-    //     && this.insuranceInformationComponent.workerCompComponent !== undefined)
-    //     this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent.workerCompComponent.model
-    //   if (!this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
-    //     && this.insuranceInformationComponent.workerNotCompComponent !== undefined)
-    //     this.insuranceInformationComponent.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent.workerNotCompComponent.model
-    //   this.patientValidator = new PatientInsuranceQuestionnaireValidator(
-    //     this.insuranceInformationComponent.insuranceQuestionnaireInfo
-    //     , this.patientFields.insurnaceCompInfoRequired
-    //     , this.patientFields.insurnacecommerialInfoRequired)
-    // }
+    if (patientModel === 'insurance') {
+      this.validator = this.insuranceInformationComponent?.validate();
+
+      if (this.validator.isValid) {
+        this.insuranceInformationComponent?.store();
+        this.proceedToNextStep();
+      } else {
+        this.scrollUp();
+      }
+    }
     // if (patientModel === 'upload') {
     //   this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
     // }

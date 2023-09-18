@@ -1,13 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Patient } from 'src/app/models/patient/patient.model';
-import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
-import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
-import { SecondaryInsurance } from 'src/app/models/questionnaire/Insurance/secondary.Insurance';
 import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
 import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurnace.commerial.info.required';
-import { LocalService } from 'src/app/modules/common';
 import { InsuranceCompany } from 'src/app/modules/patient.admin/models/insurance.company.model';
 import { InsuranceCompanyService } from 'src/app/modules/patient.admin/services/insurance.company/insurance-company.service';
+import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
+import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientCommercialInsurance } from '../../../models/intake/Insurance/patient.commercial.insurance';
 import { PatientStoreService } from '../../../service/store/patient-store.service';
 
@@ -20,8 +17,8 @@ export class WorkerNotCompComponent implements OnInit {
   InsuranceCompanies: InsuranceCompany[] = new Array();
   model: WrokerNotComp
   patientCommercialInsurance?: PatientCommercialInsurance;
-  isSecondaryInsurance: string;
-  isMedicareCoverage: string;
+  isSecondaryInsurance: boolean | undefined = undefined;
+  isMedicareCoverage: boolean | undefined = undefined;
   @Input() insurnacecommerialInfoRequired: InsurnacecommerialInfoRequired
   constructor(private patientStoreService: PatientStoreService, private insuranceCompanyService: InsuranceCompanyService) { }
 
@@ -33,45 +30,37 @@ export class WorkerNotCompComponent implements OnInit {
     })
     if (this.patientStoreService.patientCommercialInsurance === undefined) {
       this.patientCommercialInsurance = {
-        secondaryInsurance: {},
-        medicareCoverage: {},
-        patientRelationship: {}
+        relationship: '',
+        insuranceCompanyId: -1
       }
-
     } else {
       this.patientCommercialInsurance = this.patientStoreService.patientCommercialInsurance;
+      this.isSecondaryInsurance = this.patientCommercialInsurance.secondaryInsurance ? true : false
+      this.isMedicareCoverage = this.patientCommercialInsurance.medicareCoverage ? true : false
     }
   }
   isSecondaryInsuranceChange(val: string) {
-    this.isSecondaryInsurance = val;
     if (val === 'yes') {
-      this.model.isSecondaryInsurance = true
-      this.model.secondaryInsuranceDTO = new SecondaryInsurance();
+      this.patientCommercialInsurance!.secondaryInsurance = {}
     }
     if (val === 'no') {
-      this.model.isSecondaryInsurance = false
-      this.model.secondaryInsuranceDTO = undefined;
-      this.model.isMedicareCoverage = undefined
-      this.model.medicareCoverageDTO = undefined;
+      this.patientCommercialInsurance!.secondaryInsurance = undefined;
     }
 
   }
   isMedicareCoverageChange(val: string) {
-    this.isMedicareCoverage = val;
     if (val === 'yes') {
-      this.model.isMedicareCoverage = true
-      this.model.medicareCoverageDTO = new MedicareCoverage()
+      this.patientCommercialInsurance!.medicareCoverage = {};
     }
     if (val === 'no') {
-      this.model.isMedicareCoverage = false
-      this.model.medicareCoverageDTO = undefined;
+      this.patientCommercialInsurance!.medicareCoverage = undefined
     }
   }
   isPatientRelationshipDTOChange() {
-    if (this.model.relationship !== 'Self') {
-      this.model.patientRelationshipDTO = new PatientRelationship();
+    if (this.patientCommercialInsurance!.relationship !== 'Self') {
+      this.patientCommercialInsurance!.patientRelationship = {}
     } else {
-      this.model.patientRelationshipDTO = undefined
+      this.patientCommercialInsurance!.patientRelationship = undefined
     }
   }
   isRequiredField(name: string): boolean {
@@ -85,8 +74,10 @@ export class WorkerNotCompComponent implements OnInit {
     return field;
   }
 
-  // public validate(): ValidatorContainer {
-  //   var validatorContainer: ValidatorContainer;
-  //   return null;
-  // }
+  public validate(): ValidatorContainer {
+    var patientValidator = new PatientInsuranceQuestionnaireValidator();
+    patientValidator.setInsurnacecommerialInfoRequired(this.insurnacecommerialInfoRequired)
+    patientValidator.setCommmersialMode(this.patientCommercialInsurance)
+    return patientValidator.validate();
+  }
 }

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Address } from 'src/app/models/patient/address.info.model';
-import { Patient } from 'src/app/models/patient/patient.model';
 import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
 import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
-import { LocalService } from 'src/app/modules/common';
+import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
+import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientInsuranceCompensationNoFault } from '../../../models/intake/Insurance/patient.insurance.compensation.no.fault';
 import { PatientStoreService } from '../../../service/store/patient-store.service';
 
@@ -24,7 +24,10 @@ export class WorkerCompComponent implements OnInit {
   ngOnInit(): void {
     if (this.patientStoreService.patientCommercialInsurance === undefined) {
       this.patientInsuranceCompensationNoFault = {
-        address : new Address()
+        address: new Address(),
+        injuryType:'',
+        workerStatus:'',
+        caseStatus:''
       }
 
     } else {
@@ -42,7 +45,7 @@ export class WorkerCompComponent implements OnInit {
 
 
   accidentDate() {
-    this.model.accidentDate = Number(moment(this.model.accidentDate_date).format("x"))
+    this.patientInsuranceCompensationNoFault!.accidentDate = Number(moment(this.patientInsuranceCompensationNoFault!.accidentDate_date).format("x"))
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;
@@ -53,5 +56,14 @@ export class WorkerCompComponent implements OnInit {
         }
       })
     return field;
+  }
+  public validate(): ValidatorContainer {
+    var patientValidator = new PatientInsuranceQuestionnaireValidator()
+    patientValidator.setInsurnaceCompInfoRequired(this.insurnaceCompInfoRequired)
+    patientValidator.setComnsetationModel(this.patientInsuranceCompensationNoFault)
+    return patientValidator.validate();
+  }
+  formatDate() {
+    this.patientInsuranceCompensationNoFault!.accidentDate = Number(moment(this.patientInsuranceCompensationNoFault?.accidentDate_date).format("x"));
   }
 }

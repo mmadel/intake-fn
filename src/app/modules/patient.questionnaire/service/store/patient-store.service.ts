@@ -19,8 +19,9 @@ export class PatientStoreService {
   patientAddress?: Address;
   patientMedical?: PatientMedical;
   patientMedicalHistory?: PatientMedicalHistory;
-  patientCommercialInsurance: PatientCommercialInsurance;
-  patientInsuranceCompensationNoFault: PatientInsuranceCompensationNoFault;
+  patientCommercialInsurance?: PatientCommercialInsurance;
+  patientInsuranceCompensationNoFault?: PatientInsuranceCompensationNoFault;
+  patientInsuranceType?:string;
   patientGrantor?: PatientGrantor;
   patientSource?: PatientSource;
   patientSignature?: PatientSignature;
