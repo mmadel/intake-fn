@@ -159,6 +159,10 @@ export class QuestionnaireAddComponent implements OnInit {
         this.scrollUp();
       }
     }
+    if (patientModel === 'signature') {
+      this.fillSignatureModel();
+      this.proceedToNextStep();
+    }
   }
   proceedToNextStep() {
     this.calculatePercentage(this.counter, 'next')
@@ -214,39 +218,28 @@ export class QuestionnaireAddComponent implements OnInit {
     }
   }
   submit() {
-    // var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '');
-    // pateint.clinicId = this.clinicId
-    // this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
-    //   (response) => {
-    //     this.patientService.upload(this.formFiles, <number>response.body).subscribe(
-    //       (response) => {
+    var pateint: Patient = this.patientStoreService.getPatient();
+    pateint.clinicId = this.clinicId
+    this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
+      (response) => {
+        this.patientService.upload(this.formFiles, <number>response.body).subscribe(
+          (response) => {
 
-    //         console.log('uploaded..')
-    //       },
-    //       (error) => {
-    //         this.scrollUp();
-    //         this.toastr.error(error.error.message, 'Error In Upload Images');
-    //       });
-    //     this.validateAndUploadsignature(<number>response.body);
-    //     this.localService.removeData('patient');
-    //     this.isCreated = true;
-    //   },
-    //   (error) => {
-    //     console.log(JSON.stringify(error))
-    //     this.toastr.error(error.error.message, 'Error In Creation');
-    //     this.scrollUp();
-    //   });
+            console.log('uploaded..')
+          },
+          (error) => {
+            this.scrollUp();
+            this.toastr.error(error.error.message, 'Error In Upload Images');
+          });
+        this.validateAndUploadsignature(<number>response.body);
+        this.isCreated = true;
+      },
+      (error) => {
+        console.log(JSON.stringify(error))
+        this.toastr.error(error.error.message, 'Error In Creation');
+        this.scrollUp();
+      });
 
-  }
-  fillModel() {
-    //this.patientStoreService.patientAddress = this.addressInformationComponent?.patientAddress;
-    // this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
-    // this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
-    // this.fillInsuranceInformationModel()
-    this.fillModelFiles();
-    // this.patient.agreements = this.aggreementsComponent?.model;
-    // if (this.patientsignatureComponent !== undefined)
-    //   this.PatientsignatureComponentTmp = this.patientsignatureComponent
   }
   fillModelFiles() {
     if (this.essentialInfoComponent) {
@@ -259,6 +252,9 @@ export class QuestionnaireAddComponent implements OnInit {
         this.formFiles.append(patientFiles[0], patientFiles[1]);
       }
     }
-
+  }
+  fillSignatureModel() {
+    if (this.patientsignatureComponent !== undefined)
+      this.PatientsignatureComponentTmp = this.patientsignatureComponent
   }
 }

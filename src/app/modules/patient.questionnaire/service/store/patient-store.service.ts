@@ -6,6 +6,7 @@ import { PatientInsurance } from '../../models/intake/Insurance/patient.insuranc
 import { PatientInsuranceCompensationNoFault } from '../../models/intake/Insurance/patient.insurance.compensation.no.fault';
 import { PatientMedical } from '../../models/intake/medical/patient.medical';
 import { PatientMedicalHistory } from '../../models/intake/medical/patient.medical.history';
+import { Patient } from '../../models/intake/patient';
 import { PatientAgreement } from '../../models/intake/patient.agreement';
 import { PatientGrantor } from '../../models/intake/patient.grantor';
 import { PatientSignature } from '../../models/intake/patient.signature';
@@ -21,7 +22,7 @@ export class PatientStoreService {
   patientMedicalHistory?: PatientMedicalHistory;
   patientCommercialInsurance?: PatientCommercialInsurance;
   patientInsuranceCompensationNoFault?: PatientInsuranceCompensationNoFault;
-  patientInsuranceType?:string;
+  patientInsuranceType?: string;
   patientGrantor?: PatientGrantor;
   patientSource?: PatientSource;
   patientSignature?: PatientSignature;
@@ -34,5 +35,10 @@ export class PatientStoreService {
       throw new Error('PatientStoreService is already loaded')
     }
     console.log('PatientStoreService created....!!!!');
+  }
+
+  public getPatient(): Patient {
+    var patient: Patient = {};
+    return patient;
   }
 }
