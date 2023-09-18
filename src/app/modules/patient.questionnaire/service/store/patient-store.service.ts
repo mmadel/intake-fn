@@ -3,6 +3,7 @@ import { Address } from 'src/app/models/patient/address.info.model';
 import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
 import { PatientInsurance } from '../../models/intake/Insurance/patient.insurance';
 import { PatientMedical } from '../../models/intake/medical/patient.medical';
+import { PatientMedicalHistory } from '../../models/intake/medical/patient.medical.history';
 import { PatientAgreement } from '../../models/intake/patient.agreement';
 import { PatientGrantor } from '../../models/intake/patient.grantor';
 import { PatientSignature } from '../../models/intake/patient.signature';
@@ -15,6 +16,7 @@ export class PatientStoreService {
   patientEssentialInformation?: PatientEssentialInformation;
   patientAddress?: Address;
   patientMedical?: PatientMedical;
+  patientMedicalHistory?: PatientMedicalHistory;
   patientInsurance?: PatientInsurance;
   patientGrantor?: PatientGrantor;
   patientSource?: PatientSource;

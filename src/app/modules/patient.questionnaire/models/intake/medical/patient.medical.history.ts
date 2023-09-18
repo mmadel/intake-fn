@@ -1,7 +1,7 @@
 export interface PatientMedicalHistory {
-    height?: number;
+    height?: string;
     heightUnit?: string;
-    weight?: number;
+    weight?: string;
     weightUnit?: string;
     evaluationSubmission?: string;
     medicationPrescription?: string;

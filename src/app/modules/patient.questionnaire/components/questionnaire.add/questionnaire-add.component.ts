@@ -40,7 +40,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 1;
+  counter: number = 4;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -119,10 +119,16 @@ export class QuestionnaireAddComponent implements OnInit {
         this.scrollUp();
       }
     }
-    // if (patientModel === 'medical-history') {
-    //   this.patientValidator = new MdicalHistoryValidator(this.medicalHistoryInformationComponent.model,
-    //     this.patientFields.medicalHistoryInfoRequired)
-    // }
+    if (patientModel === 'medical-history') {
+      this.validator = this.medicalHistoryInformationComponent?.validate();
+      console.log(this.validator.isValid)
+      if (this.validator.isValid) {
+          this.patientStoreService.patientMedicalHistory = this.medicalHistoryInformationComponent.patientMedicalHistory;
+          this.proceedToNextStep();
+      } else {
+        this.scrollUp();
+      }
+    }
     // if (patientModel === 'insurance') {
     //   if (this.insuranceInformationComponent.insuranceQuestionnaireInfo.isCompNoFault
     //     && this.insuranceInformationComponent.workerCompComponent !== undefined)
