@@ -8,6 +8,8 @@ import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurn
 import { LocalService } from 'src/app/modules/common';
 import { InsuranceCompany } from 'src/app/modules/patient.admin/models/insurance.company.model';
 import { InsuranceCompanyService } from 'src/app/modules/patient.admin/services/insurance.company/insurance-company.service';
+import { PatientCommercialInsurance } from '../../../models/intake/Insurance/patient.commercial.insurance';
+import { PatientStoreService } from '../../../service/store/patient-store.service';
 
 @Component({
   selector: 'app-worker-not-comp',
@@ -17,10 +19,11 @@ import { InsuranceCompanyService } from 'src/app/modules/patient.admin/services/
 export class WorkerNotCompComponent implements OnInit {
   InsuranceCompanies: InsuranceCompany[] = new Array();
   model: WrokerNotComp
+  patientCommercialInsurance?: PatientCommercialInsurance;
   isSecondaryInsurance: string;
   isMedicareCoverage: string;
   @Input() insurnacecommerialInfoRequired: InsurnacecommerialInfoRequired
-  constructor(private localService: LocalService, private insuranceCompanyService:InsuranceCompanyService) { }
+  constructor(private patientStoreService: PatientStoreService, private insuranceCompanyService: InsuranceCompanyService) { }
 
   ngOnInit(): void {
     this.insuranceCompanyService.get().subscribe((response) => {
@@ -28,21 +31,15 @@ export class WorkerNotCompComponent implements OnInit {
         this.InsuranceCompanies?.push(element);
       });
     })
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.insuranceQuestionnaireInfo !== undefined && pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial !== undefined) {
-        this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial;
-
-        pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial.isSecondaryInsurance ? this.isSecondaryInsurance = 'yes' :
-          this.isSecondaryInsurance = 'no'
-
-        pateint.insuranceQuestionnaireInfo.insuranceWorkerCommercial.isMedicareCoverage ? this.isMedicareCoverage = 'yes' :
-          this.isMedicareCoverage = 'no'
-      } else {
-        this.model = new WrokerNotComp();
+    if (this.patientStoreService.patientCommercialInsurance === undefined) {
+      this.patientCommercialInsurance = {
+        secondaryInsurance: {},
+        medicareCoverage: {},
+        patientRelationship: {}
       }
+
     } else {
-      this.model = new WrokerNotComp();
+      this.patientCommercialInsurance = this.patientStoreService.patientCommercialInsurance;
     }
   }
   isSecondaryInsuranceChange(val: string) {
@@ -87,4 +84,9 @@ export class WorkerNotCompComponent implements OnInit {
       })
     return field;
   }
+
+  // public validate(): ValidatorContainer {
+  //   var validatorContainer: ValidatorContainer;
+  //   return null;
+  // }
 }

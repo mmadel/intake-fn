@@ -4,7 +4,7 @@
             <div [ngClass]="{ 'form-group required':isRequiredField('insuranceCompany') }">
                 <label for="insuranceCompanyName" class="form-label">Insurance Company</label>
                 <select cSelect sizing="sm" name="insuranceCompanyName" style="line-height: 15px;" cFormControl
-                    [(ngModel)]="model.insuranceCompanyId">
+                    [(ngModel)]="patientCommercialInsurance!.insuranceCompanyId">
                     <option value="" disabled selected>Select insurance Company</option>
                     <option *ngFor="let InsuranceCompany of InsuranceCompanies"
                         [value]="InsuranceCompany.id?.toString()">
@@ -15,20 +15,20 @@
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('memberId') }">
                 <label for="memberId" class="form-label">Member ID</label>
-                <input cFormControl [(ngModel)]="model.memberId" sizing="sm" name="memberId"/>
+                <input cFormControl [(ngModel)]="patientCommercialInsurance!.memberId" sizing="sm" name="memberId"/>
             </div>
         </c-col>
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('ploicyId') }">
                 <label for="ploicyId" class="form-label">Policy ID</label>
-                <input cFormControl [(ngModel)]="model.policyId" sizing="sm" name="ploicyId"/>
+                <input cFormControl [(ngModel)]="patientCommercialInsurance!.policyId" sizing="sm" name="ploicyId"/>
             </div>
         </c-col>
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('relationship') }">
                 <label for="policyRelationship" class="form-label">Policyholders Relationship</label>
                 <select cSelect sizing="sm" name="policyRelationship" style="line-height: 15px;" cFormControl
-                    [(ngModel)]="model.relationship" (change)="isPatientRelationshipDTOChange()">
+                    [(ngModel)]="patientCommercialInsurance!.relationship" (change)="isPatientRelationshipDTOChange()">
                     <option value="">Select</option>
                     <option value="Self">Self</option>
                     <option value="Spouse">Spouse</option>
@@ -38,28 +38,28 @@
             </div>
         </c-col>
         <!--policyRelationship : Spouse, Child , Other -->
-        <c-col xs="auto" class="mb-2" *ngIf="model.relationship !== 'Self' && model.relationship !== ''">
+        <c-col xs="auto" class="mb-2" *ngIf="patientCommercialInsurance!.relationship !== 'Self' && patientCommercialInsurance!.relationship !== ''">
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="policyRelationshipFirstName" class="form-label">Policy Holder’s First Name</label>
-                    <input cFormControl *ngIf="model.patientRelationshipDTO"
-                        [(ngModel)]="model.patientRelationshipDTO.patientRelationshipFirstName" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.patientRelationship!.patientRelationshipFirstName" sizing="sm"
                         name="policyRelationshipFirstName" />
                 </div>
             </c-col>
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="policyRelationshipMiddleName" class="form-label">Policy Holder’s Middle Name</label>
-                    <input cFormControl *ngIf="model.patientRelationshipDTO"
-                        [(ngModel)]="model.patientRelationshipDTO.patientRelationshipMeddileName" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.patientRelationship!.patientRelationshipMiddleName" sizing="sm"
                         name="policyRelationshipMiddleName" />
                 </div>
             </c-col>
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="policyRelationshipLastName" class="form-label">Policy Holder’s Last Name</label>
-                    <input cFormControl *ngIf="model.patientRelationshipDTO"
-                        [(ngModel)]="model.patientRelationshipDTO.patientRelationshipLastName" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.patientRelationship!.patientRelationshipLastName" sizing="sm"
                         name="policyRelationshipLastName" />
                 </div>
             </c-col>
@@ -69,8 +69,8 @@
                     <c-input-group class="mb-3" sizing="sm" name="policyRelationshipLastPhone">
                         <span cInputGroupText id="basic-addon1">+1</span>
                         <input numbers cFormControl *ngIf="model.patientRelationshipDTO"
-                            [ngModel]="model.patientRelationshipDTO.patientRelationshipPhone | phone"
-                            (ngModelChange)="model.patientRelationshipDTO.patientRelationshipPhone=$event" name="phone"
+                            [ngModel]="patientCommercialInsurance!.patientRelationship!.patientRelationshipPhone | phone"
+                            (ngModelChange)="patientCommercialInsurance!.patientRelationship!.patientRelationshipPhone=$event" name="phone"
                             maxlength="15" />
                     </c-input-group>
                 </div>
@@ -78,8 +78,8 @@
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('') }">
                     <label for="policyRelationshipEmployerName" class="form-label">Policy Holder’s Employer Name</label>
-                    <input cFormControl *ngIf="model.patientRelationshipDTO"
-                        [(ngModel)]="model.patientRelationshipDTO.employerName" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.patientRelationship!.employerName" sizing="sm"
                         name="policyRelationshipEmployerName" />
                 </div>
             </c-col>
@@ -104,8 +104,8 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('policyHolderFirstName') }">
                     <label for="secondaryInsurancePolicyHolderFirstName" class="form-label">Policy Holder’s First
                         Name</label>
-                    <input cFormControl *ngIf="model.secondaryInsuranceDTO"
-                        [(ngModel)]="model.secondaryInsuranceDTO.policyHolderFirstName" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.secondaryInsurance!.policyHolderFirstName" sizing="sm"
                         name="secondaryInsurancePolicyHolderFirstName" />
                 </div>
             </c-col>
@@ -113,8 +113,8 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('policyHolderMiddleName') }">
                     <label for="secondaryInsurancePolicyHolderMiddleName" class="form-label">Policy Holder’s Middle
                         Name</label>
-                    <input cFormControl *ngIf="model.secondaryInsuranceDTO"
-                        [(ngModel)]="model.secondaryInsuranceDTO.policyHolderMeddileName" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.secondaryInsurance!.policyHolderMiddleName" sizing="sm"
                         name="secondaryInsurancePolicyHolderMiddleName" />
                 </div>
             </c-col>
@@ -122,24 +122,24 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('policyHolderLastName') }">
                     <label for="secondaryInsurancePolicyHolderLastName" class="form-label">Policy Holder’s Last
                         Name</label>
-                    <input cFormControl *ngIf="model.secondaryInsuranceDTO"
-                        [(ngModel)]="model.secondaryInsuranceDTO.policyHolderLastName" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.secondaryInsurance!.policyHolderLastName" sizing="sm"
                         name="secondaryInsurancePolicyHolderLastName" />
                 </div>
             </c-col>
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('secondryInsuranceCompany') }">
                     <label for="secondaryInsuranceCompanyName" class="form-label">Insurance Company</label>
-                    <input cFormControl *ngIf="model.secondaryInsuranceDTO"
-                        [(ngModel)]="model.secondaryInsuranceDTO.insuranceCompany" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.secondaryInsurance!.insuranceCompanyName" sizing="sm"
                         name="secondaryInsuranceCompanyName" />
                 </div>
             </c-col>
             <c-col xs="auto" class="mb-1">
                 <div [ngClass]="{ 'form-group required':isRequiredField('secondryInsuranceMemberId') }">
                     <label for="secondaryInsuranceMemberId" class="form-label">Member ID</label>
-                    <input cFormControl *ngIf="model.secondaryInsuranceDTO"
-                        [(ngModel)]="model.secondaryInsuranceDTO.memberId" sizing="sm"
+                    <input cFormControl 
+                        [(ngModel)]="patientCommercialInsurance!.secondaryInsurance!.memberId" sizing="sm"
                         name="secondaryInsuranceMemberId" />
                 </div>
             </c-col>
@@ -161,8 +161,8 @@
                     <div [ngClass]="{ 'form-group required':isRequiredField('employerFirstName') }">
                         <label for="secondaryInsurancePolicyHolderEmployerFirstName" class="form-label">Policy Holder’s
                             Employer First Name</label>
-                        <input cFormControl *ngIf="model.medicareCoverageDTO"
-                            [(ngModel)]="model.medicareCoverageDTO.employerFirstName" sizing="sm"
+                        <input cFormControl
+                            [(ngModel)]="patientCommercialInsurance!.medicareCoverage!.employerFirstName" sizing="sm"
                             name="secondaryInsurancePolicyHolderEmployerFirstName" />
                     </div>
                 </c-col>
@@ -170,8 +170,8 @@
                     <div [ngClass]="{ 'form-group required':isRequiredField('employerMiddleName') }">
                         <label for="secondaryInsurancePolicyHolderEmployerMiddleName" class="form-label">Policy Holder’s
                             Employer Middle Name</label>
-                        <input cFormControl *ngIf="model.medicareCoverageDTO"
-                            [(ngModel)]="model.medicareCoverageDTO.employerMeddileName" sizing="sm"
+                        <input cFormControl 
+                            [(ngModel)]="patientCommercialInsurance!.medicareCoverage!.employerMiddleName" sizing="sm"
                             name="secondaryInsurancePolicyHolderEmployerMiddleName" />
                     </div>
                 </c-col>
@@ -179,8 +179,8 @@
                     <div [ngClass]="{ 'form-group required':isRequiredField('employerLastName') }">
                         <label for="secondaryInsurancePolicyHolderEmployerLastName" class="form-label">Policy Holder’s
                             Employer Last Name</label>
-                        <input cFormControl *ngIf="model.medicareCoverageDTO"
-                            [(ngModel)]="model.medicareCoverageDTO.employerLastName" sizing="sm"
+                        <input cFormControl 
+                            [(ngModel)]="patientCommercialInsurance!.medicareCoverage!.employerLastName" sizing="sm"
                             name="secondaryInsurancePolicyHolderEmployerLastName" />
                     </div>
                 </c-col>
@@ -189,9 +189,9 @@
                         <label for="mcphone" class="form-label">Policy Holder’s Phone</label>
                         <c-input-group class="mb-3" sizing="sm" name="mcphone">
                             <span cInputGroupText id="basic-addon1">+1</span>
-                            <input numbers cFormControl *ngIf="model.medicareCoverageDTO"
-                                [ngModel]="model.medicareCoverageDTO.employerPhone | phone"
-                                (ngModelChange)="model.medicareCoverageDTO.employerPhone=$event" name="phone"
+                            <input numbers cFormControl 
+                                [ngModel]="patientCommercialInsurance!.medicareCoverage!.employerPhone | phone"
+                                (ngModelChange)="patientCommercialInsurance!.medicareCoverage!.employerPhone=$event" name="phone"
                                 maxlength="15" />
                         </c-input-group>
                     </div>

@@ -6,6 +6,8 @@ import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
 import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
 import { LocalService } from 'src/app/modules/common';
+import { PatientInsuranceCompensationNoFault } from '../../../models/intake/Insurance/patient.insurance.compensation.no.fault';
+import { PatientStoreService } from '../../../service/store/patient-store.service';
 
 @Component({
   selector: 'app-worker-comp',
@@ -14,22 +16,19 @@ import { LocalService } from 'src/app/modules/common';
 })
 export class WorkerCompComponent implements OnInit {
   model: WrokerComp
+  patientInsuranceCompensationNoFault?: PatientInsuranceCompensationNoFault;
   requiredFields: AddressInfoRequired;
   @Input() insurnaceCompInfoRequired: InsurnaceCompInfoRequired;
-  constructor(private localService:LocalService) { }
+  constructor(private patientStoreService: PatientStoreService) { }
 
   ngOnInit(): void {
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.insuranceQuestionnaireInfo !== undefined && pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault !== undefined) {
-        this.model = pateint.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault;
-      } else {
-        this.model = new WrokerComp();;
-        this.model.workerCompAddress = new Address()
+    if (this.patientStoreService.patientCommercialInsurance === undefined) {
+      this.patientInsuranceCompensationNoFault = {
+        address : new Address()
       }
+
     } else {
-      this.model = new WrokerComp();
-      this.model.workerCompAddress = new Address()
+      this.patientInsuranceCompensationNoFault = this.patientStoreService.patientInsuranceCompensationNoFault;
     }
     this.requiredFields = {
       id: null,
