@@ -25,7 +25,7 @@ export class PatientStoreService {
   patientGrantor?: PatientGrantor;
   patientSource?: PatientSource;
   patientSignature?: PatientSignature;
-  patientAgreements?: PatientAgreement[];
+  patientAgreements?: PatientAgreement;
   resetPateint() {
 
   }

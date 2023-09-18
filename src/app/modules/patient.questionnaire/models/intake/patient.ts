@@ -17,5 +17,5 @@ export interface Patient {
     patientGrantor?: PatientGrantor;
     patientSource?: PatientSource;
     patientSignature?: PatientSignature;
-    patientAgreements?: PatientAgreement[];
+    patientAgreements?: PatientAgreement;
   }

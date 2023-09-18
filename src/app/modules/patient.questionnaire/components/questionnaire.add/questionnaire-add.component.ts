@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 //import { Patient } from 'src/app/models/patient/patient.model';
 import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
+import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
+import { PatientAggreementsValidator } from 'src/app/validators/patient.validator/patient.aggreements.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { Patient } from '../../models/intake/patient';
 import { PatientSignature } from '../../models/patient/signature.model';
@@ -40,7 +42,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 5;
+  counter: number = 7;
   progressValue: number = 0;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
@@ -139,12 +141,24 @@ export class QuestionnaireAddComponent implements OnInit {
         this.scrollUp();
       }
     }
-    // if (patientModel === 'upload') {
-    //   this.patientValidator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData);
-    // }
-    // if (patientModel === 'aggreements') {
-    //   this.patientValidator = new PatientAggreementsValidator(this.aggreementsComponent.model);
-    // }
+    if (patientModel === 'upload') {
+      this.validator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData).validate();
+      if (this.validator.isValid) {
+        this.fillModelFiles()
+        this.proceedToNextStep();
+      } else {
+        this.scrollUp();
+      }
+    }
+    if (patientModel === 'aggreements') {
+      this.validator = new PatientAggreementsValidator(this.aggreementsComponent.patientAgreements || {}).validate();
+      if (this.validator.isValid) {
+        this.patientStoreService.patientAgreements = this.aggreementsComponent.patientAgreements
+        this.proceedToNextStep();
+      } else {
+        this.scrollUp();
+      }
+    }
   }
   proceedToNextStep() {
     this.calculatePercentage(this.counter, 'next')
@@ -229,7 +243,7 @@ export class QuestionnaireAddComponent implements OnInit {
     // this.patient.medicalQuestionnaireInfo = this.medicalInfoComponent?.medicalQuestionnaireInfo;
     // this.patient.medicalHistoryInformation = this.medicalHistoryInformationComponent?.model;
     // this.fillInsuranceInformationModel()
-    // this.fillModelFiles();
+    this.fillModelFiles();
     // this.patient.agreements = this.aggreementsComponent?.model;
     // if (this.patientsignatureComponent !== undefined)
     //   this.PatientsignatureComponentTmp = this.patientsignatureComponent
@@ -246,30 +260,5 @@ export class QuestionnaireAddComponent implements OnInit {
       }
     }
 
-  }
-  fillInsuranceInformationModel() {
-    // this.patient.insuranceQuestionnaireInfo.isCompNoFault = this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault;
-    // if (this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
-    //   this.patient.insuranceQuestionnaireInfo.insuranceWorkerCompNoFault = this.insuranceInformationComponent?.workerCompComponent.model
-    // if (!this.insuranceInformationComponent?.insuranceQuestionnaireInfo.isCompNoFault)
-    //   this.patient.insuranceQuestionnaireInfo.insuranceWorkerCommercial = this.insuranceInformationComponent?.workerNotCompComponent.model
-  }
-  cachePatient(modelName: string, pateintHolder: Patient) {
-    // var patient: Patient = new Patient();
-    // patient = JSON.parse(localStorage.getItem('patient') || '{}');
-    // if (modelName === 'basic')
-    //   patient.basicInfo = pateintHolder.basicInfo;
-    // if (modelName === 'address')
-    //   patient.addressInfo = pateintHolder.addressInfo;
-    // if (modelName === 'medical')
-    //   patient.medicalQuestionnaireInfo = pateintHolder.medicalQuestionnaireInfo
-    // if (modelName === 'insurance')
-    //   patient.insuranceQuestionnaireInfo = pateintHolder.insuranceQuestionnaireInfo;
-    // if (modelName === 'medical-history')
-    //   patient.medicalHistoryInformation = pateintHolder.medicalHistoryInformation;
-    // if (modelName === 'aggreements')
-    //   patient.agreements = pateintHolder.agreements;
-
-    //localStorage.setItem('patient', JSON.stringify(patient));
   }
 }
