@@ -108,10 +108,17 @@ export class QuestionnaireAddComponent implements OnInit {
         this.scrollUp();
       }
     }
-    // if (patientModel === 'medical') {
-    //   this.patientValidator = new PatientMedicalQuestionnaireValidator(this.medicalInfoComponent.medicalQuestionnaireInfo,
-    //     this.patientFields.medicalInfoRequired);
-    // }
+    if (patientModel === 'medical') {
+      console.log(this.medicalInfoComponent.patientMedical?.familyResultSubmission)
+      this.validator = this.medicalInfoComponent?.validate();
+      if (this.validator.isValid) {
+        this.patientStoreService.patientMedical = this.medicalInfoComponent.patientMedical;
+        this.patientStoreService.patientSource = this.medicalInfoComponent.patientSource;
+        this.proceedToNextStep();
+      } else {
+        this.scrollUp();
+      }
+    }
     // if (patientModel === 'medical-history') {
     //   this.patientValidator = new MdicalHistoryValidator(this.medicalHistoryInformationComponent.model,
     //     this.patientFields.medicalHistoryInfoRequired)

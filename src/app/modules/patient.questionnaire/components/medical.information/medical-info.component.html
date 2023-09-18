@@ -12,12 +12,12 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" name="doctorRecommendation"
-                    size="sm" />
+                    size="sm" [checked]="patientSource!.doctorSource" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" name="doctorRecommendation"
-                    size="sm" />
+                    size="sm" [checked]="patientSource!.entitySource" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
@@ -26,15 +26,12 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorName') }" class="mb-1">
                     <label for="doctorname" class="form-label">Doctor Name</label>
                     <input cFormControl [(ngModel)]="patientSource!.doctorSource.doctorName"
-                        *ngIf="patientSource!.doctorSource" name="doctorname"
-                        placeholder="Doctor Name" sizing="sm" />
+                        *ngIf="patientSource!.doctorSource" name="doctorname" placeholder="Doctor Name" sizing="sm" />
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorNpi') }" class="mb-1">
                     <label for="doctornpi" class="form-label">Doctor NPI</label>
-                    <input numbers cFormControl placeholder="Doctor NPI" sizing="sm"
-                        *ngIf="patientSource!.doctorSource"
-                        [(ngModel)]="patientSource!.doctorSource.doctorNPI" name="doctornpi"
-                        maxlength="10" />
+                    <input numbers cFormControl placeholder="Doctor NPI" sizing="sm" *ngIf="patientSource!.doctorSource"
+                        [(ngModel)]="patientSource!.doctorSource.doctorNPI" name="doctornpi" maxlength="10" />
                 </div>
             </form>
         </c-col>
@@ -43,8 +40,8 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedEntityName') }" class="mb-1">
                     <label for="entityname" class="form-label">Entity Name</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
-                        *ngIf="patientSource!.entitySource"
-                        [(ngModel)]="patientSource!.entitySource.organizationName" name="entityname">
+                        *ngIf="patientSource!.entitySource" [(ngModel)]="patientSource!.entitySource.organizationName"
+                        name="entityname">
                         <option value="">Select</option>
                         <option *ngFor="let entity of entityValues" [value]="entity.entityValue"
                             [selected]="entity.selected">{{entity.entityName}}</option>
@@ -105,12 +102,12 @@
             <c-col xs="12" class="mb-1">
                 <c-form-check>
                     <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
-                        (change)="resultsfamilyQChange('yes')" [checked]="isfamilyResultSubmission === 'yes'" />
+                        (change)="resultsfamilyQChange('yes')" [checked]="patientMedical!.familyResultSubmission" />
                     <label cFormCheckLabel>Yes</label>
                 </c-form-check>
                 <c-form-check>
                     <input cFormCheckInput type="radio" name="resultsfamily" size="sm"
-                        (change)="resultsfamilyQChange('no')" [checked]="isfamilyResultSubmission === 'no'" />
+                        (change)="resultsfamilyQChange('no')" [checked]="!patientMedical!.familyResultSubmission " />
                     <label cFormCheckLabel>No</label>
                 </c-form-check>
             </c-col>
@@ -132,24 +129,24 @@
         <c-col xs="12" class="mb-1">
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="physicalTherapyQChange('yes')" name="physicaltherapy"
-                    size="sm" [checked]="isphysicalTherapy === 'yes'" />
+                    size="sm" [checked]="patientMedical!.patientPhysicalTherapy" />
                 <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" value="no" (change)="physicalTherapyQChange('no')"
-                    name="physicaltherapy" size="sm" [checked]="isphysicalTherapy === 'no'" />
+                    name="physicaltherapy" size="sm" [checked]="!patientMedical!.patientPhysicalTherapy" />
                 <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
-        <c-col xs="4" *ngIf="isphysicalTherapy === 'yes'">
+        <c-col xs="4" *ngIf="patientMedical!.patientPhysicalTherapy">
             <form cForm>
                 <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapyLocation') }" class="mb-1">
-                    <input cFormControl placeholder="Where" sizing="sm" *ngIf="patientMedical?.patientPhysicalTherapy"
+                    <input cFormControl placeholder="Where" sizing="sm"
                         [(ngModel)]="patientMedical?.patientPhysicalTherapy!.location" name="physicalTherapywhere" />
                 </div>
                 <div [ngClass]="{ 'form-group required':isRequiredField('physicalTherapyNumberOfVisit') }" class="mb-1">
                     <input cFormControl type="number" name="physicalTherapywheretimes" min="1" sizing="sm"
-                        placeholder="How many visits?" *ngIf="medicalQuestionnaireInfo.physicalTherapy"
+                        placeholder="How many visits?"
                         [(ngModel)]="patientMedical?.patientPhysicalTherapy!.numberOfVisit"
                         name="physicalTherapywheretimes" />
                 </div>

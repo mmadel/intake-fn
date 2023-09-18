@@ -1,14 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Address } from 'src/app/models/patient/address.info.model';
-import { Patient } from 'src/app/models/patient/patient.model';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
-import { PhysicalTherapy } from 'src/app/models/questionnaire/medical/physical.therapy';
-import { RecommendationDoctor } from 'src/app/models/questionnaire/medical/recommendation.doctor';
-import { RecommendationEntity } from 'src/app/models/questionnaire/medical/recommendation.entity';
-import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
 import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
-import { LocalService } from 'src/app/modules/common';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
+import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
+import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientMedical } from '../../models/intake/medical/patient.medical';
 import { PatientSource } from '../../models/intake/source/patient.source';
 import { PatientStoreService } from '../../service/store/patient-store.service';
@@ -19,7 +14,6 @@ import { PatientStoreService } from '../../service/store/patient-store.service';
 })
 export class MedicalInfoComponent implements OnInit {
   isReferringDoctor: string = '';
-  isphysicalTherapy: string = '';
   isfamilyResultSubmission: string = '';
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
   patientMedical?: PatientMedical;
@@ -40,8 +34,6 @@ export class MedicalInfoComponent implements OnInit {
     }
   }
   physicalTherapyQChange(val: string) {
-    this.isphysicalTherapy = val;
-
     if (val === 'yes') {
       this.patientMedical!.patientPhysicalTherapy = {};
     } if (val === 'no') {
@@ -49,8 +41,7 @@ export class MedicalInfoComponent implements OnInit {
     }
   }
   resultsfamilyQChange(val: string) {
-    this.isfamilyResultSubmission = val;
-    val === 'yes' ? this.medicalQuestionnaireInfo.familyResultSubmission = true : this.medicalQuestionnaireInfo.familyResultSubmission = false;
+    val === 'yes' ? this.patientMedical!.familyResultSubmission = true : this.patientMedical!.familyResultSubmission = false;
   }
   ngOnInit(): void {
     if (this.patientStoreService.patientMedical === undefined) {
@@ -72,5 +63,10 @@ export class MedicalInfoComponent implements OnInit {
         }
       })
     return field;
+  }
+  public validate(): ValidatorContainer {
+    var patientValidator = new PatientMedicalQuestionnaireValidator(this.patientMedical || {}, this.patientSource || {},
+      this.requiredFields);
+    return patientValidator.validate();
   }
 }
