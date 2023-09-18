@@ -1,7 +1,9 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
+import { PatientCommercialInsurance } from '../../models/intake/Insurance/patient.commercial.insurance';
 import { PatientInsurance } from '../../models/intake/Insurance/patient.insurance';
+import { PatientInsuranceCompensationNoFault } from '../../models/intake/Insurance/patient.insurance.compensation.no.fault';
 import { PatientMedical } from '../../models/intake/medical/patient.medical';
 import { PatientMedicalHistory } from '../../models/intake/medical/patient.medical.history';
 import { PatientAgreement } from '../../models/intake/patient.agreement';
@@ -17,7 +19,8 @@ export class PatientStoreService {
   patientAddress?: Address;
   patientMedical?: PatientMedical;
   patientMedicalHistory?: PatientMedicalHistory;
-  patientInsurance?: PatientInsurance;
+  patientCommercialInsurance: PatientCommercialInsurance;
+  patientInsuranceCompensationNoFault: PatientInsuranceCompensationNoFault;
   patientGrantor?: PatientGrantor;
   patientSource?: PatientSource;
   patientSignature?: PatientSignature;
@@ -25,8 +28,8 @@ export class PatientStoreService {
   resetPateint() {
 
   }
-  constructor(@Optional()  @SkipSelf() sharedService?:PatientStoreService) { 
-    if(sharedService){
+  constructor(@Optional() @SkipSelf() sharedService?: PatientStoreService) {
+    if (sharedService) {
       throw new Error('PatientStoreService is already loaded')
     }
     console.log('PatientStoreService created....!!!!');
