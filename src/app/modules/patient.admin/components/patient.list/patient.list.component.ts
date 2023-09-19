@@ -4,7 +4,7 @@ import * as moment from 'moment';
 import { combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { PateintDocumentsService } from '../../services/documents/pateint-documents.service';
-import { IApiParams, IUsers, PatientListService } from '../../services/patient-list.service';
+import { IApiParams, IPatient, IUsers, PatientListService } from '../../services/patient-list.service';
 import { PatientReportingService } from '../../services/patient.reporting.service';
 export interface IParams {
   activePage?: number;
@@ -118,23 +118,22 @@ export class PatientListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.#destroy$.next(true);
   }
-  exportPDF(data: IUsers) {
-    this.reportingService.exportPDF(data.tableId).subscribe(
+  exportPDF(data: IPatient) {
+    this.reportingService.exportPDF(data.patientId).subscribe(
       (response: any) => {
         this.constructExportedFile(response,'patient-','pdf')
       });
   }
-  exportPatientIDDocument(data: IUsers) {
-    this.pateintDocumentsService.exportPateintIdDocuments(data.tableId).subscribe(
+  exportPatientIDDocument(data: IPatient) {
+    this.pateintDocumentsService.exportPateintIdDocuments(data.patientId).subscribe(
       (response: any) => {
         this.constructExportedFile(response , 'patient-ID-Documents','zip')
       }
     )
 
   }
-  exportPatientInsuranceDocument(data: IUsers) {
-    console.log('patient-Id : ' + data.tableId);
-    this.pateintDocumentsService.exportPateintInsuranceDocuments(data.tableId).subscribe(
+  exportPatientInsuranceDocument(data: IPatient) {
+    this.pateintDocumentsService.exportPateintInsuranceDocuments(data.patientId).subscribe(
       (response: any) => {
         this.constructExportedFile(response, 'patient-Insurance-Documents','zip')
       },
