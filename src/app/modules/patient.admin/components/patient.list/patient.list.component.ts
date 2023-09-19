@@ -44,24 +44,16 @@ export class PatientListComponent implements OnInit, OnDestroy {
       label: 'Email'
     },
     {
-      key: 'country',
-      label: 'Country'
-    },
-    {
-      key: 'phoneType',
-      label: 'Phone Type'
-    },
-    {
       key: 'phoneNumber',
       label: 'Phone Number'
     },
     {
-      key: 'idType',
-      label: 'Id Type'
+      key: 'sourceType',
+      label: 'Source'
     },
     {
-      key: 'patientId',
-      label: 'Id'
+      key: 'insuranceType',
+      label: 'Insurance Type'
     },
     {
       key: 'actions',

@@ -16,7 +16,7 @@ const httpOptions = {
 export interface IData {
   number_of_records: number;
   number_of_matching_records: number;
-  records: IUsers[];
+  records: IPatient[];
 }
 
 export interface IUsers {
@@ -32,6 +32,16 @@ export interface IUsers {
   patientSourceType: string,
   insuranceWorkerType: string,
   hasPhysicalTherapy: boolean
+}
+
+export interface IPatient{
+    firstName:string,
+    middleName:string,
+    lastName:string,
+    email:string
+    phoneNumber:string,
+    sourceType:string,
+    insuranceType:string
 }
 
 export interface IApiParams {
