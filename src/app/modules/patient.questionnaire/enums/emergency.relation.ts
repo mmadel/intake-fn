@@ -1,8 +1,8 @@
 export enum Relation{
-    Spouse = "spouse",
-    Friend = "friend",
-    Father = "father",
-    Mother = "mother",
-    Relative = "relative",
-    Other = "other"
+    Spouse = "Spouse",
+    Friend = "Friend",
+    Father = "Father",
+    Mother = "Mother",
+    Relative = "Relative",
+    Other = "Other"
 }

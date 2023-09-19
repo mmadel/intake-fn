@@ -1,3 +1,4 @@
+import { Address } from "src/app/models/patient/address.info.model";
 import { PatientEmergencyContact } from "./patient.emergency.contact";
 import { PatientEmployment } from "./patient.employment";
 import { PatientName } from "./patient.name";
@@ -14,4 +15,5 @@ export interface PatientEssentialInformation {
     maritalStatus?: string;
     patientEmergencyContact?: PatientEmergencyContact;
     patientEmployment?: PatientEmployment;
+    patientAddress? : Address
   }

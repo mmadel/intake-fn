@@ -10,7 +10,6 @@ import { PatientSource } from "./source/patient.source";
 export interface Patient {
   id?: number;
   patientEssentialInformation?: PatientEssentialInformation;
-  patientAddress?: Address;
   patientMedical?: PatientMedical;
   patientInsurance?: PatientInsurance;
   patientGrantor?: PatientGrantor;

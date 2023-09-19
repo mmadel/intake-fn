@@ -40,11 +40,11 @@ export class SummaryComponent implements OnInit {
 
   getPatientAddress() {
     const paragraph = `<br/><u><h4 style="font-family:Lucida">Patient Address Information</h4></u>
-    <b style="font-family:Lucida">Address Type</b> : <i style="font-family:Lucida"> ${this.pateint.patientAddress?.type} </i></br>
-    <b style="font-family:Lucida">First Address </b> : <i style="font-family:Lucida"> ${this.pateint.patientAddress?.first} </i></br>
-    <b style="font-family:Lucida">Second Address </b> : <i style="font-family:Lucida"> ${this.pateint.patientAddress?.second} </i></br>
-    <b style="font-family:Lucida">Country</b> : <i style="font-family:Lucida"> ${this.pateint.patientAddress?.country} </i></br>
-    <b style="font-family:Lucida">Zip-Code</b> : <i style="font-family:Lucida"> ${this.pateint.patientAddress?.zipCode} </i></br>`
+    <b style="font-family:Lucida">Address Type</b> : <i style="font-family:Lucida"> ${this.pateint.patientEssentialInformation!.patientAddress?.type} </i></br>
+    <b style="font-family:Lucida">First Address </b> : <i style="font-family:Lucida"> ${this.pateint.patientEssentialInformation!.patientAddress?.first} </i></br>
+    <b style="font-family:Lucida">Second Address </b> : <i style="font-family:Lucida"> ${this.pateint.patientEssentialInformation!.patientAddress?.second} </i></br>
+    <b style="font-family:Lucida">Country</b> : <i style="font-family:Lucida"> ${this.pateint.patientEssentialInformation!.patientAddress?.country} </i></br>
+    <b style="font-family:Lucida">Zip-Code</b> : <i style="font-family:Lucida"> ${this.pateint.patientEssentialInformation!.patientAddress?.zipCode} </i></br>`
     return paragraph;
   }
 
