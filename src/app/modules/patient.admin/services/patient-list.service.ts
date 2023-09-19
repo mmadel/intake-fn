@@ -42,6 +42,7 @@ export interface IPatient{
     phoneNumber:string,
     sourceType:string,
     insuranceType:string
+    patientId:number
 }
 
 export interface IApiParams {
