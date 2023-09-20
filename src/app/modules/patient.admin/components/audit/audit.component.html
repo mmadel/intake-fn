@@ -1,0 +1,100 @@
+<ngx-spinner></ngx-spinner>
+<c-row>
+    <c-col xs="12" class="mb-4">
+        <c-card>
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Patient Intake Auditing Entities</strong>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    The Ability to find the activities that have been taken on the audited entities
+                </p>
+                <c-callout color="danger" *ngIf="searchInputNotValid">
+                    {{errorMsg}}
+                </c-callout>
+                <form cForm>
+                    <c-row>
+                        <c-col xs="12" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        Entity
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <c-col class="mb-2" xs="12">
+                                        <form cForm>
+                                            <select cSelect cFormControl name="entityname" [(ngModel)]="selectedEntity">
+                                                <option value=''>Select Entity</option>
+                                                <option value="clinic">Clinic</option>
+                                                <option value="Insurance_company">Insurance Company</option>
+                                                <option value="patient">Patient</option>
+                                            </select>
+                                        </form>
+                                    </c-col>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col xs="12" class="text-center">
+                            <button cButton class="me-1" (click)="find()" color="primary" variant="outline"
+                                style="width: 15%;">
+                                Search
+                            </button>
+                        </c-col>
+                    </c-row>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+    <c-container class="text-end">
+        <button cButton (click)="exportResult()" variant="outline">Export Result
+            <svg cIcon name="cilCloudDownload"></svg>
+        </button>
+    </c-container>
+    <c-col xs="12">
+        <ng-container *ngIf="props$ | async as props" fluid="true">
+            <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [columnFilter]="true"
+              [items]="(auditData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+              (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
+              [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
+              [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
+              [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
+              (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
+              <ng-template cTemplateId="tableDetails" let-item="item" >
+                <div [visible]="this.details_visible[item._id]===true" cCollapse>
+                  <c-card class="rounded-0">
+                    <c-card-body>
+                      <p [innerHTML]="showEntityData(item.entity, item.entityName)"></p>
+                      <p ><strong>Action has been taken at :</strong> {{item['actionDate']}}</p>
+                    </c-card-body>
+                    <c-card-footer>
+                        
+                    </c-card-footer>
+                  </c-card>
+                </div>
+              </ng-template>
+              <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+                <td>
+                  <ng-container [ngSwitch]="columnName">
+                    <ng-container *ngSwitchCase="'actionType'">
+                        <c-badge [color]="getBadge(tdContent)">
+                          {{(item[columnName])}}
+                        </c-badge>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'show'" class="py-2">
+                        <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
+                          Show
+                        </button>
+                      </ng-container>
+                    <ng-container *ngSwitchDefault>
+                      {{tdContent}}
+                    </ng-container>
+                  </ng-container>
+                </td>
+              </ng-template>
+            </c-smart-table>
+            <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
+              (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+          </ng-container>
+    </c-col>
+</c-row>

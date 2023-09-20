@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultAdminLayoutComponent, DefaultLayoutComponent } from './core';
-import { AuthGuard, LoginComponent } from './modules/security';
+import {  LoginComponent } from './modules/security';
+import { KCAuthGuardGuard } from './modules/security/service/kc/kcauth-guard.guard';
 
 
 const routes: Routes = [
@@ -31,9 +32,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: DefaultAdminLayoutComponent,
-    canActivateChild: [AuthGuard],
+    canActivate: [KCAuthGuardGuard],
     data: {
-      title: ''
+      title: '',
+      roles: ['administrator','normal']
     },
     children: [
       {

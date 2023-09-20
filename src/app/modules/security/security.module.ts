@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './components/login.component';
 
@@ -34,6 +34,10 @@ import {
 import { FormsModule } from '@angular/forms';
 import { IconModule } from '@coreui/icons-angular';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { initializer } from './keycloak-initializer';
+import { KeycloakService } from 'keycloak-angular';
+import { KcAuthServiceService } from './service/kc/kc-auth-service.service';
+import { KCAuthGuardGuard } from './service/kc/kcauth-guard.guard';
 @NgModule({
   declarations: [
     LoginComponent
@@ -68,6 +72,17 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     WidgetModule,
     ProgressModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+  ],
+  providers: [
+    {
+        provide: APP_INITIALIZER,
+        useFactory: initializer,
+        multi: true,
+        deps: [KeycloakService]
+    },
+    KeycloakService,
+    KcAuthServiceService,
+    KCAuthGuardGuard
   ]
 })
 export class SecurityModule { }

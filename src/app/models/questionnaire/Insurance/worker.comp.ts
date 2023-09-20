@@ -6,9 +6,9 @@ export class WrokerComp {
     accidentDate: number;
     workerStatus: string = '';
     workerCompAddress: Address;
-    fax: string;
+    fax: string='';
     insuranceName: string;
-    claimNumber: number;
+    claimNumber: string;
     adjusterInfoName: string;
     adjusterInfoPhone: string='';
     attorneyInfoName: string;

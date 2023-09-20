@@ -18,12 +18,13 @@ export class MedicalHistoryInformationComponent implements OnInit {
   isPacemaker: string = ''
   patientConditions: IPatientCondition[];
   heightUnit: boolean = false;
+  weightUnit: boolean = false;
   constructor(private localService: LocalService) { }
 
   ngOnInit(): void {
     this.createPatientConditions();
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.medicalHistoryInformation !== undefined) {
         this.model = pateint.medicalHistoryInformation;
         if (pateint.medicalHistoryInformation.metalImplantation)
@@ -151,8 +152,19 @@ export class MedicalHistoryInformationComponent implements OnInit {
       this.model.heightUnit = 'inch'
       this.model.height = (Number(this.model.height) * 0.3937 ).toFixed(2)+ '';
     }
-
   }
+
+  changeWeightUnit(event: any) {
+    if (this.weightUnit) {
+      this.model.weightUnit = 'kg'
+      this.model.weight = (Number(this.model.weight) * 0.45359237  ).toFixed(2)+ '';
+    }
+    if (!this.weightUnit) {
+      this.model.weightUnit = 'pound'
+      this.model.weight = (Number(this.model.weight) / 0.45359237  ).toFixed(2)+ '';
+    }
+  }
+
   isRequiredField(name: string): boolean {
     var field: boolean = false;
     Object.entries(this.requiredFields)

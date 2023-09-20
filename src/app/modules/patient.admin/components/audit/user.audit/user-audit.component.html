@@ -1,0 +1,83 @@
+<ngx-spinner></ngx-spinner>
+<c-row>
+    <c-col xs="12" class="mb-4">
+        <c-card>
+            <c-card-header ngPreserveWhitespaces>
+                <strong>Patient Intake Auditing Entities</strong>
+            </c-card-header>
+            <c-card-body>
+                <p class="text-medium-emphasis small">
+                    The Ability to find the activities that have been taken  by users
+                </p>
+                <c-callout color="danger" *ngIf="searchInputNotValid">
+                    {{errorMsg}}
+                </c-callout>
+                <form cForm>
+                    <c-row>
+                        <c-col xs="12" class="mb-2">
+                            <c-card>
+                                <c-card-header>
+                                    <h6>
+                                        User
+                                    </h6>
+                                </c-card-header>
+                                <c-card-body>
+                                    <c-col class="mb-2" xs="12">
+                                        <form cForm>
+                                            <select cSelect cFormControl name="username" *ngIf="users.length > 0 "
+                                                [(ngModel)]="selectedUser">
+                                                <option value=''>Select User</option>
+                                                <option *ngFor="let user of users" [value]="user.uuid">
+                                                    {{user.name}}</option>
+                                            </select>
+                                        </form>
+                                    </c-col>
+                                </c-card-body>
+                            </c-card>
+                        </c-col>
+                        <c-col xs="12" class="text-center">
+                            <button cButton class="me-1" (click)="find()" color="primary" variant="outline"
+                                style="width: 15%;">
+                                Search
+                            </button>
+                        </c-col>
+                    </c-row>
+                </form>
+            </c-card-body>
+        </c-card>
+    </c-col>
+    <c-col xs="12" class="mb-4">
+       <c-row>
+        <c-col xs="12" class="mb-4">
+            <c-card>
+                <c-card-header>
+                  <h5>Clinic</h5>
+                </c-card-header>
+                <c-card-body>
+                    <app-user-clinic-audit [uuid]="selectedUser" ></app-user-clinic-audit>
+                </c-card-body>
+              </c-card>
+        </c-col>
+        <c-col xs="12" class="mb-4">
+            <c-card>
+                <c-card-header>
+                  <h5>Insurance Company</h5>
+                </c-card-header>
+                <c-card-body>
+                    <app-user-insurance-company-audit [uuid]="selectedUser"></app-user-insurance-company-audit>
+                </c-card-body>
+              </c-card>
+        </c-col>
+        <c-col xs="12" class="mb-4">
+            <c-card>
+                <c-card-header>
+                  <h5>Patient</h5>
+                </c-card-header>
+                <c-card-body>
+                    <app-user-patient-audit [uuid]="selectedUser"></app-user-patient-audit>
+                </c-card-body>
+              </c-card>
+        </c-col>
+       </c-row>
+    </c-col>
+</c-row>

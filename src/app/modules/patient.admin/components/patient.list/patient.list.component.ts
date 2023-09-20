@@ -78,7 +78,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
   readonly sorterValue$ = new BehaviorSubject({});
   readonly totalItems$ = new BehaviorSubject(0);
 
-  readonly apiParams$ = new BehaviorSubject<IApiParams>({ limit: this.itemsPerPage$.value, offset: 0 });
+  readonly apiParams$ = new BehaviorSubject<IApiParams>({ pageSize: this.itemsPerPage$.value, currentPage: 0 });
   readonly errorMessage$ = new Subject<string>();
   readonly retry$ = new Subject<boolean>();
 
@@ -129,20 +129,13 @@ export class PatientListComponent implements OnInit, OnDestroy {
   exportPDF(data: IUsers) {
     this.reportingService.exportPDF(data.tableId).subscribe(
       (response: any) => {
-        this.constructExportedFile(response,'patient-')
-      },
-      (error) => {
-
+        this.constructExportedFile(response,'patient-','pdf')
       });
   }
   exportPatientIDDocument(data: IUsers) {
-    console.log('patient-Id : ' + data.tableId);
     this.pateintDocumentsService.exportPateintIdDocuments(data.tableId).subscribe(
       (response: any) => {
-        this.constructExportedFile(response , 'patient-ID-Documents')
-      },
-      (error) => {
-
+        this.constructExportedFile(response , 'patient-ID-Documents','zip')
       }
     )
 
@@ -151,7 +144,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
     console.log('patient-Id : ' + data.tableId);
     this.pateintDocumentsService.exportPateintInsuranceDocuments(data.tableId).subscribe(
       (response: any) => {
-        this.constructExportedFile(response, 'patient-Insurance-Documents')
+        this.constructExportedFile(response, 'patient-Insurance-Documents','zip')
       },
       (error) => {
 
@@ -159,12 +152,12 @@ export class PatientListComponent implements OnInit, OnDestroy {
     )
   }
 
-  constructExportedFile(response: any, fileName: string) {
+  constructExportedFile(response: any, fileName: string, extention:string) {
     const a = document.createElement('a')
     const objectUrl = URL.createObjectURL(response)
     a.href = objectUrl
     var nameDatePart = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-    a.download = fileName + nameDatePart + '.zip';
+    a.download = fileName + nameDatePart + '.' +extention;
     a.click();
     URL.revokeObjectURL(objectUrl);
   }

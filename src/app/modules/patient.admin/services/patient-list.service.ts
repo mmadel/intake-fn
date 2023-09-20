@@ -35,8 +35,8 @@ export interface IUsers {
 }
 
 export interface IApiParams {
-  offset?: number;
-  limit?: number;
+  currentPage?: number;
+  pageSize?: number;
   clinicId?: number
   columnFilter?: string;
   columnSorter?: string;

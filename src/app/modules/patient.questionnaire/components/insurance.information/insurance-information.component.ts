@@ -26,8 +26,8 @@ export class InsuranceInformationComponent implements OnInit {
   constructor(private localService:LocalService) { }
 
   ngOnInit(): void {
-    if (this.localService.getData('patient') !== null) {
-      var pateint: Patient = JSON.parse(this.localService.getData('patient') || '{}')
+    if (localStorage.getItem('patient') !== null) {
+      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
       if (pateint.insuranceQuestionnaireInfo !== undefined) {
         this.insuranceQuestionnaireInfo = pateint.insuranceQuestionnaireInfo;
         this.insuranceQuestionnaireInfo.isCompNoFault === true ? this.isWorkerCompNoFault = 'yes' : this.isWorkerCompNoFault = 'no'

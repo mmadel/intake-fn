@@ -19,6 +19,8 @@
             <th scope="col">Use Name</th>
             <th scope="col">User Role</th>
             <th scope="col">User Clinics</th>
+            <th scope="col">Action</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +33,17 @@
                     <li *ngFor="let clinic of user.clinics">{{clinic.name}}</li>
                 </ul>
 
+            </td>
+            <td>
+                <button cButton variant="outline" class="me-3" (click)="update(user.uuid)" [disabled]="isLoggedInUser(user.uuid)">
+                    <svg cIcon name="cilPen"></svg>
+                </button>
+                <button cButton variant="outline" (click)="delete(user.uuid)" [disabled]="isLoggedInUser(user.uuid)">
+                    <svg cIcon name="cilTrash"></svg>
+                </button>
+            </td>
+            <td>
+                <span *ngIf="isLoggedIn">LoggedIn</span>
             </td>
         </tr>
 

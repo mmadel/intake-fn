@@ -14,5 +14,6 @@ export * from './components/upload.photos/upload-photo.component'
 
 
 export * from './components/summary/summary.component'
+export * from './components/signature/patientsignature.component'
 
 export * from './patient-questionnaire.module'

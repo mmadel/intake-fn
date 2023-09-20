@@ -38,11 +38,7 @@ export class PatientReportingService {
 
   exportPDF(patientId: number) {
     const exportPDFURL = this.baseUrl + 'generator/pdf/patientId/'+patientId
-    return this.httpClient.post(exportPDFURL, {
-      headers: {
-        "Accept": "application/pdf"
-      },
-      responseType: "blob"
-    })
+    const headers = {'Content-Type': 'application/pdf', 'Accept': 'application/pdf','responseType': 'blob'};
+    return this.httpClient.post(exportPDFURL, {location: "report.pdf"}, { responseType: 'blob' } )
   }
 }

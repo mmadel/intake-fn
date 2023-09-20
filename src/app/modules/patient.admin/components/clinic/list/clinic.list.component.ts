@@ -17,6 +17,7 @@ interface RenderedClinic {
 })
 
 export class ClinicListComponent implements OnInit {
+  errorMessage: string | null = '';
   clinics: RenderedClinic[] | null = new Array();
   constructor(private router: Router, private clinicService: ClinicService) { }
 
@@ -43,9 +44,21 @@ export class ClinicListComponent implements OnInit {
       address: splitted[0],
       country: splitted[1],
       ps: splitted[2],
-      zipcode: splitted[3]
+      zipcode: splitted[4]
     }
     return renderedClinic;
   }
+  update(id: number | undefined | null) {
+    this.router.navigate(['/admin/clinic/update', id])
+  }
 
+  deleteClinic(id: number | undefined | null) {
+    this.clinicService.delete(id?.toString() || '{}').subscribe(() => {
+      this.errorMessage = ''
+      location.reload();
+    }, error => {
+      this.errorMessage = error.error.message;
+    },
+    )
+  }
 }

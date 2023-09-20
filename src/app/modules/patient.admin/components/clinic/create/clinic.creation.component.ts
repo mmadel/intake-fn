@@ -41,7 +41,7 @@ export class ClinicCreationComponent implements OnInit {
       id: null,
       name: this.form.name,
       address: this.convertAddressToString(),
-      selected:false
+      selected: false
     }
 
     if (this.clinicCreateForm.valid) {
@@ -67,6 +67,7 @@ export class ClinicCreationComponent implements OnInit {
       address = address + this.form.clinicaddressstate + ",";
     if (this.form.clinicaddressprovince)
       address = address + this.form.clinicaddressprovince + ",";
+    address = address + this.form.clinicaddresscity + ",";
     address = address + this.form.clinicaddresszipcode;
     return address
   }

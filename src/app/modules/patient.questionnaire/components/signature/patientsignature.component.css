@@ -1,0 +1,41 @@
+canvas {
+    display: block;
+    border: 1px solid rgb(187, 178, 178);
+    background-color: var(--ion-color-success);
+}
+#download {
+    display: block;
+  }
+button {
+    margin: 10px;
+    margin-left: 10px;
+}
+
+.signature-format-Dancing-Script{
+    font-family: 'Dancing Script',cursive;
+    font-size: xx-large;
+}
+.signature-format-Gloria-Hallelujah{
+    font-family: 'Gloria Hallelujah',cursive;
+    font-size: xx-large;
+}
+.signature-format-Great-Vibes{
+    font-family: 'Great Vibes',cursive;
+    font-size: xx-large;
+}
+.signature-format-Homemade-Apple{
+    font-family: 'Homemade Apple',cursive;
+    font-size: xx-large;
+}
+.signature-format-Monsieur-La-Doulaise{
+    font-family: 'Monsieur La Doulaise',cursive;
+    font-size: xx-large;
+}
+.signature-format-Nanum-Brush-Script{
+    font-family: 'Nanum Brush Script',cursive;
+    font-size: xx-large;
+}
+.signature-format-Reenie-Beanie{
+    font-family: 'Reenie Beanie',cursive;
+    font-size: xx-large;
+}

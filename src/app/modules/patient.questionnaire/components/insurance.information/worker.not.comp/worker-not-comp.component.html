@@ -15,13 +15,13 @@
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('memberId') }">
                 <label for="memberId" class="form-label">Member ID</label>
-                <input cFormControl [(ngModel)]="model.memberId" sizing="sm" name="ploicyId"  type="number"/>
+                <input cFormControl [(ngModel)]="model.memberId" sizing="sm" name="memberId"/>
             </div>
         </c-col>
         <c-col xs="auto" class="mb-2">
             <div [ngClass]="{ 'form-group required':isRequiredField('ploicyId') }">
                 <label for="ploicyId" class="form-label">Policy ID</label>
-                <input cFormControl [(ngModel)]="model.policyId" sizing="sm" name="ploicyId" type="number"/>
+                <input cFormControl [(ngModel)]="model.policyId" sizing="sm" name="ploicyId"/>
             </div>
         </c-col>
         <c-col xs="auto" class="mb-2">
