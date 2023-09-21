@@ -2,36 +2,50 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { Basic } from 'src/app/models/patient/basic.info.model';
-import { Patient } from 'src/app/models/patient/patient.model';
 import { BasicInfoRequired } from 'src/app/models/validation/basic.info';
-import { LocalService } from 'src/app/modules/common';
-import { EmergencyRelation } from '../../models/patient/emergency.relation';
+import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
+import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
+import { Relation } from '../../enums/emergency.relation';
+import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
+import { Patient } from '../../models/intake/patient';
+import { PatientGrantor } from '../../models/intake/patient.grantor';
+import { PatientStoreService } from '../../service/store/patient-store.service';
 @Component({
   selector: 'app-essential-info',
   templateUrl: './essential-info.component.html',
   styleUrls: ['./essential-info.component.css']
 })
 export class EssentialInfoComponent implements OnInit {
+  patientEssentialInformation?: PatientEssentialInformation;
+  patientGrantor: PatientGrantor = {}
+  relationShip = Relation;
   pateintBasicInfo: Basic = new Basic()
-  emergencyRelations: string[] = [];
   isPatientUnderage: boolean = false;
-  guarantorRelationship: string[] = [];
   imageFormData: FormData = new FormData();
   @Input() requiredFields: BasicInfoRequired;
-  constructor(private localService: LocalService, private imageCompress: NgxImageCompressService) { }
+  constructor(private imageCompress: NgxImageCompressService,
+    private patientStoreService: PatientStoreService) {
+  }
 
   ngOnInit(): void {
-    this.fillEmergenctrelation();
-
-    if (localStorage.getItem('patient') !== null) {
-      var pateint: Patient = JSON.parse(localStorage.getItem('patient') || '{}')
-      if (pateint.basicInfo !== undefined) {
-        this.pateintBasicInfo = pateint.basicInfo;
-      } else {
-        this.pateintBasicInfo = new Basic();
+  
+    if (this.patientStoreService.patientEssentialInformation === undefined) {
+      this.patientEssentialInformation = {
+        patientName: {},
+        patientEmergencyContact: {
+          emergencyRelation:''
+        },
+        patientEmployment: {
+          employmentStatus:''
+        },
+        patientPhone: {
+          phoneType:''
+        },
+        gender:'',
+        maritalStatus :'',
       }
     } else {
-      this.pateintBasicInfo = new Basic();
+      this.patientEssentialInformation = this.patientStoreService.patientEssentialInformation;
     }
   }
   isRequiredField(name: string): boolean {
@@ -44,27 +58,21 @@ export class EssentialInfoComponent implements OnInit {
       })
     return field;
   }
-  fillEmergenctrelation() {
-    for (var relation in EmergencyRelation) {
-      this.emergencyRelations.push(relation)
-      this.guarantorRelationship.push(relation)
-    }
-  }
   checkAge(event: any) {
     var patientAge = moment().diff(event, 'y')
     this.isPatientUnderage = patientAge < 18 ? true : false;
   }
   public onImageUpload(event: any, photoType: string) {
-    
-      var uploadedIDFrontImage: File = event.target.files[0];
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        var localUrl = event.target.result;
-        this.compressFile(localUrl, uploadedIDFrontImage['name'], photoType)
 
-      }
-      reader.readAsDataURL(uploadedIDFrontImage);
-    
+    var uploadedIDFrontImage: File = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      var localUrl = event.target.result;
+      this.compressFile(localUrl, uploadedIDFrontImage['name'], photoType)
+
+    }
+    reader.readAsDataURL(uploadedIDFrontImage);
+
   }
   compressFile(image: any, fileName: any, fileSuffix: string) {
     var orientation = -1;
@@ -100,5 +108,12 @@ export class EssentialInfoComponent implements OnInit {
   }
   imageUploadAction(uploadedImage: File, imageName: string) {
     this.imageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
+  }
+  public validate(): ValidatorContainer {
+    var patientValidator = new PatientEssentialValidator(this.requiredFields, this.patientEssentialInformation || {});
+    return patientValidator.validate();
+  }
+  formatDate() {
+    this.patientEssentialInformation!.dateOfBirth = Number(moment(this.patientEssentialInformation?.birthDate_date).format("x"));
   }
 }

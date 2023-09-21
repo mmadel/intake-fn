@@ -1,13 +1,13 @@
 import * as _ from "lodash";
-import { MedicalHistroyInformation } from "src/app/models/questionnaire/medical/history/medical.history.info";
 import { MedicalHistoryInfoRequired } from "src/app/models/validation/medical.history.info.required";
+import { PatientMedicalHistory } from "src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history";
 import { PropertyValidator } from "../PropertyValidator";
 import { ValidatorContainer } from "../ValidatorContainer";
 import { PatientValidator } from "./patient.validator";
 export class MdicalHistoryValidator extends PatientValidator {
-    model: MedicalHistroyInformation;
+    model: PatientMedicalHistory;
     requiredFields: MedicalHistoryInfoRequired;
-    constructor(model: MedicalHistroyInformation, requiredFields: MedicalHistoryInfoRequired) {
+    constructor(model: PatientMedicalHistory, requiredFields: MedicalHistoryInfoRequired) {
         super();
         this.model = model;
         this.requiredFields = requiredFields;
@@ -37,7 +37,7 @@ export class MdicalHistoryValidator extends PatientValidator {
                 validator.push({ property: "Weight", message: '' });
         }
         if (this.isRequiredField('evaluationReason')) {
-            if (this.model.evaluationReason === '' || this.model.evaluationReason === undefined)
+            if (this.model.evaluationSubmission === '' || this.model.evaluationSubmission === undefined)
                 validator.push({ property: "What is your primary reason for today’s evaluation", message: '' });
         }
         if (this.isRequiredField('medicationPrescription')) {

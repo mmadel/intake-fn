@@ -3,15 +3,16 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { Basic } from 'src/app/models/patient/basic.info.model';
 import { BasicInfoRequired } from 'src/app/models/validation/basic.info';
+import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
 import { PropertyValidator } from '../PropertyValidator';
 import { ValidatorContainer } from '../ValidatorContainer';
 import { PatientValidator } from './patient.validator';
 
 
 export class PatientEssentialValidator extends PatientValidator {
-    pateintBasicInfo: Basic;
+    pateintBasicInfo: PatientEssentialInformation;
     requiredFields: BasicInfoRequired;
-    constructor(requiredFields: BasicInfoRequired, pateintBasicInfo: Basic) {
+    constructor(requiredFields: BasicInfoRequired, pateintBasicInfo: PatientEssentialInformation) {
         super();
         this.pateintBasicInfo = pateintBasicInfo
         this.requiredFields = requiredFields;
@@ -41,17 +42,18 @@ export class PatientEssentialValidator extends PatientValidator {
     }
     protected validateInfo(validator: PropertyValidator[]) {
         if (this.isRequiredField('firstName'))
-            if (this.pateintBasicInfo.firstName === '' || this.pateintBasicInfo.firstName === undefined)
+            if (this.pateintBasicInfo.patientName?.firstName === '' || this.pateintBasicInfo.patientName?.firstName === undefined)
                 validator.push({ property: " First Name", message: '' });
         if (this.isRequiredField('middleName'))
-            if (this.pateintBasicInfo.middleName === '' || this.pateintBasicInfo.middleName === undefined)
+            if (this.pateintBasicInfo.patientName?.middleName === '' || this.pateintBasicInfo.patientName?.middleName === undefined)
                 validator.push({ property: " Middle Name", message: '' });
         if (this.isRequiredField('lastName'))
-            if (this.pateintBasicInfo.lastName === '' || this.pateintBasicInfo.lastName === undefined)
+            if (this.pateintBasicInfo.patientName?.lastName === '' || this.pateintBasicInfo.patientName?.lastName === undefined)
                 validator.push({ property: " Last Name", message: '' });
 
         if (this.isRequiredField('birthDate')) {
-            if (Number.isNaN(this.pateintBasicInfo.birthDate))
+            console.log(this.pateintBasicInfo.dateOfBirth + '  FFFFFFFFFFFFF')
+            if (this.pateintBasicInfo.dateOfBirth === undefined)
                 validator.push({ property: " Birth Date", message: '' });
         }
         if (this.isRequiredField('gender')) {
@@ -65,8 +67,8 @@ export class PatientEssentialValidator extends PatientValidator {
         }
 
         if (this.isRequiredField('phone') || this.isRequiredField('phone')) {
-            if ((this.pateintBasicInfo.phoneType === '' || this.pateintBasicInfo.phoneType === undefined)
-                && (this.pateintBasicInfo.phoneNumber === '' || this.pateintBasicInfo.phoneNumber === undefined)) {
+            if ((this.pateintBasicInfo.patientPhone?.phoneType === '' || this.pateintBasicInfo.patientPhone?.phoneType === undefined)
+                && (this.pateintBasicInfo.patientPhone?.phoneType === '' || this.pateintBasicInfo.patientPhone?.phoneType === undefined)) {
                 validator.push({ property: " Phone Type", message: '' });
                 validator.push({ property: " Phone Number", message: '' });
             }
@@ -94,8 +96,8 @@ export class PatientEssentialValidator extends PatientValidator {
         //     }
         // }
         if (this.isRequiredField('emergencyContact') && this.isRequiredField('emergencyContact')) {
-            if ((this.pateintBasicInfo.emergencyName === '' || this.pateintBasicInfo.emergencyName === undefined) &&
-                (this.pateintBasicInfo.emergencyPhone === '' || this.pateintBasicInfo.emergencyPhone === undefined)) {
+            if ((this.pateintBasicInfo.patientEmergencyContact?.emergencyName === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyName === undefined) &&
+                (this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === undefined)) {
                 validator.push({ property: "Emergency Name", message: '' });
                 validator.push({ property: "Emergency Phone", message: '' });
             }

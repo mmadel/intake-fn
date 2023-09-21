@@ -39,8 +39,7 @@
                     <h3>{{cards[0].name}}</h3>
                 </c-card-header>
                 <c-card-body>
-                    <app-essential-info *ngIf="patientFields"
-                        [requiredFields]="patientFields.basicInfo"></app-essential-info>
+                    <app-essential-info *ngIf="patientFields" [requiredFields]="patientFields.basicInfo"></app-essential-info>
                 </c-card-body>
                 <c-card-footer>
                     <button cButton (click)="next('basic')" size="sm" color="primary" variant="outline"

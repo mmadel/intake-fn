@@ -11,7 +11,12 @@ export interface IPatientResult {
   phoneNumber: string;
   idType: string,
   patientId: string
-  createdAt: number
+  createdAt: number,
+  gender:string,
+  patientSourceType:string,
+  doctorName:string,
+  doctorNPI:string,
+  organizationName:string
 }
 export interface ISearchResult {
   resultCount: number;

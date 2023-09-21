@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import { Agreements } from "src/app/models/patient/agreements/agreements.model";
+import { PatientAgreement } from "src/app/modules/patient.questionnaire/models/intake/patient.agreement";
 import { PropertyValidator } from "../PropertyValidator";
 import { ValidatorContainer } from "../ValidatorContainer";
 import { PatientValidator } from "./patient.validator";
@@ -15,7 +16,7 @@ export interface AggrementInfoRequired {
     PhotoVideo: boolean
 }
 export class PatientAggreementsValidator extends PatientValidator {
-    pateintAgreements: Agreements;
+    pateintAgreements: PatientAgreement;
     requiredFields: AggrementInfoRequired = {
         ReleaseInformation: true,
         FinancialResponsibility: true,
@@ -26,7 +27,7 @@ export class PatientAggreementsValidator extends PatientValidator {
         Pelvic: false,
         PhotoVideo: false
     }
-    constructor(pateintAgreements: Agreements) {
+    constructor(pateintAgreements: PatientAgreement) {
         super();
         this.pateintAgreements = pateintAgreements
     }

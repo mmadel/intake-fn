@@ -55,16 +55,8 @@ export class RecommendationReportComponent implements OnInit {
       label: 'Email'
     },
     {
-      key: 'country',
-      label: 'Country'
-    },
-    {
       key: 'phoneNumber',
       label: 'Phone Number'
-    },
-    {
-      key: 'patientId',
-      label: 'patientId'
     },
     {
       key: 'createdAt',

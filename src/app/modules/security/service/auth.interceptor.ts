@@ -2,7 +2,6 @@ import {
   HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError, finalize, from, mergeMap, Observable, throwError } from 'rxjs';
 import { UserRoleURLS } from 'src/app/core/adminlayout/header/user.role.urls';
@@ -31,8 +30,10 @@ export class AuthInterceptor implements HttpInterceptor {
           this.spinner.hide();
         }),
         catchError(error => {
+          if(error.status === 401){
+            this.kcAuthServiceService.logout();
+          }
           if (error.error.errorCode === 'UNAUTHORIZED') {
-            console.log('token is expired');
             this.kcAuthServiceService.logout();
           } else {
             return throwError(error);

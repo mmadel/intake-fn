@@ -1,16 +1,15 @@
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IconModule, IconSetService } from '@coreui/icons-angular';
 
 import {
-  PerfectScrollbarModule,
-  PERFECT_SCROLLBAR_CONFIG,
-  PerfectScrollbarConfigInterface,
+  PerfectScrollbarConfigInterface, PerfectScrollbarModule,
+  PERFECT_SCROLLBAR_CONFIG
 } from 'ngx-perfect-scrollbar';
 
 import {
@@ -32,21 +31,17 @@ import {
   SharedModule,
   SidebarModule,
   TabsModule,
-  UtilitiesModule,
+  UtilitiesModule
 } from '@coreui/angular-pro';
 
 
-import {
-  DefaultLayoutComponent,
-  DefaultHeaderComponent,
-  DefaultFooterComponent,
-  DefaultAdminLayoutComponent,
-  AdminHeaderComponent
-} from './core';
-import { PatientService } from './modules/patient.questionnaire/service/patient.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { PatientListService } from './modules/patient.admin/services/patient-list.service';
 import { ToastrModule } from 'ngx-toastr';
+import {
+  AdminHeaderComponent, DefaultAdminLayoutComponent, DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent
+} from './core';
+import { PatientListService } from './modules/patient.admin/services/patient-list.service';
+import { PatientService } from './modules/patient.questionnaire/service/patient.service';
 import { SecurityModule } from './modules/security';
 import { AuthInterceptor } from './modules/security/service/auth.interceptor';
 
