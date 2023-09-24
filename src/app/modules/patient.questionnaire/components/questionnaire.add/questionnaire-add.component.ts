@@ -47,6 +47,7 @@ export class QuestionnaireAddComponent implements OnInit {
   validator: ValidatorContainer;
   modelName: string = '';
   signatureImg: string;
+  isPatientUnderage: boolean = false;
   //patient: Patient = new Patient();
   obj: any;
   patientFields: PatientField;
@@ -93,6 +94,16 @@ export class QuestionnaireAddComponent implements OnInit {
       this.validator = this.essentialInfoComponent?.validate();
       if (this.validator.isValid) {
         this.patientStoreService.patientEssentialInformation = this.essentialInfoComponent.patientEssentialInformation;
+        if (this.essentialInfoComponent.isPatientUnderage) {
+          this.isPatientUnderage = true;
+          this.patientStoreService.patientGrantor = this.essentialInfoComponent.patientGrantor;
+          for (let guarantor of this.essentialInfoComponent.imageFormData) {
+            this.formFiles.append(guarantor[0], guarantor[1])
+          }
+        } else {
+          this.isPatientUnderage = false;
+          this.patientStoreService.patientGrantor = {}
+        }
         this.proceedToNextStep();
       } else {
         this.scrollUp();
@@ -133,7 +144,7 @@ export class QuestionnaireAddComponent implements OnInit {
 
       if (this.validator.isValid) {
         this.insuranceInformationComponent?.store();
-        this.proceedToNextStep();
+        this.proceedToNextStep(patientModel);
       } else {
         this.scrollUp();
       }
@@ -141,7 +152,9 @@ export class QuestionnaireAddComponent implements OnInit {
     if (patientModel === 'upload') {
       this.validator = new PateintFilesValidator(this.uploadPhotoComponent.imageFormData).validate();
       if (this.validator.isValid) {
-        this.fillModelFiles()
+        for (let patientFiles of this.uploadPhotoComponent.imageFormData) {
+          this.formFiles.append(patientFiles[0], patientFiles[1]);
+        }
         this.proceedToNextStep();
       } else {
         this.scrollUp();
@@ -161,13 +174,17 @@ export class QuestionnaireAddComponent implements OnInit {
       this.proceedToNextStep();
     }
   }
-  proceedToNextStep() {
+  proceedToNextStep(patientModel?: string) {
     this.calculatePercentage(this.counter, 'next')
     this.counter++;
+    if (patientModel === 'insurance' && this.isPatientUnderage)
+      this.counter++;
     this.scrollUp();
   }
-  back() {
+  back(patientModel?: string) {
     this.counter--;
+    if (patientModel === 'insurance' && this.isPatientUnderage)
+      this.counter--;
     this.calculatePercentage(this.counter, 'back');
     this.validator = new ValidatorContainer();
   }
@@ -219,6 +236,7 @@ export class QuestionnaireAddComponent implements OnInit {
     pateint.clinicId = this.clinicId
     this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
       (response) => {
+        console.log('this.formFiles @@@ ' + JSON.stringify(this.formFiles))
         this.patientService.upload(this.formFiles, <number>response.body).subscribe(
           (response) => {
 
@@ -237,18 +255,6 @@ export class QuestionnaireAddComponent implements OnInit {
         this.scrollUp();
       });
 
-  }
-  fillModelFiles() {
-    if (this.essentialInfoComponent) {
-      for (let guarantor of this.essentialInfoComponent.imageFormData) {
-        this.formFiles.append(guarantor[0], guarantor[1])
-      }
-    }
-    if (this.uploadPhotoComponent) {
-      for (let patientFiles of this.uploadPhotoComponent.imageFormData) {
-        this.formFiles.append(patientFiles[0], patientFiles[1]);
-      }
-    }
   }
   fillSignatureModel() {
     if (this.patientsignatureComponent !== undefined)

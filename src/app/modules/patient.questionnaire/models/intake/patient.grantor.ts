@@ -4,7 +4,7 @@ export interface PatientGrantor {
     firstName?: string;
     middleName?: string;
     lastName?: string;
-    relation?: Relation;
+    relation?: string;
     idFront?: number[];
     idBack?: number[];
   }

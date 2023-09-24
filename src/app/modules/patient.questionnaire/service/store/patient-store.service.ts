@@ -49,6 +49,8 @@ export class PatientStoreService {
       patient.patientInsurance.patientCommercialInsurance = this.patientCommercialInsurance
     if (this.patientInsuranceCompensationNoFault !== undefined)
       patient.patientInsurance.patientInsuranceCompensationNoFault = this.patientInsuranceCompensationNoFault;
+    if (this.patientGrantor)
+      patient.patientGrantor = this.patientGrantor
     patient.patientAgreements = this.patientAgreements;
     return patient;
   }

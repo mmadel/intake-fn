@@ -18,7 +18,6 @@ export class EssentialInfoComponent implements OnInit {
   patientEssentialInformation?: PatientEssentialInformation;
   patientGrantor: PatientGrantor = {}
   relationShip = Relation;
-  pateintBasicInfo: Basic = new Basic()
   isPatientUnderage: boolean = false;
   imageFormData: FormData = new FormData();
   @Input() requiredFields?: EssentialInformation;
@@ -27,21 +26,24 @@ export class EssentialInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+
     if (this.patientStoreService.patientEssentialInformation === undefined) {
+      this.patientGrantor = {
+        relation: ''
+      }
       this.patientEssentialInformation = {
         patientName: {},
         patientEmergencyContact: {
-          emergencyRelation:''
+          emergencyRelation: ''
         },
         patientEmployment: {
-          employmentStatus:''
+          employmentStatus: ''
         },
         patientPhone: {
-          phoneType:''
+          phoneType: ''
         },
-        gender:'',
-        maritalStatus :'',
+        gender: '',
+        maritalStatus: '',
       }
     } else {
       this.patientEssentialInformation = this.patientStoreService.patientEssentialInformation;
