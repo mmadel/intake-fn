@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-//import { Patient } from 'src/app/models/patient/patient.model';
-import { PatientRequiredFields } from 'src/app/models/validation/patient.fields';
+import { PatientField } from 'src/app/models/validation/new/patient.field';
 import { PatientRequiredFieldsService } from 'src/app/modules/patient.admin/services/patient.required.fields.service';
 import { PateintFilesValidator } from 'src/app/validators/patient.files.validator';
 import { PatientAggreementsValidator } from 'src/app/validators/patient.validator/patient.aggreements.validator';
@@ -50,7 +49,7 @@ export class QuestionnaireAddComponent implements OnInit {
   signatureImg: string;
   //patient: Patient = new Patient();
   obj: any;
-  patientFields: PatientRequiredFields;
+  patientFields: PatientField;
   @ViewChild(EssentialInfoComponent) essentialInfoComponent: EssentialInfoComponent;
   @ViewChild(AddressInformationComponent) addressInformationComponent: AddressInformationComponent;
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
@@ -70,21 +69,19 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   formFiles: FormData = new FormData();
   ngOnInit(): void {
-    // this.localService.removeData('patient')
-    this.patientRequiredFieldsService.retrieve().subscribe(patientFields => {
-      this.patientFields = <PatientRequiredFields>patientFields;
-      this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
-      if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
-        //this.router.navigate(['/questionnaire/error']);
-        this.isClinicIdEmpty = true;
-      } else {
-        this.router.navigate([], {
-          queryParams: {
-            'clinicId': null,
-          },
-          queryParamsHandling: 'merge'
-        })
-      }
+    this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
+    if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
+      this.isClinicIdEmpty = true;
+    } else {
+      this.router.navigate([], {
+        queryParams: {
+          'clinicId': null,
+        },
+        queryParamsHandling: 'merge'
+      })
+    }
+    this.patientRequiredFieldsService.retrieve(this.clinicId).subscribe(patientFields => {
+      this.patientFields = <PatientField>patientFields;
     })
   }
 

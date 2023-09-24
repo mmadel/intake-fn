@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
-import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
+import { MedicalInformation } from 'src/app/models/validation/new/medical.information';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
@@ -20,7 +20,7 @@ export class MedicalInfoComponent implements OnInit {
   medicalQuestionnaireInfo: MedicalQuestionnaireInfo;
   patientMedical?: PatientMedical;
   patientSource?: PatientSource = {};
-  @Input() requiredFields: MedicalInfoRequired;
+  @Input() requiredFields?: MedicalInformation;
   entityValues = entityValues;
   constructor(private patientStoreService: PatientStoreService) { }
 
@@ -62,7 +62,7 @@ export class MedicalInfoComponent implements OnInit {
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;
-    Object.entries(this.requiredFields)
+    Object.entries(this.requiredFields!)
       .forEach(([key, value]) => {
         if (key === name) {
           field = value;
@@ -72,7 +72,7 @@ export class MedicalInfoComponent implements OnInit {
   }
   public validate(): ValidatorContainer {
     var patientValidator = new PatientMedicalQuestionnaireValidator(this.patientMedical || {}, this.patientSource || {},
-      this.requiredFields);
+      this.requiredFields!);
     return patientValidator.validate();
   }
 }

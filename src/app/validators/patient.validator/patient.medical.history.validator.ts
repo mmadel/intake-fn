@@ -1,13 +1,13 @@
 import * as _ from "lodash";
-import { MedicalHistoryInfoRequired } from "src/app/models/validation/medical.history.info.required";
+import { MedicalHistoryInformation } from "src/app/models/validation/new/medical.history.information";
 import { PatientMedicalHistory } from "src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history";
 import { PropertyValidator } from "../PropertyValidator";
 import { ValidatorContainer } from "../ValidatorContainer";
 import { PatientValidator } from "./patient.validator";
 export class MdicalHistoryValidator extends PatientValidator {
     model: PatientMedicalHistory;
-    requiredFields: MedicalHistoryInfoRequired;
-    constructor(model: PatientMedicalHistory, requiredFields: MedicalHistoryInfoRequired) {
+    requiredFields: MedicalHistoryInformation;
+    constructor(model: PatientMedicalHistory, requiredFields: MedicalHistoryInformation) {
         super();
         this.model = model;
         this.requiredFields = requiredFields;

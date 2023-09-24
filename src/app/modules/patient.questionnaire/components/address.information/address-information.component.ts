@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Address } from 'src/app/models/patient/address.info.model';
-import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
+import { AddressInformation } from 'src/app/models/validation/new/address.information';
 import { PatientAddressValidator } from 'src/app/validators/patient.validator/patient.address.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientStoreService } from '../../service/store/patient-store.service';
@@ -11,7 +11,7 @@ import { PatientStoreService } from '../../service/store/patient-store.service';
 })
 export class AddressInformationComponent implements OnInit {
   patientAddress?: Address = new Address()
-  @Input() requiredFields: AddressInfoRequired;
+  @Input() requiredFields?: AddressInformation;
   constructor(private patientStoreService: PatientStoreService) { }
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class AddressInformationComponent implements OnInit {
       this.patientAddress = this.patientStoreService?.patientAddress;
   }
   public validate(): ValidatorContainer {
-    var patientValidator = new PatientAddressValidator(this.requiredFields, this.patientAddress || {});
+    var patientValidator = new PatientAddressValidator(this.requiredFields!, this.patientAddress || {});
     return patientValidator.validate();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { InsuranceQuestionnaireInfo } from 'src/app/models/questionnaire/insurance.questionnaire.info';
-import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurnace.commerial.info.required';
-import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
+import { InsuranceCommercialInformation } from 'src/app/models/validation/new/insurance.commercial.information';
+import { InsuranceCompensationInformation } from 'src/app/models/validation/new/insurance.compensation.information';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientInsurance } from '../../models/intake/Insurance/patient.insurance';
 import { PatientStoreService } from '../../service/store/patient-store.service';
@@ -17,8 +17,8 @@ export class InsuranceInformationComponent implements OnInit {
   patientInsuranceType: string | undefined = undefined;
   @ViewChild(WorkerCompComponent) workerCompComponent: WorkerCompComponent;
   @ViewChild(WorkerNotCompComponent) workerNotCompComponent: WorkerNotCompComponent;
-  @Input() insurnaceCompInfoRequired: InsurnaceCompInfoRequired;
-  @Input() insurnacecommerialInfoRequired: InsurnacecommerialInfoRequired
+  @Input() insurnaceCompInfoRequired?: InsuranceCompensationInformation;
+  @Input() insurnacecommerialInfoRequired?: InsuranceCommercialInformation
   insuranceQuestionnaireInfo: InsuranceQuestionnaireInfo;
   patientInsurance?: PatientInsurance = {};
   constructor(private patientStoreService: PatientStoreService) { }

@@ -1,7 +1,6 @@
 
 import * as _ from 'lodash';
-import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
-import { MedicalInfoRequired } from 'src/app/models/validation/medical.info.required';
+import { MedicalInformation } from 'src/app/models/validation/new/medical.information';
 import { PatientMedical } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical';
 import { PatientSource } from 'src/app/modules/patient.questionnaire/models/intake/source/patient.source';
 import { PropertyValidator } from '../PropertyValidator';
@@ -12,10 +11,10 @@ import { PatientValidator } from './patient.validator';
 export class PatientMedicalQuestionnaireValidator extends PatientValidator {
     medicalQuestionnaireInfo: PatientMedical;
     patientSource: PatientSource
-    requiredFields: MedicalInfoRequired;
+    requiredFields: MedicalInformation;
 
     constructor(medicalQuestionnaireInfo: PatientMedical, patientSource: PatientSource,
-        requiredFields: MedicalInfoRequired) {
+        requiredFields:MedicalInformation) {
         super();
         this.medicalQuestionnaireInfo = medicalQuestionnaireInfo;
         this.requiredFields = requiredFields;

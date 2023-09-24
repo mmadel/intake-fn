@@ -1,24 +1,24 @@
 import * as _ from "lodash";
-import { InsurnacecommerialInfoRequired } from "src/app/models/validation/insurnace.commerial.info.required";
-import { InsurnaceCompInfoRequired } from "src/app/models/validation/insurnace.comp.info.required";
+import { InsuranceCommercialInformation } from "src/app/models/validation/new/insurance.commercial.information";
+import { InsuranceCompensationInformation } from "src/app/models/validation/new/insurance.compensation.information";
 import { PatientCommercialInsurance } from "src/app/modules/patient.questionnaire/models/intake/Insurance/patient.commercial.insurance";
 import { PatientInsuranceCompensationNoFault } from "src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance.compensation.no.fault";
 import { PropertyValidator } from "../PropertyValidator";
 import { ValidatorContainer } from "../ValidatorContainer";
 import { PatientValidator } from "./patient.validator";
 export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
-    insurnaceCompInfoRequired: InsurnaceCompInfoRequired;
-    InsurnacecommerialInfoRequired: InsurnacecommerialInfoRequired;
+    insurnaceCompInfoRequired?: InsuranceCompensationInformation;
+    InsurnacecommerialInfoRequired?: InsuranceCommercialInformation;
     patientInsuranceCompensationNoFault?: PatientInsuranceCompensationNoFault;
     patientCommercialInsurance?: PatientCommercialInsurance;
     constructor() {
         super();
     }
 
-    public setInsurnacecommerialInfoRequired(InsurnacecommerialInfoRequired: InsurnacecommerialInfoRequired) {
+    public setInsurnacecommerialInfoRequired(InsurnacecommerialInfoRequired: InsuranceCommercialInformation) {
         this.InsurnacecommerialInfoRequired = InsurnacecommerialInfoRequired;
     }
-    public setInsurnaceCompInfoRequired(insurnaceCompInfoRequired: InsurnaceCompInfoRequired) {
+    public setInsurnaceCompInfoRequired(insurnaceCompInfoRequired: InsuranceCompensationInformation) {
         this.insurnaceCompInfoRequired = insurnaceCompInfoRequired;
     }
 

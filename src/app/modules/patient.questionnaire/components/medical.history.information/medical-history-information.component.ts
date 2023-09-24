@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MedicalHistroyInformation } from 'src/app/models/questionnaire/medical/history/medical.history.info';
-import { MedicalHistoryInfoRequired } from 'src/app/models/validation/medical.history.info.required';
-import { LocalService } from 'src/app/modules/common';
+import { MedicalHistoryInformation } from 'src/app/models/validation/new/medical.history.information';
 import { MdicalHistoryValidator } from 'src/app/validators/patient.validator/patient.medical.history.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientMedicalHistory } from '../../models/intake/medical/patient.medical.history';
@@ -16,7 +15,7 @@ import { IPatientCondition } from './patient.condition';
 export class MedicalHistoryInformationComponent implements OnInit {
   model: MedicalHistroyInformation = new MedicalHistroyInformation();
   patientMedicalHistory?: PatientMedicalHistory;
-  @Input() requiredFields: MedicalHistoryInfoRequired;
+  @Input() requiredFields?: MedicalHistoryInformation;
   isScanning: string = '';
   isMetalImplantation: string = '';
   isPacemaker: string = ''
@@ -148,7 +147,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
 
   isRequiredField(name: string): boolean {
     var field: boolean = false;
-    Object.entries(this.requiredFields)
+    Object.entries(this.requiredFields!)
       .forEach(([key, value]) => {
         if (key === name) {
           field = value;
@@ -158,7 +157,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
   }
 
   public validate(): ValidatorContainer {
-    var patientValidator = new MdicalHistoryValidator(this.patientMedicalHistory || {}, this.requiredFields)
+    var patientValidator = new MdicalHistoryValidator(this.patientMedicalHistory || {}, this.requiredFields!)
     return patientValidator.validate();
   }
 }

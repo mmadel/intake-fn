@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { WrokerComp } from 'src/app/models/questionnaire/Insurance/worker.comp';
-import { AddressInfoRequired } from 'src/app/models/validation/address.info.required';
-import { InsurnaceCompInfoRequired } from 'src/app/models/validation/insurnace.comp.info.required';
+import { AddressInformation } from 'src/app/models/validation/new/address.information';
+import { InsuranceCompensationInformation } from 'src/app/models/validation/new/insurance.compensation.information';
 import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientInsuranceCompensationNoFault } from '../../../models/intake/Insurance/patient.insurance.compensation.no.fault';
@@ -17,8 +17,8 @@ import { PatientStoreService } from '../../../service/store/patient-store.servic
 export class WorkerCompComponent implements OnInit {
   model: WrokerComp
   patientInsuranceCompensationNoFault?: PatientInsuranceCompensationNoFault;
-  requiredFields: AddressInfoRequired;
-  @Input() insurnaceCompInfoRequired: InsurnaceCompInfoRequired;
+  requiredFields: AddressInformation;
+  @Input() insurnaceCompInfoRequired?: InsuranceCompensationInformation;
   constructor(private patientStoreService: PatientStoreService) { }
 
   ngOnInit(): void {
@@ -34,7 +34,6 @@ export class WorkerCompComponent implements OnInit {
       this.patientInsuranceCompensationNoFault = this.patientStoreService.patientInsuranceCompensationNoFault;
     }
     this.requiredFields = {
-      id: null,
       type: true,
       first: true,
       second: true,
@@ -49,7 +48,7 @@ export class WorkerCompComponent implements OnInit {
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;
-    Object.entries(this.insurnaceCompInfoRequired)
+    Object.entries(this.insurnaceCompInfoRequired!)
       .forEach(([key, value]) => {
         if (key === name) {
           field = value;
@@ -59,7 +58,7 @@ export class WorkerCompComponent implements OnInit {
   }
   public validate(): ValidatorContainer {
     var patientValidator = new PatientInsuranceQuestionnaireValidator()
-    patientValidator.setInsurnaceCompInfoRequired(this.insurnaceCompInfoRequired)
+    patientValidator.setInsurnaceCompInfoRequired(this.insurnaceCompInfoRequired!)
     patientValidator.setComnsetationModel(this.patientInsuranceCompensationNoFault)
     return patientValidator.validate();
   }

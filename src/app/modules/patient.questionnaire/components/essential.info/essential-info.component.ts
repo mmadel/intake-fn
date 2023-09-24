@@ -2,12 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { Basic } from 'src/app/models/patient/basic.info.model';
-import { BasicInfoRequired } from 'src/app/models/validation/basic.info';
+import { EssentialInformation } from 'src/app/models/validation/new/essential.information';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { Relation } from '../../enums/emergency.relation';
 import { PatientEssentialInformation } from '../../models/intake/essential/patient.essential.information';
-import { Patient } from '../../models/intake/patient';
 import { PatientGrantor } from '../../models/intake/patient.grantor';
 import { PatientStoreService } from '../../service/store/patient-store.service';
 @Component({
@@ -22,7 +21,7 @@ export class EssentialInfoComponent implements OnInit {
   pateintBasicInfo: Basic = new Basic()
   isPatientUnderage: boolean = false;
   imageFormData: FormData = new FormData();
-  @Input() requiredFields: BasicInfoRequired;
+  @Input() requiredFields?: EssentialInformation;
   constructor(private imageCompress: NgxImageCompressService,
     private patientStoreService: PatientStoreService) {
   }
@@ -50,7 +49,7 @@ export class EssentialInfoComponent implements OnInit {
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;
-    Object.entries(this.requiredFields)
+    Object.entries(this.requiredFields!)
       .forEach(([key, value]) => {
         if (key === name) {
           field = value;
@@ -110,7 +109,7 @@ export class EssentialInfoComponent implements OnInit {
     this.imageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
   }
   public validate(): ValidatorContainer {
-    var patientValidator = new PatientEssentialValidator(this.requiredFields, this.patientEssentialInformation || {});
+    var patientValidator = new PatientEssentialValidator(this.requiredFields!, this.patientEssentialInformation || {});
     return patientValidator.validate();
   }
   formatDate() {

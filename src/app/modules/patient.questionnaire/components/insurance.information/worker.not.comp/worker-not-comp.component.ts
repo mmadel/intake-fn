@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WrokerNotComp } from 'src/app/models/questionnaire/Insurance/worker.not.comp';
-import { InsurnacecommerialInfoRequired } from 'src/app/models/validation/insurnace.commerial.info.required';
+import { InsuranceCommercialInformation } from 'src/app/models/validation/new/insurance.commercial.information';
 import { InsuranceCompany } from 'src/app/modules/patient.admin/models/insurance.company.model';
 import { InsuranceCompanyService } from 'src/app/modules/patient.admin/services/insurance.company/insurance-company.service';
 import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
@@ -19,7 +19,7 @@ export class WorkerNotCompComponent implements OnInit {
   patientCommercialInsurance?: PatientCommercialInsurance;
   isSecondaryInsurance: boolean | undefined = undefined;
   isMedicareCoverage: boolean | undefined = undefined;
-  @Input() insurnacecommerialInfoRequired: InsurnacecommerialInfoRequired
+  @Input() insurnacecommerialInfoRequired?: InsuranceCommercialInformation
   constructor(private patientStoreService: PatientStoreService, private insuranceCompanyService: InsuranceCompanyService) { }
 
   ngOnInit(): void {
@@ -65,7 +65,7 @@ export class WorkerNotCompComponent implements OnInit {
   }
   isRequiredField(name: string): boolean {
     var field: boolean = false;
-    Object.entries(this.insurnacecommerialInfoRequired)
+    Object.entries(this.insurnacecommerialInfoRequired!)
       .forEach(([key, value]) => {
         if (key === name) {
           field = value;
@@ -76,7 +76,7 @@ export class WorkerNotCompComponent implements OnInit {
 
   public validate(): ValidatorContainer {
     var patientValidator = new PatientInsuranceQuestionnaireValidator();
-    patientValidator.setInsurnacecommerialInfoRequired(this.insurnacecommerialInfoRequired)
+    patientValidator.setInsurnacecommerialInfoRequired(this.insurnacecommerialInfoRequired!)
     patientValidator.setCommmersialMode(this.patientCommercialInsurance)
     return patientValidator.validate();
   }
