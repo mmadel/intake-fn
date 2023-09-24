@@ -35,7 +35,7 @@
 /intake-service/api/user/delete/userId/:userId https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/user/delete/userId/:userId  200
 
 /intake-service/api/agreement https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/agreement  200
-/intake-service/api/document/id/patientId/:patientId https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/document/id/patientId/:patientId  200
+/intake-service/api/document/id/patientId/:patientId/hasGuarantor/:hasGuarantor https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/document/id/patientId/:patientId/hasGuarantor/:hasGuarantor  200
 /intake-service/api/document/insurance/patientId/:patientId https://patientintake-app-32f9d5b1a9cf.herokuapp.com/intake-service/api/document/insurance/patientId/:patientId  200
 
 
