@@ -102,7 +102,7 @@ export class QuestionnaireAddComponent implements OnInit {
           }
         } else {
           this.isPatientUnderage = false;
-          this.patientStoreService.patientGrantor = {}
+          this.patientStoreService.patientGrantor  = undefined
         }
         this.proceedToNextStep();
       } else {
