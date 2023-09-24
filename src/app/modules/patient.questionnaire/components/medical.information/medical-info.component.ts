@@ -32,13 +32,14 @@ export class MedicalInfoComponent implements OnInit {
       this.patientSource!.entitySource = undefined;
     } else {
       this.patientSource!.entitySource = {
-        organizationName:'',
+        organizationName: '',
       }
       this.patientSource!.doctorSource = undefined;
     }
   }
   physicalTherapyQChange(value: string) {
     this.patientMedical!.patientPhysicalTherapy = value === 'yes' ? {} : undefined
+    this.patientMedical!.hasPatientPhysicalTherapy = value === 'yes' ? true : false;
     this.ispatientPhysicalTherapy = value;
 
   }
@@ -50,13 +51,13 @@ export class MedicalInfoComponent implements OnInit {
     if (this.patientStoreService.patientMedical === undefined) {
       this.patientMedical = {
         patientMedicalHistory: {},
-        appointmentBooking:''
+        appointmentBooking: ''
       }
     } else {
       this.patientMedical = this.patientStoreService.patientMedical;
       this.patientSource = this.patientStoreService.patientSource;
       this.isReferringDoctor = this.patientStoreService.patientSource?.doctorSource ? 'yes' : 'no'
-      this.ispatientPhysicalTherapy = this.patientStoreService.patientMedical.patientPhysicalTherapy ? 'yes' : 'no'
+      this.ispatientPhysicalTherapy = this.patientStoreService.patientMedical.hasPatientPhysicalTherapy ? 'yes' : 'no'
       this.isfamilyResultSubmission = this.patientStoreService.patientMedical.familyResultSubmission ? 'yes' : 'no'
     }
   }

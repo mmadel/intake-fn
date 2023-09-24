@@ -8,6 +8,8 @@ export interface PatientCommercialInsurance {
     policyId?: string;
     relationship?: string;
     secondaryInsurance?: SecondaryInsurance;
+    hasSecondaryInsurance?:boolean | undefined
     medicareCoverage?: MedicareCoverage;
+    hasMedicareCoverage?:boolean | undefined
     patientRelationship?: PatientRelationship;
   }

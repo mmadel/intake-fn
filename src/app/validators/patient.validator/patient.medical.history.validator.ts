@@ -52,22 +52,22 @@ export class MdicalHistoryValidator extends PatientValidator {
                 validator.push({ property: "Please select each condition that you have been", message: '' });
 
         }
-        if (this.isRequiredField('scanningTest')) {
+        //if (this.isRequiredField('scanningTest')) {
             if (this.model.scanningTest === undefined)
                 validator.push({ property: "Please Select : MRI , CT Or X-Ray", message: '' });
 
             else if ((this.model.scanningTestValue === '' || this.model.scanningTestValue === undefined) && (this.model.scanningTest))
                 validator.push({ property: "MRI , CT Or X-Ray Values", message: '' });
-        }
+        //}
 
-        if (this.isRequiredField('metalImplantation')) {
+        //if (this.isRequiredField('metalImplantation')) {
             if (this.model.metalImplantation === undefined)
                 validator.push({ property: "Please Select : Metal Implants", message: '' });
-        }
-        if (this.isRequiredField('pacemaker')) {
+        //}
+        //if (this.isRequiredField('pacemaker')) {
             if (this.model.pacemaker === undefined)
                 validator.push({ property: "Please Select : Pacemaker", message: '' });
-        }
+        //}
         if (this.isRequiredField('surgeriesList')) {
             if (this.model.surgeriesList === '' || this.model.surgeriesList === undefined)
                 validator.push({ property: "Please Select : list any Surgeries you may have had ", message: '' });

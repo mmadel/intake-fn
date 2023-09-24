@@ -1,4 +1,4 @@
 export interface PatientPhysicalTherapy {
     location?: string;
-    numberOfVisit?: number;
+    numberOfVisit?: number;    
   }

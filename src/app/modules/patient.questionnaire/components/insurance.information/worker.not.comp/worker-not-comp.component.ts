@@ -36,25 +36,16 @@ export class WorkerNotCompComponent implements OnInit {
     } else {
       this.patientCommercialInsurance = this.patientStoreService.patientCommercialInsurance;
       this.isSecondaryInsurance = this.patientCommercialInsurance.secondaryInsurance ? true : false
-      this.isMedicareCoverage = this.patientCommercialInsurance.medicareCoverage ? true : false
+      this.isMedicareCoverage = this.patientCommercialInsurance.medicareCoverage? true : false
     }
   }
   isSecondaryInsuranceChange(val: string) {
-    if (val === 'yes') {
-      this.patientCommercialInsurance!.secondaryInsurance = {}
-    }
-    if (val === 'no') {
-      this.patientCommercialInsurance!.secondaryInsurance = undefined;
-    }
-
+    this.patientCommercialInsurance!.secondaryInsurance = val === 'yes' ? {} : undefined
+    this.patientCommercialInsurance!.hasSecondaryInsurance = val === 'yes' ? true : false
   }
   isMedicareCoverageChange(val: string) {
-    if (val === 'yes') {
-      this.patientCommercialInsurance!.medicareCoverage = {};
-    }
-    if (val === 'no') {
-      this.patientCommercialInsurance!.medicareCoverage = undefined
-    }
+    this.patientCommercialInsurance!.medicareCoverage = val === 'yes' ? {} : undefined
+    this.patientCommercialInsurance!.hasMedicareCoverage = val === 'yes' ? true : false
   }
   isPatientRelationshipDTOChange() {
     if (this.patientCommercialInsurance!.relationship !== 'Self') {

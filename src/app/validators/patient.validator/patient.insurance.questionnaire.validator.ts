@@ -42,6 +42,8 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
 
     }
     protected validateInfo(validator: PropertyValidator[]): void {
+        if (this.insurnaceCompInfoRequired === undefined && this.InsurnacecommerialInfoRequired === undefined)
+            this.validateWrokerAll(validator)
         if (this.insurnaceCompInfoRequired !== undefined)
             this.validateWrokerComp(validator)
         if (this.InsurnacecommerialInfoRequired !== undefined)
@@ -73,8 +75,7 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
                 validator.push({ property: " Injury Type", message: '' });
         }
         if (this.isRequiredField('accidentDate')) {
-            console.log(this.patientInsuranceCompensationNoFault!.accidentDate +' DDDDDDDDDDDDDD')
-            if (Number.isNaN(this.patientInsuranceCompensationNoFault!.accidentDate) || this.patientInsuranceCompensationNoFault!.accidentDate === undefined )
+            if (Number.isNaN(this.patientInsuranceCompensationNoFault!.accidentDate) || this.patientInsuranceCompensationNoFault!.accidentDate === undefined)
                 validator.push({ property: " Accident Date", message: '' });
         }
         if (this.isRequiredField('workerStatus')) {
@@ -99,10 +100,10 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
             if (this.patientInsuranceCompensationNoFault!.fax === '' || this.patientInsuranceCompensationNoFault!.fax === undefined)
                 validator.push({ property: " Fax", message: '' });
         }
-        if (this.isRequiredField('insuranceName')) {
-            if (this.patientInsuranceCompensationNoFault!.insuranceName === '' || this.patientInsuranceCompensationNoFault!.insuranceName === undefined)
-                validator.push({ property: " Insurance Name", message: '' });
-        }
+        // if (this.isRequiredField('insuranceName')) {
+        if (this.patientInsuranceCompensationNoFault!.insuranceName === '' || this.patientInsuranceCompensationNoFault!.insuranceName === undefined)
+            validator.push({ property: " Insurance Name", message: '' });
+        //}
         if (this.isRequiredField('claimNumber')) {
             if (this.patientInsuranceCompensationNoFault!.claimNumber === '' || this.patientInsuranceCompensationNoFault!.claimNumber === undefined)
                 validator.push({ property: "Claim Number/ WC Case Number", message: '' });
@@ -168,6 +169,18 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
                     validator.push({ property: "Policy Holder’s Employer Name", message: '' });
             }
         }
+        if (this.patientCommercialInsurance!.hasSecondaryInsurance === undefined)
+            validator.push({ property: "Mandatory : Do you have secondry insurance?", message: '' });
+        else {
+            if ((this.patientCommercialInsurance!.hasSecondaryInsurance) &&
+                (this.patientCommercialInsurance!.hasMedicareCoverage === undefined))
+                validator.push({ property: "Mandatory : Do you have Medicare Coverage?", message: '' });
+        }
+    }
+    public validateWrokerAll(validator: PropertyValidator[]) {
+        console.log(this.insurnaceCompInfoRequired + ' ' + this.InsurnacecommerialInfoRequired)
+        if (this.insurnaceCompInfoRequired === undefined && this.InsurnacecommerialInfoRequired === undefined)
+            validator.push({ property: "Mandatory : Patient Insurance Type ", message: '' });
     }
 
 }

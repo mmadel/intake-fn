@@ -7,4 +7,5 @@ export interface PatientMedical {
     primaryDoctor?: string;
     patientMedicalHistory?: PatientMedicalHistory;
     patientPhysicalTherapy?: PatientPhysicalTherapy;
+    hasPatientPhysicalTherapy?:boolean | undefined;
   }

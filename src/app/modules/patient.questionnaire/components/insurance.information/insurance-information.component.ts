@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { InsuranceQuestionnaireInfo } from 'src/app/models/questionnaire/insurance.questionnaire.info';
 import { InsuranceCommercialInformation } from 'src/app/models/validation/new/insurance.commercial.information';
 import { InsuranceCompensationInformation } from 'src/app/models/validation/new/insurance.compensation.information';
+import { PatientInsuranceQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.insurance.questionnaire.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientInsurance } from '../../models/intake/Insurance/patient.insurance';
 import { PatientStoreService } from '../../service/store/patient-store.service';
@@ -43,7 +44,7 @@ export class InsuranceInformationComponent implements OnInit {
       return this.workerCompComponent.validate()
     if (this.workerNotCompComponent)
       return this.workerNotCompComponent.validate();
-    return new ValidatorContainer();
+    return this.validatePatientInsurance();
   }
   public store() {
     console.log(this.patientInsuranceType)
@@ -52,5 +53,9 @@ export class InsuranceInformationComponent implements OnInit {
     if (this.patientInsuranceType === 'Commercial')
       this.patientStoreService!.patientCommercialInsurance = this.workerNotCompComponent.patientCommercialInsurance;
 
+  }
+  private validatePatientInsurance(): ValidatorContainer{
+    var patientValidator = new PatientInsuranceQuestionnaireValidator()
+    return patientValidator.validate()
   }
 }

@@ -14,7 +14,7 @@ export class PatientMedicalQuestionnaireValidator extends PatientValidator {
     requiredFields: MedicalInformation;
 
     constructor(medicalQuestionnaireInfo: PatientMedical, patientSource: PatientSource,
-        requiredFields:MedicalInformation) {
+        requiredFields: MedicalInformation) {
         super();
         this.medicalQuestionnaireInfo = medicalQuestionnaireInfo;
         this.requiredFields = requiredFields;
@@ -71,25 +71,30 @@ export class PatientMedicalQuestionnaireValidator extends PatientValidator {
         }
     }
     protected validateInfo(validator: PropertyValidator[]) {
+        if (this.patientSource.doctorSource === undefined && this.patientSource.entitySource === undefined)
+            validator.push({ property: "Patient Source", message: '' });
         if (this.patientSource.doctorSource !== undefined)
             this.validateRecommendationDoctor(validator);
         else
             this.validateRecommendationEntity(validator);
+
+        if (this.medicalQuestionnaireInfo.hasPatientPhysicalTherapy === undefined)
+            validator.push({ property: "Mandatroy : Have you received physical therapy?", message: '' });
         if (this.medicalQuestionnaireInfo.patientPhysicalTherapy !== undefined)
             this.validatephysicalTherapyReceiving(validator);
 
-        if (this.isRequiredField('appointmentBooking')) {
-            if (this.medicalQuestionnaireInfo.appointmentBooking === '' || this.medicalQuestionnaireInfo.appointmentBooking === undefined)
-                validator.push({ property: "Appointment Booking", message: '' });
-        }
+        //if (this.isRequiredField('appointmentBooking')) {
+        if (this.medicalQuestionnaireInfo.appointmentBooking === '' || this.medicalQuestionnaireInfo.appointmentBooking === undefined)
+            validator.push({ property: "Mandatory : How did you book your appointment?", message: '' });
+        //}
         if (this.isRequiredField('primaryDoctor')) {
             if (this.medicalQuestionnaireInfo.primaryDoctor === '' || this.medicalQuestionnaireInfo.primaryDoctor === undefined)
                 validator.push({ property: "Primary Doctor", message: '' });
         }
-        if (this.isRequiredField('resultSubmissionFamily')) {
-            if (this.medicalQuestionnaireInfo.familyResultSubmission === undefined)
-                validator.push({ property: "Answer : Would you like your results sent to your family doctor?", message: '' });
-        }
+        // if (this.isRequiredField('resultSubmissionFamily')) {
+        if (this.medicalQuestionnaireInfo.familyResultSubmission === undefined)
+            validator.push({ property: "Mandatory : Would you like your results sent to your family doctor?", message: '' });
+        //}
     }
 
     isRequiredField(name: string): boolean {
