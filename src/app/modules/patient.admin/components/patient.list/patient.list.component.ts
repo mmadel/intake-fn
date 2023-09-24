@@ -128,8 +128,8 @@ export class PatientListComponent implements OnInit, OnDestroy {
         this.constructExportedFile(response,'patient-','pdf')
       });
   }
-  exportPatientIDDocument(data: IPatient) {
-    this.pateintDocumentsService.exportPateintIdDocuments(data.patientId).subscribe(
+  exportPatientIDDocument(data: IPatient , hasGuarantor?:boolean) {
+    this.pateintDocumentsService.exportPateintIdDocuments(data.patientId,hasGuarantor).subscribe(
       (response: any) => {
         this.constructExportedFile(response , 'patient-ID-Documents','zip')
       }

@@ -21,11 +21,11 @@
               <button cButton variant="outline" (click)="exportPDF(item)" cTooltip="patient PDF File">
                 <svg cIcon name="cibAdobeAcrobatReader" class="text-danger"></svg>
               </button>
-              <button cButton variant="outline" (click)="exportPatientIDDocument(item)" cTooltip="patient Id Document">
+              <button cButton variant="outline" (click)="exportPatientIDDocument(item,item.hasGuarantor)" cTooltip="Id Document">
                 <svg cIcon name="cilUser"></svg>
               </button>
-              <button cButton variant="outline" (click)="exportPatientInsuranceDocument(item)"
-                cTooltip="patient Insurance Document">
+              <button cButton variant="outline" (click)="exportPatientInsuranceDocument(item)" *ngIf="!item.hasGuarantor"
+                cTooltip="Insurance Document" >
                 <svg cIcon name="cilPaperPlane"></svg>
               </button>
             </div>
