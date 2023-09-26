@@ -135,6 +135,25 @@
                     [(ngModel)]="patientEssentialInformation!.email" name="email" />
             </div>
         </c-col>
+        <c-col xs="auto" class="mb-2">
+            <div [ngClass]="{ 'form-group required':isRequiredField('employmentStatus') }">
+                <label for="employmentStatus" class="form-label">Employment Status</label>
+                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
+                    [(ngModel)]="patientEssentialInformation!.patientEmployment!.employmentStatus"
+                    name="employmentStatus">
+                    <option value="">Select Employment status</option>
+                    <option value="Employed">Employed</option>
+                    <option value="Student">Student</option>
+                    <option value="Retired">Retired</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </c-col>
+        <c-col xs="auto" class="mb-2"
+            *ngIf="patientEssentialInformation!.patientEmployment!.employmentStatus === 'Employed'">
+            <input cFormControl [(ngModel)]="patientEssentialInformation!.patientEmployment!.employmentCompany"
+                sizing="sm" name="employedcompnay" placeholder="Company" />
+        </c-col>
 
         <div cRow>
             <c-col xs="12" class="mb-2">
@@ -166,24 +185,5 @@
                 </div>
             </c-col>
         </div>
-        <c-col xs="auto" class="mb-2">
-            <div [ngClass]="{ 'form-group required':isRequiredField('employmentStatus') }">
-                <label for="employmentStatus" class="form-label">Employment Status</label>
-                <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
-                    [(ngModel)]="patientEssentialInformation!.patientEmployment!.employmentStatus"
-                    name="employmentStatus">
-                    <option value="">Select Employment status</option>
-                    <option value="Employed">Employed</option>
-                    <option value="Student">Student</option>
-                    <option value="Retired">Retired</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-        </c-col>
-        <c-col xs="auto" class="mb-2"
-            *ngIf="patientEssentialInformation!.patientEmployment!.employmentStatus === 'Employed'">
-            <input cFormControl [(ngModel)]="patientEssentialInformation!.patientEmployment!.employmentCompany"
-                sizing="sm" name="employedcompnay" placeholder="Company" />
-        </c-col>
     </form>
 </c-row>
