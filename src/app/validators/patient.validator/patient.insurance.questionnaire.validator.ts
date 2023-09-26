@@ -131,10 +131,11 @@ export class PatientInsuranceQuestionnaireValidator extends PatientValidator {
     }
 
     private validateWrokerNotComp(validator: PropertyValidator[]) {
-        if (this.isRequiredField('insuranceCompany')) {
-            if (this.patientCommercialInsurance!.insuranceCompanyId || this.patientCommercialInsurance!.insuranceCompanyId === undefined)
+        //if (this.isRequiredField('insuranceCompany')) {
+            console.log('this.patientCommercialInsurance!.insuranceCompanyId ' + this.patientCommercialInsurance!.insuranceCompanyId)
+            if (this.patientCommercialInsurance!.insuranceCompanyId === undefined || this.patientCommercialInsurance!.insuranceCompanyId === -1)
                 validator.push({ property: "Insurance Company", message: '' });
-        }
+        //}
         if (this.isRequiredField('memberId')) {
             if (this.patientCommercialInsurance!.memberId === '' || this.patientCommercialInsurance!.memberId === undefined)
                 validator.push({ property: "Member ID", message: '' });
