@@ -39,37 +39,38 @@ export class PatientEssentialValidator extends PatientValidator {
         }
     }
     protected validateInfo(validator: PropertyValidator[]) {
-        if (this.isRequiredField('firstName'))
-            if (this.pateintBasicInfo.patientName?.firstName === '' || this.pateintBasicInfo.patientName?.firstName === undefined)
-                validator.push({ property: " First Name", message: '' });
+        //if (this.isRequiredField('firstName'))
+        if (this.pateintBasicInfo.patientName?.firstName === '' || this.pateintBasicInfo.patientName?.firstName === undefined)
+            validator.push({ property: " First Name", message: '' });
         if (this.isRequiredField('middleName'))
             if (this.pateintBasicInfo.patientName?.middleName === '' || this.pateintBasicInfo.patientName?.middleName === undefined)
                 validator.push({ property: " Middle Name", message: '' });
-        if (this.isRequiredField('lastName'))
-            if (this.pateintBasicInfo.patientName?.lastName === '' || this.pateintBasicInfo.patientName?.lastName === undefined)
-                validator.push({ property: " Last Name", message: '' });
+        //if (this.isRequiredField('lastName'))
+        if (this.pateintBasicInfo.patientName?.lastName === '' || this.pateintBasicInfo.patientName?.lastName === undefined)
+            validator.push({ property: " Last Name", message: '' });
 
-        if (this.isRequiredField('birthDate')) {
-            if (this.pateintBasicInfo.dateOfBirth === undefined)
-                validator.push({ property: " Birth Date", message: '' });
-        }
-        if (this.isRequiredField('gender')) {
-            if (this.pateintBasicInfo.gender === '' || this.pateintBasicInfo.gender === undefined)
-                validator.push({ property: " Gender", message: '' });
-        }
-        if (this.isRequiredField('maritalStatus')) {
+        //if (this.isRequiredField('birthDate')) {
+        if (this.pateintBasicInfo.dateOfBirth === undefined)
+            validator.push({ property: " Birth Date", message: '' });
+        //}
+        //if (this.isRequiredField('gender')) {
+        if (this.pateintBasicInfo.gender === '' || this.pateintBasicInfo.gender === undefined)
+            validator.push({ property: " Gender", message: '' });
+        //}
+        //if (this.isRequiredField('maritalStatus')) {
 
-            if (this.pateintBasicInfo.maritalStatus === '' || this.pateintBasicInfo.maritalStatus === undefined)
-                validator.push({ property: " Marital Status", message: '' });
-        }
+        if (this.pateintBasicInfo.maritalStatus === '' || this.pateintBasicInfo.maritalStatus === undefined)
+            validator.push({ property: " Marital Status", message: '' });
+        //}
 
-        if (this.isRequiredField('phone') || this.isRequiredField('phone')) {
-            if ((this.pateintBasicInfo.patientPhone?.phoneType === '' || this.pateintBasicInfo.patientPhone?.phoneType === undefined)
-                && (this.pateintBasicInfo.patientPhone?.phoneType === '' || this.pateintBasicInfo.patientPhone?.phoneType === undefined)) {
-                validator.push({ property: " Phone Type", message: '' });
-                validator.push({ property: " Phone Number", message: '' });
-            }
+        //if (this.isRequiredField('phone') || this.isRequiredField('phone')) {
+        if (this.pateintBasicInfo.patientPhone?.phoneType === '' || this.pateintBasicInfo.patientPhone?.phoneType === undefined) {
+            validator.push({ property: " Phone Type", message: '' });
         }
+        if (this.pateintBasicInfo.patientPhone?.phone === '' || this.pateintBasicInfo.patientPhone?.phone === undefined) {
+            validator.push({ property: " Phone Number", message: '' });
+        }
+        //}
         if (this.isRequiredField('email')) {
             if (this.pateintBasicInfo.email === '' || this.pateintBasicInfo.email === undefined)
                 validator.push({ property: " Email ", message: '' });

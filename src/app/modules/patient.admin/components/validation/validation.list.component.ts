@@ -19,8 +19,8 @@ export class ValidationListComponent implements OnInit {
   isMedicalHistoryInfoReuqiredChanged: boolean = false;
   isInsuranceInfoReuqiredChanged: boolean = false;
   workersTypes: WorkerTypes[] = [
-    { typeName: 'CompNoFault-Worker', typeValue: 'comp' },
-    { typeName: 'Commercial-Worker', typeValue: 'commercial' }
+    { typeName: 'CompensationNoFault', typeValue: 'comp' },
+    { typeName: 'Commercial', typeValue: 'commercial' }
   ]
   workerType: string = '';
   constructor(private clinicService: ClinicService , private patientRequiredFieldsService: PatientRequiredFieldsService) { }
