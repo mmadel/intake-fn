@@ -1,6 +1,6 @@
 export interface MedicalHistoryInformation {
-  height?: boolean
-  weight?: boolean
+  //height?: boolean
+  //weight?: boolean
   evaluationReason?: boolean
   medicationPrescription?: boolean
   patientCondition?: boolean
