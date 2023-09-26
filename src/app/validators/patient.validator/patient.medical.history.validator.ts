@@ -28,14 +28,14 @@ export class MdicalHistoryValidator extends PatientValidator {
 
     }
     protected validateInfo(validator: PropertyValidator[]) {
-        if (this.isRequiredField('height')) {
+        //if (this.isRequiredField('height')) {
             if (this.model.height === '' || this.model.height === undefined)
                 validator.push({ property: "Height", message: '' });
-        }
-        if (this.isRequiredField('weight')) {
+        //}
+        //if (this.isRequiredField('weight')) {
             if (this.model.weight === '' || this.model.weight === undefined)
                 validator.push({ property: "Weight", message: '' });
-        }
+        //}
         if (this.isRequiredField('evaluationReason')) {
             if (this.model.evaluationSubmission === '' || this.model.evaluationSubmission === undefined)
                 validator.push({ property: "What is your primary reason for today’s evaluation", message: '' });
