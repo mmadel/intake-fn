@@ -23,7 +23,8 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'questionnaire',
+        path: 'intake',
+        canActivate: [KCAuthGuardGuard],
         loadChildren: () =>
           import('./modules/patient.questionnaire/patient-questionnaire.module').then((m) => m.PatientQuestionnaireModule)
       },
