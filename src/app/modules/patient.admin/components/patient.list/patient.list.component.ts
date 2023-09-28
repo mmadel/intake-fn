@@ -60,6 +60,12 @@ export class PatientListComponent implements OnInit, OnDestroy {
       label: 'has Guarantor'
     },
     {
+      key: 'show',
+      label: '',      
+      filter: false,
+      sorter: false,
+    },
+    {
       key: 'actions',
       label: 'Actions',
       filter: false,
@@ -239,6 +245,10 @@ export class PatientListComponent implements OnInit, OnDestroy {
   setActivePage(page: number) {
     page = page > 0 && this.totalPages$.value + 1 > page ? page : 1;
     this.activePage$.next(page);
+  }
+  details_visible = Object.create({});
+  toggleDetails(item: any) {
+    this.details_visible[item] = !this.details_visible[item];
   }
 }
 

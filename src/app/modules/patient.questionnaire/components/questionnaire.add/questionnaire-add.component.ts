@@ -202,7 +202,7 @@ export class QuestionnaireAddComponent implements OnInit {
     })();
   }
   validateAndUploadsignature(patientId: number) {
-    if (this.PatientsignatureComponentTmp?.signatureType === 0) {
+    if (this.PatientsignatureComponentTmp?.signatureType === 1) {
       this.PatientsignatureComponentTmp?.draw();
       var model: PatientSignature = this.PatientsignatureComponentTmp?.model;
       model.patientId = patientId;
@@ -215,7 +215,7 @@ export class QuestionnaireAddComponent implements OnInit {
           this.toastr.error(error.error.message, 'Error In Upload Images');
         });
     }
-    if (this.PatientsignatureComponentTmp?.signatureType === 1) {
+    if (this.PatientsignatureComponentTmp?.signatureType === 0) {
       this.PatientsignatureComponentTmp?.generate().then(canvas => {
         var model: PatientSignature = new PatientSignature();
         model.signature = canvas.toDataURL();

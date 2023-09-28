@@ -5,15 +5,16 @@
     </a>
   </c-nav-item>
 </c-nav>
-<c-tab-content #tabContent="cTabContent" (activeTabPaneIdxChange)="onTabChange($event)" [activeTabPaneIdx]="activePane"> 
+<c-tab-content #tabContent="cTabContent" (activeTabPaneIdxChange)="onTabChange($event)" [activeTabPaneIdx]="activePane">
+ 
   <c-tab-pane class="p-3">
     <c-row>
-      <c-col xs="auto">
+      <c-col xs="12">
         <div class="w-60 p-3 border border-default mb-3" style="background-color: #eee;">
           <span [class]="signatureClass" style="font-size: xx-large; background-color: transparent;" #patientsig id="sig">{{patientFirstName}} {{patientLastName}}</span>
         </div>
       </c-col>
-      <c-col xs="auto">
+      <c-col xs="12">
         <select cSelect sizing="sm" [(ngModel)]="signatureClass">
           <option value="">Select Signature Template</option>
           <option value="signature-format-Dancing-Script" style="font-family:Dancing Script;font-size: xx-large;">Format
@@ -38,7 +39,6 @@
     </c-row>
   </c-tab-pane>
   <c-tab-pane class="p-3">
-    <c-col xs="auto">
     <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)" width="700" height="200"></canvas>
     <p class="error-message" *ngIf="signatureNeeded">Signature is required</p>
 
@@ -52,6 +52,5 @@
       <img src="{{ signatureImg }}" alt="" srcset="" />
     </div> -->
     <!-- <img *ngIf="signatureImgTest" src="{{ signatureImgTest }}" alt="" srcset="" /> -->
-  </c-col>
   </c-tab-pane>
 </c-tab-content>

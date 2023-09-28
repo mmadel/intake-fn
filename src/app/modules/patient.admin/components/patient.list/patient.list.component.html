@@ -13,10 +13,48 @@
     [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
     [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
     (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
+    <ng-template cTemplateId="tableDetails" let-item="item" >
+      <div [visible]="this.details_visible[item._id]===true" cCollapse >
+        <!-- <p ><strong>Action has been taken at :</strong> {{item['patientId']}}</p> -->
+        <table cTable hover>
+          <thead>
+          <tr>
+            <th scope="col">Document Name</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Patient Intake</td>
+            <td>
+              <button cButton variant="outline" (click)="exportPDF(item)" cTooltip="patient PDF File">
+                <svg cIcon name="cilCloudDownload"></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>Patient ID Document</td>
+            <td><button cButton variant="outline" (click)="exportPatientIDDocument(item,item.hasGuarantor)" cTooltip="Id Document">
+              <svg cIcon name="cilCloudDownload"></svg>
+            </button></td>
+          </tr>
+          <tr *ngIf="!item['hasGuarantor']">
+            <td>Patient Insurance Document</td>
+            <td>
+              <button cButton variant="outline" (click)="exportPatientInsuranceDocument(item)" *ngIf="!item.hasGuarantor"
+                cTooltip="Insurance Document" >
+                <svg cIcon name="cilCloudDownload"></svg>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
     <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
       <td>
         <ng-container [ngSwitch]="columnName">
-          <ng-container *ngSwitchCase="'actions'" class="py-2">
+          <!-- <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button cButton variant="outline" (click)="exportPDF(item)" cTooltip="patient PDF File">
                 <svg cIcon name="cibAdobeAcrobatReader" class="text-danger"></svg>
@@ -29,7 +67,7 @@
                 <svg cIcon name="cilPaperPlane"></svg>
               </button>
             </div>
-          </ng-container>
+          </ng-container> -->
           <ng-container *ngSwitchCase="'hasGuarantor'">
             <c-form-check>
               <input cFormCheckInput type="checkbox" size="sm" disabled
@@ -38,6 +76,11 @@
           </ng-container>
           <ng-container *ngSwitchDefault>
             {{tdContent}}
+          </ng-container>
+          <ng-container *ngSwitchCase="'show'" class="py-2">
+            <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
+              Records
+            </button>
           </ng-container>
         </ng-container>
       </td>

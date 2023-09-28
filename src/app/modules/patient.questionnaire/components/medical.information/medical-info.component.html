@@ -3,7 +3,7 @@
         <form cForm>
             <div [ngClass]="{ 'form-group required':isRequiredField('recommendation') }">
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">The doctor recommend us or referred you to us?</strong>
+                    <strong style="font-size: medium;">Patient Source</strong>
                 </label>
             </div>
         </form>
@@ -13,12 +13,12 @@
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" name="doctorRecommendation"
                     size="sm" [checked]="isReferringDoctor ==='yes'" />
-                <label cFormCheckLabel>Yes</label>
+                <label cFormCheckLabel>Doctor Referral</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" name="doctorRecommendation"
                     size="sm" [checked]="isReferringDoctor ==='no'" />
-                <label cFormCheckLabel>No</label>
+                <label cFormCheckLabel>Other Source</label>
             </c-form-check>
         </c-col>
         <c-col xs="12" *ngIf="isReferringDoctor ==='yes'">
@@ -38,7 +38,6 @@
         <c-col xs="12" *ngIf="isReferringDoctor ==='no'">
             <form cForm>
                 <div [ngClass]="{ 'form-group required':isRequiredField('recommendedEntityName') }" class="mb-1">
-                    <label for="entityname" class="form-label">Entity Name</label>
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         [(ngModel)]="patientSource!.entitySource!.organizationName" name="entityname">
                         <option value="">Select</option>
