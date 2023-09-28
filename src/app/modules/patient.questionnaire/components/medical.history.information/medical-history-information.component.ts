@@ -28,7 +28,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
     this.createPatientConditions();
     if (this.patientStoreService.patientMedicalHistory === undefined) {
       this.patientMedicalHistory = {
-        scanningTestValue: ''
+        scanningTestValue: []
       }
     } else {
       this.patientMedicalHistory = this.patientStoreService.patientMedicalHistory;
@@ -45,7 +45,7 @@ export class MedicalHistoryInformationComponent implements OnInit {
     if (val === 'yes') {
       this.patientMedicalHistory!.scanningTest = true
     } else {
-      this.patientMedicalHistory!.scanningTestValue = ''
+      this.patientMedicalHistory!.scanningTestValue = []
       this.patientMedicalHistory!.scanningTest = false;
     }
   }

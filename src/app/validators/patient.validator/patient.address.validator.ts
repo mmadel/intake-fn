@@ -46,9 +46,9 @@ export class PatientAddressValidator extends PatientValidator {
         }
 
         //if (this.isRequiredField('country')) {
-        if ((this.pateintAddressInfo.country === '' || this.pateintAddressInfo.country === undefined)) {
-            validator.push({ property: " Country", message: '' });
-        }
+        // if ((this.pateintAddressInfo.country === '' || this.pateintAddressInfo.country === undefined)) {
+        //     validator.push({ property: " Country", message: '' });
+        // }
         //}
         //if (this.isRequiredField('zipCode')) {
         if (this.pateintAddressInfo.zipCode === '' || this.pateintAddressInfo.zipCode === undefined)

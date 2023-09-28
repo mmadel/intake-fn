@@ -10,6 +10,8 @@ import { PatientValidator } from './patient.validator';
 export class PatientEssentialValidator extends PatientValidator {
     pateintBasicInfo: PatientEssentialInformation;
     requiredFields: EssentialInformation;
+    regexCompiles: boolean = false
+    dataMatches: boolean = false
     constructor(requiredFields: EssentialInformation, pateintBasicInfo: PatientEssentialInformation) {
         super();
         this.pateintBasicInfo = pateintBasicInfo
@@ -31,12 +33,7 @@ export class PatientEssentialValidator extends PatientValidator {
         // if ((this.pateintBasicInfo.id_effective_from_date > this.pateintBasicInfo.id_effective_to_date)) {
         //     validators.push({ property: " ID Effective Date", message: "From Date Can\'t be greater than to Date" });
         // }
-        if (validators.length > 0) {
-            validatorContainer.isValid = false;
-            _.forEach(validators, validator => {
-                validatorContainer.wrong.push(validator)
-            });
-        }
+        //if (this.pateintBasicInfo.email)
     }
     protected validateInfo(validator: PropertyValidator[]) {
         //if (this.isRequiredField('firstName'))
@@ -74,6 +71,12 @@ export class PatientEssentialValidator extends PatientValidator {
         if (this.isRequiredField('email')) {
             if (this.pateintBasicInfo.email === '' || this.pateintBasicInfo.email === undefined)
                 validator.push({ property: " Email ", message: '' });
+            else {
+                this.regexCompiles = this.testRegex()
+                this.dataMatches = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]$').test(this.pateintBasicInfo.email!)
+                if (!this.dataMatches)
+                    validator.push({ property: " Invalid email format", message: '' });
+            }
         }
         if (this.isRequiredField('emergencyContact') && this.isRequiredField('emergencyContact')) {
             if ((this.pateintBasicInfo.patientEmergencyContact?.emergencyName === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyName === undefined) &&
@@ -96,5 +99,13 @@ export class PatientEssentialValidator extends PatientValidator {
                 }
             })
         return field;
+    }
+    testRegex(): boolean {
+        try {
+            new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]")]')
+            return true
+        } catch (ex) {
+            return false
+        }
     }
 }

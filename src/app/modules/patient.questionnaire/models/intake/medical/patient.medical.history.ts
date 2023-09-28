@@ -7,7 +7,7 @@ export interface PatientMedicalHistory {
     medicationPrescription?: string;
     patientCondition?: string[];
     scanningTest?: boolean;
-    scanningTestValue?: string;
+    scanningTestValue?: string[];
     metalImplantation?: boolean;
     pacemaker?: boolean;
     surgeriesList?: string;

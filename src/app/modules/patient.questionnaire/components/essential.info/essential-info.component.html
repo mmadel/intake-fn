@@ -132,7 +132,7 @@
             <div [ngClass]="{ 'form-group required':isRequiredField('email') }">
                 <label for="email" class="form-label">Email</label>
                 <input aria-describedby="basic-addon2" cFormControl sizing="sm"
-                    [(ngModel)]="patientEssentialInformation!.email" name="email" />
+                    [(ngModel)]="patientEssentialInformation!.email" name="email"/>
             </div>
         </c-col>
         <c-col xs="auto" class="mb-2">
@@ -160,7 +160,7 @@
                 <label for="emergencyName" class="form-label">Emergency Contact</label>
                 <select cFormControl cSelect class="mb-2" sizing="sm" id="EmergencyRelation" name="EmergencyRelation"
                     [(ngModel)]="patientEssentialInformation!.patientEmergencyContact!.emergencyRelation">
-                    <option value="" disabled selected>Select Patient Emergency Relation</option>
+                    <option value="" disabled selected>Select Patient Emergency contact Relation</option>
                     <option *ngFor="let relation of relationShip | keyvalue" [value]="relation.value">
                         {{relation.key}}
                     </option>
@@ -170,7 +170,7 @@
                 <div [ngClass]="{ 'form-group required':isRequiredField('emergencyContact') }">
                     <input cFormControl
                         [(ngModel)]="patientEssentialInformation!.patientEmergencyContact!.emergencyName"
-                        name="emergencyName" sizing="sm" placeholder="Emergency Name" />
+                        name="emergencyName" sizing="sm" placeholder="Emergency contact name" />
                 </div>
             </c-col>
             <c-col xs="12" class="mb-2">

@@ -36,7 +36,7 @@ export class WorkerCompComponent implements OnInit {
     this.requiredFields = {
       type: true,
       first: true,
-      second: true,
+      second: false,
       country: true,
       zipCode: true
     }

@@ -5,30 +5,15 @@
     </a>
   </c-nav-item>
 </c-nav>
-<c-tab-content #tabContent="cTabContent" (activeTabPaneIdxChange)="onTabChange($event)" [activeTabPaneIdx]="activePane">
-  <c-tab-pane class="p-3">
-    <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)" width="700" height="200"></canvas>
-    <p class="error-message" *ngIf="signatureNeeded">Signature is required</p>
-
-    <div class="buttons flex justify-between">
-      <button cButton (click)="clearPad()" >Clear</button>
-      <!-- <button cButton (click)="draw()" [disabled]="!signatureNeeded">Capture</button> -->
-      <!-- <button cButton (click)="show()">Show</button> -->
-    </div>
-    <!-- <div *ngIf="signatureNeeded === false">
-      <p>Signature in Base64Encoded Format</p>
-      <img src="{{ signatureImg }}" alt="" srcset="" />
-    </div> -->
-    <!-- <img *ngIf="signatureImgTest" src="{{ signatureImgTest }}" alt="" srcset="" /> -->
-  </c-tab-pane>
+<c-tab-content #tabContent="cTabContent" (activeTabPaneIdxChange)="onTabChange($event)" [activeTabPaneIdx]="activePane"> 
   <c-tab-pane class="p-3">
     <c-row>
-      <c-col xs="12">
+      <c-col xs="auto">
         <div class="w-60 p-3 border border-default mb-3" style="background-color: #eee;">
           <span [class]="signatureClass" style="font-size: xx-large; background-color: transparent;" #patientsig id="sig">{{patientFirstName}} {{patientLastName}}</span>
         </div>
       </c-col>
-      <c-col xs="12">
+      <c-col xs="auto">
         <select cSelect sizing="sm" [(ngModel)]="signatureClass">
           <option value="">Select Signature Template</option>
           <option value="signature-format-Dancing-Script" style="font-family:Dancing Script;font-size: xx-large;">Format
@@ -51,5 +36,22 @@
         <!-- <button cButton (click)="generate()">Capture</button> -->
       </c-col>
     </c-row>
+  </c-tab-pane>
+  <c-tab-pane class="p-3">
+    <c-col xs="auto">
+    <canvas #canvas (touchstart)="startDrawing($event)" (touchmove)="moved($event)" width="700" height="200"></canvas>
+    <p class="error-message" *ngIf="signatureNeeded">Signature is required</p>
+
+    <div class="buttons flex justify-between">
+      <button cButton (click)="clearPad()" >Clear</button>
+      <!-- <button cButton (click)="draw()" [disabled]="!signatureNeeded">Capture</button> -->
+      <!-- <button cButton (click)="show()">Show</button> -->
+    </div>
+    <!-- <div *ngIf="signatureNeeded === false">
+      <p>Signature in Base64Encoded Format</p>
+      <img src="{{ signatureImg }}" alt="" srcset="" />
+    </div> -->
+    <!-- <img *ngIf="signatureImgTest" src="{{ signatureImgTest }}" alt="" srcset="" /> -->
+  </c-col>
   </c-tab-pane>
 </c-tab-content>
