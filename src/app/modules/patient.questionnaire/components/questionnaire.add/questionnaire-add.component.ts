@@ -41,16 +41,13 @@ export class QuestionnaireAddComponent implements OnInit {
 
   ];
 
-  counter: number = 1;
-  progressValue: number = 0;
+  counter: number;
+  progressValue: number;
   windowScrolled: boolean = true;
   validator: ValidatorContainer;
-  modelName: string = '';
-  signatureImg: string;
   isPatientUnderage: boolean = false;
-  //patient: Patient = new Patient();
-  obj: any;
   patientFields: PatientField;
+  formFiles: FormData;
   @ViewChild(EssentialInfoComponent) essentialInfoComponent: EssentialInfoComponent;
   @ViewChild(AddressInformationComponent) addressInformationComponent: AddressInformationComponent;
   @ViewChild(MedicalInfoComponent) medicalInfoComponent: MedicalInfoComponent;
@@ -68,8 +65,13 @@ export class QuestionnaireAddComponent implements OnInit {
     private route: ActivatedRoute,
     private patientStoreService: PatientStoreService) {
   }
-  formFiles: FormData = new FormData();
   ngOnInit(): void {
+    this.isCreated = false;
+    this.counter = 1;
+    this.progressValue = 0;
+    this.windowScrolled = true;
+    this.isPatientUnderage = false;
+    this.formFiles = new FormData();
     this.clinicId = Number(this.route.snapshot.queryParamMap.get('clinicId'));
     if (this.clinicId === 0 || this.clinicId === undefined || this.clinicId === null) {
       this.isClinicIdEmpty = true;
@@ -102,7 +104,7 @@ export class QuestionnaireAddComponent implements OnInit {
           }
         } else {
           this.isPatientUnderage = false;
-          this.patientStoreService.patientGrantor  = undefined
+          this.patientStoreService.patientGrantor = undefined
         }
         this.proceedToNextStep();
       } else {
@@ -201,7 +203,7 @@ export class QuestionnaireAddComponent implements OnInit {
       }
     })();
   }
-  validateAndUploadsignature(patientId: number) {
+  uploadPatientSignature(patientId: number) {
     if (this.PatientsignatureComponentTmp?.signatureType === 1) {
       this.PatientsignatureComponentTmp?.draw();
       var model: PatientSignature = this.PatientsignatureComponentTmp?.model;
@@ -231,30 +233,38 @@ export class QuestionnaireAddComponent implements OnInit {
       });;
     }
   }
+  uploadPatientDocuments(patientId: number) {
+    this.patientService.upload(this.formFiles, patientId).subscribe(
+      (response) => {
+        console.log('uploaded..')
+      },
+      (error) => {
+        this.scrollUp();
+        this.toastr.error(error.error.message, 'Error In Upload Images');
+      });
+  }
   submit() {
     var pateint: Patient = this.patientStoreService.getPatient();
     pateint.clinicId = this.clinicId
     this.patientService.createPatient(JSON.stringify(pateint)).subscribe(
       (response) => {
-        console.log('this.formFiles @@@ ' + JSON.stringify(this.formFiles))
-        this.patientService.upload(this.formFiles, <number>response.body).subscribe(
-          (response) => {
-
-            console.log('uploaded..')
-          },
-          (error) => {
-            this.scrollUp();
-            this.toastr.error(error.error.message, 'Error In Upload Images');
-          });
-        this.validateAndUploadsignature(<number>response.body);
+        this.uploadPatientDocuments(<number>response.body)
+        this.uploadPatientSignature(<number>response.body);
         this.isCreated = true;
+        setTimeout(() => {
+          this.router.navigateByUrl('intake/add', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['intake/add'], { queryParams: { clinicId: this.clinicId } }).then(() => {
+              this.patientStoreService.resetPateint()
+              this.ngOnInit()
+            })
+          })
+        }, 5000);
       },
       (error) => {
         console.log(JSON.stringify(error))
         this.toastr.error(error.error.message, 'Error In Creation');
         this.scrollUp();
       });
-
   }
   fillSignatureModel() {
     if (this.patientsignatureComponent !== undefined)

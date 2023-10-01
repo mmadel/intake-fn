@@ -28,7 +28,17 @@ export class PatientStoreService {
   patientSignature?: PatientSignature;
   patientAgreements?: PatientAgreement;
   resetPateint() {
-
+    this.patientEssentialInformation = undefined;
+    this.patientAddress = undefined;
+    this.patientMedical = undefined;
+    this.patientMedicalHistory = undefined;
+    this.patientCommercialInsurance = undefined;
+    this.patientInsuranceCompensationNoFault = undefined;
+    this.patientInsuranceType = undefined;
+    this.patientGrantor = undefined;
+    this.patientSource = undefined;
+    this.patientSignature = undefined;
+    this.patientAgreements = undefined;
   }
   constructor(@Optional() @SkipSelf() sharedService?: PatientStoreService) {
     if (sharedService) {

@@ -51,13 +51,13 @@ export class KcAuthServiceService {
   public getToken(): Promise<string> {
     return this.keycloakService.getToken()
   }
-  public updateToken(minValidity:number) :Promise<boolean>{
+  public updateToken(minValidity: number): Promise<boolean> {
     return this.keycloakService.updateToken(minValidity);
   }
-  public isTokenExpired():boolean{
+  public isTokenExpired(): boolean {
     return this.keycloakService.isTokenExpired();
   }
-  public shouldUpdateToken(request: HttpRequest<unknown>){
+  public shouldUpdateToken(request: HttpRequest<unknown>) {
     return this.keycloakService.shouldAddToken(request);
   }
 }

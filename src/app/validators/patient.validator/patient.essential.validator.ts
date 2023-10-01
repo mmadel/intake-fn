@@ -73,7 +73,7 @@ export class PatientEssentialValidator extends PatientValidator {
                 validator.push({ property: " Email ", message: '' });
             else {
                 this.regexCompiles = this.testRegex()
-                this.dataMatches = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]$').test(this.pateintBasicInfo.email!)
+                this.dataMatches = new RegExp('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]$').test(this.pateintBasicInfo.email!)
                 if (!this.dataMatches)
                     validator.push({ property: " Invalid email format", message: '' });
             }
