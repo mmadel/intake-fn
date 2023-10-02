@@ -27,8 +27,8 @@ export class PatientsignatureComponent implements OnInit, AfterViewInit {
   screenTmp: ElementRef;
   constructor(private patientStorService: PatientStoreService) { }
   public panes = [
-    { name: 'Draw Signature' },
-    { name: 'Generate Signature' }
+    { name: 'Generate Signature' },
+    { name: 'Draw Signature' }
   ];
 
   activePane = 0;
@@ -70,8 +70,9 @@ export class PatientsignatureComponent implements OnInit, AfterViewInit {
   }
 
   generate(): Promise<HTMLCanvasElement> {
-
+    this.patientsig.nativeElement.name = 'patientsig'
     document.body.appendChild(this.patientsig.nativeElement);
+    //var dd: HTMLElement = document.getElementById('sig')!;
     return html2canvas(this.patientsig.nativeElement, { backgroundColor: null });
   }
 

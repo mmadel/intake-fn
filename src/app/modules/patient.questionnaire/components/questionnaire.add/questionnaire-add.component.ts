@@ -210,7 +210,7 @@ export class QuestionnaireAddComponent implements OnInit {
       model.patientId = patientId;
       this.patientService.uploadPatientSignature(model).subscribe(
         (response) => {
-          console.log('uploaded drawed  patient Signature..')
+          console.log('uploaded drawed  patient Signature..');
         },
         (error) => {
           this.scrollUp();
@@ -224,7 +224,10 @@ export class QuestionnaireAddComponent implements OnInit {
         model.patientId = patientId;
         this.patientService.uploadPatientSignature(model).subscribe(
           (response) => {
-            console.log('uploaded generated patient Signature..')
+            document.getElementById("sig")!.innerHTML = ''
+            document.getElementById("sig")!.hidden = true;
+            console.log('uploaded generated patient Signature.. ')
+            
           },
           (error) => {
             this.scrollUp();
