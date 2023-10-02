@@ -1,6 +1,5 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './components/login.component';
 
 import {
   AlertModule,
@@ -40,7 +39,7 @@ import { KcAuthServiceService } from './service/kc/kc-auth-service.service';
 import { KCAuthGuardGuard } from './service/kc/kcauth-guard.guard';
 @NgModule({
   declarations: [
-    LoginComponent
+    
   ],
   imports: [
     CommonModule,

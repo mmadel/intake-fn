@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultAdminLayoutComponent, DefaultLayoutComponent } from './core';
-import {  LoginComponent } from './modules/security';
 import { KCAuthGuardGuard } from './modules/security/service/kc/kcauth-guard.guard';
 
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
   {
     path: '',
     redirectTo: 'admin',
