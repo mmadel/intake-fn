@@ -1,7 +1,7 @@
 <c-card class="mb-2">
     <c-card-header>
         <form cForm>
-            <div [ngClass]="{ 'form-group required':isRequiredField('recommendation') }">
+            <div [ngClass]="{ 'form-group required':true }">
                 <label for="dsds" class="form-label">
                     <strong style="font-size: medium;">Patient Source</strong>
                 </label>
@@ -23,12 +23,12 @@
         </c-col>
         <c-col xs="12" *ngIf="isReferringDoctor ==='yes'">
             <form cForm>
-                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorName') }" class="mb-1">
+                <div [ngClass]="{ 'form-group required':true }" class="mb-1">
                     <label for="doctorname" class="form-label">Doctor Name</label>
                     <input cFormControl [(ngModel)]="patientSource!.doctorSource.doctorName"
                         *ngIf="patientSource!.doctorSource" name="doctorname" placeholder="Doctor Name" sizing="sm" />
                 </div>
-                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedDoctorNpi') }" class="mb-1">
+                <div [ngClass]="{ 'form-group required':true }" class="mb-1">
                     <label for="doctornpi" class="form-label">Doctor NPI</label>
                     <input numbers cFormControl placeholder="Doctor NPI" sizing="sm" *ngIf="patientSource!.doctorSource"
                         [(ngModel)]="patientSource!.doctorSource.doctorNPI" name="doctornpi" maxlength="10" />
@@ -37,7 +37,7 @@
         </c-col>
         <c-col xs="12" *ngIf="isReferringDoctor ==='no'">
             <form cForm>
-                <div [ngClass]="{ 'form-group required':isRequiredField('recommendedEntityName') }" class="mb-1">
+                <div [ngClass]="{ 'form-group required':true }" class="mb-1">
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         [(ngModel)]="patientSource!.entitySource!.organizationName" name="entityname">
                         <option value="">Select</option>
@@ -56,7 +56,7 @@
     <c-card-body>
         <c-col xs="12">
             <form cForm>
-                <div [ngClass]="{ 'form-group required':isRequiredField('appointmentBooking') }" class="mb-1">
+                <div [ngClass]="{ 'form-group required':true }" class="mb-1">
                     <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                         [(ngModel)]="patientMedical!.appointmentBooking" name="appointmentbooking">
                         <option value="">Select Appointment Booking</option>

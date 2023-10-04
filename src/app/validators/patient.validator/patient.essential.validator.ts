@@ -78,10 +78,14 @@ export class PatientEssentialValidator extends PatientValidator {
                     validator.push({ property: " Invalid email format", message: '' });
             }
         }
-        if (this.isRequiredField('emergencyContact') && this.isRequiredField('emergencyContact')) {
-            if ((this.pateintBasicInfo.patientEmergencyContact?.emergencyName === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyName === undefined) &&
-                (this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === undefined)) {
+        if (this.isRequiredField('emergencyContact')) {
+            if(this.pateintBasicInfo.patientEmergencyContact?.emergencyRelation  === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyRelation === undefined){
+                validator.push({ property: "Emergency Contact Relation", message: '' });
+            }
+            if ((this.pateintBasicInfo.patientEmergencyContact?.emergencyName === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyName === undefined)) {
                 validator.push({ property: "Emergency Name", message: '' });
+            }
+            if (this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === undefined) {
                 validator.push({ property: "Emergency Phone", message: '' });
             }
         }

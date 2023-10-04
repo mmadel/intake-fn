@@ -22,7 +22,7 @@ export class PatientAggreementsValidator extends PatientValidator {
         FinancialResponsibility: true,
         FinancialAgreement: true,
         Insurance: true,
-        HIPAAAcknowledgement: false,
+        HIPAAAcknowledgement: true,
         Cupping: false,
         Pelvic: false,
         PhotoVideo: false
@@ -52,6 +52,8 @@ export class PatientAggreementsValidator extends PatientValidator {
             validator.push({ property: "Financial Agreement", message: '' });
         if (!this.pateintAgreements.acceptInsuranceAgreement)
             validator.push({ property: "Assignment of Insurance Beneﬁts", message: '' });
+        if (!this.pateintAgreements.acceptHIPAAAgreements)
+            validator.push({ property: "HIPAA Acknowledgement", message: '' });
     }
     isRequiredField(name: string): boolean {
         var field: boolean = false;

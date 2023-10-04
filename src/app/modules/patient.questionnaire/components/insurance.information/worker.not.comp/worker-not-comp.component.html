@@ -1,7 +1,7 @@
 <c-row>
     <form cForm [gutter]="{gy: 2, gx: 4}">
         <c-col xs="auto" class="mb-2">
-            <div [ngClass]="{ 'form-group required':isRequiredField('insuranceCompany') }">
+            <div [ngClass]="{ 'form-group required':true }">
                 <label for="insuranceCompanyName" class="form-label">Insurance Company</label>
                 <select cSelect sizing="sm" name="insuranceCompanyName" style="line-height: 15px;" cFormControl
                     [(ngModel)]="patientCommercialInsurance!.insuranceCompanyId">
