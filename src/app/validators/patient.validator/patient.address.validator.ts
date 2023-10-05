@@ -32,28 +32,24 @@ export class PatientAddressValidator extends PatientValidator {
 
     }
     protected validateInfo(validator: PropertyValidator[]) {
-        //if (this.isRequiredField('type')) {
+
         if (this.pateintAddressInfo.type === '' || this.pateintAddressInfo.type === undefined)
             validator.push({ property: " Address Type", message: '' });
-        //}
-        //if (this.isRequiredField('first')) {
+
         if (this.pateintAddressInfo.first === '' || this.pateintAddressInfo.first === undefined)
             validator.push({ property: "First Address", message: '' });
-        //}
+
         if (this.isRequiredField('second')) {
             if (this.pateintAddressInfo.second === '' || this.pateintAddressInfo.second === undefined)
                 validator.push({ property: "Second Address", message: '' });
         }
 
-        //if (this.isRequiredField('country')) {
-        // if ((this.pateintAddressInfo.country === '' || this.pateintAddressInfo.country === undefined)) {
-        //     validator.push({ property: " Country", message: '' });
-        // }
-        //}
-        //if (this.isRequiredField('zipCode')) {
+        if (this.pateintAddressInfo.state === '' || this.pateintAddressInfo.state === undefined)
+            validator.push({ property: "State", message: '' });
+
         if (this.pateintAddressInfo.zipCode === '' || this.pateintAddressInfo.zipCode === undefined)
             validator.push({ property: " zipCode ", message: '' });
-        //}
+
     }
 
     isRequiredField(name: string): boolean {

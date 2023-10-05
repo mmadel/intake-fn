@@ -55,20 +55,15 @@ export class PatientMedicalQuestionnaireValidator extends PatientValidator {
     }
 
     private validatephysicalTherapyReceiving(validator: PropertyValidator[]) {
-        if (this.medicalQuestionnaireInfo.patientPhysicalTherapy !== undefined) {
-            if (this.isRequiredField('physicalTherapyLocation')) {
-                if (this.medicalQuestionnaireInfo.patientPhysicalTherapy.location === '' || this.medicalQuestionnaireInfo.patientPhysicalTherapy.location === undefined)
-                    validator.push({ property: "Location of physical therapy", message: '' });
-            }
-            if (this.isRequiredField('physicalTherapyNumberOfVisit')) {
-                if (this.medicalQuestionnaireInfo.patientPhysicalTherapy.numberOfVisit === 0 || this.medicalQuestionnaireInfo.patientPhysicalTherapy.numberOfVisit === undefined)
-                    validator.push({ property: "Number of visits of physical therapy", message: '' });
-            }
-        }
+        if (this.medicalQuestionnaireInfo.patientPhysicalTherapy?.location === '' || this.medicalQuestionnaireInfo.patientPhysicalTherapy?.location === undefined)
+            validator.push({ property: "Location of physical therapy", message: '' });
+
+        if (this.medicalQuestionnaireInfo.patientPhysicalTherapy?.numberOfVisit === 0 || this.medicalQuestionnaireInfo.patientPhysicalTherapy?.numberOfVisit === undefined)
+            validator.push({ property: "Number of visits of physical therapy", message: '' });
     }
     protected validateInfo(validator: PropertyValidator[]) {
         if (this.patientSource.doctorSource === undefined && this.patientSource.entitySource === undefined)
-            validator.push({ property: "Referring Doctor/Other", message: '' });
+            validator.push({ property: "Mandatory: Did the primary doctor/Referring doctor refer you to us or mention our clinics?", message: '' });
         if (this.patientSource.doctorSource !== undefined)
             this.validateRecommendationDoctor(validator);
         else if (this.patientSource.entitySource !== undefined)
