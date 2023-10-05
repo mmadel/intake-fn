@@ -13,12 +13,12 @@
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" name="doctorRecommendation"
                     size="sm" [checked]="isReferringDoctor ==='yes'" />
-                <label cFormCheckLabel>Referring Doctor</label>
+                <label cFormCheckLabel>Yes</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" name="doctorRecommendation"
                     size="sm" [checked]="isReferringDoctor ==='no'" />
-                <label cFormCheckLabel>Other Source</label>
+                <label cFormCheckLabel>No</label>
             </c-form-check>
         </c-col>
         <c-col xs="12" *ngIf="isReferringDoctor ==='yes'">
