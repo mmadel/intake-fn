@@ -3,7 +3,7 @@
         <form cForm>
             <div [ngClass]="{ 'form-group required':true }">
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Patient Source</strong>
+                    <strong style="font-size: medium;">Did the primary doctor/Referring doctor refer you to us or mention our clinics?</strong>
                 </label>
             </div>
         </form>
@@ -13,7 +13,7 @@
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('yes')" name="doctorRecommendation"
                     size="sm" [checked]="isReferringDoctor ==='yes'" />
-                <label cFormCheckLabel>Doctor Referral</label>
+                <label cFormCheckLabel>Referring Doctor</label>
             </c-form-check>
             <c-form-check>
                 <input cFormCheckInput type="radio" (change)="referringDoctorQChange('no')" name="doctorRecommendation"
