@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { ToastrService } from 'ngx-toastr';
 import { Basic } from 'src/app/models/patient/basic.info.model';
 import { EssentialInformation } from 'src/app/models/validation/new/essential.information';
 import { PatientEssentialValidator } from 'src/app/validators/patient.validator/patient.essential.validator';
@@ -22,11 +23,11 @@ export class EssentialInfoComponent implements OnInit {
   imageFormData: FormData = new FormData();
   @Input() requiredFields?: EssentialInformation;
   constructor(private imageCompress: NgxImageCompressService,
-    private patientStoreService: PatientStoreService) {
+    private patientStoreService: PatientStoreService,private toastr: ToastrService,) {
   }
 
   ngOnInit(): void {
-
+    this.toastr.error('ddd', 'Error In Creation');
     if (this.patientStoreService.patientEssentialInformation === undefined) {
       this.patientGrantor = {
         relation: ''

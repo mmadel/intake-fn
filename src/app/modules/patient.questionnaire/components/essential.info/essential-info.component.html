@@ -136,7 +136,7 @@
             </div>
         </c-col>
         <c-col xs="auto" class="mb-2">
-            <div [ngClass]="{ 'form-group required':isRequiredField('employmentStatus') }">
+            <div [ngClass]="{ 'form-group required':true }">
                 <label for="employmentStatus" class="form-label">Employment Status</label>
                 <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                     [(ngModel)]="patientEssentialInformation!.patientEmployment!.employmentStatus"

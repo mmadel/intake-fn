@@ -73,13 +73,17 @@ export class PatientEssentialValidator extends PatientValidator {
                 validator.push({ property: " Email ", message: '' });
             else {
                 this.regexCompiles = this.testRegex()
-                this.dataMatches = new RegExp('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]$').test(this.pateintBasicInfo.email!)
+                this.dataMatches = new RegExp('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]$').test(this.pateintBasicInfo.email!.trim())
                 if (!this.dataMatches)
                     validator.push({ property: " Invalid email format", message: '' });
             }
         }
+        console.log('@@@@@@@@@ ' + this.pateintBasicInfo.patientEmployment?.employmentStatus)
+        if (this.pateintBasicInfo.patientEmployment?.employmentStatus === '' || this.pateintBasicInfo.patientEmployment?.employmentStatus === undefined) {
+            validator.push({ property: "Employment Status", message: '' });
+        }
         if (this.isRequiredField('emergencyContact')) {
-            if(this.pateintBasicInfo.patientEmergencyContact?.emergencyRelation  === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyRelation === undefined){
+            if (this.pateintBasicInfo.patientEmergencyContact?.emergencyRelation === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyRelation === undefined) {
                 validator.push({ property: "Emergency Contact Relation", message: '' });
             }
             if ((this.pateintBasicInfo.patientEmergencyContact?.emergencyName === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyName === undefined)) {
@@ -88,9 +92,6 @@ export class PatientEssentialValidator extends PatientValidator {
             if (this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === '' || this.pateintBasicInfo.patientEmergencyContact?.emergencyPhone === undefined) {
                 validator.push({ property: "Emergency Phone", message: '' });
             }
-        }
-        if (this.isRequiredField('employmentStatus')) {
-            validator.push({ property: "Employment Status", message: '' });
         }
     }
 

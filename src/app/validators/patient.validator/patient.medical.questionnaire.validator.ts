@@ -50,12 +50,8 @@ export class PatientMedicalQuestionnaireValidator extends PatientValidator {
     }
 
     private validateRecommendationEntity(validator: PropertyValidator[]) {
-        if (this.patientSource.entitySource !== undefined) {
-            if (this.isRequiredField('recommendedEntityName')) {
-                if (this.patientSource.entitySource.organizationName === '' || this.patientSource.entitySource.organizationName === undefined)
-                    validator.push({ property: " Recommendation Entity Name", message: '' });
-            }
-        }
+        if (this.patientSource.entitySource?.organizationName === '' || this.patientSource.entitySource?.organizationName === undefined)
+            validator.push({ property: "Other Resource ", message: '' });
     }
 
     private validatephysicalTherapyReceiving(validator: PropertyValidator[]) {
@@ -72,10 +68,10 @@ export class PatientMedicalQuestionnaireValidator extends PatientValidator {
     }
     protected validateInfo(validator: PropertyValidator[]) {
         if (this.patientSource.doctorSource === undefined && this.patientSource.entitySource === undefined)
-            validator.push({ property: "Patient Source", message: '' });
+            validator.push({ property: "Referring Doctor/Other", message: '' });
         if (this.patientSource.doctorSource !== undefined)
             this.validateRecommendationDoctor(validator);
-        else
+        else if (this.patientSource.entitySource !== undefined)
             this.validateRecommendationEntity(validator);
 
         if (this.medicalQuestionnaireInfo.hasPatientPhysicalTherapy === undefined)
