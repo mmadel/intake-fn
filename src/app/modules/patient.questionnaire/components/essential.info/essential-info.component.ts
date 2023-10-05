@@ -23,11 +23,10 @@ export class EssentialInfoComponent implements OnInit {
   imageFormData: FormData = new FormData();
   @Input() requiredFields?: EssentialInformation;
   constructor(private imageCompress: NgxImageCompressService,
-    private patientStoreService: PatientStoreService,private toastr: ToastrService,) {
+    private patientStoreService: PatientStoreService) {
   }
 
   ngOnInit(): void {
-    this.toastr.error('ddd', 'Error In Creation');
     if (this.patientStoreService.patientEssentialInformation === undefined) {
       this.patientGrantor = {
         relation: ''
