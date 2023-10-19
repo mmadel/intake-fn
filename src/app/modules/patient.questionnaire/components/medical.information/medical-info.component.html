@@ -46,7 +46,6 @@
                         [(ngModel)]="patientSource!.doctorSource.doctorNPI" name="doctornpi" maxlength="10" />
                 </div>
             </form>
-            {{this.patientSource | json}}
         </c-col>
         <c-col xs="12" *ngIf="isReferringDoctor ==='no'">
             <form cForm>
