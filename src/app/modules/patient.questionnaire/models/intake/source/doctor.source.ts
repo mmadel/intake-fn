@@ -3,4 +3,5 @@ export interface DoctorSource {
     doctorNPI?: string;
     doctorFax?: number;
     doctorAddress?: string;
+    isPotential?:boolean | undefined
   }

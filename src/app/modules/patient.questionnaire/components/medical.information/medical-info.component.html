@@ -26,8 +26,19 @@
             <form cForm>
                 <div [ngClass]="{ 'form-group required':true }" class="mb-1">
                     <label for="doctorname" class="form-label">Doctor Name</label>
-                    <input cFormControl [(ngModel)]="patientSource!.doctorSource.doctorName"
-                        *ngIf="patientSource!.doctorSource" name="doctorname" placeholder="Doctor Name" sizing="sm" />
+                    <ng-autocomplete [data]="doctors" [searchKeyword]="keyword" placeholder="Enter Doctor Name"
+                        *ngIf="patientSource!.doctorSource" (selected)='selectEvent($event)'
+                        (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+                        [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate"
+                        [(ngModel)]="selectedDoctor" [ngModelOptions]="{standalone: true}">
+                    </ng-autocomplete>
+                    <ng-template #itemTemplate let-item>
+                        <a [innerHTML]="item.name"></a>
+                    </ng-template>
+
+                    <ng-template #notFoundTemplate let-notFound>
+                        <div [innerHTML]="notFound"></div>
+                    </ng-template>
                 </div>
                 <div [ngClass]="{ 'form-group required':true }" class="mb-1">
                     <label for="doctornpi" class="form-label">Doctor NPI</label>
@@ -35,6 +46,7 @@
                         [(ngModel)]="patientSource!.doctorSource.doctorNPI" name="doctornpi" maxlength="10" />
                 </div>
             </form>
+            {{this.patientSource | json}}
         </c-col>
         <c-col xs="12" *ngIf="isReferringDoctor ==='no'">
             <form cForm>

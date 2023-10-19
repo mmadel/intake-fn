@@ -22,6 +22,7 @@ import {
   AddressInformationComponent, AggreementsComponent, EssentialInfoComponent, InsuranceInformationComponent, MedicalHistoryInformationComponent, MedicalInfoComponent, PatientsignatureComponent, QuestionnaireAddComponent, SummaryComponent, UploadPhotoComponent, WorkerCompComponent,
   WorkerNotCompComponent
 } from './index';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {
     AccordionModule,
     PatientCommonModule,
     FontAwesomeModule,
+    AutocompleteLibModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })

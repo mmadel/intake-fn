@@ -121,10 +121,13 @@ export class QuestionnaireAddComponent implements OnInit {
       }
     }
     if (patientModel === 'medical') {
-      console.log(this.medicalInfoComponent.patientMedical?.familyResultSubmission)
       this.validator = this.medicalInfoComponent?.validate();
       if (this.validator.isValid) {
         this.patientStoreService.patientMedical = this.medicalInfoComponent.patientMedical;
+        if (this.medicalInfoComponent.patientSource?.doctorSource) {
+          if (this.medicalInfoComponent.patientSource?.doctorSource.doctorName === '')
+            this.medicalInfoComponent.patientSource!.doctorSource!.doctorName = this.medicalInfoComponent.selectedDoctor;
+        }
         this.patientStoreService.patientSource = this.medicalInfoComponent.patientSource;
         this.proceedToNextStep();
       } else {
@@ -227,7 +230,7 @@ export class QuestionnaireAddComponent implements OnInit {
             document.getElementById("sig")!.innerHTML = ''
             document.getElementById("sig")!.hidden = true;
             console.log('uploaded generated patient Signature.. ')
-            
+
           },
           (error) => {
             this.scrollUp();

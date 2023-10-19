@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MedicalQuestionnaireInfo } from 'src/app/models/questionnaire/medical.questionnaire.info';
 import { MedicalInformation } from 'src/app/models/validation/new/medical.information';
+import { Doctors } from 'src/app/modules/common/data/doctor.db';
+import { Doctor } from 'src/app/modules/common/model/doctor';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 import { PatientMedicalQuestionnaireValidator } from 'src/app/validators/patient.validator/patient.medical.questionnaire.validator';
 import { ValidatorContainer } from 'src/app/validators/ValidatorContainer';
 import { PatientMedical } from '../../models/intake/medical/patient.medical';
+import { DoctorSource } from '../../models/intake/source/doctor.source';
 import { PatientSource } from '../../models/intake/source/patient.source';
 import { PatientStoreService } from '../../service/store/patient-store.service';
 @Component({
@@ -13,6 +16,25 @@ import { PatientStoreService } from '../../service/store/patient-store.service';
   styleUrls: ['./medical-info.component.css']
 })
 export class MedicalInfoComponent implements OnInit {
+  keyword = 'name';
+  selectedNPI: string;
+  public doctors: Doctor[] = Doctors;
+  selectedDoctor: string;
+  selectEvent(item: Doctor) {
+    this.patientSource!.doctorSource!.doctorName = item.name!;
+    this.patientSource!.doctorSource!.doctorNPI = item.npi!;
+    this.patientSource!.doctorSource!.isPotential = false;
+  }
+  onChangeSearch(search: string) {
+    if (search === undefined || search === '') {
+      this.patientSource!.doctorSource!.doctorName = '';
+      this.patientSource!.doctorSource!.doctorNPI = '';
+      this.patientSource!.doctorSource!.isPotential = undefined;
+    }
+  }
+
+  onFocused(e: any) {
+  }
   isReferringDoctor: string | undefined = undefined;
   ispatientPhysicalTherapy: string | undefined = undefined;
   isfamilyResultSubmission: string | undefined = undefined;
@@ -28,7 +50,10 @@ export class MedicalInfoComponent implements OnInit {
     this.isReferringDoctor = val;
     val === 'yes' ? this.patientSource!.doctorSource = {} : this.patientSource!.entitySource = {};
     if (val === 'yes') {
-      this.patientSource!.doctorSource = {}
+      this.patientSource!.doctorSource = {
+        doctorName: '',
+        doctorNPI: ''
+      }
       this.patientSource!.entitySource = undefined;
     } else {
       this.patientSource!.entitySource = {
