@@ -1,54 +1,54 @@
-/intake-service/api/requires/fields/change https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/requires/fields/change 200
-/intake-service/api/requires/fields/retrieve/clinicId/:clinicId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/requires/fields/retrieve/clinicId/:clinicId 200
+/intake-service/api/requires/fields/change https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/requires/fields/change 200
+/intake-service/api/requires/fields/retrieve/clinicId/:clinicId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/requires/fields/retrieve/clinicId/:clinicId 200
 
-/intake-service/api/patient/create https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/patient/create 200
-/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit 200
-/intake-service/api/patient/upload https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/patient/upload 200
-/intake-service/api/patient/signature/upload https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/patient/signature/upload 200
-/intake-service/api/patient/signature/patientId/:patientId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/patient/signature/patientId/:patientId 200
+/intake-service/api/patient/create https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/create 200
+/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit 200
+/intake-service/api/patient/upload https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/upload 200
+/intake-service/api/patient/signature/upload https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/signature/upload 200
+/intake-service/api/patient/signature/patientId/:patientId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/signature/patientId/:patientId 200
 
-/intake-service/api/kc/users/find https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/kc/users/find 200
-/intake-service/api/kc/users/create https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/kc/users/create 200
+/intake-service/api/kc/users/find https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/kc/users/find 200
+/intake-service/api/kc/users/create https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/kc/users/create 200
 
-/intake-service/api/authentication https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/authentication 200
+/intake-service/api/authentication https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/authentication 200
 
-/intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId/startDate/:startDate/endDate/:endDate https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId/startDate/:startDate/endDate/:endDate 200
+/intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId/startDate/:startDate/endDate/:endDate https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/dashboard/data/clinicId/:clinicId/userId/:userId/startDate/:startDate/endDate/:endDate 200
 
-/intake-service/api/reports/recommendation https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/reports/recommendation 200
-/intake-service/api/reports/generator/excel https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/reports/generator/excel 200
-/intake-service/api/reports/generator/pdf/patientId/:patientId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/reports/generator/pdf/patientId/:patientId 200
+/intake-service/api/reports/recommendation https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/reports/recommendation 200
+/intake-service/api/reports/generator/excel https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/reports/generator/excel 200
+/intake-service/api/reports/generator/pdf/patientId/:patientId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/reports/generator/pdf/patientId/:patientId 200
 
-/intake-service/api/auth/login https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/auth/login 200
-/intake-service/api/user/find/loggedIn/:userId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/user/find/loggedIn/:userId 200
+/intake-service/api/auth/login https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/auth/login 200
+/intake-service/api/user/find/loggedIn/:userId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/find/loggedIn/:userId 200
 
-/intake-service/api/clinic https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/clinic  200
-/intake-service/api/clinic/find https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/clinic/find  200
-/intake-service/api/clinic/find/:clinicId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/clinic/find/:clinicId  200
-/intake-service/api/clinic/update https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/clinic/update  200
-/intake-service/api/clinic/delete/clinicId/:clinicId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/clinic/delete/clinicId/:clinicId  200
-/intake-service/api/user/find/clinics/:userId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/user/find/clinics/:userId  200
+/intake-service/api/clinic https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/clinic  200
+/intake-service/api/clinic/find https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/clinic/find  200
+/intake-service/api/clinic/find/:clinicId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/clinic/find/:clinicId  200
+/intake-service/api/clinic/update https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/clinic/update  200
+/intake-service/api/clinic/delete/clinicId/:clinicId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/clinic/delete/clinicId/:clinicId  200
+/intake-service/api/user/find/clinics/:userId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/find/clinics/:userId  200
 
-/intake-service/api/user/create https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/user/create  200
-/intake-service/api/user/update https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/user/update  200
-/intake-service/api/user/find https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/user/find  200
-/intake-service/api/user/find/:userId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/user/find/:userId  200
-/intake-service/api/user/delete/userId/:userId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/user/delete/userId/:userId  200
+/intake-service/api/user/create https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/create  200
+/intake-service/api/user/update https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/update  200
+/intake-service/api/user/find https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/find  200
+/intake-service/api/user/find/:userId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/find/:userId  200
+/intake-service/api/user/delete/userId/:userId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/delete/userId/:userId  200
 
-/intake-service/api/agreement https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/agreement  200
-/intake-service/api/document/id/patientId/:patientId/hasGuarantor/:hasGuarantor https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/document/id/patientId/:patientId/hasGuarantor/:hasGuarantor  200
-/intake-service/api/document/insurance/patientId/:patientId https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/document/insurance/patientId/:patientId  200
+/intake-service/api/agreement https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/agreement  200
+/intake-service/api/document/id/patientId/:patientId/hasGuarantor/:hasGuarantor https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/document/id/patientId/:patientId/hasGuarantor/:hasGuarantor  200
+/intake-service/api/document/insurance/patientId/:patientId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/document/insurance/patientId/:patientId  200
 
 
-/intake-service/api/insurance/company/create https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/insurance/company/create 200
-/intake-service/api/insurance/company/find https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/insurance/company/find 200
+/intake-service/api/insurance/company/create https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/insurance/company/create 200
+/intake-service/api/insurance/company/find https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/insurance/company/find 200
 
-/intake-service/api/audit/insurance/company/retrieve/uuid/:uuid https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/audit/insurance/company/retrieve/uuid/:uuid 200
-/intake-service/api/audit/insurance/company/retrieve https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/audit/insurance/company/retrieve 200
+/intake-service/api/audit/insurance/company/retrieve/uuid/:uuid https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/insurance/company/retrieve/uuid/:uuid 200
+/intake-service/api/audit/insurance/company/retrieve https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/insurance/company/retrieve 200
 
-/intake-service/api/audit/clinic/retrieve/uuid/:uuid https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/audit/clinic/retrieve/uuid/:uuid 200
-/intake-service/api/audit/clinic/retrieve https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/audit/clinic/retrieve 200
+/intake-service/api/audit/clinic/retrieve/uuid/:uuid https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/clinic/retrieve/uuid/:uuid 200
+/intake-service/api/audit/clinic/retrieve https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/clinic/retrieve 200
 
-/intake-service/api/audit/patient/retrieve/uuid/:uuid https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/audit/patient/retrieve/uuid/:uuid 200
-/intake-service/api/audit/patient/retrieve https://patient-intake-service-be404036c6a1.herokuapp.com/intake-service/api/audit/patient/retrieve 200
+/intake-service/api/audit/patient/retrieve/uuid/:uuid https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/patient/retrieve/uuid/:uuid 200
+/intake-service/api/audit/patient/retrieve https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/patient/retrieve 200
 
 /*  /index.html   200
