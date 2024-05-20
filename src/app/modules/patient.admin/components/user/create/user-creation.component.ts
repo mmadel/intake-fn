@@ -32,6 +32,9 @@ export class UserCreationComponent implements OnInit {
   @ViewChild('userCreateForm') userCreateForm: NgForm;
   form = {
     name: null,
+    firstName: null,
+    lastName: null,
+    email: null,
     password: null,
     useraddress: null,
     useraddresscountry: null,
@@ -66,10 +69,13 @@ export class UserCreationComponent implements OnInit {
     }
     var user: User = {
       id: null,
-      uuid:'',
+      uuid: '',
       name: this.form.name,
+      firstName: this.form.firstName,
+      lastName: this.form.lastName,
+      email: this.form.email,
       password: this.localService.encrypt(this.form.password !== null ? this.form.password : ''),
-      address: this.convertAddressToString(),
+      address: this.createAddressModel(),
       userRole: this.form.userrole,
       clinics: this.createClinics(this.form.selectedClinics)
     }
@@ -90,17 +96,13 @@ export class UserCreationComponent implements OnInit {
   resetError() {
 
   }
-  convertAddressToString(): string {
-    let address: string = ""
-    address = address + this.form.useraddress + ",";
-    address = address + this.form.useraddresscountry + ",";
-    if (this.form.useraddressstate)
-      address = address + this.form.useraddressstate + ",";
-    if (this.form.useraddressprovince)
-      address = address + this.form.useraddressprovince + ",";
-    address = address + this.form.useraddresscity + ",";
-    address = address + this.form.useraddresszipcode;
-    return address
+  createAddressModel(): any {
+    return {
+      address: this.form.useraddress,
+      state: this.form.useraddressstate,
+      city: this.form.useraddresscity,
+      zipCode: this.form.useraddresszipcode
+    }
   }
 
   createClinics(ids: string[] | null) {

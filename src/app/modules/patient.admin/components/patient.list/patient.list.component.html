@@ -11,7 +11,7 @@
     (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
     [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
     [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
-    [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
+    [tableProps]="{ hover: true, striped: true  }" [tableBodyProps]="{ align: 'middle' }"
     (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
     <ng-template cTemplateId="tableDetails" let-item="item">
       <div [visible]="this.details_visible[item._id]===true" cCollapse>

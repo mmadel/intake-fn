@@ -12,38 +12,37 @@
     </c-col>
 </c-row>
 <hr />
-<table cTable *ngIf="users">
+<table cTable *ngIf="users" small>
     <thead cTableColor="light">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">Use Name</th>
-            <th scope="col">User Role</th>
-            <th scope="col">User Clinics</th>
-            <th scope="col">Action</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col" style="width: 20%;">User ID</th>
+            <th scope="col">Role</th>
+            <th scope="col" style="width: 10%;">Action</th>
             <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let user of users; index as i;">
-            <td>{{user.id}}</td>
             <td>{{user.name}}</td>
-            <td>{{user.userRole}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.uuid}}</td>
             <td>
-                <ul>
-                    <li *ngFor="let clinic of user.clinics">{{clinic.name}}</li>
-                </ul>
+                <c-badge color="primary" *ngIf="user.userRole === 'administrator'">{{user.userRole}}</c-badge>
+                <c-badge color="warning" *ngIf="user.userRole === 'normal'">{{user.userRole}}</c-badge>
+            </td>
 
-            </td>
             <td>
-                <button cButton variant="outline" class="me-3" (click)="update(user.uuid)" [disabled]="isLoggedInUser(user.uuid)">
-                    <svg cIcon name="cilPen"></svg>
-                </button>
-                <button cButton variant="outline" (click)="delete(user.uuid)" [disabled]="isLoggedInUser(user.uuid)">
-                    <svg cIcon name="cilTrash"></svg>
-                </button>
-            </td>
-            <td>
-                <span *ngIf="isLoggedIn">LoggedIn</span>
+                <c-button-group aria-label="Basic example" role="group" size="sm">
+                    <button cButton variant="outline" (click)="update(user.uuid)">
+                        <svg cIcon name="cilPen"></svg>
+                    </button>
+                    <button cButton variant="outline" (click)="delete(user.uuid)"
+                        [disabled]="isLoggedInUser(user.uuid)">
+                        <svg cIcon name="cilTrash"></svg>
+                    </button>
+                </c-button-group>
             </td>
         </tr>
 
