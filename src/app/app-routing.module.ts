@@ -31,7 +31,7 @@ const routes: Routes = [
     canActivate: [KCAuthGuardGuard],
     data: {
       title: '',
-      roles: ['administrator','normal']
+      roles: ['administrator', 'normal']
     },
     children: [
       {
@@ -41,6 +41,17 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: '',
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path:'digital-intake',
+        loadChildren: ()=>
+        import('./modules/patient.digital.intake/patient-digital-intake.module').then((m) => m.PatientDigitalIntakeModule)
+      }
+    ]
+  }
 
 ];
 
