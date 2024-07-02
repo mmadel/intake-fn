@@ -2,7 +2,7 @@ export interface PateintBasic {
     firstname?: string,
     middleName?: string,
     lastName?: string
-    dob?: number
+    dob?: Date
     gender?: string,
     marital?: string
     phone?: string,

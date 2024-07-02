@@ -1,29 +1,32 @@
 <c-container fluid="true">
     <c-card>
         <c-card-body>
-            <mat-stepper linear="true" #stepper [orientation]="stepperOrientation">
-                <mat-step completed="false">
-                    <ng-template matStepLabel>Essential Information</ng-template>
-                </mat-step>
-                <mat-step completed="false">
-                    <ng-template matStepLabel>Address</ng-template>
-                </mat-step>
-                <mat-step completed="false">
-                    <ng-template matStepLabel>Medical Information</ng-template>
-                </mat-step>
-                <mat-step completed="false">
-                    <ng-template matStepLabel>Medical History</ng-template>
-                </mat-step>
-                <mat-step completed="false">
-                    <ng-template matStepLabel>Insurance Information</ng-template>
-                </mat-step>
-                <mat-step completed="false">
-                    <ng-template matStepLabel>Agreements</ng-template>
-                </mat-step>
-                <mat-step completed="false">
-                    <ng-template matStepLabel>Signature</ng-template>
-                </mat-step>
-            </mat-stepper>
+            <form [formGroup]="patientForm">
+                <mat-stepper linear="true" #stepper [orientation]="stepperOrientation">
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Essential Information</ng-template>
+                        <patient-basic [form]="patientForm"></patient-basic>
+                    </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Address</ng-template>
+                    </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Medical Information</ng-template>
+                    </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Medical History</ng-template>
+                    </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Insurance Information</ng-template>
+                    </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Agreements</ng-template>
+                    </mat-step>
+                    <mat-step completed="false">
+                        <ng-template matStepLabel>Signature</ng-template>
+                    </mat-step>
+                </mat-stepper>
+            </form>
         </c-card-body>
     </c-card>
 </c-container>
