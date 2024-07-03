@@ -3,77 +3,134 @@
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">First Name <span class="text-danger">*</span></label>
             <input class="form-control" placeholder formControlName="firstname">
+            <div *ngIf="!this.form.get('basic')?.get('firstname')?.valid && 
+                    (this.form.get('basic')?.get('basic')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
+                class="text-danger mx-1">
+                First Name is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Middle Name</label>
             <input class="form-control" placeholder formControlName="middleName">
+            <div *ngIf="!this.form.get('basic')?.get('middleName')?.valid && 
+                    (this.form.get('basic')?.get('basic')?.dirty ||this.form.get('basic')?.get('middleName')?.touched)"
+                class="text-danger mx-1">
+                Middle Name is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Last Name <span class="text-danger">*</span></label>
             <input class="form-control" placeholder formControlName="lastName">
+            <div *ngIf="!this.form.get('basic')?.get('lastName')?.valid && 
+                    (this.form.get('basic')?.get('basic')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
+                class="text-danger mx-1">
+                Last Name is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">DOB <span class="text-danger">*</span></label>
             <c-date-picker size="sm" formControlName="dob"></c-date-picker>
+            <div *ngIf="!this.form.get('basic')?.get('dob')?.valid && 
+                    (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
+                class="text-danger mx-1">
+                Date Of Birth is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Gender <span class="text-danger">*</span></label>
             <select cSelect sizing="sm" formControlName="gender">
-                <option value="null">Select Gender</option>
+                <option value="null" disabled>Select Gender</option>
                 <option value="1">Male</option>
                 <option value="2">Female</option>
                 <option value="3">Non-binary</option>
                 <option value="3">To Self describe</option>
                 <option value="3">Prefer not to say</option>
             </select>
+            <div *ngIf="!this.form.get('basic')?.get('gender')?.valid && 
+                    (this.form.get('basic')?.get('gender')?.touched)" class="text-danger mx-1">
+                Gender is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Marital Status <span class="text-danger">*</span></label>
             <select cSelect sizing="sm" formControlName="marital">
-                <option value="null">Select Marital Status</option>
+                <option value="null" disabled>Select Marital Status</option>
                 <option value="1">Single</option>
                 <option value="2">Married</option>
                 <option value="3">Widowed</option>
                 <option value="3">Divorced</option>
             </select>
+            <div *ngIf="!this.form.get('basic')?.get('marital')?.valid && 
+                    (this.form.get('basic')?.get('marital')?.touched)" class="text-danger mx-1">
+                Marital Status is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Phone Type <span class="text-danger">*</span></label>
             <select cSelect sizing="sm" formControlName="phoneType">
-                <option value="null">Select Phone Type</option>
+                <option value="null" disabled>Select Phone Type</option>
                 <option value="1">Home</option>
                 <option value="2">Work</option>
                 <option value="3">CellPhone</option>
                 <option value="3">Other</option>
             </select>
+            <div *ngIf="!this.form.get('basic')?.get('phoneType')?.valid && 
+                    (this.form.get('basic')?.get('phoneType')?.touched)" class="text-danger mx-1">
+                Phone Type is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Phone<span class="text-danger">*</span></label>
             <input class="form-control" placeholder formControlName="phone"
                 [value]="this.form.get('basic')?.get('phone')?.value | phone" maxlength="15">
+
+            <div *ngIf="!this.form.get('basic')?.get('phone')?.valid && 
+                    (this.form.get('basic')?.get('phone')?.touched)" class="text-danger mx-1">
+                Phone is required
+            </div>
+            <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['pattern']" class="text-danger mx-1">
+                Invalid Phone
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Email<span class="text-danger">*</span></label>
             <input class="form-control" placeholder formControlName="email">
+            <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['required'] === true && 
+            (this.form.get('basic')?.get('email')?.dirty ||this.form.get('basic')?.get('email')?.touched)"
+                class="text-danger mx-1">
+                Email Required
+            </div>
+            <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['email'] === true" class="text-danger mx-1">
+                Invalid Email
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Employment Status<span class="text-danger">*</span></label>
             <select cSelect formControlName="employment">
-                <option value="null">Select Employment Status</option>
+                <option value="null" disabled>Select Employment Status</option>
                 <option value="Employed">Employed</option>
                 <option value="Student">Student</option>
                 <option value="Retired">Retired</option>
                 <option value="Other">Other</option>
             </select>
+            <div *ngIf="!this.form.get('basic')?.get('employment')?.valid && 
+                    (this.form.get('basic')?.get('employment')?.touched)" class="text-danger mx-1">
+                Employment Status is required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm" *ngIf="this.form.get('basic')?.get('employment')?.value === 'Employed'">
             <label style="width: 151px;">Company<span class="text-danger">*</span></label>
             <input class="form-control" placeholder formControlName="employmentCompany">
+            <div *ngIf="this.form.get('basic')?.get('employmentCompany')?.errors?.['required'] === true && 
+            (this.form.get('basic')?.get('employmentCompany')?.dirty ||this.form.get('basic')?.get('employmentCompany')?.touched)"
+                class="text-danger mx-1">
+                Employment Company  Required
+            </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">Emergency Contact<span class="text-danger">*</span></label>
             <select cSelect formControlName="emergencyContact">
-                <option value="null">Select Emergency Contact</option>
+                <option value="null" disabled>Select Emergency Contact</option>
                 <option value="Father">Father</option>
                 <option value="Mother">Mother</option>
                 <option value="Friend">Friend</option>

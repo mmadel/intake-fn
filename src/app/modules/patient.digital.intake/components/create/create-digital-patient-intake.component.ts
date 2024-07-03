@@ -22,6 +22,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.createPatientForm();
   }
   private createPatientForm() {
+    const re = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
     this.patientForm = new FormGroup({
       'basic': new FormGroup({
         'firstname': new FormControl(null, [Validators.required]),
@@ -31,14 +32,23 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'gender': new FormControl(null, [Validators.required]),
         'marital': new FormControl(null, [Validators.required]),
         'phoneType': new FormControl(null, [Validators.required]),
-        'phone': new FormControl(null, [Validators.required, Validators.min(15)]),
+        'phone': new FormControl(null, [Validators.required, Validators.min(15), Validators.pattern(re)]),
         'email': new FormControl(null, [Validators.required, Validators.email]),
         'employment': new FormControl(null, [Validators.required]),
-        'employmentCompany': new FormControl(null, [Validators.required]),
+        'employmentCompany': new FormControl(null),
         'emergencyContact': new FormControl(null, [Validators.required]),
         'emergencyName': new FormControl(null, [Validators.required]),
         'emergencyPhone': new FormControl(null, [Validators.required]),
       })
+    })
+    this.patientForm.valueChanges.subscribe((value: any) => {
+      var employmentValue = value?.['basic'].employment
+      if (employmentValue && employmentValue === 'Employed') {
+        this.patientForm.get('basic')?.get('employmentCompany')?.setValidators(Validators.required)
+      }else{
+        this.patientForm.get('basic')?.get('employmentCompany')?.setValidators(null)
+        this.patientForm.get('basic')?.get('employmentCompany')?.setErrors(null)
+      }
     })
   }
 
