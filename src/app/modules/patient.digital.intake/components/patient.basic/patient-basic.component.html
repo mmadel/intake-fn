@@ -29,7 +29,7 @@
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">DOB <span class="text-danger">*</span></label>
-            <c-date-picker size="sm" formControlName="dob"></c-date-picker>
+            <c-date-picker size="sm" formControlName="dob" placeholder=""></c-date-picker>
             <div *ngIf="!this.form.get('basic')?.get('dob')?.valid && 
                     (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
                 class="text-danger mx-1">
