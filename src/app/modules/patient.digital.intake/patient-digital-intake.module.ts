@@ -11,6 +11,7 @@ import { IconModule } from '@coreui/icons-angular';
 import { PatientBasicComponent } from './components/patient.basic/patient-basic.component';
 import { PatientCommonModule } from '../common';
 import { PatientAddressComponent } from './components/patient.address/patient-address.component';
+import { PatientMedicalComponent } from './components/patient.medical/patient-medical.component';
 
 
 const COREUI_MODULES = [
@@ -42,7 +43,8 @@ const COREUI_MODULES = [
   declarations: [
     CreateDigitalPatientIntakeComponent,
     PatientBasicComponent,
-    PatientAddressComponent
+    PatientAddressComponent,
+    PatientMedicalComponent
   ],
   imports: [
     CommonModule,

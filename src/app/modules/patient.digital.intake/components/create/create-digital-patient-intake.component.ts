@@ -44,8 +44,11 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       'address': new FormGroup({
         'firstAddress': new FormControl(null, [Validators.required]),
         'secondAddress': new FormControl(null),
-        'state': new FormControl(null,[Validators.required]),
-        'zipCode': new FormControl(null,[Validators.required,Validators.min(10),Validators.pattern(zipCodeRgx)]),
+        'state': new FormControl(null, [Validators.required]),
+        'zipCode': new FormControl(null, [Validators.required, Validators.min(10), Validators.pattern(zipCodeRgx)]),
+      }),
+      'medical': new FormGroup({
+
       })
     })
     this.patientForm.valueChanges.subscribe((value: any) => {

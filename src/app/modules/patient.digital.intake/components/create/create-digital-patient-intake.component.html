@@ -11,8 +11,9 @@
                         <ng-template matStepLabel>Address</ng-template>
                         <patient-address [form]="patientForm"></patient-address>
                     </mat-step>
-                    <mat-step completed="false">
+                    <mat-step completed="true" [stepControl]="patientForm.get('medical')!" formGroupName="medical">
                         <ng-template matStepLabel>Medical Information</ng-template>
+                        <patient-medical [form]="patientForm"></patient-medical>
                     </mat-step>
                     <mat-step completed="false">
                         <ng-template matStepLabel>Medical History</ng-template>
