@@ -67,7 +67,7 @@ export class QuestionnaireAddComponent implements OnInit {
   }
   ngOnInit(): void {
     this.isCreated = false;
-    this.counter = 1;
+    this.counter = 2;
     this.progressValue = 0;
     this.windowScrolled = true;
     this.isPatientUnderage = false;

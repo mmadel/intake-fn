@@ -1,0 +1,48 @@
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="address">
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">First Address <span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="firstAddress">
+            <div *ngIf="!this.form.get('address')?.get('firstAddress')?.valid && 
+                    (this.form.get('address')?.get('firstAddress')?.dirty ||this.form.get('address')?.get('firstAddress')?.touched)"
+                class="text-danger mx-1">
+                First Address is required
+            </div>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Second Address</label>
+            <input class="form-control" placeholder formControlName="secondAddress">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">state <span class="text-danger">*</span></label>
+            <select cSelect sizing="sm" style="line-height: 15px;" formControlName="state">
+                <option value="null">Select State</option>
+                <option *ngFor="let state of states" [value]="state">
+                    {{state}}
+                </option>
+            </select>
+            <div *ngIf="!this.form.get('address')?.get('state')?.valid && 
+            (this.form.get('address')?.get('state')?.touched)" class="text-danger mx-1">
+                State is required
+            </div>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">ZipCode <span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="zipCode" zipcode maxlength="10">
+
+            <div *ngIf="this.form.get('address')?.get('zipCode')?.errors?.['required'] === true && 
+            (this.form.get('address')?.get('zipCode')?.dirty ||this.form.get('address')?.get('zipCode')?.touched)"
+                class="text-danger mx-1">
+                ZipCode Required
+            </div>
+            <div *ngIf="form.get('address')?.get('zipCode')?.errors?.['pattern']" class="text-danger mx-1">
+                Invalid ZipCode
+            </div>
+        </c-input-group>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton matStepperNext variant="outline" size="sm" type="submit"
+            [disabled]="!form.get('address')?.valid">Next</button>
+    </div>
+</div>

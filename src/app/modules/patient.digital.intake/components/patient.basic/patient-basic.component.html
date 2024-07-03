@@ -4,7 +4,7 @@
             <label style="width: 150px;">First Name <span class="text-danger">*</span></label>
             <input class="form-control" placeholder formControlName="firstname">
             <div *ngIf="!this.form.get('basic')?.get('firstname')?.valid && 
-                    (this.form.get('basic')?.get('basic')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
+                    (this.form.get('basic')?.get('firstname')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
                 class="text-danger mx-1">
                 First Name is required
             </div>
@@ -29,7 +29,7 @@
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">
             <label style="width: 150px;">DOB <span class="text-danger">*</span></label>
-            <c-date-picker size="sm" formControlName="dob" placeholder=""></c-date-picker>
+            <c-date-picker size="sm" formControlName="dob"></c-date-picker>
             <div *ngIf="!this.form.get('basic')?.get('dob')?.valid && 
                     (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
                 class="text-danger mx-1">

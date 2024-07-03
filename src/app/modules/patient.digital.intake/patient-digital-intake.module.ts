@@ -10,6 +10,7 @@ import { AvatarModule, BadgeModule, BreadcrumbModule, ButtonGroupModule, ButtonM
 import { IconModule } from '@coreui/icons-angular';
 import { PatientBasicComponent } from './components/patient.basic/patient-basic.component';
 import { PatientCommonModule } from '../common';
+import { PatientAddressComponent } from './components/patient.address/patient-address.component';
 
 
 const COREUI_MODULES = [
@@ -40,7 +41,8 @@ const COREUI_MODULES = [
 @NgModule({
   declarations: [
     CreateDigitalPatientIntakeComponent,
-    PatientBasicComponent
+    PatientBasicComponent,
+    PatientAddressComponent
   ],
   imports: [
     CommonModule,
