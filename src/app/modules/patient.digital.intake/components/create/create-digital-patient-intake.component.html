@@ -3,12 +3,13 @@
         <c-card-body>
             <form [formGroup]="patientForm">
                 <mat-stepper linear="true" #stepper [orientation]="stepperOrientation">
-                    <mat-step completed="false">
+                    <mat-step [stepControl]="patientForm.get('basic')!" formGroupName="basic" completed="false">
                         <ng-template matStepLabel>Essential Information</ng-template>
                         <patient-basic [form]="patientForm"></patient-basic>
                     </mat-step>
                     <mat-step completed="false">
                         <ng-template matStepLabel>Address</ng-template>
+                        ddd
                     </mat-step>
                     <mat-step completed="false">
                         <ng-template matStepLabel>Medical Information</ng-template>

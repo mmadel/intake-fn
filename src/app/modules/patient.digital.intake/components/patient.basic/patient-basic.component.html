@@ -1,1 +1,99 @@
-<p>patient-basic works!</p>
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="basic">
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">First Name <span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="firstname">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Middle Name</label>
+            <input class="form-control" placeholder formControlName="middleName">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Last Name <span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="lastName">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">DOB <span class="text-danger">*</span></label>
+            <c-date-picker size="sm" formControlName="dob"></c-date-picker>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Gender <span class="text-danger">*</span></label>
+            <select cSelect sizing="sm" formControlName="gender">
+                <option value="null">Select Gender</option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+                <option value="3">Non-binary</option>
+                <option value="3">To Self describe</option>
+                <option value="3">Prefer not to say</option>
+            </select>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Marital Status <span class="text-danger">*</span></label>
+            <select cSelect sizing="sm" formControlName="marital">
+                <option value="null">Select Marital Status</option>
+                <option value="1">Single</option>
+                <option value="2">Married</option>
+                <option value="3">Widowed</option>
+                <option value="3">Divorced</option>
+            </select>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Phone Type <span class="text-danger">*</span></label>
+            <select cSelect sizing="sm" formControlName="phoneType">
+                <option value="null">Select Phone Type</option>
+                <option value="1">Home</option>
+                <option value="2">Work</option>
+                <option value="3">CellPhone</option>
+                <option value="3">Other</option>
+            </select>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Phone<span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="phone"
+                [value]="this.form.get('basic')?.get('phone')?.value | phone" maxlength="15">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Email<span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="email">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Employment Status<span class="text-danger">*</span></label>
+            <select cSelect formControlName="employment">
+                <option value="null">Select Employment Status</option>
+                <option value="Employed">Employed</option>
+                <option value="Student">Student</option>
+                <option value="Retired">Retired</option>
+                <option value="Other">Other</option>
+            </select>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm" *ngIf="this.form.get('basic')?.get('employment')?.value === 'Employed'">
+            <label style="width: 151px;">Company<span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="employmentCompany">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">Emergency Contact<span class="text-danger">*</span></label>
+            <select cSelect formControlName="emergencyContact">
+                <option value="null">Select Emergency Contact</option>
+                <option value="Father">Father</option>
+                <option value="Mother">Mother</option>
+                <option value="Friend">Friend</option>
+                <option value="Relative">Relative</option>
+                <option value="Spouse">Spouse</option>
+                <option value="Other">Other</option>
+            </select>
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">EmergencyName<span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="emergencyName">
+        </c-input-group>
+        <c-input-group class="mb-1" sizing="sm">
+            <label style="width: 150px;">EmergencyPhone<span class="text-danger">*</span></label>
+            <input class="form-control" placeholder formControlName="emergencyPhone"
+                [value]="this.form.get('basic')?.get('emergencyPhone')?.value | phone" maxlength="15">
+        </c-input-group>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperNext variant="outline" size="sm" type="submit"
+            [disabled]="!form.get('basic')?.valid">Next</button>
+    </div>
+</div>

@@ -19,17 +19,19 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     ]).subscribe(result => {
       this.stepperOrientation = result.matches ? 'vertical' : 'horizontal';
     });
+    this.createPatientForm();
   }
-  private dd() {
+  private createPatientForm() {
     this.patientForm = new FormGroup({
       'basic': new FormGroup({
         'firstname': new FormControl(null, [Validators.required]),
-        'middleName': new FormControl(null, [Validators.required]),
+        'middleName': new FormControl(null),
         'lastName': new FormControl(null, [Validators.required]),
         'dob': new FormControl(null, [Validators.required]),
         'gender': new FormControl(null, [Validators.required]),
         'marital': new FormControl(null, [Validators.required]),
-        'phone': new FormControl(null, [Validators.required]),
+        'phoneType': new FormControl(null, [Validators.required]),
+        'phone': new FormControl(null, [Validators.required, Validators.min(15)]),
         'email': new FormControl(null, [Validators.required, Validators.email]),
         'employment': new FormControl(null, [Validators.required]),
         'employmentCompany': new FormControl(null, [Validators.required]),
