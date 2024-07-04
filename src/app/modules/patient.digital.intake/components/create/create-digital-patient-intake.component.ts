@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-create-digital-patient-intake',
@@ -48,9 +49,23 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'zipCode': new FormControl(null, [Validators.required, Validators.min(10), Validators.pattern(zipCodeRgx)]),
       }),
       'medical': new FormGroup({
-
+        'isReferring': new FormControl(null, [Validators.required]),
+        'providerName': new FormControl(null),
+        'providerNPI': new FormControl(null),
+        'referringEntity': new FormControl(null),
+        'appointmentBooking': new FormControl(null, [Validators.required]),
+        'isPrimaryDoctor': new FormControl(null, [Validators.required]),
+        'isFamilyDoctorRequest': new FormControl(null, [Validators.required]),
+        'isReceivedPhysicalTherapy': new FormControl(null, [Validators.required]),
+        'PhysicalTherapyLocation': new FormControl(null),
+        'PhysicalTherapyNumber': new FormControl(null),
       })
     })
+    this.setAddressConditionalValidators()
+    this.setMedicalConditionalValidatos()
+    this.setReceivedPhysicalTherapyValidator();
+  }
+  private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {
       var employmentValue = value?.['basic'].employment
       if (employmentValue && employmentValue === 'Employed') {
@@ -62,4 +77,41 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     })
   }
 
+  private setMedicalConditionalValidatos() {
+    this.patientForm.get('medical')?.get('isReferring')?.valueChanges.subscribe((value: any) => {
+      if (value === 'yes') {
+        this.patientForm.get('medical')?.get('providerNPI')?.setValidators(Validators.required)
+        this.patientForm.get('medical')?.get('providerName')?.setValidators(Validators.required)
+        this.patientForm.get('medical')?.get('providerNPI')?.updateValueAndValidity();
+        this.patientForm.get('medical')?.get('providerName')?.updateValueAndValidity();
+      }
+      if (value === 'no') {
+        this.patientForm.get('medical')?.get('providerNPI')?.clearValidators();
+        this.patientForm.get('medical')?.get('providerNPI')?.setErrors(null);
+        this.patientForm.get('medical')?.get('providerNPI')?.updateValueAndValidity();
+
+        this.patientForm.get('medical')?.get('providerName')?.clearValidators();
+        this.patientForm.get('medical')?.get('providerName')?.setErrors(null);
+        this.patientForm.get('medical')?.get('providerName')?.updateValueAndValidity();
+      }
+    })
+  }
+  private setReceivedPhysicalTherapyValidator() {
+    this.patientForm.get('medical')?.get('isReceivedPhysicalTherapy')?.valueChanges.subscribe((value: any) => {
+      if (value === 'yes') {
+        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.setValidators(Validators.required)
+        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.setValidators(Validators.required)
+        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.updateValueAndValidity();
+        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.updateValueAndValidity();
+      } else {
+        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.clearValidators();
+        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.setErrors(null);
+        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.updateValueAndValidity();
+
+        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.clearValidators();
+        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.setErrors(null);
+        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.updateValueAndValidity();
+      }
+    })
+  }
 }

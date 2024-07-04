@@ -16,6 +16,13 @@ export class AuthInterceptor implements HttpInterceptor {
     , private spinner: NgxSpinnerService, private router: Router) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinner.show();
+    if (this.router.routerState.snapshot.url === '/digital-intake') {
+      return next.handle(request).pipe(
+        finalize(() => {
+          this.spinner.hide();
+        }),
+      )
+    }
     if ((this.kcAuthServiceService.isTokenExpired() && this.isRefreshURLS(this.router.routerState.snapshot.url))
     ) {
       console.log('intake');

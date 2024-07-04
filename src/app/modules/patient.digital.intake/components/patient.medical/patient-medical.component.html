@@ -1,1 +1,138 @@
-<p>patient-medical works!</p>
+<ngx-spinner></ngx-spinner>
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="medical">
+        <!-- Referring-->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Did the primary doctor/Referring doctor refer you to us or
+                        mention our clinics?<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body>
+                <c-form-check class="mb-2">
+                    <input cFormCheckInput type="radio" formControlName="isReferring" size="sm" [value]="'yes'" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check class="mb-4">
+                    <input cFormCheckInput type="radio" formControlName="isReferring" size="sm" [value]="'no'" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <span *ngIf="this.form.get('medical')?.get('isReferring')?.value ==='yes'">
+                    <c-input-group class="mb-1" sizing="sm">
+                        <label style="width: 90px;">NPI<span class="text-danger">*</span></label>
+                        <input class="form-control" placeholder formControlName="providerNPI">
+                    </c-input-group>
+                    <c-input-group class="mb-1" sizing="sm">
+                        <label style="width: 90px;">Name<span class="text-danger">*</span></label>
+                        <input class="form-control" placeholder formControlName="providerName"
+                            [value]="provider.fullName">
+                    </c-input-group>
+                </span>
+                <span *ngIf="this.form.get('medical')?.get('isReferring')?.value ==='no'">
+                    <c-input-group class="mb-1" sizing="sm">
+                        <label style="width: 90px;">Entity<span class="text-danger">*</span></label>
+                        <select cSelect sizing="sm" formControlName="referringEntity">
+                            <option value="null" disabled>Select</option>
+                            <option *ngFor="let entity of entityValues" [value]="entity.entityValue"
+                                [selected]="entity.selected">{{entity.entityName}}</option>
+                        </select>
+                    </c-input-group>
+                </span>
+            </c-card-body>
+        </c-card>
+        <!-- Appointment Booking-->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">How did you book your appointment? <span
+                            class="text-danger">*</span>
+                    </strong>
+                </label>
+            </c-card-header>
+            <c-card-body>
+                <c-input-group class="mb-1" sizing="sm">
+                    <select cSelect formControlName="appointmentBooking">
+                        <option value="null" disabled>Select Appointment Booking</option>
+                        <option value="Website">Website</option>
+                        <option value="Zocdoc">Zocdoc</option>
+                        <option value="Calls">Calls</option>
+                        <option value="Walkin">Walk-in</option>
+                    </select>
+                </c-input-group>
+            </c-card-body>
+        </c-card>
+        <!--Primary Doctor-->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">What is your primary doctor name?
+                        <span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body>
+                <c-input-group class="mb-1" sizing="sm">
+                    <input class="form-control" placeholder formControlName="isPrimaryDoctor">
+                </c-input-group>
+            </c-card-body>
+        </c-card>
+        <!--family doctor request-->
+        <c-card>
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Would you like your results sent to your family doctor?
+                        <span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body>
+                <c-form-check class="mb-2">
+                    <input cFormCheckInput type="radio" formControlName="isFamilyDoctorRequest" size="sm"
+                        [value]="'yes'" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check class="mb-4">
+                    <input cFormCheckInput type="radio" formControlName="isFamilyDoctorRequest" size="sm"
+                        [value]="'no'" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+            </c-card-body>
+        </c-card>
+        <!--received physical therapy -->
+        <c-card>
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere else?<span
+                            class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body>
+                <c-form-check class="mb-2">
+                    <input cFormCheckInput type="radio" formControlName="isReceivedPhysicalTherapy" size="sm"
+                        [value]="'yes'" />
+                    <label cFormCheckLabel>Yes</label>
+                </c-form-check>
+                <c-form-check class="mb-4">
+                    <input cFormCheckInput type="radio" formControlName="isReceivedPhysicalTherapy" size="sm"
+                        [value]="'no'" />
+                    <label cFormCheckLabel>No</label>
+                </c-form-check>
+                <span *ngIf="this.form.get('medical')?.get('isReceivedPhysicalTherapy')?.value ==='yes'">
+                    <c-input-group class="mb-1" sizing="sm">
+                        <label style="width: 150px;">Where<span class="text-danger">*</span></label>
+                        <input class="form-control" placeholder formControlName="PhysicalTherapyLocation">
+                    </c-input-group>
+                    <c-input-group class="mb-1" sizing="sm">
+                        <label style="width: 150px;">How Many Visits<span class="text-danger">*</span></label>
+                        <input class="form-control" placeholder formControlName="PhysicalTherapyNumber" type="text"
+                        pattern="\d*" maxlength="2">
+                    </c-input-group>
+                </span>
+            </c-card-body>
+        </c-card>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton matStepperNext variant="outline" size="sm" type="submit"
+            [disabled]="!form.get('medical')?.valid">Next</button>
+    </div>
+</div>

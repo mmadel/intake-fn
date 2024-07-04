@@ -12,6 +12,7 @@ import { PatientBasicComponent } from './components/patient.basic/patient-basic.
 import { PatientCommonModule } from '../common';
 import { PatientAddressComponent } from './components/patient.address/patient-address.component';
 import { PatientMedicalComponent } from './components/patient.medical/patient-medical.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 
 const COREUI_MODULES = [
@@ -55,6 +56,7 @@ const COREUI_MODULES = [
     PatientCommonModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
     ...COREUI_MODULES,
+    AutocompleteLibModule,
   ]
 })
 export class PatientDigitalIntakeModule { }
