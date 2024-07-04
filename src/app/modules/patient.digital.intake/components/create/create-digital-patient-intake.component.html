@@ -15,8 +15,10 @@
                         <ng-template matStepLabel>Medical Information</ng-template>
                         <patient-medical [form]="patientForm"></patient-medical>
                     </mat-step>
-                    <mat-step completed="false">
+                    <mat-step completed="true" [stepControl]="patientForm.get('medicalhistory')!"
+                        formGroupName="medicalhistory">
                         <ng-template matStepLabel>Medical History</ng-template>
+                        <patient-medical-history [form]="patientForm"></patient-medical-history>
                     </mat-step>
                     <mat-step completed="false">
                         <ng-template matStepLabel>Insurance Information</ng-template>

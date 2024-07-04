@@ -59,6 +59,9 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'isReceivedPhysicalTherapy': new FormControl(null, [Validators.required]),
         'PhysicalTherapyLocation': new FormControl(null),
         'PhysicalTherapyNumber': new FormControl(null),
+      }),
+      'medicalhistory': new FormGroup({
+
       })
     })
     this.setAddressConditionalValidators()

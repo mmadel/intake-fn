@@ -12,8 +12,6 @@ import { ProvidersService } from '../../services/provider/providers.service';
   styleUrls: ['./patient-medical.component.css']
 })
 export class PatientMedicalComponent implements OnInit {
-  isLoading = false;
-  npiNotFound: boolean = false
   @Input() form: FormGroup;
   provider: Provider = {}
   entityValues = entityValues;
@@ -40,14 +38,14 @@ export class PatientMedicalComponent implements OnInit {
         }),
         debounceTime(500),
         tap((value) => {
-          this.isLoading = true;
+          
         }),
         switchMap((value: any) => {
           console.log(value)
           return this.providersService.findProviderByNPI(value)
             .pipe(
               finalize(() => {
-                this.isLoading = false
+                
               }),
             )
         }
@@ -60,9 +58,7 @@ export class PatientMedicalComponent implements OnInit {
           this.provider.fullName = ''
       },
         error => {
-          console.log(JSON.stringify(error))
-          this.isLoading = false
-          this.npiNotFound = true;
+          console.log(JSON.stringify(error))          
         });
   }
 }

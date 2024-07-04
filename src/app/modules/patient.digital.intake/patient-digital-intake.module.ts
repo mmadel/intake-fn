@@ -13,6 +13,7 @@ import { PatientCommonModule } from '../common';
 import { PatientAddressComponent } from './components/patient.address/patient-address.component';
 import { PatientMedicalComponent } from './components/patient.medical/patient-medical.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { PatientMedicalHistoryComponent } from './components/patient.medical.history/patient-medical-history.component';
 
 
 const COREUI_MODULES = [
@@ -45,7 +46,8 @@ const COREUI_MODULES = [
     CreateDigitalPatientIntakeComponent,
     PatientBasicComponent,
     PatientAddressComponent,
-    PatientMedicalComponent
+    PatientMedicalComponent,
+    PatientMedicalHistoryComponent
   ],
   imports: [
     CommonModule,
