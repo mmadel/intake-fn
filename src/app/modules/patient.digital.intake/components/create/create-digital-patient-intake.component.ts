@@ -61,7 +61,10 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'PhysicalTherapyNumber': new FormControl(null),
       }),
       'medicalhistory': new FormGroup({
-
+        'height': new FormControl(null, [Validators.required]),
+        'heightUnit': new FormControl(null),
+        'weight': new FormControl(null, [Validators.required]),
+        'weightUnit': new FormControl(null),
       })
     })
     this.setAddressConditionalValidators()

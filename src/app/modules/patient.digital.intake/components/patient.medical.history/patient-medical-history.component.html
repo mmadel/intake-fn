@@ -8,7 +8,23 @@
                     <strong style="font-size: medium;">What is your Height ?<span class="text-danger">*</span></strong>
                 </label>
             </c-card-header>
-            <c-card-body></c-card-body>
+            <c-card-body>
+                <c-row>
+                    <c-col xl="6">
+                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="height" numbers
+                            onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;">
+                    </c-col>
+                    <c-col xl="2">
+                        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                            <input cFormCheckInput type="checkbox"  formControlName="heightUnit"/>
+                            <label cFormCheckLabel>
+                                <span [ngClass]="{ 'fw-bold':true }">cm</span>/<span
+                                    [ngClass]="{ 'fw-bold':false }">Inch</span>
+                            </label>
+                        </c-form-check>
+                    </c-col>
+                </c-row>
+            </c-card-body>
         </c-card>
         <!--Weight -->
         <c-card class="mb-2">
@@ -17,7 +33,23 @@
                     <strong style="font-size: medium;">What is your Weight ?<span class="text-danger">*</span></strong>
                 </label>
             </c-card-header>
-            <c-card-body></c-card-body>
+            <c-card-body>
+                <c-row>
+                    <c-col xl="6">
+                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="weight" numbers
+                            onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;">
+                    </c-col>
+                    <c-col xl="2">
+                        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                            <input cFormCheckInput type="checkbox"  formControlName="weightUnit"/>
+                            <label cFormCheckLabel>
+                                <span [ngClass]="{ 'fw-bold':true }">pound</span>/<span
+                                    [ngClass]="{ 'fw-bold':false }">kg</span>
+                            </label>
+                        </c-form-check>
+                    </c-col>
+                </c-row>
+            </c-card-body>
         </c-card>
         <!--primary reason for today’s evaluation -->
         <c-card class="mb-2">

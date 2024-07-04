@@ -123,8 +123,7 @@
                     </c-input-group>
                     <c-input-group class="mb-1" sizing="sm">
                         <label style="width: 150px;">How Many Visits<span class="text-danger">*</span></label>
-                        <input class="form-control" placeholder formControlName="PhysicalTherapyNumber" type="text"
-                        pattern="\d*" maxlength="2">
+                        <input class="form-control" placeholder formControlName="PhysicalTherapyNumber" numbers onKeyDown="if(this.value.length==2 && event.keyCode!=8) return false;">
                     </c-input-group>
                 </span>
             </c-card-body>
