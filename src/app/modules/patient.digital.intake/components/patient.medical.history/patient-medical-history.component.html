@@ -1,1 +1,95 @@
-<p>patient-medical-history works!</p>
+<ngx-spinner></ngx-spinner>
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="medicalhistory">
+        <!--Height -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">What is your Height ?<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--Weight -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">What is your Weight ?<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--primary reason for today’s evaluation -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">What is your primary reason for today’s evaluation ?<span
+                            class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--prescription or non-prescription medication-->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Please list any prescription or non-prescription medication you
+                        are taking<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--patient condition -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Please select each condition that you have been told you have (or
+                        had)<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--X-Ray -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">MRI, CT scan and X-Ray<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--Metal Implants -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Metal Implants<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--Pacemaker -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Pacemaker<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+        <!--Please list any surgeries you may have had or any other conditions not listed above -->
+        <c-card class="mb-2">
+            <c-card-header>
+                <label for="dsds" class="form-label">
+                    <strong style="font-size: medium;">Please list any surgeries you may have had or any other
+                        conditions not listed above<span class="text-danger">*</span></strong>
+                </label>
+            </c-card-header>
+            <c-card-body></c-card-body>
+        </c-card>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton matStepperNext variant="outline" size="sm" type="submit"
+            [disabled]="!form.get('medicalhistory')?.valid">Next</button>
+    </div>
+</div>
