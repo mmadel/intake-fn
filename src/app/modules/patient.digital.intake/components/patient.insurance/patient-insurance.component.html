@@ -1,1 +1,23 @@
-<p>patient-insurance works!</p>
+<ngx-spinner></ngx-spinner>
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="insurance">
+        <!--Insurance Type-->
+        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+            <input cFormCheckInput type="checkbox" formControlName="type" />
+            <label cFormCheckLabel>
+                <span [ngClass]="{ 'fw-bold':!this.form.get('insurance')?.get('type')?.value }">Worker's Compensation</span>/<span
+                    [ngClass]="{ 'fw-bold':this.form.get('insurance')?.get('type')?.value }">Commercial Insurance</span>
+            </label>
+        </c-form-check>
+        <c-card *ngIf="!form.get('insurance')?.get('type')?.value">
+            <c-card-body>
+                <h5 cCardTitle>Worker's Compensation/No Fault</h5>
+            </c-card-body>
+        </c-card>
+        <c-card *ngIf="form.get('insurance')?.get('type')?.value">
+            <c-card-body>
+                <h5 cCardTitle>Commercial Insurance</h5>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

@@ -9,7 +9,6 @@ import { FormGroup } from '@angular/forms';
 export class PatientInsuranceComponent implements OnInit {
   @Input() form: FormGroup;
   constructor() { }
-
   ngOnInit(): void {
   }
 

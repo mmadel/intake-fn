@@ -74,7 +74,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'surgeriesList': new FormControl(null, [Validators.required]),
       }),
       'insurance': new FormGroup({
-
+        'type': new FormControl(false, [Validators.required]),
       })
     })
     this.setAddressConditionalValidators()
