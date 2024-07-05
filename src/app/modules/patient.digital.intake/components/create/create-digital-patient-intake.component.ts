@@ -72,6 +72,9 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'isXRayValue': new FormControl(null),
         'isPacemaker': new FormControl(null, [Validators.required]),
         'surgeriesList': new FormControl(null, [Validators.required]),
+      }),
+      'insurance': new FormGroup({
+
       })
     })
     this.setAddressConditionalValidators()
