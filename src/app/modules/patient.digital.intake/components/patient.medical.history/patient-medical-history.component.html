@@ -2,122 +2,126 @@
 <div [formGroup]="form" class="mt-3">
     <div formGroupName="medicalhistory">
         <!--Height -->
-        <c-card class="mb-2">
-            <c-card-header>
+        <c-row>
+            <c-col xl="12">
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">What is your Height ?<span class="text-danger">*</span></strong>
+                    <strong style="font-size: medium;">What is your Height?<span
+                            class="text-danger">*</span></strong>
                 </label>
-            </c-card-header>
-            <c-card-body>
-                <c-row>
-                    <c-col xl="6">
-                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="height" numbers
-                            onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;">
-                    </c-col>
-                    <c-col xl="2">
-                        <c-form-check [switch]="true" class="mb-3" sizing="lg">
-                            <input cFormCheckInput type="checkbox"  formControlName="heightUnit"/>
-                            <label cFormCheckLabel>
-                                <span [ngClass]="{ 'fw-bold':true }">cm</span>/<span
-                                    [ngClass]="{ 'fw-bold':false }">Inch</span>
-                            </label>
-                        </c-form-check>
-                    </c-col>
-                </c-row>
-            </c-card-body>
-        </c-card>
+            </c-col>
+            <c-col xl="4">
+                    <input class="form-control col-xs-2 mx-2" placeholder formControlName="height" numbers
+                        onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;">
+            </c-col>
+            <c-col xl="2">
+                <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                    <input cFormCheckInput type="checkbox" formControlName="heightUnit" />
+                    <label cFormCheckLabel>
+                        <span [ngClass]="{ 'fw-bold':true }">cm</span>/<span [ngClass]="{ 'fw-bold':false }">Inch</span>
+                    </label>
+                </c-form-check>
+            </c-col>
+        </c-row>
         <!--Weight -->
-        <c-card class="mb-2">
-            <c-card-header>
+        <c-row>
+            <c-col xl="12">
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">What is your Weight ?<span class="text-danger">*</span></strong>
+                    <strong style="font-size: medium;">What is your Weight?<span
+                            class="text-danger">*</span></strong>
                 </label>
-            </c-card-header>
-            <c-card-body>
-                <c-row>
-                    <c-col xl="6">
-                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="weight" numbers
-                            onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;">
-                    </c-col>
-                    <c-col xl="2">
-                        <c-form-check [switch]="true" class="mb-3" sizing="lg">
-                            <input cFormCheckInput type="checkbox"  formControlName="weightUnit"/>
-                            <label cFormCheckLabel>
-                                <span [ngClass]="{ 'fw-bold':true }">pound</span>/<span
-                                    [ngClass]="{ 'fw-bold':false }">kg</span>
-                            </label>
-                        </c-form-check>
-                    </c-col>
-                </c-row>
-            </c-card-body>
-        </c-card>
+            </c-col>
+            <c-col xl="4">
+                    <input class="form-control col-xs-2 mx-2" placeholder formControlName="weight" numbers
+                        onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;">
+            </c-col>
+            <c-col xl="2">
+                <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                    <input cFormCheckInput type="checkbox" formControlName="weightUnit" />
+                    <label cFormCheckLabel>
+                        <span [ngClass]="{ 'fw-bold':true }">pound</span>/<span
+                            [ngClass]="{ 'fw-bold':false }">kg</span>
+                    </label>
+                </c-form-check>
+            </c-col>
+        </c-row>
         <!--primary reason for today’s evaluation -->
-        <c-card class="mb-2">
-            <c-card-header>
+        <c-row class="mb-2">
+            <c-col xl="12">
                 <label for="dsds" class="form-label">
                     <strong style="font-size: medium;">What is your primary reason for today’s evaluation ?<span
                             class="text-danger">*</span></strong>
                 </label>
-            </c-card-header>
-            <c-card-body></c-card-body>
-        </c-card>
+            </c-col>
+            <c-col xl="12">
+                <textarea cFormControl sizing="sm" formControlName="evaluationReason"></textarea>
+            </c-col>
+        </c-row>
         <!--prescription or non-prescription medication-->
-        <c-card class="mb-2">
-            <c-card-header>
+        <c-row class="mb-2">
+            <c-col xl="12">
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Please list any prescription or non-prescription medication you
-                        are taking<span class="text-danger">*</span></strong>
+                    <strong style="font-size: medium;">What is your primary reason for today’s evaluation ?<span
+                            class="text-danger">*</span></strong>
                 </label>
-            </c-card-header>
-            <c-card-body></c-card-body>
-        </c-card>
+            </c-col>
+            <c-col xl="12">
+                <textarea cFormControl sizing="sm" formControlName="prescriptionMedication"></textarea>
+            </c-col>
+        </c-row>
         <!--patient condition -->
-        <c-card class="mb-2">
-            <c-card-header>
+        <c-row class="mb-2">
+            <c-col xl="12">
                 <label for="dsds" class="form-label">
                     <strong style="font-size: medium;">Please select each condition that you have been told you have (or
                         had)<span class="text-danger">*</span></strong>
                 </label>
-            </c-card-header>
-            <c-card-body></c-card-body>
-        </c-card>
-        <!--X-Ray -->
-        <c-card class="mb-2">
-            <c-card-header>
-                <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">MRI, CT scan and X-Ray<span class="text-danger">*</span></strong>
-                </label>
-            </c-card-header>
-            <c-card-body></c-card-body>
-        </c-card>
+            </c-col>
+            <c-col xl="12">
+                <c-multi-select multiple >
+                    <c-multi-select-option *ngFor="let option of patientConditions"
+                        [value]="option.name">{{option.name}}</c-multi-select-option>
+                </c-multi-select>
+            </c-col>
+        </c-row>
+        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+            <input cFormCheckInput type="checkbox" formControlName="isXRay" />
+            <label cFormCheckLabel>
+                <span [ngClass]="{ 'fw-bold':true }">MRI, CT scan and X-Ray</span>
+            </label>
+        </c-form-check>        
+        <span *ngIf="form.get('medicalhistory')?.get('isXRay')?.value">
+            <c-multi-select multiple formControlName="isXRayValue">
+                <c-multi-select-option value="MRI">MRI</c-multi-select-option>
+                <c-multi-select-option value="CT">CT</c-multi-select-option>
+                <c-multi-select-option value="X-ray">X-ray</c-multi-select-option>
+            </c-multi-select>
+        </span>
         <!--Metal Implants -->
-        <c-card class="mb-2">
-            <c-card-header>
-                <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Metal Implants<span class="text-danger">*</span></strong>
-                </label>
-            </c-card-header>
-            <c-card-body></c-card-body>
-        </c-card>
+        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+            <input cFormCheckInput type="checkbox" formControlName="isMetalImplants" />
+            <label cFormCheckLabel>
+                <span [ngClass]="{ 'fw-bold':true }">MetalImplants</span>
+            </label>
+        </c-form-check>
         <!--Pacemaker -->
-        <c-card class="mb-2">
-            <c-card-header>
-                <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Pacemaker<span class="text-danger">*</span></strong>
-                </label>
-            </c-card-header>
-            <c-card-body></c-card-body>
-        </c-card>
+        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+            <input cFormCheckInput type="checkbox" formControlName="isPacemaker" />
+            <label cFormCheckLabel>
+                <span [ngClass]="{ 'fw-bold':true }">Pacemaker</span>
+            </label>
+        </c-form-check>
         <!--Please list any surgeries you may have had or any other conditions not listed above -->
-        <c-card class="mb-2">
-            <c-card-header>
+        <c-row>
+            <c-col xl="12">
                 <label for="dsds" class="form-label">
                     <strong style="font-size: medium;">Please list any surgeries you may have had or any other
                         conditions not listed above<span class="text-danger">*</span></strong>
                 </label>
-            </c-card-header>
-            <c-card-body></c-card-body>
-        </c-card>
+            </c-col>
+            <c-col xl="12">
+                <textarea cFormControl sizing="sm" formControlName="surgeriesList"></textarea>
+            </c-col>
+        </c-row>
     </div>
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>

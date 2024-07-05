@@ -65,11 +65,19 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'heightUnit': new FormControl(null),
         'weight': new FormControl(null, [Validators.required]),
         'weightUnit': new FormControl(null),
+        'evaluationReason': new FormControl(null, [Validators.required]),
+        'prescriptionMedication': new FormControl(null, [Validators.required]),
+        'isMetalImplants': new FormControl(null, [Validators.required]),
+        'isXRay': new FormControl(null, [Validators.required]),
+        'isXRayValue': new FormControl(null),
+        'isPacemaker': new FormControl(null, [Validators.required]),
+        'surgeriesList': new FormControl(null, [Validators.required]),
       })
     })
     this.setAddressConditionalValidators()
     this.setMedicalConditionalValidatos()
     this.setReceivedPhysicalTherapyValidator();
+    this.setXRayValidator();
   }
   private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {
@@ -117,6 +125,18 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.clearValidators();
         this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.setErrors(null);
         this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.updateValueAndValidity();
+      }
+    })
+  }
+  private setXRayValidator() {
+    this.patientForm.get('medicalhistory')?.get('isXRay')?.valueChanges.subscribe((value: any) => {
+      if (value) {
+        this.patientForm.get('medicalhistory')?.get('isXRayValue')?.setValidators(Validators.required)
+        this.patientForm.get('medicalhistory')?.get('isXRayValue')?.updateValueAndValidity();
+      } else {
+        this.patientForm.get('medicalhistory')?.get('isXRayValue')?.clearValidators();
+        this.patientForm.get('medicalhistory')?.get('isXRayValue')?.setErrors(null);
+        this.patientForm.get('medicalhistory')?.get('isXRayValue')?.updateValueAndValidity();
       }
     })
   }

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { PatientConditions } from 'src/app/modules/patient.questionnaire/components/medical.history.information/create.patient.conditions/patient.conditions';
+import { IPatientCondition } from 'src/app/modules/patient.questionnaire/components/medical.history.information/patient.condition';
 
 @Component({
   selector: 'patient-medical-history',
@@ -12,6 +14,7 @@ export class PatientMedicalHistoryComponent implements OnInit {
   @Input() form: FormGroup;
   initHeight: number = 0;
   initWeight: number
+  patientConditions: IPatientCondition[] = PatientConditions.create();
   ngOnInit(): void {
     this.form?.get('medicalhistory')?.get('heightUnit')?.valueChanges.subscribe(value => {
       this.convertHeight(value);
