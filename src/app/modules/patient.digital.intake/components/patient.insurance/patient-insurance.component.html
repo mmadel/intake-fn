@@ -193,25 +193,188 @@
                         </c-row>
                     </c-card-body>
                 </c-card>
-                <c-row>
-                    <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">Case Status<span
-                                class="text-danger">*</span></label>
-                    </c-col>
-                    <c-col xl="12">
-                        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
-                            <option value="null" selected disabled>Select</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </c-col>
-                </c-row>
+
             </c-card-body>
 
         </c-card>
         <c-card *ngIf="form.get('insurance')?.get('type')?.value">
             <c-card-body>
                 <h5 cCardTitle>Commercial Insurance</h5>
+                <c-row class="mb-2">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">Insurance Company<span
+                                class="text-danger">*</span>
+                        </label>
+                    </c-col>
+                    <c-col xl="12">
+                        <select cSelect sizing="sm" name="injuryType" style="line-height: 15px;" cFormControl>
+                            <option value="null" disabled>Select</option>
+                        </select>
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">Member Id<span
+                                class="text-danger">*</span>
+                        </label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input cFormControl sizing="sm">
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">Ploicy Id<span
+                                class="text-danger">*</span>
+                        </label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input cFormControl sizing="sm">
+                    </c-col>
+                </c-row>
+                <c-row class="mb-2">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">PloicyHolder Relationship<span
+                                class="text-danger">*</span>
+                        </label>
+                    </c-col>
+                    <c-col xl="12">
+                        <select cSelect sizing="sm" style="line-height: 15px;" cFormControl>
+                            <option value="null" disabled>Select</option>
+                            <option value="Self">Self</option>
+                            <option value="Spouse">Spouse</option>
+                            <option value="Spouse">Child</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </c-col>
+                </c-row>
+                <c-row>
+                    <c-card class="mb-2" [cBorder]="{top: {color: 'secondary', width: 3}}">
+                        <c-card-body>
+                            <h6 cCardSubtitle class="mb-2 text-medium-emphasis">PloicyHolder</h6>
+                            <c-row>
+                                <c-col xl="12">
+                                    <label for="dsds" class="form-label" style="font-size: medium;">Full Name<span
+                                            class="text-danger">*</span></label>
+                                </c-col>
+                            </c-row>
+                            <c-col xl="12">
+                                <c-input-group>
+                                    <input cFormControl placeholder="FirstName">
+                                    <input cFormControl placeholder="MiddleName">
+                                    <input cFormControl placeholder="LastName">
+                                </c-input-group>
+                            </c-col>
+                            <c-row>
+                                <c-col xl="12">
+                                    <label for="dsds" class="form-label" style="font-size: medium;">Phone<span
+                                            class="text-danger">*</span></label>
+                                </c-col>
+                                <c-col xs="12">
+                                    <input cFormControl placeholder="Phone">
+                                </c-col>
+                            </c-row>
+                            <c-row>
+                                <c-col xl="12">
+                                    <label for="dsds" class="form-label" style="font-size: medium;">Employer Name<span
+                                            class="text-danger">*</span></label>
+                                </c-col>
+                                <c-col xs="12">
+                                    <input cFormControl placeholder="Employer Name">
+                                </c-col>
+                            </c-row>
+                        </c-card-body>
+                    </c-card>
+                </c-row>
+                <c-row>
+                    <c-col xl="12">
+                        <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                            <input cFormCheckInput type="checkbox" />
+                            <label cFormCheckLabel>
+                                <span [ngClass]="{ 'fw-bold':true }">Do you have secondary insurance?</span>
+                            </label>
+                        </c-form-check>
+                    </c-col>
+                </c-row>
+                <c-card class="mb-2" [cBorder]="{top: {color: 'secondary', width: 3}}">
+                    <c-card-body>
+                        <h6 cCardSubtitle class="mb-2 text-medium-emphasis">Secondary Insurance</h6>
+                        <c-row>
+                            <c-col xl="12">
+                                <label for="dsds" class="form-label" style="font-size: medium;">Insurance Company<span
+                                        class="text-danger">*</span></label>
+                            </c-col>
+                            <c-col xl="12">
+                                <input cFormControl sizing="sm">
+                            </c-col>
+                        </c-row>
+                        <c-row>
+                            <c-col xl="12">
+                                <label for="dsds" class="form-label" style="font-size: medium;">Member Id<span
+                                        class="text-danger">*</span></label>
+                            </c-col>
+                            <c-col xl="12">
+                                <input cFormControl sizing="sm">
+                            </c-col>
+                        </c-row>
+                        <c-row>
+                            <c-col xl="12">
+                                <label for="dsds" class="form-label" style="font-size: medium;">Full Name<span
+                                        class="text-danger">*</span></label>
+                            </c-col>
+                            <c-col xl="12">
+                                <c-input-group>
+                                    <input cFormControl placeholder="FirstName">
+                                    <input cFormControl placeholder="MiddleName">
+                                    <input cFormControl placeholder="LastName">
+                                </c-input-group>
+                            </c-col>
+                        </c-row>
+                        <c-row>
+                            <c-col xl="12">
+                                <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                                    <input cFormCheckInput type="checkbox" />
+                                    <label cFormCheckLabel>
+                                        <span [ngClass]="{ 'fw-bold':true }">Medicare Coverage?</span>
+                                    </label>
+                                </c-form-check>
+                            </c-col>
+                        </c-row>
+                        <c-card class="mb-2" [cBorder]="{top: {color: 'secondary', width: 3}}">
+                            <c-card-body>
+                                <h6 cCardSubtitle class="mb-2 text-medium-emphasis">Medicare Coverage</h6>
+                                <c-row>
+                                    <c-col xl="12">
+                                        <label for="dsds" class="form-label" style="font-size: medium;">Full Name<span
+                                                class="text-danger">*</span></label>
+                                    </c-col>
+                                    <c-col xl="12">
+                                        <c-input-group>
+                                            <input cFormControl placeholder="FirstName">
+                                            <input cFormControl placeholder="MiddleName">
+                                            <input cFormControl placeholder="LastName">
+                                        </c-input-group>
+                                    </c-col>
+                                </c-row>
+                                <c-row>
+                                    <c-col xl="12">
+                                        <label for="dsds" class="form-label" style="font-size: medium;">Full Name<span
+                                                class="text-danger">*</span></label>
+                                    </c-col>
+                                    <c-row>
+                                        <c-col xl="12">
+                                            <label for="dsds" class="form-label" style="font-size: medium;">Phone<span
+                                                    class="text-danger">*</span></label>
+                                        </c-col>
+                                        <c-col xl="12">
+                                            <input cFormControl sizing="sm" />
+                                        </c-col>
+                                    </c-row>
+                                </c-row>
+                            </c-card-body>
+                        </c-card>
+                    </c-card-body>
+                </c-card>
             </c-card-body>
         </c-card>
     </div>
