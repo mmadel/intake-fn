@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
+import { InsuranceValidator } from './validators/insurance/insurance.validator';
 
 @Component({
   selector: 'app-create-digital-patient-intake',
@@ -122,6 +123,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.setMedicalConditionalValidatos()
     this.setReceivedPhysicalTherapyValidator();
     this.setXRayValidator();
+    InsuranceValidator.addValidator(this.patientForm)
   }
   private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {

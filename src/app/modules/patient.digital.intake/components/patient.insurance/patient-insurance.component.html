@@ -557,4 +557,9 @@
             </c-card-body>
         </c-card>
     </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton matStepperNext variant="outline" size="sm" type="submit"
+            [disabled]="!form.get('insurance')?.valid">Next</button>
+    </div>
 </div>
