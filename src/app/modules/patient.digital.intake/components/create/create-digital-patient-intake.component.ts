@@ -98,6 +98,22 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'compensation-attorney-middle-name': new FormControl(null),
         'compensation-attorney-last-name': new FormControl(null, [Validators.required]),
         'compensation-attorney-phone': new FormControl(null, [Validators.required]),
+
+        'commercial-insurance-company': new FormControl(null, [Validators.required]),
+        'commercial-member-id': new FormControl(null, [Validators.required]),
+        'commercial-ploicy-id': new FormControl(null, [Validators.required]),
+        'commercial-ploicyHolder-relationship': new FormControl(null, [Validators.required]),
+        'commercial-is-secondary-insurance': new FormControl(false, [Validators.required]),
+        'commercial-is-medicare-coverage': new FormControl(false),
+        'commercial-is-secondary-insurance-insurance-company': new FormControl(null),
+        'commercial-is-secondary-insurance-member-id': new FormControl(null),
+        'commercial-is-secondary-insurance-first-name': new FormControl(null),
+        'commercial-is-secondary-insurance-middle-name': new FormControl(null),
+        'commercial-is-secondary-insurance-last-name': new FormControl(null),
+        'commercial-is-secondary-insurance-medicare-coverage-first-name': new FormControl(null),
+        'commercial-is-secondary-insurance-medicare-coverage-middle-name': new FormControl(null),
+        'commercial-is-secondary-insurance-medicare-coverage-last-name': new FormControl(null),
+        'commercial-is-secondary-insurance-medicare-coverage-phone': new FormControl(null),
       })
     })
     this.setAddressConditionalValidators()
