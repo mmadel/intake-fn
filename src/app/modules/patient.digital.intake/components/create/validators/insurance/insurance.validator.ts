@@ -1,4 +1,6 @@
 import { FormGroup } from "@angular/forms";
+import { AddCommercialValidators } from "./commercial/add.commercial.validator";
+import { RemoveCommercialValidators } from "./commercial/remove.commercial.validator";
 import { AddWorkerCompensationValidators } from "./compensation/add.worker.compensation.validators";
 import { RemoveWorkerCompensationValidators } from "./compensation/remove.worker.compensation.validators";
 
@@ -9,10 +11,12 @@ export class InsuranceValidator {
             if (!value) {
                 //add worker compansation validators 
                 AddWorkerCompensationValidators.add(form)
-                console.log('remove commercial validators')
+                //remove worker commercial validators
+                RemoveCommercialValidators.remove(form)
             }
             if (value) {
-                console.log('add commercial validators ')
+                //add commercial validators
+                AddCommercialValidators.add(form);
                 //remove worker compansation validators
                 RemoveWorkerCompensationValidators.remove(form)
             }
