@@ -103,6 +103,12 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'commercial-member-id': new FormControl(null, [Validators.required]),
         'commercial-ploicy-id': new FormControl(null, [Validators.required]),
         'commercial-ploicyHolder-relationship': new FormControl(null, [Validators.required]),
+        'commercial-ploicyHolder-relationship-first-name': new FormControl(null),
+        'commercial-ploicyHolder-relationship-middle-name': new FormControl(null),
+        'commercial-ploicyHolder-relationship-last-name': new FormControl(null),
+        'commercial-ploicyHolder-relationship-phone': new FormControl(null),
+        'commercial-ploicyHolder-relationship-employer': new FormControl(null),
+        
         'commercial-is-secondary-insurance': new FormControl(false, [Validators.required]),
         'commercial-is-medicare-coverage': new FormControl(false),
         'commercial-is-secondary-insurance-insurance-company': new FormControl(null),
