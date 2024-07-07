@@ -75,6 +75,29 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       }),
       'insurance': new FormGroup({
         'type': new FormControl(false, [Validators.required]),
+        'compensation-related-injury': new FormControl(null, [Validators.required]),
+        'compensation-accident-date': new FormControl(null, [Validators.required]),
+        'compensation-wroker-status': new FormControl(null, [Validators.required]),
+
+        'compensation-address-type': new FormControl(null, [Validators.required]),
+        'compensation-first-address': new FormControl(null, [Validators.required]),
+        'compensation-second-address': new FormControl(null, [Validators.required]),
+        'compensation-state': new FormControl(null, [Validators.required]),
+        'compensation-city': new FormControl(null, [Validators.required]),
+        'compensation-zipcode': new FormControl(null, [Validators.required]),
+
+        'compensation-phone': new FormControl(null, [Validators.required]),
+        'compensation-fax': new FormControl(null, [Validators.required]),
+
+        'compensation-adjuster-first-name': new FormControl(null, [Validators.required]),
+        'compensation-adjuster-middle-name': new FormControl(null),
+        'compensation-adjuster-last-name': new FormControl(null, [Validators.required]),
+        'compensation-adjuster-phone': new FormControl(null, [Validators.required]),
+
+        'compensation-attorney-first-name': new FormControl(null, [Validators.required]),
+        'compensation-attorney-middle-name': new FormControl(null),
+        'compensation-attorney-last-name': new FormControl(null, [Validators.required]),
+        'compensation-attorney-phone': new FormControl(null, [Validators.required]),
       })
     })
     this.setAddressConditionalValidators()
