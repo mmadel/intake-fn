@@ -384,10 +384,23 @@
                         </c-row>
                         <c-col xl="12">
                             <c-input-group>
-                                <input cFormControl placeholder="FirstName">
-                                <input cFormControl placeholder="MiddleName">
-                                <input cFormControl placeholder="LastName">
+                                <input cFormControl placeholder="FirstName"
+                                    formControlName="commercial-ploicyHolder-relationship-first-name">
+                                <input cFormControl placeholder="MiddleName"
+                                    formControlName="commercial-ploicyHolder-relationship-middle-name">
+                                <input cFormControl placeholder="LastName"
+                                    formControlName="commercial-ploicyHolder-relationship-last-name">
                             </c-input-group>
+                            <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.valid && 
+						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.touched)"
+                                class="text-danger mx-1">
+                                first-name is required
+                            </div>
+                            <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.valid && 
+						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.touched)"
+                                class="text-danger mx-1">
+                                first-name is required
+                            </div>
                         </c-col>
                         <c-row>
                             <c-col xl="12">
@@ -395,8 +408,14 @@
                                         class="text-danger">*</span></label>
                             </c-col>
                             <c-col xs="12">
-                                <input cFormControl placeholder="Phone">
+                                <input cFormControl placeholder="Phone"
+                                    formControlName="commercial-ploicyHolder-relationship-phone">
                             </c-col>
+                            <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-phone')?.valid && 
+						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-phone')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-phone')?.touched)"
+                                class="text-danger mx-1">
+                                phone is required
+                            </div>
                         </c-row>
                         <c-row>
                             <c-col xl="12">
@@ -404,8 +423,14 @@
                                         class="text-danger">*</span></label>
                             </c-col>
                             <c-col xs="12">
-                                <input cFormControl placeholder="Employer Name">
+                                <input cFormControl placeholder="Employer Name"
+                                    formControlName="commercial-ploicyHolder-relationship-employer">
                             </c-col>
+                            <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-employer')?.valid && 
+						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-employer')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-employer')?.touched)"
+                                class="text-danger mx-1">
+                                employer is required
+                            </div>
                         </c-row>
                     </c-card-body>
                 </c-card>
