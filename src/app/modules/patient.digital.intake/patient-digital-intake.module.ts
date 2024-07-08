@@ -16,6 +16,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { PatientMedicalHistoryComponent } from './components/patient.medical.history/patient-medical-history.component';
 import { PatientInsuranceComponent } from './components/patient.insurance/patient-insurance.component';
 import { PatientDocumentComponent } from './components/patient.document/patient-document.component';
+import { PatientAgreementComponent } from './components/patient.agreement/patient-agreement.component';
 
 
 const COREUI_MODULES = [
@@ -51,7 +52,8 @@ const COREUI_MODULES = [
     PatientMedicalComponent,
     PatientMedicalHistoryComponent,
     PatientInsuranceComponent,
-    PatientDocumentComponent
+    PatientDocumentComponent,
+    PatientAgreementComponent
   ],
   imports: [
     CommonModule,
