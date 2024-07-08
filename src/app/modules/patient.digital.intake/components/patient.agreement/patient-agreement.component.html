@@ -1,43 +1,46 @@
 <div [formGroup]="form" class="mt-3">
     <div formGroupName="agreement">
-        <c-accordion [alwaysOpen]="false" [flush]="false" class="shadow" >
-            <c-accordion-item #item0="cAccordionItem" [visible]="false" >
+        <c-accordion [alwaysOpen]="false" [flush]="false" class="shadow">
+            <c-accordion-item #item0="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
                     <button (click)="item0.toggleItem()" [collapsed]="!item0.visible" cAccordionButton>
-                        <h5>Release of Information</h5>
+                        <h5>Release of Information <span class="text-danger">*</span></h5>
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
                     <c-row>
                         <c-col xs="auto">
-                            <div *ngIf="releaseInformationParagraph" [innerHTML]="getReleaseInformationParagraph()" class="accordion-body">
+                            <div *ngIf="releaseInformationParagraph" [innerHTML]="getReleaseInformationParagraph()"
+                                class="accordion-body">
                             </div>
                         </c-col>
                         <c-col xs="auto" class="ms-3">
                             <c-form-check>
-                                <input cFormCheckInput id="release" type="checkbox"/>
+                                <input cFormCheckInput id="release" type="checkbox"
+                                    formControlName="release-Information" />
                                 <label cFormCheckLabel for="release">I accept</label>
                             </c-form-check>
                         </c-col>
                     </c-row>
-        
+
                 </ng-template>
             </c-accordion-item>
             <c-accordion-item #item1="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
                     <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
-                        <h5>Financial Responsibility Agreement by Other than Patient’s Legal Representative</h5>
+                        <h5>Financial Responsibility Agreement by Other than Patient’s Legal Representative <span class="text-danger">*</span></h5>
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
                     <c-row>
                         <c-col xs="auto">
-                            <div [innerHTML]="getFinancialResponsibility()"  class="accordion-body">
+                            <div [innerHTML]="getFinancialResponsibility()" class="accordion-body">
                             </div>
                         </c-col>
                         <c-col xs="12" class="ms-3">
                             <c-form-check>
-                                <input cFormCheckInput id="Financial" type="checkbox" />
+                                <input cFormCheckInput id="Financial" type="checkbox"
+                                    formControlName="financial-responsibility" />
                                 <label cFormCheckLabel for="Financial">I accept</label>
                             </c-form-check>
                         </c-col>
@@ -47,7 +50,7 @@
             <c-accordion-item #item2="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
                     <button (click)="item2.toggleItem()" [collapsed]="!item2.visible" cAccordionButton>
-                        <h5>Financial Agreement</h5>
+                        <h5>Financial Agreement <span class="text-danger">*</span></h5>
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
@@ -60,7 +63,7 @@
                         <c-col xs="auto" class="ms-3">
                             <c-form-check>
                                 <input cFormCheckInput id="fagreement" type="checkbox"
-                                   />
+                                    formControlName="financial-agreement" />
                                 <label cFormCheckLabel for="fagreement">I accept</label>
                             </c-form-check>
                         </c-col>
@@ -70,11 +73,11 @@
             <c-accordion-item #item3="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
                     <button (click)="item3.toggleItem()" [collapsed]="!item3.visible" cAccordionButton>
-                        <h5>Assignment of Insurance Beneﬁts</h5>
+                        <h5>Assignment of Insurance Beneﬁts <span class="text-danger">*</span></h5>
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
-        
+
                     <c-row>
                         <c-col xs="auto">
                             <div class="accordion-body">
@@ -83,7 +86,8 @@
                         </c-col>
                         <c-col xs="auto" class="ms-3">
                             <c-form-check>
-                                <input cFormCheckInput id="insurancebeneﬁts" type="checkbox"/>
+                                <input cFormCheckInput id="insurancebeneﬁts" type="checkbox"
+                                    formControlName="Insurance-agreement" />
                                 <label cFormCheckLabel for="insurancebeneﬁts">I accept</label>
                             </c-form-check>
                         </c-col>
@@ -93,11 +97,11 @@
             <c-accordion-item #item4="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
                     <button (click)="item4.toggleItem()" [collapsed]="!item4.visible" cAccordionButton>
-                        <h5>HIPAA Acknowledgement</h5>
+                        <h5>HIPAA Acknowledgement <span class="text-danger">*</span></h5>
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
-        
+
                     <c-row>
                         <c-col xs="auto">
                             <div class="accordion-body">
@@ -106,7 +110,8 @@
                         </c-col>
                         <c-col xs="auto" class="ms-3">
                             <c-form-check>
-                                <input cFormCheckInput id="HIPAA" type="checkbox" />
+                                <input cFormCheckInput id="HIPAA" type="checkbox"
+                                    formControlName="hipaa-acknowledgement" />
                                 <label cFormCheckLabel for="HIPAA">I accept</label>
                             </c-form-check>
                         </c-col>
@@ -120,7 +125,7 @@
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
-        
+
                     <c-row>
                         <c-col xs="auto">
                             <div class="accordion-body">
@@ -129,7 +134,8 @@
                         </c-col>
                         <c-col xs="auto" class="ms-3">
                             <c-form-check>
-                                <input cFormCheckInput id="Cupping" type="checkbox" />
+                                <input cFormCheckInput id="Cupping" type="checkbox"
+                                    formControlName="cupping-agreement" />
                                 <label cFormCheckLabel for="Cupping">I accept</label>
                             </c-form-check>
                         </c-col>
@@ -143,7 +149,7 @@
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
-        
+
                     <c-row>
                         <c-col xs="auto">
                             <div class="accordion-body">
@@ -152,7 +158,7 @@
                         </c-col>
                         <c-col xs="auto" class="ms-3">
                             <c-form-check>
-                                <input cFormCheckInput id="Pelvic" type="checkbox" />
+                                <input cFormCheckInput id="Pelvic" type="checkbox" formControlName="pelvic-agreement" />
                                 <label cFormCheckLabel for="Pelvic">I accept</label>
                             </c-form-check>
                         </c-col>
@@ -166,7 +172,7 @@
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
-        
+
                     <c-row>
                         <c-col xs="auto">
                             <div class="accordion-body">
@@ -175,7 +181,8 @@
                         </c-col>
                         <c-col xs="auto" class="ms-3">
                             <c-form-check>
-                                <input cFormCheckInput id="photovideo" type="checkbox" />
+                                <input cFormCheckInput id="photovideo" type="checkbox"
+                                    formControlName="photo-video-agreement" />
                                 <label cFormCheckLabel for="photovideo">I accept</label>
                             </c-form-check>
                         </c-col>
@@ -183,5 +190,10 @@
                 </ng-template>
             </c-accordion-item>
         </c-accordion>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton matStepperNext variant="outline" size="sm" type="submit"
+            [disabled]="!form.get('agreement')?.valid">Next</button>
     </div>
 </div>

@@ -125,7 +125,14 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'insurance-back': new FormControl(null, [Validators.required])
       }),
       'agreement': new FormGroup({
-
+        'release-Information': new FormControl(null, [Validators.required]),
+        'financial-responsibility': new FormControl(null, [Validators.required]),
+        'financial-agreement': new FormControl(null, [Validators.required]),
+        'Insurance-agreement': new FormControl(null, [Validators.required]),
+        'hipaa-acknowledgement': new FormControl(null, [Validators.required]),
+        'cupping-agreement': new FormControl(null),
+        'pelvic-agreement': new FormControl(null),
+        'photo-video-agreement': new FormControl(null),
       })
     })
     this.setAddressConditionalValidators()
