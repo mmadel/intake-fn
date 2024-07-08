@@ -38,14 +38,14 @@ export class PatientMedicalComponent implements OnInit {
         }),
         debounceTime(500),
         tap((value) => {
-          
+
         }),
         switchMap((value: any) => {
           console.log(value)
           return this.providersService.findProviderByNPI(value)
             .pipe(
               finalize(() => {
-                
+
               }),
             )
         }
@@ -56,9 +56,11 @@ export class PatientMedicalComponent implements OnInit {
           this.provider.fullName = this.provider.lastName?.toLowerCase() + ',' + this.provider.firstName?.toLowerCase()
         else
           this.provider.fullName = ''
+
+        this.form.get('medical')?.get('providerName')?.setValue(this.provider.fullName);
       },
         error => {
-          console.log(JSON.stringify(error))          
+          console.log(JSON.stringify(error))
         });
   }
 }

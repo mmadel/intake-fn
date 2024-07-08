@@ -5,7 +5,9 @@ import { Address } from 'src/app/models/patient/address.info.model';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
 import { PatientAddress } from 'src/app/modules/patient.questionnaire/models/intake/essential/patienta.ddress';
 import { Patient } from 'src/app/modules/patient.questionnaire/models/intake/patient';
-
+import { DoctorSource } from 'src/app/modules/patient.questionnaire/models/intake/source/doctor.source';
+import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intake/source/entity.source';
+import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
 @Component({
   selector: 'patient-summary',
   templateUrl: './patient-summary.component.html',
@@ -18,7 +20,7 @@ export class PatientSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
-    this.fillPatientAddressInformation();
+    this.fillPatientSource();
   }
   submit() {
 
@@ -63,7 +65,31 @@ export class PatientSummaryComponent implements OnInit {
     });
   }
 
-  private fillPatientAddressInformation() {
-
+  private fillPatientSource() {
+    this.form.get('medical')?.get('isReferring')?.valueChanges.subscribe(value => {
+      var doctorSource: DoctorSource = {};
+      var entitySource: EntitySource = {};
+      if (value === 'yes') {
+        this.form.get('medical')?.get('providerName')?.valueChanges.subscribe(value => {
+          console.log('######## ' + value)
+          doctorSource.doctorName = value;
+        })
+        this.form.get('medical')?.get('providerNPI')?.valueChanges.subscribe(value => {
+          console.log('######## ' + value)
+          doctorSource.doctorNPI = value;
+        })
+      }
+      if (value === 'no') {
+        this.form.get('medical')?.get('referringEntity')?.valueChanges.subscribe(value => {
+          entitySource.organizationName = value;
+        })
+      }
+      var patientSource: PatientSource = {
+        doctorSource: doctorSource,
+        entitySource: entitySource
+      }
+      this.pateint.patientSource = patientSource;
+      console.log(JSON.stringify(this.pateint))
+    })
   }
 }
