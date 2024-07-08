@@ -40,11 +40,11 @@
             <label style="width: 150px;">Gender <span class="text-danger">*</span></label>
             <select cSelect sizing="sm" formControlName="gender">
                 <option value="null" disabled>Select Gender</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Non-binary</option>
-                <option value="3">To Self describe</option>
-                <option value="3">Prefer not to say</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="To Self describe">To Self describe</option>
+                <option value="Prefer not to say">Prefer not to say</option>
             </select>
             <div *ngIf="!this.form.get('basic')?.get('gender')?.valid && 
                     (this.form.get('basic')?.get('gender')?.touched)" class="text-danger mx-1">
@@ -55,10 +55,10 @@
             <label style="width: 150px;">Marital Status <span class="text-danger">*</span></label>
             <select cSelect sizing="sm" formControlName="marital">
                 <option value="null" disabled>Select Marital Status</option>
-                <option value="1">Single</option>
-                <option value="2">Married</option>
-                <option value="3">Widowed</option>
-                <option value="3">Divorced</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Widowed">Widowed</option>
+                <option value="Divorced">Divorced</option>
             </select>
             <div *ngIf="!this.form.get('basic')?.get('marital')?.valid && 
                     (this.form.get('basic')?.get('marital')?.touched)" class="text-danger mx-1">
@@ -69,10 +69,10 @@
             <label style="width: 150px;">Phone Type <span class="text-danger">*</span></label>
             <select cSelect sizing="sm" formControlName="phoneType">
                 <option value="null" disabled>Select Phone Type</option>
-                <option value="1">Home</option>
-                <option value="2">Work</option>
-                <option value="3">CellPhone</option>
-                <option value="3">Other</option>
+                <option value="Home">Home</option>
+                <option value="Work">Work</option>
+                <option value="CellPhone">CellPhone</option>
+                <option value="Other">Other</option>
             </select>
             <div *ngIf="!this.form.get('basic')?.get('phoneType')?.valid && 
                     (this.form.get('basic')?.get('phoneType')?.touched)" class="text-danger mx-1">
@@ -124,7 +124,7 @@
             <div *ngIf="this.form.get('basic')?.get('employmentCompany')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('employmentCompany')?.dirty ||this.form.get('basic')?.get('employmentCompany')?.touched)"
                 class="text-danger mx-1">
-                Employment Company  Required
+                Employment Company Required
             </div>
         </c-input-group>
         <c-input-group class="mb-1" sizing="sm">

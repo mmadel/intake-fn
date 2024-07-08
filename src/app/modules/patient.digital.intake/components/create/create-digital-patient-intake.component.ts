@@ -136,6 +136,9 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       }),
       'signature': new FormGroup({
         'signatureClass': new FormControl(null)
+      }),
+      'summary': new FormGroup({
+        
       })
     })
     this.setAddressConditionalValidators()
