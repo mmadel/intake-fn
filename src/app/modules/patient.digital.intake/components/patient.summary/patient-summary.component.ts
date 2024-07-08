@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
+import { Address } from 'src/app/models/patient/address.info.model';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
+import { PatientAddress } from 'src/app/modules/patient.questionnaire/models/intake/essential/patienta.ddress';
 import { Patient } from 'src/app/modules/patient.questionnaire/models/intake/patient';
 
 @Component({
@@ -15,14 +17,16 @@ export class PatientSummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.fillPateintEssentialInformation()
+    this.fillPateintEssentialInformation();
+    this.fillPatientAddressInformation();
   }
   submit() {
 
   }
   private fillPateintEssentialInformation() {
+    var patientEssentialInformation: PatientEssentialInformation
     this.form.get('basic')?.valueChanges.forEach(selected => {
-      var patientEssentialInformation: PatientEssentialInformation = {
+      patientEssentialInformation = {
         patientName: {
           firstName: selected.firstname,
           middleName: selected.middleName,
@@ -48,6 +52,18 @@ export class PatientSummaryComponent implements OnInit {
       };
       this.pateint.patientEssentialInformation = patientEssentialInformation
     })
+    this.form.get('address')?.valueChanges.forEach(selected => {
+      var address: PatientAddress = {
+        first: selected.firstAddress,
+        second: selected.secondAddress,
+        state: selected.state,
+        zipCode: selected.zipCode
+      };
+      this.pateint.patientEssentialInformation!.address = address;
+    });
   }
 
+  private fillPatientAddressInformation() {
+
+  }
 }

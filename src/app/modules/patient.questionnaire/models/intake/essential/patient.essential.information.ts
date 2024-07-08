@@ -17,4 +17,5 @@ export interface PatientEssentialInformation {
     patientEmergencyContact?: PatientEmergencyContact;
     patientEmployment?: PatientEmployment;
     patientAddress? : Address
+    address?:PatientAddress
   }

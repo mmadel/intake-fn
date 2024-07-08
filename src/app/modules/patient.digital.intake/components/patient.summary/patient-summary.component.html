@@ -30,7 +30,10 @@
     <c-card-body>
         <h5 cCardTitle>Address Information</h5>
         <p cCardText>
-
+            <strong>First Address : </strong> {{pateint.patientEssentialInformation?.address?.first}}<br />
+            <strong>Second Address : </strong> {{pateint.patientEssentialInformation?.address?.second}}<br />
+            <strong>State : </strong> {{pateint.patientEssentialInformation?.address?.state}}<br />
+            <strong>Zip-Code : </strong> {{pateint.patientEssentialInformation?.address?.zipCode}}<br />
         </p>
     </c-card-body>
 </c-card>
