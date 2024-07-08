@@ -1,0 +1,81 @@
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="document">
+        <c-row class="mb-2">
+            <c-col xl="12">
+                <label for="dsds" class="form-label">
+                    Patient ID Front<span class="text-danger">*</span>
+                </label>
+            </c-col>
+            <c-col xl="12">
+
+                <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                    formControlName="id-front" (change)="onImageUpload($event ,'patientIdfront')" />
+
+                <div *ngIf="!this.form.get('document')?.get('id-front')?.valid && 
+                (this.form.get('document')?.get('id-front')?.dirty ||this.form.get('document')?.get('id-front')?.touched)"
+                    class="text-danger mx-1">
+                    Patient id front is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row class="mb-2">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">
+                    Patient ID Back<span class="text-danger">*</span>
+                </label>
+            </c-col>
+            <c-col xl="12">
+
+                <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                    formControlName="id-back" (change)="onImageUpload($event ,'patientIdback')" />
+
+                <div *ngIf="!this.form.get('document')?.get('id-back')?.valid && 
+                (this.form.get('document')?.get('id-back')?.dirty ||this.form.get('document')?.get('id-back')?.touched)"
+                    class="text-danger mx-1">
+                    Patient id front is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row class="mb-2">
+            <c-col xl="12">
+                <label for="dsds" class="form-label">
+                    Patient Insurance ID Front<span class="text-danger">*</span>
+                </label>
+            </c-col>
+            <c-col xl="12">
+
+                <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                    formControlName="insurance-fornt" (change)="onImageUpload($event ,'patientinsurancefront')" />
+
+                <div *ngIf="!this.form.get('document')?.get('insurance-fornt')?.valid && 
+                (this.form.get('document')?.get('insurance-fornt')?.dirty ||this.form.get('document')?.get('insurance-fornt')?.touched)"
+                    class="text-danger mx-1">
+                    Patient id front is required
+                </div>
+            </c-col>
+        </c-row>
+        <c-row class="mb-2">
+            <c-col xl="12">
+                <label for="dsds" class="form-label">
+                    Patient Insurance ID Front<span class="text-danger">*</span>
+                </label>
+            </c-col>
+            <c-col xl="12">
+
+                <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                    formControlName="insurance-back" (change)="onImageUpload($event ,'patientinsuranceback')" />
+
+                <div *ngIf="!this.form.get('document')?.get('insurance-back')?.valid && 
+                (this.form.get('document')?.get('insurance-back')?.dirty ||this.form.get('document')?.get('insurance-back')?.touched)"
+                    class="text-danger mx-1">
+                    Patient id front is required
+                </div>
+            </c-col>
+        </c-row>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton matStepperNext variant="outline" size="sm" type="submit"
+            [disabled]="!form.get('document')?.valid">Next</button>
+    </div>
+</div>

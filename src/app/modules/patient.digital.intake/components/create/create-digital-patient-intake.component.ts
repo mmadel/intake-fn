@@ -117,6 +117,12 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'commercial-is-secondary-insurance-medicare-coverage-middle-name': new FormControl(null),
         'commercial-is-secondary-insurance-medicare-coverage-last-name': new FormControl(null),
         'commercial-is-secondary-insurance-medicare-coverage-phone': new FormControl(null),
+      }),
+      'document' : new FormGroup({
+        'id-front' : new FormControl(null,[Validators.required]),
+        'id-back' : new FormControl(null,[Validators.required]),
+        'insurance-fornt' : new FormControl(null,[Validators.required]),
+        'insurance-back' : new FormControl(null,[Validators.required])
       })
     })
     this.setAddressConditionalValidators()
@@ -124,6 +130,9 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.setReceivedPhysicalTherapyValidator();
     this.setXRayValidator();
     InsuranceValidator.addValidator(this.patientForm)
+    this.patientForm.get('document')?.get('id-front')?.valueChanges.subscribe(value=>{
+        console.log(value)
+    })
   }
   private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {
