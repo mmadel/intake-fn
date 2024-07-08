@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-patient-signature',
+  selector: 'patient-signature',
   templateUrl: './patient-signature.component.html',
   styleUrls: ['./patient-signature.component.css']
 })
 export class PatientSignatureComponent implements OnInit {
-
+  @Input() form: FormGroup;
   constructor() { }
 
   ngOnInit(): void {
