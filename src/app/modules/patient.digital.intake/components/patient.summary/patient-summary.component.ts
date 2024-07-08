@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
@@ -10,6 +10,7 @@ import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intak
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
 import { PatientMedical } from "src/app/modules/patient.questionnaire/models/intake/medical/patient.medical";
 import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
+import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history';
 @Component({
   selector: 'patient-summary',
   templateUrl: './patient-summary.component.html',
@@ -24,6 +25,7 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPateintEssentialInformation();
     this.fillPatientSource();
     this.fillPatientMedicalInformation();
+    this.fillPatientMedicalHistoryInformation();
   }
   submit() {
 
@@ -95,7 +97,7 @@ export class PatientSummaryComponent implements OnInit {
 
   private fillPatientMedicalInformation() {
     var patientMedical: PatientMedical = {}
-    var patientPhysicalTherapy: PatientPhysicalTherapy={}
+    var patientPhysicalTherapy: PatientPhysicalTherapy = {}
     this.form.get('medical')?.valueChanges.forEach(selected => {
       patientMedical.appointmentBooking = selected.appointmentBooking;
       patientMedical.primaryDoctor = selected.isPrimaryDoctor
@@ -104,10 +106,10 @@ export class PatientSummaryComponent implements OnInit {
     })
     this.form.get('medical')?.get('isReceivedPhysicalTherapy')?.valueChanges.subscribe(value => {
       if (value === 'yes') {
-        this.form.get('medical')?.get('PhysicalTherapyLocation')?.valueChanges.subscribe(value=>{
+        this.form.get('medical')?.get('PhysicalTherapyLocation')?.valueChanges.subscribe(value => {
           patientPhysicalTherapy.location = value
         })
-        this.form.get('medical')?.get('PhysicalTherapyNumber')?.valueChanges.subscribe(value=>{
+        this.form.get('medical')?.get('PhysicalTherapyNumber')?.valueChanges.subscribe(value => {
           patientPhysicalTherapy.numberOfVisit = value
         })
         this.pateint.patientMedical!.hasPatientPhysicalTherapy = true;
@@ -117,6 +119,24 @@ export class PatientSummaryComponent implements OnInit {
         this.pateint.patientMedical!.patientPhysicalTherapy = undefined
       }
 
+    })
+  }
+  private fillPatientMedicalHistoryInformation() {
+    var patientMedicalHistory: PatientMedicalHistory = {};
+    this.form.get('medicalhistory')?.valueChanges.forEach(select => {
+      patientMedicalHistory.height = select.height
+      patientMedicalHistory.heightUnit = select.heightUnit
+      patientMedicalHistory.weight = select.weight
+      patientMedicalHistory.weightUnit = select.weightUnit
+      patientMedicalHistory.evaluationSubmission = select.evaluationReason;
+      patientMedicalHistory.patientCondition = select.patientConditions
+      patientMedicalHistory.medicationPrescription = select.prescriptionMedication
+      patientMedicalHistory.scanningTest = select.isXRay
+      patientMedicalHistory.scanningTestValue = select.isXRayValue
+      patientMedicalHistory.pacemaker = select.isPacemaker
+      patientMedicalHistory.metalImplantation = select.isMetalImplants
+      patientMedicalHistory.surgeriesList = select.surgeriesList
+      this.pateint.patientMedical!.patientMedicalHistory = patientMedicalHistory
     })
   }
 }

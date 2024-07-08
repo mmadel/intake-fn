@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { distinctUntilChanged } from 'rxjs';
 import { InsuranceValidator } from './validators/insurance/insurance.validator';
 
@@ -63,10 +63,11 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       }),
       'medicalhistory': new FormGroup({
         'height': new FormControl(null, [Validators.required]),
-        'heightUnit': new FormControl(null),
+        'heightUnit': new FormControl(false),
         'weight': new FormControl(null, [Validators.required]),
-        'weightUnit': new FormControl(null),
+        'weightUnit': new FormControl(false),
         'evaluationReason': new FormControl(null, [Validators.required]),
+        'patientConditions': new FormControl(null, [Validators.required]),
         'prescriptionMedication': new FormControl(null, [Validators.required]),
         'isMetalImplants': new FormControl(null, [Validators.required]),
         'isXRay': new FormControl(null, [Validators.required]),
@@ -138,7 +139,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'signatureClass': new FormControl(null)
       }),
       'summary': new FormGroup({
-        
+
       })
     })
     this.setAddressConditionalValidators()

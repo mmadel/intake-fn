@@ -58,8 +58,8 @@
 
             <span *ngIf="pateint.patientMedical?.hasPatientPhysicalTherapy">
                 <strong>Received physical therapy : </strong> <br />
-                    Location : {{pateint.patientMedical?.patientPhysicalTherapy?.location}} <br />
-                    Number Of Visits : {{pateint.patientMedical?.patientPhysicalTherapy?.numberOfVisit}} <br />
+                Location : {{pateint.patientMedical?.patientPhysicalTherapy?.location}} <br />
+                Number Of Visits : {{pateint.patientMedical?.patientPhysicalTherapy?.numberOfVisit}} <br />
             </span>
         </p>
     </c-card-body>
@@ -68,7 +68,38 @@
     <c-card-body>
         <h5 cCardTitle>Medical History Information</h5>
         <p cCardText>
-
+            <strong>
+                Height : </strong> {{pateint.patientMedical?.patientMedicalHistory?.height}} :
+            {{!pateint.patientMedical?.patientMedicalHistory?.heightUnit? 'CM':'Inch'}}<br />
+            <strong>
+                Weight : </strong> {{pateint.patientMedical?.patientMedicalHistory?.weight}} :
+            {{!pateint.patientMedical?.patientMedicalHistory?.weightUnit ? 'Pound':'KG'}}<br />
+            <strong>
+                Reason for today’s evaluation : </strong>
+            {{pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission}} <br />
+            <strong>
+                List prescription or non-prescription medication : </strong>
+            {{pateint.patientMedical?.patientMedicalHistory?.medicationPrescription}} <br />
+            <strong>
+                Conditions : </strong>
+            <li *ngFor="let condition of pateint.patientMedical?.patientMedicalHistory?.patientCondition">
+                {{condition }}
+            </li>
+            <br />
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.scanningTest">
+                <strong>
+                    X-Ray : </strong> {{pateint.patientMedical?.patientMedicalHistory?.scanningTestValue}}
+                <br />
+            </span>
+            <strong>
+                Has MetalImplants : </strong>
+            {{pateint.patientMedical?.patientMedicalHistory?.metalImplantation?'yes':'no'}} <br />
+            <strong>
+                Has Pacemaker : </strong>
+            {{pateint.patientMedical?.patientMedicalHistory?.pacemaker?'yes':'no'}} <br />
+            <strong>
+                surgeries or any other conditions not listed above : </strong>
+            {{pateint.patientMedical?.patientMedicalHistory?.surgeriesList}}
         </p>
     </c-card-body>
 </c-card>
