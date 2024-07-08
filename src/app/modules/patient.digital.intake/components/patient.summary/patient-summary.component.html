@@ -107,7 +107,13 @@
     <c-card-body>
         <h5 cCardTitle>Patient Insurance Information</h5>
         <p cCardText>
+            <span *ngIf="this.pateint.patientInsurance?.patientInsuranceCompensationNoFault">
+                <strong>Patient Insurance Type : </strong> Worker's Compensation/No Fault
+            </span>
+            <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance">
+                <strong>Patient Insurance Type : </strong> Commercial Insurance
 
+            </span>
         </p>
     </c-card-body>
 </c-card>

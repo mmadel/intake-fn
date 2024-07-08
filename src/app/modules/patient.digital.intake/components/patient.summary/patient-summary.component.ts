@@ -11,6 +11,7 @@ import { PatientSource } from "src/app/modules/patient.questionnaire/models/inta
 import { PatientMedical } from "src/app/modules/patient.questionnaire/models/intake/medical/patient.medical";
 import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
 import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history';
+import { PatientInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance';
 @Component({
   selector: 'patient-summary',
   templateUrl: './patient-summary.component.html',
@@ -26,6 +27,7 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientSource();
     this.fillPatientMedicalInformation();
     this.fillPatientMedicalHistoryInformation();
+    this.fillPatientInsurance();
   }
   submit() {
 
@@ -137,6 +139,26 @@ export class PatientSummaryComponent implements OnInit {
       patientMedicalHistory.metalImplantation = select.isMetalImplants
       patientMedicalHistory.surgeriesList = select.surgeriesList
       this.pateint.patientMedical!.patientMedicalHistory = patientMedicalHistory
+    })
+  }
+  private fillPatientInsurance() {
+    var patientInsurance: PatientInsurance = {}
+    if (!this.form.get('insurance')?.get('type')?.value) {
+      patientInsurance = {
+        patientInsuranceCompensationNoFault: {}
+      }
+      this.pateint.patientInsurance = patientInsurance;
+    }
+    this.form.get('insurance')?.valueChanges.forEach(select => {
+      if (!select)
+        patientInsurance = {
+          patientInsuranceCompensationNoFault: {}
+        }
+      else
+        patientInsurance = {
+          patientCommercialInsurance: {}
+        }
+      this.pateint.patientInsurance = patientInsurance;
     })
   }
 }
