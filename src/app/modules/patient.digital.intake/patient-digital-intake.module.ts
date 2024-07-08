@@ -17,6 +17,7 @@ import { PatientMedicalHistoryComponent } from './components/patient.medical.his
 import { PatientInsuranceComponent } from './components/patient.insurance/patient-insurance.component';
 import { PatientDocumentComponent } from './components/patient.document/patient-document.component';
 import { PatientAgreementComponent } from './components/patient.agreement/patient-agreement.component';
+import { PatientSignatureComponent } from './components/patient.signature/patient-signature.component';
 
 
 const COREUI_MODULES = [
@@ -53,7 +54,8 @@ const COREUI_MODULES = [
     PatientMedicalHistoryComponent,
     PatientInsuranceComponent,
     PatientDocumentComponent,
-    PatientAgreementComponent
+    PatientAgreementComponent,
+    PatientSignatureComponent
   ],
   imports: [
     CommonModule,
