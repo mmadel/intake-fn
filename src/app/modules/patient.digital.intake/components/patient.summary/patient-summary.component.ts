@@ -8,6 +8,8 @@ import { Patient } from 'src/app/modules/patient.questionnaire/models/intake/pat
 import { DoctorSource } from 'src/app/modules/patient.questionnaire/models/intake/source/doctor.source';
 import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intake/source/entity.source';
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
+import { PatientMedical } from "src/app/modules/patient.questionnaire/models/intake/medical/patient.medical";
+import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
 @Component({
   selector: 'patient-summary',
   templateUrl: './patient-summary.component.html',
@@ -21,6 +23,7 @@ export class PatientSummaryComponent implements OnInit {
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
     this.fillPatientSource();
+    this.fillPatientMedicalInformation();
   }
   submit() {
 
@@ -71,11 +74,9 @@ export class PatientSummaryComponent implements OnInit {
       var entitySource: EntitySource = {};
       if (value === 'yes') {
         this.form.get('medical')?.get('providerName')?.valueChanges.subscribe(value => {
-          console.log('######## ' + value)
           doctorSource.doctorName = value;
         })
         this.form.get('medical')?.get('providerNPI')?.valueChanges.subscribe(value => {
-          console.log('######## ' + value)
           doctorSource.doctorNPI = value;
         })
       }
@@ -89,7 +90,33 @@ export class PatientSummaryComponent implements OnInit {
         entitySource: entitySource
       }
       this.pateint.patientSource = patientSource;
-      console.log(JSON.stringify(this.pateint))
+    })
+  }
+
+  private fillPatientMedicalInformation() {
+    var patientMedical: PatientMedical = {}
+    var patientPhysicalTherapy: PatientPhysicalTherapy={}
+    this.form.get('medical')?.valueChanges.forEach(selected => {
+      patientMedical.appointmentBooking = selected.appointmentBooking;
+      patientMedical.primaryDoctor = selected.isPrimaryDoctor
+      patientMedical.familyResultSubmission = selected.isFamilyDoctorRequest
+      this.pateint.patientMedical = patientMedical;
+    })
+    this.form.get('medical')?.get('isReceivedPhysicalTherapy')?.valueChanges.subscribe(value => {
+      if (value === 'yes') {
+        this.form.get('medical')?.get('PhysicalTherapyLocation')?.valueChanges.subscribe(value=>{
+          patientPhysicalTherapy.location = value
+        })
+        this.form.get('medical')?.get('PhysicalTherapyNumber')?.valueChanges.subscribe(value=>{
+          patientPhysicalTherapy.numberOfVisit = value
+        })
+        this.pateint.patientMedical!.hasPatientPhysicalTherapy = true;
+        this.pateint.patientMedical!.patientPhysicalTherapy = patientPhysicalTherapy;
+      } else {
+        this.pateint.patientMedical!.hasPatientPhysicalTherapy = false;
+        this.pateint.patientMedical!.patientPhysicalTherapy = undefined
+      }
+
     })
   }
 }

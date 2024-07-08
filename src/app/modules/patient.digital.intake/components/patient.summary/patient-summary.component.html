@@ -49,6 +49,18 @@
             <span *ngIf="pateint.patientSource?.entitySource?.organizationName">
                 <strong>Referring Entity : </strong> {{pateint.patientSource?.entitySource?.organizationName}}
             </span>
+            <strong>Appointment Booking via
+                : </strong> {{pateint.patientMedical?.appointmentBooking}}<br />
+            <strong>Primary Doctor
+                : </strong> {{pateint.patientMedical?.primaryDoctor}}<br />
+            <strong>Sending Result to Primary Doctor
+                : </strong> {{pateint.patientMedical?.familyResultSubmission}}<br />
+
+            <span *ngIf="pateint.patientMedical?.hasPatientPhysicalTherapy">
+                <strong>Received physical therapy : </strong> <br />
+                    Location : {{pateint.patientMedical?.patientPhysicalTherapy?.location}} <br />
+                    Number Of Visits : {{pateint.patientMedical?.patientPhysicalTherapy?.numberOfVisit}} <br />
+            </span>
         </p>
     </c-card-body>
 </c-card>
