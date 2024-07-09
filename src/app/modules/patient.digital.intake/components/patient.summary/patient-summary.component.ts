@@ -57,6 +57,7 @@ export class PatientSummaryComponent implements OnInit {
           lastName: selected.lastName,
         },
         birthDate_str: moment(selected.dob).format("MM/DD/YYYY"),
+        dateOfBirth: Number(moment(selected.dob).format("x")),
         gender: selected.gender,
         maritalStatus: selected.marital,
         patientPhone: {
