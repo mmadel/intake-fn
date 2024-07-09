@@ -106,26 +106,37 @@ export class PatientSummaryComponent implements OnInit {
   }
   private fillPatientSource() {
     this.form.get('medical')?.get('isReferring')?.valueChanges.subscribe(value => {
-      var doctorSource: DoctorSource = {};
-      var entitySource: EntitySource = {};
+      var patientSource: PatientSource ={}
       if (value === 'yes') {
+        var doctorSource: DoctorSource = {};
         this.form.get('medical')?.get('providerName')?.valueChanges.subscribe(value => {
           doctorSource.doctorName = value;
+          patientSource={
+            doctorSource:doctorSource,
+            entitySource :undefined
+          }
+          this.pateint.patientSource = patientSource;
         })
         this.form.get('medical')?.get('providerNPI')?.valueChanges.subscribe(value => {
           doctorSource.doctorNPI = value;
+          patientSource={
+            doctorSource:doctorSource,
+            entitySource :undefined
+          }
+          this.pateint.patientSource = patientSource;
         })
       }
       if (value === 'no') {
+        var entitySource: EntitySource = {}
         this.form.get('medical')?.get('referringEntity')?.valueChanges.subscribe(value => {
           entitySource.organizationName = value;
+          patientSource={
+            doctorSource:undefined,
+            entitySource :entitySource
+          }
+          this.pateint.patientSource = patientSource;
         })
       }
-      var patientSource: PatientSource = {
-        doctorSource: doctorSource,
-        entitySource: entitySource
-      }
-      this.pateint.patientSource = patientSource;
     })
   }
 
