@@ -70,10 +70,10 @@
         <p cCardText>
             <strong>
                 Height : </strong> {{pateint.patientMedical?.patientMedicalHistory?.height}} :
-            {{!pateint.patientMedical?.patientMedicalHistory?.heightUnit? 'CM':'Inch'}}<br />
+            {{pateint.patientMedical?.patientMedicalHistory?.heightUnit}}<br />
             <strong>
                 Weight : </strong> {{pateint.patientMedical?.patientMedicalHistory?.weight}} :
-            {{!pateint.patientMedical?.patientMedicalHistory?.weightUnit ? 'Pound':'KG'}}<br />
+            {{pateint.patientMedical?.patientMedicalHistory?.weightUnit}}<br />
             <strong>
                 Reason for today’s evaluation : </strong>
             {{pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission}} <br />

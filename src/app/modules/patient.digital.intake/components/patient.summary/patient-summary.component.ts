@@ -106,22 +106,22 @@ export class PatientSummaryComponent implements OnInit {
   }
   private fillPatientSource() {
     this.form.get('medical')?.get('isReferring')?.valueChanges.subscribe(value => {
-      var patientSource: PatientSource ={}
+      var patientSource: PatientSource = {}
       if (value === 'yes') {
         var doctorSource: DoctorSource = {};
         this.form.get('medical')?.get('providerName')?.valueChanges.subscribe(value => {
           doctorSource.doctorName = value;
-          patientSource={
-            doctorSource:doctorSource,
-            entitySource :undefined
+          patientSource = {
+            doctorSource: doctorSource,
+            entitySource: undefined
           }
           this.pateint.patientSource = patientSource;
         })
         this.form.get('medical')?.get('providerNPI')?.valueChanges.subscribe(value => {
           doctorSource.doctorNPI = value;
-          patientSource={
-            doctorSource:doctorSource,
-            entitySource :undefined
+          patientSource = {
+            doctorSource: doctorSource,
+            entitySource: undefined
           }
           this.pateint.patientSource = patientSource;
         })
@@ -130,9 +130,9 @@ export class PatientSummaryComponent implements OnInit {
         var entitySource: EntitySource = {}
         this.form.get('medical')?.get('referringEntity')?.valueChanges.subscribe(value => {
           entitySource.organizationName = value;
-          patientSource={
-            doctorSource:undefined,
-            entitySource :entitySource
+          patientSource = {
+            doctorSource: undefined,
+            entitySource: entitySource
           }
           this.pateint.patientSource = patientSource;
         })
@@ -170,9 +170,9 @@ export class PatientSummaryComponent implements OnInit {
     var patientMedicalHistory: PatientMedicalHistory = {};
     this.form.get('medicalhistory')?.valueChanges.forEach(select => {
       patientMedicalHistory.height = select.height
-      patientMedicalHistory.heightUnit = select.heightUnit
+      patientMedicalHistory.heightUnit = select.heightUnit ? 'Inch' : 'cm'
       patientMedicalHistory.weight = select.weight
-      patientMedicalHistory.weightUnit = select.weightUnit
+      patientMedicalHistory.weightUnit = select.weightUnit ? 'kg' : 'pound',
       patientMedicalHistory.evaluationSubmission = select.evaluationReason;
       patientMedicalHistory.patientCondition = select.patientConditions
       patientMedicalHistory.medicationPrescription = select.prescriptionMedication

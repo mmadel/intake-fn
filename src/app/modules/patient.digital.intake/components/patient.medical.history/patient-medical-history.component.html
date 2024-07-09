@@ -16,7 +16,7 @@
                 <c-form-check [switch]="true" class="mb-3" sizing="lg">
                     <input cFormCheckInput type="checkbox" formControlName="heightUnit" />
                     <label cFormCheckLabel>
-                        <span [ngClass]="{ 'fw-bold':true }">cm</span>/<span [ngClass]="{ 'fw-bold':false }">Inch</span>
+                        <span [ngClass]="{ 'fw-bold':!this.form.get('medicalhistory')?.get('heightUnit')?.value}">cm</span>/<span [ngClass]="{ 'fw-bold':this.form.get('medicalhistory')?.get('heightUnit')?.value }">Inch</span>
                     </label>
                 </c-form-check>
             </c-col>
@@ -36,8 +36,8 @@
                 <c-form-check [switch]="true" class="mb-3" sizing="lg">
                     <input cFormCheckInput type="checkbox" formControlName="weightUnit" />
                     <label cFormCheckLabel>
-                        <span [ngClass]="{ 'fw-bold':true }">pound</span>/<span
-                            [ngClass]="{ 'fw-bold':false }">kg</span>
+                        <span [ngClass]="{ 'fw-bold':!this.form.get('medicalhistory')?.get('weightUnit')?.value }">pound</span>/<span
+                            [ngClass]="{ 'fw-bold':this.form.get('medicalhistory')?.get('weightUnit')?.value }">kg</span>
                     </label>
                 </c-form-check>
             </c-col>
