@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { BehaviorSubject } from 'rxjs';
+import { PatientDocumentService } from '../../services/doument/patient-document.service';
 
 @Component({
   selector: 'patient-document',
@@ -10,7 +12,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 export class PatientDocumentComponent implements OnInit {
   imageFormData = new FormData();
   @Input() form: FormGroup;
-  constructor(private imageCompress: NgxImageCompressService) { }
+  constructor(private imageCompress: NgxImageCompressService,
+    private patientDocumentService: PatientDocumentService) { }
 
   ngOnInit(): void {
   }
@@ -40,13 +43,7 @@ export class PatientDocumentComponent implements OnInit {
         const imageFile = new File([imageBlob], imageName, {
           type: 'image/jpeg'
         });
-        // console.log(imageFile)
-        // console.log(fileSuffix)
         this.imageUploadAction(imageFile, fileSuffix);
-        console.log(this.imageFormData)
-        for (let file of this.imageFormData) {
-          console.log(file)
-        }
       });
   }
   dataURItoBlob(dataURI: any) {
@@ -63,5 +60,6 @@ export class PatientDocumentComponent implements OnInit {
   }
   private imageUploadAction(uploadedImage: File, imageName: string) {
     this.imageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
+    this.patientDocumentService.selectedDocument$.next(this.imageFormData)
   }
 }

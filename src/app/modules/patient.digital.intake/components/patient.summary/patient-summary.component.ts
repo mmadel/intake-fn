@@ -1,22 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { Address } from 'src/app/models/patient/address.info.model';
+import { filter, tap } from 'rxjs';
+import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
+import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
 import { PatientAddress } from 'src/app/modules/patient.questionnaire/models/intake/essential/patienta.ddress';
+import { PatientCommercialInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.commercial.insurance';
+import { PatientInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance';
+import { PatientInsuranceCompensationNoFault } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance.compensation.no.fault';
+import { SecondaryInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/secondary.insurance';
+import { PatientMedical } from "src/app/modules/patient.questionnaire/models/intake/medical/patient.medical";
+import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history';
+import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
 import { Patient } from 'src/app/modules/patient.questionnaire/models/intake/patient';
 import { DoctorSource } from 'src/app/modules/patient.questionnaire/models/intake/source/doctor.source';
 import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intake/source/entity.source';
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
-import { PatientMedical } from "src/app/modules/patient.questionnaire/models/intake/medical/patient.medical";
-import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
-import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history';
-import { PatientInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance';
-import { PatientInsuranceCompensationNoFault } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance.compensation.no.fault';
-import { PatientCommercialInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.commercial.insurance';
-import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
-import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
-import { SecondaryInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/secondary.insurance';
+import { PatientDocumentService } from '../../services/doument/patient-document.service';
+
 @Component({
   selector: 'patient-summary',
   templateUrl: './patient-summary.component.html',
@@ -25,7 +27,7 @@ import { SecondaryInsurance } from 'src/app/modules/patient.questionnaire/models
 export class PatientSummaryComponent implements OnInit {
   @Input() form: FormGroup;
   pateint: Patient = {}
-  constructor() { }
+  constructor(private patientDocumentService: PatientDocumentService) { }
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
@@ -33,9 +35,15 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientMedicalInformation();
     this.fillPatientMedicalHistoryInformation();
     this.fillPatientInsurance();
+    this.patientDocumentService.selectedDocument$.pipe(
+      filter(result => result !== null)
+    ).subscribe((result: any) => {
+      for (let file of result) {
+      }
+    })
   }
   submit() {
-
+    console.log(JSON.stringify(this.pateint))
   }
   private fillPateintEssentialInformation() {
     var patientEssentialInformation: PatientEssentialInformation
