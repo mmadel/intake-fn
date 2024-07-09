@@ -51,6 +51,38 @@
                         Accident Date is required
                     </div>
                 </c-row>
+                <!-- Insurance Company-->
+                <c-row class="mb-2">
+                    <c-col xl="12">
+                        <label class="form-label" style="font-size: medium;">Insurance Company<span
+                                class="text-danger">*</span>
+                        </label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input cFormControl sizing="sm" formControlName="compensation-insurance-company">
+                    </c-col>
+                    <div *ngIf="!this.form.get('insurance')?.get('compensation-insurance-company')?.valid && 
+                    (this.form.get('insurance')?.get('compensation-insurance-company')?.dirty ||this.form.get('insurance')?.get('compensation-insurance-company')?.touched)"
+                        class="text-danger mx-1">
+                        Insurance Company is required
+                    </div>
+                </c-row>
+                <!-- Claim Number-->
+                <c-row class="mb-2">
+                    <c-col xl="12">
+                        <label class="form-label" style="font-size: medium;">Claim Number/ WC Case Number<span
+                                class="text-danger">*</span>
+                        </label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input cFormControl sizing="sm" formControlName="compensation-claim-number">
+                    </c-col>
+                    <div *ngIf="!this.form.get('insurance')?.get('compensation-claim-number')?.valid && 
+                    (this.form.get('insurance')?.get('compensation-claim-number')?.dirty ||this.form.get('insurance')?.get('compensation-claim-number')?.touched)"
+                        class="text-danger mx-1">
+                        Claim Number/ WC Case Number is required
+                    </div>
+                </c-row>
                 <!--Wroker Status-->
                 <c-row class="mb-2">
                     <c-col xl="12">
@@ -58,6 +90,11 @@
                                 class="text-danger">*</span>
                         </label>
                     </c-col>
+                    <div *ngIf="!this.form.get('insurance')?.get('compensation-wroker-status')?.valid && 
+                    (this.form.get('insurance')?.get('compensation-wroker-status')?.dirty ||this.form.get('insurance')?.get('compensation-wroker-status')?.touched)"
+                        class="text-danger mx-1">
+                        wroker status is required
+                    </div>
                     <c-col xl="12">
                         <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                             formControlName="compensation-wroker-status">

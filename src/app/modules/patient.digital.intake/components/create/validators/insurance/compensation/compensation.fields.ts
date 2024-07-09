@@ -2,6 +2,8 @@ export var CompensationFields: string[] = [
     'compensation-related-injury',
     'compensation-accident-date',
     'compensation-wroker-status',
+    'compensation-insurance-company',
+    'compensation-claim-number',
     'compensation-address-type',
     'compensation-first-address',
     'compensation-state',

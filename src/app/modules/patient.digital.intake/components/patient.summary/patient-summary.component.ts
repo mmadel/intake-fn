@@ -173,7 +173,7 @@ export class PatientSummaryComponent implements OnInit {
       patientMedicalHistory.heightUnit = select.heightUnit ? 'Inch' : 'cm'
       patientMedicalHistory.weight = select.weight
       patientMedicalHistory.weightUnit = select.weightUnit ? 'kg' : 'pound',
-      patientMedicalHistory.evaluationSubmission = select.evaluationReason;
+        patientMedicalHistory.evaluationSubmission = select.evaluationReason;
       patientMedicalHistory.patientCondition = select.patientConditions
       patientMedicalHistory.medicationPrescription = select.prescriptionMedication
       patientMedicalHistory.scanningTest = select.isXRay
@@ -216,7 +216,20 @@ export class PatientSummaryComponent implements OnInit {
       attorneyInfoName: selected['compensation-attorney-last-name'] + ',' + selected['compensation-attorney-first-name'],
       attorneyInfoPhone: selected['compensation-attorney-phone'],
       caseStatus: selected['compensation-case-status'],
+      insuranceName:selected['compensation-insurance-company'],
+      claimNumber:selected['compensation-claim-number'],
     }
+    var address: Address = {
+      type: selected['compensation-address-type'],
+      first: selected['compensation-first-address'],
+      second: selected['compensation-second-address'],
+      country: '',
+      state: selected['compensation-state'],
+      province: '',
+      city: selected['compensation-city'],
+      zipCode: selected['compensation-zipcode']
+    }
+    patientInsuranceCompensationNoFault.address = address
     return patientInsuranceCompensationNoFault;
   }
   private fillPatientCommercialInsurance(selected: any) {

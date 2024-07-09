@@ -107,7 +107,7 @@
     <c-card-body>
         <h5 cCardTitle>Patient Insurance Information</h5>
         <p cCardText>
-            <span *ngIf="this.pateint.patientInsurance?.patientInsuranceCompensationNoFault">
+            <span *ngIf="this.pateint.patientInsurance?.patientInsuranceCompensationNoFault !== undefined">
                 <strong>Patient Insurance Type : </strong> Worker's Compensation/No Fault <br />
                 <strong> Injury/Auto-Accident: </strong>
                 {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.injuryType}} <br />
@@ -132,7 +132,7 @@
                 <label> Phone : </label>
                 {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.attorneyInfoPhone}} <br />
             </span>
-            <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance">
+            <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance !==undefined">
                 <strong>Patient Insurance Type : </strong> Commercial Insurance <br />
                 <strong> Member ID: </strong>
                 {{this.pateint.patientInsurance?.patientCommercialInsurance?.memberId}} <br />
@@ -174,14 +174,6 @@
                     </span>
                 </span>
             </span>
-        </p>
-    </c-card-body>
-</c-card>
-<c-card class="mb-3 mt-3">
-    <c-card-body>
-        <h5 cCardTitle>Patient Insurance Information</h5>
-        <p cCardText>
-
         </p>
     </c-card-body>
 </c-card>
