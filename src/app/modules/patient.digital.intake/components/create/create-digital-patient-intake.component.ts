@@ -148,9 +148,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.setReceivedPhysicalTherapyValidator();
     this.setXRayValidator();
     InsuranceValidator.addValidator(this.patientForm)
-    this.patientForm.get('document')?.get('id-front')?.valueChanges.subscribe(value => {
-      console.log(value)
-    })
   }
   private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {

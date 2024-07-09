@@ -8,6 +8,8 @@ export var CompensationFields: string[] = [
     'compensation-state',
     'compensation-city',
     'compensation-zipcode',
+    'compensation-phone',
+    'compensation-fax',
     'compensation-adjuster-first-name',
     'compensation-adjuster-middle-name',
     'compensation-adjuster-last-name',
