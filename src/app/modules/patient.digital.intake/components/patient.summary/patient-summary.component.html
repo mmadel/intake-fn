@@ -133,8 +133,46 @@
                 {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.attorneyInfoPhone}} <br />
             </span>
             <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance">
-                <strong>Patient Insurance Type : </strong> Commercial Insurance
-
+                <strong>Patient Insurance Type : </strong> Commercial Insurance <br />
+                <strong> Member ID: </strong>
+                {{this.pateint.patientInsurance?.patientCommercialInsurance?.memberId}} <br />
+                <strong> Plociy ID: </strong>
+                {{this.pateint.patientInsurance?.patientCommercialInsurance?.policyId}} <br />
+                <strong> ploicy Holder relationship: </strong>
+                {{this.pateint.patientInsurance?.patientCommercialInsurance?.relationship}} <br />
+                <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance?.relationship !== 'Self'">
+                    <label> Name : </label>
+                    {{this.pateint.patientInsurance?.patientCommercialInsurance?.patientRelationship?.patientRelationshipLastName
+                    + ',' +
+                    this.pateint.patientInsurance?.patientCommercialInsurance?.patientRelationship?.patientRelationshipFirstName
+                    }} <br />
+                    <label> Phone : </label>
+                    {{this.pateint.patientInsurance?.patientCommercialInsurance?.patientRelationship?.patientRelationshipPhone}}
+                    <br />
+                    <label> Employer : </label>
+                    {{this.pateint.patientInsurance?.patientCommercialInsurance?.patientRelationship?.employerName}}
+                    <br />
+                </span>
+                <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance?.hasSecondaryInsurance">
+                    <strong>Secondary Insurance</strong> <br />
+                    <label>InsuranceCompany : </label>
+                    {{this.pateint.patientInsurance?.patientCommercialInsurance?.secondaryInsurance?.insuranceCompanyName}}<br />
+                    <label>memberId : </label>
+                    {{this.pateint.patientInsurance?.patientCommercialInsurance?.secondaryInsurance?.memberId}}<br />
+                    <label>Name : </label>
+                    {{this.pateint.patientInsurance?.patientCommercialInsurance?.secondaryInsurance?.policyHolderLastName
+                    +',' +
+                    this.pateint.patientInsurance?.patientCommercialInsurance?.secondaryInsurance?.policyHolderFirstName}}<br />
+                    <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance?.hasMedicareCoverage">
+                        <strong>Medicare Coverage</strong> <br />
+                        <label>Name : </label>
+                        {{this.pateint.patientInsurance?.patientCommercialInsurance?.medicareCoverage?.employerLastName
+                        +',' +
+                        this.pateint.patientInsurance?.patientCommercialInsurance?.medicareCoverage?.employerFirstName}}<br />
+                        <label>Phone : </label>
+                        {{this.pateint.patientInsurance?.patientCommercialInsurance?.medicareCoverage?.employerPhone}}<br />
+                    </span>
+                </span>
             </span>
         </p>
     </c-card-body>

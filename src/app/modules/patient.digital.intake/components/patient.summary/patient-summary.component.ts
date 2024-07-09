@@ -13,6 +13,10 @@ import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/mo
 import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history';
 import { PatientInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance';
 import { PatientInsuranceCompensationNoFault } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance.compensation.no.fault';
+import { PatientCommercialInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.commercial.insurance';
+import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
+import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
+import { SecondaryInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/secondary.insurance';
 @Component({
   selector: 'patient-summary',
   templateUrl: './patient-summary.component.html',
@@ -155,7 +159,7 @@ export class PatientSummaryComponent implements OnInit {
       else {
         patientInsurance = {
           patientInsuranceCompensationNoFault: undefined,
-          patientCommercialInsurance: {}
+          patientCommercialInsurance: this.fillPatientCommercialInsurance(select)
         }
       }
       this.pateint.patientInsurance = patientInsurance;
@@ -177,6 +181,48 @@ export class PatientSummaryComponent implements OnInit {
     return patientInsuranceCompensationNoFault;
   }
   private fillPatientCommercialInsurance(selected: any) {
-
+    var patientCommercialInsurance: PatientCommercialInsurance = {
+      memberId: selected['commercial-member-id'],
+      policyId: selected['commercial-ploicy-id'],
+      relationship: selected['commercial-ploicyHolder-relationship'],
+      hasSecondaryInsurance: selected['commercial-is-secondary-insurance'],
+      hasMedicareCoverage: selected['commercial-is-medicare-coverage'],
+    }
+    if (patientCommercialInsurance.relationship !== 'Self') {
+      var patientRelationship: PatientRelationship = {
+        patientRelationshipFirstName: selected['commercial-ploicyHolder-relationship-first-name'],
+        patientRelationshipMeddileName: selected['commercial-ploicyHolder-relationship-middle-name'],
+        patientRelationshipLastName: selected['commercial-ploicyHolder-relationship-last-name'],
+        patientRelationshipPhone: selected['commercial-ploicyHolder-relationship-phone'],
+        employerName: selected['commercial-ploicyHolder-relationship-employer'],
+      }
+      patientCommercialInsurance.patientRelationship = patientRelationship;
+    } else {
+      patientCommercialInsurance.patientRelationship = undefined;
+    }
+    if (patientCommercialInsurance.hasSecondaryInsurance) {
+      var secondaryInsurance: SecondaryInsurance = {
+        policyHolderFirstName: selected['commercial-is-secondary-insurance-first-name'],
+        policyHolderMiddleName: selected['commercial-is-secondary-insurance-middle-name'],
+        policyHolderLastName: selected['commercial-is-secondary-insurance-last-name'],
+        insuranceCompanyName: selected['commercial-is-secondary-insurance-insurance-company'],
+        memberId: selected['commercial-is-secondary-insurance-member-id']
+      }
+      patientCommercialInsurance.secondaryInsurance = secondaryInsurance
+    } else {
+      patientCommercialInsurance.secondaryInsurance = undefined
+    }
+    if (patientCommercialInsurance.hasMedicareCoverage) {
+      var medicareCoverage: MedicareCoverage = {
+        employerFirstName: selected['commercial-is-secondary-insurance-medicare-coverage-first-name'],
+        employerMeddileName: selected['commercial-is-secondary-insurance-medicare-coverage-middle-name'],
+        employerLastName: selected['commercial-is-secondary-insurance-medicare-coverage-last-name'],
+        employerPhone: selected['commercial-is-secondary-insurance-medicare-coverage-phone']
+      }
+      patientCommercialInsurance.medicareCoverage = medicareCoverage
+    } else {
+      patientCommercialInsurance.medicareCoverage = undefined;
+    }
+    return patientCommercialInsurance;
   }
 }
