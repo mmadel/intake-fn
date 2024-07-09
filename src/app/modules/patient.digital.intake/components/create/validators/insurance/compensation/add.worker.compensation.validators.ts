@@ -6,7 +6,6 @@ export class AddWorkerCompensationValidators {
         const phoneRgx = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
         const zipCodeRgx = new RegExp("^\\d{5}(?:[-\s]\\d{4})?$");
         for (var i = 0; i < CompensationFields.length; i++) {
-            console.log(CompensationFields[i])
             form.get('insurance')?.get(CompensationFields[i])?.setValidators(Validators.required)
             if (CompensationFields[i] === 'compensation-phone'
                 || CompensationFields[i] === 'compensation-fax'

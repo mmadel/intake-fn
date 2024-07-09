@@ -14,6 +14,7 @@ import { PatientMedical } from "src/app/modules/patient.questionnaire/models/int
 import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history';
 import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
 import { Patient } from 'src/app/modules/patient.questionnaire/models/intake/patient';
+import { PatientAgreement } from 'src/app/modules/patient.questionnaire/models/intake/patient.agreement';
 import { DoctorSource } from 'src/app/modules/patient.questionnaire/models/intake/source/doctor.source';
 import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intake/source/entity.source';
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
@@ -35,6 +36,7 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientMedicalInformation();
     this.fillPatientMedicalHistoryInformation();
     this.fillPatientInsurance();
+    this.fillPatientAgreement();
     this.patientDocumentService.selectedDocument$.pipe(
       filter(result => result !== null)
     ).subscribe((result: any) => {
@@ -232,5 +234,19 @@ export class PatientSummaryComponent implements OnInit {
       patientCommercialInsurance.medicareCoverage = undefined;
     }
     return patientCommercialInsurance;
+  }
+  private fillPatientAgreement() {
+    var patientAgreement: PatientAgreement = {}
+    this.form.get('agreement')?.valueChanges.forEach(value => {
+      patientAgreement.acceptReleaseAgreements = value['release-Information'] ? value['release-Information'] : false
+      patientAgreement.acceptFinancialResponsibilityAgreements = value['financial-responsibility'] ? value['financial-responsibility'] : false
+      patientAgreement.acceptFinancialAgreementAgreements = value['financial-agreement'] ? value['financial-agreement'] : false
+      patientAgreement.acceptInsuranceAgreement = value['Insurance-agreement'] ? value['Insurance-agreement'] : false
+      patientAgreement.acceptHIPAAAgreements = value['hipaa-acknowledgement'] ? value['hipaa-acknowledgement'] : false
+      patientAgreement.acceptCuppingAgreements = value['cupping-agreement'] ? value['cupping-agreement'] : false
+      patientAgreement.acceptPelvicAgreements = value['pelvic-agreement'] ? value['pelvic-agreement'] : false
+      patientAgreement.acceptPhotoVideoAgreements = value['photo-video-agreement'] ? value['photo-video-agreement'] : false
+      this.pateint.patientAgreements = patientAgreement;
+    })
   }
 }
