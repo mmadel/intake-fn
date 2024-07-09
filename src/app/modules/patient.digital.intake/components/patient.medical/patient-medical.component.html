@@ -85,15 +85,11 @@
                 </label>
             </c-card-header>
             <c-card-body>
-                <c-form-check class="mb-2">
-                    <input cFormCheckInput type="radio" formControlName="isFamilyDoctorRequest" size="sm"
-                        [value]="'yes'" />
-                    <label cFormCheckLabel>Yes</label>
-                </c-form-check>
-                <c-form-check class="mb-4">
-                    <input cFormCheckInput type="radio" formControlName="isFamilyDoctorRequest" size="sm"
-                        [value]="'no'" />
-                    <label cFormCheckLabel>No</label>
+                <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                    <input cFormCheckInput type="checkbox" formControlName="isFamilyDoctorRequest" />
+                    <label cFormCheckLabel>
+                        <span [ngClass]="{ 'fw-bold':true }">isFamilyDoctorRequest</span>
+                    </label>
                 </c-form-check>
             </c-card-body>
         </c-card>
