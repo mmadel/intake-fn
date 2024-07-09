@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { filter, tap } from 'rxjs';
+import { Address } from 'src/app/models/patient/address.info.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
@@ -75,6 +76,7 @@ export class PatientSummaryComponent implements OnInit {
           emergencyRelation: selected.emergencyContact
         }
       };
+      this.fillPatientAddress(patientEssentialInformation);
       this.pateint.patientEssentialInformation = patientEssentialInformation
     })
     this.form.get('address')?.valueChanges.forEach(selected => {
@@ -87,7 +89,21 @@ export class PatientSummaryComponent implements OnInit {
       this.pateint.patientEssentialInformation!.address = address;
     });
   }
-
+  private fillPatientAddress(patientEssentialInformation: PatientEssentialInformation) {
+    this.form.get('address')?.valueChanges.forEach(selected => {
+      var address: Address = {
+        type: '',
+        first: selected.firstAddress,
+        second: selected.secondAddress,
+        country: '',
+        state: selected.state,
+        province: '',
+        city: '',
+        zipCode: selected.zipCode
+      };
+      patientEssentialInformation.patientAddress = address
+    })
+  }
   private fillPatientSource() {
     this.form.get('medical')?.get('isReferring')?.valueChanges.subscribe(value => {
       var doctorSource: DoctorSource = {};
@@ -180,6 +196,7 @@ export class PatientSummaryComponent implements OnInit {
     var patientInsuranceCompensationNoFault: PatientInsuranceCompensationNoFault = {
       injuryType: selected['compensation-related-injury'],
       accidentDate_str: moment(selected['compensation-accident-date']).format("MM/DD/YYYY"),
+      accidentDate: Number(moment(selected['compensation-accident-date']).format("x")),
       workerStatus: selected['compensation-wroker-status'],
       phone: selected['compensation-phone'],
       fax: selected['compensation-fax'],
