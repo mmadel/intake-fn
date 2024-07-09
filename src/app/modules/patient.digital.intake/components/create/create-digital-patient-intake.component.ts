@@ -69,10 +69,10 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'evaluationReason': new FormControl(null, [Validators.required]),
         'patientConditions': new FormControl(null, [Validators.required]),
         'prescriptionMedication': new FormControl(null, [Validators.required]),
-        'isMetalImplants': new FormControl(null, [Validators.required]),
-        'isXRay': new FormControl(null, [Validators.required]),
+        'isMetalImplants': new FormControl(false, [Validators.required]),
+        'isXRay': new FormControl(false, [Validators.required]),
         'isXRayValue': new FormControl(null),
-        'isPacemaker': new FormControl(null, [Validators.required]),
+        'isPacemaker': new FormControl(false, [Validators.required]),
         'surgeriesList': new FormControl(null, [Validators.required]),
       }),
       'insurance': new FormGroup({
