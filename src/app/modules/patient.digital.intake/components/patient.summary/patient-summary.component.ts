@@ -12,6 +12,7 @@ import { PatientMedical } from "src/app/modules/patient.questionnaire/models/int
 import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
 import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.medical.history';
 import { PatientInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance';
+import { PatientInsuranceCompensationNoFault } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance.compensation.no.fault';
 @Component({
   selector: 'patient-summary',
   templateUrl: './patient-summary.component.html',
@@ -143,22 +144,39 @@ export class PatientSummaryComponent implements OnInit {
   }
   private fillPatientInsurance() {
     var patientInsurance: PatientInsurance = {}
-    if (!this.form.get('insurance')?.get('type')?.value) {
-      patientInsurance = {
-        patientInsuranceCompensationNoFault: {}
-      }
-      this.pateint.patientInsurance = patientInsurance;
-    }
     this.form.get('insurance')?.valueChanges.forEach(select => {
-      if (!select)
+      if (!select.type) {
+
         patientInsurance = {
-          patientInsuranceCompensationNoFault: {}
+          patientInsuranceCompensationNoFault: this.fillPatientInsuranceCompensationNoFault(select),
+          patientCommercialInsurance: undefined
         }
-      else
+      }
+      else {
         patientInsurance = {
+          patientInsuranceCompensationNoFault: undefined,
           patientCommercialInsurance: {}
         }
+      }
       this.pateint.patientInsurance = patientInsurance;
     })
+  }
+  private fillPatientInsuranceCompensationNoFault(selected: any) {
+    var patientInsuranceCompensationNoFault: PatientInsuranceCompensationNoFault = {
+      injuryType: selected['compensation-related-injury'],
+      accidentDate_str: moment(selected['compensation-accident-date']).format("MM/DD/YYYY"),
+      workerStatus: selected['compensation-wroker-status'],
+      phone: selected['compensation-phone'],
+      fax: selected['compensation-fax'],
+      adjusterInfoName: selected['compensation-adjuster-last-name'] + ',' + selected['compensation-adjuster-first-name'],
+      adjusterInfoPhone: selected['compensation-adjuster-phone'],
+      attorneyInfoName: selected['compensation-attorney-last-name'] + ',' + selected['compensation-attorney-first-name'],
+      attorneyInfoPhone: selected['compensation-attorney-phone'],
+      caseStatus: selected['compensation-case-status'],
+    }
+    return patientInsuranceCompensationNoFault;
+  }
+  private fillPatientCommercialInsurance(selected: any) {
+
   }
 }

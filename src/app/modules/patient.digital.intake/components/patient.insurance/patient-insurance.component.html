@@ -25,8 +25,8 @@
                         <select cSelect sizing="sm" name="injuryType" style="line-height: 15px;" cFormControl
                             formControlName="compensation-related-injury">
                             <option value="null" disabled>Select</option>
-                            <option value="workingInjury">Worker Related Injury</option>
-                            <option value="autoAccident">Auto-Accident</option>
+                            <option value="Worker Related Injury">Worker Related Injury</option>
+                            <option value="Auto Accident">Auto-Accident</option>
                         </select>
                     </c-col>
                     <div *ngIf="!this.form.get('insurance')?.get('compensation-related-injury')?.valid && 
@@ -221,7 +221,7 @@
                                 class="text-danger mx-1">
                                 adjuster first name is required
                             </div>
-                            <div *ngIf="!this.form.get('insurance')?.get('compensation-last-first-name')?.valid && 
+                            <div *ngIf="!this.form.get('insurance')?.get('compensation-adjuster-last-name')?.valid && 
                             (this.form.get('insurance')?.get('compensation-adjuster-last-name')?.dirty ||this.form.get('insurance')?.get('compensation-adjuster-last-name')?.touched)"
                                 class="text-danger mx-1">
                                 adjuster last name is required
@@ -290,9 +290,27 @@
                         </c-row>
                     </c-card-body>
                 </c-card>
-
             </c-card-body>
-
+            <c-row>
+                <c-col xl="12">
+                    <label for="dsds" class="form-label" style="font-size: medium;">
+                        Case Status<span class="text-danger">*</span>
+                    </label>
+                </c-col>
+                <c-col xl="12">
+                    <select cSelect sizing="sm" name="injuryType" style="line-height: 15px;" cFormControl
+                        formControlName="compensation-case-status">
+                        <option value="null" disabled>Select</option>
+                        <option value="Active">Active</option>
+                        <option value="Active">In-Active</option>
+                    </select>
+                </c-col>
+                <div *ngIf="!this.form.get('insurance')?.get('compensation-case-status')?.valid && 
+                    (this.form.get('insurance')?.get('compensation-case-status')?.dirty ||this.form.get('insurance')?.get('compensation-case-status')?.touched)"
+                    class="text-danger mx-1">
+                    Case Status is required
+                </div>
+            </c-row>
         </c-card>
         <c-card *ngIf="form.get('insurance')?.get('type')?.value">
             <c-card-body>

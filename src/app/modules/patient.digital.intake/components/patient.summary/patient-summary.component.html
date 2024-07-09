@@ -108,7 +108,29 @@
         <h5 cCardTitle>Patient Insurance Information</h5>
         <p cCardText>
             <span *ngIf="this.pateint.patientInsurance?.patientInsuranceCompensationNoFault">
-                <strong>Patient Insurance Type : </strong> Worker's Compensation/No Fault
+                <strong>Patient Insurance Type : </strong> Worker's Compensation/No Fault <br />
+                <strong> Injury/Auto-Accident: </strong>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.injuryType}} <br />
+                <strong> Accident Date: </strong>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.accidentDate_str}} <br />
+                <strong> Wroker Status: </strong>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.accidentDate_str}} <br />
+                <strong> Phone: </strong>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.phone}} <br />
+                <strong> Fax: </strong>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.fax}} <br />
+                <strong> Case Status: </strong>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.caseStatus}} <br />
+                <strong> Adjuster: </strong> <br />
+                <label> Name : </label>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.adjusterInfoName}} <br />
+                <label> Phone : </label>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.adjusterInfoPhone}} <br />
+                <strong> Attorney: </strong> <br />
+                <label> Name : </label>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.attorneyInfoName}} <br />
+                <label> Phone : </label>
+                {{this.pateint.patientInsurance?.patientInsuranceCompensationNoFault?.attorneyInfoPhone}} <br />
             </span>
             <span *ngIf="this.pateint.patientInsurance?.patientCommercialInsurance">
                 <strong>Patient Insurance Type : </strong> Commercial Insurance

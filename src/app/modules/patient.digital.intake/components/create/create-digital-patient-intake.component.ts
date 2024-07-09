@@ -97,6 +97,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'compensation-attorney-middle-name': new FormControl(null),
         'compensation-attorney-last-name': new FormControl(null),
         'compensation-attorney-phone': new FormControl(null),
+        'compensation-case-status': new FormControl(null),
 
         'commercial-insurance-company': new FormControl(null),
         'commercial-member-id': new FormControl(null),
