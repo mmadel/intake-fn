@@ -1,9 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import html2canvas from 'html2canvas';
-import { fromEvent, pairwise, switchMap, takeUntil, tap } from 'rxjs';
 import SignaturePad from 'signature_pad';
-import { PatientSignature } from 'src/app/modules/patient.questionnaire/models/patient/signature.model';
 import { PatientSignatureService } from '../../services/signature/patient-signature.service';
 
 @Component({

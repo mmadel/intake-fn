@@ -22,12 +22,9 @@ export class PatientService {
     return this.http.post(createPatientURL, JSON.stringify(patient), { 'headers': headers, observe: 'response' })
   }
   newCreatePatient(patient: Patient) {
-    of(this.keycloakService.getToken()).subscribe(token=>{
-    })
     const createPatientURL = this.baseUrl + '/create';
     const headers = {
       'content-type': 'application/json'
-      , 'Authorization': 'Bearer ' + this.keycloakService.getKeycloakInstance().token
     }
     console.log(JSON.stringify(headers))
     return this.http.post(createPatientURL, JSON.stringify(patient), { 'headers': headers, observe: 'response' })
@@ -35,7 +32,9 @@ export class PatientService {
 
   upload(files: FormData, pateintId: number) {
     const uploadURL = this.baseUrl + '/upload';
-    let headers = new HttpHeaders({ 'patientId': pateintId.toString() });
+    let headers = new HttpHeaders({
+      'patientId': pateintId.toString(),
+    });
 
     return this.http.post(uploadURL, files, { 'headers': headers, observe: 'response' })
   }

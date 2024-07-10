@@ -16,6 +16,7 @@ export class PatientDocumentComponent implements OnInit {
     private patientDocumentService: PatientDocumentService) { }
 
   ngOnInit(): void {
+    this.patientDocumentService.setPatientDocumentComponent(this)
   }
   public onImageUpload(event: any, photoType: string) {
     var uploadedIDFrontImage: File = event.target.files[0];
@@ -60,6 +61,5 @@ export class PatientDocumentComponent implements OnInit {
   }
   private imageUploadAction(uploadedImage: File, imageName: string) {
     this.imageFormData.append('files', uploadedImage, uploadedImage.name + ':' + imageName);
-    this.patientDocumentService.selectedDocument$.next(this.imageFormData)
   }
 }

@@ -47,6 +47,7 @@ const routes: Routes = [
     children: [
       {
         path:'digital-intake',
+        canActivate: [KCAuthGuardGuard],
         loadChildren: ()=>
         import('./modules/patient.digital.intake/patient-digital-intake.module').then((m) => m.PatientDigitalIntakeModule)
       }

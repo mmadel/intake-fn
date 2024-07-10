@@ -33,6 +33,7 @@ export class PatientSummaryComponent implements OnInit {
   @Input() form: FormGroup;
   pateint: Patient = {}
   patientSignature: PatientSignature = new PatientSignature();
+  formFiles: FormData;
   constructor(private patientDocumentService: PatientDocumentService, private patientSignatureService: PatientSignatureService
     , private patientService: PatientService) { }
 
@@ -44,16 +45,14 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientInsurance();
     this.fillPatientAgreement();
     this.getSignture()
-    this.patientDocumentService.selectedDocument$.pipe(
-      filter(result => result !== null)
-    ).subscribe((result: any) => {
-      for (let file of result) {
-      }
-    })
+    this.formFiles = new FormData();
+    
   }
   submit() {
-    console.log(JSON.stringify(this.pateint))
     this.patientService.newCreatePatient(this.pateint).subscribe(response => {
+      this.patientService.upload(this.patientDocumentService.getPatientDocumentComponent()!.imageFormData, <number>response.body).subscribe(d => {
+        console.log('Patient document updload..')
+      })
       console.log('Patient Created..')
     }, error => {
       console.error('Error ' + JSON.stringify(error))
@@ -305,11 +304,11 @@ export class PatientSummaryComponent implements OnInit {
   private getSignture() {
     this.form.get('signature')?.get('generatesign')?.valueChanges.subscribe((valu: any) => {
       this.patientSignature.signature = valu;
-      this.pateint.signature=valu;
+      this.pateint.signature = valu;
       console.log(valu)
     })
     this.form.get('signature')?.get('drawsign')?.valueChanges.subscribe(valu => {
-      this.pateint.signature=valu;
+      this.pateint.signature = valu;
       this.patientSignature.signature = valu;
     })
   }
