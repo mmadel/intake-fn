@@ -6,6 +6,7 @@ import { AgreementHolder } from 'src/app/models/patient/agreements/agreements.ho
 import { PatientSignature } from '../models/patient/signature.model';
 import { Patient } from '../models/intake/patient';
 import { KeycloakService } from 'keycloak-angular';
+import { of } from 'rxjs';
 
 
 @Injectable({
@@ -21,6 +22,8 @@ export class PatientService {
     return this.http.post(createPatientURL, JSON.stringify(patient), { 'headers': headers, observe: 'response' })
   }
   newCreatePatient(patient: Patient) {
+    of(this.keycloakService.getToken()).subscribe(token=>{
+    })
     const createPatientURL = this.baseUrl + '/create';
     const headers = {
       'content-type': 'application/json'

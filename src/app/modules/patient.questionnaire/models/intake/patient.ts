@@ -17,4 +17,5 @@ export interface Patient {
   patientSignature?: PatientSignature;
   patientAgreements?: PatientAgreement;
   clinicId?: number;
+  signature?:string;
 }

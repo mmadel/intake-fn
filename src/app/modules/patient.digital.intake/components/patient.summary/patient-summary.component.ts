@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { result } from 'lodash';
 import * as moment from 'moment';
 import { filter } from 'rxjs';
 import { Address } from 'src/app/models/patient/address.info.model';
@@ -20,6 +19,7 @@ import { PatientAgreement } from 'src/app/modules/patient.questionnaire/models/i
 import { DoctorSource } from 'src/app/modules/patient.questionnaire/models/intake/source/doctor.source';
 import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intake/source/entity.source';
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
+import { PatientSignature } from 'src/app/modules/patient.questionnaire/models/patient/signature.model';
 import { PatientService } from 'src/app/modules/patient.questionnaire/service/patient.service';
 import { PatientDocumentService } from '../../services/doument/patient-document.service';
 import { PatientSignatureService } from '../../services/signature/patient-signature.service';
@@ -31,9 +31,10 @@ import { PatientSignatureService } from '../../services/signature/patient-signat
 })
 export class PatientSummaryComponent implements OnInit {
   @Input() form: FormGroup;
-  pateint: Patient = {}  
+  pateint: Patient = {}
+  patientSignature: PatientSignature = new PatientSignature();
   constructor(private patientDocumentService: PatientDocumentService, private patientSignatureService: PatientSignatureService
-    ,private patientService:PatientService) { }
+    , private patientService: PatientService) { }
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
@@ -42,7 +43,7 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientMedicalHistoryInformation();
     this.fillPatientInsurance();
     this.fillPatientAgreement();
-    //this.getSignture();
+    this.getSignture()
     this.patientDocumentService.selectedDocument$.pipe(
       filter(result => result !== null)
     ).subscribe((result: any) => {
@@ -52,11 +53,11 @@ export class PatientSummaryComponent implements OnInit {
   }
   submit() {
     console.log(JSON.stringify(this.pateint))
-    this.patientService.newCreatePatient(this.pateint).subscribe(result=>{
-      console.log('Created..')
-    },error=>{
-        console.error('Error ' + JSON.stringify(error))
-    })  
+    this.patientService.newCreatePatient(this.pateint).subscribe(response => {
+      console.log('Patient Created..')
+    }, error => {
+      console.error('Error ' + JSON.stringify(error))
+    })
   }
   private fillPateintEssentialInformation() {
     var patientEssentialInformation: PatientEssentialInformation
@@ -301,10 +302,15 @@ export class PatientSummaryComponent implements OnInit {
       this.pateint.patientAgreements = patientAgreement;
     })
   }
-  // private getSignture(){
-  //   this.form.get('signature')?.valueChanges.subscribe(valu=>{
-  //     this.patientSignatureService.getPatientSignatureComponent()?.draw()
-  //     this.patientSignatureService.getPatientSignatureComponent()?.generate()
-  //   })
-  // }
+  private getSignture() {
+    this.form.get('signature')?.get('generatesign')?.valueChanges.subscribe((valu: any) => {
+      this.patientSignature.signature = valu;
+      this.pateint.signature=valu;
+      console.log(valu)
+    })
+    this.form.get('signature')?.get('drawsign')?.valueChanges.subscribe(valu => {
+      this.pateint.signature=valu;
+      this.patientSignature.signature = valu;
+    })
+  }
 }

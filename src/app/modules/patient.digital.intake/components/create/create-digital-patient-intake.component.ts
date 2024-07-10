@@ -139,7 +139,8 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'photo-video-agreement': new FormControl(null),
       }),
       'signature': new FormGroup({
-        'signatureClass': new FormControl(null)
+        'generatesign': new FormControl(null),
+        'drawsign': new FormControl(null)
       }),
       'summary': new FormGroup({
 
