@@ -1,7 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { distinctUntilChanged } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CacheClinicService } from '../../services/cache.clinic/cache-clinic.service';
 import { InsuranceValidator } from './validators/insurance/insurance.validator';
 
 @Component({
@@ -21,6 +22,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     ]).subscribe(result => {
       this.stepperOrientation = result.matches ? 'vertical' : 'horizontal';
     });
+
     this.createPatientForm();
   }
   private createPatientForm() {

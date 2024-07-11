@@ -70,6 +70,6 @@ const COREUI_MODULES = [
     ...COREUI_MODULES,
     AccordionModule,
     AutocompleteLibModule,
-  ]
+  ],
 })
 export class PatientDigitalIntakeModule { }

@@ -3,7 +3,6 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 import * as moment from 'moment';
-import { from, mergeMap } from 'rxjs';
 import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';

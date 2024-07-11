@@ -5,6 +5,7 @@ import { filter } from 'rxjs';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
+import { LocalService } from 'src/app/modules/common';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
 import { PatientAddress } from 'src/app/modules/patient.questionnaire/models/intake/essential/patienta.ddress';
 import { PatientCommercialInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.commercial.insurance';
@@ -21,6 +22,7 @@ import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intak
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
 import { PatientSignature } from 'src/app/modules/patient.questionnaire/models/patient/signature.model';
 import { PatientService } from 'src/app/modules/patient.questionnaire/service/patient.service';
+import { CacheClinicService } from '../../services/cache.clinic/cache-clinic.service';
 import { PatientDocumentService } from '../../services/doument/patient-document.service';
 import { PatientSignatureService } from '../../services/signature/patient-signature.service';
 
@@ -33,9 +35,11 @@ export class PatientSummaryComponent implements OnInit {
   @Input() form: FormGroup;
   pateint: Patient = {}
   patientSignature: PatientSignature = new PatientSignature();
-  formFiles: FormData;
-  constructor(private patientDocumentService: PatientDocumentService, private patientSignatureService: PatientSignatureService
-    , private patientService: PatientService) { }
+  clinicId:number;
+  constructor(private patientDocumentService: PatientDocumentService
+    , private patientService: PatientService
+    , private cacheClinicService: CacheClinicService
+    ,private localService:LocalService) { }
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
@@ -45,10 +49,10 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientInsurance();
     this.fillPatientAgreement();
     this.getSignture()
-    this.formFiles = new FormData();
-    
+    this.clinicId = this.cacheClinicService.getClinic();    
   }
-  submit() {
+  submit() {    
+    this.pateint.clinicId = this.clinicId;
     this.patientService.newCreatePatient(this.pateint).subscribe(response => {
       this.patientService.upload(this.patientDocumentService.getPatientDocumentComponent()!.imageFormData, <number>response.body).subscribe(d => {
         console.log('Patient document updload..')
