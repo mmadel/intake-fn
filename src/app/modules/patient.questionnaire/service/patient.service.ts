@@ -26,7 +26,6 @@ export class PatientService {
     const headers = {
       'content-type': 'application/json'
     }
-    console.log(JSON.stringify(headers))
     return this.http.post(createPatientURL, JSON.stringify(patient), { 'headers': headers, observe: 'response' })
   }
 

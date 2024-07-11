@@ -34,7 +34,7 @@ export class KcAuthServiceService {
 
   public logout(): void {
     localStorage.removeItem('access-token')
-    localStorage.removeItem('clinicId')
+    localStorage.removeItem('digital-access-token')
     this.keycloakService.logout(window.location.origin);
   }
 

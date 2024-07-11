@@ -1,17 +1,37 @@
-import { KeycloakOptions, KeycloakService } from 'keycloak-angular';
+import { KeycloakEventType, KeycloakOptions, KeycloakService } from 'keycloak-angular';
+import { filter, from, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-export function initializer(keycloak: KeycloakService): () => Promise<boolean> {
+import { FetshDigitalPatientIntakeUrlsService } from './service/digital.intake.urls/fetsh-digital-patient-intake-urls.service';
+import { KcAuthServiceService } from './service/kc/kc-auth-service.service';
+export function initializer(keycloak: KeycloakService
+  , fetshUrls: FetshDigitalPatientIntakeUrlsService
+  , kcAuthServiceService: KcAuthServiceService): () => Promise<boolean> {
 
-    const options: KeycloakOptions = {
-      config : environment.keycloak,
-      loadUserProfileAtStartUp: false,
-      initOptions: {
-          onLoad: 'check-sso',
-          // onLoad: 'login-required',
-          checkLoginIframe: false
-      },
-      bearerExcludedUrls: []
-    };
+  const options: KeycloakOptions = {
+    config: environment.keycloak,
+    loadUserProfileAtStartUp: false,
+    initOptions: {
+      onLoad: 'check-sso',
+      // onLoad: 'login-required',
+      checkLoginIframe: false
+    },
+    bearerExcludedUrls: []
+  };
+  from(keycloak.keycloakEvents$)
+    .pipe(
+      filter(event => event.type === KeycloakEventType.OnTokenExpired))
+    .subscribe(() => {
+      if (fetshUrls.isDigitalIntakeURLS()) {
+        of(keycloak.getToken()).subscribe((newToken: any) => {
+          console.log('keycloak.updateToken(20);')
+          localStorage.removeItem('digital-access-token')
+          keycloak.updateToken(1800);
+          localStorage.setItem('digital-access-token', newToken)
+        })
+      }
+      else
+        kcAuthServiceService.logout();
+    })
+  return () => keycloak.init(options);
 
-    return () => keycloak.init(options);
 }
