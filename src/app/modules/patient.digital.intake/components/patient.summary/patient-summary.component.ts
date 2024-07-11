@@ -50,8 +50,9 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientAgreement();
     this.getSignture()
     this.clinicId = this.cacheClinicService.getClinic();    
+    console.log(this.clinicId)
   }
-  submit() {    
+  submit() {
     this.pateint.clinicId = this.clinicId;
     this.patientService.newCreatePatient(this.pateint).subscribe(response => {
       this.patientService.upload(this.patientDocumentService.getPatientDocumentComponent()!.imageFormData, <number>response.body).subscribe(d => {
@@ -253,6 +254,7 @@ export class PatientSummaryComponent implements OnInit {
       relationship: selected['commercial-ploicyHolder-relationship'],
       hasSecondaryInsurance: selected['commercial-is-secondary-insurance'],
       hasMedicareCoverage: selected['commercial-is-medicare-coverage'],
+      insuranceCompanyId: selected['commercial-insurance-company']
     }
     if (patientCommercialInsurance.relationship !== 'Self') {
       var patientRelationship: PatientRelationship = {

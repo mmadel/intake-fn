@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';
+import { CacheClinicService } from 'src/app/modules/patient.digital.intake/services/cache.clinic/cache-clinic.service';
 import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 
 @Component({

@@ -382,7 +382,7 @@
             <c-card-body>
                 <h5 cCardTitle>Commercial Insurance</h5>
                 <!--Insurance Company-->
-                <!-- <c-row class="mb-2">
+                <c-row class="mb-2">
                     <c-col xl="12">
                         <label for="dsds" class="form-label" style="font-size: medium;">Insurance Company<span
                                 class="text-danger">*</span>
@@ -392,6 +392,9 @@
                         <select cSelect sizing="sm" name="injuryType" style="line-height: 15px;" cFormControl
                             formControlName="commercial-insurance-company">
                             <option value="null" disabled>Select</option>
+                            <option *ngFor="let InsuranceCompany of InsuranceCompanies"
+                                [value]="InsuranceCompany.id?.toString()">
+                                {{InsuranceCompany.name}}</option>
                         </select>
                         <div *ngIf="!this.form.get('insurance')?.get('commercial-insurance-company')?.valid && 
 						(this.form.get('insurance')?.get('commercial-insurance-company')?.dirty ||this.form.get('insurance')?.get('commercial-insurance-company')?.touched)"
@@ -399,7 +402,7 @@
                             Related Injury is required
                         </div>
                     </c-col>
-                </c-row> -->
+                </c-row>
                 <!--Member Id-->
                 <c-row>
                     <c-col xl="12">

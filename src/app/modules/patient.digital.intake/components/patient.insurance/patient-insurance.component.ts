@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { InsuranceCompany } from 'src/app/modules/patient.admin/models/insurance.company.model';
+import { InsuranceCompanyService } from 'src/app/modules/patient.admin/services/insurance.company/insurance-company.service';
 
 @Component({
   selector: 'patient-insurance',
@@ -8,8 +10,14 @@ import { FormGroup } from '@angular/forms';
 })
 export class PatientInsuranceComponent implements OnInit {
   @Input() form: FormGroup;
-  constructor() { }
+  InsuranceCompanies: InsuranceCompany[] = new Array();
+  constructor(private insuranceCompanyService: InsuranceCompanyService) { }
   ngOnInit(): void {
+    this.insuranceCompanyService.get().subscribe((response) => {
+      response.body?.forEach(element => {
+        this.InsuranceCompanies?.push(element);
+      });
+    })
   }
 
 }
