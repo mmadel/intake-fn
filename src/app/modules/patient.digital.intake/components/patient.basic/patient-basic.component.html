@@ -1,101 +1,125 @@
 <div [formGroup]="form" class="mt-3">
     <div formGroupName="basic">
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">First Name <span class="text-danger">*</span></label>
-            <input class="form-control" placeholder formControlName="firstname">
-            <div *ngIf="!this.form.get('basic')?.get('firstname')?.valid && 
+        <!--Patient Name-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Name<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <c-input-group sizing="sm">
+                    <input cFormControl placeholder="FirstName" formControlName="firstname">
+                    <input cFormControl placeholder="MiddleName" formControlName="middleName">
+                    <input cFormControl placeholder="LastName" formControlName="lastName">
+                </c-input-group>
+            </c-col>
+            <c-col xl="12">
+                <div *ngIf="!this.form.get('basic')?.get('firstname')?.valid && 
                     (this.form.get('basic')?.get('firstname')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
-                class="text-danger mx-1">
-                First Name is required
-            </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Middle Name</label>
-            <input class="form-control" placeholder formControlName="middleName">
-            <div *ngIf="!this.form.get('basic')?.get('middleName')?.valid && 
-                    (this.form.get('basic')?.get('basic')?.dirty ||this.form.get('basic')?.get('middleName')?.touched)"
-                class="text-danger mx-1">
-                Middle Name is required
-            </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Last Name <span class="text-danger">*</span></label>
-            <input class="form-control" placeholder formControlName="lastName">
-            <div *ngIf="!this.form.get('basic')?.get('lastName')?.valid && 
-                    (this.form.get('basic')?.get('basic')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
-                class="text-danger mx-1">
-                Last Name is required
-            </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">DOB <span class="text-danger">*</span></label>
-            <c-date-picker size="sm" formControlName="dob" (dateChange)="checkAge($event)"></c-date-picker>
+                    class="text-danger mx-1">
+                    First Name is required
+                </div>
+                <div *ngIf="!this.form.get('basic')?.get('lastName')?.valid && 
+                    (this.form.get('basic')?.get('lastName')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
+                    class="text-danger mx-1">
+                    Last Name is required
+                </div>
+            </c-col>
+        </c-row>
+        <!--Patient DOB-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label style="width: 150px;">Date Of Birth <span class="text-danger">*</span></label>
+                <c-date-picker size="sm" formControlName="dob" (dateChange)="checkAge($event)"></c-date-picker>
+            </c-col>
             <div *ngIf="!this.form.get('basic')?.get('dob')?.valid && 
                     (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
                 class="text-danger mx-1">
                 Date Of Birth is required
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Gender <span class="text-danger">*</span></label>
-            <select cSelect sizing="sm" formControlName="gender">
-                <option value="null" disabled>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Non-binary">Non-binary</option>
-                <option value="To Self describe">To Self describe</option>
-                <option value="Prefer not to say">Prefer not to say</option>
-            </select>
+        </c-row>
+        <!--Gender-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Gender<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <select cSelect sizing="sm" formControlName="gender">
+                    <option value="null" disabled>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="To Self describe">To Self describe</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+            </c-col>
             <div *ngIf="!this.form.get('basic')?.get('gender')?.valid && 
-                    (this.form.get('basic')?.get('gender')?.touched)" class="text-danger mx-1">
+            (this.form.get('basic')?.get('gender')?.touched)" class="text-danger mx-1">
                 Gender is required
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Marital Status <span class="text-danger">*</span></label>
-            <select cSelect sizing="sm" formControlName="marital">
-                <option value="null" disabled>Select Marital Status</option>
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Widowed">Widowed</option>
-                <option value="Divorced">Divorced</option>
-            </select>
+        </c-row>
+        <!--Marital Status-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label style="width: 150px;">Marital Status <span class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <select cSelect sizing="sm" formControlName="marital">
+                    <option value="null" disabled>Select Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+            </c-col>
             <div *ngIf="!this.form.get('basic')?.get('marital')?.valid && 
                     (this.form.get('basic')?.get('marital')?.touched)" class="text-danger mx-1">
                 Marital Status is required
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Phone Type <span class="text-danger">*</span></label>
-            <select cSelect sizing="sm" formControlName="phoneType">
-                <option value="null" disabled>Select Phone Type</option>
-                <option value="Home">Home</option>
-                <option value="Work">Work</option>
-                <option value="CellPhone">CellPhone</option>
-                <option value="Other">Other</option>
-            </select>
+        </c-row>
+        <!--Phone-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Phone<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12" class="mb-1">
+                <select cSelect sizing="sm" formControlName="phoneType">
+                    <option value="null" disabled>Select Phone Type</option>
+                    <option value="Home">Home</option>
+                    <option value="Work">Work</option>
+                    <option value="CellPhone">CellPhone</option>
+                    <option value="Other">Other</option>
+                </select>
+            </c-col>
+            <c-col xl="12">
+                <input cFormControl class="form-control" placeholder formControlName="phone" sizing="sm"
+                    [value]="this.form.get('basic')?.get('phone')?.value | phone" maxlength="15"
+                    [placeholder]="'Phone'">
+            </c-col>
             <div *ngIf="!this.form.get('basic')?.get('phoneType')?.valid && 
                     (this.form.get('basic')?.get('phoneType')?.touched)" class="text-danger mx-1">
                 Phone Type is required
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Phone<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder formControlName="phone"
-                [value]="this.form.get('basic')?.get('phone')?.value | phone" maxlength="15">
-
-                <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['required'] === true && 
-                (this.form.get('basic')?.get('phone')?.dirty ||this.form.get('basic')?.get('phone')?.touched)"
-                    class="text-danger mx-1">
-                    Phone Required
-                </div>
+            <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['required'] === true && 
+            (this.form.get('basic')?.get('phone')?.dirty ||this.form.get('basic')?.get('phone')?.touched)"
+                class="text-danger mx-1">
+                Phone Required
+            </div>
             <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['pattern']" class="text-danger mx-1">
                 Invalid Phone
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Email<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder formControlName="email">
+        </c-row>
+        <!--Email-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Email<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <input cFormControl sizing="sm" class="form-control" placeholder formControlName="email">
+            </c-col>
             <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('email')?.dirty ||this.form.get('basic')?.get('email')?.touched)"
                 class="text-danger mx-1">
@@ -104,51 +128,85 @@
             <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['email'] === true" class="text-danger mx-1">
                 Invalid Email
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Employment Status<span class="text-danger">*</span></label>
-            <select cSelect formControlName="employment">
-                <option value="null" disabled>Select Employment Status</option>
-                <option value="Employed">Employed</option>
-                <option value="Student">Student</option>
-                <option value="Retired">Retired</option>
-                <option value="Other">Other</option>
-            </select>
+        </c-row>
+        <!--Employment Status-->
+        <c-row class="mb-2">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Employment Status<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <select cSelect formControlName="employment" sizing="sm">
+                    <option value="null" disabled>Select Employment Status</option>
+                    <option value="Employed">Employed</option>
+                    <option value="Student">Student</option>
+                    <option value="Retired">Retired</option>
+                    <option value="Other">Other</option>
+                </select>
+            </c-col>
             <div *ngIf="!this.form.get('basic')?.get('employment')?.valid && 
                     (this.form.get('basic')?.get('employment')?.touched)" class="text-danger mx-1">
                 Employment Status is required
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm" *ngIf="this.form.get('basic')?.get('employment')?.value === 'Employed'">
-            <label style="width: 151px;">Company<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder formControlName="employmentCompany">
+        </c-row>
+        <!--Employment Status Company-->
+        <c-row class="mb-2" *ngIf="this.form.get('basic')?.get('employment')?.value === 'Employed'">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Company<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <input cFormControl sizing="sm" class="form-control" placeholder formControlName="employmentCompany">
+            </c-col>
             <div *ngIf="this.form.get('basic')?.get('employmentCompany')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('employmentCompany')?.dirty ||this.form.get('basic')?.get('employmentCompany')?.touched)"
                 class="text-danger mx-1">
                 Employment Company Required
             </div>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">Emergency Contact<span class="text-danger">*</span></label>
-            <select cSelect formControlName="emergencyContact">
-                <option value="null" disabled>Select Emergency Contact</option>
-                <option value="Father">Father</option>
-                <option value="Mother">Mother</option>
-                <option value="Friend">Friend</option>
-                <option value="Relative">Relative</option>
-                <option value="Spouse">Spouse</option>
-                <option value="Other">Other</option>
-            </select>
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">EmergencyName<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder formControlName="emergencyName">
-        </c-input-group>
-        <c-input-group class="mb-1" sizing="sm">
-            <label style="width: 150px;">EmergencyPhone<span class="text-danger">*</span></label>
-            <input class="form-control" placeholder formControlName="emergencyPhone"
-                [value]="this.form.get('basic')?.get('emergencyPhone')?.value | phone" maxlength="15">
-        </c-input-group>
+        </c-row>
+        <!--Emergency -->
+        <c-card class="mb-1" [cBorder]="{top: {color: 'secondary', width: 3}}">
+            <c-card-body>
+                <h6 cCardSubtitle class="mb-1 text-medium-emphasis">Emergency</h6>
+                <c-row class="mb-1">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">Emergency Contact<span
+                                class="text-danger">*</span></label>
+                    </c-col>
+                    <c-col xl="12">
+                        <select cSelect formControlName="emergencyContact" sizing="sm">
+                            <option value="null" disabled>Select Emergency Contact</option>
+                            <option value="Father">Father</option>
+                            <option value="Mother">Mother</option>
+                            <option value="Friend">Friend</option>
+                            <option value="Relative">Relative</option>
+                            <option value="Spouse">Spouse</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </c-col>
+                </c-row>
+                <c-row class="mb-1">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">EmergencyName<span
+                                class="text-danger">*</span></label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input class="form-control" placeholder formControlName="emergencyName" cFormControl
+                            sizing="sm">
+                    </c-col>
+                </c-row>
+                <c-row class="mb-1">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">EmergencyPhone<span
+                                class="text-danger">*</span></label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input class="form-control" placeholder formControlName="emergencyPhone" cFormControl sizing="sm"
+                            [value]="this.form.get('basic')?.get('emergencyPhone')?.value | phone" maxlength="15">
+                    </c-col>
+                </c-row>
+            </c-card-body>
+        </c-card>
     </div>
     <div class="mt-3">
         <button cButton matStepperNext variant="outline" size="sm" type="submit"
