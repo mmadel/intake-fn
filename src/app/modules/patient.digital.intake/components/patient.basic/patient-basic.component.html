@@ -27,7 +27,7 @@
             </c-col>
         </c-row>
         <!--Patient DOB-->
-        <c-row class="mb-1">
+        <c-row class="mb-2">
             <c-col xl="12">
                 <label style="width: 150px;">Date Of Birth <span class="text-danger">*</span></label>
                 <c-date-picker size="sm" formControlName="dob" (dateChange)="checkAge($event)"></c-date-picker>
@@ -37,6 +37,42 @@
                 class="text-danger mx-1">
                 Date Of Birth is required
             </div>
+        </c-row>
+        <c-row *ngIf="isGuarantor">
+            <c-card class="mb-1" [cBorder]="{top: {color: 'secondary', width: 3}}">
+                <c-card-body>
+                    <h6 cCardSubtitle class="mb-1 text-medium-emphasis">Guarantor </h6>
+                    <c-row class="mb-1">
+                        <c-col xl="12">
+                            <label for="dsds" class="form-label" style="font-size: medium;">Name<span
+                                    class="text-danger">*</span></label>
+                        </c-col>
+                        <c-col xl="12">
+                            <c-input-group sizing="sm">
+                                <input cFormControl placeholder="FirstName">
+                                <input cFormControl placeholder="MiddleName">
+                                <input cFormControl placeholder="LastName">
+                            </c-input-group>
+                        </c-col>
+                    </c-row>
+                    <c-row class="mb-1">
+                        <c-col xl="12">
+                            <label for="dsds" class="form-label" style="font-size: medium;">Relationship<span
+                                    class="text-danger">*</span></label>
+                        </c-col>
+                        <c-col xl="12">
+                            <select cSelect sizing="sm">
+                                <option value="null" disabled>Select</option>
+                                <option value="Father">Father</option>
+                                <option value="Mother">Mother</option>
+                                <option value="Spouse">Spouse</option>
+                                <option value="Relative">Relative</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </c-col>
+                    </c-row>
+                </c-card-body>
+            </c-card>
         </c-row>
         <!--Gender-->
         <c-row class="mb-1">
@@ -201,8 +237,9 @@
                                 class="text-danger">*</span></label>
                     </c-col>
                     <c-col xl="12">
-                        <input class="form-control" placeholder formControlName="emergencyPhone" cFormControl sizing="sm"
-                            [value]="this.form.get('basic')?.get('emergencyPhone')?.value | phone" maxlength="15">
+                        <input class="form-control" placeholder formControlName="emergencyPhone" cFormControl
+                            sizing="sm" [value]="this.form.get('basic')?.get('emergencyPhone')?.value | phone"
+                            maxlength="15">
                     </c-col>
                 </c-row>
             </c-card-body>
