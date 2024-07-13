@@ -49,11 +49,21 @@
                         </c-col>
                         <c-col xl="12">
                             <c-input-group sizing="sm">
-                                <input cFormControl placeholder="FirstName">
-                                <input cFormControl placeholder="MiddleName">
-                                <input cFormControl placeholder="LastName">
+                                <input cFormControl placeholder="FirstName" formControlName="guarantorFirstName">
+                                <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName">
+                                <input cFormControl placeholder="LastName" formControlName="guarantorLastName">
                             </c-input-group>
                         </c-col>
+                        <div *ngIf="!this.form.get('basic')?.get('guarantorFirstName')?.valid && 
+                    (this.form.get('basic')?.get('guarantorFirstName')?.dirty ||this.form.get('basic')?.get('guarantorFirstName')?.touched)"
+                            class="text-danger mx-1">
+                            FirstName is required
+                        </div>
+                        <div *ngIf="!this.form.get('basic')?.get('guarantorLastName')?.valid && 
+                        (this.form.get('basic')?.get('guarantorLastName')?.dirty ||this.form.get('basic')?.get('guarantorLastName')?.touched)"
+                            class="text-danger mx-1">
+                            LastName is required
+                        </div>
                     </c-row>
                     <c-row class="mb-1">
                         <c-col xl="12">
@@ -61,7 +71,7 @@
                                     class="text-danger">*</span></label>
                         </c-col>
                         <c-col xl="12">
-                            <select cSelect sizing="sm">
+                            <select cSelect sizing="sm" formControlName="guarantorRelationship">
                                 <option value="null" disabled>Select</option>
                                 <option value="Father">Father</option>
                                 <option value="Mother">Mother</option>
@@ -70,6 +80,11 @@
                                 <option value="Other">Other</option>
                             </select>
                         </c-col>
+                        <div *ngIf="!this.form.get('basic')?.get('guarantorRelationship')?.valid && 
+                        (this.form.get('basic')?.get('guarantorRelationship')?.dirty ||this.form.get('basic')?.get('guarantorRelationship')?.touched)"
+                            class="text-danger mx-1">
+                            guarantor Relationship is required
+                        </div>
                     </c-row>
                 </c-card-body>
             </c-card>

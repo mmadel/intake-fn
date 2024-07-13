@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { CacheClinicService } from '../../services/cache.clinic/cache-clinic.service';
 import { InsuranceValidator } from './validators/insurance/insurance.validator';
 
@@ -41,6 +42,12 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'email': new FormControl(null, [Validators.required, Validators.email]),
         'employment': new FormControl(null, [Validators.required]),
         'employmentCompany': new FormControl(null),
+
+        'guarantorFirstName': new FormControl(null),
+        'guarantorMiddleName': new FormControl(null),
+        'guarantorLastName': new FormControl(null),
+        'guarantorRelationship': new FormControl(null),
+
         'emergencyContact': new FormControl(null, [Validators.required]),
         'emergencyName': new FormControl(null, [Validators.required]),
         'emergencyPhone': new FormControl(null, [Validators.required]),
@@ -152,6 +159,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.setMedicalConditionalValidatos()
     this.setReceivedPhysicalTherapyValidator();
     this.setXRayValidator();
+    this.setGuarantorValidators();
     InsuranceValidator.addValidator(this.patientForm)
   }
   private setAddressConditionalValidators() {
@@ -214,5 +222,28 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         this.patientForm.get('medicalhistory')?.get('isXRayValue')?.updateValueAndValidity();
       }
     })
+  }
+  private setGuarantorValidators() {
+
+    this.patientForm.get('basic')?.get('dob')?.valueChanges.subscribe(date => {
+      var patientAge = moment().diff(date, 'y')
+      var isGuarantor: boolean = patientAge < 21 ? true : false;
+      if (isGuarantor) {
+        this.patientForm.get('basic')?.get('guarantorFirstName')?.setValidators(Validators.required)
+        this.patientForm.get('basic')?.get('guarantorLastName')?.setValidators(Validators.required)
+        this.patientForm.get('basic')?.get('guarantorRelationship')?.setValidators(Validators.required)
+      } else {
+        this.patientForm.get('basic')?.get('guarantorFirstName')?.setValidators(null)
+        this.patientForm.get('basic')?.get('guarantorFirstName')?.setErrors(null)
+
+        this.patientForm.get('basic')?.get('guarantorLastName')?.setValidators(null)
+        this.patientForm.get('basic')?.get('guarantorLastName')?.setErrors(null)
+
+        this.patientForm.get('basic')?.get('guarantorRelationship')?.setValidators(null)
+        this.patientForm.get('basic')?.get('guarantorRelationship')?.setErrors(null)
+      }
+
+    })
+
   }
 }
