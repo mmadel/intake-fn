@@ -86,6 +86,38 @@
                             guarantor Relationship is required
                         </div>
                     </c-row>
+                    <!--guarantor Id Front-->
+                    <c-row>
+                        <c-col xl="12">
+                            <label for="dsds" class="form-label" style="font-size: medium;">guarantor Id Front<span
+                                    class="text-danger">*</span></label>
+                        </c-col>
+                        <c-col xl="12">
+                            <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
+                                formControlName="guarantorIdFront" />
+                        </c-col>
+                        <div *ngIf="!this.form.get('basic')?.get('guarantorIdFront')?.valid && 
+                (this.form.get('basic')?.get('guarantorIdFront')?.dirty ||this.form.get('basic')?.get('guarantorIdFront')?.touched)"
+                            class="text-danger mx-1">
+                            guarantor id back is required
+                        </div>
+                    </c-row>
+                    <!--guarantor Id Back-->
+                    <c-row>
+                        <c-col xl="12">
+                            <label for="dsds" class="form-label" style="font-size: medium;">guarantor Id Back<span
+                                    class="text-danger">*</span></label>
+                        </c-col>
+                        <c-col xl="12">
+                            <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
+                                formControlName="guarantorIdBack" />
+                        </c-col>
+                        <div *ngIf="!this.form.get('basic')?.get('guarantorIdBack')?.valid && 
+                (this.form.get('basic')?.get('guarantorIdBack')?.dirty ||this.form.get('basic')?.get('guarantorIdBack')?.touched)"
+                            class="text-danger mx-1">
+                            guarantor id front is required
+                        </div>
+                    </c-row>
                 </c-card-body>
             </c-card>
         </c-row>

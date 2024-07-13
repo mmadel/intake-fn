@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { BehaviorSubject } from 'rxjs';
 import { PatientDocumentService } from '../../services/doument/patient-document.service';
 
 @Component({

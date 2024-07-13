@@ -47,6 +47,8 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'guarantorMiddleName': new FormControl(null),
         'guarantorLastName': new FormControl(null),
         'guarantorRelationship': new FormControl(null),
+        'guarantorIdFront': new FormControl(null),
+        'guarantorIdBack': new FormControl(null),
 
         'emergencyContact': new FormControl(null, [Validators.required]),
         'emergencyName': new FormControl(null, [Validators.required]),
@@ -232,6 +234,8 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         this.patientForm.get('basic')?.get('guarantorFirstName')?.setValidators(Validators.required)
         this.patientForm.get('basic')?.get('guarantorLastName')?.setValidators(Validators.required)
         this.patientForm.get('basic')?.get('guarantorRelationship')?.setValidators(Validators.required)
+        this.patientForm.get('basic')?.get('guarantorIdFront')?.setValidators(Validators.required)
+        this.patientForm.get('basic')?.get('guarantorIdBack')?.setValidators(Validators.required)
       } else {
         this.patientForm.get('basic')?.get('guarantorFirstName')?.setValidators(null)
         this.patientForm.get('basic')?.get('guarantorFirstName')?.setErrors(null)
@@ -241,6 +245,12 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
 
         this.patientForm.get('basic')?.get('guarantorRelationship')?.setValidators(null)
         this.patientForm.get('basic')?.get('guarantorRelationship')?.setErrors(null)
+
+        this.patientForm.get('basic')?.get('guarantorIdFront')?.setValidators(null)
+        this.patientForm.get('basic')?.get('guarantorIdFront')?.setErrors(null)
+
+        this.patientForm.get('basic')?.get('guarantorIdBack')?.setValidators(null)
+        this.patientForm.get('basic')?.get('guarantorIdBack')?.setErrors(null)
       }
 
     })
