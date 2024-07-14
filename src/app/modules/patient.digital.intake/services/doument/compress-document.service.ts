@@ -53,7 +53,7 @@ export class CompressDocumentService {
   }
   private imageUploadAction(uploadedImage: File, imageName: string) {
     if (this.fileMap.has(imageName))
-      this.fileMap.delete('imageName')
+      this.fileMap.delete(imageName)
     this.fileMap.set(imageName, uploadedImage)
   }
 }

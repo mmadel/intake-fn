@@ -52,10 +52,6 @@ export class PatientSummaryComponent implements OnInit {
   }
   submit() {
     var imageFormData = new FormData();
-    this.componentReference.getPatientBasicComponent()!.getFormDate().forEach((guarantorDocument: any) => {
-      console.log(guarantorDocument)
-      imageFormData.append('files', guarantorDocument, guarantorDocument.name);
-    })
     this.componentReference.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
       console.log(patientDocument)
       imageFormData.append('files', patientDocument, patientDocument.name);
@@ -109,6 +105,8 @@ export class PatientSummaryComponent implements OnInit {
           relation: selected.guarantorRelationship
         };
         this.pateint.patientGrantor = patientGrantor;
+      } else {
+        this.pateint.patientGrantor = undefined;
       }
       this.pateint.patientEssentialInformation = patientEssentialInformation
     })

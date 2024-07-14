@@ -28,10 +28,22 @@ export class PatientDocumentComponent implements OnInit {
     this.compressDocumentService.onImageUpload(event, photoType)
   }
   public getFormDate() {
+    this.clearfilMap();
     var imageFormData = new FormData();
     for (const [key, value] of this.fileMap) {
       imageFormData.append('files', value, key);
     }
     return imageFormData;
+  }
+  private  clearfilMap(){
+    if(this.isGuarantor){
+      this.fileMap.delete('patientIdfront')
+      this.fileMap.delete('patientIdback')
+      this.fileMap.delete('patientinsurancefront')
+      this.fileMap.delete('patientinsuranceback')
+    }else{
+      this.fileMap.delete('guarantorIdfront')
+      this.fileMap.delete('guarantorIdback')
+    }
   }
 }
