@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { PatientBasicComponent } from '../../components/patient.basic/patient-basic.component';
 import { PatientDocumentComponent } from '../../components/patient.document/patient-document.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PatientDocumentService {
+export class ComponentReferenceComponentService {
   private patientDocumentComponent: PatientDocumentComponent | null = null;
   private patientBasicComponent: PatientBasicComponent | null = null;
-
+  constructor() { }
   setPatientBasicComponent(patientBasicComponent: PatientBasicComponent) {
     this.patientBasicComponent = patientBasicComponent
   }
@@ -22,5 +21,4 @@ export class PatientDocumentService {
   getPatientDocumentComponent(): PatientDocumentComponent | null {
     return this.patientDocumentComponent;
   }
-  constructor() { }
 }

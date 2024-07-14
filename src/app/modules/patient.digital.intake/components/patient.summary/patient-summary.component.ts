@@ -22,7 +22,7 @@ import { PatientSource } from "src/app/modules/patient.questionnaire/models/inta
 import { PatientSignature } from 'src/app/modules/patient.questionnaire/models/patient/signature.model';
 import { PatientService } from 'src/app/modules/patient.questionnaire/service/patient.service';
 import { CacheClinicService } from '../../services/cache.clinic/cache-clinic.service';
-import { PatientDocumentService } from '../../services/doument/patient-document.service';
+import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 
 @Component({
   selector: 'patient-summary',
@@ -35,7 +35,7 @@ export class PatientSummaryComponent implements OnInit {
   patientSignature: PatientSignature = new PatientSignature();
   clinicId: number;
 
-  constructor(private patientDocumentService: PatientDocumentService
+  constructor(private componentReference: ComponentReferenceComponentService
     , private patientService: PatientService
     , private cacheClinicService: CacheClinicService) { }
 
@@ -52,11 +52,11 @@ export class PatientSummaryComponent implements OnInit {
   }
   submit() {
     var imageFormData = new FormData();
-    this.patientDocumentService.getPatientBasicComponent()!.getFormDate().forEach((guarantorDocument: any) => {
+    this.componentReference.getPatientBasicComponent()!.getFormDate().forEach((guarantorDocument: any) => {
       console.log(guarantorDocument)
       imageFormData.append('files', guarantorDocument, guarantorDocument.name);
     })
-    this.patientDocumentService.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
+    this.componentReference.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
       console.log(patientDocument)
       imageFormData.append('files', patientDocument, patientDocument.name);
     })

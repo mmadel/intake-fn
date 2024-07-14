@@ -1,9 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
-import { CacheClinicService } from '../../services/cache.clinic/cache-clinic.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DocumentValidator } from './validators/document/document.validator';
 import { InsuranceValidator } from './validators/insurance/insurance.validator';
 
 @Component({
@@ -47,8 +45,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'guarantorMiddleName': new FormControl(null),
         'guarantorLastName': new FormControl(null),
         'guarantorRelationship': new FormControl(null),
-        'guarantorIdFront': new FormControl(null),
-        'guarantorIdBack': new FormControl(null),
 
         'emergencyContact': new FormControl(null, [Validators.required]),
         'emergencyName': new FormControl(null, [Validators.required]),
@@ -137,7 +133,9 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'id-front': new FormControl(null, [Validators.required]),
         'id-back': new FormControl(null, [Validators.required]),
         'insurance-fornt': new FormControl(null, [Validators.required]),
-        'insurance-back': new FormControl(null, [Validators.required])
+        'insurance-back': new FormControl(null, [Validators.required]),
+        'guarantorIdFront': new FormControl(null),
+        'guarantorIdBack': new FormControl(null),
       }),
       'agreement': new FormGroup({
         'release-Information': new FormControl(null, [Validators.required]),
@@ -161,8 +159,8 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.setMedicalConditionalValidatos()
     this.setReceivedPhysicalTherapyValidator();
     this.setXRayValidator();
-    this.setGuarantorValidators();
     InsuranceValidator.addValidator(this.patientForm)
+    DocumentValidator.addValidator(this.patientForm)
   }
   private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {
@@ -225,35 +223,5 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       }
     })
   }
-  private setGuarantorValidators() {
 
-    this.patientForm.get('basic')?.get('dob')?.valueChanges.subscribe(date => {
-      var patientAge = moment().diff(date, 'y')
-      var isGuarantor: boolean = patientAge < 21 ? true : false;
-      if (isGuarantor) {
-        this.patientForm.get('basic')?.get('guarantorFirstName')?.setValidators(Validators.required)
-        this.patientForm.get('basic')?.get('guarantorLastName')?.setValidators(Validators.required)
-        this.patientForm.get('basic')?.get('guarantorRelationship')?.setValidators(Validators.required)
-        this.patientForm.get('basic')?.get('guarantorIdFront')?.setValidators(Validators.required)
-        this.patientForm.get('basic')?.get('guarantorIdBack')?.setValidators(Validators.required)
-      } else {
-        this.patientForm.get('basic')?.get('guarantorFirstName')?.setValidators(null)
-        this.patientForm.get('basic')?.get('guarantorFirstName')?.setErrors(null)
-
-        this.patientForm.get('basic')?.get('guarantorLastName')?.setValidators(null)
-        this.patientForm.get('basic')?.get('guarantorLastName')?.setErrors(null)
-
-        this.patientForm.get('basic')?.get('guarantorRelationship')?.setValidators(null)
-        this.patientForm.get('basic')?.get('guarantorRelationship')?.setErrors(null)
-
-        this.patientForm.get('basic')?.get('guarantorIdFront')?.setValidators(null)
-        this.patientForm.get('basic')?.get('guarantorIdFront')?.setErrors(null)
-
-        this.patientForm.get('basic')?.get('guarantorIdBack')?.setValidators(null)
-        this.patientForm.get('basic')?.get('guarantorIdBack')?.setErrors(null)
-      }
-
-    })
-
-  }
 }

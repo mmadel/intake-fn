@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NgxImageCompressService } from 'ngx-image-compress';
-import { BehaviorSubject } from 'rxjs';
+import { faL } from '@fortawesome/free-solid-svg-icons';
+import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 import { CompressDocumentService } from '../../services/doument/compress-document.service';
-import { PatientDocumentService } from '../../services/doument/patient-document.service';
 
 @Component({
   selector: 'patient-document',
@@ -13,12 +12,16 @@ import { PatientDocumentService } from '../../services/doument/patient-document.
 export class PatientDocumentComponent implements OnInit {
   
   fileMap: Map<string, File> = new Map();
+  isGuarantor:boolean = false
   @Input() form: FormGroup;
-  constructor(private patientDocumentService: PatientDocumentService
+  constructor(private componentReference: ComponentReferenceComponentService
     , private compressDocumentService: CompressDocumentService) { }
 
   ngOnInit(): void {
-    this.patientDocumentService.setPatientDocumentComponent(this)
+    this.componentReference.setPatientDocumentComponent(this)
+    this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('dob')?.valueChanges.subscribe(value=>{
+        this.isGuarantor = this.componentReference.getPatientBasicComponent()!.isGuarantor
+    })
   }
   public onImageUpload(event: any, photoType: string) {
     this.compressDocumentService.setuploadedImages(this.fileMap);

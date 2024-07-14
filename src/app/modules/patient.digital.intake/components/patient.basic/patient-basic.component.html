@@ -38,10 +38,12 @@
                 Date Of Birth is required
             </div>
         </c-row>
+        <!--Guarantor-->
         <c-row *ngIf="isGuarantor">
             <c-card class="mb-1" [cBorder]="{top: {color: 'secondary', width: 3}}">
                 <c-card-body>
                     <h6 cCardSubtitle class="mb-1 text-medium-emphasis">Guarantor </h6>
+                    <!--Name-->
                     <c-row class="mb-1">
                         <c-col xl="12">
                             <label for="dsds" class="form-label" style="font-size: medium;">Name<span
@@ -65,6 +67,7 @@
                             LastName is required
                         </div>
                     </c-row>
+                    <!--Relationship-->
                     <c-row class="mb-1">
                         <c-col xl="12">
                             <label for="dsds" class="form-label" style="font-size: medium;">Relationship<span
@@ -84,38 +87,6 @@
                         (this.form.get('basic')?.get('guarantorRelationship')?.dirty ||this.form.get('basic')?.get('guarantorRelationship')?.touched)"
                             class="text-danger mx-1">
                             guarantor Relationship is required
-                        </div>
-                    </c-row>
-                    <!--guarantor Id Front-->
-                    <c-row>
-                        <c-col xl="12">
-                            <label for="dsds" class="form-label" style="font-size: medium;">guarantor Id Front<span
-                                    class="text-danger">*</span></label>
-                        </c-col>
-                        <c-col xl="12">
-                            <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
-                                formControlName="guarantorIdFront" (change)="onImageUpload($event ,'guarantorIdfront')"/>
-                        </c-col>
-                        <div *ngIf="!this.form.get('basic')?.get('guarantorIdFront')?.valid && 
-                (this.form.get('basic')?.get('guarantorIdFront')?.dirty ||this.form.get('basic')?.get('guarantorIdFront')?.touched)"
-                            class="text-danger mx-1">
-                            guarantor id back is required
-                        </div>
-                    </c-row>
-                    <!--guarantor Id Back-->
-                    <c-row>
-                        <c-col xl="12">
-                            <label for="dsds" class="form-label" style="font-size: medium;">guarantor Id Back<span
-                                    class="text-danger">*</span></label>
-                        </c-col>
-                        <c-col xl="12">
-                            <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
-                                formControlName="guarantorIdBack" (change)="onImageUpload($event ,'guarantorIdback')"/>
-                        </c-col>
-                        <div *ngIf="!this.form.get('basic')?.get('guarantorIdBack')?.valid && 
-                (this.form.get('basic')?.get('guarantorIdBack')?.dirty ||this.form.get('basic')?.get('guarantorIdback')?.touched)"
-                            class="text-danger mx-1">
-                            guarantor id front is required
                         </div>
                     </c-row>
                 </c-card-body>

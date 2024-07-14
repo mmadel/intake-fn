@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
+import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 import { CompressDocumentService } from '../../services/doument/compress-document.service';
-import { PatientDocumentService } from '../../services/doument/patient-document.service';
 
 @Component({
   selector: 'patient-basic',
@@ -13,13 +13,13 @@ export class PatientBasicComponent implements OnInit {
   fileMap: Map<string, File> = new Map();
   @Input() form: FormGroup;
   isGuarantor: boolean = false
-  constructor(private patientDocumentService: PatientDocumentService
+  constructor(private componentReference: ComponentReferenceComponentService
     , private compressDocumentService: CompressDocumentService) { }
 
   ngOnInit(): void {
-    this.patientDocumentService.setPatientBasicComponent(this)
+    this.componentReference.setPatientBasicComponent(this)
   }
-  checkAge(event: any) {
+  public checkAge(event: any) {
     var patientAge = moment().diff(event, 'y')
     this.isGuarantor = patientAge < 21 ? true : false;
   }

@@ -57,7 +57,7 @@ const COREUI_MODULES = [
     PatientDocumentComponent,
     PatientAgreementComponent,
     PatientSignatureComponent,
-    PatientSummaryComponent
+    PatientSummaryComponent,
   ],
   imports: [
     CommonModule,
