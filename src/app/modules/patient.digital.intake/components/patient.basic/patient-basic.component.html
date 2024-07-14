@@ -94,7 +94,7 @@
                         </c-col>
                         <c-col xl="12">
                             <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
-                                formControlName="guarantorIdFront" />
+                                formControlName="guarantorIdFront" (change)="onImageUpload($event ,'guarantorIdfront')"/>
                         </c-col>
                         <div *ngIf="!this.form.get('basic')?.get('guarantorIdFront')?.valid && 
                 (this.form.get('basic')?.get('guarantorIdFront')?.dirty ||this.form.get('basic')?.get('guarantorIdFront')?.touched)"
@@ -110,10 +110,10 @@
                         </c-col>
                         <c-col xl="12">
                             <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
-                                formControlName="guarantorIdBack" />
+                                formControlName="guarantorIdBack" (change)="onImageUpload($event ,'guarantorIdback')"/>
                         </c-col>
                         <div *ngIf="!this.form.get('basic')?.get('guarantorIdBack')?.valid && 
-                (this.form.get('basic')?.get('guarantorIdBack')?.dirty ||this.form.get('basic')?.get('guarantorIdBack')?.touched)"
+                (this.form.get('basic')?.get('guarantorIdBack')?.dirty ||this.form.get('basic')?.get('guarantorIdback')?.touched)"
                             class="text-danger mx-1">
                             guarantor id front is required
                         </div>

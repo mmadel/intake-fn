@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { filter } from 'rxjs';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
-import { LocalService } from 'src/app/modules/common';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
 import { PatientAddress } from 'src/app/modules/patient.questionnaire/models/intake/essential/patienta.ddress';
 import { PatientCommercialInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.commercial.insurance';
@@ -17,6 +15,7 @@ import { PatientMedicalHistory } from 'src/app/modules/patient.questionnaire/mod
 import { PatientPhysicalTherapy } from 'src/app/modules/patient.questionnaire/models/intake/medical/patient.physical.therapy';
 import { Patient } from 'src/app/modules/patient.questionnaire/models/intake/patient';
 import { PatientAgreement } from 'src/app/modules/patient.questionnaire/models/intake/patient.agreement';
+import { PatientGrantor } from 'src/app/modules/patient.questionnaire/models/intake/patient.grantor';
 import { DoctorSource } from 'src/app/modules/patient.questionnaire/models/intake/source/doctor.source';
 import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intake/source/entity.source';
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
@@ -24,7 +23,6 @@ import { PatientSignature } from 'src/app/modules/patient.questionnaire/models/p
 import { PatientService } from 'src/app/modules/patient.questionnaire/service/patient.service';
 import { CacheClinicService } from '../../services/cache.clinic/cache-clinic.service';
 import { PatientDocumentService } from '../../services/doument/patient-document.service';
-import { PatientSignatureService } from '../../services/signature/patient-signature.service';
 
 @Component({
   selector: 'patient-summary',
@@ -35,11 +33,11 @@ export class PatientSummaryComponent implements OnInit {
   @Input() form: FormGroup;
   pateint: Patient = {}
   patientSignature: PatientSignature = new PatientSignature();
-  clinicId:number;
+  clinicId: number;
+
   constructor(private patientDocumentService: PatientDocumentService
     , private patientService: PatientService
-    , private cacheClinicService: CacheClinicService
-    ,private localService:LocalService) { }
+    , private cacheClinicService: CacheClinicService) { }
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
@@ -49,13 +47,22 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientInsurance();
     this.fillPatientAgreement();
     this.getSignture()
-    this.clinicId = this.cacheClinicService.getClinic();    
+    this.clinicId = this.cacheClinicService.getClinic();
     console.log(this.clinicId)
   }
   submit() {
+    var imageFormData = new FormData();
+    this.patientDocumentService.getPatientBasicComponent()!.getFormDate().forEach((guarantorDocument: any) => {
+      console.log(guarantorDocument)
+      imageFormData.append('files', guarantorDocument, guarantorDocument.name);
+    })
+    this.patientDocumentService.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
+      console.log(patientDocument)
+      imageFormData.append('files', patientDocument, patientDocument.name);
+    })
     this.pateint.clinicId = this.clinicId;
     this.patientService.newCreatePatient(this.pateint).subscribe(response => {
-      this.patientService.upload(this.patientDocumentService.getPatientDocumentComponent()!.imageFormData, <number>response.body).subscribe(d => {
+      this.patientService.upload(imageFormData, <number>response.body).subscribe(d => {
         console.log('Patient document updload..')
       })
       console.log('Patient Created..')
@@ -92,6 +99,17 @@ export class PatientSummaryComponent implements OnInit {
         }
       };
       this.fillPatientAddress(patientEssentialInformation);
+      var patientAge = moment().diff(selected.dob, 'y')
+      var isGuarantor: boolean = patientAge < 21 ? true : false;
+      if (isGuarantor) {
+        var patientGrantor: PatientGrantor = {
+          firstName: selected.guarantorFirstName,
+          middleName: selected.guarantorMiddleName,
+          lastName: selected.guarantorLastName,
+          relation: selected.guarantorRelationship
+        };
+        this.pateint.patientGrantor = patientGrantor;
+      }
       this.pateint.patientEssentialInformation = patientEssentialInformation
     })
     this.form.get('address')?.valueChanges.forEach(selected => {
