@@ -48,7 +48,6 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientAgreement();
     this.getSignture()
     this.clinicId = this.cacheClinicService.getClinic();
-    console.log(this.clinicId)
   }
   submit() {
     var imageFormData = new FormData();
@@ -327,7 +326,6 @@ export class PatientSummaryComponent implements OnInit {
     this.form.get('signature')?.get('generatesign')?.valueChanges.subscribe((valu: any) => {
       this.patientSignature.signature = valu;
       this.pateint.signature = valu;
-      console.log(valu)
     })
     this.form.get('signature')?.get('drawsign')?.valueChanges.subscribe(valu => {
       this.pateint.signature = valu;

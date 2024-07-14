@@ -15,8 +15,7 @@
                     <c-col xs="12">
                         <div class="w-60 p-3 border border-default mb-3" style="background-color: #eee;">
                             <span [class]="signatureClass"
-                                style="font-size: xx-large; background-color: transparent;" #patientsig id="sig">mohamed
-                                Adel</span>
+                                style="font-size: xx-large; background-color: transparent;" #patientsig id="sig">{{patientFullName}}</span>
                         </div>
                     </c-col>
                     <c-col xs="12">
@@ -58,4 +57,9 @@
                 </div>
             </c-tab-pane>
         </c-tab-content>
+        <div class="mt-3">
+            <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+            <button cButton matStepperNext variant="outline" size="sm" type="submit"
+                >Next</button>
+        </div>
     
