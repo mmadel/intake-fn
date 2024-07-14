@@ -51,15 +51,14 @@
             <c-tab-pane class="p-3">
                 <canvas #canvas  width="700" height="200" (mouseleave)="stopDrawing()"
                     ></canvas>
-                <p class="error-message" *ngIf="signatureNeeded">Signature is required</p>
                 <div class="buttons flex justify-between">
                     <button cButton (click)="clearPad()">Clear</button>
                 </div>
             </c-tab-pane>
         </c-tab-content>
-        <div class="mt-3">
+        <div class="mt-3">            
             <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
             <button cButton matStepperNext variant="outline" size="sm" type="submit"
-                >Next</button>
+            [disabled]="!(isDrawsign || isGeneratesign)" >Next</button>
         </div>
     

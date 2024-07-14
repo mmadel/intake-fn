@@ -15,12 +15,14 @@ import { PatientSignatureService } from '../../services/signature/patient-signat
 export class PatientSignatureComponent implements OnInit, AfterViewInit {
   @Input() form: FormGroup;
   signatureType: number = 2;
-  signatureNeeded: boolean = true;
   signaturePad!: SignaturePad;
   activePane = 0;
   signatureClass: string = "";
   signatureImg!: string;
   patientFullName: string | undefined
+  isDrawsign:boolean = false;
+  isGeneratesign:boolean = false
+
 
   @ViewChild('patientsig') patientsig: ElementRef;
   public panes = [
@@ -52,13 +54,14 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
   }
 
   clearPad() {
-    this.signatureNeeded = true;
+    this.isDrawsign = false;
     this.signaturePad.clear();
     this.form.get('signature')?.get('drawsign')?.setValue(null)
   }
 
   stopDrawing() {
     this.form.get('signature')?.get('drawsign')?.setValue(this.signaturePad.toDataURL())
+    this.isDrawsign = true;
   }
   generatesign(event: any) {
     this.patientsig.nativeElement.name = 'patientsig'
@@ -66,8 +69,9 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
     html2canvas(this.patientsig.nativeElement).then(canvas => {
       this.form.get('signature')?.get('generatesign')?.setValue(canvas.toDataURL())
     });;
+    this.isGeneratesign= true
   }
   isNotValid() {
-
+    return !this.isDrawsign || !this.isGeneratesign
   }
 }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { Address } from 'src/app/models/patient/address.info.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
@@ -37,7 +38,8 @@ export class PatientSummaryComponent implements OnInit {
 
   constructor(private componentReference: ComponentReferenceComponentService
     , private patientService: PatientService
-    , private cacheClinicService: CacheClinicService) { }
+    , private cacheClinicService: CacheClinicService
+    ,private router: Router) { }
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
@@ -48,22 +50,23 @@ export class PatientSummaryComponent implements OnInit {
     this.fillPatientAgreement();
     this.getSignture()
     this.clinicId = this.cacheClinicService.getClinic();
+    console.log(this.clinicId)
   }
   submit() {
-    var imageFormData = new FormData();
-    this.componentReference.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
-      console.log(patientDocument)
-      imageFormData.append('files', patientDocument, patientDocument.name);
-    })
-    this.pateint.clinicId = this.clinicId;
-    this.patientService.newCreatePatient(this.pateint).subscribe(response => {
-      this.patientService.upload(imageFormData, <number>response.body).subscribe(d => {
-        console.log('Patient document updload..')
-      })
-      console.log('Patient Created..')
-    }, error => {
-      console.error('Error ' + JSON.stringify(error))
-    })
+    this.router.navigateByUrl('/digital-intake/done');
+    // var imageFormData = new FormData();
+    // this.componentReference.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
+    //   console.log(patientDocument)
+    //   imageFormData.append('files', patientDocument, patientDocument.name);
+    // })
+    // this.pateint.clinicId = this.clinicId;
+    // this.patientService.newCreatePatient(this.pateint).subscribe(response => {
+    //   this.patientService.upload(imageFormData, <number>response.body).subscribe(d => {
+    //     this.router.navigateByUrl('/digital-intake/done');
+    //   })
+    // }, error => {
+    //   console.error('Error ' + JSON.stringify(error))
+    // })
   }
   private fillPateintEssentialInformation() {
     var patientEssentialInformation: PatientEssentialInformation
