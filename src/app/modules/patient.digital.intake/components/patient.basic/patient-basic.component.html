@@ -25,9 +25,11 @@
                     Last Name is required
                 </div>
                 <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">Name cannot contain special characters.</div>
+                    class="text-danger mx-1">firstname cannot contain special characters.</div>
+                <div *ngIf="this.form.get('basic')?.get('middleName')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">middleName cannot contain special characters.</div>
                 <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">Name cannot contain special characters.</div>
+                    class="text-danger mx-1">lastName cannot contain special characters.</div>
             </c-col>
         </c-row>
         <!--Patient DOB-->
@@ -72,6 +74,8 @@
                         </div>
                         <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['noSpecialCharacters']"
                             class="text-danger mx-1">firstname cannot contain special characters.</div>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorMiddleName')?.errors?.['noSpecialCharacters']"
+                            class="text-danger mx-1">MiddleName cannot contain special characters.</div>
                         <div *ngIf="this.form.get('basic')?.get('guarantorLastName')?.errors?.['noSpecialCharacters']"
                             class="text-danger mx-1">lastName cannot contain special characters.</div>
                     </c-row>

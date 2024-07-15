@@ -33,7 +33,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.patientForm = new FormGroup({
       'basic': new FormGroup({
         'firstname': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
-        'middleName': new FormControl(null),
+        'middleName': new FormControl(null,noSpecialCharactersValidator()),
         'lastName': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
         'dob': new FormControl(null, [Validators.required]),
         'gender': new FormControl(null, [Validators.required]),
@@ -45,7 +45,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'employmentCompany': new FormControl(null),
 
         'guarantorFirstName': new FormControl(null),
-        'guarantorMiddleName': new FormControl(null),
+        'guarantorMiddleName': new FormControl(null,noSpecialCharactersValidator()),
         'guarantorLastName': new FormControl(null),
         'guarantorRelationship': new FormControl(null),
 
