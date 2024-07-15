@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { imageDocumentValidator } from './validators/custom.validation/document.image.validator';
+import { futureDateValidator } from './validators/custom.validation/future.date.validator';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
 import { todayDOBValidator } from './validators/custom.validation/today.dob.validator';
 import { DocumentValidator } from './validators/document/document.validator';

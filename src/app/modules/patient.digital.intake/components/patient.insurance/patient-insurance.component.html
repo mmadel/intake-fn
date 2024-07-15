@@ -45,11 +45,13 @@
                     <c-col xl="12">
                         <c-date-picker size="sm" formControlName="compensation-accident-date"></c-date-picker>
                     </c-col>
-                    <div *ngIf="!this.form.get('insurance')?.get('compensation-accident-date')?.valid && 
-                    (this.form.get('insurance')?.get('compensation-accident-date')?.dirty ||this.form.get('insurance')?.get('compensation-accident-date')?.touched)"
+                    <div *ngIf="this.form.get('insurance')?.get('compensation-accident-date')?.errors?.['required'] && 
+                (this.form.get('insurance')?.get('compensation-accident-date')?.dirty ||this.form.get('insurance')?.get('compensation-accident-date')?.touched)"
                         class="text-danger mx-1">
                         Accident Date is required
                     </div>
+                    <div *ngIf="this.form.get('insurance')?.get('compensation-accident-date')?.errors?.['future']"
+                        class="text-danger mx-1">accident date can't be in future.</div>
                 </c-row>
                 <!-- Insurance Company-->
                 <c-row class="mb-2">

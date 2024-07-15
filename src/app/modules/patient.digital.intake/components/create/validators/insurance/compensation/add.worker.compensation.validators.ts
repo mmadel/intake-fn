@@ -1,4 +1,5 @@
 import { FormGroup, Validators } from "@angular/forms";
+import { futureDateValidator } from "../../custom.validation/future.date.validator";
 import { CompensationFields } from "./compensation.fields";
 
 export class AddWorkerCompensationValidators {
@@ -15,6 +16,9 @@ export class AddWorkerCompensationValidators {
             }
             if (CompensationFields[i] === 'compensation-zipcode') {
                 form.get('insurance')?.get(CompensationFields[i])?.setValidators([Validators.required, Validators.min(10), Validators.pattern(zipCodeRgx)])
+            }
+            if (CompensationFields[i] === 'compensation-accident-date') {
+                form.get('insurance')?.get(CompensationFields[i])?.setValidators([futureDateValidator()])
             }
             form.get('insurance')?.get(CompensationFields[i])?.updateValueAndValidity();
         }
