@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { imageDocumentValidator } from './validators/custom.validation/document.image.validator';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
 import { todayDOBValidator } from './validators/custom.validation/today.dob.validator';
 import { DocumentValidator } from './validators/document/document.validator';
@@ -33,10 +34,10 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     const zipCodeRgx = new RegExp("^\\d{5}(?:[-\s]\\d{4})?$");
     this.patientForm = new FormGroup({
       'basic': new FormGroup({
-        'firstname': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
-        'middleName': new FormControl(null,noSpecialCharactersValidator()),
-        'lastName': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
-        'dob': new FormControl(null, [Validators.required,todayDOBValidator()]),
+        'firstname': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
+        'middleName': new FormControl(null, noSpecialCharactersValidator()),
+        'lastName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
+        'dob': new FormControl(null, [Validators.required, todayDOBValidator()]),
         'gender': new FormControl(null, [Validators.required]),
         'marital': new FormControl(null, [Validators.required]),
         'phoneType': new FormControl(null, [Validators.required]),
@@ -46,17 +47,17 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'employmentCompany': new FormControl(null),
 
         'guarantorFirstName': new FormControl(null),
-        'guarantorMiddleName': new FormControl(null,noSpecialCharactersValidator()),
+        'guarantorMiddleName': new FormControl(null, noSpecialCharactersValidator()),
         'guarantorLastName': new FormControl(null),
         'guarantorRelationship': new FormControl(null),
 
         'emergencyContact': new FormControl(null, [Validators.required]),
-        'emergencyName': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
-        'emergencyPhone': new FormControl(null, [Validators.required,Validators.min(15), Validators.pattern(phoneRgx)]),
+        'emergencyName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
+        'emergencyPhone': new FormControl(null, [Validators.required, Validators.min(15), Validators.pattern(phoneRgx)]),
       }),
       'address': new FormGroup({
-        'firstAddress': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
-        'secondAddress': new FormControl(null,[noSpecialCharactersValidator()]),
+        'firstAddress': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
+        'secondAddress': new FormControl(null, [noSpecialCharactersValidator()]),
         'state': new FormControl(null, [Validators.required]),
         'zipCode': new FormControl(null, [Validators.required, Validators.min(10), Validators.pattern(zipCodeRgx)]),
       }),
@@ -134,12 +135,12 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'commercial-is-secondary-insurance-medicare-coverage-phone': new FormControl(null),
       }),
       'document': new FormGroup({
-        'id-front': new FormControl(null, [Validators.required]),
-        'id-back': new FormControl(null, [Validators.required]),
-        'insurance-fornt': new FormControl(null, [Validators.required]),
-        'insurance-back': new FormControl(null, [Validators.required]),
-        'guarantorIdFront': new FormControl(null),
-        'guarantorIdBack': new FormControl(null),
+        'id-front': new FormControl(null, [imageDocumentValidator()]),
+        'id-back': new FormControl(null, [imageDocumentValidator()]),
+        'insurance-fornt': new FormControl(null, [imageDocumentValidator()]),
+        'insurance-back': new FormControl(null, [imageDocumentValidator()]),
+        'guarantorIdFront': new FormControl(null, imageDocumentValidator()),
+        'guarantorIdBack': new FormControl(null, imageDocumentValidator()),
       }),
       'agreement': new FormGroup({
         'release-Information': new FormControl(null, [Validators.required]),

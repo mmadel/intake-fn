@@ -8,6 +8,11 @@ export class CompressDocumentService {
   fileMap: Map<string, File> = new Map();
   constructor(private imageCompress: NgxImageCompressService) { }
   public onImageUpload(event: any, photoType: string) {
+    const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    console.log(event.srcElement.files[0].name)
+    const extension = event.srcElement.files[0]?.name?.split('.').pop().toLowerCase();
+    if (!validExtensions.includes(extension))
+      return  false;
     var uploadedIDFrontImage: File = event.target.files[0];
     var reader = new FileReader();
     reader.onload = (event: any) => {

@@ -13,12 +13,13 @@
 
                     <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
                         formControlName="id-front" (change)="onImageUpload($event ,'patientIdfront')" />
-
-                    <div *ngIf="!this.form.get('document')?.get('id-front')?.valid && 
-                (this.form.get('document')?.get('id-front')?.dirty ||this.form.get('document')?.get('id-front')?.touched)"
+                    <div *ngIf="this.form.get('document')?.get('id-front')?.errors?.['required'] && 
+                    (this.form.get('document')?.get('id-front')?.dirty ||this.form.get('document')?.get('id-front')?.touched)"
                         class="text-danger mx-1">
-                        Patient id front is required
+                        Patient Id Front is required
                     </div>
+                    <div *ngIf="this.form.get('document')?.get('id-front')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
                 </c-col>
             </c-row>
             <!--Patient id back-->
@@ -30,14 +31,16 @@
                 </c-col>
                 <c-col xl="12">
 
-                    <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                    <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
                         formControlName="id-back" (change)="onImageUpload($event ,'patientIdback')" />
 
-                    <div *ngIf="!this.form.get('document')?.get('id-back')?.valid && 
-                (this.form.get('document')?.get('id-back')?.dirty ||this.form.get('document')?.get('id-back')?.touched)"
+                    <div *ngIf="this.form.get('document')?.get('id-back')?.errors?.['required'] && 
+                    (this.form.get('document')?.get('id-back')?.dirty ||this.form.get('document')?.get('id-back')?.touched)"
                         class="text-danger mx-1">
-                        Patient id front is required
+                        Patient Id Back is required
                     </div>
+                    <div *ngIf="this.form.get('document')?.get('id-back')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
                 </c-col>
             </c-row>
             <!--Patient insurance front-->
@@ -52,11 +55,13 @@
                     <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
                         formControlName="insurance-fornt" (change)="onImageUpload($event ,'patientinsurancefront')" />
 
-                    <div *ngIf="!this.form.get('document')?.get('insurance-fornt')?.valid && 
-                (this.form.get('document')?.get('insurance-fornt')?.dirty ||this.form.get('document')?.get('insurance-fornt')?.touched)"
-                        class="text-danger mx-1">
-                        Patient id front is required
-                    </div>
+                        <div *ngIf="this.form.get('document')?.get('insurance-fornt')?.errors?.['required'] && 
+                        (this.form.get('document')?.get('insurance-fornt')?.dirty ||this.form.get('document')?.get('insurance-fornt')?.touched)"
+                            class="text-danger mx-1">
+                            Patient Insurance id Front is required
+                        </div>
+                    <div *ngIf="this.form.get('document')?.get('insurance-fornt')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
                 </c-col>
             </c-row>
             <!--Patient insurance back-->
@@ -71,11 +76,13 @@
                     <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
                         formControlName="insurance-back" (change)="onImageUpload($event ,'patientinsuranceback')" />
 
-                    <div *ngIf="!this.form.get('document')?.get('insurance-back')?.valid && 
-                (this.form.get('document')?.get('insurance-back')?.dirty ||this.form.get('document')?.get('insurance-back')?.touched)"
+                    <div *ngIf="this.form.get('document')?.get('insurance-back')?.errors?.['required'] && 
+                    (this.form.get('document')?.get('insurance-back')?.dirty ||this.form.get('document')?.get('insurance-back')?.touched)"
                         class="text-danger mx-1">
-                        Patient id front is required
+                        Patient Insurance id back is required
                     </div>
+                    <div *ngIf="this.form.get('document')?.get('insurance-back')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
                 </c-col>
             </c-row>
         </span>
@@ -93,11 +100,13 @@
                     <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
                         formControlName="guarantorIdFront" (change)="onImageUpload($event ,'guarantorIdfront')" />
                 </c-col>
-                <div *ngIf="!this.form.get('document')?.get('guarantorIdFront')?.valid && 
-    (this.form.get('document')?.get('guarantorIdFront')?.dirty ||this.form.get('document')?.get('guarantorIdFront')?.touched)"
+                <div *ngIf="this.form.get('document')?.get('guarantorIdFront')?.errors?.['required'] && 
+                (this.form.get('document')?.get('guarantorIdFront')?.dirty ||this.form.get('document')?.get('guarantorIdFront')?.touched)"
                     class="text-danger mx-1">
-                    guarantor id back is required
+                    Guarantor Id Front is required
                 </div>
+                <div *ngIf="this.form.get('document')?.get('guarantorIdFront')?.errors?.['imageFile']"
+                    class="text-danger mx-1">Images Only</div>
             </c-row>
             <!--guarantor Id Back Document-->
             <c-row>
@@ -109,11 +118,13 @@
                     <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
                         formControlName="guarantorIdBack" (change)="onImageUpload($event ,'guarantorIdback')" />
                 </c-col>
-                <div *ngIf="!this.form.get('document')?.get('guarantorIdBack')?.valid && 
-(this.form.get('document')?.get('guarantorIdBack')?.dirty ||this.form.get('document')?.get('guarantorIdback')?.touched)"
+                <div *ngIf="this.form.get('document')?.get('guarantorIdBack')?.errors?.['required'] && 
+                (this.form.get('document')?.get('guarantorIdBack')?.dirty ||this.form.get('document')?.get('guarantorIdBack')?.touched)"
                     class="text-danger mx-1">
-                    guarantor id front is required
+                    Guarantor Id Back is required
                 </div>
+                <div *ngIf="this.form.get('document')?.get('guarantorIdBack')?.errors?.['imageFile']"
+                    class="text-danger mx-1">Images Only</div>
             </c-row>
         </span>
     </div>
