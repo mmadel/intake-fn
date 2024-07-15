@@ -15,7 +15,7 @@ export class PatientCreateComponent implements OnInit {
   ngOnInit(): void {
     this.clinicService.selectedClinic$.subscribe(clinicId => {
       this.clinicId = clinicId
-      this.createPatientURL = this.baseURL + '/intake/add?clinicId=' + clinicId;
+      this.createPatientURL = this.baseURL + '/digital-intake?clinicId=' + clinicId;
     })
   }
 
