@@ -1,7 +1,9 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
 import { DocumentValidator } from './validators/document/document.validator';
+import { GuarantorValidator } from './validators/guarantor/guarantor.validator';
 import { InsuranceValidator } from './validators/insurance/insurance.validator';
 
 @Component({
@@ -26,12 +28,13 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
   }
   private createPatientForm() {
     const phoneRgx = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
+    const specialRgx = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
     const zipCodeRgx = new RegExp("^\\d{5}(?:[-\s]\\d{4})?$");
     this.patientForm = new FormGroup({
       'basic': new FormGroup({
-        'firstname': new FormControl(null, [Validators.required]),
+        'firstname': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
         'middleName': new FormControl(null),
-        'lastName': new FormControl(null, [Validators.required]),
+        'lastName': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
         'dob': new FormControl(null, [Validators.required]),
         'gender': new FormControl(null, [Validators.required]),
         'marital': new FormControl(null, [Validators.required]),
@@ -161,6 +164,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.setXRayValidator();
     InsuranceValidator.addValidator(this.patientForm)
     DocumentValidator.addValidator(this.patientForm)
+    GuarantorValidator.addValidator(this.patientForm);
   }
   private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {

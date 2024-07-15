@@ -14,16 +14,20 @@
                 </c-input-group>
             </c-col>
             <c-col xl="12">
-                <div *ngIf="!this.form.get('basic')?.get('firstname')?.valid && 
-                    (this.form.get('basic')?.get('firstname')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
+                <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['required'] && 
+                (this.form.get('basic')?.get('firstname')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
                     class="text-danger mx-1">
                     First Name is required
                 </div>
-                <div *ngIf="!this.form.get('basic')?.get('lastName')?.valid && 
-                    (this.form.get('basic')?.get('lastName')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
+                <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['required'] && 
+                (this.form.get('basic')?.get('lastName')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
                     class="text-danger mx-1">
                     Last Name is required
                 </div>
+                <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">Name cannot contain special characters.</div>
+                <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">Name cannot contain special characters.</div>
             </c-col>
         </c-row>
         <!--Patient DOB-->
@@ -56,16 +60,20 @@
                                 <input cFormControl placeholder="LastName" formControlName="guarantorLastName">
                             </c-input-group>
                         </c-col>
-                        <div *ngIf="!this.form.get('basic')?.get('guarantorFirstName')?.valid && 
-                    (this.form.get('basic')?.get('guarantorFirstName')?.dirty ||this.form.get('basic')?.get('guarantorFirstName')?.touched)"
+                        <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['required'] && 
+                (this.form.get('basic')?.get('guarantorFirstName')?.dirty ||this.form.get('basic')?.get('guarantorFirstName')?.touched)"
                             class="text-danger mx-1">
-                            FirstName is required
+                            First Name is required
                         </div>
-                        <div *ngIf="!this.form.get('basic')?.get('guarantorLastName')?.valid && 
+                        <div *ngIf="this.form.get('basic')?.get('guarantorLastName')?.errors?.['required'] && 
                         (this.form.get('basic')?.get('guarantorLastName')?.dirty ||this.form.get('basic')?.get('guarantorLastName')?.touched)"
                             class="text-danger mx-1">
-                            LastName is required
+                            Last Name is required
                         </div>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['noSpecialCharacters']"
+                            class="text-danger mx-1">firstname cannot contain special characters.</div>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorLastName')?.errors?.['noSpecialCharacters']"
+                            class="text-danger mx-1">lastName cannot contain special characters.</div>
                     </c-row>
                     <!--Relationship-->
                     <c-row class="mb-1">
