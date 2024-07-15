@@ -20,6 +20,9 @@ export class PatientBasicComponent implements OnInit {
     this.componentReference.setPatientBasicComponent(this)
   }
   public checkAge(event: any) {
+    const today = moment(event).isSame(moment(), 'day');
+    if(today)
+      return false
     var patientAge = moment().diff(event, 'y')
     this.isGuarantor = patientAge < 21 ? true : false;
   }

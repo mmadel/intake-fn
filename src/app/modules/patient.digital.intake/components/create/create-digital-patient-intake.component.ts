@@ -2,6 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
+import { todayDOBValidator } from './validators/custom.validation/today.dob.validator';
 import { DocumentValidator } from './validators/document/document.validator';
 import { GuarantorValidator } from './validators/guarantor/guarantor.validator';
 import { InsuranceValidator } from './validators/insurance/insurance.validator';
@@ -35,7 +36,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'firstname': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
         'middleName': new FormControl(null,noSpecialCharactersValidator()),
         'lastName': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
-        'dob': new FormControl(null, [Validators.required]),
+        'dob': new FormControl(null, [Validators.required,todayDOBValidator()]),
         'gender': new FormControl(null, [Validators.required]),
         'marital': new FormControl(null, [Validators.required]),
         'phoneType': new FormControl(null, [Validators.required]),

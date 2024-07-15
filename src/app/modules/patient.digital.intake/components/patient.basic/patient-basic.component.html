@@ -38,11 +38,14 @@
                 <label style="width: 150px;">Date Of Birth <span class="text-danger">*</span></label>
                 <c-date-picker size="sm" formControlName="dob" (dateChange)="checkAge($event)"></c-date-picker>
             </c-col>
-            <div *ngIf="!this.form.get('basic')?.get('dob')?.valid && 
-                    (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['required'] && 
+            (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
                 class="text-danger mx-1">
-                Date Of Birth is required
+                Date of birth is required
             </div>
+            
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['today']"
+                class="text-danger mx-1">Date of birth can't be today.</div>
         </c-row>
         <!--Guarantor-->
         <c-row *ngIf="isGuarantor">
