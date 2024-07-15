@@ -250,6 +250,10 @@
                             <option value="Other">Other</option>
                         </select>
                     </c-col>
+                    <div *ngIf="!this.form.get('basic')?.get('emergencyContact')?.valid && 
+                    (this.form.get('basic')?.get('emergencyContact')?.touched)" class="text-danger mx-1">
+                        Contact Status is required
+                    </div>
                 </c-row>
                 <c-row class="mb-1">
                     <c-col xl="12">
@@ -260,6 +264,14 @@
                         <input class="form-control" placeholder formControlName="emergencyName" cFormControl
                             sizing="sm">
                     </c-col>
+                    <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['required'] && 
+                        (this.form.get('basic')?.get('emergencyName')?.dirty ||this.form.get('basic')?.get('emergencyName')?.touched)"
+                        class="text-danger mx-1">
+                        EmergencyName Name is required
+                    </div>
+
+                    <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['noSpecialCharacters']"
+                        class="text-danger mx-1">name cannot contain special characters.</div>
                 </c-row>
                 <c-row class="mb-1">
                     <c-col xl="12">
@@ -271,6 +283,13 @@
                             sizing="sm" [value]="this.form.get('basic')?.get('emergencyPhone')?.value | phone"
                             maxlength="15">
                     </c-col>
+                    <div *ngIf="!this.form.get('basic')?.get('emergencyPhone')?.valid && 
+                    (this.form.get('basic')?.get('emergencyPhone')?.touched)" class="text-danger mx-1">
+                        Phone is required
+                    </div>
+                    <div *ngIf="this.form.get('basic')?.get('emergencyPhone')?.errors?.['pattern']" class="text-danger mx-1">
+                        Invalid Phone
+                    </div>
                 </c-row>
             </c-card-body>
         </c-card>

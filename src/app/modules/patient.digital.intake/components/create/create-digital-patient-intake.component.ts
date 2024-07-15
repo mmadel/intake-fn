@@ -50,8 +50,8 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'guarantorRelationship': new FormControl(null),
 
         'emergencyContact': new FormControl(null, [Validators.required]),
-        'emergencyName': new FormControl(null, [Validators.required]),
-        'emergencyPhone': new FormControl(null, [Validators.required]),
+        'emergencyName': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
+        'emergencyPhone': new FormControl(null, [Validators.required,Validators.min(15), Validators.pattern(phoneRgx)]),
       }),
       'address': new FormGroup({
         'firstAddress': new FormControl(null, [Validators.required]),
