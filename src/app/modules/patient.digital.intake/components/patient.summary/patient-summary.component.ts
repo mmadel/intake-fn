@@ -56,7 +56,6 @@ export class PatientSummaryComponent implements OnInit {
     // this.router.navigateByUrl('/digital-intake/done');
     var imageFormData = new FormData();
     this.componentReference.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
-      console.log(patientDocument)
       imageFormData.append('files', patientDocument, patientDocument.name);
     })
     this.pateint.clinicId = this.clinicId;
