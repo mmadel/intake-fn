@@ -1,3 +1,6 @@
+<c-callout color="danger" *ngIf="isValidForm">
+    Please all mandatory agreements <strong class="text-danger">marked with red star</strong> before navigating to next step
+</c-callout>
 <div [formGroup]="form" class="mt-3">
     <div formGroupName="agreement">
         <c-accordion [alwaysOpen]="false" [flush]="false" class="shadow">
@@ -28,7 +31,8 @@
             <c-accordion-item #item1="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
                     <button (click)="item1.toggleItem()" [collapsed]="!item1.visible" cAccordionButton>
-                        <h5>Financial Responsibility Agreement by Other than Patient’s Legal Representative <span class="text-danger">*</span></h5>
+                        <h5>Financial Responsibility Agreement by Other than Patient’s Legal Representative <span
+                                class="text-danger">*</span></h5>
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
@@ -193,7 +197,6 @@
     </div>
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-        <button cButton matStepperNext variant="outline" size="sm" type="submit"
-            [disabled]="!form.get('agreement')?.valid">Next</button>
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
     </div>
 </div>

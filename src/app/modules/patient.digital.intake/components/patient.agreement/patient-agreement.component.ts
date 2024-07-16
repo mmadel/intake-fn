@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AgreementHolder } from 'src/app/models/patient/agreements/agreements.holder';
 import { PatientService } from 'src/app/modules/patient.questionnaire/service/patient.service';
+import { ValidationExploder } from '../create/validators/validation.exploder';
 
 @Component({
   selector: 'patient-agreement',
@@ -10,6 +12,8 @@ import { PatientService } from 'src/app/modules/patient.questionnaire/service/pa
   styleUrls: ['./patient-agreement.component.css']
 })
 export class PatientAgreementComponent implements OnInit {
+  @Input() stepper: MatStepper
+  isValidForm: boolean = false;
   @Input() form: FormGroup;
   agreementHolder: AgreementHolder[] | null;
   releaseInformationParagraph: string | null;
@@ -104,5 +108,13 @@ export class PatientAgreementComponent implements OnInit {
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
-
+  next(){
+    if (this.form.get('agreement')?.valid) {
+      this.stepper.next();
+      this.isValidForm = false;
+    } else {
+      this.isValidForm = true;
+      ValidationExploder.explode(this.form, 'agreement')      
+    }
+  }
 }

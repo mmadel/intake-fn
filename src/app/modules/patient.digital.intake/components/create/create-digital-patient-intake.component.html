@@ -32,7 +32,7 @@
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('agreement')!" formGroupName="agreement">
                         <ng-template matStepLabel>Agreements</ng-template>
-                        <patient-agreement [form]="patientForm"></patient-agreement>
+                        <patient-agreement [form]="patientForm" [stepper]="patientStepper"></patient-agreement>
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('signature')!" formGroupName="signature">
                         <ng-template matStepLabel>Signature</ng-template>
