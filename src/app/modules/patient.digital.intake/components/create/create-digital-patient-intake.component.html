@@ -16,7 +16,7 @@
                     <mat-step completed="true" [stepControl]="patientForm.get('medical')!" formGroupName="medical">
                         <ng-template matStepLabel>Medical</ng-template>
                         <!-- <ng-template matStepLabel><svg cIcon name="cilMedicalCross" size="xxl"></svg></ng-template> -->
-                        <patient-medical [form]="patientForm"></patient-medical>
+                        <patient-medical [form]="patientForm" [stepper]="patientStepper"></patient-medical>
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('medicalhistory')!"
                         formGroupName="medicalhistory">

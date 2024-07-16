@@ -3,12 +3,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { imageDocumentValidator } from './validators/custom.validation/document.image.validator';
-import { futureDateValidator } from './validators/custom.validation/future.date.validator';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
 import { todayDOBValidator } from './validators/custom.validation/today.dob.validator';
 import { DocumentValidator } from './validators/document/document.validator';
 import { GuarantorValidator } from './validators/guarantor/guarantor.validator';
 import { InsuranceValidator } from './validators/insurance/insurance.validator';
+import { PatientSourceValidator } from './validators/patient.source/patient.source.validator';
+import { PhysicalTherapyValidator } from './validators/physical.therapy/add.physical.therapy.validator';
 
 @Component({
   selector: 'app-create-digital-patient-intake',
@@ -164,12 +165,14 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       })
     })
     this.setAddressConditionalValidators()
-    this.setMedicalConditionalValidatos()
     this.setReceivedPhysicalTherapyValidator();
     this.setXRayValidator();
+    PatientSourceValidator.addValidator(this.patientForm);
+    PhysicalTherapyValidator.addValidator(this.patientForm)
     InsuranceValidator.addValidator(this.patientForm)
     DocumentValidator.addValidator(this.patientForm)
     GuarantorValidator.addValidator(this.patientForm);
+    PatientSourceValidator.addValidator(this.patientForm)
   }
   private setAddressConditionalValidators() {
     this.patientForm.valueChanges.subscribe((value: any) => {
@@ -183,25 +186,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     })
   }
 
-  private setMedicalConditionalValidatos() {
-    this.patientForm.get('medical')?.get('isReferring')?.valueChanges.subscribe((value: any) => {
-      if (value === 'yes') {
-        this.patientForm.get('medical')?.get('providerNPI')?.setValidators(Validators.required)
-        this.patientForm.get('medical')?.get('providerName')?.setValidators(Validators.required)
-        this.patientForm.get('medical')?.get('providerNPI')?.updateValueAndValidity();
-        this.patientForm.get('medical')?.get('providerName')?.updateValueAndValidity();
-      }
-      if (value === 'no') {
-        this.patientForm.get('medical')?.get('providerNPI')?.clearValidators();
-        this.patientForm.get('medical')?.get('providerNPI')?.setErrors(null);
-        this.patientForm.get('medical')?.get('providerNPI')?.updateValueAndValidity();
-
-        this.patientForm.get('medical')?.get('providerName')?.clearValidators();
-        this.patientForm.get('medical')?.get('providerName')?.setErrors(null);
-        this.patientForm.get('medical')?.get('providerName')?.updateValueAndValidity();
-      }
-    })
-  }
   private setReceivedPhysicalTherapyValidator() {
     this.patientForm.get('medical')?.get('isReceivedPhysicalTherapy')?.valueChanges.subscribe((value: any) => {
       if (value === 'yes') {

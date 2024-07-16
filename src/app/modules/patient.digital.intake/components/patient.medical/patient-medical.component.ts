@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 import { Provider } from '../../models/provider';
 import { ProvidersService } from '../../services/provider/providers.service';
+import { ValidationExploder } from '../create/validators/validation.exploder';
 
 
 @Component({
@@ -15,6 +17,8 @@ export class PatientMedicalComponent implements OnInit {
   @Input() form: FormGroup;
   provider: Provider = {}
   entityValues = entityValues;
+  @Input() stepper: MatStepper
+  isValidForm: boolean = false;
   constructor(private providersService: ProvidersService) { }
 
   ngOnInit(): void {
@@ -62,5 +66,14 @@ export class PatientMedicalComponent implements OnInit {
         error => {
           console.log(JSON.stringify(error))
         });
+  }
+  next(){
+    if (this.form.get('medical')?.valid) {
+      this.stepper.next();
+      this.isValidForm = false;
+    } else {
+      this.isValidForm = true;
+      ValidationExploder.explode(this.form, 'medical')      
+    }
   }
 }
