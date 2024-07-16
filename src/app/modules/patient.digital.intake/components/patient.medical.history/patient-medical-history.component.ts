@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { PatientConditions } from 'src/app/modules/patient.questionnaire/components/medical.history.information/create.patient.conditions/patient.conditions';
 import { IPatientCondition } from 'src/app/modules/patient.questionnaire/components/medical.history.information/patient.condition';
+import { ValidationExploder } from '../create/validators/validation.exploder';
 
 @Component({
   selector: 'patient-medical-history',
@@ -11,6 +13,8 @@ import { IPatientCondition } from 'src/app/modules/patient.questionnaire/compone
 export class PatientMedicalHistoryComponent implements OnInit {
 
   constructor() { }
+  @Input() stepper: MatStepper
+  isValidForm: boolean = false;
   @Input() form: FormGroup;
   initHeight: number = 0;
   initWeight: number
@@ -44,5 +48,14 @@ export class PatientMedicalHistoryComponent implements OnInit {
       weightValue = Math.round(weightValue * 2.20462)
     }
     this.form?.get('medicalhistory')?.get('weight')?.setValue(weightValue, { emitEvent: false });
+  }
+  next(){
+    if (this.form.get('medicalhistory')?.valid) {
+      this.stepper.next();
+      this.isValidForm = false;
+    } else {
+      this.isValidForm = true;
+      ValidationExploder.explode(this.form, 'medicalhistory')      
+    }
   }
 }

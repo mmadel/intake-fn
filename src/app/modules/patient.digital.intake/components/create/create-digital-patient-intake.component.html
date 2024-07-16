@@ -10,19 +10,17 @@
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('address')!" formGroupName="address">
                         <ng-template matStepLabel>Address</ng-template>
-                        <!-- <ng-template matStepLabel><svg cIcon name="cilHome" size="xxl"></svg></ng-template> -->
                         <patient-address [form]="patientForm" [stepper]="patientStepper"></patient-address>
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('medical')!" formGroupName="medical">
                         <ng-template matStepLabel>Medical</ng-template>
-                        <!-- <ng-template matStepLabel><svg cIcon name="cilMedicalCross" size="xxl"></svg></ng-template> -->
                         <patient-medical [form]="patientForm" [stepper]="patientStepper"></patient-medical>
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('medicalhistory')!"
                         formGroupName="medicalhistory">
                         <ng-template matStepLabel>Medical History</ng-template>
-                        <!-- <ng-template matStepLabel><svg cIcon name="cilHistory" size="xxl"></svg></ng-template> -->
-                        <patient-medical-history [form]="patientForm"></patient-medical-history>
+                        <patient-medical-history [form]="patientForm"
+                            [stepper]="patientStepper"></patient-medical-history>
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('insurance')!" formGroupName="insurance">
                         <ng-template matStepLabel>Insurance</ng-template>
