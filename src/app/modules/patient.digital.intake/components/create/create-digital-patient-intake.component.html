@@ -36,7 +36,7 @@
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('signature')!" formGroupName="signature">
                         <ng-template matStepLabel>Signature</ng-template>
-                        <patient-signature [form]="patientForm"></patient-signature>
+                        <patient-signature [form]="patientForm" [stepper]="patientStepper"></patient-signature>
                     </mat-step>
                     <mat-step completed="true">
                         <ng-template matStepLabel>Summary</ng-template>

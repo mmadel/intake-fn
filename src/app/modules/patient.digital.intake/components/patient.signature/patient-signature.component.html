@@ -1,64 +1,61 @@
-
-
-        <c-nav variant="underline">
-            <c-nav-item *ngFor="let nav of panes; index as i; first as isFirst; last as isLast">
-                <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="i" cNavLink>
-                    {{nav.name}}
-                </a>
-            </c-nav-item>
-        </c-nav>
-        <c-tab-content #tabContent="cTabContent" (activeTabPaneIdxChange)="onTabChange($event)"
-            [activeTabPaneIdx]="activePane">
-            <!-- generate-->
-            <c-tab-pane class="p-3">
-                <c-row>
-                    <c-col xs="12">
-                        <div class="w-60 p-3 border border-default mb-3" style="background-color: #eee;">
-                            <span [class]="signatureClass"
-                                style="font-size: xx-large; background-color: transparent;" #patientsig id="sig">{{patientFullName}}</span>
-                        </div>
-                    </c-col>
-                    <c-col xs="12">
-                        <select cSelect sizing="sm"  (change)="generatesign($event)">
-                            <option value="null">Select Signature Template</option>
-                            <option value="signature-format-Dancing-Script"
-                                style="font-family:Dancing Script;font-size: xx-large;">Format
-                                Me..</option>
-                            <option value="signature-format-Gloria-Hallelujah"
-                                style="font-family:Gloria Hallelujah;font-size: xx-large;">
-                                Format Me..</option>
-                            <option value="signature-format-Great-Vibes"
-                                style="font-family:Great Vibes;font-size: xx-large;">Format Me..
-                            </option>
-                            <option value="signature-format-Homemade-Apple"
-                                style="font-family:Homemade Apple;font-size: xx-large;">Format
-                                Me</option>
-                            <option value="signature-format-Monsieur-La-Doulaise"
-                                style="font-family:Monsieur La Doulaise;font-size: xx-large;">Format Me</option>
-                            <option value="signature-format-Nanum-Brush-Script"
-                                style="font-family:Nanum Brush Script;font-size: xx-large;">Format Me</option>
-                            <option value="signature-format-Reenie-Beanie"
-                                style="font-family:Reenie Beanie;font-size: xx-large;">Format
-                                Me</option>
-                        </select>
-                    </c-col>
-                    <c-col xs="12">
-                        <!-- <button cButton (click)="generate()">Capture</button> -->
-                    </c-col>
-                </c-row>
-            </c-tab-pane>
-            <!-- Draw-->
-            <c-tab-pane class="p-3">
-                <canvas #canvas  width="700" height="200" (mouseleave)="stopDrawing()"
-                    ></canvas>
-                <div class="buttons flex justify-between">
-                    <button cButton (click)="clearPad()">Clear</button>
+<c-callout color="danger" *ngIf="isValidForm">
+    Please create your signature before navigating to next step
+</c-callout>
+<c-nav variant="underline">
+    <c-nav-item *ngFor="let nav of panes; index as i; first as isFirst; last as isLast">
+        <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="i" cNavLink>
+            {{nav.name}}
+        </a>
+    </c-nav-item>
+</c-nav>
+<c-tab-content #tabContent="cTabContent" (activeTabPaneIdxChange)="onTabChange($event)" [activeTabPaneIdx]="activePane">
+    <!-- generate-->
+    <c-tab-pane class="p-3">
+        <c-row>
+            <c-col xs="12">
+                <div class="w-60 p-3 border border-default mb-3" style="background-color: #eee;">
+                    <span [class]="signatureClass" style="font-size: xx-large; background-color: transparent;"
+                        #patientsig id="sig">{{patientFullName}}</span>
                 </div>
-            </c-tab-pane>
-        </c-tab-content>
-        <div class="mt-3">            
-            <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-            <button cButton matStepperNext variant="outline" size="sm" type="submit"
-            [disabled]="!(isDrawsign || isGeneratesign)" >Next</button>
+            </c-col>
+            <c-col xs="12">
+                <select cSelect sizing="sm" (change)="generatesign($event)">
+                    <option value="null">Select Signature Template</option>
+                    <option value="signature-format-Dancing-Script"
+                        style="font-family:Dancing Script;font-size: xx-large;">Format
+                        Me..</option>
+                    <option value="signature-format-Gloria-Hallelujah"
+                        style="font-family:Gloria Hallelujah;font-size: xx-large;">
+                        Format Me..</option>
+                    <option value="signature-format-Great-Vibes" style="font-family:Great Vibes;font-size: xx-large;">
+                        Format Me..
+                    </option>
+                    <option value="signature-format-Homemade-Apple"
+                        style="font-family:Homemade Apple;font-size: xx-large;">Format
+                        Me</option>
+                    <option value="signature-format-Monsieur-La-Doulaise"
+                        style="font-family:Monsieur La Doulaise;font-size: xx-large;">Format Me</option>
+                    <option value="signature-format-Nanum-Brush-Script"
+                        style="font-family:Nanum Brush Script;font-size: xx-large;">Format Me</option>
+                    <option value="signature-format-Reenie-Beanie"
+                        style="font-family:Reenie Beanie;font-size: xx-large;">Format
+                        Me</option>
+                </select>
+            </c-col>
+            <c-col xs="12">
+                <!-- <button cButton (click)="generate()">Capture</button> -->
+            </c-col>
+        </c-row>
+    </c-tab-pane>
+    <!-- Draw-->
+    <c-tab-pane class="p-3">
+        <canvas #canvas width="700" height="200" (mouseleave)="stopDrawing()"></canvas>
+        <div class="buttons flex justify-between">
+            <button cButton (click)="clearPad()">Clear</button>
         </div>
-    
+    </c-tab-pane>
+</c-tab-content>
+<div class="mt-3">
+    <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+    <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+</div>
