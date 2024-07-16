@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { faL } from '@fortawesome/free-solid-svg-icons';
+import { MatStepper } from '@angular/material/stepper';
 import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 import { CompressDocumentService } from '../../services/doument/compress-document.service';
+import { ValidationExploder } from '../create/validators/validation.exploder';
 
 @Component({
   selector: 'patient-document',
@@ -10,7 +11,8 @@ import { CompressDocumentService } from '../../services/doument/compress-documen
   styleUrls: ['./patient-document.component.css']
 })
 export class PatientDocumentComponent implements OnInit {
-  
+  @Input() stepper: MatStepper
+  isValidForm: boolean = false;
   fileMap: Map<string, File> = new Map();
   isGuarantor:boolean = false
   @Input() form: FormGroup;
@@ -44,6 +46,16 @@ export class PatientDocumentComponent implements OnInit {
     }else{
       this.fileMap.delete('guarantorIdfront')
       this.fileMap.delete('guarantorIdback')
+    }
+  }
+  next(){
+    console.log(this.form.get('document')?.valid)
+    if (this.form.get('document')?.valid) {
+      this.stepper.next();
+      this.isValidForm = false;
+    } else {
+      this.isValidForm = true;
+      ValidationExploder.explode(this.form, 'document')      
     }
   }
 }

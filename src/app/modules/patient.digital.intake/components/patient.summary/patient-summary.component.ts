@@ -39,7 +39,7 @@ export class PatientSummaryComponent implements OnInit {
   constructor(private componentReference: ComponentReferenceComponentService
     , private patientService: PatientService
     , private cacheClinicService: CacheClinicService
-    ,private router: Router) { }
+    , private router: Router) { }
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
@@ -213,7 +213,8 @@ export class PatientSummaryComponent implements OnInit {
       patientMedicalHistory.pacemaker = select.isPacemaker
       patientMedicalHistory.metalImplantation = select.isMetalImplants
       patientMedicalHistory.surgeriesList = select.surgeriesList
-      this.pateint.patientMedical!.patientMedicalHistory = patientMedicalHistory
+      if (this.pateint.patientMedical !== undefined)
+        this.pateint.patientMedical.patientMedicalHistory = patientMedicalHistory
     })
   }
   private fillPatientInsurance() {
