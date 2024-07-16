@@ -1,8 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import * as moment from 'moment';
+import { tap } from 'rxjs';
 import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 import { CompressDocumentService } from '../../services/doument/compress-document.service';
+import { ValidationExploder } from '../create/validators/validation.exploder';
 
 @Component({
   selector: 'patient-basic',
@@ -12,16 +15,19 @@ import { CompressDocumentService } from '../../services/doument/compress-documen
 export class PatientBasicComponent implements OnInit {
   fileMap: Map<string, File> = new Map();
   @Input() form: FormGroup;
+  @Input() stepper: MatStepper
+  isValidForm: boolean = false;
   isGuarantor: boolean = false
   constructor(private componentReference: ComponentReferenceComponentService
-    , private compressDocumentService: CompressDocumentService) { }
+    , private compressDocumentService: CompressDocumentService
+    ) { }
 
   ngOnInit(): void {
     this.componentReference.setPatientBasicComponent(this)
   }
   public checkAge(event: any) {
     const today = moment(event).isSame(moment(), 'day');
-    if(today)
+    if (today)
       return false
     var patientAge = moment().diff(event, 'y')
     this.isGuarantor = patientAge < 21 ? true : false;
@@ -37,4 +43,16 @@ export class PatientBasicComponent implements OnInit {
     }
     return imageFormData;
   }
+  next() {
+
+    if (this.form.get('basic')?.valid) {
+      this.stepper.next();
+      this.isValidForm = false;
+    } else {
+      this.isValidForm = true;
+      ValidationExploder.explode(this.form, 'basic')      
+    }
+  }
+
 }
+

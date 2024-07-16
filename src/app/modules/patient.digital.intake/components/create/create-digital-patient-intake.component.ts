@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { imageDocumentValidator } from './validators/custom.validation/document.image.validator';
 import { futureDateValidator } from './validators/custom.validation/future.date.validator';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
@@ -17,6 +18,7 @@ import { InsuranceValidator } from './validators/insurance/insurance.validator';
 export class CreateDigitalPatientIntakeComponent implements OnInit {
   stepperOrientation: 'horizontal' | 'vertical' = 'horizontal';
   patientForm: FormGroup
+  @ViewChild(MatStepper, { static: true } ) public patientStepper: MatStepper;
   constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
