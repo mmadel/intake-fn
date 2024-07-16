@@ -7,6 +7,7 @@ export class ValidationExploder {
             const control = basicForm.get(field);
             control?.markAsTouched({ onlySelf: true });
         });
+        this.scrollUp()
     }
     private static scrollUp() {
         (function smoothscroll() {

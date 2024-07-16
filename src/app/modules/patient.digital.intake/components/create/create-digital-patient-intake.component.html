@@ -24,7 +24,7 @@
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('insurance')!" formGroupName="insurance">
                         <ng-template matStepLabel>Insurance</ng-template>
-                        <patient-insurance [form]="patientForm"></patient-insurance>
+                        <patient-insurance [form]="patientForm" [stepper]="patientStepper"></patient-insurance>
                     </mat-step>
                     <mat-step completed="true" [stepControl]="patientForm.get('document')!" formGroupName="document">
                         <ng-template matStepLabel>Documents</ng-template>

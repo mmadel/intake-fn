@@ -165,7 +165,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       })
     })
     this.setAddressConditionalValidators()
-    this.setReceivedPhysicalTherapyValidator();
     this.setXRayValidator();
     PatientSourceValidator.addValidator(this.patientForm);
     PhysicalTherapyValidator.addValidator(this.patientForm)
@@ -182,25 +181,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       } else {
         this.patientForm.get('basic')?.get('employmentCompany')?.setValidators(null)
         this.patientForm.get('basic')?.get('employmentCompany')?.setErrors(null)
-      }
-    })
-  }
-
-  private setReceivedPhysicalTherapyValidator() {
-    this.patientForm.get('medical')?.get('isReceivedPhysicalTherapy')?.valueChanges.subscribe((value: any) => {
-      if (value === 'yes') {
-        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.setValidators(Validators.required)
-        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.setValidators(Validators.required)
-        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.updateValueAndValidity();
-        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.updateValueAndValidity();
-      } else {
-        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.clearValidators();
-        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.setErrors(null);
-        this.patientForm.get('medical')?.get('PhysicalTherapyLocation')?.updateValueAndValidity();
-
-        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.clearValidators();
-        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.setErrors(null);
-        this.patientForm.get('medical')?.get('PhysicalTherapyNumber')?.updateValueAndValidity();
       }
     })
   }

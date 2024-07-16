@@ -1,4 +1,7 @@
 <ngx-spinner></ngx-spinner>
+<c-callout color="danger" *ngIf="isValidForm">
+    Please fill in all the required fields before navigating to next step
+</c-callout>
 <div [formGroup]="form" class="mt-3">
     <div formGroupName="insurance">
         <!--Insurance Type-->
@@ -419,7 +422,7 @@
                         <div *ngIf="!this.form.get('insurance')?.get('commercial-member-id')?.valid && 
 						(this.form.get('insurance')?.get('commercial-member-id')?.dirty ||this.form.get('insurance')?.get('commercial-member-id')?.touched)"
                             class="text-danger mx-1">
-                            Related Injury is required
+                            Member Id is required
                         </div>
                     </c-col>
                 </c-row>
@@ -459,7 +462,7 @@
                     <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.valid && 
 						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.touched)"
                         class="text-danger mx-1">
-                        Related Injury is required
+                        PloicyHolder Relationship is required
                     </div>
                 </c-row>
                 <!--PloicyHolder Info-->
@@ -591,12 +594,12 @@
                             <div *ngIf="!this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.valid && 
 						(this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.touched)"
                                 class="text-danger mx-1">
-                                Related Injury is required
+                                first-name is required
                             </div>
                             <div *ngIf="!this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.valid && 
 						(this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.touched)"
                                 class="text-danger mx-1">
-                                Related Injury is required
+                                last-name is required
                             </div>
                         </c-row>
                         <c-row>
@@ -629,6 +632,18 @@
                                                 formControlName="commercial-is-secondary-insurance-medicare-coverage-last-name">
                                         </c-input-group>
                                     </c-col>
+                                    <c-col xl="12">
+                                        <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-first-name')?.errors?.['required'] === true && 
+                                        (this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-first-name')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.touched)"
+                                            class="text-danger mx-1">
+                                            first name Required
+                                        </div>
+                                        <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.errors?.['required'] === true && 
+                                        (this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.touched)"
+                                            class="text-danger mx-1">
+                                            first name Required
+                                        </div>
+                                    </c-col>
                                 </c-row>
                                 <c-row>
                                     <c-row>
@@ -651,7 +666,6 @@
     </div>
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
-        <button cButton matStepperNext variant="outline" size="sm" type="submit"
-            [disabled]="!form.get('insurance')?.valid">Next</button>
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
     </div>
 </div>
