@@ -200,7 +200,7 @@
                 <c-row>
                     <c-col xs="12">
                         <textarea cFormControl sizing="sm" formControlName="surgeriesList" [ngClass]="{'is-invalid': this.form.get('medicalhistory')?.get('surgeriesList')?.invalid
-                        && this.form.get('medicalhistory')?.get('surgeriesList')?.touched}"></textarea>
+                        && this.form.get('medicalhistory')?.get('surgeriesList')?.touched}" maxlength="200"></textarea>
                     </c-col>
                     <c-col xs="12">
                         <div *ngIf="this.form.get('medicalhistory')?.get('surgeriesList')?.errors?.['required'] === true && 
