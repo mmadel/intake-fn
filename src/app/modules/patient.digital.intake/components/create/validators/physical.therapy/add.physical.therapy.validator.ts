@@ -3,9 +3,7 @@ import { PhysicalTherapyFields } from "./physical.therapy.fields";
 
 export class PhysicalTherapyValidator {
     public static addValidator(form: FormGroup) {
-        console.log('PhysicalTherapyValidator')
         form.get('medical')?.get('isReceivedPhysicalTherapy')?.valueChanges.subscribe((value: any) => {
-            console.log(value)
             if (value === 'yes') {
                 for (var i = 0; i < PhysicalTherapyFields.length; i++) {
                     form.get('medical')?.get(PhysicalTherapyFields[i])?.setValidators(Validators.required)
