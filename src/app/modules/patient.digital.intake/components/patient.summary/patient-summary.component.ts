@@ -43,6 +43,7 @@ export class PatientSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillPateintEssentialInformation();
+    this.fillPatientAddress();
     this.fillPatientSource();
     this.fillPatientMedicalInformation();
     this.fillPatientMedicalHistoryInformation();
@@ -68,7 +69,7 @@ export class PatientSummaryComponent implements OnInit {
     })
   }
   private fillPateintEssentialInformation() {
-    var patientEssentialInformation: PatientEssentialInformation
+    var patientEssentialInformation: PatientEssentialInformation = {}
     this.form.get('basic')?.valueChanges.forEach(selected => {
       patientEssentialInformation = {
         patientName: {
@@ -93,9 +94,11 @@ export class PatientSummaryComponent implements OnInit {
           emergencyName: selected.emergencyName,
           emergencyPhone: selected.emergencyPhone,
           emergencyRelation: selected.emergencyContact
+        },
+        address:{
+
         }
       };
-      this.fillPatientAddress(patientEssentialInformation);
       var patientAge = moment().diff(selected.dob, 'y')
       var isGuarantor: boolean = patientAge < 21 ? true : false;
       if (isGuarantor) {
@@ -111,17 +114,8 @@ export class PatientSummaryComponent implements OnInit {
       }
       this.pateint.patientEssentialInformation = patientEssentialInformation
     })
-    this.form.get('address')?.valueChanges.forEach(selected => {
-      var address: PatientAddress = {
-        first: selected.firstAddress,
-        second: selected.secondAddress,
-        state: selected.state,
-        zipCode: selected.zipCode
-      };
-      this.pateint.patientEssentialInformation!.address = address;
-    });
   }
-  private fillPatientAddress(patientEssentialInformation: PatientEssentialInformation) {
+  private fillPatientAddress() {
     this.form.get('address')?.valueChanges.forEach(selected => {
       var address: Address = {
         type: '',
@@ -133,7 +127,7 @@ export class PatientSummaryComponent implements OnInit {
         city: '',
         zipCode: selected.zipCode
       };
-      patientEssentialInformation.patientAddress = address
+      this.pateint.patientAddress = address
     })
   }
   private fillPatientSource() {
