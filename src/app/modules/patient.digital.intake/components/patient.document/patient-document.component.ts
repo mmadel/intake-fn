@@ -15,6 +15,8 @@ export class PatientDocumentComponent implements OnInit {
   isValidForm: boolean = false;
   fileMap: Map<string, File> = new Map();
   isGuarantor:boolean = false
+  isMaxSize:boolean = false;
+  excceedControl:string;
   @Input() form: FormGroup;
   constructor(private componentReference: ComponentReferenceComponentService
     , private compressDocumentService: CompressDocumentService) { }
@@ -25,7 +27,15 @@ export class PatientDocumentComponent implements OnInit {
         this.isGuarantor = this.componentReference.getPatientBasicComponent()!.isGuarantor
     })
   }
-  public onImageUpload(event: any, photoType: string) {
+  public onImageUpload(event: any, photoType: string , name:string) {
+    console.log( event.target.value)
+    if(event.target.files[0].size / (1024 * 1024) > 50){
+      this.isMaxSize = true;
+      this.form.get('document')?.get(name)?.setValue(null);
+      this.excceedControl = name;
+    }else{
+      this.isMaxSize = false;
+    }
     this.compressDocumentService.setuploadedImages(this.fileMap);
     this.compressDocumentService.onImageUpload(event, photoType)
   }
