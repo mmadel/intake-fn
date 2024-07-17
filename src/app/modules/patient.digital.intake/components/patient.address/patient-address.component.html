@@ -11,7 +11,7 @@
             <c-col xl="12">
                 <input class="form-control" placeholder formControlName="firstAddress" sizing="sm" cFormControl
                     [ngClass]="{'is-invalid': this.form.get('address')?.get('firstAddress')?.invalid
-                && this.form.get('address')?.get('firstAddress')?.touched}">
+                && this.form.get('address')?.get('firstAddress')?.touched}" maxlength="60">
             </c-col>
             <c-col xl=" 12">
                 <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['required'] && 
