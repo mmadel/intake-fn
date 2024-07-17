@@ -46,7 +46,7 @@
                         </label>
                     </c-col>
                     <c-col xl="12">
-                        <c-date-picker size="sm" formControlName="compensation-accident-date"></c-date-picker>
+                        <input type="date" cFormControl sizing="sm" formControlName="compensation-accident-date">
                     </c-col>
                     <div *ngIf="this.form.get('insurance')?.get('compensation-accident-date')?.errors?.['required'] && 
                 (this.form.get('insurance')?.get('compensation-accident-date')?.dirty ||this.form.get('insurance')?.get('compensation-accident-date')?.touched)"

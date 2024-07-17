@@ -20,10 +20,20 @@ export class PatientBasicComponent implements OnInit {
   isGuarantor: boolean = false
   constructor(private componentReference: ComponentReferenceComponentService
     , private compressDocumentService: CompressDocumentService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.componentReference.setPatientBasicComponent(this)
+    this.form.get('basic')?.get('dob')?.valueChanges.subscribe(value => {
+      const today = moment(value).isSame(moment(), 'day');
+      if (today) {
+        this.isGuarantor = false;
+        return false
+      }
+
+      var patientAge = moment().diff(value, 'y')
+      this.isGuarantor = patientAge < 21 ? true : false;
+    })
   }
   public checkAge(event: any) {
     const today = moment(event).isSame(moment(), 'day');
@@ -50,7 +60,7 @@ export class PatientBasicComponent implements OnInit {
       this.isValidForm = false;
     } else {
       this.isValidForm = true;
-      ValidationExploder.explode(this.form, 'basic')      
+      ValidationExploder.explode(this.form, 'basic')
     }
   }
 
