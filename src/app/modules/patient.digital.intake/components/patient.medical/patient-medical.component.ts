@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
+import { isObject } from 'lodash';
+import { debounceTime, filter, finalize, Observable, switchMap, tap } from 'rxjs';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 import { Provider } from '../../models/provider';
 import { ProvidersService } from '../../services/provider/providers.service';
@@ -16,27 +17,60 @@ import { ValidationExploder } from '../create/validators/validation.exploder';
 export class PatientMedicalComponent implements OnInit {
   @Input() form: FormGroup;
   provider: Provider = {}
+  providers: Observable<Provider[]> | undefined;
+  test: Provider[];
   entityValues = entityValues;
   @Input() stepper: MatStepper
   isValidForm: boolean = false;
   constructor(private providersService: ProvidersService) { }
 
+
   ngOnInit(): void {
+    this.providers = this.form.get('medical')?.get('providerName')?.valueChanges
+      .pipe(
+        filter(text => {
+          if (isObject(text))
+            return false;
+          if (text === undefined) {
+            return false;
+          }
+          if (text !== null && text?.includes(','))
+            return false;
+          if (Number.isNaN(text)) {
+            return false;
+          }
+          if (text?.length > 1) {
+            return true
+          } else {
+
+            return false;
+          }
+        }),
+        debounceTime(1000),
+        switchMap((value: any) => {
+          return this.providersService.findProviderByName(value)
+        })
+      )
+    this.providers?.subscribe((res: any) => {
+      if (res.length === 0) {
+        console.log('Emtpy')
+        this.form.get('medical')?.get('providerNPI')?.setValue('');
+      }
+    })
     this.form.get('medical')?.get('providerNPI')?.valueChanges
       .pipe(
         filter(text => {
           if (!Number(text)) {
-            this.provider.fullName = '';
             return false;
           }
+          if (text === '')
+            return false;
           if (text === undefined) {
-            this.provider.fullName = '';
             return false;
           }
           if (text.length > 1) {
             return true
           } else {
-            this.provider.fullName = '';
             return false;
           }
         }),
@@ -45,7 +79,6 @@ export class PatientMedicalComponent implements OnInit {
 
         }),
         switchMap((value: any) => {
-          console.log(value)
           return this.providersService.findProviderByNPI(value)
             .pipe(
               finalize(() => {
@@ -56,24 +89,28 @@ export class PatientMedicalComponent implements OnInit {
         )
       ).subscribe(data => {
         this.provider = data
-        if (this.provider.lastName !== null && this.provider.firstName !== null)
-          this.provider.fullName = this.provider.lastName?.toLowerCase() + ',' + this.provider.firstName?.toLowerCase()
+        var name: string;
+        if (this.provider !== null)
+          name = this.provider.firstName?.toLowerCase() + ',' + this.provider.lastName?.toLowerCase()
         else
-          this.provider.fullName = ''
-
-        this.form.get('medical')?.get('providerName')?.setValue(this.provider.fullName);
+          name = ''
+        if (data !== '')
+          this.form.get('medical')?.get('providerName')?.setValue(name);
       },
         error => {
           console.log(JSON.stringify(error))
         });
   }
-  next(){
+  next() {
     if (this.form.get('medical')?.valid) {
       this.stepper.next();
       this.isValidForm = false;
     } else {
       this.isValidForm = true;
-      ValidationExploder.explode(this.form, 'medical')      
+      ValidationExploder.explode(this.form, 'medical')
     }
+  }
+  pickProvider(event: any) {
+    this.form.get('medical')?.get('providerNPI')?.setValue(event.split(':')[1]);
   }
 }

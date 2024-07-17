@@ -52,12 +52,21 @@
                         </c-col>
                     </c-row>
                     <c-row>
-                        <c-col xs="12"><label style="width: 90px;">Name<span
-                                    class="text-danger">*</span></label></c-col>
                         <c-col xs="12">
-                            <input class="form-control" placeholder formControlName="providerName"
-                                [value]="provider.fullName" cFormControl sizing="sm" [ngClass]="{'is-invalid': this.form.get('medical')?.get('providerName')?.invalid
-                                && this.form.get('medical')?.get('providerName')?.touched}">
+                            <label style="width: 90px;">Provider <span class="text-danger">*</span></label>
+                        </c-col>
+                        <c-col xs="12">
+                            <ng-autocomplete [itemTemplate]="itemTemplate" formControlName="providerName"
+                                [data]="(providers | async) ?? []" [notFoundTemplate]="notFoundTemplate"
+                                (selected)="pickProvider($event)" [searchKeyword]="''">
+                            </ng-autocomplete>
+                            <ng-template #itemTemplate let-item>
+                                <a [innerHTML]="item"></a>
+                            </ng-template>
+
+                            <ng-template #notFoundTemplate let-notFound>
+                                <div [innerHTML]="notFound"></div>
+                            </ng-template>
                         </c-col>
                         <c-col xs="12">
                             <div *ngIf="this.form.get('medical')?.get('providerName')?.errors?.['required'] === true && 
@@ -67,6 +76,7 @@
                             </div>
                         </c-col>
                     </c-row>
+
                 </span>
                 <span *ngIf="this.form.get('medical')?.get('isReferring')?.value ==='no'">
                     <c-row>
