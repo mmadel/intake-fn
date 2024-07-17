@@ -12,10 +12,10 @@
             <c-col xl="12">
                 <c-input-group sizing="sm" class="has-validation">
                     <input cFormControl placeholder="FirstName" formControlName="firstname" [ngClass]="{'is-invalid': this.form.get('basic')?.get('firstname')?.invalid
-                && this.form.get('basic')?.get('firstname')?.touched}">
-                    <input cFormControl placeholder="MiddleName" formControlName="middleName">
+                && this.form.get('basic')?.get('firstname')?.touched}" maxlength="60">
+                    <input cFormControl placeholder="MiddleName" formControlName="middleName" maxlength="60">
                     <input cFormControl placeholder="LastName" formControlName="lastName" [ngClass]="{'is-invalid': this.form.get('basic')?.get('lastName')?.invalid
-                    && this.form.get('basic')?.get('lastName')?.touched}">
+                    && this.form.get('basic')?.get('lastName')?.touched}" maxlength="60">
                 </c-input-group>
             </c-col>
             <c-col xl="12">
@@ -71,11 +71,11 @@
                             <c-input-group sizing="sm">
                                 <input cFormControl placeholder="FirstName" formControlName="guarantorFirstName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorFirstName')?.invalid
-                                && this.form.get('basic')?.get('guarantorFirstName')?.touched}">
-                                <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName">
+                                && this.form.get('basic')?.get('guarantorFirstName')?.touched}" maxlength="60">
+                                <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName" maxlength="60">
                                 <input cFormControl placeholder="LastName" formControlName="guarantorLastName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorLastName')?.invalid
-                                && this.form.get('basic')?.get('guarantorLastName')?.touched}">
+                                && this.form.get('basic')?.get('guarantorLastName')?.touched}" maxlength="60">
                             </c-input-group>
                         </c-col>
                         <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['required'] && 
@@ -206,7 +206,7 @@
             </c-col>
             <c-col xl="12">
                 <input cFormControl sizing="sm" class="form-control" placeholder formControlName="email" [ngClass]="{'is-invalid': this.form.get('basic')?.get('email')?.invalid
-                && this.form.get('basic')?.get('email')?.touched}">
+                && this.form.get('basic')?.get('email')?.touched}" maxlength="60">
             </c-col>
             <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('email')?.dirty ||this.form.get('basic')?.get('email')?.touched)"
@@ -247,7 +247,7 @@
             <c-col xl="12">
                 <input cFormControl sizing="sm" class="form-control" placeholder formControlName="employmentCompany"
                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('employmentCompany')?.invalid
-                && this.form.get('basic')?.get('employmentCompany')?.touched}">
+                && this.form.get('basic')?.get('employmentCompany')?.touched}" maxlength="60">
             </c-col>
             <div *ngIf="this.form.get('basic')?.get('employmentCompany')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('employmentCompany')?.dirty ||this.form.get('basic')?.get('employmentCompany')?.touched)"
@@ -289,7 +289,7 @@
                     <c-col xl="12">
                         <input class="form-control" placeholder formControlName="emergencyName" cFormControl sizing="sm"
                             [ngClass]="{'is-invalid': this.form.get('basic')?.get('emergencyName')?.invalid
-                            && this.form.get('basic')?.get('emergencyName')?.touched}">
+                            && this.form.get('basic')?.get('emergencyName')?.touched}" maxlength="60">
                     </c-col>
                     <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['required'] && 
                         (this.form.get('basic')?.get('emergencyName')?.dirty ||this.form.get('basic')?.get('emergencyName')?.touched)"
