@@ -30,7 +30,11 @@ export class PatientBasicComponent implements OnInit {
         this.isGuarantor = false;
         return false
       }
-
+      const future = moment(value).isAfter(moment(), 'day');
+      if (future) {
+        this.isGuarantor = false;
+        return false
+      }
       var patientAge = moment().diff(value, 'y')
       this.isGuarantor = patientAge < 21 ? true : false;
     })

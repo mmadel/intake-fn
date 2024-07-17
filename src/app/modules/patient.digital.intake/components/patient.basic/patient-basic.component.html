@@ -53,6 +53,8 @@
 
             <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['today']" class="text-danger mx-1">Date of birth
                 can't be today.</div>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['future']" class="text-danger mx-1">Date of birth
+                can't be in future.</div>
         </c-row>
         <!--Guarantor-->
         <c-row *ngIf="isGuarantor">

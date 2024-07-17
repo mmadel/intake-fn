@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { imageDocumentValidator } from './validators/custom.validation/document.image.validator';
+import { futureDateValidator } from './validators/custom.validation/future.date.validator';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
 import { todayDOBValidator } from './validators/custom.validation/today.dob.validator';
 import { DocumentValidator } from './validators/document/document.validator';
@@ -41,7 +42,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'firstname': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
         'middleName': new FormControl(null, noSpecialCharactersValidator()),
         'lastName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
-        'dob': new FormControl(null, [Validators.required, todayDOBValidator()]),
+        'dob': new FormControl(null, [Validators.required, todayDOBValidator(),futureDateValidator()]),
         'gender': new FormControl(null, [Validators.required]),
         'marital': new FormControl(null, [Validators.required]),
         'phoneType': new FormControl(null, [Validators.required]),

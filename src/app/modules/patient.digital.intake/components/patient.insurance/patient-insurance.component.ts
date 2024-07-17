@@ -11,6 +11,7 @@ import { ValidationExploder } from '../create/validators/validation.exploder';
   styleUrls: ['./patient-insurance.component.css']
 })
 export class PatientInsuranceComponent implements OnInit {
+  maxDate:Date =new Date();
   @Input() stepper: MatStepper
   isValidForm: boolean = false;
   @Input() form: FormGroup;
