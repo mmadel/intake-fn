@@ -140,7 +140,7 @@
             <c-card-body>
                 <c-input-group class="mb-1" sizing="sm">
                     <input class="form-control" placeholder formControlName="isPrimaryDoctor" [ngClass]="{'is-invalid': this.form.get('medical')?.get('isPrimaryDoctor')?.invalid
-                    && this.form.get('medical')?.get('isPrimaryDoctor')?.touched}">
+                    && this.form.get('medical')?.get('isPrimaryDoctor')?.touched}" maxlength="60">
                 </c-input-group>
                 <div *ngIf="this.form.get('medical')?.get('isPrimaryDoctor')?.errors?.['required'] === true && 
                 (this.form.get('medical')?.get('isPrimaryDoctor')?.dirty ||this.form.get('medical')?.get('isPrimaryDoctor')?.touched)"
@@ -192,7 +192,7 @@
                         <c-col xs="12">
                             <input class="form-control" placeholder formControlName="PhysicalTherapyLocation"
                                 cFormControl sizing="sm" [ngClass]="{'is-invalid': this.form.get('medical')?.get('PhysicalTherapyLocation')?.invalid
-                                && this.form.get('medical')?.get('PhysicalTherapyLocation')?.touched}">
+                                && this.form.get('medical')?.get('PhysicalTherapyLocation')?.touched}" maxlength="60">
                         </c-col>
                         <c-col xs="12">
                             <div *ngIf="this.form.get('medical')?.get('PhysicalTherapyLocation')?.errors?.['required'] === true && 
