@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { imageDocumentValidator } from './validators/custom.validation/document.image.validator';
+import { EmailValidator } from './validators/custom.validation/email.validator';
 import { futureDateValidator } from './validators/custom.validation/future.date.validator';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
 import { todayDOBValidator } from './validators/custom.validation/today.dob.validator';
@@ -35,7 +36,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
   }
   private createPatientForm() {
     const phoneRgx = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
-    const specialRgx = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
     const zipCodeRgx = new RegExp("^\\d{5}(?:[-\s]\\d{4})?$");
     this.patientForm = new FormGroup({
       'basic': new FormGroup({
@@ -47,7 +47,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'marital': new FormControl(null, [Validators.required]),
         'phoneType': new FormControl(null, [Validators.required]),
         'phone': new FormControl(null, [Validators.required, Validators.min(15), Validators.pattern(phoneRgx)]),
-        'email': new FormControl(null, [Validators.required, Validators.email]),
+        'email': new FormControl(null, [Validators.required, EmailValidator()]),
         'employment': new FormControl(null, [Validators.required]),
         'employmentCompany': new FormControl(null),
 
