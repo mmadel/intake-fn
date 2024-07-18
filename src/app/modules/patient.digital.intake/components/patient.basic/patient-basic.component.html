@@ -1,0 +1,329 @@
+<c-callout color="danger" *ngIf="isValidForm">
+    Please fill in all the required fields before navigating to next step
+</c-callout>
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="basic">
+        <!--Patient Name-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Name<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <c-input-group sizing="sm" class="has-validation">
+                    <input cFormControl placeholder="FirstName" formControlName="firstname" [ngClass]="{'is-invalid': this.form.get('basic')?.get('firstname')?.invalid
+                && this.form.get('basic')?.get('firstname')?.touched}" maxlength="60">
+                    <input cFormControl placeholder="MiddleName" formControlName="middleName" maxlength="60">
+                    <input cFormControl placeholder="LastName" formControlName="lastName" [ngClass]="{'is-invalid': this.form.get('basic')?.get('lastName')?.invalid
+                    && this.form.get('basic')?.get('lastName')?.touched}" maxlength="60">
+                </c-input-group>
+            </c-col>
+            <c-col xl="12">
+                <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['required'] && 
+                (this.form.get('basic')?.get('firstname')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
+                    class="text-danger mx-1">
+                    First Name is required
+                </div>
+                <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['required'] && 
+                (this.form.get('basic')?.get('lastName')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
+                    class="text-danger mx-1">
+                    Last Name is required
+                </div>
+                <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">firstname cannot contain special characters.</div>
+                <div *ngIf="this.form.get('basic')?.get('middleName')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">middleName cannot contain special characters.</div>
+                <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">lastName cannot contain special characters.</div>
+            </c-col>
+        </c-row>
+        <!--Patient DOB-->
+        <c-row class="mb-2">
+            <c-col xs="12">
+                <label style="width: 150px;">Date Of Birth <span class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <input type="date" cFormControl sizing="sm" formControlName="dob">
+            </c-col>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['required'] && 
+            (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
+                class="text-danger mx-1">
+                Date of birth is required
+            </div>
+
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['today']" class="text-danger mx-1">Date of birth
+                can't be today.</div>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['future']" class="text-danger mx-1">Date of birth
+                can't be in future.</div>
+        </c-row>
+        <!--Guarantor-->
+        <c-row *ngIf="isGuarantor">
+            <c-card class="mb-1" [cBorder]="{top: {color: 'secondary', width: 3}}">
+                <c-card-body>
+                    <h6 cCardSubtitle class="mb-1 text-medium-emphasis">Guarantor </h6>
+                    <!--Name-->
+                    <c-row class="mb-1">
+                        <c-col xl="12">
+                            <label for="dsds" class="form-label" style="font-size: medium;">Name<span
+                                    class="text-danger">*</span></label>
+                        </c-col>
+                        <c-col xl="12">
+                            <c-input-group sizing="sm">
+                                <input cFormControl placeholder="FirstName" formControlName="guarantorFirstName"
+                                    [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorFirstName')?.invalid
+                                && this.form.get('basic')?.get('guarantorFirstName')?.touched}" maxlength="60">
+                                <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName" maxlength="60">
+                                <input cFormControl placeholder="LastName" formControlName="guarantorLastName"
+                                    [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorLastName')?.invalid
+                                && this.form.get('basic')?.get('guarantorLastName')?.touched}" maxlength="60">
+                            </c-input-group>
+                        </c-col>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['required'] && 
+                (this.form.get('basic')?.get('guarantorFirstName')?.dirty ||this.form.get('basic')?.get('guarantorFirstName')?.touched)"
+                            class="text-danger mx-1">
+                            First Name is required
+                        </div>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorLastName')?.errors?.['required'] && 
+                        (this.form.get('basic')?.get('guarantorLastName')?.dirty ||this.form.get('basic')?.get('guarantorLastName')?.touched)"
+                            class="text-danger mx-1">
+                            Last Name is required
+                        </div>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['noSpecialCharacters']"
+                            class="text-danger mx-1">firstname cannot contain special characters.</div>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorMiddleName')?.errors?.['noSpecialCharacters']"
+                            class="text-danger mx-1">MiddleName cannot contain special characters.</div>
+                        <div *ngIf="this.form.get('basic')?.get('guarantorLastName')?.errors?.['noSpecialCharacters']"
+                            class="text-danger mx-1">lastName cannot contain special characters.</div>
+                    </c-row>
+                    <!--Relationship-->
+                    <c-row class="mb-1">
+                        <c-col xl="12">
+                            <label for="dsds" class="form-label" style="font-size: medium;">Relationship<span
+                                    class="text-danger">*</span></label>
+                        </c-col>
+                        <c-col xl="12">
+                            <select cSelect sizing="sm" formControlName="guarantorRelationship" [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorRelationship')?.invalid
+                            && this.form.get('basic')?.get('guarantorRelationship')?.touched}" class="is-invalid">
+                                <option value="null" disabled>Select</option>
+                                <option value="Father">Father</option>
+                                <option value="Mother">Mother</option>
+                                <option value="Spouse">Spouse</option>
+                                <option value="Relative">Relative</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </c-col>
+                        <div *ngIf="!this.form.get('basic')?.get('guarantorRelationship')?.valid && 
+                        (this.form.get('basic')?.get('guarantorRelationship')?.dirty ||this.form.get('basic')?.get('guarantorRelationship')?.touched)"
+                            class="text-danger mx-1">
+                            guarantor Relationship is required
+                        </div>
+                    </c-row>
+                </c-card-body>
+            </c-card>
+        </c-row>
+        <!--Gender-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Gender<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <select cSelect sizing="sm" formControlName="gender" [ngClass]="{'is-invalid': this.form.get('basic')?.get('gender')?.invalid
+                && this.form.get('basic')?.get('gender')?.touched}">
+                    <option value="null" disabled>Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="NonBinary">Non-binary</option>
+                    <option value="Self_Describe">To Self describe</option>
+                    <option value="Not_Prefer">Prefer not to say</option>
+                </select>
+            </c-col>
+            <div *ngIf="!this.form.get('basic')?.get('gender')?.valid && 
+            (this.form.get('basic')?.get('gender')?.touched)" class="text-danger mx-1">
+                Gender is required
+            </div>
+        </c-row>
+        <!--Marital Status-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label style="width: 150px;">Marital Status <span class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <select cSelect sizing="sm" formControlName="marital" [ngClass]="{'is-invalid': this.form.get('basic')?.get('marital')?.invalid
+                && this.form.get('basic')?.get('marital')?.touched}">
+                    <option value="null" disabled>Select Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+            </c-col>
+            <div *ngIf="!this.form.get('basic')?.get('marital')?.valid && 
+                    (this.form.get('basic')?.get('marital')?.touched)" class="text-danger mx-1">
+                Marital Status is required
+            </div>
+        </c-row>
+        <!--Phone-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Phone<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12" class="mb-1">
+                <select cSelect sizing="sm" formControlName="phoneType" [ngClass]="{'is-invalid': this.form.get('basic')?.get('phoneType')?.invalid
+                && this.form.get('basic')?.get('phoneType')?.touched}">
+                    <option value="null" disabled>Select Phone Type</option>
+                    <option value="Home">Home</option>
+                    <option value="Work">Work</option>
+                    <option value="CellPhone">CellPhone</option>
+                    <option value="Other">Other</option>
+                </select>
+            </c-col>
+            <c-col xl="12">
+                <input cFormControl class="form-control" placeholder formControlName="phone" sizing="sm"
+                    [value]="this.form.get('basic')?.get('phone')?.value | phone" maxlength="15" [placeholder]="'Phone'"
+                    [ngClass]="{'is-invalid': this.form.get('basic')?.get('phone')?.invalid
+                    && this.form.get('basic')?.get('phone')?.touched}">
+            </c-col>
+            <div *ngIf="!this.form.get('basic')?.get('phoneType')?.valid && 
+                    (this.form.get('basic')?.get('phoneType')?.touched)" class="text-danger mx-1">
+                Phone Type is required
+            </div>
+            <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['required'] === true && 
+            (this.form.get('basic')?.get('phone')?.dirty ||this.form.get('basic')?.get('phone')?.touched)"
+                class="text-danger mx-1">
+                Phone Required
+            </div>
+            <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['pattern']" class="text-danger mx-1">
+                Invalid Phone
+            </div>
+        </c-row>
+        <!--Email-->
+        <c-row class="mb-1">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Email<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <input cFormControl sizing="sm" class="form-control" placeholder formControlName="email" [ngClass]="{'is-invalid': this.form.get('basic')?.get('email')?.invalid
+                && this.form.get('basic')?.get('email')?.touched}" maxlength="60">
+            </c-col>
+            <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['required'] === true && 
+            (this.form.get('basic')?.get('email')?.dirty ||this.form.get('basic')?.get('email')?.touched)"
+                class="text-danger mx-1">
+                Email Required
+            </div>
+            <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['email'] === true" class="text-danger mx-1">
+                Invalid Email
+            </div>
+        </c-row>
+        <!--Employment Status-->
+        <c-row class="mb-2">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Employment Status<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <select cSelect formControlName="employment" sizing="sm" [ngClass]="{'is-invalid': this.form.get('basic')?.get('employment')?.invalid
+                && this.form.get('basic')?.get('employment')?.touched}">
+                    <option value="null" disabled>Select Employment Status</option>
+                    <option value="Employed">Employed</option>
+                    <option value="Student">Student</option>
+                    <option value="Retired">Retired</option>
+                    <option value="Other">Other</option>
+                </select>
+            </c-col>
+            <div *ngIf="!this.form.get('basic')?.get('employment')?.valid && 
+                    (this.form.get('basic')?.get('employment')?.touched)" class="text-danger mx-1">
+                Employment Status is required
+            </div>
+        </c-row>
+        <!--Employment Status Company-->
+        <c-row class="mb-2" *ngIf="this.form.get('basic')?.get('employment')?.value === 'Employed'">
+            <c-col xl="12">
+                <label for="dsds" class="form-label" style="font-size: medium;">Company<span
+                        class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <input cFormControl sizing="sm" class="form-control" placeholder formControlName="employmentCompany"
+                    [ngClass]="{'is-invalid': this.form.get('basic')?.get('employmentCompany')?.invalid
+                && this.form.get('basic')?.get('employmentCompany')?.touched}" maxlength="60">
+            </c-col>
+            <div *ngIf="this.form.get('basic')?.get('employmentCompany')?.errors?.['required'] === true && 
+            (this.form.get('basic')?.get('employmentCompany')?.dirty ||this.form.get('basic')?.get('employmentCompany')?.touched)"
+                class="text-danger mx-1">
+                Employment Company Required
+            </div>
+        </c-row>
+        <!--Emergency -->
+        <c-card class="mb-1" [cBorder]="{top: {color: 'secondary', width: 3}}">
+            <c-card-body>
+                <h6 cCardSubtitle class="mb-1 text-medium-emphasis">Emergency</h6>
+                <c-row class="mb-1">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">Emergency Contact<span
+                                class="text-danger">*</span></label>
+                    </c-col>
+                    <c-col xl="12">
+                        <select cSelect formControlName="emergencyContact" sizing="sm" [ngClass]="{'is-invalid': this.form.get('basic')?.get('emergencyContact')?.invalid
+                        && this.form.get('basic')?.get('emergencyContact')?.touched}">
+                            <option value="null" disabled>Select Emergency Contact</option>
+                            <option value="Father">Father</option>
+                            <option value="Mother">Mother</option>
+                            <option value="Friend">Friend</option>
+                            <option value="Relative">Relative</option>
+                            <option value="Spouse">Spouse</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </c-col>
+                    <div *ngIf="!this.form.get('basic')?.get('emergencyContact')?.valid && 
+                    (this.form.get('basic')?.get('emergencyContact')?.touched)" class="text-danger mx-1">
+                        Contact Status is required
+                    </div>
+                </c-row>
+                <c-row class="mb-1">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">EmergencyName<span
+                                class="text-danger">*</span></label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input class="form-control" placeholder formControlName="emergencyName" cFormControl sizing="sm"
+                            [ngClass]="{'is-invalid': this.form.get('basic')?.get('emergencyName')?.invalid
+                            && this.form.get('basic')?.get('emergencyName')?.touched}" maxlength="60">
+                    </c-col>
+                    <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['required'] && 
+                        (this.form.get('basic')?.get('emergencyName')?.dirty ||this.form.get('basic')?.get('emergencyName')?.touched)"
+                        class="text-danger mx-1">
+                        EmergencyName Name is required
+                    </div>
+
+                    <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['noSpecialCharacters']"
+                        class="text-danger mx-1">name cannot contain special characters.</div>
+                </c-row>
+                <c-row class="mb-1">
+                    <c-col xl="12">
+                        <label for="dsds" class="form-label" style="font-size: medium;">EmergencyPhone<span
+                                class="text-danger">*</span></label>
+                    </c-col>
+                    <c-col xl="12">
+                        <input class="form-control" placeholder formControlName="emergencyPhone" cFormControl
+                            sizing="sm" [value]="this.form.get('basic')?.get('emergencyPhone')?.value | phone"
+                            maxlength="15" [ngClass]="{'is-invalid': this.form.get('basic')?.get('emergencyPhone')?.invalid
+                            && this.form.get('basic')?.get('emergencyPhone')?.touched}">
+                    </c-col>
+                    <div *ngIf="!this.form.get('basic')?.get('emergencyPhone')?.valid && 
+                    (this.form.get('basic')?.get('emergencyPhone')?.touched)" class="text-danger mx-1">
+                        Phone is required
+                    </div>
+                    <div *ngIf="this.form.get('basic')?.get('emergencyPhone')?.errors?.['pattern']"
+                        class="text-danger mx-1">
+                        Invalid Phone
+                    </div>
+                </c-row>
+            </c-card-body>
+        </c-card>
+    </div>
+    <div class="mt-3">
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    </div>
+</div>

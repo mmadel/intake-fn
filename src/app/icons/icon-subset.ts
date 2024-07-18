@@ -118,10 +118,12 @@ import {
   cilTv,
   cilCloudUpload, cilAccountLogout,
   cilSad,
-  cilSmile,cilMonitor
+  cilSmile,cilMonitor, cilMedicalCross,cilHighligt,cilHistory
 } from '@coreui/icons';
 
 export const iconSubset = {
+  cilHistory,
+  cilHighligt,
   cibCcAmex,
   cibCcApplePay,
   cibCcMastercard,
@@ -242,7 +244,7 @@ export const iconSubset = {
   cilCloudUpload,
   cilAccountLogout,
   cilSad,
-  cilSmile,cilMonitor
+  cilSmile,cilMonitor,cilMedicalCross
 };
 
 export enum IconSubset {

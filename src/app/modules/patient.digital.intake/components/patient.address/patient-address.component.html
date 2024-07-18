@@ -1,0 +1,78 @@
+<c-callout color="danger" *ngIf="isValidForm">
+    Please fill in all the required fields before navigating to next step
+</c-callout>
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="address">
+        <!--First Address-->
+        <c-row>
+            <c-col xl="12">
+                <label style="width: 150px;">First Address <span class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <input class="form-control" placeholder formControlName="firstAddress" sizing="sm" cFormControl
+                    [ngClass]="{'is-invalid': this.form.get('address')?.get('firstAddress')?.invalid
+                && this.form.get('address')?.get('firstAddress')?.touched}" maxlength="60">
+            </c-col>
+            <c-col xl=" 12">
+                <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['required'] && 
+            (this.form.get('address')?.get('firstAddress')?.dirty ||this.form.get('address')?.get('firstAddress')?.touched)"
+                    class="text-danger mx-1">
+                    firstAddress is required
+                </div>
+                <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">firstAddress cannot contain special characters.</div>
+            </c-col>
+        </c-row>
+        <!-- Second Address-->
+        <c-row>
+            <c-col xs="12">
+                <label style="width: 150px;">Second Address</label>
+            </c-col>
+            <c-col xs="12">
+                <div *ngIf="this.form.get('address')?.get('secondAddress')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">secondAddress cannot contain special characters.</div>
+            </c-col>
+        </c-row>
+        <!-- State-->
+        <c-row>
+            <c-col xs="12"><label style="width: 150px;">state <span class="text-danger">*</span></label></c-col>
+            <c-col xs="12">
+                <select cSelect sizing="sm" style="line-height: 15px;" formControlName="state" [ngClass]="{'is-invalid': this.form.get('address')?.get('state')?.invalid
+                && this.form.get('address')?.get('state')?.touched}">
+                    <option value="null">Select State</option>
+                    <option *ngFor="let state of states" [value]="state">
+                        {{state}}
+                    </option>
+                </select></c-col>
+            <c-col xs="12">
+                <div *ngIf="!this.form.get('address')?.get('state')?.valid && 
+                (this.form.get('address')?.get('state')?.touched)" class="text-danger mx-1">
+                    State is required
+                </div>
+            </c-col>
+        </c-row>
+        <!-- zipCode-->
+        <c-row>
+            <c-col xs="12"><label style="width: 150px;">ZipCode <span class="text-danger">*</span></label></c-col>
+            <c-col xs="12">
+                <input class="form-control" placeholder formControlName="zipCode" zipcode maxlength="10" sizing="sm"
+                    cFormControl [ngClass]="{'is-invalid': this.form.get('address')?.get('zipCode')?.invalid
+                    && this.form.get('address')?.get('zipCode')?.touched}">
+            </c-col>
+            <c-col xs="12">
+                <div *ngIf="this.form.get('address')?.get('zipCode')?.errors?.['required'] === true && 
+                (this.form.get('address')?.get('zipCode')?.dirty ||this.form.get('address')?.get('zipCode')?.touched)"
+                    class="text-danger mx-1">
+                    ZipCode Required
+                </div>
+                <div *ngIf="form.get('address')?.get('zipCode')?.errors?.['pattern']" class="text-danger mx-1">
+                    Invalid ZipCode
+                </div>
+            </c-col>
+        </c-row>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    </div>
+</div>

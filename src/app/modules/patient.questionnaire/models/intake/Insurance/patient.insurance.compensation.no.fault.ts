@@ -4,7 +4,9 @@ export interface PatientInsuranceCompensationNoFault {
   injuryType?: string;
   accidentDate?: number;
   accidentDate_date?: Date;
+  accidentDate_str?: string;
   workerStatus?: string;
+  phone?:string
   fax?: string;
   address?: Address;
   insuranceName?: string;

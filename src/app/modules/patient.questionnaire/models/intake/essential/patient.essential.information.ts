@@ -9,6 +9,7 @@ export interface PatientEssentialInformation {
     patientName?: PatientName;
     dateOfBirth?: number;
     birthDate_date?:Date;
+    birthDate_str?:string
     gender?: string;
     patientPhone?: PatientPhone;
     email?: string;
@@ -16,4 +17,5 @@ export interface PatientEssentialInformation {
     patientEmergencyContact?: PatientEmergencyContact;
     patientEmployment?: PatientEmployment;
     patientAddress? : Address
+    address?:PatientAddress
   }

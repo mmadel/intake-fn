@@ -1,0 +1,154 @@
+<c-callout color="danger" *ngIf="isValidForm">
+    Please fill in all the required fields before navigating to next step
+</c-callout>
+<div [formGroup]="form" class="mt-3">
+    <div formGroupName="document">
+        <!--Patient  Document-->
+        <span *ngIf="!isGuarantor">
+            <!--Patient id front-->
+            <c-row class="mb-2">
+                <c-col xl="12">
+                    <label for="dsds" class="form-label">
+                        Patient ID Front<span class="text-danger">*</span>
+                    </label>
+                </c-col>
+                <c-col xl="12">
+
+                    <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                        formControlName="id-front" (change)="onImageUpload($event ,'patientIdfront' , 'id-front')" />
+                    <div *ngIf="this.form.get('document')?.get('id-front')?.errors?.['required'] && 
+                    (this.form.get('document')?.get('id-front')?.dirty ||this.form.get('document')?.get('id-front')?.touched) "
+                        class="text-danger mx-1">
+                        Patient Id Front is required
+                    </div>
+                    <div *ngIf="this.form.get('document')?.get('id-front')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
+                    <div *ngIf="excceedControl === 'id-front' && isMaxSize" class="text-danger mx-1">File excceds
+                        maximum size (50MegaBytes)</div>
+                </c-col>
+            </c-row>
+            <!--Patient id back-->
+            <c-row class="mb-2">
+                <c-col xl="12">
+                    <label for="dsds" class="form-label" style="font-size: medium;">
+                        Patient ID Back<span class="text-danger">*</span>
+                    </label>
+                </c-col>
+                <c-col xl="12">
+
+                    <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
+                        formControlName="id-back" (change)="onImageUpload($event ,'patientIdback' ,'id-back')" />
+
+                    <div *ngIf="this.form.get('document')?.get('id-back')?.errors?.['required'] && 
+                    (this.form.get('document')?.get('id-back')?.dirty ||this.form.get('document')?.get('id-back')?.touched) && !isMaxSize"
+                        class="text-danger mx-1">
+                        Patient Id Back is required
+                    </div>
+                    <div *ngIf="this.form.get('document')?.get('id-back')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
+                    <div *ngIf="excceedControl === 'id-back' && isMaxSize" class="text-danger mx-1">File excceds maximum
+                        size (50MegaBytes)</div>
+                </c-col>
+            </c-row>
+            <!--Patient insurance front-->
+            <c-row class="mb-2">
+                <c-col xl="12">
+                    <label for="dsds" class="form-label">
+                        Patient Insurance ID Front<span class="text-danger">*</span>
+                    </label>
+                </c-col>
+                <c-col xl="12">
+
+                    <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                        formControlName="insurance-fornt"
+                        (change)="onImageUpload($event ,'patientinsurancefront','insurance-fornt')" />
+
+                    <div *ngIf="this.form.get('document')?.get('insurance-fornt')?.errors?.['required'] && 
+                        (this.form.get('document')?.get('insurance-fornt')?.dirty ||this.form.get('document')?.get('insurance-fornt')?.touched) && !isMaxSize"
+                        class="text-danger mx-1">
+                        Patient Insurance id Front is required
+                    </div>
+                    <div *ngIf="this.form.get('document')?.get('insurance-fornt')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
+                    <div *ngIf="excceedControl === 'insurance-fornt' && isMaxSize" class="text-danger mx-1">File excceds
+                        maximum size (50MegaBytes)</div>
+                </c-col>
+            </c-row>
+            <!--Patient insurance back-->
+            <c-row class="mb-2">
+                <c-col xl="12">
+                    <label for="dsds" class="form-label">
+                        Patient Insurance ID Front<span class="text-danger">*</span>
+                    </label>
+                </c-col>
+                <c-col xl="12">
+
+                    <input cFormControl id="pIdfront" accept="image/*" type="file" capture="environment" class="mb-1"
+                        formControlName="insurance-back"
+                        (change)="onImageUpload($event ,'patientinsuranceback','insurance-back')" />
+
+                    <div *ngIf="this.form.get('document')?.get('insurance-back')?.errors?.['required'] && 
+                    (this.form.get('document')?.get('insurance-back')?.dirty ||this.form.get('document')?.get('insurance-back')?.touched)&& !isMaxSize"
+                        class="text-danger mx-1">
+                        Patient Insurance id back is required
+                    </div>
+                    <div *ngIf="this.form.get('document')?.get('insurance-back')?.errors?.['imageFile']"
+                        class="text-danger mx-1">Images Only</div>
+                    <div *ngIf="excceedControl === 'insurance-back'&& isMaxSize" class="text-danger mx-1">File excceds
+                        maximum size (50MegaBytes)</div>
+                </c-col>
+            </c-row>
+        </span>
+
+        <!--Guarantor  Document-->
+        <span *ngIf="isGuarantor">
+            <!--guarantor Id Front Document-->
+            <c-row class="mb-2">
+                <c-col xl="12">
+                    <label for="dsds" class="form-label">
+                        guarantor Id Front<span class="text-danger">*</span>
+                    </label>
+                </c-col>
+                <c-col xl="12">
+                    <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
+                        formControlName="guarantorIdFront"
+                        (change)="onImageUpload($event ,'guarantorIdfront' ,'guarantorIdFront')" />
+                </c-col>
+                <div *ngIf="this.form.get('document')?.get('guarantorIdFront')?.errors?.['required'] && 
+                (this.form.get('document')?.get('guarantorIdFront')?.dirty ||this.form.get('document')?.get('guarantorIdFront')?.touched) && !isMaxSize"
+                    class="text-danger mx-1">
+                    Guarantor Id Front is required
+                </div>
+                <div *ngIf="this.form.get('document')?.get('guarantorIdFront')?.errors?.['imageFile']"
+                    class="text-danger mx-1">Images Only</div>
+                <div *ngIf="excceedControl === 'guarantorIdFront' && isMaxSize" class="text-danger mx-1">File excceds
+                    maximum size (50MegaBytes)</div>
+            </c-row>
+            <!--guarantor Id Back Document-->
+            <c-row>
+                <c-col xl="12">
+                    <label for="dsds" class="form-label" style="font-size: medium;">guarantor Id Back<span
+                            class="text-danger">*</span></label>
+                </c-col>
+                <c-col xl="12">
+                    <input cFormControl accept="image/*" type="file" capture="environment" class="mb-1"
+                        formControlName="guarantorIdBack"
+                        (change)="onImageUpload($event ,'guarantorIdback','guarantorIdBack')" />
+                </c-col>
+                <div *ngIf="this.form.get('document')?.get('guarantorIdBack')?.errors?.['required'] && 
+                (this.form.get('document')?.get('guarantorIdBack')?.dirty ||this.form.get('document')?.get('guarantorIdBack')?.touched) && !isMaxSize"
+                    class="text-danger mx-1">
+                    Guarantor Id Back is required
+                </div>
+                <div *ngIf="this.form.get('document')?.get('guarantorIdBack')?.errors?.['imageFile']"
+                    class="text-danger mx-1">Images Only</div>
+                <div *ngIf="excceedControl === 'guarantorIdBack' && isMaxSize" class="text-danger mx-1">File excceds
+                    maximum size (50MegaBytes)</div>
+            </c-row>
+        </span>
+    </div>
+    <div class="mt-3">
+        <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>
+        <button cButton variant="outline" size="sm" (click)="next()">Next</button>
+    </div>
+</div>
