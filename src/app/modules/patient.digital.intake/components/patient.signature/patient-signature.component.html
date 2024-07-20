@@ -49,7 +49,7 @@
     </c-tab-pane>
     <!-- Draw-->
     <c-tab-pane class="p-3">
-        <canvas #canvas width="700" height="200" (mouseleave)="stopDrawing()"></canvas>
+        <canvas #canvas width="700" height="200" (mouseleave)="stopDrawing()" (touchend)="touchStopDrawing()"></canvas>
         <div class="buttons flex justify-between">
             <button cButton (click)="clearPad()">Clear</button>
         </div>

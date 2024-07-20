@@ -89,6 +89,10 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
     }
     else
       this.isValidForm = true;
-
+  }
+  touchStopDrawing(){
+    this.form.get('signature')?.get('drawsign')?.setValue(this.signaturePad.toDataURL())
+    this.isDrawsign = true;
+    this.isGeneratesign = false
   }
 }
