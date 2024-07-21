@@ -9,7 +9,7 @@ import {
   ValidationListComponent,
   RecommendationReportComponent,
   DashboardComponent,
-  ClinicCreationComponent,
+  
   ClinicListComponent,
   UserCreationComponent,
   UserListComponent,
@@ -22,7 +22,8 @@ import {
   UserAuditComponent,
   UserClinicAuditComponent,
   UserInsuranceCompanyAuditComponent,
-  UserPatientAuditComponent
+  UserPatientAuditComponent,
+  ClinicCreationComponent
 } from './index';
 
 
@@ -55,7 +56,8 @@ import {
   ProgressModule,
   AccordionModule,
   FooterModule,
-  UtilitiesModule
+  UtilitiesModule,
+  ModalModule
 
 } from '@coreui/angular-pro';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -112,6 +114,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ReactiveFormsModule,
     FooterModule,
     UtilitiesModule,
+    ModalModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BasicAddress } from 'src/app/models/common/basic.address';
@@ -10,11 +10,12 @@ import { Clinic } from '../../../models/clinic.model';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 
 @Component({
-  selector: 'app-clinic.creation',
+  selector: 'clinic-creation',
   templateUrl: './clinic.creation.component.html',
   styleUrls: ['./clinic.creation.component.css']
 })
 export class ClinicCreationComponent implements OnInit {
+  @Output() changeVisibility = new EventEmitter<string>()
   countries: Countries[] = countries;
   states: string[] = states;
   clinicForm: FormGroup
@@ -40,6 +41,7 @@ export class ClinicCreationComponent implements OnInit {
       this.isValidForm = false;
       console.log(JSON.stringify(this.fillClinicModel()))
       this.clinicService.create(this.fillClinicModel()).subscribe(result=>{
+        this.changeVisibility.emit('close');
         console.log('clinic created.')
       },error=>{
         console.log('error during create clinic')

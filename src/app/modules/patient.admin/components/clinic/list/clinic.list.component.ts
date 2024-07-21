@@ -19,10 +19,16 @@ interface RenderedClinic {
 export class ClinicListComponent implements OnInit {
   errorMessage: string | null = '';
   clinics: RenderedClinic[] | null = new Array();
+  isCreateClinic: boolean = false;
   constructor(private router: Router, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
+    this.getClinics();
+  }
+
+  getClinics(){
     this.clinicService.get().subscribe(response => {
+      this.clinics= [];
       response.body?.forEach(element => {
         this.clinics?.push(this.constructClinic(element))
       });
@@ -31,10 +37,6 @@ export class ClinicListComponent implements OnInit {
         console.log(error)
       },
     )
-
-  }
-  create() {
-    this.router.navigateByUrl('/admin/clinic/creation');
   }
   private constructClinic(element: Clinic) {
     var splitted = element.address.split(",");
@@ -60,5 +62,17 @@ export class ClinicListComponent implements OnInit {
       this.errorMessage = error.error.message;
     },
     )
+  }
+  showCreateClinic() {
+    this.isCreateClinic = true;
+  }
+  toggleEditClinic() {
+    this.isCreateClinic = !this.isCreateClinic;
+  }
+  changeClinicVisibility(event: any){
+    if (event === 'close') {
+      this.isCreateClinic = false;
+      this.getClinics();
+    }
   }
 }
