@@ -28,11 +28,8 @@
       <td>{{clinic.address}}</td>
       <td>
         <div class="btn-group" role="group">
-          <button cButton variant="outline" (click)="update(clinic.id)" size="sm">
+          <button cButton variant="outline" (click)="showEditClinic(clinic.id)" size="sm">
             <svg cIcon name="cilPen"></svg>
-          </button>
-          <button cButton variant="outline" (click)="deleteClinic(clinic.id)" size="sm">
-            <svg cIcon name="cilTrash"></svg>
           </button>
         </div>
       </td>
@@ -42,9 +39,19 @@
 <c-modal id="createClinic" [visible]="isCreateClinic" size="xl" backdrop="static">
   <c-modal-header>
     <h3 cModalTitle>Clinic Creation</h3>
+    <button (click)="toggleCreateClinic()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <clinic-creation (changeVisibility)="changeClinicVisibility($event)" *ngIf="isCreateClinic"></clinic-creation>
+  </c-modal-body>
+</c-modal>
+
+<c-modal id="editClinic" [visible]="isEditClinic" size="xl" backdrop="static">
+  <c-modal-header>
+    <h3 cModalTitle>Update Clinic</h3>
     <button (click)="toggleEditClinic()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    <clinic-creation (changeVisibility)="changeClinicVisibility($event)"></clinic-creation>
+    <clinic-creation (changeVisibility)="changeClinicVisibility($event)" *ngIf="isEditClinic" [clinicId]="selectedClinicId"></clinic-creation>
   </c-modal-body>
 </c-modal>

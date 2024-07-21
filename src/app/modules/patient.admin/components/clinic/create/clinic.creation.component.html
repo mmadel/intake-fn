@@ -57,7 +57,7 @@
                 </c-col>
                 <c-col xl=" 12">
                     <div *ngIf="this.clinicForm.get('second-address')?.errors?.['noSpecialCharacters']"
-                        class="text-danger mx-1">first address cannot contain special characters.</div>
+                        class="text-danger mx-1">second address cannot contain special characters.</div>
                 </c-col>
             </c-row>
             <!--City-->
@@ -122,7 +122,21 @@
             </c-row>
         </c-card-body>
     </c-card>
+    <c-row>
+        <c-col xs="12">
+            <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                <input cFormCheckInput type="checkbox" formControlName="clinic-status" />
+                <label cFormCheckLabel>
+                    <span [ngClass]="{ 'fw-bold':this.clinicForm.get('clinic-status')?.value}">Active</span>/<span
+                        [ngClass]="{ 'fw-bold':!this.clinicForm.get('clinic-status')?.value }">In-Active</span>
+                </label>
+            </c-form-check>
+        </c-col>
+    </c-row>
     <div class="mt-3 text-center">
-        <button cButton size="sm" variant="outline" class="mx-2" (click)="create()">Create</button>
+        <button cButton size="sm" variant="outline" class="mx-2" (click)="create()">
+            <span *ngIf="!clinicId">Create</span>
+            <span *ngIf="clinicId">Update</span>
+        </button>
     </div>
 </form>

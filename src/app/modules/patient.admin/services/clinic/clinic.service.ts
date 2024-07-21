@@ -21,6 +21,9 @@ export class ClinicService {
   get() {
     return this.http.get<Clinic[]>(`${this.clinicUrl}` + '/find', { observe: 'response' })
   }
+  getActive() {
+    return this.http.get<Clinic[]>(`${this.clinicUrl}` + '/find/active', { observe: 'response' })
+  }
   getByUserId(userId: string | undefined) {
     return this.http.get<Clinic[]>(`${this.userUrl}` + '/find/clinics/' + userId, { observe: 'response' })
   }

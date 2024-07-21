@@ -20,6 +20,8 @@ export class ClinicListComponent implements OnInit {
   errorMessage: string | null = '';
   clinics: RenderedClinic[] | null = new Array();
   isCreateClinic: boolean = false;
+  isEditClinic: boolean = false;
+  selectedClinicId: number;
   constructor(private router: Router, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
@@ -67,13 +69,22 @@ export class ClinicListComponent implements OnInit {
   showCreateClinic() {
     this.isCreateClinic = true;
   }
-  toggleEditClinic() {
+  toggleCreateClinic() {
     this.isCreateClinic = !this.isCreateClinic;
   }
   changeClinicVisibility(event: any) {
-    if (event === 'close') {
+    if (event === 'close-create')
       this.isCreateClinic = false;
-      this.getClinics();
-    }
+    if (event === 'close-edit')
+      this.isEditClinic = false;
+    this.getClinics();
+  }
+
+  showEditClinic(clinicId: number | undefined | null) {
+    this.selectedClinicId = clinicId!;
+    this.isEditClinic = true;
+  }
+  toggleEditClinic() {
+    this.isEditClinic = !this.isEditClinic;
   }
 }

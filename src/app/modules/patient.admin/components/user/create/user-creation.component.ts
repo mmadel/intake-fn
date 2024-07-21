@@ -52,7 +52,7 @@ export class UserCreationComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.clinicService.get().subscribe(response => {
+    this.clinicService.getActive().subscribe(response => {
       response.body?.forEach(element => {
         this.returnClinics?.push(element)
       });

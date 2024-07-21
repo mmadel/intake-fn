@@ -57,7 +57,7 @@ import {
   AccordionModule,
   FooterModule,
   UtilitiesModule,
-  ModalModule
+  ModalModule,
 
 } from '@coreui/angular-pro';
 import { QRCodeModule } from 'angularx-qrcode';
