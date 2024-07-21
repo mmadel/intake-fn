@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Address } from 'src/app/models/patient/address.info.model';
 import { countries } from 'src/app/modules/common/components/address/country-data-store';
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
 import { states } from 'src/app/modules/common/components/address/state-data-store';
+import { noSpecialCharactersValidator } from 'src/app/modules/patient.digital.intake/components/create/validators/custom.validation/special.characters.validator';
 import { Clinic } from '../../../models/clinic.model';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 
@@ -16,59 +16,42 @@ import { ClinicService } from '../../../services/clinic/clinic.service';
 export class ClinicCreationComponent implements OnInit {
   countries: Countries[] = countries;
   states: string[] = states;
-  @ViewChild('clinicCreateForm') clinicCreateForm: NgForm;
-  form = {
-    name: null,
-    clinicaddressvalue: null,
-    clinicaddresscountry: null,
-    clinicaddressstate: null,
-    clinicaddressprovince: null,
-    clinicaddresscity: null,
-    clinicaddresszipcode: null
-  };
-  errorMessage: string | null;
-  constructor(private clinicService: ClinicService,
-    private router: Router) { }
-  position = 'top-end';
-  visible = false;
-  percentage = 0;
-
+  clinicForm: FormGroup
+  isValidForm: boolean = false;
+  constructor() { }
   ngOnInit(): void {
+    this.createClinicForm();
   }
 
-  create() {
-    var clinic: Clinic = {
-      id: null,
-      name: this.form.name,
-      address: this.convertAddressToString(),
-      selected: false
+  private createClinicForm(){
+    const zipCodeRgx = new RegExp("^\\d{5}(?:[-\s]\\d{4})?$");
+    this.clinicForm = new FormGroup({
+      'clinic-name': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
+      'first-address': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
+      'second-address': new FormControl(null,noSpecialCharactersValidator()),
+      'city-address': new FormControl(null, [Validators.required]),
+      'state-address': new FormControl(null, [Validators.required]),
+      'zipcode-address': new FormControl(null, [Validators.required,Validators.min(10), Validators.pattern(zipCodeRgx)]),
+    })
+  }
+  create(){
+    if (this.clinicForm?.valid) {
+      this.isValidForm = false;
+    }else{
+      this.isValidForm = true;
+      Object.keys(this.clinicForm.controls).forEach(field => {
+        const control = this.clinicForm.get(field);
+        control?.markAsTouched({ onlySelf: true });
+    });
+    this.scrollUp()
     }
-
-    if (this.clinicCreateForm.valid) {
-      this.clinicService.create(clinic).subscribe(
-        (response) => {
-          this.router.navigateByUrl('admin/clinic/list')
-        },
-        (error) => { console.log(error); });
-    } else {
-      console.log('not valid')
-      this.errorMessage = 'Please enter valid data';
-    }
-
   }
-  resetError() {
-    this.errorMessage = null;
-  }
-  convertAddressToString(): string {
-    let address: string = ""
-    address = address + this.form.clinicaddressvalue + ",";
-    address = address + this.form.clinicaddresscountry + ",";
-    if (this.form.clinicaddressstate)
-      address = address + this.form.clinicaddressstate + ",";
-    if (this.form.clinicaddressprovince)
-      address = address + this.form.clinicaddressprovince + ",";
-    address = address + this.form.clinicaddresscity + ",";
-    address = address + this.form.clinicaddresszipcode;
-    return address
-  }
+  private  scrollUp() {
+    (function smoothscroll() {
+        var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        if (currentScroll > 0) {
+            window.scrollTo(0, 0);
+        }
+    })();
+}
 }

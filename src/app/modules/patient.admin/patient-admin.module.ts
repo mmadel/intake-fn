@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PatientAdminRoutingModule } from './patient-admin-routing.module';
 import {
@@ -53,7 +53,9 @@ import {
   MultiSelectModule,
   WidgetModule,
   ProgressModule,
-  AccordionModule
+  AccordionModule,
+  FooterModule,
+  UtilitiesModule
 
 } from '@coreui/angular-pro';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -107,6 +109,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     PatientCommonModule,
     QRCodeModule,
     AccordionModule,
+    ReactiveFormsModule,
+    FooterModule,
+    UtilitiesModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
