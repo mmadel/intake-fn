@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { Clinic } from '../../../models/clinic.model';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 interface RenderedClinic {
-  id: number | null,
-  name: string | null,
-  address: string | null,
-  country: string | null,
-  ps: string | null,
-  zipcode: string | null
+  id?: number | null,
+  name?: string | null,
+  address?: string | null,
+  country?: string | null,
+  ps?: string | null,
+  zipcode?: string | null
 }
 @Component({
   selector: 'app-clinic.list',
@@ -26,9 +26,9 @@ export class ClinicListComponent implements OnInit {
     this.getClinics();
   }
 
-  getClinics(){
+  getClinics() {
     this.clinicService.get().subscribe(response => {
-      this.clinics= [];
+      this.clinics = [];
       response.body?.forEach(element => {
         this.clinics?.push(this.constructClinic(element))
       });
@@ -39,14 +39,15 @@ export class ClinicListComponent implements OnInit {
     )
   }
   private constructClinic(element: Clinic) {
-    var splitted = element.address.split(",");
+    var address: string = '';
+    address = element.clinicAddress?.firstAddress + ',' + element.clinicAddress?.secondAddress!
+      + ',' + element.clinicAddress?.city
+      + ',' + element.clinicAddress?.state
+      + ',' + element.clinicAddress?.zipCode
     var renderedClinic: RenderedClinic = {
       id: element.id,
       name: element.name,
-      address: splitted[0],
-      country: splitted[1],
-      ps: splitted[2],
-      zipcode: splitted[4]
+      address: address,
     }
     return renderedClinic;
   }
@@ -69,7 +70,7 @@ export class ClinicListComponent implements OnInit {
   toggleEditClinic() {
     this.isCreateClinic = !this.isCreateClinic;
   }
-  changeClinicVisibility(event: any){
+  changeClinicVisibility(event: any) {
     if (event === 'close') {
       this.isCreateClinic = false;
       this.getClinics();
