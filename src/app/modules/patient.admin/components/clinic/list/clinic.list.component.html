@@ -1,48 +1,15 @@
 <ngx-spinner></ngx-spinner>
-<c-row >
-  <c-col class="mb-3"  style="float: right;">
-    <c-button-group aria-label="Button outlined group with nested dropdown" role="group" size="sm">
-      <button cButton color="primary" variant="outline" dispaly-input (click)="create()">Add New
-        Clinic</button>
-    </c-button-group>
-  </c-col>
-</c-row>
 <c-row>
-  <!-- Search For Clinics-->
   <c-col xs="12">
-    <c-card class="mb-4">
-      <c-card-header ngPreserveWhitespaces>
-        <strong>Clinic Search</strong> <small>From clinics list</small>
-      </c-card-header>
-      <c-card-body>
-        <form cForm>
-          <c-row>
-            <c-col class="mb-2" xs="12">
-              <input aria-describedby="basic-addon1" aria-label="Username" cFormControl placeholder="Name"
-                sizing="sm" />
-            </c-col>
-            <c-col class="mb-2" xs="12">
-              <select cSelect>
-                <option>Select Status</option>
-                <option>Active</option>
-                <option>In-Active</option>
-              </select>
-            </c-col>
-            <c-col class="mb-2" xs="12">
-              <c-date-range-picker></c-date-range-picker>
-            </c-col>
-            <c-col xs="12" class="text-center">
-              <button cButton class="me-1" color="primary" style="width: 15%;">
-                Search
-              </button>
-            </c-col>
-          </c-row>
-        </form>
-      </c-card-body>
-    </c-card>
+      <h1>User List</h1>
   </c-col>
-  <!-- Add Clinic Card-->
-
+  <c-col xs="12">
+      <div style="float: right;">
+          <button cButton color="primary" variant="outline" (click)="create()">
+              Create Clinic
+          </button>
+      </div>
+  </c-col>
 </c-row>
 <c-alert color="danger" *ngIf="errorMessage !== ''">{{ errorMessage }}</c-alert>
 <table cTable>
