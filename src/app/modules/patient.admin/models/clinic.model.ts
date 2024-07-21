@@ -1,6 +1,9 @@
+import { BasicAddress } from "src/app/models/common/basic.address"
+
 export interface Clinic{
     id:number|null,
     name:string|null,
     address:string,
-    selected:boolean
+    clinicAddress?: BasicAddress
+    selected?:boolean
 }
