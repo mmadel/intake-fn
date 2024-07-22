@@ -86,7 +86,7 @@ export class ClinicCreationComponent implements OnInit {
   }
   private fillClinicModel() {
     this.clinic = {
-      id: this.clinicId,
+      id: this.clinicId!== undefined?this.clinicId: null,
       name: null,
       address: ''
     }
