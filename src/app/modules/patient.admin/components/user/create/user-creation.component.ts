@@ -10,6 +10,7 @@ import { ClinicService } from '../../../services/clinic/clinic.service';
 import { UserService } from '../../../services/user/user.service';
 import { EmailValidator } from 'src/app/modules/patient.digital.intake/components/create/validators/custom.validation/email.validator';
 import { User } from 'src/app/modules/security/model/user';
+import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
 
 interface UserRole {
   name: string;
@@ -26,12 +27,16 @@ export class UserCreationComponent implements OnInit {
   states: string[] = states;
   userForm: FormGroup
   isValidForm: boolean = false;
+  validEmail: boolean | undefined = undefined;
+  validUserName: boolean | undefined = undefined;
+  validUserNameMessage: string | undefined = undefined
+  validEmailMessage: string | undefined = undefined
   userRoles: UserRole[] = [
     { name: "Administrator", value: "administrator" },
     { name: "Normal User", value: "normal" }
   ]
   returnClinics: Clinic[] = new Array();
-  user:User
+  user: User
   constructor(private clinicService: ClinicService,
     private userService: UserService,
     private router: Router,
@@ -41,6 +46,8 @@ export class UserCreationComponent implements OnInit {
   ngOnInit(): void {
     this.getClinics();
     this.createUserForm();
+    this.checkUserName();
+    this.checkEmail()
   }
 
   private getClinics() {
@@ -100,17 +107,17 @@ export class UserCreationComponent implements OnInit {
       }
     })();
   }
-  private fillUserModel(){
-    this.user={
-      id:null,
-      name : this.userForm.get('username')?.value,
-      firstName : this.userForm.get('firstName')?.value, 
+  private fillUserModel() {
+    this.user = {
+      id: null,
+      name: this.userForm.get('username')?.value,
+      firstName: this.userForm.get('firstName')?.value,
       lastName: this.userForm.get('lastName')?.value,
-      email:this.userForm.get('email')?.value,
-      password:this.userForm.get('password')?.value,
-      userRole:this.userForm.get('userRole')?.value,
-      address:'',
-      clinics:this.createClinics(this.userForm.get('clinics')?.value),
+      email: this.userForm.get('email')?.value,
+      password: this.userForm.get('password')?.value,
+      userRole: this.userForm.get('userRole')?.value,
+      address: '',
+      clinics: this.createClinics(this.userForm.get('clinics')?.value),
     }
   }
   private createClinics(ids: string[] | null) {
@@ -126,5 +133,79 @@ export class UserCreationComponent implements OnInit {
       clinics.push(clinic)
     });
     return clinics;
+  }
+  private checkUserName() {
+    this.userForm.get('username')?.valueChanges
+      .pipe(
+        filter(text => {
+          if (text === '') {
+            this.validUserName = undefined;
+            return false;
+          }
+          if (text === undefined) {
+            return false;
+          }
+          if (text.length > 1) {
+            return true
+          } else {
+            return false;
+          }
+        }),
+        debounceTime(500),
+        tap((value) => {
+        }),
+        switchMap((value: any) => {
+          return this.userService.checkUserName(value)
+            .pipe(
+              finalize(() => {
+              }),
+            )
+        }
+        )
+      ).subscribe((check: any) => {
+        this.validUserName = check;
+        if (!check) {
+          this.validUserNameMessage = 'username is already exists';
+        }
+      },
+        () => {
+        });
+  }
+  private checkEmail() {
+    this.userForm.get('email')?.valueChanges
+      .pipe(
+        filter(text => {
+          if (text === '') {
+            this.validEmail = undefined;
+            return false;
+          }
+          if (text === undefined) {
+            return false;
+          }
+          if (text.length > 1) {
+            return true
+          } else {
+            return false;
+          }
+        }),
+        debounceTime(500),
+        tap((value) => {
+        }),
+        switchMap((value) => {
+          return this.userService.checkEmail(value)
+            .pipe(
+              finalize(() => {
+              }),
+            )
+        }
+        )
+      ).subscribe((check: any) => {
+        this.validEmail = check;
+        if (!check) {
+          this.validEmailMessage = 'Email is already exists';
+        }
+      },
+        error => {
+        });
   }
 }

@@ -17,6 +17,17 @@
             </div>
             <div *ngIf="this.userForm.get('username')?.errors?.['noSpecialCharacters']" class="text-danger mx-1">
                 User Name cannot contain special characters.</div>
+            <span *ngIf="validUserName">
+                <label>
+                    <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
+                </label>
+            </span>
+            <span *ngIf="validUserName === false">
+                <label>
+                    {{validUserNameMessage}}
+                    <svg cIcon name="cilReportSlash" cTextColor="danger" size="lg"></svg>
+                </label>
+            </span>
         </c-col>
     </c-row>
     <!--First Name-->
@@ -72,6 +83,17 @@
             <div *ngIf="this.userForm.get('email')?.errors?.['email'] === true" class="text-danger mx-1">
                 Invalid Email
             </div>
+            <span *ngIf="validEmail">
+                <label>
+                    <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
+                </label>
+            </span>
+            <span *ngIf="validEmail === false">
+                <label>
+                    {{validEmailMessage}}
+                    <svg cIcon name="cilReportSlash" cTextColor="danger" size="lg"></svg>
+                </label>
+            </span>
         </c-col>
     </c-row>
     <!--Password-->
