@@ -3,6 +3,22 @@
     Please fill in all the required fields before create clinic
 </c-callout>
 <form [formGroup]="userForm">
+    <!--User-->
+    <c-row>
+        <c-col xs="12"><label style="width: 150px;">User Name<span class="text-danger">*</span></label></c-col>
+        <c-col xs="12">
+            <input class="form-control" placeholder formControlName="username" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.userForm.get('username')?.invalid
+            && this.userForm.get('username')?.touched}" maxlength="60">
+        </c-col>
+        <c-col xs="12">
+            <div *ngIf="this.userForm.get('username')?.errors?.['required'] && 
+        (this.userForm.get('username')?.dirty ||this.userForm.get('username')?.touched)" class="text-danger mx-1">
+                User Name is required
+            </div>
+            <div *ngIf="this.userForm.get('username')?.errors?.['noSpecialCharacters']" class="text-danger mx-1">
+                User Name cannot contain special characters.</div>
+        </c-col>
+    </c-row>
     <!--First Name-->
     <c-row>
         <c-col xs="12">
@@ -211,8 +227,7 @@
                 </c-col>
                 <c-col xs="12">
                     <div *ngIf="this.userForm.get('clinics')?.errors?.['required'] && 
-                        (this.userForm.get('clinics')?.touched)"
-                        class="text-danger mx-1">
+                        (this.userForm.get('clinics')?.touched)" class="text-danger mx-1">
                         Clinics is required
                     </div>
                 </c-col>

@@ -10,6 +10,6 @@ export interface User {
     address: any | null;
     userRole: string | null;
     clinics: Clinic[] | null;
-    uuid: string
+    uuid?: string
     currentRole?: string
 }

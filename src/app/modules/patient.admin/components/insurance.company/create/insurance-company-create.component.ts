@@ -102,7 +102,6 @@ export class InsuranceCompanyCreateComponent implements OnInit {
     console.log(JSON.stringify(this.insuranceCompany))
   }
   private fillInsuranceCompanyForm() {
-    console.log(JSON.stringify(this.insuranceCompany))
     this.insuranceCompanyForm.get('insurance-company-name')?.setValue(this.insuranceCompany.name);
     this.insuranceCompanyForm.get('insurance-company-status')?.setValue(this.insuranceCompany.status);
   }
@@ -126,12 +125,6 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       }
       clinics.push(clinic)
     });
-    return clinics;
-  }
-  private getClinicsId(clinics: Clinic[]): Clinic[] {
-    for (var i = 0; i < clinics.length; i++) {
-      clinics[i].selected = true;
-    }
     return clinics;
   }
 }

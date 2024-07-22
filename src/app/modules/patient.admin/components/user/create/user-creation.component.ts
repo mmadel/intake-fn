@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {  FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LocalService } from 'src/app/modules/common';
@@ -8,7 +8,8 @@ import { noSpecialCharactersValidator } from 'src/app/modules/patient.digital.in
 import { Clinic } from '../../../models/clinic.model';
 import { ClinicService } from '../../../services/clinic/clinic.service';
 import { UserService } from '../../../services/user/user.service';
-import {EmailValidator  } from 'src/app/modules/patient.digital.intake/components/create/validators/custom.validation/email.validator';
+import { EmailValidator } from 'src/app/modules/patient.digital.intake/components/create/validators/custom.validation/email.validator';
+import { User } from 'src/app/modules/security/model/user';
 
 interface UserRole {
   name: string;
@@ -30,6 +31,7 @@ export class UserCreationComponent implements OnInit {
     { name: "Normal User", value: "normal" }
   ]
   returnClinics: Clinic[] = new Array();
+  user:User
   constructor(private clinicService: ClinicService,
     private userService: UserService,
     private router: Router,
@@ -55,6 +57,7 @@ export class UserCreationComponent implements OnInit {
   private createUserForm() {
     const zipCodeRgx = new RegExp("^\\d{5}(?:[-\s]\\d{4})?$");
     this.userForm = new FormGroup({
+      'username': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
       'firstName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
       'lastName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
       'email': new FormControl(null, [Validators.required, EmailValidator()]),
@@ -68,8 +71,8 @@ export class UserCreationComponent implements OnInit {
       'clinics': new FormControl(null, [Validators.required]),
     })
   }
-  create(){
-    // if (this.userForm?.valid) {
+  create() {
+    if (this.userForm?.valid) {
       this.isValidForm = false;
       if (!this.selectedUser) {
         this.changeVisibility.emit('close-create');
@@ -79,15 +82,15 @@ export class UserCreationComponent implements OnInit {
         this.changeVisibility.emit('close-edit');
         this.toastrService.success('Clinic Updated');
       }
-    // }else{
-    //   this.isValidForm = true;
-    //   this.isValidForm = true;
-    //   Object.keys(this.userForm.controls).forEach(field => {
-    //     const control = this.userForm.get(field);
-    //     control?.markAsTouched({ onlySelf: true });
-    //   });
-    //   this.scrollUp()
-    // }
+    } else {
+      this.isValidForm = true;
+      this.isValidForm = true;
+      Object.keys(this.userForm.controls).forEach(field => {
+        const control = this.userForm.get(field);
+        control?.markAsTouched({ onlySelf: true });
+      });
+      this.scrollUp()
+    }
   }
   private scrollUp() {
     (function smoothscroll() {
@@ -96,5 +99,32 @@ export class UserCreationComponent implements OnInit {
         window.scrollTo(0, 0);
       }
     })();
+  }
+  private fillUserModel(){
+    this.user={
+      id:null,
+      name : this.userForm.get('username')?.value,
+      firstName : this.userForm.get('firstName')?.value, 
+      lastName: this.userForm.get('lastName')?.value,
+      email:this.userForm.get('email')?.value,
+      password:this.userForm.get('password')?.value,
+      userRole:this.userForm.get('userRole')?.value,
+      address:'',
+      clinics:this.createClinics(this.userForm.get('clinics')?.value),
+    }
+  }
+  private createClinics(ids: string[] | null) {
+    var clinics: Clinic[] = new Array();
+    ids?.forEach(element => {
+      var clinic: Clinic = {
+        id: Number(element),
+        name: null,
+        address: "",
+        selected: false,
+
+      }
+      clinics.push(clinic)
+    });
+    return clinics;
   }
 }
