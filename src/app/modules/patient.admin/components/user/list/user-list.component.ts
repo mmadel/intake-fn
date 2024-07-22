@@ -15,7 +15,7 @@ export class UserListComponent implements OnInit {
   users: User[] = new Array();
   isCreateUSer: boolean = false;
   isEditUser: boolean = false;
-  selectedUser: number;
+  selectedUser: string;
   constructor(private router: Router, private userService: UserService, private kcAuthServiceService: KcAuthServiceService) { }
 
   ngOnInit(): void {
@@ -56,6 +56,13 @@ export class UserListComponent implements OnInit {
     this.isCreateUSer = true;
   }
   toggleCreateUser() {
+    this.isCreateUSer = !this.isCreateUSer;
+  }
+  showEditUser(userId: string) {
+    this.selectedUser = userId
+    this.isCreateUSer = true;
+  }
+  toggleEditUser() {
     this.isCreateUSer = !this.isCreateUSer;
   }
   changeClinicVisibility(event: any) {
