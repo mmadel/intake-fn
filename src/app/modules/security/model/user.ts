@@ -1,3 +1,4 @@
+import { BasicAddress } from "src/app/models/common/basic.address";
 import { Clinic } from "../../patient.admin/models/clinic.model";
 
 export interface User {
@@ -7,7 +8,7 @@ export interface User {
     lastName: string | null,
     email: string | null,
     password: string | null;
-    address: any | null;
+    address?: BasicAddress | null;
     userRole: string | null;
     clinics: Clinic[] | null;
     uuid?: string

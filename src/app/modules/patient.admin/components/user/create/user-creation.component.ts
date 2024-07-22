@@ -37,6 +37,7 @@ export class UserCreationComponent implements OnInit {
   ]
   returnClinics: Clinic[] = new Array();
   user: User
+  mode: string = 'create';
   constructor(private clinicService: ClinicService,
     private userService: UserService,
     private router: Router,
@@ -44,12 +45,29 @@ export class UserCreationComponent implements OnInit {
     private toastrService: ToastrService) { }
 
   ngOnInit(): void {
-    this.getClinics();
+    this.userOptMode()
     this.createUserForm();
-    this.checkUserName();
-    this.checkEmail()
+    this.getClinics();
+    if (this.mode === 'edit') {
+      this.getUser();
+    } else {
+      this.checkUserName();
+      this.checkEmail()
+    }
   }
 
+  userOptMode() {
+    if (this.selectedUser !== undefined)
+      this.mode = 'edit';
+    else
+      this.mode = 'create';
+  }
+  private getUser() {
+    this.userService.getById(this.selectedUser).subscribe(result => {
+      this.user = result;
+      this.fillUserForm();
+    })
+  }
   private getClinics() {
     this.clinicService.getActive().subscribe(response => {
       response.body?.forEach(element => {
@@ -79,16 +97,19 @@ export class UserCreationComponent implements OnInit {
     })
   }
   create() {
-    if (this.userForm?.valid) {
-      this.isValidForm = false;
-      if (!this.selectedUser) {
-        this.changeVisibility.emit('close-create');
-        this.toastrService.success('Clinic Created');
-      }
-      else {
-        this.changeVisibility.emit('close-edit');
-        this.toastrService.success('Clinic Updated');
-      }
+    if (this.userForm?.valid && (this.validUserName && this.validEmail)) {
+      this.fillUserModel();
+      this.userService.create(this.user).subscribe(result => {
+        this.isValidForm = false;
+        if (!this.selectedUser) {
+          this.changeVisibility.emit('close-create');
+          this.toastrService.success('Clinic Created');
+        }
+        else {
+          this.changeVisibility.emit('close-edit');
+          this.toastrService.success('Clinic Updated');
+        }
+      })
     } else {
       this.isValidForm = true;
       this.isValidForm = true;
@@ -114,9 +135,9 @@ export class UserCreationComponent implements OnInit {
       firstName: this.userForm.get('firstName')?.value,
       lastName: this.userForm.get('lastName')?.value,
       email: this.userForm.get('email')?.value,
-      password: this.userForm.get('password')?.value,
+      password: this.localService.encrypt(this.userForm.get('password')?.value !== null ? this.userForm.get('password')?.value : ''),
       userRole: this.userForm.get('userRole')?.value,
-      address: '',
+      address: {},
       clinics: this.createClinics(this.userForm.get('clinics')?.value),
     }
   }
@@ -207,5 +228,17 @@ export class UserCreationComponent implements OnInit {
       },
         error => {
         });
+  }
+  private fillUserForm() {
+    this.userForm.get('username')?.setValue(this.user.name)
+    this.userForm.get('firstName')?.setValue(this.user.firstName)
+    this.userForm.get('lastName')?.setValue(this.user.lastName)
+    this.userForm.get('email')?.setValue(this.user.email)
+    this.userForm.get('password')?.setValue(this.user.password)
+    this.userForm.get('first-address')?.setValue(this.user.address?.firstAddress)
+    this.userForm.get('second-address')?.setValue(this.user.address?.secondAddress)
+    this.userForm.get('city-address')?.setValue(this.user.address?.city)
+    this.userForm.get('state-address')?.setValue(this.user.address?.state)
+    this.userForm.get('zipcode-address')?.setValue(this.user.address?.zipCode)
   }
 }

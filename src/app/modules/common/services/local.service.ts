@@ -19,14 +19,12 @@ export class LocalService {
   }
 
   public encrypt(txt: string): string {
-    // var hash = CryptoJS.SHA1('0123456789123456');
-    // var key = CryptoJS.lib.WordArray.create(hash.words.slice(0, 16 / 4));
-    // let encrypted = CryptoJS.AES.encrypt(txt, key, {
-    //   mode: CryptoJS.mode.ECB,
-    // });
-    // return encrypted.toString();
-    // //return CryptoJS.AES.encrypt(txt, this.key).toString();
-    return CryptoJS.AES.encrypt(txt, this.secretKey.trim()).toString();
+    var hash = CryptoJS.SHA1('0123456789123456');
+    var key = CryptoJS.lib.WordArray.create(hash.words.slice(0, 16 / 4));
+    let encrypted = CryptoJS.AES.encrypt(txt, key, {
+      mode: CryptoJS.mode.ECB,
+    });
+    return encrypted.toString();
   }
 
   public decrypt(txtToDecrypt: string) {

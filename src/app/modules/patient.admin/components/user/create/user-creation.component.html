@@ -8,7 +8,7 @@
         <c-col xs="12"><label style="width: 150px;">User Name<span class="text-danger">*</span></label></c-col>
         <c-col xs="12">
             <input class="form-control" placeholder formControlName="username" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.userForm.get('username')?.invalid
-            && this.userForm.get('username')?.touched}" maxlength="60">
+            && this.userForm.get('username')?.touched}" maxlength="60" [readonly]="mode ==='edit'">
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('username')?.errors?.['required'] && 
@@ -67,13 +67,13 @@
         </c-col>
     </c-row>
     <!--Email-->
-    <c-row>
+    <c-row class="mb-2">
         <c-col xs="12">
             <label style="width: 150px;">Email<span class="text-danger">*</span></label>
         </c-col>
         <c-col xs="12">
             <input cFormControl sizing="sm" class="form-control" placeholder formControlName="email" [ngClass]="{'is-invalid': this.userForm.get('email')?.invalid
-        && this.userForm.get('email')?.touched}" maxlength="60">
+        && this.userForm.get('email')?.touched}" maxlength="60" [readonly]="mode ==='edit'">
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('email')?.errors?.['required'] === true && 
@@ -97,7 +97,7 @@
         </c-col>
     </c-row>
     <!--Password-->
-    <c-row class="mb-2">
+    <c-row class="mb-2" *ngIf="mode ==='create'">
         <c-col xs="12">
             <label style="width: 150px;">Password<span class="text-danger">*</span></label>
         </c-col>
