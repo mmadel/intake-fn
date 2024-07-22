@@ -129,7 +129,6 @@ export class UserCreationComponent implements OnInit {
     return invalid;
   }
   create() {
-
     if (this.selectedUser) {
       if (this.userForm?.valid) {
         this.fillUserModel();
@@ -151,6 +150,7 @@ export class UserCreationComponent implements OnInit {
     } else {
       if (this.userForm?.valid && (this.validUserName && this.validEmail)) {
         this.fillUserModel();
+        console.log(JSON.stringify(this.user))
         this.userService.create(this.user).subscribe(result => {
           this.isValidForm = false;
           this.changeVisibility.emit('close-create');

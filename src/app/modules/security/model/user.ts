@@ -9,8 +9,8 @@ export interface User {
     email: string | null,
     password: string | null;
     address?: BasicAddress | null;
-    userRole: string | null;
+    userRole?: string | null;
     clinics: Clinic[] | null;
     uuid?: string
-    currentRole?: string
+    currentRole?: string | null
 }
