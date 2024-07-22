@@ -41,6 +41,7 @@ export class InsuranceCompanyCreateComponent implements OnInit {
     this.insuranceCompanyForm = new FormGroup({
       'insurance-company-name': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
       'clinic': new FormControl(null, [Validators.required]),
+      'insurance-company-status': new FormControl(true, [Validators.required]),
     })
   }
   create() {
@@ -73,6 +74,7 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       name: this.insuranceCompanyForm.get('insurance-company-name')?.value,
       address: null,
       clinics: this.createClinics(this.insuranceCompanyForm.get('clinic')?.value),
+      status : this.insuranceCompanyForm.get('insurance-company-status')?.value,
     }
   }  
   private scrollUp() {

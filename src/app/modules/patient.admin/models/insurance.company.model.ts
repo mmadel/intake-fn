@@ -5,6 +5,6 @@ export class InsuranceCompany{
     name:string| null;
     address:string|null;
     clinics:Clinic[] | null;
-    
+    status?:boolean
     
 }
