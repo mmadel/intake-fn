@@ -26,9 +26,33 @@ export class InsuranceCompanyCreateComponent implements OnInit {
     private toastrService: ToastrService) { }
 
   ngOnInit(): void {
-    this.createInsuranceCompanyform()
+    console.log(this.selectedCompany)
+    if (this.selectedCompany !== undefined) {
+      this.getSelectedInsuranceCompany(this.selectedCompany);
+    }
+    this.createInsuranceCompanyform();
+    this.getClinics();
+
+  }
+  private getSelectedInsuranceCompany(id: number) {
+    this.insuranceCompanyService.getById(id).subscribe((result: any) => {
+      this.insuranceCompany = result.body;
+      this.fillInsuranceCompanyForm();
+    }, error => {
+      console.log('error getting selected insurance comapny')
+    })
+  }
+  private getClinics() {
     this.clinicService.getActive().subscribe(response => {
       response.body?.forEach(element => {
+        if (this.selectedCompany) {
+          var isClinicFound = this.insuranceCompany.clinics?.some(clinic => {
+            return clinic.id === element.id
+          })
+          if (isClinicFound) {
+            element.selected = true
+          }
+        }
         this.returnClinics?.push(element)
       });
     },
@@ -49,10 +73,10 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       this.isValidForm = false;
       this.fillInsuranceCompanyModel();
       this.insuranceCompanyService.create(this.insuranceCompany).subscribe(result => {
-        if(!this.selectedCompany){
+        if (!this.selectedCompany) {
           this.changeVisibility.emit('close-create');
           this.toastrService.success('Insurance Company Created.')
-        }else{
+        } else {
           this.changeVisibility.emit('close-edit');
           this.toastrService.success('Insurance Company Updated.');
         }
@@ -74,9 +98,14 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       name: this.insuranceCompanyForm.get('insurance-company-name')?.value,
       address: null,
       clinics: this.createClinics(this.insuranceCompanyForm.get('clinic')?.value),
-      status : this.insuranceCompanyForm.get('insurance-company-status')?.value,
+      status: this.insuranceCompanyForm.get('insurance-company-status')?.value,
     }
-  }  
+  }
+  private fillInsuranceCompanyForm() {
+    console.log(JSON.stringify(this.insuranceCompany))
+    this.insuranceCompanyForm.get('insurance-company-name')?.setValue(this.insuranceCompany.name);
+    this.insuranceCompanyForm.get('insurance-company-status')?.setValue(this.insuranceCompany.status);
+  }
   private scrollUp() {
     (function smoothscroll() {
       var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -97,6 +126,12 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       }
       clinics.push(clinic)
     });
+    return clinics;
+  }
+  private getClinicsId(clinics: Clinic[]): Clinic[] {
+    for (var i = 0; i < clinics.length; i++) {
+      clinics[i].selected = true;
+    }
     return clinics;
   }
 }

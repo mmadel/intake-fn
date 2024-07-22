@@ -39,4 +39,11 @@ export class InsuranceCompanyListComponent implements OnInit {
       this.isEditInsuranceCompany = false;
     this.getInsuranceCompanies();
   }
+  showEditInsuranceCompany(id: number | undefined | null) {
+    this.selectedInsuranceCompanyId = id!;
+    this.isEditInsuranceCompany = true;
+  }
+  toggleEditInsuranceCompany() {
+    this.isEditInsuranceCompany = !this.isEditInsuranceCompany;
+  }
 }

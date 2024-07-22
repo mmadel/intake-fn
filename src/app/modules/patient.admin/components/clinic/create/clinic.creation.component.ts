@@ -54,7 +54,6 @@ export class ClinicCreationComponent implements OnInit {
     if (this.clinicForm?.valid) {
       this.isValidForm = false;
       this.fillClinicModel();
-      console.log(JSON.stringify(this.clinic))
       this.clinicService.create(this.clinic).subscribe(result => {
         if (!this.clinicId) {
           this.changeVisibility.emit('close-create');
