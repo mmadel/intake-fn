@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,11 +9,12 @@ import { ClinicService } from '../../../services/clinic/clinic.service';
 import { InsuranceCompanyService } from '../../../services/insurance.company/insurance-company.service';
 
 @Component({
-  selector: 'app-insurance-company-create',
+  selector: 'insurance-company-create',
   templateUrl: './insurance-company-create.component.html',
   styleUrls: ['./insurance-company-create.component.css']
 })
 export class InsuranceCompanyCreateComponent implements OnInit {
+  @Output() changeVisibility = new EventEmitter<string>()
   @Input() selectedCompany: number
   insuranceCompanyForm: FormGroup
   isValidForm: boolean = false;
@@ -47,7 +48,13 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       this.isValidForm = false;
       this.fillInsuranceCompanyModel();
       this.insuranceCompanyService.create(this.insuranceCompany).subscribe(result => {
-        this.toastrService.success('Insurance Company Created.')
+        if(!this.selectedCompany){
+          this.changeVisibility.emit('close-create');
+          this.toastrService.success('Insurance Company Created.')
+        }else{
+          this.changeVisibility.emit('close-edit');
+          this.toastrService.success('Insurance Company Updated.');
+        }
       }, error => {
         this.toastrService.success('Erro during creating insurance company')
       })

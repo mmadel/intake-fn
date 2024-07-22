@@ -5,7 +5,7 @@
     </c-col>
     <c-col xs="12">
         <div style="float: right;">
-            <button cButton color="primary" variant="outline" (click)="create()">
+            <button cButton color="primary" variant="outline" (click)="showCreateInsuranceCompany()">
                 Create Insurance Company
             </button>
         </div>
@@ -32,3 +32,12 @@
 
     </tbody>
 </table>
+<c-modal id="createinsuranceComany" [visible]="isCreateInsuranceCompany" size="xl" backdrop="static">
+    <c-modal-header>
+      <h3 cModalTitle>Clinic Creation</h3>
+      <button (click)="toggleCreateInsuranceCompany()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <insurance-company-create (changeVisibility)="changeClinicVisibility($event)" *ngIf="isCreateInsuranceCompany"></insurance-company-create>
+    </c-modal-body>
+  </c-modal>
