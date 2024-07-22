@@ -15,7 +15,7 @@ interface UserRole {
   value: string
 }
 @Component({
-  selector: 'app-user-creation',
+  selector: 'user-creation',
   templateUrl: './user-creation.component.html',
   styleUrls: ['./user-creation.component.css']
 })

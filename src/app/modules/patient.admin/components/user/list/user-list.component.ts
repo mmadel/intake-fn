@@ -13,9 +13,15 @@ import { UserService } from '../../../services/user/user.service';
 export class UserListComponent implements OnInit {
   isLoggedIn: boolean;
   users: User[] = new Array();
+  isCreateUSer: boolean = false;
+  isEditUser: boolean = false;
+  selectedUser: number;
   constructor(private router: Router, private userService: UserService, private kcAuthServiceService: KcAuthServiceService) { }
 
   ngOnInit(): void {
+    this.getUsers();
+  }
+  private getUsers() {
     this.userService.get().subscribe(response => {
       response.body?.forEach(element => {
         this.users?.push(element)
@@ -29,7 +35,6 @@ export class UserListComponent implements OnInit {
       },
     )
   }
-
   create() {
     this.router.navigateByUrl('/admin/user/creation');
   }
@@ -46,5 +51,18 @@ export class UserListComponent implements OnInit {
     var userId: string | undefined = this.kcAuthServiceService.getLoggedUser()?.sub;
     this.isLoggedIn = userId == id ? true : false;
     return this.isLoggedIn;
+  }
+  showCreateUser() {
+    this.isCreateUSer = true;
+  }
+  toggleCreateUser() {
+    this.isCreateUSer = !this.isCreateUSer;
+  }
+  changeClinicVisibility(event: any) {
+    if (event === 'close-create')
+      this.isCreateUSer = false;
+    if (event === 'close-edit')
+      this.isEditUser = false;
+    this.getUsers();
   }
 }
