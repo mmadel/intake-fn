@@ -58,6 +58,6 @@
         <button (click)="toggleEditUser()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <user-creation (changeVisibility)="changeClinicVisibility($event)" *ngIf="isEditUser"></user-creation>
+        <user-creation (changeVisibility)="changeClinicVisibility($event)" *ngIf="isEditUser" [selectedUser]="selectedUser"></user-creation>
     </c-modal-body>
 </c-modal>

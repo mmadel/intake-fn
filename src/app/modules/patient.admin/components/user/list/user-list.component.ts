@@ -22,6 +22,7 @@ export class UserListComponent implements OnInit {
     this.getUsers();
   }
   private getUsers() {
+    this.users=[]
     this.userService.get().subscribe(response => {
       response.body?.forEach(element => {
         this.users?.push(element)
@@ -60,10 +61,10 @@ export class UserListComponent implements OnInit {
   }
   showEditUser(userId: string) {
     this.selectedUser = userId
-    this.isCreateUSer = true;
+    this.isEditUser = true;
   }
   toggleEditUser() {
-    this.isCreateUSer = !this.isCreateUSer;
+    this.isEditUser = !this.isEditUser;
   }
   changeClinicVisibility(event: any) {
     if (event === 'close-create')

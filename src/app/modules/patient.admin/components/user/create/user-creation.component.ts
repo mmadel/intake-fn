@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {  FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +20,8 @@ interface UserRole {
   styleUrls: ['./user-creation.component.css']
 })
 export class UserCreationComponent implements OnInit {
-  @Input() selectedUser: number
+  @Input() selectedUser: string
+  @Output() changeVisibility = new EventEmitter<string>()
   states: string[] = states;
   userForm: FormGroup
   isValidForm: boolean = false;
@@ -33,7 +34,7 @@ export class UserCreationComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private localService: LocalService,
-    private toastr: ToastrService) { }
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getClinics();
@@ -68,17 +69,25 @@ export class UserCreationComponent implements OnInit {
     })
   }
   create(){
-    if (this.userForm?.valid) {
+    // if (this.userForm?.valid) {
       this.isValidForm = false;
-    }else{
-      this.isValidForm = true;
-      this.isValidForm = true;
-      Object.keys(this.userForm.controls).forEach(field => {
-        const control = this.userForm.get(field);
-        control?.markAsTouched({ onlySelf: true });
-      });
-      this.scrollUp()
-    }
+      if (!this.selectedUser) {
+        this.changeVisibility.emit('close-create');
+        this.toastrService.success('Clinic Created');
+      }
+      else {
+        this.changeVisibility.emit('close-edit');
+        this.toastrService.success('Clinic Updated');
+      }
+    // }else{
+    //   this.isValidForm = true;
+    //   this.isValidForm = true;
+    //   Object.keys(this.userForm.controls).forEach(field => {
+    //     const control = this.userForm.get(field);
+    //     control?.markAsTouched({ onlySelf: true });
+    //   });
+    //   this.scrollUp()
+    // }
   }
   private scrollUp() {
     (function smoothscroll() {
