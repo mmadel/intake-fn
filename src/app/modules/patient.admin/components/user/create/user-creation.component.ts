@@ -47,10 +47,10 @@ export class UserCreationComponent implements OnInit {
   ngOnInit(): void {
     this.userOptMode()
     this.createUserForm();
-    this.getClinics();
     if (this.mode === 'edit') {
-      this.getUser();
+      this.getSelectedUser();
     } else {
+      this.getClinics();
       this.checkUserName();
       this.checkEmail()
     }
@@ -62,15 +62,37 @@ export class UserCreationComponent implements OnInit {
     else
       this.mode = 'create';
   }
-  private getUser() {
+  private getSelectedUser() {
     this.userService.getById(this.selectedUser).subscribe(result => {
       this.user = result;
       this.fillUserForm();
+      this.userForm.controls['username'].disable();
+      this.userForm.controls['email'].disable();
+      this.getSelectedClinics()
     })
   }
   private getClinics() {
     this.clinicService.getActive().subscribe(response => {
       response.body?.forEach(element => {
+        this.returnClinics?.push(element)
+      });
+    },
+      error => {
+        console.log(error)
+      },
+    )
+  }
+  private getSelectedClinics() {
+    this.clinicService.getActive().subscribe(response => {
+      response.body?.forEach(element => {
+        if (this.selectedUser) {
+          var isClinicFound = this.user.clinics?.some(clinic => {
+            return clinic.id === element.id
+          })
+          if (isClinicFound) {
+            element.selected = true
+          }
+        }
         this.returnClinics?.push(element)
       });
     },
@@ -86,7 +108,7 @@ export class UserCreationComponent implements OnInit {
       'firstName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
       'lastName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
       'email': new FormControl(null, [Validators.required, EmailValidator()]),
-      'password': new FormControl(null, [Validators.required]),
+      'password': new FormControl(null, this.mode !== 'edit' ? Validators.required : null),
       'first-address': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
       'second-address': new FormControl(null, noSpecialCharactersValidator()),
       'city-address': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
@@ -96,28 +118,53 @@ export class UserCreationComponent implements OnInit {
       'clinics': new FormControl(null, [Validators.required]),
     })
   }
+  public findInvalidControls() {
+    const invalid = [];
+    const controls = this.userForm.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
+    }
+    return invalid;
+  }
   create() {
-    if (this.userForm?.valid && (this.validUserName && this.validEmail)) {
-      this.fillUserModel();
-      this.userService.create(this.user).subscribe(result => {
-        this.isValidForm = false;
-        if (!this.selectedUser) {
-          this.changeVisibility.emit('close-create');
-          this.toastrService.success('Clinic Created');
-        }
-        else {
+
+    if (this.selectedUser) {
+      if (this.userForm?.valid) {
+        this.fillUserModel();
+        this.userService.update(this.user).subscribe(result => {
+          this.isValidForm = false;
           this.changeVisibility.emit('close-edit');
           this.toastrService.success('Clinic Updated');
-        }
-      })
+        })
+      } else {
+        this.isValidForm = true;
+        this.isValidForm = true;
+        Object.keys(this.userForm.controls).forEach(field => {
+          const control = this.userForm.get(field);
+          control?.markAsTouched({ onlySelf: true });
+        });
+        this.scrollUp()
+      }
+
     } else {
-      this.isValidForm = true;
-      this.isValidForm = true;
-      Object.keys(this.userForm.controls).forEach(field => {
-        const control = this.userForm.get(field);
-        control?.markAsTouched({ onlySelf: true });
-      });
-      this.scrollUp()
+      if (this.userForm?.valid && (this.validUserName && this.validEmail)) {
+        this.fillUserModel();
+        this.userService.create(this.user).subscribe(result => {
+          this.isValidForm = false;
+          this.changeVisibility.emit('close-create');
+          this.toastrService.success('Clinic Created');
+        })
+      } else {
+        this.isValidForm = true;
+        this.isValidForm = true;
+        Object.keys(this.userForm.controls).forEach(field => {
+          const control = this.userForm.get(field);
+          control?.markAsTouched({ onlySelf: true });
+        });
+        this.scrollUp()
+      }
     }
   }
   private scrollUp() {
@@ -131,13 +178,20 @@ export class UserCreationComponent implements OnInit {
   private fillUserModel() {
     this.user = {
       id: null,
+      uuid: this.user?.uuid,
       name: this.userForm.get('username')?.value,
       firstName: this.userForm.get('firstName')?.value,
       lastName: this.userForm.get('lastName')?.value,
       email: this.userForm.get('email')?.value,
       password: this.localService.encrypt(this.userForm.get('password')?.value !== null ? this.userForm.get('password')?.value : ''),
       userRole: this.userForm.get('userRole')?.value,
-      address: {},
+      address: {
+        firstAddress: this.userForm.controls['first-address'].value,
+        secondAddress: this.userForm.controls['second-address'].value,
+        city: this.userForm.controls['city-address'].value,
+        state: this.userForm.controls['state-address'].value,
+        zipCode: this.userForm.controls['zipcode-address'].value
+      },
       clinics: this.createClinics(this.userForm.get('clinics')?.value),
     }
   }
@@ -240,5 +294,6 @@ export class UserCreationComponent implements OnInit {
     this.userForm.get('city-address')?.setValue(this.user.address?.city)
     this.userForm.get('state-address')?.setValue(this.user.address?.state)
     this.userForm.get('zipcode-address')?.setValue(this.user.address?.zipCode)
+    this.userForm.get('userRole')?.setValue(this.user.userRole)
   }
 }

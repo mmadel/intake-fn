@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <c-callout color="danger" *ngIf="isValidForm">
-    Please fill in all the required fields before create clinic
+    Please fill in all the required.
 </c-callout>
 <form [formGroup]="userForm">
     <!--User-->
@@ -8,7 +8,7 @@
         <c-col xs="12"><label style="width: 150px;">User Name<span class="text-danger">*</span></label></c-col>
         <c-col xs="12">
             <input class="form-control" placeholder formControlName="username" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.userForm.get('username')?.invalid
-            && this.userForm.get('username')?.touched}" maxlength="60" [readonly]="mode ==='edit'">
+            && this.userForm.get('username')?.touched}" maxlength="60">
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('username')?.errors?.['required'] && 
