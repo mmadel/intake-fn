@@ -53,6 +53,7 @@ export class AddCommercialValidators {
     }
 
     private static addMedicareCoverageValidators(form: FormGroup) {
+        const phoneRgx = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
         for (var i = 0; i < CommercialMedicareCoverageFields.length; i++) {
             form.get('insurance')?.get(CommercialMedicareCoverageFields[i])?.setValidators(Validators.required)
             if (CommercialMedicareCoverageFields[i] === 'commercial-is-secondary-insurance-medicare-coverage-first-name') {
@@ -61,6 +62,10 @@ export class AddCommercialValidators {
             if (CommercialMedicareCoverageFields[i] === 'commercial-is-secondary-insurance-medicare-coverage-last-name') {
                 form.get('insurance')?.get(CommercialMedicareCoverageFields[i])?.addValidators([noSpecialCharactersValidator()])
             }
+            if (CommercialMedicareCoverageFields[i] === 'commercial-is-secondary-insurance-medicare-coverage-phone') {
+                form.get('insurance')?.get(CommercialMedicareCoverageFields[i])?.setValidators([Validators.required, Validators.pattern(phoneRgx)])
+            }
+
             form.get('insurance')?.get(CommercialMedicareCoverageFields[i])?.updateValueAndValidity();
         }
     }

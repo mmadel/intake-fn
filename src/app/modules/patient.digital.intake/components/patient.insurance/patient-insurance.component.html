@@ -694,7 +694,20 @@
                                         </c-col>
                                         <c-col xl="12">
                                             <input cFormControl sizing="sm"
-                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-phone" />
+                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-phone"
+                                                [value]="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.value | phone"
+                                                maxlength="15" />
+                                        </c-col>
+                                        <c-col xs="12">
+                                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.errors?.['required'] === true && 
+                                            (this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.touched)"
+                                                class="text-danger mx-1">
+                                                Phone Required
+                                            </div>
+                                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.errors?.['pattern']"
+                                                class="text-danger mx-1">
+                                                Invalid Phone
+                                            </div>
                                         </c-col>
                                     </c-row>
                                 </c-row>
