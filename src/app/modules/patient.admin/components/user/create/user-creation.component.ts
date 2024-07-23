@@ -226,7 +226,7 @@ export class UserCreationComponent implements OnInit {
             return false;
           }
         }),
-        debounceTime(500),
+        debounceTime(1800),
         tap((value) => {
         }),
         switchMap((value: any) => {
@@ -263,7 +263,7 @@ export class UserCreationComponent implements OnInit {
             return false;
           }
         }),
-        debounceTime(500),
+        debounceTime(1800),
         tap((value) => {
         }),
         switchMap((value) => {
