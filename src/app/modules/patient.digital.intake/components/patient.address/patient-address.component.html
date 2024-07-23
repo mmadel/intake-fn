@@ -29,8 +29,32 @@
                 <label style="width: 150px;">Second Address</label>
             </c-col>
             <c-col xs="12">
+                <input class="form-control" placeholder formControlName="secondAddress" sizing="sm" cFormControl
+                    maxlength="60">
+            </c-col>
+            <c-col xs="12">
                 <div *ngIf="this.form.get('address')?.get('secondAddress')?.errors?.['noSpecialCharacters']"
                     class="text-danger mx-1">secondAddress cannot contain special characters.</div>
+            </c-col>
+        </c-row>
+        <!--City-->
+        <c-row>
+            <c-col xl="12">
+                <label style="width: 150px;">City<span class="text-danger">*</span></label>
+            </c-col>
+            <c-col xl="12">
+                <input class="form-control" placeholder formControlName="city" sizing="sm" cFormControl
+                    [ngClass]="{'is-invalid': this.form.get('address')?.get('city')?.invalid
+                && this.form.get('address')?.get('city')?.touched}" maxlength="60">
+            </c-col>
+            <c-col xl=" 12">
+                <div *ngIf="this.form.get('address')?.get('city')?.errors?.['required'] && 
+            (this.form.get('address')?.get('city')?.dirty ||this.form.get('address')?.get('city')?.touched)"
+                    class="text-danger mx-1">
+                    City is required
+                </div>
+                <div *ngIf="this.form.get('address')?.get('city')?.errors?.['noSpecialCharacters']"
+                    class="text-danger mx-1">City cannot contain special characters.</div>
             </c-col>
         </c-row>
         <!-- State-->

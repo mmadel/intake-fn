@@ -63,6 +63,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       'address': new FormGroup({
         'firstAddress': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
         'secondAddress': new FormControl(null, [noSpecialCharactersValidator()]),
+        'city': new FormControl(null, [Validators.required,noSpecialCharactersValidator()]),
         'state': new FormControl(null, [Validators.required]),
         'zipCode': new FormControl(null, [Validators.required, Validators.min(10), Validators.pattern(zipCodeRgx)]),
       }),
