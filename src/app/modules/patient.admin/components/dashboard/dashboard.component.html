@@ -1,4 +1,22 @@
 <ngx-spinner></ngx-spinner>
+<c-row>
+  <c-col xs="3" class="mb-2">
+    <c-dropdown [autoClose]="'outside'">
+      <button cButton cDropdownToggle variant="outline">
+        <svg cIcon name="cilFilter" *ngIf="!isFiltered"></svg>
+        <svg cIcon name="cilFilterX" *ngIf="isFiltered"></svg>
+      </button>
+      <div cDropdownMenu [ngStyle]="{'min-width.px': 300}">
+        <div class="px-2 py-1 mb-3">
+          <label cLabel for="db_date_filter">Date Filter</label>
+          <c-date-range-picker size="sm" id="db_date_filter" [ranges]="customRanges"
+            (startDateChange)="startDateChange($event)" (endDateChange)="endDateChange($event)"></c-date-range-picker>
+        </div>
+        <div cDropdownDivider></div>
+      </div>
+    </c-dropdown>
+  </c-col>
+</c-row>
 <c-row *ngIf="dashboardDataContainer">
   <c-col md="12" xl="3" *ngFor="let recipient of dashboardDataContainer.clinicsData | keyvalue">
     <c-widget-stat-a [title]="recipient.key" [color]="getColor(recipient.value[0])" class="mb-4" text="">
