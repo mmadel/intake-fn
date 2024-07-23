@@ -88,7 +88,7 @@
                         Claim Number/ WC Case Number is required
                     </div>
                 </c-row>
-                <!--Wroker Status-->
+                <!--Worker Status-->
                 <c-row class="mb-2">
                     <c-col xl="12">
                         <label for="dsds" class="form-label" style="font-size: medium;">Wroker Status<span
@@ -98,7 +98,7 @@
                     <div *ngIf="!this.form.get('insurance')?.get('compensation-wroker-status')?.valid && 
                     (this.form.get('insurance')?.get('compensation-wroker-status')?.dirty ||this.form.get('insurance')?.get('compensation-wroker-status')?.touched)"
                         class="text-danger mx-1">
-                        wroker status is required
+                        Worker status is required
                     </div>
                     <c-col xl="12">
                         <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
@@ -112,7 +112,7 @@
                     <div *ngIf="!this.form.get('insurance')?.get('compensation-wroker-status')?.valid && 
                     (this.form.get('insurance')?.get('compensation-wroker-status')?.dirty ||this.form.get('insurance')?.get('compensation-wroker-status')?.touched)"
                         class="text-danger mx-1">
-                        wroker status is required
+                        Worker status is required
                     </div>
                 </c-row>
                 <!--Address-->
@@ -438,10 +438,10 @@
                         </div>
                     </c-col>
                 </c-row>
-                <!--Ploicy Id-->
+                <!--Policy Id-->
                 <c-row>
                     <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">Ploicy Id<span
+                        <label for="dsds" class="form-label" style="font-size: medium;">Policy Id<span
                                 class="text-danger">*</span>
                         </label>
                     </c-col>
@@ -451,13 +451,13 @@
                     <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicy-id')?.valid && 
 						(this.form.get('insurance')?.get('commercial-ploicy-id')?.dirty ||this.form.get('insurance')?.get('commercial-ploicy-id')?.touched)"
                         class="text-danger mx-1">
-                        ploicy id is required
+                        Policy id is required
                     </div>
                 </c-row>
-                <!--PloicyHolder Relationship-->
+                <!--Policy Holder Relationship-->
                 <c-row class="mb-2">
                     <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">PloicyHolder Relationship<span
+                        <label for="dsds" class="form-label" style="font-size: medium;">PolicyHolder Relationship<span
                                 class="text-danger">*</span>
                         </label>
                     </c-col>
@@ -474,14 +474,14 @@
                     <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.valid && 
 						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.touched)"
                         class="text-danger mx-1">
-                        PloicyHolder Relationship is required
+                        PolicyHolder Relationship is required
                     </div>
                 </c-row>
-                <!--PloicyHolder Info-->
+                <!--Policy Holder Info-->
                 <c-card class="mb-2" [cBorder]="{top: {color: 'secondary', width: 3}}" *ngIf="this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.value 
                     && this.form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.value !== 'Self'">
                     <c-card-body>
-                        <h6 cCardSubtitle class="mb-2 text-medium-emphasis">PloicyHolder</h6>
+                        <h6 cCardSubtitle class="mb-2 text-medium-emphasis">PolicyHolder</h6>
                         <c-row>
                             <c-col xl="12">
                                 <label for="dsds" class="form-label" style="font-size: medium;">Full Name<span
