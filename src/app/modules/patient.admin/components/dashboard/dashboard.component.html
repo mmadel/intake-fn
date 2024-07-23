@@ -42,126 +42,7 @@
 
             <hr class="mt-0" />
 
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <span class="ms-auto font-semibold">
-                  ({{dashboardDataContainer.weekCounterContainer.numberOfMonday}})
-                  {{dashboardDataContainer.weekCounterContainer.numberOfMondayPercentage}}%
-                </span>
-              </div>
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Monday</span>
-              </div>
 
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info-gradient"
-                    [value]="dashboardDataContainer.weekCounterContainer.numberOfMondayPercentage"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <span class="ms-auto font-semibold">
-                  ({{dashboardDataContainer.weekCounterContainer.numberOfTuesday}})
-                  {{dashboardDataContainer.weekCounterContainer.numberOfTuesdayPercentage}}%
-                </span>
-              </div>
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Tuesday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info-gradient"
-                    [value]="dashboardDataContainer.weekCounterContainer.numberOfTuesdayPercentage"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <span class="ms-auto font-semibold">
-                  ({{dashboardDataContainer.weekCounterContainer.numberOfWednesday}})
-                  {{dashboardDataContainer.weekCounterContainer.numberOfWednesdayPercentage}}%
-                </span>
-              </div>
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Wednesday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info-gradient"
-                    [value]="dashboardDataContainer.weekCounterContainer.numberOfWednesdayPercentage"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <span class="ms-auto font-semibold">
-                  ({{dashboardDataContainer.weekCounterContainer.numberOfThursday}})
-                  {{dashboardDataContainer.weekCounterContainer.numberOfThursdayPercentage}}%
-                </span>
-              </div>
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Thursday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info-gradient"
-                    [value]="dashboardDataContainer.weekCounterContainer.numberOfThursdayPercentage"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <span class="ms-auto font-semibold">
-                  ({{dashboardDataContainer.weekCounterContainer.numberOfFriday}})
-                  {{dashboardDataContainer.weekCounterContainer.numberOfFridayPercentage}}%
-                </span>
-              </div>
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Friday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info-gradient"
-                    [value]="dashboardDataContainer.weekCounterContainer.numberOfFridayPercentage"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <span class="ms-auto font-semibold">
-                  ({{dashboardDataContainer.weekCounterContainer.numberOfSaturday}})
-                  {{dashboardDataContainer.weekCounterContainer.numberOfSaturdayPercentage}}%
-                </span>
-              </div>
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Saturday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info-gradient"
-                    [value]="dashboardDataContainer.weekCounterContainer.numberOfSaturdayPercentage"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
-            <div class="progress-group mb-4">
-              <div class="progress-group-header">
-                <span class="ms-auto font-semibold">
-                  ({{dashboardDataContainer.weekCounterContainer.numberOfSunday}})
-                  {{dashboardDataContainer.weekCounterContainer.numberOfSundayPercentage}}%
-                </span>
-              </div>
-              <div class="progress-group-prepend">
-                <span class="text-medium-emphasis small">Sunday</span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin>
-                  <c-progress-bar color="info-gradient"
-                    [value]="dashboardDataContainer.weekCounterContainer.numberOfSundayPercentage"></c-progress-bar>
-                </c-progress>
-              </div>
-            </div>
           </c-col>
 
           <c-col md="6" xl="6" xs="12">
@@ -177,7 +58,8 @@
             </c-row>
 
             <hr class="mt-0" />
-
+          </c-col>
+          <c-col xs="12">
             <div class="progress-group mb-4">
               <div class="progress-group-header">
                 <svg cIcon class="icon icon-lg me-2" name="cilUser"></svg>
@@ -210,7 +92,6 @@
                 </c-progress>
               </div>
             </div>
-
             <div class="progress-group">
               <div class="progress-group-header">
                 <svg cIcon class="icon icon-lg me-2" name="cilUserFollow"></svg>
@@ -295,11 +176,6 @@
                     [value]="dashboardDataContainer.patientSourceContainer.tvPercentage"></c-progress-bar>
                 </c-progress>
               </div>
-            </div>
-            <div class="divider d-flex justify-content-center">
-              <button cButton class="text-muted btn-link" color="transparent" size="sm" type="button">
-                <svg cIcon name="cil-options"></svg>
-              </button>
             </div>
           </c-col>
         </c-row>
