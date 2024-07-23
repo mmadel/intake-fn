@@ -28,7 +28,7 @@ export class AddWorkerCompensationValidators {
                 form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])
             }
             if (CompensationFields[i] === 'compensation-attorney-last-name') {
-                form.get('insurance')?.get(CompensationFields[i])?.setValidators([noSpecialCharactersValidator()])
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])
             }
 
 
