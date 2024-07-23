@@ -52,6 +52,6 @@
 /intake-service/api/audit/patient/retrieve https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/patient/retrieve 200
 
 /intake-service/api/nppes/find/provider/npi/:npi https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/nppes/find/provider/npi/:npi 200
-/intake-service/api/nppes/find/provider/name/:name https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/nppes/find/provider/npi/:name 200
+/intake-service/api/nppes/find/provider/name/:name https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/nppes/find/provider/name/:name 200
 
 /*  /index.html   200

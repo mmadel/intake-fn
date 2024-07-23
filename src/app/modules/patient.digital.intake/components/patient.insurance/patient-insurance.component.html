@@ -277,16 +277,22 @@
                                 <input cFormControl placeholder="LastName"
                                     formControlName="compensation-adjuster-last-name" maxlength="60">
                             </c-input-group>
-                            <div *ngIf="!this.form.get('insurance')?.get('compensation-adjuster-first-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-first-name')?.errors?.['required'] && 
                             (this.form.get('insurance')?.get('compensation-adjuster-first-name')?.dirty ||this.form.get('insurance')?.get('compensation-adjuster-first-name')?.touched)"
                                 class="text-danger mx-1">
                                 adjuster first name is required
                             </div>
-                            <div *ngIf="!this.form.get('insurance')?.get('compensation-adjuster-last-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-last-name')?.errors?.['required'] && 
                             (this.form.get('insurance')?.get('compensation-adjuster-last-name')?.dirty ||this.form.get('insurance')?.get('compensation-adjuster-last-name')?.touched)"
                                 class="text-danger mx-1">
                                 adjuster last name is required
                             </div>
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-first-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">firstname cannot contain special characters.</div>
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-middle-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">middle name cannot contain special characters.</div>
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-last-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">last cannot contain special characters.</div>
                         </c-col>
                         <c-row>
                             <c-col xl="12">
@@ -329,17 +335,22 @@
                                 <input cFormControl placeholder="LastName"
                                     formControlName="compensation-attorney-last-name" maxlength="60">
                             </c-input-group>
-                            <div *ngIf="!this.form.get('insurance')?.get('compensation-attorney-first-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-first-name')?.errors?.['required'] && 
 						(this.form.get('insurance')?.get('compensation-attorney-first-name')?.dirty ||this.form.get('insurance')?.get('compensation-attorney-first-name')?.touched)"
                                 class="text-danger mx-1">
                                 attorney first name is required
                             </div>
-
-                            <div *ngIf="!this.form.get('insurance')?.get('compensation-attorney-last-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-last-name')?.errors?.['required'] && 
 						(this.form.get('insurance')?.get('compensation-attorney-last-name')?.dirty ||this.form.get('insurance')?.get('compensation-attorney-last-name')?.touched)"
                                 class="text-danger mx-1">
                                 attorney last name is required
                             </div>
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-first-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">firstname cannot contain special characters.</div>
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-middle-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">middle name cannot contain special characters.</div>
+                            <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-last-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">last cannot contain special characters.</div>
                         </c-col>
                         <c-row>
                             <c-col xl="12">
@@ -385,6 +396,7 @@
                 </c-row>
             </c-card-body>
         </c-card>
+        <!--Commercial Insurance-->
         <c-card *ngIf="form.get('insurance')?.get('type')?.value">
             <c-card-body>
                 <h5 cCardTitle>Commercial Insurance</h5>
@@ -485,16 +497,24 @@
                                 <input cFormControl placeholder="LastName"
                                     formControlName="commercial-ploicyHolder-relationship-last-name">
                             </c-input-group>
-                            <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.errors?.['required']  && 
 						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.touched)"
                                 class="text-danger mx-1">
                                 first-name is required
                             </div>
-                            <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.errors?.['required'] && 
 						(this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.dirty ||this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.touched)"
                                 class="text-danger mx-1">
-                                first-name is required
+                                last-name is required
                             </div>
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-first-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">firstname cannot contain special characters.</div>
+
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-middle-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">middle name cannot contain special characters.</div>
+
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-ploicyHolder-relationship-last-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">lastname cannot contain special characters.</div>
                         </c-col>
                         <c-row>
                             <c-col xl="12">
@@ -592,16 +612,24 @@
                                         formControlName="commercial-is-secondary-insurance-last-name" maxlength="60">
                                 </c-input-group>
                             </c-col>
-                            <div *ngIf="!this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.errors?.['required'] && 
 						(this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.touched)"
                                 class="text-danger mx-1">
                                 first-name is required
                             </div>
-                            <div *ngIf="!this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.valid && 
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.errors?.['required'] && 
 						(this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.touched)"
                                 class="text-danger mx-1">
                                 last-name is required
                             </div>
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-first-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">firstname cannot contain special characters.</div>
+
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-middle-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">middle name cannot contain special characters.</div>
+
+                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-last-name')?.errors?.['noSpecialCharacters']"
+                                class="text-danger mx-1">lastname cannot contain special characters.</div>
                         </c-row>
                         <c-row>
                             <c-col xl="12">
@@ -626,11 +654,14 @@
                                     <c-col xl="12">
                                         <c-input-group>
                                             <input cFormControl placeholder="FirstName"
-                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-first-name" maxlength="60">
+                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-first-name"
+                                                maxlength="60">
                                             <input cFormControl placeholder="MiddleName"
-                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-middle-name" maxlength="60">
+                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-middle-name"
+                                                maxlength="60">
                                             <input cFormControl placeholder="LastName"
-                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-last-name" maxlength="60">
+                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-last-name"
+                                                maxlength="60">
                                         </c-input-group>
                                     </c-col>
                                     <c-col xl="12">
@@ -644,6 +675,15 @@
                                             class="text-danger mx-1">
                                             first name Required
                                         </div>
+                                        <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-first-name')?.errors?.['noSpecialCharacters']"
+                                            class="text-danger mx-1">firstname cannot contain special characters.</div>
+
+                                        <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-middle-name')?.errors?.['noSpecialCharacters']"
+                                            class="text-danger mx-1">middle name cannot contain special characters.
+                                        </div>
+
+                                        <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.errors?.['noSpecialCharacters']"
+                                            class="text-danger mx-1">lastname cannot contain special characters.</div>
                                     </c-col>
                                 </c-row>
                                 <c-row>

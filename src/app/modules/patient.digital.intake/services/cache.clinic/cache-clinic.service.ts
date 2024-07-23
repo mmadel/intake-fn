@@ -23,6 +23,7 @@ export class CacheClinicService {
   //   localStorage.setItem('clinicId', encryptClinicId);
   // }
   private getCachedClinic(): number {
+    console.log(this.localService.decrypt(localStorage.getItem('clinicId') || '{}') )
     var cahcedClinicId = localStorage.getItem('clinicId');
     if (cahcedClinicId === null)
       throw new Error('no  clinic');
@@ -35,7 +36,7 @@ export class CacheClinicService {
 
   }
   private cahceClinic(clinicId: number): number {
-    var encryptClinicId = this.localService.encrypt(clinicId.toString())
+    var encryptClinicId = this.localService.simpleEncrypt(clinicId.toString())
     localStorage.setItem('clinicId', encryptClinicId);
     return clinicId;
   }

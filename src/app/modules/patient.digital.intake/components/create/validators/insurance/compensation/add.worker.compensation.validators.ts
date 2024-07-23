@@ -1,5 +1,6 @@
 import { FormGroup, Validators } from "@angular/forms";
 import { futureDateValidator } from "../../custom.validation/future.date.validator";
+import { noSpecialCharactersValidator } from "../../custom.validation/special.characters.validator";
 import { CompensationFields } from "./compensation.fields";
 
 export class AddWorkerCompensationValidators {
@@ -19,6 +20,26 @@ export class AddWorkerCompensationValidators {
             }
             if (CompensationFields[i] === 'compensation-accident-date') {
                 form.get('insurance')?.get(CompensationFields[i])?.setValidators([futureDateValidator()])
+            }
+            if (CompensationFields[i] === 'compensation-attorney-first-name') {
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])
+            }
+            if (CompensationFields[i] === 'compensation-attorney-middle-name') {
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])
+            }
+            if (CompensationFields[i] === 'compensation-attorney-last-name') {
+                form.get('insurance')?.get(CompensationFields[i])?.setValidators([noSpecialCharactersValidator()])
+            }
+
+
+            if (CompensationFields[i] === 'compensation-adjuster-first-name') {
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])
+            }
+            if (CompensationFields[i] === 'compensation-adjuster-middle-name') {
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])
+            }
+            if (CompensationFields[i] === 'compensation-adjuster-last-name') {
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])
             }
             form.get('insurance')?.get(CompensationFields[i])?.updateValueAndValidity();
         }
