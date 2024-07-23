@@ -35,39 +35,63 @@
                     </c-col>
                 </c-row>
                 <span *ngIf="this.form.get('medical')?.get('isReferring')?.value ==='yes'">
+                    <strong>Search By</strong>
+                    <c-form-check [switch]="true" class="mb-3" sizing="lg">
+                        <input cFormCheckInput type="checkbox" formControlName="providerSearch" />
+                        <label cFormCheckLabel>
+                            <span
+                                [ngClass]="{ 'fw-bold':!this.form.get('medical')?.get('providerSearch')?.value}">NPI/</span>
+                            <span
+                                [ngClass]="{ 'fw-bold':this.form.get('medical')?.get('providerSearch')?.value}">Provider
+                                Name</span>
+                        </label>
+                    </c-form-check>
+                    <span *ngIf="!form.get('medical')?.get('providerSearch')?.value">
+                        <c-row class="mb-2">
+                            <c-col xs="8">
+                                <input class="form-control mb-2" placeholder="Type Provider NPI"
+                                    formControlName="providerSearchNPI" cFormControl sizing="sm">
+                            </c-col>
+                            <c-col xs="4">
+                                <p><em>Type exact provider NPI</em></p>
+                            </c-col>
+                        </c-row>
+                    </span>
+                    <span *ngIf="form.get('medical')?.get('providerSearch')?.value">
+                        <c-row class="mb-2">
+                            <c-col xs="8">
+                                <ng-autocomplete [itemTemplate]="itemTemplate" formControlName="providerSearchName"
+                                    placeholder="Provider Name" [data]="(providers | async) ?? []"
+                                    [notFoundTemplate]="notFoundTemplate" (selected)="pickProvider($event)"
+                                    [searchKeyword]="''">
+                                </ng-autocomplete>
+                                <ng-template #itemTemplate let-item>
+                                    <a [innerHTML]="item"></a>
+                                </ng-template>
+                                <ng-template #notFoundTemplate let-notFound>
+                                    <div [innerHTML]="notFound"></div>
+                                </ng-template>
+                            </c-col>
+                            <c-col xs="4">
+                                <p><em>Type provider first name or first name followed by space and last name</em></p>
+                            </c-col>
+                        </c-row>
+                    </span>
                     <c-row>
-                        <c-col xs="12">
-                            <label style="width: 90px;">NPI<span class="text-danger">*</span></label>
-                        </c-col>
-                        <c-col xs="12">
-                            <input class="form-control" placeholder formControlName="providerNPI" cFormControl
-                                sizing="sm" [ngClass]="{'is-invalid': this.form.get('medical')?.get('providerNPI')?.invalid
-                                && this.form.get('medical')?.get('providerNPI')?.touched}">
-                        </c-col>
-                        <c-col xs="12">
-                            <div *ngIf="this.form.get('medical')?.get('providerNPI')?.errors?.['required'] === true && 
-                            (this.form.get('medical')?.get('providerNPI')?.touched)" class="text-danger mx-1">
-                                NPI is required
-                            </div>
+                        <c-col xs="8">
+                            <c-input-group sizing="sm">
+                                <input cFormControl placeholder="NPI" maxlength="60" readonly
+                                    formControlName="providerNPI">
+                                <input cFormControl placeholder="ProviderName" maxlength="60" readonly
+                                    formControlName="providerName">
+                            </c-input-group>
                         </c-col>
                     </c-row>
-                    <c-row>
-                        <c-col xs="12">
-                            <label style="width: 90px;">Provider <span class="text-danger">*</span></label>
-                        </c-col>
-                        <c-col xs="12">
-                            <ng-autocomplete [itemTemplate]="itemTemplate" formControlName="providerName"
-                                [data]="(providers | async) ?? []" [notFoundTemplate]="notFoundTemplate"
-                                (selected)="pickProvider($event)" [searchKeyword]="''">
-                            </ng-autocomplete>
-                            <ng-template #itemTemplate let-item>
-                                <a [innerHTML]="item"></a>
-                            </ng-template>
-
-                            <ng-template #notFoundTemplate let-notFound>
-                                <div [innerHTML]="notFound"></div>
-                            </ng-template>
-                        </c-col>
+                    <c-col xs="12">
+                        <div *ngIf="this.form.get('medical')?.get('providerNPI')?.errors?.['required'] === true && 
+                        (this.form.get('medical')?.get('providerNPI')?.touched)" class="text-danger mx-1">
+                            NPI is required
+                        </div>
                         <c-col xs="12">
                             <div *ngIf="this.form.get('medical')?.get('providerName')?.errors?.['required'] === true && 
                 (this.form.get('medical')?.get('providerName')?.dirty ||this.form.get('medical')?.get('providerName')?.touched)"
@@ -75,8 +99,7 @@
                                 Provider Name is required
                             </div>
                         </c-col>
-                    </c-row>
-
+                    </c-col>
                 </span>
                 <span *ngIf="this.form.get('medical')?.get('isReferring')?.value ==='no'">
                     <c-row>

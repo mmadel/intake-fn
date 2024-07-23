@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { isObject } from 'lodash';
-import { debounceTime, filter, finalize, Observable, switchMap, tap } from 'rxjs';
+import { isObject, result } from 'lodash';
+import { debounceTime, filter, finalize, Observable, share, switchMap, tap } from 'rxjs';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 import { Provider } from '../../models/provider';
 import { ProvidersService } from '../../services/provider/providers.service';
@@ -26,15 +26,10 @@ export class PatientMedicalComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.providers = this.form.get('medical')?.get('providerName')?.valueChanges
+    this.providers = this.form.get('medical')?.get('providerSearchName')?.valueChanges
       .pipe(
         filter(text => {
-          if (isObject(text))
-            return false;
-          if (text === undefined) {
-            return false;
-          }
-          if (text !== null && text?.includes(','))
+          if (text.includes(':'))
             return false;
           if (Number.isNaN(text)) {
             return false;
@@ -42,22 +37,21 @@ export class PatientMedicalComponent implements OnInit {
           if (text?.length > 1) {
             return true
           } else {
-
             return false;
           }
         }),
         debounceTime(1000),
         switchMap((value: any) => {
           return this.providersService.findProviderByName(value)
-        })
+        }), share()
       )
-    this.providers?.subscribe((res: any) => {
-      if (res.length === 0) {
-        console.log('Emtpy')
-        this.form.get('medical')?.get('providerNPI')?.setValue('');
+    this.providers?.subscribe(data => {
+      if (data === null) {
+        this.form.get('medical')?.get('providerName')?.setValue(null);
+        this.form.get('medical')?.get('providerNPI')?.setValue(null);
       }
     })
-    this.form.get('medical')?.get('providerNPI')?.valueChanges
+    this.form.get('medical')?.get('providerSearchNPI')?.valueChanges
       .pipe(
         filter(text => {
           if (!Number(text)) {
@@ -89,13 +83,19 @@ export class PatientMedicalComponent implements OnInit {
         )
       ).subscribe(data => {
         this.provider = data
-        var name: string;
-        if (this.provider !== null)
-          name = this.provider.firstName?.toLowerCase() + ',' + this.provider.lastName?.toLowerCase()
-        else
-          name = ''
-        if (data !== '')
+        var name: string | undefined;
+        var npi: string | undefined;
+        if (this.provider !== null) {
+          name = this.provider.firstName?.toLowerCase() + ',' + this.provider.lastName?.toLowerCase();
+          npi = this.provider.npi;
+        } else {
+          name = undefined;
+          npi = undefined;
+        }
+        if (data !== '') {
           this.form.get('medical')?.get('providerName')?.setValue(name);
+          this.form.get('medical')?.get('providerNPI')?.setValue(npi);
+        }
       },
         error => {
           console.log(JSON.stringify(error))
@@ -111,6 +111,7 @@ export class PatientMedicalComponent implements OnInit {
     }
   }
   pickProvider(event: any) {
+    this.form.get('medical')?.get('providerName')?.setValue(event.split(':')[0]);
     this.form.get('medical')?.get('providerNPI')?.setValue(event.split(':')[1]);
   }
 }
