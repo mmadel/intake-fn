@@ -42,7 +42,7 @@ export class ClinicListComponent implements OnInit {
   }
   private constructClinic(element: Clinic) {
     var address: string = '';
-    address = element.clinicAddress?.firstAddress + ',' + element.clinicAddress?.secondAddress!
+    address = element.clinicAddress?.firstAddress
       + ',' + element.clinicAddress?.city
       + ',' + element.clinicAddress?.state
       + ',' + element.clinicAddress?.zipCode
