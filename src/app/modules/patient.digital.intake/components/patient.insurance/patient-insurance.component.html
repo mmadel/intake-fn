@@ -91,7 +91,7 @@
                 <!--Worker Status-->
                 <c-row class="mb-2">
                     <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">Wroker Status<span
+                        <label for="dsds" class="form-label" style="font-size: medium;">Worker Status<span
                                 class="text-danger">*</span>
                         </label>
                     </c-col>
@@ -288,11 +288,11 @@
                                 adjuster last name is required
                             </div>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-first-name')?.errors?.['noSpecialCharacters']"
-                                class="text-danger mx-1">firstname cannot contain special characters.</div>
+                                class="text-danger mx-1">adjuster first name cannot contain special characters.</div>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-middle-name')?.errors?.['noSpecialCharacters']"
-                                class="text-danger mx-1">middle name cannot contain special characters.</div>
+                                class="text-danger mx-1">adjuster middle name cannot contain special characters.</div>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-last-name')?.errors?.['noSpecialCharacters']"
-                                class="text-danger mx-1">last cannot contain special characters.</div>
+                                class="text-danger mx-1">adjuster last name cannot contain special characters.</div>
                         </c-col>
                         <c-row>
                             <c-col xl="12">
@@ -340,17 +340,18 @@
                                 class="text-danger mx-1">
                                 attorney first name is required
                             </div>
+                            
                             <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-last-name')?.errors?.['required'] && 
 						(this.form.get('insurance')?.get('compensation-attorney-last-name')?.dirty ||this.form.get('insurance')?.get('compensation-attorney-last-name')?.touched)"
                                 class="text-danger mx-1">
                                 attorney last name is required
                             </div>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-first-name')?.errors?.['noSpecialCharacters']"
-                                class="text-danger mx-1">firstname cannot contain special characters.</div>
+                                class="text-danger mx-1">attorney first name cannot contain special characters.</div>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-middle-name')?.errors?.['noSpecialCharacters']"
-                                class="text-danger mx-1">middle name cannot contain special characters.</div>
+                                class="text-danger mx-1">attorney middle name cannot contain special characters.</div>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-last-name')?.errors?.['noSpecialCharacters']"
-                                class="text-danger mx-1">last cannot contain special characters.</div>
+                                class="text-danger mx-1">attorney last name cannot contain special characters.</div>
                         </c-col>
                         <c-row>
                             <c-col xl="12">
@@ -673,7 +674,7 @@
                                         <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.errors?.['required'] === true && 
                                         (this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-last-name')?.touched)"
                                             class="text-danger mx-1">
-                                            first name Required
+                                            last name Required
                                         </div>
                                         <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-first-name')?.errors?.['noSpecialCharacters']"
                                             class="text-danger mx-1">firstname cannot contain special characters.</div>
@@ -694,7 +695,20 @@
                                         </c-col>
                                         <c-col xl="12">
                                             <input cFormControl sizing="sm"
-                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-phone" />
+                                                formControlName="commercial-is-secondary-insurance-medicare-coverage-phone"
+                                                [value]="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.value | phone"
+                                                maxlength="15" />
+                                        </c-col>
+                                        <c-col xs="12">
+                                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.errors?.['required'] === true && 
+                                            (this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.touched)"
+                                                class="text-danger mx-1">
+                                                Phone Required
+                                            </div>
+                                            <div *ngIf="this.form.get('insurance')?.get('commercial-is-secondary-insurance-medicare-coverage-phone')?.errors?.['pattern']"
+                                                class="text-danger mx-1">
+                                                Invalid Phone
+                                            </div>
                                         </c-col>
                                     </c-row>
                                 </c-row>

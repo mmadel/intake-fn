@@ -1,4 +1,5 @@
 <ngx-spinner></ngx-spinner>
+<!--Essential Information-->
 <c-card class="mb-3 mt-3">
     <c-card-body>
         <h5 cCardTitle>Essential Information</h5>
@@ -27,17 +28,20 @@
         </p>
     </c-card-body>
 </c-card>
+<!--Address Information-->
 <c-card class="mb-3 mt-3">
     <c-card-body>
         <h5 cCardTitle>Address Information</h5>
         <p cCardText>
-            <strong>First Address : </strong> {{pateint.patientEssentialInformation?.address?.first}}<br />
-            <strong>Second Address : </strong> {{pateint.patientEssentialInformation?.address?.second}}<br />
-            <strong>State : </strong> {{pateint.patientEssentialInformation?.address?.state}}<br />
-            <strong>Zip-Code : </strong> {{pateint.patientEssentialInformation?.address?.zipCode}}<br />
+            <strong>First Address : </strong> {{pateint.patientAddress?.firstAddress}}<br />
+            <strong>Second Address : </strong> {{pateint.patientAddress?.secondAddress}}<br />
+            <strong>City : </strong> {{pateint.patientAddress?.city}}<br />
+            <strong>State : </strong> {{pateint.patientAddress?.state}}<br />
+            <strong>Zip-Code : </strong> {{pateint.patientAddress?.zipCode}}<br />
         </p>
     </c-card-body>
 </c-card>
+<!--Medical Information-->
 <c-card class="mb-3 mt-3">
     <c-card-body>
         <h5 cCardTitle>Medical Information</h5>
@@ -55,16 +59,18 @@
             <strong>Primary Doctor
                 : </strong> {{pateint.patientMedical?.primaryDoctor}}<br />
             <strong>Sending Result to Primary Doctor
-                : </strong> {{pateint.patientMedical?.familyResultSubmission}}<br />
+                : </strong> {{pateint.patientMedical?.familyResultSubmission?'Yes':'No'}}<br />
 
             <span *ngIf="pateint.patientMedical?.hasPatientPhysicalTherapy">
-                <strong>Received physical therapy : </strong> <br />
-                Location : {{pateint.patientMedical?.patientPhysicalTherapy?.location}} <br />
-                Number Of Visits : {{pateint.patientMedical?.patientPhysicalTherapy?.numberOfVisit}} <br />
+                <strong>Received physical therapy : </strong> {{pateint.patientMedical?.hasPatientPhysicalTherapy?
+                'Yes':'No'}} <br />
+                <li>Location : {{pateint.patientMedical?.patientPhysicalTherapy?.location}} </li>
+                <li>Number Of Visits : {{pateint.patientMedical?.patientPhysicalTherapy?.numberOfVisit}}</li>
             </span>
         </p>
     </c-card-body>
 </c-card>
+<!--Medical History Information-->
 <c-card class="mb-3 mt-3">
     <c-card-body>
         <h5 cCardTitle>Medical History Information</h5>
@@ -104,6 +110,7 @@
         </p>
     </c-card-body>
 </c-card>
+<!--Patient Insurance Information-->
 <c-card class="mb-3 mt-3">
     <c-card-body>
         <h5 cCardTitle>Patient Insurance Information</h5>
@@ -178,6 +185,7 @@
         </p>
     </c-card-body>
 </c-card>
+<!--Submit-->
 <div [formGroup]="form">
     <div class="mt-3">
         <button cButton matStepperPrevious size="sm" variant="outline" class="mx-2">Back</button>

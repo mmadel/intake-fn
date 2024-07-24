@@ -17,7 +17,6 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
-            <th scope="col" style="width: 20%;">User ID</th>
             <th scope="col">Role</th>
             <th scope="col" style="width: 10%;">Action</th>
             <th scope="col"></th>
@@ -27,7 +26,6 @@
         <tr *ngFor="let user of users; index as i;">
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
-            <td>{{user.uuid}}</td>
             <td>
                 <c-badge color="primary" *ngIf="user.userRole === 'administrator'">{{user.userRole}}</c-badge>
                 <c-badge color="warning" *ngIf="user.userRole === 'normal'">{{user.userRole}}</c-badge>

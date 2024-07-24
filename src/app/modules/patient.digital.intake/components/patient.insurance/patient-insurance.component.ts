@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { InsuranceCompany } from 'src/app/modules/patient.admin/models/insurance.company.model';
 import { InsuranceCompanyService } from 'src/app/modules/patient.admin/services/insurance.company/insurance-company.service';
+import { CheckInvalidForm } from '../../util/invalid.form';
 import { ValidationExploder } from '../create/validators/validation.exploder';
 
 @Component({
@@ -25,6 +26,8 @@ export class PatientInsuranceComponent implements OnInit {
     })
   }
   next(){
+    var insuranceForm:FormGroup =  this.form.get('insurance') as FormGroup
+    CheckInvalidForm.check(insuranceForm)
     if (this.form.get('insurance')?.valid) {
       this.stepper.next();
       this.isValidForm = false;

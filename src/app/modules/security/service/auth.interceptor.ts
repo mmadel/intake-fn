@@ -30,13 +30,17 @@ export class AuthInterceptor implements HttpInterceptor {
         }),
         catchError(error => {
           if (error.status === 401) {
+            console.log('token is expired 401');
+            console.log('Error:' + JSON.stringify(error.error));
             this.kcAuthServiceService.logout();
           }
           if (error.error.errorCode === 'UNAUTHORIZED') {
-            console.log('token is expired');
+            console.log('token is expired UNAUTHORIZED');
+            console.log('Error:' + JSON.stringify(error.error));
             this.kcAuthServiceService.logout();
           } else {
-            console.log('other error , please contact the administrator..!!');
+            console.log('other error , please contact the administrator..!! ErrorCode :' + error.error.errorCode);
+            console.log('Error:' + JSON.stringify(error.error));
           }
           return [];
         }))

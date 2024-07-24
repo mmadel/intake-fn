@@ -1,5 +1,5 @@
 <!--sidebar-->
-<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" visible>
+<c-sidebar #sidebar1="cSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar1" [visible]="!(noShow | async)">
   <c-sidebar-brand [brandFull]="{
       src: 'assets/img/brand/cob-logo.png',
       width: 100,

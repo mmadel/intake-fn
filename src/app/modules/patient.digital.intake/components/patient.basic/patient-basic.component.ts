@@ -36,7 +36,7 @@ export class PatientBasicComponent implements OnInit {
         return false
       }
       var patientAge = moment().diff(value, 'y')
-      this.isGuarantor = patientAge < 21 ? true : false;
+      this.isGuarantor = patientAge < 18 ? true : false;
     })
   }
   public checkAge(event: any) {
@@ -44,7 +44,7 @@ export class PatientBasicComponent implements OnInit {
     if (today)
       return false
     var patientAge = moment().diff(event, 'y')
-    this.isGuarantor = patientAge < 21 ? true : false;
+    this.isGuarantor = patientAge < 18 ? true : false;
   }
   public onImageUpload(event: any, photoType: string) {
     this.compressDocumentService.setuploadedImages(this.fileMap);

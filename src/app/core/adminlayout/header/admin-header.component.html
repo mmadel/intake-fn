@@ -11,12 +11,7 @@
           {{clinic.name}}
         </option>
       </select>
-    </c-header-nav>
-    <c-header-nav class="ms-auto me-4">
-      <c-date-range-picker size="sm" [ranges]="customRanges"
-      (startDateChange)="startDateChange($event)" 
-      (endDateChange)="endDateChange($event)"></c-date-range-picker>
-    </c-header-nav>
+    </c-header-nav>    
     <c-header-nav class="ms-auto me-4">
       <form [formGroup]="themeSwitch" cForm>
         <c-button-group aria-label="Theme switch">

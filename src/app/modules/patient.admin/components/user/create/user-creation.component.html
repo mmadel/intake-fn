@@ -60,10 +60,10 @@
         <c-col xs="12">
             <div *ngIf="this.userForm.get('lastName')?.errors?.['required'] && 
         (this.userForm.get('lastName')?.dirty ||this.userForm.get('lastName')?.touched)" class="text-danger mx-1">
-                First Name is required
+                Last Name is required
             </div>
             <div *ngIf="this.userForm.get('lastName')?.errors?.['noSpecialCharacters']" class="text-danger mx-1">
-                First Name cannot contain special characters.</div>
+                Last Name cannot contain special characters.</div>
         </c-col>
     </c-row>
     <!--Email-->
