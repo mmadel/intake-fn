@@ -3,5 +3,6 @@ export interface PatientAddress {
     firstAddress?: string
     secondAddress?: string
     state?: string
+    city?:string
     zipCode?: string
 }

@@ -6,7 +6,6 @@ import { Address } from 'src/app/models/patient/address.info.model';
 import { MedicareCoverage } from 'src/app/models/questionnaire/Insurance/medicare.coverage';
 import { PatientRelationship } from 'src/app/models/questionnaire/Insurance/patient.relationship';
 import { PatientEssentialInformation } from 'src/app/modules/patient.questionnaire/models/intake/essential/patient.essential.information';
-import { PatientAddress } from 'src/app/modules/patient.questionnaire/models/intake/essential/patienta.ddress';
 import { PatientCommercialInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.commercial.insurance';
 import { PatientInsurance } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance';
 import { PatientInsuranceCompensationNoFault } from 'src/app/modules/patient.questionnaire/models/intake/Insurance/patient.insurance.compensation.no.fault';
@@ -22,6 +21,7 @@ import { EntitySource } from 'src/app/modules/patient.questionnaire/models/intak
 import { PatientSource } from "src/app/modules/patient.questionnaire/models/intake/source/patient.source";
 import { PatientSignature } from 'src/app/modules/patient.questionnaire/models/patient/signature.model';
 import { PatientService } from 'src/app/modules/patient.questionnaire/service/patient.service';
+import { PatientAddress } from '../../models/patient.address';
 import { CacheClinicService } from '../../services/cache.clinic/cache-clinic.service';
 import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 
@@ -54,7 +54,6 @@ export class PatientSummaryComponent implements OnInit {
     console.log(this.clinicId)
   }
   submit() {
-    // this.router.navigateByUrl('/digital-intake/done');
     var imageFormData = new FormData();
     this.componentReference.getPatientDocumentComponent()!.getFormDate().forEach((patientDocument: any) => {
       imageFormData.append('files', patientDocument, patientDocument.name);
@@ -116,15 +115,13 @@ export class PatientSummaryComponent implements OnInit {
     })
   }
   private fillPatientAddress() {
+    var address: PatientAddress={}
     this.form.get('address')?.valueChanges.forEach(selected => {
-      var address: Address = {
-        type: '',
-        first: selected.firstAddress,
-        second: selected.secondAddress,
-        country: '',
+      address = {        
+        firstAddress: selected.firstAddress,
+        secondAddress: selected.secondAddress,
+        city: selected.city,
         state: selected.state,
-        province: '',
-        city: '',
         zipCode: selected.zipCode
       };
       this.pateint.patientAddress = address
