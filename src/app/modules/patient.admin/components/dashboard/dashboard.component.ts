@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { combineLatest, filter, iif, switchMap, tap, zip } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, iif, switchMap, tap, zip } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
 import { LocalService } from 'src/app/modules/common';
 import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
@@ -22,11 +22,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   filterStartDate: number;
   filterEndDate: number
   isFiltered: boolean;
+  noShow:BehaviorSubject<boolean|null>;
   constructor(private dashboardService: DashboardService, private clinicService: ClinicService
     , private kcAuthServiceService: KcAuthServiceService, private router: Router) { }
-
-
   ngOnInit(): void {
+    this.noShow = this.clinicService.preventUser$;
     if (this.kcAuthServiceService.isUserInRole('normal')) {
       this.router.navigateByUrl('admin/patient/list')
     }
@@ -47,6 +47,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.clinicService.filterDate$.next(null)
+  }
+  logout() {
+    this.kcAuthServiceService.logout()
   }
   getColor(percentage: number): string {
     var color: string = "";

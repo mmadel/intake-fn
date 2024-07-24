@@ -47,10 +47,14 @@ export class AdminHeaderComponent extends HeaderComponent {
       .then((userProfile) => {
         this.userName = userProfile.username?.charAt(0).toUpperCase()
         this.clinicService.getByUserId(userProfile.id).subscribe(response => {
-          response.body?.forEach(element => {
-            this.clinics.push(element);
-          });
-          this.clinicService.selectedClinic$.next(this.clinics[0].id)
+          if (response.body?.length !== 0) {
+            response.body?.forEach((element: any) => {
+              this.clinics.push(element);
+            });
+            this.clinicService.selectedClinic$.next(this.clinics[0].id)
+          }else{
+            this.clinicService.preventUser$.next(true)
+          }
         })
       })
   }
