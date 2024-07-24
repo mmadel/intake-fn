@@ -2,11 +2,9 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
-import * as moment from 'moment';
 import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';
-import { CacheClinicService } from 'src/app/modules/patient.digital.intake/services/cache.clinic/cache-clinic.service';
 import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 
 @Component({
@@ -39,9 +37,8 @@ export class AdminHeaderComponent extends HeaderComponent {
     themeSwitchRadio: new UntypedFormControl('light'),
   });
 
-  constructor(private _classToggler: ClassToggleService, private router: Router
+  constructor(private _classToggler: ClassToggleService
     , private clinicService: ClinicService
-    , private localService: LocalService
     , private ksAuthServiceService: KcAuthServiceService) {
     super();
   }
