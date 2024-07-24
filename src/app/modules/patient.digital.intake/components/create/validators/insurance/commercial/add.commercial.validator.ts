@@ -4,6 +4,9 @@ import { CommercialFields } from "./commercial.fields";
 import { CommercialMedicareCoverageFields } from "./commercial.medicare.coverage.fields";
 import { CommercialPolicyHolderFields } from "./commercial.ploicy.holder.fields";
 import { CommercialSecondaryInsuranceFields } from "./commercial.secondary.insurance.fields";
+import { RemoveCommercialMedicareCoverageValidator } from "./remove.commercial.medicare.coverage.validator";
+import { RemoveCommercialPloicyHolderRelationshipValidator } from "./remove.commercial.ploicy.holderRelationship.validator";
+import { RemoveCommercialSecondaryInsuranceValidator } from "./remove.commercial.secondary.insurance.validator";
 
 export class AddCommercialValidators {
     public static add(form: FormGroup) {
@@ -15,25 +18,24 @@ export class AddCommercialValidators {
             if (value)
                 this.addSecondaryInsuranceValidators(form)
             else
-                this.removeSecondaryInsuranceValidators(form)
+                RemoveCommercialSecondaryInsuranceValidator.remove(form)
         })
         form.get('insurance')?.get('commercial-ploicyHolder-relationship')?.valueChanges.subscribe(value => {
-            if (value !== 'Self')
+            if (value !== null && value !== 'Self')
                 this.addploicyHolderRelationshipValidators(form);
             if (value === 'Self')
-                this.removeploicyHolderRelationshipValidators(form);
+                RemoveCommercialPloicyHolderRelationshipValidator.remove(form)
         })
         form.get('insurance')?.get('commercial-is-medicare-coverage')?.valueChanges.subscribe(value => {
             if (value)
                 this.addMedicareCoverageValidators(form);
             else
-                this.removeMedicareCoverageValidators(form);
+                RemoveCommercialMedicareCoverageValidator.remove(form);
         })
     }
 
     private static addSecondaryInsuranceValidators(form: FormGroup) {
         for (var i = 0; i < CommercialSecondaryInsuranceFields.length; i++) {
-            console.log(CommercialSecondaryInsuranceFields[i])
             form.get('insurance')?.get(CommercialSecondaryInsuranceFields[i])?.setValidators(Validators.required)
             if (CommercialSecondaryInsuranceFields[i] === 'commercial-is-secondary-insurance-first-name') {
                 form.get('insurance')?.get(CommercialSecondaryInsuranceFields[i])?.addValidators([noSpecialCharactersValidator()])
@@ -41,13 +43,6 @@ export class AddCommercialValidators {
             if (CommercialSecondaryInsuranceFields[i] === 'commercial-is-secondary-insurance-last-name') {
                 form.get('insurance')?.get(CommercialSecondaryInsuranceFields[i])?.addValidators([noSpecialCharactersValidator()])
             }
-            form.get('insurance')?.get(CommercialSecondaryInsuranceFields[i])?.updateValueAndValidity();
-        }
-    }
-    private static removeSecondaryInsuranceValidators(form: FormGroup) {
-        for (var i = 0; i < CommercialSecondaryInsuranceFields.length; i++) {
-            form.get('insurance')?.get(CommercialSecondaryInsuranceFields[i])?.clearValidators();
-            form.get('insurance')?.get(CommercialSecondaryInsuranceFields[i])?.setErrors(null);
             form.get('insurance')?.get(CommercialSecondaryInsuranceFields[i])?.updateValueAndValidity();
         }
     }
@@ -70,14 +65,6 @@ export class AddCommercialValidators {
         }
     }
 
-    private static removeMedicareCoverageValidators(form: FormGroup) {
-        for (var i = 0; i < CommercialMedicareCoverageFields.length; i++) {
-            form.get('insurance')?.get(CommercialMedicareCoverageFields[i])?.clearValidators();
-            form.get('insurance')?.get(CommercialMedicareCoverageFields[i])?.setErrors(null);
-            form.get('insurance')?.get(CommercialMedicareCoverageFields[i])?.updateValueAndValidity();
-        }
-    }
-
     private static addploicyHolderRelationshipValidators(form: FormGroup) {
         for (var i = 0; i < CommercialPolicyHolderFields.length; i++) {
             form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.setValidators([Validators.required])
@@ -87,13 +74,6 @@ export class AddCommercialValidators {
                 form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.addValidators(noSpecialCharactersValidator())
                 form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.updateValueAndValidity();
             }
-        }
-    }
-    private static removeploicyHolderRelationshipValidators(form: FormGroup) {
-        for (var i = 0; i < CommercialPolicyHolderFields.length; i++) {
-            form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.clearValidators();
-            form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.setErrors(null);
-            form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.updateValueAndValidity();
         }
     }
 }
