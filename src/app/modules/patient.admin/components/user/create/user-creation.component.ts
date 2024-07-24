@@ -135,7 +135,7 @@ export class UserCreationComponent implements OnInit {
         this.userService.update(this.user).subscribe(result => {
           this.isValidForm = false;
           this.changeVisibility.emit('close-edit');
-          this.toastrService.success('Clinic Updated');
+          this.toastrService.success('User Updated');
         })
       } else {
         this.isValidForm = true;
@@ -154,7 +154,7 @@ export class UserCreationComponent implements OnInit {
         this.userService.create(this.user).subscribe(result => {
           this.isValidForm = false;
           this.changeVisibility.emit('close-create');
-          this.toastrService.success('Clinic Created');
+          this.toastrService.success('User Created');
         })
       } else {
         this.isValidForm = true;
