@@ -63,8 +63,8 @@ export class PatientSummaryComponent implements OnInit {
       this.patientService.upload(imageFormData, <number>response.body).subscribe(d => {
         this.router.navigateByUrl('/digital-intake/done');
       })
-    }, error => {
-      console.error('Error ' + JSON.stringify(error))
+    }, (error: any) => {
+      
     })
   }
   private fillPateintEssentialInformation() {
@@ -94,7 +94,7 @@ export class PatientSummaryComponent implements OnInit {
           emergencyPhone: selected.emergencyPhone,
           emergencyRelation: selected.emergencyContact
         },
-        address:{
+        address: {
 
         }
       };
@@ -115,9 +115,9 @@ export class PatientSummaryComponent implements OnInit {
     })
   }
   private fillPatientAddress() {
-    var address: PatientAddress={}
+    var address: PatientAddress = {}
     this.form.get('address')?.valueChanges.forEach(selected => {
-      address = {        
+      address = {
         firstAddress: selected.firstAddress,
         secondAddress: selected.secondAddress,
         city: selected.city,
