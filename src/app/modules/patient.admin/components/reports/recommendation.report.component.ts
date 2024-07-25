@@ -100,7 +100,7 @@ export class RecommendationReportComponent implements OnInit {
   }
 
   private formatDate() {
-    
+
     if (this.patientSearchCriteria.startDate_date !== undefined)
       this.patientSearchCriteria.startDate = this.patientSearchCriteria.startDate_date ? moment(new Date(this.patientSearchCriteria.startDate_date)).startOf('day').valueOf() : 0;
     if (this.patientSearchCriteria.endDate_date !== undefined)
@@ -109,7 +109,7 @@ export class RecommendationReportComponent implements OnInit {
 
 
   private requestSearchService() {
-    if (!this.checkEmptyOfpatientSearchCriteria()) {
+    if (this.checkEmptyOfpatientSearchCriteria() === '') {
       this.searchInputNotValid = false
       this.FillEmptyFieldsInSearchCriteria();
       this.clinicService.selectedClinic$.subscribe(id => {
@@ -129,7 +129,7 @@ export class RecommendationReportComponent implements OnInit {
       })
     }
     else {
-      this.errorMsg = 'Please select patient Source Doctor/Entity input Or Date Range';
+      this.errorMsg = this.checkEmptyOfpatientSearchCriteria();
       this.searchInputNotValid = true
       this.result = {
         resultCount: 0,
@@ -163,14 +163,11 @@ export class RecommendationReportComponent implements OnInit {
   }
 
   private checkEmptyOfpatientSearchCriteria() {
-    var source: boolean = this.patientSearchCriteria.type === '' || this.patientSearchCriteria.type === null || this.patientSearchCriteria.type === 'null';
-    var dateRange: boolean =
-      (this.patientSearchCriteria.startDate === undefined || this.patientSearchCriteria.startDate === null || Number.isNaN(this.patientSearchCriteria.startDate))
-      ||
-      (this.patientSearchCriteria.endDate === undefined || this.patientSearchCriteria.endDate === null || Number.isNaN(this.patientSearchCriteria.endDate))
-    if (source && dateRange)
-      return true
-    else
-      return false;
+    console.log(this.patientSearchCriteria.entityNames)
+    var errorMsg = ''
+    if (this.patientSearchCriteria.type === 'Entity' && (this.patientSearchCriteria.entityNames === undefined
+      || this.patientSearchCriteria.entityNames?.length === 0))
+      errorMsg = 'Please Select Entity Value'
+    return errorMsg
   }
 }
