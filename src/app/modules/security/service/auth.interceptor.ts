@@ -6,7 +6,6 @@ import { KeycloakService } from 'keycloak-angular';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, finalize, from, mergeMap, Observable } from 'rxjs';
-import { FailedPatientService } from '../../patient.digital.intake/services/failed.patient/failed-patient.service';
 import { FetshDigitalPatientIntakeUrlsService } from './digital.intake.urls/fetsh-digital-patient-intake-urls.service';
 import { KcAuthServiceService } from './kc/kc-auth-service.service';
 
@@ -14,9 +13,7 @@ import { KcAuthServiceService } from './kc/kc-auth-service.service';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private kcAuthServiceService: KcAuthServiceService, private keycloakService: KeycloakService
     , private spinner: NgxSpinnerService
-    , private fetshUrls: FetshDigitalPatientIntakeUrlsService
-    , private failedPatientService: FailedPatientService
-    , private toastrService: ToastrService) { }
+    , private fetshUrls: FetshDigitalPatientIntakeUrlsService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinner.show();
     return from(this.kcAuthServiceService.getToken())
@@ -44,9 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
             this.kcAuthServiceService.logout();
           } else {
             if (request.url === '/intake-service/api/patient/create') {
-              this.toastrService.error('Error during creating patient')
               this.scrollUp()
-              this.failedPatientService.addToList(JSON.parse((request.body)));
             }
             console.log('other error , please contact the administrator..!! ErrorCode :' + error.error.errorCode);
             console.log('Error:' + JSON.stringify(error.error));

@@ -5,7 +5,6 @@ import * as moment from 'moment';
 import { tap } from 'rxjs';
 import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 import { CompressDocumentService } from '../../services/doument/compress-document.service';
-import { FailedPatientService } from '../../services/failed.patient/failed-patient.service';
 import { ValidationExploder } from '../create/validators/validation.exploder';
 
 @Component({
@@ -21,7 +20,6 @@ export class PatientBasicComponent implements OnInit {
   isGuarantor: boolean = false
   constructor(private componentReference: ComponentReferenceComponentService
     , private compressDocumentService: CompressDocumentService
-    ,private failedPatientService:FailedPatientService
   ) { }
 
   ngOnInit(): void {
