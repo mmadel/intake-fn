@@ -33,13 +33,15 @@ export class InsuranceCompanyCreateComponent implements OnInit {
     if (this.selectedCompany !== undefined) {
       this.getSelectedInsuranceCompany(this.selectedCompany);
     } else {
+      this.getClinics();
       this.checkUserName();
     }
-    this.getClinics();
+    
   }
   private getSelectedInsuranceCompany(id: number) {
     this.insuranceCompanyService.getById(id).subscribe((result: any) => {
       this.insuranceCompany = result.body;
+      this.getClinics();
       this.fillInsuranceCompanyForm();
     }, error => {
       console.log('error getting selected insurance comapny')
