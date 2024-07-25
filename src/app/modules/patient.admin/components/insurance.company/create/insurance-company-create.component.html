@@ -21,6 +21,17 @@
             <div *ngIf="this.insuranceCompanyForm.get('insurance-company-name')?.errors?.['noSpecialCharacters']"
                 class="text-danger mx-1">
                 Name cannot contain special characters.</div>
+            <span *ngIf="validName === false">
+                <label>
+                    <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
+                </label>
+            </span>
+            <span *ngIf="validName === true">
+                <label>
+                    {{validNameMessage}}
+                    <svg cIcon name="cilReportSlash" cTextColor="danger" size="lg"></svg>
+                </label>
+            </span>
         </c-col>
     </c-row>
     <c-row class="mb-2">
@@ -48,7 +59,8 @@
             <c-form-check [switch]="true" class="mb-3" sizing="lg">
                 <input cFormCheckInput type="checkbox" formControlName="insurance-company-status" />
                 <label cFormCheckLabel>
-                    <span [ngClass]="{ 'fw-bold':this.insuranceCompanyForm.get('insurance-company-status')?.value}">Active</span>/<span
+                    <span
+                        [ngClass]="{ 'fw-bold':this.insuranceCompanyForm.get('insurance-company-status')?.value}">Active</span>/<span
                         [ngClass]="{ 'fw-bold':!this.insuranceCompanyForm.get('insurance-company-status')?.value }">In-Active</span>
                 </label>
             </c-form-check>

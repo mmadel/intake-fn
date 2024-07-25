@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
 import { noSpecialCharactersValidator } from 'src/app/modules/patient.digital.intake/components/create/validators/custom.validation/special.characters.validator';
 import { Clinic } from '../../../models/clinic.model';
 import { InsuranceCompany } from '../../../models/insurance.company.model';
@@ -20,17 +21,20 @@ export class InsuranceCompanyCreateComponent implements OnInit {
   isValidForm: boolean = false;
   returnClinics: Clinic[] = new Array();
   insuranceCompany: InsuranceCompany
+  validName: boolean | undefined = undefined;
+  validNameMessage: string;
   constructor(
     private clinicService: ClinicService,
     private insuranceCompanyService: InsuranceCompanyService,
     private toastrService: ToastrService) { }
 
   ngOnInit(): void {
-    console.log(this.selectedCompany)
+    this.createInsuranceCompanyform();
     if (this.selectedCompany !== undefined) {
       this.getSelectedInsuranceCompany(this.selectedCompany);
+    } else {
+      this.checkUserName();
     }
-    this.createInsuranceCompanyform();
     this.getClinics();
   }
   private getSelectedInsuranceCompany(id: number) {
@@ -68,27 +72,37 @@ export class InsuranceCompanyCreateComponent implements OnInit {
     })
   }
   create() {
-    if (this.insuranceCompanyForm?.valid) {
-      this.isValidForm = false;
-      this.fillInsuranceCompanyModel();
-      this.insuranceCompanyService.create(this.insuranceCompany).subscribe(result => {
-        if (!this.selectedCompany) {
+    if (this.selectedCompany) {
+      if (this.insuranceCompanyForm?.valid) {
+        this.isValidForm = false;
+        this.fillInsuranceCompanyModel();
+        this.insuranceCompanyService.create(this.insuranceCompany).subscribe(result => {
+          this.changeVisibility.emit('close-edit');
+          this.toastrService.success('Insurance Company Updated.')
+
+        }, error => {
+          this.toastrService.success('Erro during updating insurance company')
+        })
+      }
+    } else {
+      if (this.insuranceCompanyForm?.valid && !this.validName) {
+        this.isValidForm = false;
+        this.fillInsuranceCompanyModel();
+        this.insuranceCompanyService.create(this.insuranceCompany).subscribe(result => {
           this.changeVisibility.emit('close-create');
           this.toastrService.success('Insurance Company Created.')
-        } else {
-          this.changeVisibility.emit('close-edit');
-          this.toastrService.success('Insurance Company Updated.');
-        }
-      }, error => {
-        this.toastrService.success('Erro during creating insurance company')
-      })
-    } else {
-      this.isValidForm = true;
-      Object.keys(this.insuranceCompanyForm.controls).forEach(field => {
-        const control = this.insuranceCompanyForm.get(field);
-        control?.markAsTouched({ onlySelf: true });
-      });
-      this.scrollUp()
+
+        }, error => {
+          this.toastrService.success('Erro during creating insurance company')
+        })
+      } else {
+        this.isValidForm = true;
+        Object.keys(this.insuranceCompanyForm.controls).forEach(field => {
+          const control = this.insuranceCompanyForm.get(field);
+          control?.markAsTouched({ onlySelf: true });
+        });
+        this.scrollUp()
+      }
     }
   }
   private fillInsuranceCompanyModel() {
@@ -126,5 +140,42 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       clinics.push(clinic)
     });
     return clinics;
+  }
+  private checkUserName() {
+    this.insuranceCompanyForm.get('insurance-company-name')?.valueChanges
+      .pipe(
+        filter(text => {
+          if (text === '') {
+            this.validName = undefined;
+            return false;
+          }
+          if (text === undefined) {
+            return false;
+          }
+          if (text.length > 1) {
+            return true
+          } else {
+            return false;
+          }
+        }),
+        debounceTime(500),
+        tap((value) => {
+        }),
+        switchMap((value: any) => {
+          return this.insuranceCompanyService.checkName(value)
+            .pipe(
+              finalize(() => {
+              }),
+            )
+        }
+        )
+      ).subscribe((response: any) => {
+        this.validName = response.body;
+        if (this.validName) {
+          this.validNameMessage = 'name is already exists';
+        }
+      },
+        () => {
+        });
   }
 }

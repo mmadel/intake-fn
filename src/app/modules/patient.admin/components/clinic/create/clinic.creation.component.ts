@@ -138,7 +138,7 @@ export class ClinicCreationComponent implements OnInit {
             return false;
           }
         }),
-        debounceTime(1800),
+        debounceTime(500),
         tap((value) => {
         }),
         switchMap((value: any) => {
