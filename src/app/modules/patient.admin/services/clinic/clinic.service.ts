@@ -22,6 +22,9 @@ export class ClinicService {
   get() {
     return this.http.get<Clinic[]>(`${this.clinicUrl}` + '/find', { observe: 'response' })
   }
+  checkName(name: string) {
+    return this.http.get(`${this.clinicUrl}` + '/check/' + name, { observe: 'response' })
+  }
   getActive() {
     return this.http.get<Clinic[]>(`${this.clinicUrl}` + '/find/active', { observe: 'response' })
   }
@@ -29,7 +32,7 @@ export class ClinicService {
     return this.http.get<Clinic[]>(`${this.userUrl}` + '/find/clinics/' + userId, { observe: 'response' })
   }
   delete(id: string | null) {
-    var deleteClinicURL = this.clinicUrl +  '/delete/clinicId/';
+    var deleteClinicURL = this.clinicUrl + '/delete/clinicId/';
     return this.http.delete(deleteClinicURL + id)
   }
   getById(id: string | null) {

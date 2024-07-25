@@ -20,6 +20,17 @@
             </div>
             <div *ngIf="this.clinicForm.get('clinic-name')?.errors?.['noSpecialCharacters']" class="text-danger mx-1">
                 Clinic Name cannot contain special characters.</div>
+            <span *ngIf="validName === false">
+                <label>
+                    <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
+                </label>
+            </span>
+            <span *ngIf="validName === true">
+                <label>
+                    {{validNameMessage}}
+                    <svg cIcon name="cilReportSlash" cTextColor="danger" size="lg"></svg>
+                </label>
+            </span>
         </c-col>
     </c-row>
     <!--Address-->
