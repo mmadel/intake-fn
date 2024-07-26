@@ -3,6 +3,8 @@ import { IColumn, IColumnFilterValue, ISorterValue } from '@coreui/angular-pro/l
 import * as moment from 'moment';
 import { combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
+import { ClinicService } from '../../services/clinic/clinic.service';
 import { PateintDocumentsService } from '../../services/documents/pateint-documents.service';
 import { IApiParams, IPatient, IUsers, PatientListService } from '../../services/patient-list.service';
 import { PatientReportingService } from '../../services/patient.reporting.service';
@@ -19,10 +21,12 @@ export interface IParams {
   styleUrls: ['./patient.list.component.css']
 })
 export class PatientListComponent implements OnInit, OnDestroy {
-
+  noShow:BehaviorSubject<boolean|null>;
   constructor(private patientListService: PatientListService
     , private reportingService: PatientReportingService
-    , private pateintDocumentsService: PateintDocumentsService) {
+    , private pateintDocumentsService: PateintDocumentsService
+    ,private clinicService:ClinicService
+    ,private kcAuthServiceService: KcAuthServiceService) {
   }
 
   title = 'CoreUI Angular Smart Table Example';
@@ -128,6 +132,9 @@ export class PatientListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.#destroy$.next(true);
   }
+  logout() {
+    this.kcAuthServiceService.logout()
+  }
   exportPDF(data: IPatient) {
     this.reportingService.exportPDF(data.patientId).subscribe(
       (response: any) => {
@@ -163,7 +170,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
     URL.revokeObjectURL(objectUrl);
   }
   ngOnInit(): void {
-
+    this.noShow = this.clinicService.preventUser$;
     this.activePage$.pipe(
       takeUntil(this.#destroy$)
     ).subscribe((page) => {

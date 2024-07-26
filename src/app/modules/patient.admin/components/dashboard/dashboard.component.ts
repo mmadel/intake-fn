@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { BehaviorSubject, combineLatest, filter, iif, switchMap, tap, zip } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, switchMap, tap } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
-import { LocalService } from 'src/app/modules/common';
 import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 import { ClinicService } from '../../services/clinic/clinic.service';
 import { DashboardService } from '../../services/dashboard.service';
