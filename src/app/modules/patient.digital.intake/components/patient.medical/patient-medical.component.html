@@ -184,7 +184,8 @@
                 <c-form-check [switch]="true" class="mb-3" sizing="lg">
                     <input cFormCheckInput type="checkbox" formControlName="isFamilyDoctorRequest" />
                     <label cFormCheckLabel>
-                        <span [ngClass]="{ 'fw-bold':true }">isFamilyDoctorRequest</span>
+                        <span [ngClass]="{ 'fw-bold':this.form.get('medical')?.get('isFamilyDoctorRequest')?.value}">Yes/</span>
+                        <span [ngClass]="{ 'fw-bold':!this.form.get('medical')?.get('isFamilyDoctorRequest')?.value }">No</span>
                     </label>
                 </c-form-check>
             </c-card-body>
