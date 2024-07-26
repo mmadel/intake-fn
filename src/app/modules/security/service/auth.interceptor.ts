@@ -13,7 +13,8 @@ import { KcAuthServiceService } from './kc/kc-auth-service.service';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private kcAuthServiceService: KcAuthServiceService, private keycloakService: KeycloakService
     , private spinner: NgxSpinnerService
-    , private fetshUrls: FetshDigitalPatientIntakeUrlsService) { }
+    , private fetshUrls: FetshDigitalPatientIntakeUrlsService
+    ,private toastrService: ToastrService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinner.show();
     return from(this.kcAuthServiceService.getToken())
@@ -41,6 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
             this.kcAuthServiceService.logout();
           } else {
             if (request.url === '/intake-service/api/patient/create') {
+              this.toastrService.error('Error during creating patient.');
               this.scrollUp()
             }
             console.log('other error , please contact the administrator..!! ErrorCode :' + error.error.errorCode);
