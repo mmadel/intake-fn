@@ -97,7 +97,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'surgeriesList': new FormControl(null, [Validators.required]),
       }),
       'insurance': new FormGroup({
-        'type': new FormControl(false, [Validators.required]),
+        'type': new FormControl(true, [Validators.required]),
 
         'compensation-related-injury': new FormControl(null),
         'compensation-accident-date': new FormControl(null),

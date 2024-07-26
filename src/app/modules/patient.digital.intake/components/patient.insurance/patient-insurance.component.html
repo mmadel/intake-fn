@@ -8,9 +8,8 @@
         <c-form-check [switch]="true" class="mb-3" sizing="lg">
             <input cFormCheckInput type="checkbox" formControlName="type" />
             <label cFormCheckLabel>
-                <span [ngClass]="{ 'fw-bold':!this.form.get('insurance')?.get('type')?.value }">Worker's
-                    Compensation</span>/<span
-                    [ngClass]="{ 'fw-bold':this.form.get('insurance')?.get('type')?.value }">Commercial Insurance</span>
+                <span [ngClass]="{ 'fw-bold':this.form.get('insurance')?.get('type')?.value }">Commercial Insurance</span>/<span
+                    [ngClass]="{ 'fw-bold':!this.form.get('insurance')?.get('type')?.value }">Worker'sCompensation</span>
             </label>
         </c-form-check>
         <!--Worker's Compensation/No Fault-->
