@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Clinic } from '../../models/clinic.model';
 
@@ -25,7 +26,7 @@ export class ClinicService {
   checkName(name: string) {
     return this.http.get(`${this.clinicUrl}` + '/check/' + name, { observe: 'response' })
   }
-  getActive() {
+  getActive():Observable<any>{
     return this.http.get<Clinic[]>(`${this.clinicUrl}` + '/find/active', { observe: 'response' })
   }
   getByUserId(userId: string | undefined) {

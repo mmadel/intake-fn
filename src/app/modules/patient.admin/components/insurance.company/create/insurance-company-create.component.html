@@ -39,8 +39,8 @@
             <label style="width: 150px;">Clinics<span class="text-danger">*</span></label>
         </c-col>
         <c-col xl="12">
-            <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm" formControlName="clinic">
-                <c-multi-select-option *ngFor="let clinic of returnClinics" [value]="clinic.id?.toString()"
+            <c-multi-select  multiple cSelect sizing="sm" formControlName="clinic">
+                <c-multi-select-option *ngFor="let clinic of (clinics$ |async)" [value]="clinic.id?.toString()"
                     [selected]="clinic.selected">
                     {{clinic.name}}
                 </c-multi-select-option>

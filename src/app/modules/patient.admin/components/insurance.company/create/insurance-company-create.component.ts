@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
+import { debounceTime, filter, finalize, map, mergeMap, Observable, switchMap, tap, toArray } from 'rxjs';
 import { noSpecialCharactersValidator } from 'src/app/modules/patient.digital.intake/components/create/validators/custom.validation/special.characters.validator';
 import { Clinic } from '../../../models/clinic.model';
 import { InsuranceCompany } from '../../../models/insurance.company.model';
@@ -18,8 +17,8 @@ export class InsuranceCompanyCreateComponent implements OnInit {
   @Output() changeVisibility = new EventEmitter<string>()
   @Input() selectedCompany: number
   insuranceCompanyForm: FormGroup
-  isValidForm: boolean = false;
-  returnClinics: Clinic[] = new Array();
+  isValidForm: boolean = false;  
+  clinics$!: Observable<Clinic[]>;
   insuranceCompany: InsuranceCompany
   validName: boolean | undefined = undefined;
   validNameMessage: string;
@@ -33,8 +32,8 @@ export class InsuranceCompanyCreateComponent implements OnInit {
     if (this.selectedCompany !== undefined) {
       this.getSelectedInsuranceCompany(this.selectedCompany);
     } else {
-      this.getClinics();
       this.checkUserName();
+      this.getClinics();
     }
     
   }
@@ -48,23 +47,21 @@ export class InsuranceCompanyCreateComponent implements OnInit {
     })
   }
   private getClinics() {
-    this.clinicService.getActive().subscribe(response => {
-      response.body?.forEach(element => {
+    this.clinics$ = this.clinicService.getActive().pipe(
+      mergeMap(data => data.body),
+      map((clinic: any) => {
         if (this.selectedCompany) {
-          var isClinicFound = this.insuranceCompany.clinics?.some(clinic => {
-            return clinic.id === element.id
+          var isClinicFound = this.insuranceCompany.clinics?.some(in_clinic => {
+            var dd: boolean = clinic.id === in_clinic.id
+            return dd;
           })
           if (isClinicFound) {
-            element.selected = true
+            clinic.selected = true
           }
         }
-        this.returnClinics?.push(element)
-      });
-    },
-      error => {
-        console.log(error)
-      },
-    )
+        return clinic;
+      }), toArray()
+    );
   }
   private createInsuranceCompanyform() {
     this.insuranceCompanyForm = new FormGroup({
