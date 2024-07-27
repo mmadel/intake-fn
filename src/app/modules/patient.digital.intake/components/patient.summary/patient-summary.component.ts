@@ -64,7 +64,7 @@ export class PatientSummaryComponent implements OnInit {
         this.router.navigateByUrl('/digital-intake/done');
       })
     }, (error: any) => {
-      
+
     })
   }
   private fillPateintEssentialInformation() {
@@ -151,11 +151,22 @@ export class PatientSummaryComponent implements OnInit {
       }
       if (value === 'no') {
         var entitySource: EntitySource = {}
+        var hasOther: boolean = false;
         this.form.get('medical')?.get('referringEntity')?.valueChanges.subscribe(value => {
           entitySource.organizationName = value;
           patientSource = {
             doctorSource: undefined,
             entitySource: entitySource
+          }
+          if (value === 'other' || value === 'clinic_staff' || value === 'word_Of_mouse') {
+            hasOther = true;
+            this.form.get('medical')?.get('referringEntityOther')?.valueChanges.subscribe(value => {
+              entitySource.other = value
+            })
+          }
+          if (hasOther) {
+            var ff: string = this.form.get('medical')?.get('referringEntityOther')?.value;;
+            entitySource.other = ff
           }
           this.pateint.patientSource = patientSource;
         })
