@@ -21,6 +21,17 @@
             <div *ngIf="this.insuranceCompanyForm.get('insurance-company-name')?.errors?.['noSpecialCharacters']"
                 class="text-danger mx-1">
                 Name cannot contain special characters.</div>
+            <span *ngIf="validName === false">
+                <label>
+                    <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
+                </label>
+            </span>
+            <span *ngIf="validName === true">
+                <label>
+                    {{validNameMessage}}
+                    <svg cIcon name="cilReportSlash" cTextColor="danger" size="lg"></svg>
+                </label>
+            </span>
         </c-col>
     </c-row>
     <c-row class="mb-2">
@@ -28,8 +39,8 @@
             <label style="width: 150px;">Clinics<span class="text-danger">*</span></label>
         </c-col>
         <c-col xl="12">
-            <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm" formControlName="clinic">
-                <c-multi-select-option *ngFor="let clinic of returnClinics" [value]="clinic.id?.toString()"
+            <c-multi-select  multiple cSelect sizing="sm" formControlName="clinic">
+                <c-multi-select-option *ngFor="let clinic of (clinics$ |async)" [value]="clinic.id?.toString()"
                     [selected]="clinic.selected">
                     {{clinic.name}}
                 </c-multi-select-option>
@@ -48,7 +59,8 @@
             <c-form-check [switch]="true" class="mb-3" sizing="lg">
                 <input cFormCheckInput type="checkbox" formControlName="insurance-company-status" />
                 <label cFormCheckLabel>
-                    <span [ngClass]="{ 'fw-bold':this.insuranceCompanyForm.get('insurance-company-status')?.value}">Active</span>/<span
+                    <span
+                        [ngClass]="{ 'fw-bold':this.insuranceCompanyForm.get('insurance-company-status')?.value}">Active</span>/<span
                         [ngClass]="{ 'fw-bold':!this.insuranceCompanyForm.get('insurance-company-status')?.value }">In-Active</span>
                 </label>
             </c-form-check>

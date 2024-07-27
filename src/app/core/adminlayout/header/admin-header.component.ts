@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
+import { BehaviorSubject } from 'rxjs';
 import { LocalService } from 'src/app/modules/common';
 import { Clinic } from 'src/app/modules/patient.admin/models/clinic.model';
 import { ClinicService } from 'src/app/modules/patient.admin/services/clinic/clinic.service';
@@ -17,7 +18,7 @@ import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-aut
 export class AdminHeaderComponent extends HeaderComponent {
   startDate: number;
   endDate: number;
-
+  noShow:BehaviorSubject<boolean|null>;
   userName: string | undefined;
   clinics: Clinic[] = new Array();
   selectedClinicId: number;
@@ -43,6 +44,7 @@ export class AdminHeaderComponent extends HeaderComponent {
     super();
   }
   ngOnInit(): void {
+    this.noShow = this.clinicService.preventUser$
     this.ksAuthServiceService.loadUserProfile()
       .then((userProfile) => {
         this.userName = userProfile.username?.charAt(0).toUpperCase()

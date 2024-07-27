@@ -58,7 +58,6 @@ export class PatientBasicComponent implements OnInit {
     return imageFormData;
   }
   next() {
-
     if (this.form.get('basic')?.valid) {
       this.stepper.next();
       this.isValidForm = false;

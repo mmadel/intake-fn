@@ -106,13 +106,19 @@
                         <c-col xs="12">
                             <label style="width: 90px;">Entity<span class="text-danger">*</span></label>
                         </c-col>
-                        <c-col xs="12">
+                        <c-col xs="12" class="mb-2">
                             <select cSelect sizing="sm" formControlName="referringEntity" [ngClass]="{'is-invalid': this.form.get('medical')?.get('referringEntity')?.invalid
                             && this.form.get('medical')?.get('referringEntity')?.touched}">
                                 <option value="null" disabled>Select</option>
                                 <option *ngFor="let entity of entityValues" [value]="entity.entityValue"
                                     [selected]="entity.selected">{{entity.entityName}}</option>
                             </select>
+                        </c-col>
+                        <c-col xs="12" *ngIf="this.form.get('medical')?.get('referringEntity')?.value ==='clinic_staff' ||
+                        this.form.get('medical')?.get('referringEntity')?.value ==='word_Of_mouse' ||
+                        this.form.get('medical')?.get('referringEntity')?.value ==='other'">
+                            <input class="form-control" placeholder formControlName="referringEntityOther"
+                                maxlength="60">
                         </c-col>
                         <c-col xs="12">
                             <div *ngIf="this.form.get('medical')?.get('referringEntity')?.errors?.['required'] === true && 
@@ -139,9 +145,9 @@
                     <select cSelect formControlName="appointmentBooking" [ngClass]="{'is-invalid': this.form.get('medical')?.get('appointmentBooking')?.invalid
                     && this.form.get('medical')?.get('appointmentBooking')?.touched}">
                         <option value="null" disabled>Select Appointment Booking</option>
-                        <option value="Website">Website</option>
+                        <option value="Website">Our website www.ptofthecity.com/Google</option>
                         <option value="Zocdoc">Zocdoc</option>
-                        <option value="Calls">Calls</option>
+                        <option value="Calls">Phone Call/Text</option>
                         <option value="Walkin">Walk-in</option>
                     </select>
                 </c-input-group>
@@ -184,7 +190,10 @@
                 <c-form-check [switch]="true" class="mb-3" sizing="lg">
                     <input cFormCheckInput type="checkbox" formControlName="isFamilyDoctorRequest" />
                     <label cFormCheckLabel>
-                        <span [ngClass]="{ 'fw-bold':true }">isFamilyDoctorRequest</span>
+                        <span
+                            [ngClass]="{ 'fw-bold':this.form.get('medical')?.get('isFamilyDoctorRequest')?.value}">Yes/</span>
+                        <span
+                            [ngClass]="{ 'fw-bold':!this.form.get('medical')?.get('isFamilyDoctorRequest')?.value }">No</span>
                     </label>
                 </c-form-check>
             </c-card-body>

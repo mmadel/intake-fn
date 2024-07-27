@@ -16,6 +16,9 @@ export class InsuranceCompanyService {
   get() {
     return this.http.get<InsuranceCompany[]>(`${this.userUrl}` + '/find', { observe: 'response' })
   }
+  checkName(name: string) {
+    return this.http.get(`${this.userUrl}` + '/check/' + name, { observe: 'response' })
+  }
   getById(id:number) {
     return this.http.get<InsuranceCompany[]>(`${this.userUrl}` + '/find/'+id, { observe: 'response' })
   }

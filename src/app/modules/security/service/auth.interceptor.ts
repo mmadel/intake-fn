@@ -4,6 +4,7 @@ import {
 import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, finalize, from, mergeMap, Observable } from 'rxjs';
 import { FetshDigitalPatientIntakeUrlsService } from './digital.intake.urls/fetsh-digital-patient-intake-urls.service';
 import { KcAuthServiceService } from './kc/kc-auth-service.service';
@@ -12,7 +13,8 @@ import { KcAuthServiceService } from './kc/kc-auth-service.service';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private kcAuthServiceService: KcAuthServiceService, private keycloakService: KeycloakService
     , private spinner: NgxSpinnerService
-    , private fetshUrls: FetshDigitalPatientIntakeUrlsService) { }
+    , private fetshUrls: FetshDigitalPatientIntakeUrlsService
+    ,private toastrService: ToastrService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinner.show();
     return from(this.kcAuthServiceService.getToken())
@@ -39,11 +41,23 @@ export class AuthInterceptor implements HttpInterceptor {
             console.log('Error:' + JSON.stringify(error.error));
             this.kcAuthServiceService.logout();
           } else {
+            if (request.url === '/intake-service/api/patient/create') {
+              this.toastrService.error('Error during creating patient.');
+              this.scrollUp()
+            }
             console.log('other error , please contact the administrator..!! ErrorCode :' + error.error.errorCode);
             console.log('Error:' + JSON.stringify(error.error));
           }
           return [];
         }))
+  }
+  private scrollUp() {
+    (function smoothscroll() {
+      var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.scrollTo(0, 0);
+      }
+    })();
   }
   private getToken(token: string): string | null {
     var return_token: string

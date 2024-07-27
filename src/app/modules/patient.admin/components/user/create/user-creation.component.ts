@@ -10,7 +10,7 @@ import { ClinicService } from '../../../services/clinic/clinic.service';
 import { UserService } from '../../../services/user/user.service';
 import { EmailValidator } from 'src/app/modules/patient.digital.intake/components/create/validators/custom.validation/email.validator';
 import { User } from 'src/app/modules/security/model/user';
-import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
+import { debounceTime, filter, finalize, map, mergeMap, Observable, switchMap, tap, toArray } from 'rxjs';
 
 interface UserRole {
   name: string;
@@ -35,7 +35,7 @@ export class UserCreationComponent implements OnInit {
     { name: "Administrator", value: "administrator" },
     { name: "Normal User", value: "normal" }
   ]
-  returnClinics: Clinic[] = new Array();
+  clinics$!: Observable<Clinic[]>;
   user: User
   mode: string = 'create';
   constructor(private clinicService: ClinicService,
@@ -68,38 +68,24 @@ export class UserCreationComponent implements OnInit {
       this.fillUserForm();
       this.userForm.controls['username'].disable();
       this.userForm.controls['email'].disable();
-      this.getSelectedClinics()
+      this.getClinics();
     })
   }
   private getClinics() {
-    this.clinicService.getActive().subscribe(response => {
-      response.body?.forEach(element => {
-        this.returnClinics?.push(element)
-      });
-    },
-      error => {
-        console.log(error)
-      },
-    )
-  }
-  private getSelectedClinics() {
-    this.clinicService.getActive().subscribe(response => {
-      response.body?.forEach(element => {
+    this.clinics$ = this.clinicService.getActive().pipe(
+      mergeMap(data => data.body),
+      map((clinic: any) => {
         if (this.selectedUser) {
-          var isClinicFound = this.user.clinics?.some(clinic => {
-            return clinic.id === element.id
+          var isClinicFound = this.user.clinics?.some(user_clinic => {
+            return  clinic.id === user_clinic.id;
           })
           if (isClinicFound) {
-            element.selected = true
+            clinic.selected = true
           }
         }
-        this.returnClinics?.push(element)
-      });
-    },
-      error => {
-        console.log(error)
-      },
-    )
+        return clinic;
+      }), toArray()
+    );
   }
   private createUserForm() {
     const zipCodeRgx = new RegExp("^\\d{5}(?:[-\s]\\d{4})?$");

@@ -7,7 +7,7 @@ export class GuarantorValidator {
     public static addValidator(form: FormGroup) {
         form.get('basic')?.get('dob')?.valueChanges.subscribe((value: any) => {
             var patientAge = moment().diff(value, 'y')
-            var isGuarantor: boolean = patientAge < 21 ? true : false;
+            var isGuarantor: boolean = patientAge < 18 ? true : false;
             if (isGuarantor) {
                 AddGuarantorValidators.add(form);
             } else {

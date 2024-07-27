@@ -242,8 +242,8 @@
             <h6 cCardSubtitle class="mb-2 text-medium-emphasis">Clinics</h6>
             <c-row>
                 <c-col xs="12">
-                    <c-multi-select *ngIf="returnClinics" multiple cSelect sizing="sm" formControlName="clinics">
-                        <c-multi-select-option *ngFor="let clinic of returnClinics" [value]="clinic.id?.toString()"
+                    <c-multi-select multiple cSelect sizing="sm" formControlName="clinics">
+                        <c-multi-select-option *ngFor="let clinic of (clinics$ |async)" [value]="clinic.id?.toString()"
                             [selected]="clinic.selected">{{clinic.name}}</c-multi-select-option>
                     </c-multi-select>
                 </c-col>

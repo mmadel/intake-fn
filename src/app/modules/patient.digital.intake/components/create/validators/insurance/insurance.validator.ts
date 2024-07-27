@@ -9,8 +9,9 @@ import { RemoveWorkerCompensationValidators } from "./compensation/remove.worker
 
 export class InsuranceValidator {
     public static addValidator(form: FormGroup) {
-        AddWorkerCompensationValidators.add(form)
+        AddCommercialValidators.add(form)
         form.get('insurance')?.get('type')?.valueChanges.subscribe((value: any) => {
+            console.log(value)
             if (!value) {
                 //add worker compansation validators 
                 AddWorkerCompensationValidators.add(form)

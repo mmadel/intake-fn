@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { debounceTime, filter, finalize, switchMap, tap } from 'rxjs';
 import { BasicAddress } from 'src/app/models/common/basic.address';
 import { countries } from 'src/app/modules/common/components/address/country-data-store';
 import { Countries } from 'src/app/modules/common/components/address/model/country.model';
@@ -23,11 +24,16 @@ export class ClinicCreationComponent implements OnInit {
   clinicForm: FormGroup
   isValidForm: boolean = false;
   clinic: Clinic;
+  validName: boolean | undefined = undefined;
+  validNameMessage: string;
   constructor(private clinicService: ClinicService, private toastrService: ToastrService) { }
   ngOnInit(): void {
-    if (this.clinicId !== undefined)
-      this.getSelectedClinic()
     this.createClinicForm();
+    if (this.clinicId !== undefined) {
+      this.getSelectedClinic()
+    } else {
+      this.checkUserName();
+    }
   }
 
   private getSelectedClinic() {
@@ -51,29 +57,34 @@ export class ClinicCreationComponent implements OnInit {
     })
   }
   create() {
-    if (this.clinicForm?.valid) {
-      this.isValidForm = false;
-      this.fillClinicModel();
-      this.clinicService.create(this.clinic).subscribe(result => {
-        if (!this.clinicId) {
-          this.changeVisibility.emit('close-create');
-          this.toastrService.success('Clinic Created');
-        }
-        else {
+    if (this.clinicId) {
+      if (this.clinicForm?.valid) {
+        this.isValidForm = false;
+        this.fillClinicModel();
+        this.clinicService.create(this.clinic).subscribe(result => {
           this.changeVisibility.emit('close-edit');
           this.toastrService.success('Clinic Updated');
-        }
-      }, error => {
-        console.log('error during create clinic')
-        this.toastrService.success('Error. ' + JSON.stringify(error));
-      })
+        })
+      }
     } else {
-      this.isValidForm = true;
-      Object.keys(this.clinicForm.controls).forEach(field => {
-        const control = this.clinicForm.get(field);
-        control?.markAsTouched({ onlySelf: true });
-      });
-      this.scrollUp()
+      if (this.clinicForm?.valid && !this.validName) {
+        this.isValidForm = false;
+        this.fillClinicModel();
+        this.clinicService.create(this.clinic).subscribe(result => {
+          this.changeVisibility.emit('close-create');
+          this.toastrService.success('Clinic Created');
+        }, error => {
+          console.log('error during create clinic')
+          this.toastrService.success('Error. ' + JSON.stringify(error));
+        })
+      } else {
+        this.isValidForm = true;
+        Object.keys(this.clinicForm.controls).forEach(field => {
+          const control = this.clinicForm.get(field);
+          control?.markAsTouched({ onlySelf: true });
+        });
+        this.scrollUp()
+      }
     }
   }
   private scrollUp() {
@@ -86,7 +97,7 @@ export class ClinicCreationComponent implements OnInit {
   }
   private fillClinicModel() {
     this.clinic = {
-      id: this.clinicId!== undefined?this.clinicId: null,
+      id: this.clinicId !== undefined ? this.clinicId : null,
       name: null,
       address: ''
     }
@@ -99,7 +110,7 @@ export class ClinicCreationComponent implements OnInit {
     }
     this.clinic.name = this.clinicForm.controls['clinic-name'].value
     this.clinic.clinicAddress = clinicAddress;
-    this.clinic.status= this.clinicForm.controls['clinic-status'].value
+    this.clinic.status = this.clinicForm.controls['clinic-status'].value
   }
   private fillClinicForm() {
     this.clinicForm.controls['clinic-name'].setValue(this.clinic.name)
@@ -109,5 +120,42 @@ export class ClinicCreationComponent implements OnInit {
     this.clinicForm.controls['state-address'].setValue(this.clinic.clinicAddress?.state)
     this.clinicForm.controls['zipcode-address'].setValue(this.clinic.clinicAddress?.zipCode)
     this.clinicForm.controls['clinic-status'].setValue(this.clinic.status)
+  }
+  private checkUserName() {
+    this.clinicForm.get('clinic-name')?.valueChanges
+      .pipe(
+        filter(text => {
+          if (text === '') {
+            this.validName = undefined;
+            return false;
+          }
+          if (text === undefined) {
+            return false;
+          }
+          if (text.length > 1) {
+            return true
+          } else {
+            return false;
+          }
+        }),
+        debounceTime(500),
+        tap((value) => {
+        }),
+        switchMap((value: any) => {
+          return this.clinicService.checkName(value)
+            .pipe(
+              finalize(() => {
+              }),
+            )
+        }
+        )
+      ).subscribe((response: any) => {
+        this.validName = response.body;
+        if (this.validName) {
+          this.validNameMessage = 'name is already exists';
+        }
+      },
+        () => {
+        });
   }
 }

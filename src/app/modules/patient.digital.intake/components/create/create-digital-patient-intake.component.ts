@@ -75,6 +75,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'providerName': new FormControl(null),
         'providerNPI': new FormControl(null),
         'referringEntity': new FormControl(null),
+        'referringEntityOther': new FormControl(null),
         'appointmentBooking': new FormControl(null, [Validators.required]),
         'isPrimaryDoctor': new FormControl(null, [Validators.required]),
         'isFamilyDoctorRequest': new FormControl(false, [Validators.required]),
@@ -97,7 +98,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'surgeriesList': new FormControl(null, [Validators.required]),
       }),
       'insurance': new FormGroup({
-        'type': new FormControl(false, [Validators.required]),
+        'type': new FormControl(true, [Validators.required]),
 
         'compensation-related-injury': new FormControl(null),
         'compensation-accident-date': new FormControl(null),
