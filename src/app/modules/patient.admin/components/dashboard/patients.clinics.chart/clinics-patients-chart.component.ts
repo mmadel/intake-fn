@@ -63,12 +63,13 @@ export class ClinicsPatientsChartComponent implements OnInit {
                 clinicCounts[item.clinicName][item.month - 1] = item.count;
               });
               Object.keys(clinicCounts).forEach(key => {
+                var color = this.random_rgba();
                 var ds: any = {
                   label: key,
-                  backgroundColor: this.random_rgba(),
-                  borderColor: this.random_rgba(),
-                  pointBackgroundColor: this.random_rgba(),
-                  pointBorderColor: '#fff',
+                  backgroundColor: color,
+                  borderColor: color,
+                  
+                  pointBorderColor: color,
                   data: clinicCounts[key]
                 }
                 mappedDatasets.push(ds);
