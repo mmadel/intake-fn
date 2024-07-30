@@ -40,7 +40,7 @@ export class InsuranceCompanyCreateComponent implements OnInit {
   private getSelectedInsuranceCompany(id: number) {
     this.insuranceCompanyService.getById(id).subscribe((result: any) => {
       this.insuranceCompany = result.body;
-      console.log(JSON.stringify(this.insuranceCompany))
+      this.insuranceCompanyForm.controls['insurance-company-name'].disable();
       this.getClinics();
       this.fillInsuranceCompanyForm();
     }, error => {

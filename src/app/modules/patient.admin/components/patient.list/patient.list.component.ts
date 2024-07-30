@@ -65,7 +65,7 @@ export class PatientListComponent implements OnInit, OnDestroy {
     },
     {
       key: 'createAt',
-      label: 'Create At'
+      label: 'Created At'
     },
     {
       key: 'actions',

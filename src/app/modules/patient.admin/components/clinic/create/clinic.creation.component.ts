@@ -40,6 +40,7 @@ export class ClinicCreationComponent implements OnInit {
     this.clinicService.getById(this.clinicId.toString()).subscribe((selectedClinic: any) => {
       this.clinic = selectedClinic;
       this.fillClinicForm();
+      this.clinicForm.controls['clinic-name'].disable();
     }, error => {
       console.error('error getting selected clinic')
     })
