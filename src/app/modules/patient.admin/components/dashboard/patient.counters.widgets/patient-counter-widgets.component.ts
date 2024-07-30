@@ -52,6 +52,7 @@ export class PatientCounterWidgetsComponent implements OnInit {
         labels: ChartMonths,
         datasets: totalPatientsDatasets
       }
+      this.totalPatients= 0;
       for (var i = 0; i < result.length; i++) {
         this.totalPatients = this.totalPatients + result[i];
       }
@@ -69,6 +70,7 @@ export class PatientCounterWidgetsComponent implements OnInit {
         labels: ChartMonths,
         datasets: totalPatientsDoctorSourceDatasets
       }
+      this.totalPatientsDoctorSource = 0
       for (var i = 0; i < result.length; i++) {
         this.totalPatientsDoctorSource = this.totalPatientsDoctorSource + result[i];
       }
@@ -86,6 +88,7 @@ export class PatientCounterWidgetsComponent implements OnInit {
         labels: ChartMonths,
         datasets: totalPatientsEntitySourceDatasets
       }
+      this.totalPatientsEntitySource = 0
       for (var i = 0; i < result.length; i++) {
         this.totalPatientsEntitySource = this.totalPatientsEntitySource + result[i];
       }
