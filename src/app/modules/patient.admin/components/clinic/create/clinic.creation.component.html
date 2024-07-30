@@ -1,6 +1,6 @@
 <ngx-spinner></ngx-spinner>
 <c-callout color="danger" *ngIf="isValidForm">
-    Please fill in all the required fields before create clinic
+    <span class="text-danger fw-bold">Please fill in all the required fields before create clinic</span>
 </c-callout>
 <form [formGroup]="clinicForm">
     <!--Clinic Name -->
