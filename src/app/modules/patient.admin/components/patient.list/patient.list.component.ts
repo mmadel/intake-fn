@@ -64,16 +64,12 @@ export class PatientListComponent implements OnInit, OnDestroy {
       label: 'has Guarantor'
     },
     {
-      key: 'show',
-      label: '',      
-      filter: false,
-      sorter: false,
+      key: 'createAt',
+      label: 'Create At'
     },
     {
       key: 'actions',
-      label: 'Actions',
-      filter: false,
-      sorter: false
+      label: 'Actions'
     }
   ];
   readonly activePage$ = new BehaviorSubject(0);

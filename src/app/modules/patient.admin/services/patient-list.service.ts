@@ -32,6 +32,7 @@ export interface IUsers {
   patientSourceType: string,
   insuranceWorkerType: string,
   hasPhysicalTherapy: boolean
+  createdAt:number;
 }
 
 export interface IPatient{

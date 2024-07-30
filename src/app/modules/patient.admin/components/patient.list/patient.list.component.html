@@ -7,13 +7,13 @@
   </c-row>
   <hr />
   <ng-container *ngIf="props$ | async as props" fluid="true">
-    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [columnFilter]="true"
+    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
       [items]="(usersData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
       (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
       [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
       [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
       [tableProps]="{ hover: true, striped: true  }" [tableBodyProps]="{ align: 'middle' }"
-      (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
+      (sorterValueChange)="handleSorterValueChange($event)" header>
       <ng-template cTemplateId="tableDetails" let-item="item">
         <div [visible]="this.details_visible[item._id]===true" cCollapse>
           <!-- <p ><strong>Action has been taken at :</strong> {{item['patientId']}}</p> -->
@@ -79,7 +79,10 @@
             <ng-container *ngSwitchDefault>
               {{tdContent}}
             </ng-container>
-            <ng-container *ngSwitchCase="'show'" class="py-2">
+            <ng-container *ngSwitchCase="'createAt'" class="py-2">
+                {{item.createdAt | date:"MM/dd/yyyy  hh:mm a"}}
+            </ng-container>
+            <ng-container *ngSwitchCase="'actions'" class="py-2">
               <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
                 Records
               </button>
