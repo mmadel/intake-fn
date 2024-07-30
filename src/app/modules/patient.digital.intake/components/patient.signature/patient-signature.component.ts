@@ -38,24 +38,22 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
     , private componentReference: ComponentReferenceComponentService) { }
   ngAfterViewInit(): void {
     this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('dob')?.valueChanges.subscribe(value => {
-      var isGuarantor : boolean;
+      console.log(value)
+      var isGuarantor: boolean;
       this.componentReference.getPatientBasicComponent()!.isGuarantor
       var patientAge = moment().diff(value, 'y')
       isGuarantor = patientAge < 18 ? true : false;
-      if(isGuarantor){
-        combineLatest([
-          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorFirstName')?.valueChanges,
-          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorLastName')?.valueChanges
-        ]).subscribe((pName: any) => {
-          this.patientFullName = pName[1] + ' ' + pName[0]
-        })
-      }else{
-        combineLatest([
-          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.valueChanges,
-          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.valueChanges
-        ]).subscribe((pName: any) => {
-          this.patientFullName = pName[1] + ' ' + pName[0]
-        })
+      if (isGuarantor) {
+        console.log('PatientSignature isGuarantor');
+        var fName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorFirstName')?.value;
+        var lName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorLastName')?.value;
+        this.patientFullName = lName + ' ' + fName
+
+      } else {
+        console.log('PatientSignature not Guarantor');
+        var fName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.value;
+        var lName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.value;
+        this.patientFullName = lName + ' ' + fName
       }
     })
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
@@ -92,11 +90,11 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
   }
 
   next() {
-    if (this.isGeneratesign === undefined && this.isDrawsign === undefined){
+    if (this.isGeneratesign === undefined && this.isDrawsign === undefined) {
       this.isValidForm = true;
       return;
     }
-      
+
     if ((!this.isGeneratesign) || (!this.isDrawsign)) {
       this.stepper.next();
       this.isValidForm = false;
@@ -104,7 +102,7 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
     else
       this.isValidForm = true;
   }
-  touchStopDrawing(){
+  touchStopDrawing() {
     this.form.get('signature')?.get('drawsign')?.setValue(this.signaturePad.toDataURL())
     this.isDrawsign = true;
     this.isGeneratesign = false
