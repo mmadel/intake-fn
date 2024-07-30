@@ -41,6 +41,7 @@
 
 /intake-service/api/insurance/company/create https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/insurance/company/create 200
 /intake-service/api/insurance/company/find https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/insurance/company/find 200
+/intake-service/api/insurance/company/find/:id https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/insurance/company/find/:id 200
 
 /intake-service/api/audit/insurance/company/retrieve/uuid/:uuid https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/insurance/company/retrieve/uuid/:uuid 200
 /intake-service/api/audit/insurance/company/retrieve https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/audit/insurance/company/retrieve 200
