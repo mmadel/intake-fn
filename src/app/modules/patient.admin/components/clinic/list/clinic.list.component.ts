@@ -9,6 +9,7 @@ interface RenderedClinic {
   country?: string | null,
   ps?: string | null,
   zipcode?: string | null
+  createdAt?:number
 }
 @Component({
   selector: 'app-clinic.list',
@@ -50,6 +51,7 @@ export class ClinicListComponent implements OnInit {
       id: element.id,
       name: element.name,
       address: address,
+      createdAt:element.createdAt
     }
     return renderedClinic;
   }
