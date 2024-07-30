@@ -27,7 +27,7 @@ export class PatientDocumentComponent implements OnInit {
     this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('dob')?.valueChanges.subscribe(value => {
       this.isGuarantor = this.componentReference.getPatientBasicComponent()!.isGuarantor
       var patientAge = moment().diff(value, 'y')
-      this.isGuarantor = patientAge < 21 ? true : false;
+      this.isGuarantor = patientAge < 18 ? true : false;
     })
   }
   public onImageUpload(event: any, photoType: string, name: string) {
