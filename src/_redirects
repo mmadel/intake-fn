@@ -59,4 +59,9 @@
 
 /intake-service/api/insurance/company/check/:name https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/insurance/company/check/:name 200
 /intake-service/api/clinic/check/:name https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/clinic/check/:name 200
+
+/intake-service/api/patient/counter/monthly/:year https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/counter/monthly/:year 200
+/intake-service/api/patient/counter/monthly/doctor/:year https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/counter/monthly/doctor/:year 200
+/intake-service/api/patient/counter/monthly/entity/:year https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/counter/monthly/entity/:year 200
+/intake-service/api/patient/counter/clinic/:year https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/counter/clinic/:year 200
 /*  /index.html   200
