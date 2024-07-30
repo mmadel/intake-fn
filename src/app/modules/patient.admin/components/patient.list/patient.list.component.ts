@@ -32,44 +32,49 @@ export class PatientListComponent implements OnInit, OnDestroy {
   title = 'CoreUI Angular Smart Table Example';
   readonly columns: (string | IColumn)[] = [
     {
-      key: 'firstName',
-      label: 'First Name'
-    },
-    {
-      key: 'middleName',
-      label: 'Middle Name'
-    },
-    {
       key: 'lastName',
-      label: 'Last Name'
+      label: 'Last Name',
+      sorter: false,
+    },
+    {
+      key: 'firstName',
+      label: 'First Name',
+      sorter: false,
     },
     {
       key: 'email',
-      label: 'Email'
+      label: 'Email',
+      sorter: false,
     },
     {
       key: 'phoneNumber',
-      label: 'Phone Number'
+      label: 'Phone Number',
+      sorter: false,
     },
     {
       key: 'sourceType',
-      label: 'Source'
+      label: 'Source',
+      sorter: false,
     },
     {
       key: 'insuranceType',
-      label: 'Insurance Type'
+      label: 'Insurance Type',
+      sorter: false,
     },
     {
       key: 'hasGuarantor',
-      label: 'has Guarantor'
+      label: 'Has Guarantor',
+      sorter: false,
     },
     {
       key: 'createAt',
-      label: 'Created At'
+      label: 'Created At',
+      sorter: false,
     },
     {
       key: 'actions',
-      label: 'Actions'
+      label: 'Actions',
+      sorter: false,
     }
   ];
   readonly activePage$ = new BehaviorSubject(0);

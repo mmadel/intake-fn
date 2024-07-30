@@ -7,11 +7,9 @@
   </c-row>
   <hr />
   <ng-container *ngIf="props$ | async as props" fluid="true">
-    <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns"
-      [items]="(usersData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+    <c-smart-table [columns]="columns" [items]="(usersData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
       (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
-      [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
-      [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
+      [itemsPerPageSelect]="true" [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
       [tableProps]="{ hover: true, striped: true  }" [tableBodyProps]="{ align: 'middle' }"
       (sorterValueChange)="handleSorterValueChange($event)" header>
       <ng-template cTemplateId="tableDetails" let-item="item">
@@ -80,7 +78,7 @@
               {{tdContent}}
             </ng-container>
             <ng-container *ngSwitchCase="'createAt'" class="py-2">
-                {{item.createdAt | date:"MM/dd/yyyy  hh:mm a"}}
+              {{item.createdAt | date:"MM/dd/yyyy hh:mm a"}}
             </ng-container>
             <ng-container *ngSwitchCase="'actions'" class="py-2">
               <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
