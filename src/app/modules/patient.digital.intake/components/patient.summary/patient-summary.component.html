@@ -81,18 +81,25 @@
             <strong>
                 Weight : </strong> {{pateint.patientMedical?.patientMedicalHistory?.weight}}
             {{pateint.patientMedical?.patientMedicalHistory?.weightUnit }}<br />
-            <strong>
-                Reason for today’s evaluation : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission}} <br />
-            <strong>
-                List prescription or non-prescription medication : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.medicationPrescription}} <br />
-            <strong>
-                Conditions : </strong>
-            <li *ngFor="let condition of pateint.patientMedical?.patientMedicalHistory?.patientCondition">
-                {{condition }}
-            </li>
-            <br />
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission !== null">
+                <strong>
+                    Reason for today’s evaluation : </strong>
+                {{pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission}} <br />
+            </span>
+
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.medicationPrescription !== null">
+                <strong>
+                    List prescription or non-prescription medication : </strong>
+                {{pateint.patientMedical?.patientMedicalHistory?.medicationPrescription}} <br />
+            </span>
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.patientCondition">
+                <strong>
+                    Conditions : </strong>
+                <li *ngFor="let condition of pateint.patientMedical?.patientMedicalHistory?.patientCondition">
+                    {{condition }}
+                </li>
+                <br />
+            </span>
             <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.scanningTest">
                 <strong>X-Ray</strong>
                 <li *ngFor="let xVaue of pateint.patientMedical?.patientMedicalHistory?.scanningTestValue">
@@ -102,13 +109,15 @@
             </span>
             <strong>
                 Has MetalImplants : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.metalImplantation?'yes':'no'}} <br />
+            {{pateint.patientMedical?.patientMedicalHistory?.metalImplantation?'Yes':'No'}} <br />
             <strong>
                 Has Pacemaker : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.pacemaker?'yes':'no'}} <br />
-            <strong>
-                surgeries or any other conditions not listed above : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.surgeriesList}}
+            {{pateint.patientMedical?.patientMedicalHistory?.pacemaker?'Yes':'No'}} <br />
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.surgeriesList !== null">
+                <strong>
+                    Surgeries or any other conditions not listed above : </strong>
+                {{pateint.patientMedical?.patientMedicalHistory?.surgeriesList}}
+            </span>
         </p>
     </c-card-body>
 </c-card>
