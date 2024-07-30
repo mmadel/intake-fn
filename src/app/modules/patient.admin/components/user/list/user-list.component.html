@@ -18,6 +18,7 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
+            <th scope="col">Create At</th>
             <th scope="col" style="width: 10%;">Action</th>
             <th scope="col"></th>
         </tr>
@@ -30,7 +31,7 @@
                 <c-badge color="primary" *ngIf="user.userRole === 'administrator'">{{user.userRole}}</c-badge>
                 <c-badge color="warning" *ngIf="user.userRole === 'normal'">{{user.userRole}}</c-badge>
             </td>
-
+            <td>{{user.createdAt | date:"MM/dd/yyyy  hh:mm a"}}</td>
             <td>
                 <c-button-group aria-label="Basic example" role="group" size="sm">
                     <button cButton variant="outline" (click)="showEditUser(user.uuid!)">

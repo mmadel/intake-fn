@@ -64,6 +64,7 @@ export class UserCreationComponent implements OnInit {
   }
   private getSelectedUser() {
     this.userService.getById(this.selectedUser).subscribe(result => {
+      console.log(JSON.stringify(result))
       this.user = result;
       this.fillUserForm();
       this.userForm.controls['username'].disable();
@@ -179,6 +180,7 @@ export class UserCreationComponent implements OnInit {
         zipCode: this.userForm.controls['zipcode-address'].value
       },
       clinics: this.createClinics(this.userForm.get('clinics')?.value),
+      createdAt: this.user?.createdAt
     }
   }
   private createClinics(ids: string[] | null) {
