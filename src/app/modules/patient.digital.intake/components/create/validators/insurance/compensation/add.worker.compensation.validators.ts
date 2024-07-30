@@ -16,10 +16,10 @@ export class AddWorkerCompensationValidators {
                 form.get('insurance')?.get(CompensationFields[i])?.setValidators([Validators.required, Validators.pattern(phoneRgx)])
             }
             if (CompensationFields[i] === 'compensation-zipcode') {
-                form.get('insurance')?.get(CompensationFields[i])?.setValidators([Validators.required, Validators.min(10), Validators.pattern(zipCodeRgx)])
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([Validators.required, Validators.min(10), Validators.pattern(zipCodeRgx)])
             }
             if (CompensationFields[i] === 'compensation-accident-date') {
-                form.get('insurance')?.get(CompensationFields[i])?.setValidators([futureDateValidator()])
+                form.get('insurance')?.get(CompensationFields[i])?.addValidators([futureDateValidator()])
             }
             if (CompensationFields[i] === 'compensation-attorney-first-name') {
                 form.get('insurance')?.get(CompensationFields[i])?.addValidators([noSpecialCharactersValidator()])

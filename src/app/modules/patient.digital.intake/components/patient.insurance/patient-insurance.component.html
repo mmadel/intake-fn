@@ -9,7 +9,7 @@
             <input cFormCheckInput type="checkbox" formControlName="type" />
             <label cFormCheckLabel>
                 <span [ngClass]="{ 'fw-bold':this.form.get('insurance')?.get('type')?.value }">Commercial Insurance</span>/<span
-                    [ngClass]="{ 'fw-bold':!this.form.get('insurance')?.get('type')?.value }">Worker'sCompensation</span>
+                    [ngClass]="{ 'fw-bold':!this.form.get('insurance')?.get('type')?.value }">Worker's Compensation</span>
             </label>
         </c-form-check>
         <!--Worker's Compensation/No Fault-->
@@ -94,11 +94,6 @@
                                 class="text-danger">*</span>
                         </label>
                     </c-col>
-                    <div *ngIf="!this.form.get('insurance')?.get('compensation-wroker-status')?.valid && 
-                    (this.form.get('insurance')?.get('compensation-wroker-status')?.dirty ||this.form.get('insurance')?.get('compensation-wroker-status')?.touched)"
-                        class="text-danger mx-1">
-                        Worker status is required
-                    </div>
                     <c-col xl="12">
                         <select cSelect sizing="sm" style="line-height: 15px;" cFormControl
                             formControlName="compensation-wroker-status">
@@ -202,7 +197,7 @@
                                     maxlength="10">
                             </c-col>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-zipcode')?.errors?.['required'] === true && 
-            (this.form.get('insurance')?.get('compensation-zipcode')?.dirty ||this.form.get('address')?.get('compensation-zipcode')?.touched)"
+            (this.form.get('insurance')?.get('compensation-zipcode')?.dirty ||this.form.get('insurance')?.get('compensation-zipcode')?.touched)"
                                 class="text-danger mx-1">
                                 ZipCode Required
                             </div>
