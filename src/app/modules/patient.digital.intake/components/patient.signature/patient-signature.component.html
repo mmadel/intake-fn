@@ -1,5 +1,5 @@
 <c-callout color="danger" *ngIf="isValidForm">
-    Please create your signature before navigating to next step
+    <span class="text-danger fw-bold">Please create your signature before navigating to next step</span>
 </c-callout>
 <c-nav variant="underline">
     <c-nav-item *ngFor="let nav of panes; index as i; first as isFirst; last as isLast">

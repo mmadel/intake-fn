@@ -6,5 +6,6 @@ export class InsuranceCompany{
     address:string|null;
     clinics:Clinic[] | null;
     status?:boolean
+    createdAt?:number
     
 }

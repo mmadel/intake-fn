@@ -3,7 +3,24 @@
   <c-row>
     <c-col xs="3" class="mb-2">
       <c-dropdown [autoClose]="'outside'">
-        <button cButton cDropdownToggle variant="outline">
+        <button cButton cDropdownToggle variant="outline" size="sm">
+          <svg cIcon name="cilFilter" *ngIf="!isFiltered"></svg>
+          <svg cIcon name="cilFilterX" *ngIf="isFiltered"></svg>
+        </button>
+        <div cDropdownMenu [ngStyle]="{'min-width.px': 200}" class="p-2">
+          <select cSelect sizing="sm" (change)="onChange($event)">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+      </c-dropdown>
+    </c-col>
+  </c-row>
+  <patient-counter-widgets></patient-counter-widgets>
+  <clinics-patients-chart></clinics-patients-chart>
+  <c-row>
+    <c-col xs="3" class="mb-2">
+      <c-dropdown [autoClose]="'outside'">
+        <button cButton cDropdownToggle variant="outline" size="sm">
           <svg cIcon name="cilFilter" *ngIf="!isFiltered"></svg>
           <svg cIcon name="cilFilterX" *ngIf="isFiltered"></svg>
         </button>
@@ -18,65 +35,34 @@
       </c-dropdown>
     </c-col>
   </c-row>
-  <c-row *ngIf="dashboardDataContainer">
-    <c-col md="12" xl="3" *ngFor="let recipient of dashboardDataContainer.clinicsData | keyvalue">
-      <c-widget-stat-a [title]="recipient.key" [color]="getColor(recipient.value[0])" class="mb-4" text="">
-        <br><br><br>
-        <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-          {{recipient.value[0]}}
-          <span class="fs-6 fw-normal">({{recipient.value[1]}}%)</span>
-          <span class="fs-6 fw-normal">
-            Patients <svg size="lg" cIcon name="cilDisabled"></svg>
-          </span>
-        </ng-template>
-        <c-progress class="my-2" thin>
-          <c-progress-bar [value]="recipient.value[1]" color="success"></c-progress-bar>
-        </c-progress>
-      </c-widget-stat-a>
-    </c-col>
-  </c-row>
   <c-row>
-    <c-col xs>
+    <c-col xs="12">
       <c-card class="mb-4" *ngIf="dashboardDataContainer">
-        <c-card-header>Traffic {{ "&" }} Sales</c-card-header>
+        <c-card-header>Traffic </c-card-header>
         <c-card-body>
           <c-row>
-            <c-col md="6" xl="6" xs="12">
-              <c-row>
-                <c-col sm="6">
-                  <div class="border-start border-start-4 border-start-info py-1 px-3">
-                    <div class="text-medium-emphasis small">total Patients</div>
-                    <div class="fs-5 fw-semibold">{{dashboardDataContainer.totalNumberOfPatient}}</div>
-                  </div>
-                </c-col>
-                <c-col sm="6">
-                  <div class="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                    <div class="text-medium-emphasis small">
-                      Insured Patients : Compensation-NoFault
-                    </div>
-                    <div class="fs-5 fw-semibold">{{dashboardDataContainer.totalNumberOfCompensationNoFaultPatient}}</div>
-                  </div>
-                </c-col>
-              </c-row>
-  
-              <hr class="mt-0" />
-  
-  
+            <c-col sm="4">
+              <div class="border-start border-start-4 border-start-info py-1 px-3">
+                <div class="text-medium-emphasis small">total Patients</div>
+                <div class="fs-5 fw-semibold">{{dashboardDataContainer.totalNumberOfPatient}}</div>
+              </div>
             </c-col>
-  
-            <c-col md="6" xl="6" xs="12">
-              <c-row>
-                <c-col sm="6">
-                  <div class="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                    <div class="text-medium-emphasis small">
-                      Insured Patients : Commercial
-                    </div>
-                    <div class="fs-5 fw-semibold">{{dashboardDataContainer.totalNumberOfCommercialPatient}}</div>
-                  </div>
-                </c-col>
-              </c-row>
-  
-              <hr class="mt-0" />
+            <c-col sm="4">
+              <div class="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                <div class="text-medium-emphasis small">
+                  Insured Patients : Compensation-NoFault
+                </div>
+                <div class="fs-5 fw-semibold">{{dashboardDataContainer.totalNumberOfCompensationNoFaultPatient}}
+                </div>
+              </div>
+            </c-col>
+            <c-col sm="4">
+              <div class="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                <div class="text-medium-emphasis small">
+                  Insured Patients : Commercial
+                </div>
+                <div class="fs-5 fw-semibold">{{dashboardDataContainer.totalNumberOfCommercialPatient}}</div>
+              </div>
             </c-col>
             <c-col xs="12">
               <div class="progress-group mb-4">
@@ -201,6 +187,14 @@
         </c-card-body>
       </c-card>
     </c-col>
+    <!-- <c-col xs="5">
+      <c-card class="mb-4" *ngIf="dashboardDataContainer">
+        <c-card-header>
+          Users
+        </c-card-header>
+        <c-card-body></c-card-body>
+      </c-card>
+    </c-col> -->
   </c-row>
 </span>
 <span *ngIf="noShow | async">
@@ -208,6 +202,6 @@
     <h1 class="display-4">Oops, something went wrong!</h1>
     <p class="lead">We apologize for the inconvenience.</p>
     <p>May be you don't assign to any clinic or your clinic has been deactivated. Please contact the administrator</p>
-    <a  class="btn btn-primary" (click)="logout()">Logout</a>
-</div>
+    <a class="btn btn-primary" (click)="logout()">Logout</a>
+  </div>
 </span>

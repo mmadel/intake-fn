@@ -7,4 +7,5 @@ export interface Clinic{
     clinicAddress?: BasicAddress
     selected?:boolean
     status?:boolean
+    createdAt?:number
 }

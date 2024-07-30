@@ -4,7 +4,7 @@
     <c-col xs="12" class="mb-4">
         <c-card>
             <c-card-header ngPreserveWhitespaces>
-                <strong>Patient Source  Reports</strong> <small>From patient list</small>
+                <strong>Patient Source Reports</strong> <small>From patient list</small>
             </c-card-header>
             <c-card-body>
                 <p class="text-medium-emphasis small">
@@ -12,7 +12,7 @@
                     the recommendation may be doctor or another entity
                 </p>
                 <c-callout color="danger" *ngIf="searchInputNotValid">
-                    {{errorMsg}}
+                    <span class="text-danger fw-bold">{{errorMsg}}</span>
                 </c-callout>
                 <!--
               <div style="float: left;margin-top: 4%;">
@@ -35,7 +35,7 @@
                                                 [(ngModel)]="patientSearchCriteria.type">
                                                 <option value="null">Select Patient Recommendation</option>
                                                 <option value="Doctor">Doctor</option>
-                                                <option value="Entity">Entity</option>                                        
+                                                <option value="Entity">Entity</option>
                                             </select>
                                         </form>
                                     </c-col>
@@ -51,7 +51,7 @@
                                             <form cForm>
                                                 <label for="doctor-npi" class="form-label"> Doctor NPI</label>
                                                 <input numbers cFormControl placeholder="Doctor NPI" name="doctor-npi"
-                                                    [(ngModel)]="patientSearchCriteria.doctorNPI"  maxlength="10"/>
+                                                    [(ngModel)]="patientSearchCriteria.doctorNPI" maxlength="10" />
                                             </form>
                                         </c-col>
                                     </div>
@@ -110,8 +110,8 @@
                 <td>
                     <ng-container [ngSwitch]="columnName">
                         <ng-container *ngSwitchCase="'createdAt'">
-                              {{(item[columnName]) | date}}
-                          </ng-container>
+                            {{(item[columnName]) | date}}
+                        </ng-container>
                         <ng-container *ngSwitchDefault>
                             {{tdContent}}
                         </ng-container>

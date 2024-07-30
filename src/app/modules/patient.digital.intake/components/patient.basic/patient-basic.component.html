@@ -1,5 +1,5 @@
-<c-callout color="danger" *ngIf="isValidForm">
-    Please fill in all the required fields before navigating to next step
+<c-callout color="danger" *ngIf="isValidForm">    
+    <span class="text-danger fw-bold">Please fill in all the required fields before navigating to next step</span>
 </c-callout>
 <div [formGroup]="form" class="mt-3">
     <div formGroupName="basic">
@@ -55,6 +55,7 @@
                 can't be today.</div>
             <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['future']" class="text-danger mx-1">Date of birth
                 can't be in future.</div>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['max']" class="text-danger mx-1">Age Cannot be greater than 100 years</div>
         </c-row>
         <!--Guarantor-->
         <c-row *ngIf="isGuarantor">
@@ -72,7 +73,8 @@
                                 <input cFormControl placeholder="FirstName" formControlName="guarantorFirstName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorFirstName')?.invalid
                                 && this.form.get('basic')?.get('guarantorFirstName')?.touched}" maxlength="60">
-                                <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName" maxlength="60">
+                                <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName"
+                                    maxlength="60">
                                 <input cFormControl placeholder="LastName" formControlName="guarantorLastName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorLastName')?.invalid
                                 && this.form.get('basic')?.get('guarantorLastName')?.touched}" maxlength="60">

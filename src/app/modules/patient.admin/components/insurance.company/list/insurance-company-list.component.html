@@ -18,6 +18,7 @@
             <th scope="col">#</th>
             <th scope="col">insurance Company</th>
             <th scope="col">Clinic</th>
+            <th scope="col">Create At</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -31,6 +32,7 @@
                     <li *ngFor="let clinic of insuranceCompany.clinics">{{clinic.name}}</li>
                 </ul>
             </td>
+            <td>{{insuranceCompany.createdAt | date:"MM/dd/yyyy  hh:mm a"}}</td>
             <td>
                 <div class="btn-group" role="group">
                     <button cButton variant="outline" (click)="showEditInsuranceCompany(insuranceCompany.id)" size="sm">

@@ -5,6 +5,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { imageDocumentValidator } from './validators/custom.validation/document.image.validator';
 import { EmailValidator } from './validators/custom.validation/email.validator';
 import { futureDateValidator } from './validators/custom.validation/future.date.validator';
+import { maxDateValidator } from './validators/custom.validation/max.date.validator';
 import { noSpecialCharactersValidator } from './validators/custom.validation/special.characters.validator';
 import { todayDOBValidator } from './validators/custom.validation/today.dob.validator';
 import { DocumentValidator } from './validators/document/document.validator';
@@ -42,7 +43,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'firstname': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
         'middleName': new FormControl(null, noSpecialCharactersValidator()),
         'lastName': new FormControl(null, [Validators.required, noSpecialCharactersValidator()]),
-        'dob': new FormControl(null, [Validators.required, todayDOBValidator(),futureDateValidator()]),
+        'dob': new FormControl(null, [Validators.required, todayDOBValidator(),futureDateValidator(),maxDateValidator()]),
         'gender': new FormControl(null, [Validators.required]),
         'marital': new FormControl(null, [Validators.required]),
         'phoneType': new FormControl(null, [Validators.required]),
@@ -88,14 +89,14 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'heightUnit': new FormControl(false),
         'weight': new FormControl(null, [Validators.required]),
         'weightUnit': new FormControl(false),
-        'evaluationReason': new FormControl(null, [Validators.required]),
-        'patientConditions': new FormControl(null, [Validators.required]),
-        'prescriptionMedication': new FormControl(null, [Validators.required]),
+        'evaluationReason': new FormControl(null),
+        'patientConditions': new FormControl(null),
+        'prescriptionMedication': new FormControl(null),
         'isMetalImplants': new FormControl(false, [Validators.required]),
         'isXRay': new FormControl(false, [Validators.required]),
         'isXRayValue': new FormControl(null),
         'isPacemaker': new FormControl(false, [Validators.required]),
-        'surgeriesList': new FormControl(null, [Validators.required]),
+        'surgeriesList': new FormControl(null),
       }),
       'insurance': new FormGroup({
         'type': new FormControl(true, [Validators.required]),

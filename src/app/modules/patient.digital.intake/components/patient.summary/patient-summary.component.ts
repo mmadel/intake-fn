@@ -99,7 +99,7 @@ export class PatientSummaryComponent implements OnInit {
         }
       };
       var patientAge = moment().diff(selected.dob, 'y')
-      var isGuarantor: boolean = patientAge < 21 ? true : false;
+      var isGuarantor: boolean = patientAge < 18 ? true : false;
       if (isGuarantor) {
         var patientGrantor: PatientGrantor = {
           firstName: selected.guarantorFirstName,

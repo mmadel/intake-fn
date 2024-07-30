@@ -1,6 +1,5 @@
 <ngx-spinner></ngx-spinner>
 <!--Essential Information-->
-{{this.pateint.patientSource |json}}
 <c-card class="mb-3 mt-3">
     <c-card-body>
         <h5 cCardTitle>Essential Information</h5>
@@ -77,37 +76,48 @@
         <h5 cCardTitle>Medical History Information</h5>
         <p cCardText>
             <strong>
-                Height : </strong> {{pateint.patientMedical?.patientMedicalHistory?.height}} :
+                Height : </strong> {{pateint.patientMedical?.patientMedicalHistory?.height}}
             {{pateint.patientMedical?.patientMedicalHistory?.heightUnit}}<br />
             <strong>
-                Weight : </strong> {{pateint.patientMedical?.patientMedicalHistory?.weight}} :
-            {{pateint.patientMedical?.patientMedicalHistory?.weightUnit}}<br />
-            <strong>
-                Reason for today’s evaluation : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission}} <br />
-            <strong>
-                List prescription or non-prescription medication : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.medicationPrescription}} <br />
-            <strong>
-                Conditions : </strong>
-            <li *ngFor="let condition of pateint.patientMedical?.patientMedicalHistory?.patientCondition">
-                {{condition }}
-            </li>
-            <br />
-            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.scanningTest">
+                Weight : </strong> {{pateint.patientMedical?.patientMedicalHistory?.weight}}
+            {{pateint.patientMedical?.patientMedicalHistory?.weightUnit }}<br />
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission !== null">
                 <strong>
-                    X-Ray : </strong> {{pateint.patientMedical?.patientMedicalHistory?.scanningTestValue}}
+                    Reason for today’s evaluation : </strong>
+                {{pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission}} <br />
+            </span>
+
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.medicationPrescription !== null">
+                <strong>
+                    List prescription or non-prescription medication : </strong>
+                {{pateint.patientMedical?.patientMedicalHistory?.medicationPrescription}} <br />
+            </span>
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.patientCondition">
+                <strong>
+                    Conditions : </strong>
+                <li *ngFor="let condition of pateint.patientMedical?.patientMedicalHistory?.patientCondition">
+                    {{condition }}
+                </li>
+                <br />
+            </span>
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.scanningTest">
+                <strong>X-Ray</strong>
+                <li *ngFor="let xVaue of pateint.patientMedical?.patientMedicalHistory?.scanningTestValue">
+                    {{xVaue }}
+                </li>
                 <br />
             </span>
             <strong>
                 Has MetalImplants : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.metalImplantation?'yes':'no'}} <br />
+            {{pateint.patientMedical?.patientMedicalHistory?.metalImplantation?'Yes':'No'}} <br />
             <strong>
                 Has Pacemaker : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.pacemaker?'yes':'no'}} <br />
-            <strong>
-                surgeries or any other conditions not listed above : </strong>
-            {{pateint.patientMedical?.patientMedicalHistory?.surgeriesList}}
+            {{pateint.patientMedical?.patientMedicalHistory?.pacemaker?'Yes':'No'}} <br />
+            <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.surgeriesList !== null">
+                <strong>
+                    Surgeries or any other conditions not listed above : </strong>
+                {{pateint.patientMedical?.patientMedicalHistory?.surgeriesList}}
+            </span>
         </p>
     </c-card-body>
 </c-card>

@@ -96,10 +96,12 @@ export class ClinicCreationComponent implements OnInit {
     })();
   }
   private fillClinicModel() {
+    console.log(JSON.stringify(this.clinic))
     this.clinic = {
       id: this.clinicId !== undefined ? this.clinicId : null,
       name: null,
-      address: ''
+      address: '',
+      createdAt: this.clinic?.createdAt!
     }
     var clinicAddress: BasicAddress = {
       firstAddress: this.clinicForm.controls['first-address'].value,

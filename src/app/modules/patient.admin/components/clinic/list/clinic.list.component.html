@@ -18,6 +18,7 @@
       <th scope="col">#</th>
       <th scope="col">Clinic Name</th>
       <th scope="col">Address</th>
+      <th scope="col">Create At</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -26,6 +27,7 @@
       <td>{{clinic.id}}</td>
       <td>{{clinic.name}}</td>
       <td>{{clinic.address}}</td>
+      <td>{{clinic.createdAt | date:"MM/dd/yyyy  hh:mm a"}}</td>
       <td>
         <div class="btn-group" role="group">
           <button cButton variant="outline" (click)="showEditClinic(clinic.id)" size="sm">

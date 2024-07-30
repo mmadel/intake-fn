@@ -13,4 +13,5 @@ export interface User {
     clinics: Clinic[] | null;
     uuid?: string
     currentRole?: string | null
+    createdAt?:number
 }

@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { cilArrowTop, cilOptions } from '@coreui/icons';
 import * as moment from 'moment';
 import { BehaviorSubject, combineLatest, filter, switchMap, tap } from 'rxjs';
 import { DashboardDataContainer } from 'src/app/models/dashboard/dashboard.data.container';
 import { KcAuthServiceService } from 'src/app/modules/security/service/kc/kc-auth-service.service';
 import { ClinicService } from '../../services/clinic/clinic.service';
 import { DashboardService } from '../../services/dashboard.service';
+import { PatientsCounterService } from '../../services/patient.counters/patients-counter.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,8 +15,88 @@ import { DashboardService } from '../../services/dashboard.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  public users: any[] = [
+    {
+      name: 'Yiorgos Avraamu',
+      state: 'New',
+      registered: 'Jan 1, 2021',
+      country: 'Us',
+      usage: 50,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      payment: 'Mastercard',
+      activity: '10 sec ago',
+      avatar: './assets/img/avatars/1.jpg',
+      status: 'success',
+      color: 'success'
+    },
+    {
+      name: 'Avram Tarasios',
+      state: 'Recurring ',
+      registered: 'Jan 1, 2021',
+      country: 'Br',
+      usage: 10,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      payment: 'Visa',
+      activity: '5 minutes ago',
+      avatar: './assets/img/avatars/2.jpg',
+      status: 'danger',
+      color: 'info'
+    },
+    {
+      name: 'Quintin Ed',
+      state: 'New',
+      registered: 'Jan 1, 2021',
+      country: 'In',
+      usage: 74,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      payment: 'Stripe',
+      activity: '1 hour ago',
+      avatar: './assets/img/avatars/3.jpg',
+      status: 'warning',
+      color: 'warning'
+    },
+    {
+      name: 'Enéas Kwadwo',
+      state: 'Sleep',
+      registered: 'Jan 1, 2021',
+      country: 'Fr',
+      usage: 98,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      payment: 'Paypal',
+      activity: 'Last month',
+      avatar: './assets/img/avatars/4.jpg',
+      status: 'secondary',
+      color: 'danger'
+    },
+    {
+      name: 'Agapetus Tadeáš',
+      state: 'New',
+      registered: 'Jan 1, 2021',
+      country: 'Es',
+      usage: 22,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      payment: 'ApplePay',
+      activity: 'Last week',
+      avatar: './assets/img/avatars/5.jpg',
+      status: 'success',
+      color: 'primary'
+    },
+    {
+      name: 'Friderik Dávid',
+      state: 'New',
+      registered: 'Jan 1, 2021',
+      country: 'Pl',
+      usage: 43,
+      period: 'Jun 11, 2021 - Jul 10, 2021',
+      payment: 'Amex',
+      activity: 'Yesterday',
+      avatar: './assets/img/avatars/6.jpg',
+      status: 'info',
+      color: 'dark'
+    }
+  ];
   dashboardDataContainer: DashboardDataContainer | null;
-
+  years: number[] = [];
   clinicId: number | null;
   startDate: number = 0;
   endDate: number = 0;
@@ -22,9 +104,91 @@ export class DashboardComponent implements OnInit, OnDestroy {
   filterEndDate: number
   isFiltered: boolean;
   noShow:BehaviorSubject<boolean|null>;
-  constructor(private dashboardService: DashboardService, private clinicService: ClinicService
-    , private kcAuthServiceService: KcAuthServiceService, private router: Router) { }
+  icons = { cilOptions, cilArrowTop };
+
+  data: any = {};
+  options: any = {};
+
+  labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  datasets = [
+    {
+      label: 'My First dataset',
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(255,255,255,.55)',
+      data: [65, 59, 84, 250, 51, 55, 40,100,500]
+    }
+  ];
+
+  optionsDefault = {
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    maintainAspectRatio: true,
+    scales: {
+      x: {
+        grid: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          display: false
+        }
+      },
+      y: {
+        
+        display: false,
+        grid: {
+          display: false
+        },
+        ticks: {
+          display: false
+        }
+      }
+    },
+    elements: {
+      line: {
+        borderWidth: 1,
+        tension: 0.4
+      },
+      point: {
+        radius: 4,
+        hitRadius: 10,
+        hoverRadius: 4
+      }
+    }
+  };
+  constructor(private dashboardService: DashboardService, 
+    private clinicService: ClinicService,
+    private kcAuthServiceService: KcAuthServiceService,
+    private router: Router,
+    private patientsCounterService:PatientsCounterService) { }
   ngOnInit(): void {
+    const currentYear = new Date().getFullYear();
+    for (let i = 0; i <= 5; i++) {
+      this.years.push(currentYear - i);
+    }
+    this.data = {
+      labels: this.labels.slice(0, this.datasets[0].data.length),
+      datasets: this.datasets
+    };
+    this.options = this.optionsDefault;
+  
     this.noShow = this.clinicService.preventUser$;
     if (this.kcAuthServiceService.isUserInRole('normal')) {
       this.router.navigateByUrl('admin/patient/list')
@@ -104,5 +268,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   emitFilterDate(startDate: number, endDate: number) {
     var dates: number[] = [startDate, endDate]
     this.clinicService.filterDate$.next(dates)
+  }
+  onChange(selectedYear:any){
+    this.patientsCounterService.selectedYear$.next(selectedYear.target.value)
   }
 }

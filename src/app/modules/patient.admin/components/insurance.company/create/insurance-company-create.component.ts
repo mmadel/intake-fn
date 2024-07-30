@@ -40,6 +40,7 @@ export class InsuranceCompanyCreateComponent implements OnInit {
   private getSelectedInsuranceCompany(id: number) {
     this.insuranceCompanyService.getById(id).subscribe((result: any) => {
       this.insuranceCompany = result.body;
+      console.log(JSON.stringify(this.insuranceCompany))
       this.getClinics();
       this.fillInsuranceCompanyForm();
     }, error => {
@@ -111,6 +112,7 @@ export class InsuranceCompanyCreateComponent implements OnInit {
       address: null,
       clinics: this.createClinics(this.insuranceCompanyForm.get('clinic')?.value),
       status: this.insuranceCompanyForm.get('insurance-company-status')?.value,
+      createdAt:this.insuranceCompany?.createdAt!
     }
     console.log(JSON.stringify(this.insuranceCompany))
   }

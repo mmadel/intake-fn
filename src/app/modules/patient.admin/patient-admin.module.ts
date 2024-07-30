@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '@coreui/icons-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { PatientAdminRoutingModule } from './patient-admin-routing.module';
 import {
   PatientListComponent,
@@ -62,6 +61,9 @@ import {
 } from '@coreui/angular-pro';
 import { QRCodeModule } from 'angularx-qrcode';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ChartjsModule } from '@coreui/angular-chartjs';
+import { PatientCounterWidgetsComponent } from './components/dashboard/patient.counters.widgets/patient-counter-widgets.component';
+import { ClinicsPatientsChartComponent } from './components/dashboard/patients.clinics.chart/clinics-patients-chart.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     PatientCreateComponent,
     InsuranceCompanyCreateComponent,
     InsuranceCompanyListComponent,
-    UserUpdateComponent, UpdateClinicComponent, AuditComponent, UserAuditComponent, UserClinicAuditComponent, UserInsuranceCompanyAuditComponent, UserPatientAuditComponent
+    UserUpdateComponent, UpdateClinicComponent, AuditComponent, UserAuditComponent, UserClinicAuditComponent, UserInsuranceCompanyAuditComponent, UserPatientAuditComponent, PatientCounterWidgetsComponent, ClinicsPatientsChartComponent
   ],
   imports: [
     CommonModule,
@@ -115,6 +117,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FooterModule,
     UtilitiesModule,
     ModalModule,
+    ChartjsModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })

@@ -56,4 +56,7 @@
 
 /intake-service/api/user/check/username/:username https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/check/username/:username 200
 /intake-service/api/user/check/email/:email https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/user/check/email/:email 200
+
+/intake-service/api/insurance/company/check/:name https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/insurance/company/check/:name 200
+/intake-service/api/clinic/check/:name https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/clinic/check/:name 200
 /*  /index.html   200
