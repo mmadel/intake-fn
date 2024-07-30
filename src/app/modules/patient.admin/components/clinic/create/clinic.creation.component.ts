@@ -66,6 +66,8 @@ export class ClinicCreationComponent implements OnInit {
           this.changeVisibility.emit('close-edit');
           this.toastrService.success('Clinic Updated');
         })
+      }else{
+        this.isValidForm = true;
       }
     } else {
       if (this.clinicForm?.valid && !this.validName) {

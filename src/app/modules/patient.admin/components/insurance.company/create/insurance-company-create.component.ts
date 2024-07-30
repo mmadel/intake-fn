@@ -83,6 +83,8 @@ export class InsuranceCompanyCreateComponent implements OnInit {
         }, error => {
           this.toastrService.success('Erro during updating insurance company')
         })
+      }else{
+        this.isValidForm = true;
       }
     } else {
       if (this.insuranceCompanyForm?.valid && !this.validName) {

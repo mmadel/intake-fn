@@ -22,6 +22,7 @@
                 Clinic Name cannot contain special characters.</div>
             <span *ngIf="validName === false">
                 <label>
+                    <span class="text-success">Typed clinic name is unique</span>
                     <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
                 </label>
             </span>
