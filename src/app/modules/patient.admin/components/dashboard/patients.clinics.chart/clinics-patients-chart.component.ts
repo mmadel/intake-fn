@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartjsComponent } from '@coreui/angular-chartjs';
+import { Component, OnInit } from '@angular/core';
 import { filter, map, Observable, tap } from 'rxjs';
+import { ColorsPool } from 'src/app/modules/common/components/color/color.pool';
 import { PatientsCounterService } from '../../../services/patient.counters/patients-counter.service';
-import { OptionsDefault } from '../patient.counters.widgets/chart.defautl.options';
 import { ChartMonths } from '../patient.counters.widgets/chart.months';
 
 @Component({
@@ -11,6 +10,7 @@ import { ChartMonths } from '../patient.counters.widgets/chart.months';
   styleUrls: ['./clinics-patients-chart.component.css']
 })
 export class ClinicsPatientsChartComponent implements OnInit {
+  colors: string[] = ColorsPool;
   data$: Observable<any>
   options: any = {};
   constructor(private patientsCounterService: PatientsCounterService) { }
@@ -62,8 +62,10 @@ export class ClinicsPatientsChartComponent implements OnInit {
                 // Subtract 1 from month to get the correct array index (0-based index)
                 clinicCounts[item.clinicName][item.month - 1] = item.count;
               });
+              var counter:number = 0;
               Object.keys(clinicCounts).forEach(key => {
-                var color = this.random_rgba();
+                counter++
+                var color = this.colors[counter]
                 var ds: any = {
                   label: key,
                   backgroundColor: color,
