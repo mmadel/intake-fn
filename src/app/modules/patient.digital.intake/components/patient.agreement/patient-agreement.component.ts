@@ -24,6 +24,13 @@ export class PatientAgreementComponent implements OnInit {
   CuppingParagraph: string | null;
   PelvicParagraph: string | null;
   PhotoVideoParagraph: string | null;
+  CancellationPolicyParagraph: string | null;
+  CommunicationAttestationParagraph: string | null;
+  AuthorizationToReleaseObtainInformationParagraph: string | null;
+  ConsentToTreatmentParagraph: string | null;
+  NoticeOfPrivacyPracticesParagraph: string | null;
+  InsuranceEligibilityParagraph: string | null;
+  AssignmentReleaseOfBenefitsParagraph: string | null;
   constructor(private patientService: PatientService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -54,6 +61,20 @@ export class PatientAgreementComponent implements OnInit {
       this.PelvicParagraph = element.agreementText;
     if (element.agreementName === 'PhotoVideo')
       this.PhotoVideoParagraph = element.agreementText;
+    if (element.agreementName === 'CancellationPolicy')
+      this.CancellationPolicyParagraph = element.agreementText;
+    if (element.agreementName === 'CommunicationAttestation')
+      this.CommunicationAttestationParagraph = element.agreementText;
+    if (element.agreementName === 'Authorization-To-Release-Obtain-Information')
+      this.AuthorizationToReleaseObtainInformationParagraph = element.agreementText;
+    if (element.agreementName === 'Consent-To-Treatment')
+      this.ConsentToTreatmentParagraph = element.agreementText;
+    if (element.agreementName === 'Notice-Of-Privacy-Practices')
+      this.NoticeOfPrivacyPracticesParagraph = element.agreementText;
+    if (element.agreementName === 'Insurance-Eligibility')
+      this.InsuranceEligibilityParagraph = element.agreementText;
+    if (element.agreementName === 'Assignment-Release-Of-Benefits')
+      this.AssignmentReleaseOfBenefitsParagraph = element.agreementText;
   }
   getReleaseInformationParagraph() {
     const paragraph = `<p style="font-family:Lucida ">${this.releaseInformationParagraph}</p>
@@ -108,13 +129,48 @@ export class PatientAgreementComponent implements OnInit {
 `;
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
-  next(){
+  getCancellationPolicy() {
+    const paragraph = `${this.CancellationPolicyParagraph}</p>
+`;
+    return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+  getCommunicationAttestation() {
+    const paragraph = `${this.CommunicationAttestationParagraph}</p>
+`;
+    return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+  getAuthorizationToReleaseObtainInformationParagraph() {
+    const paragraph = `${this.AuthorizationToReleaseObtainInformationParagraph}</p>
+`;
+    return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+  getConsentToTreatmentParagraph() {
+    const paragraph = `${this.ConsentToTreatmentParagraph}</p>
+`;
+    return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+  getNoticeOfPrivacyPracticesParagraph() {
+    const paragraph = `${this.NoticeOfPrivacyPracticesParagraph}</p>
+`;
+    return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+  getInsuranceEligibilityParagraph() {
+    const paragraph = `${this.InsuranceEligibilityParagraph}</p>
+`;
+    return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+  getAssignmentReleaseOfBenefitsParagraph() {
+    const paragraph = `${this.AssignmentReleaseOfBenefitsParagraph}</p>
+`;
+    return this.sanitizer.bypassSecurityTrustHtml(paragraph);
+  }
+  next() {
     if (this.form.get('agreement')?.valid) {
       this.stepper.next();
       this.isValidForm = false;
     } else {
       this.isValidForm = true;
-      ValidationExploder.explode(this.form, 'agreement')      
+      ValidationExploder.explode(this.form, 'agreement')
     }
   }
 }

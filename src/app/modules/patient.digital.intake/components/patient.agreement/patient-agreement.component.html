@@ -105,7 +105,6 @@
                     </button>
                 </ng-template>
                 <ng-template cTemplateId="accordionBodyTemplate">
-
                     <c-row>
                         <c-col xs="auto">
                             <div class="accordion-body">
@@ -125,6 +124,167 @@
             <c-accordion-item #item5="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
                     <button (click)="item5.toggleItem()" [collapsed]="!item5.visible" cAccordionButton>
+                        <h5>Cancellation and No-Show Policy <span class="text-danger">*</span></h5>
+                    </button>
+                </ng-template>
+                <ng-template cTemplateId="accordionBodyTemplate">
+                    <c-row>
+                        <c-col xs="auto">
+                            <div class="accordion-body">
+                                <span [innerHTML]="getCancellationPolicy()"></span>
+                            </div>
+                        </c-col>
+                        <c-col xs="auto" class="ms-3">
+                            <c-form-check>
+                                <input cFormCheckInput id="cancellation" type="checkbox"
+                                    formControlName="cancellation-policy" />
+                                <label cFormCheckLabel for="cancellation">I accept</label>
+                            </c-form-check>
+                        </c-col>
+                    </c-row>
+                </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item6="cAccordionItem" [visible]="false">
+                <ng-template cTemplateId="accordionHeaderTemplate">
+                    <button (click)="item6.toggleItem()" [collapsed]="!item6.visible" cAccordionButton>
+                        <h5>Communication Attestation<span class="text-danger"> *</span></h5>
+                    </button>
+                </ng-template>
+                <ng-template cTemplateId="accordionBodyTemplate">
+                    <c-row>
+                        <c-col xs="auto">
+                            <div class="accordion-body">
+                                <span [innerHTML]="getCommunicationAttestation()"></span>
+                            </div>
+                        </c-col>
+                        <c-col xs="auto" class="ms-3">
+                            <c-form-check>
+                                <input cFormCheckInput id="cancellation" type="checkbox"
+                                    formControlName="communication-attestation" />
+                                <label cFormCheckLabel for="cancellation">I accept</label>
+                            </c-form-check>
+                        </c-col>
+                    </c-row>
+                </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item7="cAccordionItem" [visible]="false">
+                <ng-template cTemplateId="accordionHeaderTemplate">
+                    <button (click)="item7.toggleItem()" [collapsed]="!item7.visible" cAccordionButton>
+                        <h5>Authorization to Release / Obtain Information<span class="text-danger"> *</span></h5>
+                    </button>
+                </ng-template>
+                <ng-template cTemplateId="accordionBodyTemplate">
+                    <c-row>
+                        <c-col xs="auto">
+                            <div class="accordion-body">
+                                <span [innerHTML]="getAuthorizationToReleaseObtainInformationParagraph()"></span>
+                            </div>
+                        </c-col>
+                        <c-col xs="auto" class="ms-3">
+                            <c-form-check>
+                                <input cFormCheckInput id="cancellation" type="checkbox"
+                                    formControlName="authorization" />
+                                <label cFormCheckLabel for="cancellation">I accept</label>
+                            </c-form-check>
+                        </c-col>
+                    </c-row>
+                </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item8="cAccordionItem" [visible]="false">
+                <ng-template cTemplateId="accordionHeaderTemplate">
+                    <button (click)="item8.toggleItem()" [collapsed]="!item8.visible" cAccordionButton>
+                        <h5>Consent to Treatment<span class="text-danger"> *</span></h5>
+                    </button>
+                </ng-template>
+                <ng-template cTemplateId="accordionBodyTemplate">
+                    <c-row>
+                        <c-col xs="auto">
+                            <div class="accordion-body">
+                                <span [innerHTML]="getConsentToTreatmentParagraph()"></span>
+                            </div>
+                        </c-col>
+                        <c-col xs="auto" class="ms-3">
+                            <c-form-check>
+                                <input cFormCheckInput id="cancellation" type="checkbox"
+                                    formControlName="consent-treatment" />
+                                <label cFormCheckLabel for="cancellation">I accept</label>
+                            </c-form-check>
+                        </c-col>
+                    </c-row>
+                </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item9="cAccordionItem" [visible]="false">
+                <ng-template cTemplateId="accordionHeaderTemplate">
+                    <button (click)="item9.toggleItem()" [collapsed]="!item9.visible" cAccordionButton>
+                        <h5>Notice of Privacy Practices<span class="text-danger"> *</span></h5>
+                    </button>
+                </ng-template>
+                <ng-template cTemplateId="accordionBodyTemplate">
+                    <c-row>
+                        <c-col xs="auto">
+                            <div class="accordion-body">
+                                <span [innerHTML]="getNoticeOfPrivacyPracticesParagraph()"></span>
+                            </div>
+                        </c-col>
+                        <c-col xs="auto" class="ms-3">
+                            <c-form-check>
+                                <input cFormCheckInput id="cancellation" type="checkbox"
+                                    formControlName="notice-of-privacy-practices" />
+                                <label cFormCheckLabel for="cancellation">I accept</label>
+                            </c-form-check>
+                        </c-col>
+                    </c-row>
+                </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item10="cAccordionItem" [visible]="false">
+                <ng-template cTemplateId="accordionHeaderTemplate">
+                    <button (click)="item10.toggleItem()" [collapsed]="!item10.visible" cAccordionButton>
+                        <h5>Insurance Eligibility<span class="text-danger"> *</span></h5>
+                    </button>
+                </ng-template>
+                <ng-template cTemplateId="accordionBodyTemplate">
+                    <c-row>
+                        <c-col xs="auto">
+                            <div class="accordion-body">
+                                <span [innerHTML]="getInsuranceEligibilityParagraph()"></span>
+                            </div>
+                        </c-col>
+                        <c-col xs="auto" class="ms-3">
+                            <c-form-check>
+                                <input cFormCheckInput id="cancellation" type="checkbox"
+                                    formControlName="insurance-eligibility" />
+                                <label cFormCheckLabel for="cancellation">I accept</label>
+                            </c-form-check>
+                        </c-col>
+                    </c-row>
+                </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item11="cAccordionItem" [visible]="false">
+                <ng-template cTemplateId="accordionHeaderTemplate">
+                    <button (click)="item11.toggleItem()" [collapsed]="!item11.visible" cAccordionButton>
+                        <h5>Assignment & Release of Benefits<span class="text-danger"> *</span></h5>
+                    </button>
+                </ng-template>
+                <ng-template cTemplateId="accordionBodyTemplate">
+                    <c-row>
+                        <c-col xs="auto">
+                            <div class="accordion-body">
+                                <span [innerHTML]="getAssignmentReleaseOfBenefitsParagraph()"></span>
+                            </div>
+                        </c-col>
+                        <c-col xs="auto" class="ms-3">
+                            <c-form-check>
+                                <input cFormCheckInput id="cancellation" type="checkbox"
+                                    formControlName="assignment-release-of-benefits" />
+                                <label cFormCheckLabel for="cancellation">I accept</label>
+                            </c-form-check>
+                        </c-col>
+                    </c-row>
+                </ng-template>
+            </c-accordion-item>
+            <c-accordion-item #item12="cAccordionItem" [visible]="false">
+                <ng-template cTemplateId="accordionHeaderTemplate">
+                    <button (click)="item12.toggleItem()" [collapsed]="!item12.visible" cAccordionButton>
                         <h5>Cupping Consent Form</h5>
                     </button>
                 </ng-template>
@@ -146,9 +306,9 @@
                     </c-row>
                 </ng-template>
             </c-accordion-item>
-            <c-accordion-item #item6="cAccordionItem" [visible]="false">
+            <c-accordion-item #item13="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
-                    <button (click)="item6.toggleItem()" [collapsed]="!item6.visible" cAccordionButton>
+                    <button (click)="item13.toggleItem()" [collapsed]="!item13.visible" cAccordionButton>
                         <h5>Pelvic Examination & Treatment Consent Form</h5>
                     </button>
                 </ng-template>
@@ -169,9 +329,9 @@
                     </c-row>
                 </ng-template>
             </c-accordion-item>
-            <c-accordion-item #item7="cAccordionItem" [visible]="false">
+            <c-accordion-item #item14="cAccordionItem" [visible]="false">
                 <ng-template cTemplateId="accordionHeaderTemplate">
-                    <button (click)="item7.toggleItem()" [collapsed]="!item7.visible" cAccordionButton>
+                    <button (click)="item14.toggleItem()" [collapsed]="!item14.visible" cAccordionButton>
                         <h5>Photo / Video Release Form</h5>
                     </button>
                 </ng-template>

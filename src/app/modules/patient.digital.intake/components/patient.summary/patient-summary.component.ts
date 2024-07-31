@@ -321,6 +321,13 @@ export class PatientSummaryComponent implements OnInit {
       patientAgreement.acceptFinancialAgreementAgreements = value['financial-agreement'] ? value['financial-agreement'] : false
       patientAgreement.acceptInsuranceAgreement = value['Insurance-agreement'] ? value['Insurance-agreement'] : false
       patientAgreement.acceptHIPAAAgreements = value['hipaa-acknowledgement'] ? value['hipaa-acknowledgement'] : false
+      patientAgreement.cancellationPolicyAgreements = value['cancellation-policy'] ? value['cancellation-policy'] : false
+      patientAgreement.communicationAttestationAgreements = value['communication-attestation'] ? value['communication-attestation'] : false
+      patientAgreement.authorizationToReleaseObtainInformationAgreements = value['authorization'] ? value['authorization'] : false
+      patientAgreement.consentToTreatmentAgreements = value['consent-treatment'] ? value['consent-treatment'] : false
+      patientAgreement.noticeOfPrivacyPracticesAgreements = value['notice-of-privacy-practices'] ? value['notice-of-privacy-practices'] : false
+      patientAgreement.insuranceEligibilityAgreements = value['insurance-eligibility'] ? value['insurance-eligibility'] : false
+      patientAgreement.assignmentReleaseOfBenefitsAgreements = value['assignment-release-of-benefits'] ? value['assignment-release-of-benefits'] : false
       patientAgreement.acceptCuppingAgreements = value['cupping-agreement'] ? value['cupping-agreement'] : false
       patientAgreement.acceptPelvicAgreements = value['pelvic-agreement'] ? value['pelvic-agreement'] : false
       patientAgreement.acceptPhotoVideoAgreements = value['photo-video-agreement'] ? value['photo-video-agreement'] : false
