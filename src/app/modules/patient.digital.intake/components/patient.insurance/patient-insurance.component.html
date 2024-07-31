@@ -425,7 +425,7 @@
                         </label>
                     </c-col>
                     <c-col xl="12">
-                        <input cFormControl sizing="sm" formControlName="commercial-member-id" maxlength="60">
+                        <input cFormControl sizing="sm" formControlName="commercial-member-id" maxlength="60" input-trimmer>
                         <div *ngIf="!this.form.get('insurance')?.get('commercial-member-id')?.valid && 
 						(this.form.get('insurance')?.get('commercial-member-id')?.dirty ||this.form.get('insurance')?.get('commercial-member-id')?.touched)"
                             class="text-danger mx-1">
@@ -441,7 +441,7 @@
                         </label>
                     </c-col>
                     <c-col xl="12">
-                        <input cFormControl sizing="sm" formControlName="commercial-ploicy-id" maxlength="60">
+                        <input cFormControl sizing="sm" formControlName="commercial-ploicy-id" maxlength="60" input-trimmer>
                     </c-col>
                     <div *ngIf="!this.form.get('insurance')?.get('commercial-ploicy-id')?.valid && 
 						(this.form.get('insurance')?.get('commercial-ploicy-id')?.dirty ||this.form.get('insurance')?.get('commercial-ploicy-id')?.touched)"
