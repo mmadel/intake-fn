@@ -8,7 +8,7 @@
         <c-col xs="12"><label style="width: 150px;">User Name<span class="text-danger">*</span></label></c-col>
         <c-col xs="12">
             <input class="form-control" placeholder formControlName="username" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.userForm.get('username')?.invalid
-            && this.userForm.get('username')?.touched}" maxlength="60">
+            && this.userForm.get('username')?.touched}" maxlength="60" input-trimmer>
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('username')?.errors?.['required'] && 
@@ -38,7 +38,7 @@
         </c-col>
         <c-col xs="12">
             <input class="form-control" placeholder formControlName="firstName" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.userForm.get('firstName')?.invalid
-        && this.userForm.get('firstName')?.touched}" maxlength="60">
+        && this.userForm.get('firstName')?.touched}" maxlength="60" input-trimmer>
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('firstName')?.errors?.['required'] && 
@@ -56,7 +56,7 @@
         </c-col>
         <c-col xs="12">
             <input class="form-control" placeholder formControlName="lastName" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.userForm.get('lastName')?.invalid
-        && this.userForm.get('lastName')?.touched}" maxlength="60">
+        && this.userForm.get('lastName')?.touched}" maxlength="60" input-trimmer>
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('lastName')?.errors?.['required'] && 
@@ -74,7 +74,7 @@
         </c-col>
         <c-col xs="12">
             <input cFormControl sizing="sm" class="form-control" placeholder formControlName="email" [ngClass]="{'is-invalid': this.userForm.get('email')?.invalid
-        && this.userForm.get('email')?.touched}" maxlength="60" [readonly]="mode ==='edit'">
+        && this.userForm.get('email')?.touched}" maxlength="60" [readonly]="mode ==='edit'" input-trimmer>
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('email')?.errors?.['required'] === true && 
@@ -104,7 +104,7 @@
         </c-col>
         <c-col xs="12">
             <input class="form-control" placeholder formControlName="password" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.userForm.get('password')?.invalid
-        && this.userForm.get('password')?.touched}" maxlength="60" type="password">
+        && this.userForm.get('password')?.touched}" maxlength="60" type="password" input-trimmer>
         </c-col>
         <c-col xs="12">
             <div *ngIf="this.userForm.get('password')?.errors?.['required'] && 
@@ -125,7 +125,7 @@
                 <c-col xl="12">
                     <input class="form-control" placeholder formControlName="first-address" sizing="sm" cFormControl
                         [ngClass]="{'is-invalid': this.userForm.get('first-address')?.invalid
-                    && this.userForm.get('first-address')?.touched}" maxlength="60">
+                    && this.userForm.get('first-address')?.touched}" maxlength="60" input-trimmer>
                 </c-col>
                 <c-col xl=" 12">
                     <div *ngIf="this.userForm.get('first-address')?.errors?.['required'] && 
@@ -145,7 +145,7 @@
                 <c-col xl="12">
                     <input class="form-control" placeholder formControlName="second-address" sizing="sm" cFormControl
                         [ngClass]="{'is-invalid': this.userForm.get('second-address')?.invalid
-                    && this.userForm.get('second-address')?.touched}" maxlength="60">
+                    && this.userForm.get('second-address')?.touched}" maxlength="60" input-trimmer>
                 </c-col>
                 <c-col xl=" 12">
                     <div *ngIf="this.userForm.get('second-address')?.errors?.['noSpecialCharacters']"
@@ -160,7 +160,7 @@
                 <c-col xl="12">
                     <input class="form-control" placeholder formControlName="city-address" sizing="sm" cFormControl
                         [ngClass]="{'is-invalid': this.userForm.get('city-address')?.invalid
-                    && this.userForm.get('city-address')?.touched}" maxlength="60">
+                    && this.userForm.get('city-address')?.touched}" maxlength="60" input-trimmer>
                 </c-col>
                 <c-col xl=" 12">
                     <div *ngIf="this.userForm.get('city-address')?.errors?.['required'] && 
