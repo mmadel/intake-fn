@@ -15,7 +15,7 @@
             <c-col xs="12">
                 <div class="w-60 p-3 border border-default mb-3" style="background-color: #eee;">
                     <span [class]="signatureClass" style="font-size: xx-large; background-color: transparent;"
-                        #patientsig id="sig">{{patientFullName}}</span>
+                        #patientsig id="sig">{{gPatientFullName?gPatientFullName:patientFullName }}</span>
                 </div>
             </c-col>
             <c-col xs="12">

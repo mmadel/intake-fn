@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChi
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import html2canvas from 'html2canvas';
+import { result } from 'lodash';
 import * as moment from 'moment';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest, map, Observable, tap } from 'rxjs';
 
 import SignaturePad from 'signature_pad';
 import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
@@ -24,6 +25,7 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
   signatureClass: string = "";
   signatureImg!: string;
   patientFullName: string | undefined
+  gPatientFullName: string | undefined
   isDrawsign: boolean | undefined = undefined;
   isGeneratesign: boolean | undefined = undefined
 
@@ -37,24 +39,35 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
   constructor(private patientSignatureService: PatientSignatureService, private renderer: Renderer2
     , private componentReference: ComponentReferenceComponentService) { }
   ngAfterViewInit(): void {
-    this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('dob')?.valueChanges.subscribe(value => {
-      console.log(value)
-      var isGuarantor: boolean;
-      this.componentReference.getPatientBasicComponent()!.isGuarantor
-      var patientAge = moment().diff(value, 'y')
-      isGuarantor = patientAge < 18 ? true : false;
-      if (isGuarantor) {
-        console.log('PatientSignature isGuarantor');
-        var fName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorFirstName')?.value;
-        var lName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorLastName')?.value;
-        this.patientFullName = lName + ' ' + fName
+    combineLatest([
+      this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.valueChanges,
+      this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.valueChanges
+    ]).subscribe((pName: any) => {
+      this.patientFullName = pName[1] + ' ' + pName[0]
+    })
 
-      } else {
-        console.log('PatientSignature not Guarantor');
-        var fName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.value;
-        var lName: string = this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.value;
-        this.patientFullName = lName + ' ' + fName
+    this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('dob')!.valueChanges.subscribe(dob => {
+      var isGuarantor: boolean;
+      var patientAge = moment().diff(dob, 'y')
+      isGuarantor = patientAge < 18 ? true : false;
+      console.log(isGuarantor)
+      if (isGuarantor)
+        combineLatest([
+          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorFirstName')?.valueChanges,
+          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorLastName')?.valueChanges
+        ]).subscribe((pName: any) => {
+          this.gPatientFullName = pName[1] + ' ' + pName[0]
+        })
+      else{
+        this.gPatientFullName  = undefined
+        combineLatest([
+          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.valueChanges,
+          this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.valueChanges
+        ]).subscribe((pName: any) => {
+          this.patientFullName = pName[1] + ' ' + pName[0]
+        })
       }
+        
     })
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
   }
