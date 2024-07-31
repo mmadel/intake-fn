@@ -26,10 +26,10 @@ export const adminNavItems: INavData[] = [
     url: '',
     iconComponent: { name: 'cil-applicationsSettings' },
     children: [
-      {
-        name: 'Validation List',
-        url: 'validation/list'
-      },
+      // {
+      //   name: 'Validation List',
+      //   url: 'validation/list'
+      // },
       {
         name: 'Clinics',
         url: 'clinic/list'
@@ -55,19 +55,19 @@ export const adminNavItems: INavData[] = [
       }
     ]
   },
-  {
-    name: 'Auditing',
-    url: '',
-    iconComponent: { name: 'cil-monitor' },
-    children: [
-      {
-        name: 'Entity Actions',
-        url: 'audit/entity-audit'
-      },
-      {
-        name: 'User Action',
-        url: 'audit/user-audit'
-      }
-    ]
-  }
+  // {
+  //   name: 'Auditing',
+  //   url: '',
+  //   iconComponent: { name: 'cil-monitor' },
+  //   children: [
+  //     {
+  //       name: 'Entity Actions',
+  //       url: 'audit/entity-audit'
+  //     },
+  //     {
+  //       name: 'User Action',
+  //       url: 'audit/user-audit'
+  //     }
+  //   ]
+  // }
 ];
