@@ -63,7 +63,7 @@
                         </label>
                     </c-col>
                     <c-col xl="12">
-                        <input cFormControl sizing="sm" formControlName="compensation-insurance-company" maxlength="60">
+                        <input cFormControl sizing="sm" formControlName="compensation-insurance-company" maxlength="60" input-trimmer>
                     </c-col>
                     <div *ngIf="!this.form.get('insurance')?.get('compensation-insurance-company')?.valid && 
                     (this.form.get('insurance')?.get('compensation-insurance-company')?.dirty ||this.form.get('insurance')?.get('compensation-insurance-company')?.touched)"
@@ -79,7 +79,7 @@
                         </label>
                     </c-col>
                     <c-col xl="12">
-                        <input cFormControl sizing="sm" formControlName="compensation-claim-number" maxlength="60">
+                        <input cFormControl sizing="sm" formControlName="compensation-claim-number" maxlength="60" input-trimmer>
                     </c-col>
                     <div *ngIf="!this.form.get('insurance')?.get('compensation-claim-number')?.valid && 
                     (this.form.get('insurance')?.get('compensation-claim-number')?.dirty ||this.form.get('insurance')?.get('compensation-claim-number')?.touched)"
@@ -142,7 +142,7 @@
                             </c-col>
                             <c-col xl="12">
                                 <input cFormControl sizing="sm" formControlName="compensation-first-address"
-                                    maxlength="60">
+                                    maxlength="60" input-trimmer>
                             </c-col>
                             <div *ngIf="!this.form.get('insurance')?.get('compensation-first-address')?.valid && 
                     (this.form.get('insurance')?.get('compensation-first-address')?.dirty ||this.form.get('insurance')?.get('compensation-first-address')?.touched)"
@@ -156,7 +156,7 @@
                             </c-col>
                             <c-col xl="12">
                                 <input cFormControl sizing="sm" formControlName="compensation-second-address"
-                                    maxlength="60">
+                                    maxlength="60" input-trimmer>
                             </c-col>
                         </c-row>
                         <c-row class="mb-2">
@@ -165,7 +165,7 @@
                                         class="text-danger">*</span></label>
                             </c-col>
                             <c-col xl="12">
-                                <input cFormControl sizing="sm" formControlName="compensation-state" maxlength="60">
+                                <input cFormControl sizing="sm" formControlName="compensation-state" maxlength="60" input-trimmer>
                             </c-col>
                             <div *ngIf="!this.form.get('insurance')?.get('compensation-state')?.valid && 
                     (this.form.get('insurance')?.get('compensation-state')?.dirty ||this.form.get('insurance')?.get('compensation-state')?.touched)"
@@ -179,7 +179,7 @@
                                         class="text-danger">*</span></label>
                             </c-col>
                             <c-col xl="12">
-                                <input cFormControl sizing="sm" formControlName="compensation-city" maxlength="60">
+                                <input cFormControl sizing="sm" formControlName="compensation-city" maxlength="60" input-trimmer>
                             </c-col>
                             <div *ngIf="!this.form.get('insurance')?.get('compensation-city')?.valid && 
                             (this.form.get('insurance')?.get('compensation-city')?.dirty ||this.form.get('insurance')?.get('compensation-city')?.touched)"
@@ -263,13 +263,13 @@
                             </c-col>
                         </c-row>
                         <c-col xl="12">
-                            <c-input-group>
+                            <c-input-group sizing="sm">
                                 <input cFormControl placeholder="FirstName"
-                                    formControlName="compensation-adjuster-first-name" maxlength="60">
+                                    formControlName="compensation-adjuster-first-name" maxlength="60" input-trimmer>
                                 <input cFormControl placeholder="MiddleName"
-                                    formControlName="compensation-adjuster-middle-name" maxlength="60">
+                                    formControlName="compensation-adjuster-middle-name" maxlength="60"input-trimmer>
                                 <input cFormControl placeholder="LastName"
-                                    formControlName="compensation-adjuster-last-name" maxlength="60">
+                                    formControlName="compensation-adjuster-last-name" maxlength="60" input-trimmer>
                             </c-input-group>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-first-name')?.errors?.['required'] && 
                             (this.form.get('insurance')?.get('compensation-adjuster-first-name')?.dirty ||this.form.get('insurance')?.get('compensation-adjuster-first-name')?.touched)"
@@ -296,7 +296,7 @@
                             <c-col xs="12">
                                 <input cFormControl placeholder="Phone" formControlName="compensation-adjuster-phone"
                                     [value]="this.form.get('insurance')?.get('compensation-adjuster-phone')?.value | phone"
-                                    maxlength="15">
+                                    maxlength="15" sizing="sm">
                             </c-col>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-adjuster-phone')?.errors?.['required'] === true && 
                 (this.form.get('insurance')?.get('compensation-adjuster-phone')?.dirty ||this.form.get('insurance')?.get('compensation-adjuster-phone')?.touched)"
@@ -321,13 +321,13 @@
                             </c-col>
                         </c-row>
                         <c-col xl="12">
-                            <c-input-group>
+                            <c-input-group sizing="sm">
                                 <input cFormControl placeholder="FirstName"
-                                    formControlName="compensation-attorney-first-name" maxlength="60">
+                                    formControlName="compensation-attorney-first-name" maxlength="60" input-trimmer>
                                 <input cFormControl placeholder="MiddleName"
-                                    formControlName="compensation-attorney-middle-name" maxlength="60">
+                                    formControlName="compensation-attorney-middle-name" maxlength="60" input-trimmer>
                                 <input cFormControl placeholder="LastName"
-                                    formControlName="compensation-attorney-last-name" maxlength="60">
+                                    formControlName="compensation-attorney-last-name" maxlength="60" input-trimmer>
                             </c-input-group>
                             <div *ngIf="this.form.get('insurance')?.get('compensation-attorney-first-name')?.errors?.['required'] && 
 						(this.form.get('insurance')?.get('compensation-attorney-first-name')?.dirty ||this.form.get('insurance')?.get('compensation-attorney-first-name')?.touched)"
@@ -353,7 +353,7 @@
                                         class="text-danger">*</span></label>
                             </c-col>
                             <c-col xs="12">
-                                <input cFormControl placeholder="phone" formControlName="compensation-attorney-phone"
+                                <input cFormControl placeholder="phone" formControlName="compensation-attorney-phone" sizing="sm"
                                     [value]="this.form.get('insurance')?.get('compensation-attorney-phone')?.value | phone"
                                     maxlength="15">
                             </c-col>
@@ -569,7 +569,7 @@
                             <c-col xl="12">
                                 <input cFormControl sizing="sm"
                                     formControlName="commercial-is-secondary-insurance-insurance-company"
-                                    maxlength="60">
+                                    maxlength="60" input-trimmer>
                                 <div *ngIf="!this.form.get('insurance')?.get('commercial-is-secondary-insurance-insurance-company')?.valid && 
 						(this.form.get('insurance')?.get('commercial-is-secondary-insurance-insurance-company')?.dirty ||this.form.get('insurance')?.get('commercial-is-secondary-insurance-insurance-company')?.touched)"
                                     class="text-danger mx-1">
