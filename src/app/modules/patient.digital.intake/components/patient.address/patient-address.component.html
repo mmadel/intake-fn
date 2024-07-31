@@ -11,7 +11,7 @@
             <c-col xl="12">
                 <input class="form-control" placeholder formControlName="firstAddress" sizing="sm" cFormControl
                     [ngClass]="{'is-invalid': this.form.get('address')?.get('firstAddress')?.invalid
-                && this.form.get('address')?.get('firstAddress')?.touched}" maxlength="60">
+                && this.form.get('address')?.get('firstAddress')?.touched}" maxlength="60" input-trimmer>
             </c-col>
             <c-col xl=" 12">
                 <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['required'] && 
@@ -30,7 +30,7 @@
             </c-col>
             <c-col xs="12">
                 <input class="form-control" placeholder formControlName="secondAddress" sizing="sm" cFormControl
-                    maxlength="60">
+                    maxlength="60" input-trimmer>
             </c-col>
             <c-col xs="12">
                 <div *ngIf="this.form.get('address')?.get('secondAddress')?.errors?.['noSpecialCharacters']"
@@ -45,7 +45,7 @@
             <c-col xl="12">
                 <input class="form-control" placeholder formControlName="city" sizing="sm" cFormControl
                     [ngClass]="{'is-invalid': this.form.get('address')?.get('city')?.invalid
-                && this.form.get('address')?.get('city')?.touched}" maxlength="60">
+                && this.form.get('address')?.get('city')?.touched}" maxlength="60" input-trimmer>
             </c-col>
             <c-col xl=" 12">
                 <div *ngIf="this.form.get('address')?.get('city')?.errors?.['required'] && 
