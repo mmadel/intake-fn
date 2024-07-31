@@ -82,7 +82,7 @@
                 <c-row>
                     <c-col xs="12">
                         <textarea cFormControl sizing="sm" formControlName="evaluationReason" maxlength="200" [ngClass]="{'is-invalid': this.form.get('medicalhistory')?.get('evaluationReason')?.invalid
-                            && this.form.get('medicalhistory')?.get('evaluationReason')?.touched}"></textarea>
+                            && this.form.get('medicalhistory')?.get('evaluationReason')?.touched}" input-trimmer></textarea>
                     </c-col>
                     <c-col xs="12">
                         <div *ngIf="this.form.get('medicalhistory')?.get('evaluationReason')?.errors?.['required'] === true && 
@@ -107,7 +107,7 @@
                     <c-col xs="12">
                         <textarea cFormControl sizing="sm" formControlName="prescriptionMedication" maxlength="200"
                             [ngClass]="{'is-invalid': this.form.get('medicalhistory')?.get('prescriptionMedication')?.invalid
-                            && this.form.get('medicalhistory')?.get('prescriptionMedication')?.touched}"></textarea>
+                            && this.form.get('medicalhistory')?.get('prescriptionMedication')?.touched}" input-trimmer></textarea>
                     </c-col>
                     <c-col xs="12">
                         <div *ngIf="this.form.get('medicalhistory')?.get('prescriptionMedication')?.errors?.['required'] === true && 
