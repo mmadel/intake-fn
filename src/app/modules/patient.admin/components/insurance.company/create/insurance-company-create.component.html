@@ -10,7 +10,7 @@
         <c-col xl="12">
             <input class="form-control" placeholder formControlName="insurance-company-name" sizing="sm" cFormControl
                 [ngClass]="{'is-invalid': this.insuranceCompanyForm.get('insurance-company-name')?.invalid
-                && this.insuranceCompanyForm.get('insurance-company-name')?.touched}" maxlength="60">
+                && this.insuranceCompanyForm.get('insurance-company-name')?.touched}" maxlength="60" input-trimmer>
         </c-col>
         <c-col xl=" 12">
             <div *ngIf="this.insuranceCompanyForm.get('insurance-company-name')?.errors?.['required'] && 
