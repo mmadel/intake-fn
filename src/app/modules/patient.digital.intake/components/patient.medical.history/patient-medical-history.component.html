@@ -21,7 +21,7 @@
                         <div *ngIf="this.form.get('medicalhistory')?.get('height')?.errors?.['required'] === true && 
                     (this.form.get('medicalhistory')?.get('height')?.dirty ||this.form.get('medicalhistory')?.get('height')?.touched)"
                             class="text-danger mx-1">
-                            height Required
+                            {{labels.height_r_v}}
                         </div>
                     </c-col>
                 </c-row>
@@ -55,7 +55,7 @@
                         <div *ngIf="this.form.get('medicalhistory')?.get('weight')?.errors?.['required'] === true && 
                         (this.form.get('medicalhistory')?.get('weight')?.dirty ||this.form.get('medicalhistory')?.get('weight')?.touched)"
                             class="text-danger mx-1">
-                            height Required
+                            {{labels.weight_r_v}}
                         </div>
                     </c-col>
                 </c-row>

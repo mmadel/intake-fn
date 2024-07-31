@@ -174,7 +174,7 @@
                 <div *ngIf="this.form.get('medical')?.get('isPrimaryDoctor')?.errors?.['required'] === true && 
                 (this.form.get('medical')?.get('isPrimaryDoctor')?.dirty ||this.form.get('medical')?.get('isPrimaryDoctor')?.touched)"
                     class="text-danger mx-1">
-                    Primary Doctor is required
+                    {{labels.primary_r_v}}
                 </div>
             </c-card-body>
         </c-card>

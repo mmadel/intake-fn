@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { isObject, result } from 'lodash';
 import { debounceTime, filter, finalize, Observable, share, switchMap, tap } from 'rxjs';
+import { LabelsService } from 'src/app/modules/common/services/labels/labels.service';
 import entityValues from 'src/app/modules/patient.admin/components/reports/_entity.values';
 import { Provider } from '../../models/provider';
 import { ProvidersService } from '../../services/provider/providers.service';
@@ -22,10 +23,14 @@ export class PatientMedicalComponent implements OnInit {
   entityValues = entityValues;
   @Input() stepper: MatStepper
   isValidForm: boolean = false;
-  constructor(private providersService: ProvidersService) { }
+  labels: any = {};
+  constructor(private providersService: ProvidersService,private labelsService:LabelsService) { }
 
 
   ngOnInit(): void {
+    this.labelsService.getLabels().subscribe(data => {
+      this.labels = data;
+    });
     this.providers = this.form.get('medical')?.get('providerSearchName')?.valueChanges
       .pipe(
         filter(text => {

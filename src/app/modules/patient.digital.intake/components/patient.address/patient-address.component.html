@@ -6,7 +6,7 @@
         <!--First Address-->
         <c-row>
             <c-col xl="12">
-                <label style="width: 150px;">First Address <span class="text-danger">*</span></label>
+                <label style="width: 150px;">{{labels.f_address}} <span class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12">
                 <input class="form-control" placeholder formControlName="firstAddress" sizing="sm" cFormControl
@@ -17,16 +17,16 @@
                 <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['required'] && 
             (this.form.get('address')?.get('firstAddress')?.dirty ||this.form.get('address')?.get('firstAddress')?.touched)"
                     class="text-danger mx-1">
-                    firstAddress is required
+                    {{labels.fa_r_v}}
                 </div>
                 <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">firstAddress cannot contain special characters.</div>
+                    class="text-danger mx-1">{{labels.f_address_spec_v}}</div>
             </c-col>
         </c-row>
         <!-- Second Address-->
         <c-row>
             <c-col xs="12">
-                <label style="width: 150px;">Second Address</label>
+                <label style="width: 150px;">{{labels.s_address}}</label>
             </c-col>
             <c-col xs="12">
                 <input class="form-control" placeholder formControlName="secondAddress" sizing="sm" cFormControl
@@ -34,32 +34,32 @@
             </c-col>
             <c-col xs="12">
                 <div *ngIf="this.form.get('address')?.get('secondAddress')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">secondAddress cannot contain special characters.</div>
+                    class="text-danger mx-1">{{labels.f_second_spec_v}}</div>
             </c-col>
         </c-row>
         <!--City-->
         <c-row>
             <c-col xl="12">
-                <label style="width: 150px;">City<span class="text-danger">*</span></label>
+                <label style="width: 150px;">{{labels.city}}<span class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12">
-                <input class="form-control" placeholder formControlName="city" sizing="sm" cFormControl
-                    [ngClass]="{'is-invalid': this.form.get('address')?.get('city')?.invalid
+                <input class="form-control" placeholder formControlName="city" sizing="sm" cFormControl [ngClass]="{'is-invalid': this.form.get('address')?.get('city')?.invalid
                 && this.form.get('address')?.get('city')?.touched}" maxlength="60" input-trimmer>
             </c-col>
             <c-col xl=" 12">
                 <div *ngIf="this.form.get('address')?.get('city')?.errors?.['required'] && 
             (this.form.get('address')?.get('city')?.dirty ||this.form.get('address')?.get('city')?.touched)"
                     class="text-danger mx-1">
-                    City is required
+                    {{labels.c_r_v}}
                 </div>
                 <div *ngIf="this.form.get('address')?.get('city')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">City cannot contain special characters.</div>
+                    class="text-danger mx-1">{{labels.c_spec_v}}</div>
             </c-col>
         </c-row>
         <!-- State-->
         <c-row>
-            <c-col xs="12"><label style="width: 150px;">state <span class="text-danger">*</span></label></c-col>
+            <c-col xs="12"><label style="width: 150px;">{{labels.state}} <span
+                        class="text-danger">*</span></label></c-col>
             <c-col xs="12">
                 <select cSelect sizing="sm" style="line-height: 15px;" formControlName="state" [ngClass]="{'is-invalid': this.form.get('address')?.get('state')?.invalid
                 && this.form.get('address')?.get('state')?.touched}">
@@ -71,13 +71,14 @@
             <c-col xs="12">
                 <div *ngIf="!this.form.get('address')?.get('state')?.valid && 
                 (this.form.get('address')?.get('state')?.touched)" class="text-danger mx-1">
-                    State is required
+                    {{labels.state_r_v}}
                 </div>
             </c-col>
         </c-row>
         <!-- zipCode-->
         <c-row>
-            <c-col xs="12"><label style="width: 150px;">ZipCode <span class="text-danger">*</span></label></c-col>
+            <c-col xs="12"><label style="width: 150px;">{{labels.zipcode}} <span
+                        class="text-danger">*</span></label></c-col>
             <c-col xs="12">
                 <input class="form-control" placeholder formControlName="zipCode" zipcode maxlength="10" sizing="sm"
                     cFormControl [ngClass]="{'is-invalid': this.form.get('address')?.get('zipCode')?.invalid
@@ -87,10 +88,10 @@
                 <div *ngIf="this.form.get('address')?.get('zipCode')?.errors?.['required'] === true && 
                 (this.form.get('address')?.get('zipCode')?.dirty ||this.form.get('address')?.get('zipCode')?.touched)"
                     class="text-danger mx-1">
-                    ZipCode Required
+                    {{labels.zipcode_r_v}}
                 </div>
                 <div *ngIf="form.get('address')?.get('zipCode')?.errors?.['pattern']" class="text-danger mx-1">
-                    Invalid ZipCode
+                    {{labels.zipcode_f_v}}
                 </div>
             </c-col>
         </c-row>

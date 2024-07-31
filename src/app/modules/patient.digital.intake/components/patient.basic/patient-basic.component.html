@@ -6,8 +6,8 @@
         <!--Patient Name-->
         <c-row class="mb-1">
             <c-col xl="12">
-                <label for="dsds" class="form-label" style="font-size: medium;">Name<span
-                        class="text-danger">*</span></label>
+                <label for="dsds" class="form-label" style="font-size: medium;">{{labels.name}}<span
+                        class="text-danger"> *</span></label>
             </c-col>
             <c-col xl="12">
                 <c-input-group sizing="sm" class="has-validation">
@@ -22,25 +22,25 @@
                 <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['required'] && 
                 (this.form.get('basic')?.get('firstname')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
                     class="text-danger mx-1">
-                    First Name is required
+                    {{labels.fname_r_v}}
                 </div>
                 <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['required'] && 
                 (this.form.get('basic')?.get('lastName')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
                     class="text-danger mx-1">
-                    Last Name is required
+                    {{labels.lname_r_v}}
                 </div>
                 <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">firstname cannot contain special characters.</div>
+                    class="text-danger mx-1">{{labels.fname_spec_v}}</div>
                 <div *ngIf="this.form.get('basic')?.get('middleName')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">middleName cannot contain special characters.</div>
+                    class="text-danger mx-1">{{labels.mname_spec_v}}</div>
                 <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">lastName cannot contain special characters.</div>
+                    class="text-danger mx-1">{{labels.lname_spec_v}}</div>
             </c-col>
         </c-row>
         <!--Patient DOB-->
         <c-row class="mb-2">
             <c-col xs="12">
-                <label style="width: 150px;">Date Of Birth <span class="text-danger">*</span></label>
+                <label style="width: 150px;">{{labels.dob}} <span class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12">
                 <input type="date" cFormControl sizing="sm" formControlName="dob">
@@ -48,14 +48,12 @@
             <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['required'] && 
             (this.form.get('basic')?.get('dob')?.dirty ||this.form.get('basic')?.get('dob')?.touched)"
                 class="text-danger mx-1">
-                Date of birth is required
+                    {{labels.dob_r_v}}
             </div>
 
-            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['today']" class="text-danger mx-1">Date of birth
-                can't be today.</div>
-            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['future']" class="text-danger mx-1">Date of birth
-                can't be in future.</div>
-            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['max']" class="text-danger mx-1">Age Cannot be greater than 100 years</div>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['today']" class="text-danger mx-1">{{labels.dob_tod_v}}</div>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['future']" class="text-danger mx-1">{{labels.dob_fut_v}}</div>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['max']" class="text-danger mx-1">{{labels.dob_max_v}}</div>
         </c-row>
         <!--Guarantor-->
         <c-row *ngIf="isGuarantor">
@@ -126,7 +124,7 @@
         <!--Gender-->
         <c-row class="mb-1">
             <c-col xl="12">
-                <label for="dsds" class="form-label" style="font-size: medium;">Gender<span
+                <label for="dsds" class="form-label" style="font-size: medium;">{{labels.gender}}<span
                         class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12">
@@ -142,13 +140,13 @@
             </c-col>
             <div *ngIf="!this.form.get('basic')?.get('gender')?.valid && 
             (this.form.get('basic')?.get('gender')?.touched)" class="text-danger mx-1">
-                Gender is required
+                {{labels.gender_r_v}}
             </div>
         </c-row>
         <!--Marital Status-->
         <c-row class="mb-1">
             <c-col xl="12">
-                <label style="width: 150px;">Marital Status <span class="text-danger">*</span></label>
+                <label style="width: 150px;">{{labels.marital_status}} <span class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12">
                 <select cSelect sizing="sm" formControlName="marital" [ngClass]="{'is-invalid': this.form.get('basic')?.get('marital')?.invalid
@@ -162,13 +160,13 @@
             </c-col>
             <div *ngIf="!this.form.get('basic')?.get('marital')?.valid && 
                     (this.form.get('basic')?.get('marital')?.touched)" class="text-danger mx-1">
-                Marital Status is required
+                {{labels.ms_r_v}}
             </div>
         </c-row>
         <!--Phone-->
         <c-row class="mb-1">
             <c-col xl="12">
-                <label for="dsds" class="form-label" style="font-size: medium;">Phone<span
+                <label for="dsds" class="form-label" style="font-size: medium;">{{labels.p_phone}}<span
                         class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12" class="mb-1">
@@ -189,15 +187,15 @@
             </c-col>
             <div *ngIf="!this.form.get('basic')?.get('phoneType')?.valid && 
                     (this.form.get('basic')?.get('phoneType')?.touched)" class="text-danger mx-1">
-                Phone Type is required
+                    {{labels.phone_type_r_v}}
             </div>
             <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('phone')?.dirty ||this.form.get('basic')?.get('phone')?.touched)"
                 class="text-danger mx-1">
-                Phone Required
+                {{labels.phone_r_v}}
             </div>
             <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['pattern']" class="text-danger mx-1">
-                Invalid Phone
+                {{labels.phone_f_v}}
             </div>
         </c-row>
         <!--Email-->
@@ -213,16 +211,16 @@
             <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('email')?.dirty ||this.form.get('basic')?.get('email')?.touched)"
                 class="text-danger mx-1">
-                Email Required
+                {{labels.email_r_v}}
             </div>
             <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['email'] === true" class="text-danger mx-1">
-                Invalid Email
+                {{labels.email_f_v}}
             </div>
         </c-row>
         <!--Employment Status-->
         <c-row class="mb-2">
             <c-col xl="12">
-                <label for="dsds" class="form-label" style="font-size: medium;">Employment Status<span
+                <label for="dsds" class="form-label" style="font-size: medium;">{{labels.employment_status}}<span
                         class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12">
@@ -237,13 +235,13 @@
             </c-col>
             <div *ngIf="!this.form.get('basic')?.get('employment')?.valid && 
                     (this.form.get('basic')?.get('employment')?.touched)" class="text-danger mx-1">
-                Employment Status is required
+                {{labels.employment_status_r_v}}
             </div>
         </c-row>
         <!--Employment Status Company-->
         <c-row class="mb-2" *ngIf="this.form.get('basic')?.get('employment')?.value === 'Employed'">
             <c-col xl="12">
-                <label for="dsds" class="form-label" style="font-size: medium;">Company<span
+                <label for="dsds" class="form-label" style="font-size: medium;">{{labels.employment_company}}<span
                         class="text-danger">*</span></label>
             </c-col>
             <c-col xl="12">
@@ -254,7 +252,7 @@
             <div *ngIf="this.form.get('basic')?.get('employmentCompany')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('employmentCompany')?.dirty ||this.form.get('basic')?.get('employmentCompany')?.touched)"
                 class="text-danger mx-1">
-                Employment Company Required
+                {{labels.employment_company_r_v}}
             </div>
         </c-row>
         <!--Emergency -->
@@ -263,7 +261,7 @@
                 <h6 cCardSubtitle class="mb-1 text-medium-emphasis">Emergency</h6>
                 <c-row class="mb-1">
                     <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">Emergency Contact<span
+                        <label for="dsds" class="form-label" style="font-size: medium;">{{labels.emergency_contact}}<span
                                 class="text-danger">*</span></label>
                     </c-col>
                     <c-col xl="12">
@@ -280,12 +278,12 @@
                     </c-col>
                     <div *ngIf="!this.form.get('basic')?.get('emergencyContact')?.valid && 
                     (this.form.get('basic')?.get('emergencyContact')?.touched)" class="text-danger mx-1">
-                        Contact Status is required
+                    {{labels.contact_status_r_v}}
                     </div>
                 </c-row>
                 <c-row class="mb-1">
                     <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">EmergencyName<span
+                        <label for="dsds" class="form-label" style="font-size: medium;">{{labels.emergency_name}}<span
                                 class="text-danger">*</span></label>
                     </c-col>
                     <c-col xl="12">
@@ -296,15 +294,15 @@
                     <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['required'] && 
                         (this.form.get('basic')?.get('emergencyName')?.dirty ||this.form.get('basic')?.get('emergencyName')?.touched)"
                         class="text-danger mx-1">
-                        EmergencyName Name is required
+                        {{labels.emergency_name_r_v}}
                     </div>
 
                     <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['noSpecialCharacters']"
-                        class="text-danger mx-1">name cannot contain special characters.</div>
+                        class="text-danger mx-1">{{labels.emergency_name_spec_v}}</div>
                 </c-row>
                 <c-row class="mb-1">
                     <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">EmergencyPhone<span
+                        <label for="dsds" class="form-label" style="font-size: medium;">{{labels.emergency_phone}}<span
                                 class="text-danger">*</span></label>
                     </c-col>
                     <c-col xl="12">
@@ -315,11 +313,11 @@
                     </c-col>
                     <div *ngIf="!this.form.get('basic')?.get('emergencyPhone')?.valid && 
                     (this.form.get('basic')?.get('emergencyPhone')?.touched)" class="text-danger mx-1">
-                        Phone is required
+                        {{labels.phone_r_v}}
                     </div>
                     <div *ngIf="this.form.get('basic')?.get('emergencyPhone')?.errors?.['pattern']"
                         class="text-danger mx-1">
-                        Invalid Phone
+                        {{labels.phone_f_v}}
                     </div>
                 </c-row>
             </c-card-body>

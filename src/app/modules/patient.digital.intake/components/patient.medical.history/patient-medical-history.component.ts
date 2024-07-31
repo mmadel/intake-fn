@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { LabelsService } from 'src/app/modules/common/services/labels/labels.service';
 import { PatientConditions } from 'src/app/modules/patient.questionnaire/components/medical.history.information/create.patient.conditions/patient.conditions';
 import { IPatientCondition } from 'src/app/modules/patient.questionnaire/components/medical.history.information/patient.condition';
 import { ValidationExploder } from '../create/validators/validation.exploder';
@@ -11,8 +12,8 @@ import { ValidationExploder } from '../create/validators/validation.exploder';
   styleUrls: ['./patient-medical-history.component.css']
 })
 export class PatientMedicalHistoryComponent implements OnInit {
-
-  constructor() { }
+  labels: any = {};
+  constructor(private labelsService: LabelsService) { }
   @Input() stepper: MatStepper
   isValidForm: boolean = false;
   @Input() form: FormGroup;
@@ -20,6 +21,9 @@ export class PatientMedicalHistoryComponent implements OnInit {
   initWeight: number
   patientConditions: IPatientCondition[] = PatientConditions.create();
   ngOnInit(): void {
+    this.labelsService.getLabels().subscribe(data => {
+      this.labels = data;
+    });
     this.form?.get('medicalhistory')?.get('heightUnit')?.valueChanges.subscribe(value => {
       this.convertHeight(value);
     })
@@ -42,20 +46,20 @@ export class PatientMedicalHistoryComponent implements OnInit {
   convertWeight(checked: boolean) {
     var weightValue: number = this.form?.get('medicalhistory')?.get('weight')?.value;
     if (checked) {
-      
+
       weightValue = Number((weightValue / 2.20462).toFixed(1));
     } else {
       weightValue = Math.round(weightValue * 2.20462)
     }
     this.form?.get('medicalhistory')?.get('weight')?.setValue(weightValue, { emitEvent: false });
   }
-  next(){
+  next() {
     if (this.form.get('medicalhistory')?.valid) {
       this.stepper.next();
       this.isValidForm = false;
     } else {
       this.isValidForm = true;
-      ValidationExploder.explode(this.form, 'medicalhistory')      
+      ValidationExploder.explode(this.form, 'medicalhistory')
     }
   }
 }

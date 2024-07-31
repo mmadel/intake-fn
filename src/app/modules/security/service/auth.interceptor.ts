@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, finalize, from, mergeMap, Observable } from 'rxjs';
+import { catchError, finalize, from, mergeMap, Observable, tap } from 'rxjs';
 import { FetshDigitalPatientIntakeUrlsService } from './digital.intake.urls/fetsh-digital-patient-intake-urls.service';
 import { KcAuthServiceService } from './kc/kc-auth-service.service';
 
@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private kcAuthServiceService: KcAuthServiceService, private keycloakService: KeycloakService
     , private spinner: NgxSpinnerService
     , private fetshUrls: FetshDigitalPatientIntakeUrlsService
-    ,private toastrService: ToastrService) { }
+    , private toastrService: ToastrService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.spinner.show();
     return from(this.kcAuthServiceService.getToken())
@@ -46,7 +46,6 @@ export class AuthInterceptor implements HttpInterceptor {
               this.scrollUp()
             }
             console.log('other error , please contact the administrator..!! ErrorCode :' + error.error.errorCode);
-            console.log('Error:' + JSON.stringify(error.error));
           }
           return [];
         }))

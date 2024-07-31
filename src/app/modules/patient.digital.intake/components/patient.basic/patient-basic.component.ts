@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import * as moment from 'moment';
 import { tap } from 'rxjs';
+import { LabelsService } from 'src/app/modules/common/services/labels/labels.service';
 import { ComponentReferenceComponentService } from '../../services/component.reference/component-reference-component.service';
 import { CompressDocumentService } from '../../services/doument/compress-document.service';
 import { ValidationExploder } from '../create/validators/validation.exploder';
@@ -18,11 +19,16 @@ export class PatientBasicComponent implements OnInit {
   @Input() stepper: MatStepper
   isValidForm: boolean = false;
   isGuarantor: boolean = false
+  labels: any = {};
   constructor(private componentReference: ComponentReferenceComponentService
     , private compressDocumentService: CompressDocumentService
+    , private labelsService:LabelsService
   ) { }
 
   ngOnInit(): void {
+    this.labelsService.getLabels().subscribe(data => {
+      this.labels = data;
+    });
     this.componentReference.setPatientBasicComponent(this)
     this.form.get('basic')?.get('dob')?.valueChanges.subscribe(value => {
       const today = moment(value).isSame(moment(), 'day');
