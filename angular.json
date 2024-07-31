@@ -9,10 +9,15 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US"
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
+            "i18nMissingTranslation": "error",
             "outputPath": "dist/intake-fn",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,8 +35,7 @@
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "src/scss/styles.scss"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
