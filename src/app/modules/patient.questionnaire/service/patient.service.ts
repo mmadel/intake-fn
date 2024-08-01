@@ -15,11 +15,15 @@ import { of } from 'rxjs';
 export class PatientService {
   private baseUrl = environment.baseURL + 'patient'
   private agreementURL = environment.baseURL + 'agreement';
-  constructor(private http: HttpClient, private keycloakService: KeycloakService) { }
-  createPatient(patient: string) {
+  constructor(private http: HttpClient, private keycloakService: KeycloakService) { }  createPatient(patient: string) {
     const createPatientURL = this.baseUrl + '/create';
     const headers = { 'content-type': 'application/json' }
     return this.http.post(createPatientURL, JSON.stringify(patient), { 'headers': headers, observe: 'response' })
+  }
+  otherCreatPatient(imageFormData: FormData){
+    const createPatientURL = this.baseUrl + '/create-new';
+    return this.http.post(createPatientURL, imageFormData)
+
   }
   newCreatePatient(patient: Patient) {
     const createPatientURL = this.baseUrl + '/create';

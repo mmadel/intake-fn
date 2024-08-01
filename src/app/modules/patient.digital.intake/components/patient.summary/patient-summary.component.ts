@@ -59,13 +59,19 @@ export class PatientSummaryComponent implements OnInit {
       imageFormData.append('files', patientDocument, patientDocument.name);
     })
     this.pateint.clinicId = this.clinicId;
-    this.patientService.newCreatePatient(this.pateint).subscribe(response => {
-      this.patientService.upload(imageFormData, <number>response.body).subscribe(d => {
-        this.router.navigateByUrl('/digital-intake/done');
-      })
-    }, (error: any) => {
-
+    imageFormData.append('patient', new Blob([JSON.stringify(this.pateint)], { type: 'application/json' }));
+    this.patientService.otherCreatPatient(imageFormData).subscribe(resuldd=>{
+      this.router.navigateByUrl('/digital-intake/done');
+    },error=>{
+      console.log('Error During Creation ' + JSON.stringify(error))
     })
+    // this.patientService.newCreatePatient(this.pateint).subscribe(response => {
+    //   this.patientService.upload(imageFormData, <number>response.body).subscribe(d => {
+    //     this.router.navigateByUrl('/digital-intake/done');
+    //   })
+    // }, (error: any) => {
+
+    // })
   }
   private fillPateintEssentialInformation() {
     var patientEssentialInformation: PatientEssentialInformation = {}
