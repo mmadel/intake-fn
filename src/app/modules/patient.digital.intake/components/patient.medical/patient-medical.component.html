@@ -8,8 +8,8 @@
         <c-card class="mb-2">
             <c-card-header>
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Did the Referring doctor refer you to us or
-                        mention our clinics?<span class="text-danger">*</span></strong>
+                    <strong style="font-size: medium;">Did the referring doctor refer you to us or
+                        mention our clinics ? <span class="text-danger">*</span></strong>
                 </label>
             </c-card-header>
             <c-card-body>
@@ -135,7 +135,7 @@
         <c-card class="mb-2">
             <c-card-header>
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">How did you book your appointment? <span
+                    <strong style="font-size: medium;">How did you book your appointment ? <span
                             class="text-danger">*</span>
                     </strong>
                 </label>
@@ -154,7 +154,7 @@
                 <div *ngIf="this.form.get('medical')?.get('appointmentBooking')?.errors?.['required'] === true && 
                 (this.form.get('medical')?.get('appointmentBooking')?.dirty ||this.form.get('medical')?.get('appointmentBooking')?.touched)"
                     class="text-danger mx-1">
-                    Appointment Booking is required
+                    Appointment booking is required
                 </div>
             </c-card-body>
         </c-card>
@@ -162,7 +162,7 @@
         <c-card class="mb-2">
             <c-card-header>
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">What is your primary doctor name?
+                    <strong style="font-size: medium;">What is your primary doctor name ?
                         <span class="text-danger">*</span></strong>
                 </label>
             </c-card-header>
@@ -174,7 +174,7 @@
                 <div *ngIf="this.form.get('medical')?.get('isPrimaryDoctor')?.errors?.['required'] === true && 
                 (this.form.get('medical')?.get('isPrimaryDoctor')?.dirty ||this.form.get('medical')?.get('isPrimaryDoctor')?.touched)"
                     class="text-danger mx-1">
-                    Primary Doctor is required
+                    Primary doctor is required
                 </div>
             </c-card-body>
         </c-card>
@@ -182,7 +182,7 @@
         <c-card>
             <c-card-header>
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Would you like your results sent to your family doctor?
+                    <strong style="font-size: medium;">Would you like your results to be sent to your family doctor ?
                         <span class="text-danger">*</span></strong>
                 </label>
             </c-card-header>
@@ -202,7 +202,7 @@
         <c-card>
             <c-card-header>
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere else?<span
+                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere else ?<span
                             class="text-danger">*</span></strong>
                 </label>
             </c-card-header>
@@ -256,7 +256,7 @@
                 <div *ngIf="this.form.get('medical')?.get('isReceivedPhysicalTherapy')?.errors?.['required'] === true && 
                 (this.form.get('medical')?.get('isReceivedPhysicalTherapy')?.dirty ||this.form.get('medical')?.get('isReceivedPhysicalTherapy')?.touched)"
                     class="text-danger mx-1">
-                    physical therapy treatment is required
+                    Physical therapy treatment is required
                 </div>
             </c-card-body>
         </c-card>
