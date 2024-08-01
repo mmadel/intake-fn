@@ -2,6 +2,7 @@
 /intake-service/api/requires/fields/retrieve/clinicId/:clinicId https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/requires/fields/retrieve/clinicId/:clinicId 200
 
 /intake-service/api/patient/create https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/create 200
+/intake-service/api/patient/create-new https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/create-new 200
 /intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/find/clinic/:clinicId?offset=:offset&limit=:limit 200
 /intake-service/api/patient/upload https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/upload 200
 /intake-service/api/patient/signature/upload https://patient-intake-a7d7a58ddf0b.herokuapp.com/intake-service/api/patient/signature/upload 200
