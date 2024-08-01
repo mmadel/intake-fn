@@ -16,11 +16,11 @@
             <div *ngIf="this.insuranceCompanyForm.get('insurance-company-name')?.errors?.['required'] && 
         (this.insuranceCompanyForm.get('insurance-company-name')?.dirty ||this.insuranceCompanyForm.get('insurance-company-name')?.touched)"
                 class="text-danger mx-1">
-                Name is required
+                Insurance company name is required
             </div>
             <div *ngIf="this.insuranceCompanyForm.get('insurance-company-name')?.errors?.['noSpecialCharacters']"
                 class="text-danger mx-1">
-                Name cannot contain special characters.</div>
+                Name cannot contain special character</div>
             <span *ngIf="validName === false">
                 <label>
                     <span class="text-success">Typed insurance company name is unique</span>
