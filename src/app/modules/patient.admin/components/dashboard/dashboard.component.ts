@@ -199,7 +199,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.kcAuthServiceService.loadUserProfile().then((userProfile) => {
       combineLatest([this.clinicService.selectedClinic$, this.clinicService.filterDate$])
         .pipe(
-          tap((result) => console.log(result[0])),
           filter((result) => result[0] !== null),
           switchMap(result => this.dashboardService.getDate(result[0], userProfile.id
             , result[1] === null ? 0 : result[1][0]

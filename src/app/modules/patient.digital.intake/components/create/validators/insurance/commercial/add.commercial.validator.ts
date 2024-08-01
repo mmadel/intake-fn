@@ -66,12 +66,17 @@ export class AddCommercialValidators {
     }
 
     private static addploicyHolderRelationshipValidators(form: FormGroup) {
+        const phoneRgx = new RegExp("^[\+]?[0-9]{0,3}\W?[(]?[0-9]{3}[)]?[-\s\.]?[(]?[0-9]{3}[)][-\s\.]?[0-9]{4,6}$");
         for (var i = 0; i < CommercialPolicyHolderFields.length; i++) {
             form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.setValidators([Validators.required])
             form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.updateValueAndValidity();
             if (CommercialPolicyHolderFields[i] === 'commercial-ploicyHolder-relationship-first-name' ||
                 CommercialPolicyHolderFields[i] === 'commercial-ploicyHolder-relationship-last-name') {
                 form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.addValidators(noSpecialCharactersValidator())
+                form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.updateValueAndValidity();
+            }
+            if(CommercialPolicyHolderFields[i] ==='commercial-ploicyHolder-relationship-phone'){
+                form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.addValidators([Validators.required, Validators.pattern(phoneRgx)])
                 form.get('insurance')?.get(CommercialPolicyHolderFields[i])?.updateValueAndValidity();
             }
         }

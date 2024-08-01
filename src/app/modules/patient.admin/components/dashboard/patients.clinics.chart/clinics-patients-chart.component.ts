@@ -35,8 +35,7 @@ export class ClinicsPatientsChartComponent implements OnInit {
   ngOnInit(): void {
     this.patientsCounterService.selectedYear$
       .pipe(
-        tap(result => console.log(result))
-        , map(result => {
+        map(result => {
           if (result === null)
             return new Date().getFullYear();
           else
