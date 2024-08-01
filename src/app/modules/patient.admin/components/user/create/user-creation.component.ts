@@ -228,7 +228,7 @@ export class UserCreationComponent implements OnInit {
       ).subscribe((check: any) => {
         this.validUserName = check;
         if (!check) {
-          this.validUserNameMessage = 'username is already exists';
+          this.validUserNameMessage = 'Username already exists';
         }
       },
         () => {
@@ -265,7 +265,7 @@ export class UserCreationComponent implements OnInit {
       ).subscribe((check: any) => {
         this.validEmail = check;
         if (!check) {
-          this.validEmailMessage = 'Email is already exists';
+          this.validEmailMessage = 'Email already exists';
         }
       },
         error => {

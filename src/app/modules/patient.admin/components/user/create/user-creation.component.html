@@ -13,10 +13,10 @@
         <c-col xs="12">
             <div *ngIf="this.userForm.get('username')?.errors?.['required'] && 
         (this.userForm.get('username')?.dirty ||this.userForm.get('username')?.touched)" class="text-danger mx-1">
-                User Name is required
+                User name is required
             </div>
             <div *ngIf="this.userForm.get('username')?.errors?.['noSpecialCharacters']" class="text-danger mx-1">
-                User Name cannot contain special characters.</div>
+                User name cannot contain special characters.</div>
             <span *ngIf="validUserName">
                 <label>
                     <span class="text-success">Typed user name is unique</span>
@@ -43,10 +43,10 @@
         <c-col xs="12">
             <div *ngIf="this.userForm.get('firstName')?.errors?.['required'] && 
         (this.userForm.get('firstName')?.dirty ||this.userForm.get('firstName')?.touched)" class="text-danger mx-1">
-                First Name is required
+                First name is required
             </div>
             <div *ngIf="this.userForm.get('firstName')?.errors?.['noSpecialCharacters']" class="text-danger mx-1">
-                First Name cannot contain special characters.</div>
+                First name cannot contain special characters</div>
         </c-col>
     </c-row>
     <!--Last Name-->
@@ -61,10 +61,10 @@
         <c-col xs="12">
             <div *ngIf="this.userForm.get('lastName')?.errors?.['required'] && 
         (this.userForm.get('lastName')?.dirty ||this.userForm.get('lastName')?.touched)" class="text-danger mx-1">
-                Last Name is required
+                Last name is required
             </div>
             <div *ngIf="this.userForm.get('lastName')?.errors?.['noSpecialCharacters']" class="text-danger mx-1">
-                Last Name cannot contain special characters.</div>
+                Last name cannot contain special characters</div>
         </c-col>
     </c-row>
     <!--Email-->
@@ -79,13 +79,14 @@
         <c-col xs="12">
             <div *ngIf="this.userForm.get('email')?.errors?.['required'] === true && 
         (this.userForm.get('email')?.dirty ||this.userForm.get('email')?.touched)" class="text-danger mx-1">
-                Email Required
+                Email is required
             </div>
             <div *ngIf="this.userForm.get('email')?.errors?.['email'] === true" class="text-danger mx-1">
                 Invalid Email
             </div>
             <span *ngIf="validEmail">
                 <label>
+                    <span class="text-success">Typed email is unique</span>
                     <svg cIcon name="cilCheck" cTextColor="success" size="lg"></svg>
                 </label>
             </span>
@@ -131,10 +132,10 @@
                     <div *ngIf="this.userForm.get('first-address')?.errors?.['required'] && 
             (this.userForm.get('first-address')?.dirty ||this.userForm.get('first-address')?.touched)"
                         class="text-danger mx-1">
-                        first address is required
+                        First address is required
                     </div>
                     <div *ngIf="this.userForm.get('first-address')?.errors?.['noSpecialCharacters']"
-                        class="text-danger mx-1">first address cannot contain special characters.</div>
+                        class="text-danger mx-1">First address cannot contain special characters.</div>
                 </c-col>
             </c-row>
             <!--Second Address-->
@@ -149,7 +150,7 @@
                 </c-col>
                 <c-col xl=" 12">
                     <div *ngIf="this.userForm.get('second-address')?.errors?.['noSpecialCharacters']"
-                        class="text-danger mx-1">second address cannot contain special characters.</div>
+                        class="text-danger mx-1">Second address cannot contain special characters.</div>
                 </c-col>
             </c-row>
             <!--City-->
@@ -205,10 +206,10 @@
                     <div *ngIf="this.userForm.get('zipcode-address')?.errors?.['required'] === true && 
                 (this.userForm.get('zipcode-address')?.dirty ||this.userForm.get('zipcode-address')?.touched)"
                         class="text-danger mx-1">
-                        ZipCode Required
+                        ZipCode is required
                     </div>
                     <div *ngIf="userForm.get('zipcode-address')?.errors?.['pattern']" class="text-danger mx-1">
-                        Invalid ZipCode
+                        Invalid ZipCode format
                     </div>
                 </c-col>
             </c-row>
@@ -221,7 +222,7 @@
             <c-row>
                 <c-col xs="12">
                     <select cSelect sizing="sm" formControlName="userRole" sizing="sm">
-                        <option value="null">Select Role</option>
+                        <option value="null" disabled>Select Role</option>
                         <option *ngFor="let role of userRoles" [value]="role.value">
                             {{role.name}}
                         </option>
@@ -231,7 +232,7 @@
                     <div *ngIf="!this.userForm.get('userRole')?.valid && 
                         (this.userForm.get('userRole')?.dirty ||this.userForm.get('userRole')?.touched)"
                         class="text-danger mx-1">
-                        user role is required
+                        User role is required
                     </div>
                 </c-col>
             </c-row>
@@ -251,7 +252,7 @@
                 <c-col xs="12">
                     <div *ngIf="this.userForm.get('clinics')?.errors?.['required'] && 
                         (this.userForm.get('clinics')?.touched)" class="text-danger mx-1">
-                        Clinics is required
+                        Clinic(s) is required
                     </div>
                 </c-col>
             </c-row>
