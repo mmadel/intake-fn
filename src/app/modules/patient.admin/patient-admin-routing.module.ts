@@ -32,21 +32,21 @@ const routes: Routes = [{
 {
   path: '',
   data: {
-    title: 'pateint',
+    title: 'Patient',
   },
   children: [
     {
       path: 'patient/list',
       component: PatientListComponent,
       data: {
-        title: 'list',
+        title: 'List',
       },
     },
     {
       path: 'patient/create',
       component: PatientCreateComponent,
       data: {
-        title: 'create',
+        title: 'Create',
       },
     }
   ]
@@ -54,7 +54,7 @@ const routes: Routes = [{
 {
   path: '',
   data: {
-    title: 'administration',
+    title: 'Administration',
   },
   children: [
     {
@@ -68,49 +68,49 @@ const routes: Routes = [{
       path: 'clinic/list',
       component: ClinicListComponent,
       data: {
-        title: 'clinics-list',
+        title: 'Clinics List',
       },
     },
     {
       path: 'clinic/creation',
       component: ClinicCreationComponent,
       data: {
-        title: 'clinic-Creation',
+        title: 'Clinic Creation',
       },
     },
     {
       path: 'clinic/update/:clinicId',
       component: UpdateClinicComponent,
       data: {
-        title: 'clinic-update',
+        title: 'Clinic Update',
       },
     },
     {
       path: 'user/list',
       component: UserListComponent,
       data: {
-        title: 'users-list',
+        title: 'Users List',
       },
     },
     {
       path: 'user/creation',
       component: UserCreationComponent,
       data: {
-        title: 'user-Creation',
+        title: 'User Creation',
       },
     },
     {
       path: 'user/update/:userId',
       component: UserUpdateComponent,
       data: {
-        title: 'user-update',
+        title: 'User update',
       }
     },
     {
       path: 'insurance/company/list',
       component: InsuranceCompanyListComponent,
       data: {
-        title: 'insurance-company-list',
+        title: 'Insurance Companies List',
       }
     },
     {
@@ -132,7 +132,7 @@ const routes: Routes = [{
       path: 'report/recommendation',
       component: RecommendationReportComponent,
       data: {
-        title: 'patient-source',
+        title: 'Patient Source',
       },
     }
   ]
