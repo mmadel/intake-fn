@@ -1,4 +1,4 @@
-<c-callout color="danger" *ngIf="isValidForm">    
+<c-callout color="danger" *ngIf="isValidForm">
     <span class="text-danger fw-bold">Please fill in all the required fields before navigating to next step</span>
 </c-callout>
 <div [formGroup]="form" class="mt-3">
@@ -13,7 +13,8 @@
                 <c-input-group sizing="sm" class="has-validation">
                     <input cFormControl placeholder="FirstName" formControlName="firstname" [ngClass]="{'is-invalid': this.form.get('basic')?.get('firstname')?.invalid
                 && this.form.get('basic')?.get('firstname')?.touched}" maxlength="60" input-trimmer>
-                    <input cFormControl placeholder="MiddleName" formControlName="middleName" maxlength="60" input-trimmer>
+                    <input cFormControl placeholder="MiddleName" formControlName="middleName" maxlength="60"
+                        input-trimmer>
                     <input cFormControl placeholder="LastName" formControlName="lastName" [ngClass]="{'is-invalid': this.form.get('basic')?.get('lastName')?.invalid
                     && this.form.get('basic')?.get('lastName')?.touched}" maxlength="60" input-trimmer>
                 </c-input-group>
@@ -22,19 +23,19 @@
                 <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['required'] && 
                 (this.form.get('basic')?.get('firstname')?.dirty ||this.form.get('basic')?.get('firstname')?.touched)"
                     class="text-danger mx-1">
-                    First Name is required
+                    First name is required
                 </div>
                 <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['required'] && 
                 (this.form.get('basic')?.get('lastName')?.dirty ||this.form.get('basic')?.get('lastName')?.touched)"
                     class="text-danger mx-1">
-                    Last Name is required
+                    Last name is required
                 </div>
                 <div *ngIf="this.form.get('basic')?.get('firstname')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">firstname cannot contain special characters.</div>
+                    class="text-danger mx-1">First name cannot contains special characters.</div>
                 <div *ngIf="this.form.get('basic')?.get('middleName')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">middleName cannot contain special characters.</div>
+                    class="text-danger mx-1">Middle name cannot contain special characters.</div>
                 <div *ngIf="this.form.get('basic')?.get('lastName')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">lastName cannot contain special characters.</div>
+                    class="text-danger mx-1">Last name cannot contains special characters.</div>
             </c-col>
         </c-row>
         <!--Patient DOB-->
@@ -55,7 +56,8 @@
                 can't be today.</div>
             <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['future']" class="text-danger mx-1">Date of birth
                 can't be in future.</div>
-            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['max']" class="text-danger mx-1">Age Cannot be greater than 100 years</div>
+            <div *ngIf="this.form.get('basic')?.get('dob')?.errors?.['max']" class="text-danger mx-1">Age Cannot be
+                greater than 100 years</div>
         </c-row>
         <!--Guarantor-->
         <c-row *ngIf="isGuarantor">
@@ -72,12 +74,14 @@
                             <c-input-group sizing="sm">
                                 <input cFormControl placeholder="FirstName" formControlName="guarantorFirstName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorFirstName')?.invalid
-                                && this.form.get('basic')?.get('guarantorFirstName')?.touched}" maxlength="60" input-trimmer>
+                                && this.form.get('basic')?.get('guarantorFirstName')?.touched}" maxlength="60"
+                                    input-trimmer>
                                 <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName"
                                     maxlength="60" input-trimmer>
                                 <input cFormControl placeholder="LastName" formControlName="guarantorLastName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorLastName')?.invalid
-                                && this.form.get('basic')?.get('guarantorLastName')?.touched}" maxlength="60" input-trimmer>
+                                && this.form.get('basic')?.get('guarantorLastName')?.touched}" maxlength="60"
+                                    input-trimmer>
                             </c-input-group>
                         </c-col>
                         <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['required'] && 
@@ -194,10 +198,10 @@
             <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('phone')?.dirty ||this.form.get('basic')?.get('phone')?.touched)"
                 class="text-danger mx-1">
-                Phone Required
+                Phone number is required
             </div>
             <div *ngIf="this.form.get('basic')?.get('phone')?.errors?.['pattern']" class="text-danger mx-1">
-                Invalid Phone
+                Phone number format is invalid
             </div>
         </c-row>
         <!--Email-->
@@ -213,10 +217,10 @@
             <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('email')?.dirty ||this.form.get('basic')?.get('email')?.touched)"
                 class="text-danger mx-1">
-                Email Required
+                Email is required
             </div>
             <div *ngIf="this.form.get('basic')?.get('email')?.errors?.['email'] === true" class="text-danger mx-1">
-                Invalid Email
+                Email is invalid
             </div>
         </c-row>
         <!--Employment Status-->
@@ -254,7 +258,7 @@
             <div *ngIf="this.form.get('basic')?.get('employmentCompany')?.errors?.['required'] === true && 
             (this.form.get('basic')?.get('employmentCompany')?.dirty ||this.form.get('basic')?.get('employmentCompany')?.touched)"
                 class="text-danger mx-1">
-                Employment Company Required
+                Company is required
             </div>
         </c-row>
         <!--Emergency -->
@@ -280,12 +284,12 @@
                     </c-col>
                     <div *ngIf="!this.form.get('basic')?.get('emergencyContact')?.valid && 
                     (this.form.get('basic')?.get('emergencyContact')?.touched)" class="text-danger mx-1">
-                        Contact Status is required
+                        Emergency Contact status is required
                     </div>
                 </c-row>
                 <c-row class="mb-1">
                     <c-col xl="12">
-                        <label for="dsds" class="form-label" style="font-size: medium;">EmergencyName<span
+                        <label for="dsds" class="form-label" style="font-size: medium;">Emergency Name<span
                                 class="text-danger">*</span></label>
                     </c-col>
                     <c-col xl="12">
@@ -296,7 +300,7 @@
                     <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['required'] && 
                         (this.form.get('basic')?.get('emergencyName')?.dirty ||this.form.get('basic')?.get('emergencyName')?.touched)"
                         class="text-danger mx-1">
-                        EmergencyName Name is required
+                        Emergency name is required
                     </div>
 
                     <div *ngIf="this.form.get('basic')?.get('emergencyName')?.errors?.['noSpecialCharacters']"
@@ -315,7 +319,7 @@
                     </c-col>
                     <div *ngIf="!this.form.get('basic')?.get('emergencyPhone')?.valid && 
                     (this.form.get('basic')?.get('emergencyPhone')?.touched)" class="text-danger mx-1">
-                        Phone is required
+                    Emergency phone is required
                     </div>
                     <div *ngIf="this.form.get('basic')?.get('emergencyPhone')?.errors?.['pattern']"
                         class="text-danger mx-1">
