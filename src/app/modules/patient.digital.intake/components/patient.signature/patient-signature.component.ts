@@ -17,7 +17,7 @@ import { PatientSignatureService } from '../../services/signature/patient-signat
 })
 export class PatientSignatureComponent implements OnInit, AfterViewInit {
   @Input() stepper: MatStepper
-  isValidForm: boolean = false;
+  isValidForm: boolean = true;
   @Input() form: FormGroup;
   signatureType: number = 2;
   signaturePad!: SignaturePad;
@@ -26,8 +26,8 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
   signatureImg!: string;
   patientFullName: string | undefined
   gPatientFullName: string | undefined
-  isDrawsign: boolean | undefined = undefined;
-  isGeneratesign: boolean | undefined = undefined
+  isDrawsign: boolean | undefined = false;
+  isGeneratesign: boolean | undefined = false
 
 
   @ViewChild('patientsig') patientsig: ElementRef;
@@ -58,8 +58,8 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
         ]).subscribe((pName: any) => {
           this.gPatientFullName = pName[1] + ' ' + pName[0]
         })
-      else{
-        this.gPatientFullName  = undefined
+      else {
+        this.gPatientFullName = undefined
         combineLatest([
           this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.valueChanges,
           this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.valueChanges
@@ -67,7 +67,7 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
           this.patientFullName = pName[1] + ' ' + pName[0]
         })
       }
-        
+
     })
     this.signaturePad = new SignaturePad(this.canvasEl.nativeElement);
   }
@@ -103,17 +103,16 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
   }
 
   next() {
-    if (this.isGeneratesign === undefined && this.isDrawsign === undefined) {
-      this.isValidForm = true;
-      return;
-    }
-
-    if ((!this.isGeneratesign) || (!this.isDrawsign)) {
+    var drawSign: string = this.form.get('signature')?.get('drawsign')?.value
+    this.isDrawsign = false;
+    if (drawSign !== null && !drawSign.endsWith('=='))
+      this.isDrawsign = true
+    if (this.isGeneratesign || this.isDrawsign) {
       this.stepper.next();
-      this.isValidForm = false;
+      this.isValidForm = true;
     }
     else
-      this.isValidForm = true;
+      this.isValidForm = false;
   }
   touchStopDrawing() {
     this.form.get('signature')?.get('drawsign')?.setValue(this.signaturePad.toDataURL())
