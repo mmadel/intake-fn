@@ -17,10 +17,10 @@
                 <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['required'] && 
             (this.form.get('address')?.get('firstAddress')?.dirty ||this.form.get('address')?.get('firstAddress')?.touched)"
                     class="text-danger mx-1">
-                    firstAddress is required
+                    First address is required
                 </div>
                 <div *ngIf="this.form.get('address')?.get('firstAddress')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">firstAddress cannot contain special characters.</div>
+                    class="text-danger mx-1">First address cannot contain special characters.</div>
             </c-col>
         </c-row>
         <!-- Second Address-->
@@ -34,7 +34,7 @@
             </c-col>
             <c-col xs="12">
                 <div *ngIf="this.form.get('address')?.get('secondAddress')?.errors?.['noSpecialCharacters']"
-                    class="text-danger mx-1">secondAddress cannot contain special characters.</div>
+                    class="text-danger mx-1">Second address cannot contain special characters.</div>
             </c-col>
         </c-row>
         <!--City-->
@@ -87,10 +87,10 @@
                 <div *ngIf="this.form.get('address')?.get('zipCode')?.errors?.['required'] === true && 
                 (this.form.get('address')?.get('zipCode')?.dirty ||this.form.get('address')?.get('zipCode')?.touched)"
                     class="text-danger mx-1">
-                    ZipCode Required
+                    ZipCode is required
                 </div>
                 <div *ngIf="form.get('address')?.get('zipCode')?.errors?.['pattern']" class="text-danger mx-1">
-                    Invalid ZipCode
+                    Invalid ZipCode format 
                 </div>
             </c-col>
         </c-row>
