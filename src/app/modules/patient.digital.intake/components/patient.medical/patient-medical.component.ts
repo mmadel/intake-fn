@@ -26,6 +26,12 @@ export class PatientMedicalComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.form.get('medical')?.get('providerSearch')?.valueChanges.subscribe(res => {
+      if (this.form.get('medical')?.get('providerNPI')?.value)
+        this.form.get('medical')?.get('providerNPI')?.setValue(null)
+      if (this.form.get('medical')?.get('providerName')?.value)
+        this.form.get('medical')?.get('providerName')?.setValue(null)
+    })
     this.providers = this.form.get('medical')?.get('providerSearchName')?.valueChanges
       .pipe(
         filter(text => {
