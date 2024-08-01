@@ -27,7 +27,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpointObserver.observe([
-      Breakpoints.HandsetPortrait,
+      Breakpoints.Tablet,
       Breakpoints.HandsetLandscape
     ]).subscribe(result => {
       this.stepperOrientation = result.matches ? 'vertical' : 'horizontal';
