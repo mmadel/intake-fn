@@ -19,12 +19,12 @@
                     <div *ngIf="this.form.get('document')?.get('id-front')?.errors?.['required'] && 
                     (this.form.get('document')?.get('id-front')?.dirty ||this.form.get('document')?.get('id-front')?.touched) "
                         class="text-danger mx-1">
-                        Patient Id Front is required
+                        Patient ID Front is required
                     </div>
                     <div *ngIf="this.form.get('document')?.get('id-front')?.errors?.['imageFile']"
                         class="text-danger mx-1">Images Only</div>
-                    <div *ngIf="excceedControl === 'id-front' && isMaxSize" class="text-danger mx-1">File excceds
-                        maximum size (50MegaBytes)</div>
+                    <div *ngIf="excceedControl === 'id-front' && isMaxSize" class="text-danger mx-1">File excced
+                        maximum size (50 MB)</div>
                 </c-col>
             </c-row>
             <!--Patient id back-->
@@ -42,12 +42,12 @@
                     <div *ngIf="this.form.get('document')?.get('id-back')?.errors?.['required'] && 
                     (this.form.get('document')?.get('id-back')?.dirty ||this.form.get('document')?.get('id-back')?.touched) && !isMaxSize"
                         class="text-danger mx-1">
-                        Patient Id Back is required
+                        Patient ID Back is required
                     </div>
                     <div *ngIf="this.form.get('document')?.get('id-back')?.errors?.['imageFile']"
                         class="text-danger mx-1">Images Only</div>
-                    <div *ngIf="excceedControl === 'id-back' && isMaxSize" class="text-danger mx-1">File excceds maximum
-                        size (50MegaBytes)</div>
+                    <div *ngIf="excceedControl === 'id-back' && isMaxSize" class="text-danger mx-1">File excced maximum
+                        size (50 MB)</div>
                 </c-col>
             </c-row>
             <!--Patient insurance front-->
@@ -66,12 +66,12 @@
                     <div *ngIf="this.form.get('document')?.get('insurance-fornt')?.errors?.['required'] && 
                         (this.form.get('document')?.get('insurance-fornt')?.dirty ||this.form.get('document')?.get('insurance-fornt')?.touched) && !isMaxSize"
                         class="text-danger mx-1">
-                        Patient Insurance id Front is required
+                        Patient Insurance ID Front is required
                     </div>
                     <div *ngIf="this.form.get('document')?.get('insurance-fornt')?.errors?.['imageFile']"
                         class="text-danger mx-1">Images Only</div>
-                    <div *ngIf="excceedControl === 'insurance-fornt' && isMaxSize" class="text-danger mx-1">File excceds
-                        maximum size (50MegaBytes)</div>
+                    <div *ngIf="excceedControl === 'insurance-fornt' && isMaxSize" class="text-danger mx-1">File excced
+                        maximum size (50 MB)</div>
                 </c-col>
             </c-row>
             <!--Patient insurance back-->
@@ -90,12 +90,12 @@
                     <div *ngIf="this.form.get('document')?.get('insurance-back')?.errors?.['required'] && 
                     (this.form.get('document')?.get('insurance-back')?.dirty ||this.form.get('document')?.get('insurance-back')?.touched)&& !isMaxSize"
                         class="text-danger mx-1">
-                        Patient Insurance id back is required
+                        Patient Insurance ID back is required
                     </div>
                     <div *ngIf="this.form.get('document')?.get('insurance-back')?.errors?.['imageFile']"
                         class="text-danger mx-1">Images Only</div>
-                    <div *ngIf="excceedControl === 'insurance-back'&& isMaxSize" class="text-danger mx-1">File excceds
-                        maximum size (50MegaBytes)</div>
+                    <div *ngIf="excceedControl === 'insurance-back'&& isMaxSize" class="text-danger mx-1">File excced
+                        maximum size (50 MB)</div>
                 </c-col>
             </c-row>
         </span>
@@ -121,8 +121,8 @@
                 </div>
                 <div *ngIf="this.form.get('document')?.get('guarantorIdFront')?.errors?.['imageFile']"
                     class="text-danger mx-1">Images Only</div>
-                <div *ngIf="excceedControl === 'guarantorIdFront' && isMaxSize" class="text-danger mx-1">File excceds
-                    maximum size (50MegaBytes)</div>
+                <div *ngIf="excceedControl === 'guarantorIdFront' && isMaxSize" class="text-danger mx-1">File excced
+                    maximum size (50 MB)</div>
             </c-row>
             <!--guarantor Id Back Document-->
             <c-row>
@@ -142,8 +142,8 @@
                 </div>
                 <div *ngIf="this.form.get('document')?.get('guarantorIdBack')?.errors?.['imageFile']"
                     class="text-danger mx-1">Images Only</div>
-                <div *ngIf="excceedControl === 'guarantorIdBack' && isMaxSize" class="text-danger mx-1">File excceds
-                    maximum size (50MegaBytes)</div>
+                <div *ngIf="excceedControl === 'guarantorIdBack' && isMaxSize" class="text-danger mx-1">File excced
+                    maximum size (50 MB)</div>
             </c-row>
         </span>
     </div>
