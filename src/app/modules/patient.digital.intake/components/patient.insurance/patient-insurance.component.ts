@@ -24,6 +24,10 @@ export class PatientInsuranceComponent implements OnInit {
         this.InsuranceCompanies?.push(element);
       });
     })
+    this.form.get('insurance')?.get('commercial-is-secondary-insurance')?.valueChanges.subscribe(value =>{
+      if(!value)
+      this.form.get('insurance')?.get('commercial-is-medicare-coverage')?.setValue(false);
+    })
   }
   next(){
     var insuranceForm:FormGroup =  this.form.get('insurance') as FormGroup

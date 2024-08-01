@@ -165,6 +165,7 @@ export class PatientAgreementComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(paragraph);
   }
   next() {
+    console.log(this.form.get('agreement')?.valid)
     if (this.form.get('agreement')?.valid) {
       this.stepper.next();
       this.isValidForm = false;

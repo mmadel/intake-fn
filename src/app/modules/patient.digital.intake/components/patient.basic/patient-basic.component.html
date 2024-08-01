@@ -72,12 +72,12 @@
                             <c-input-group sizing="sm">
                                 <input cFormControl placeholder="FirstName" formControlName="guarantorFirstName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorFirstName')?.invalid
-                                && this.form.get('basic')?.get('guarantorFirstName')?.touched}" maxlength="60">
+                                && this.form.get('basic')?.get('guarantorFirstName')?.touched}" maxlength="60" input-trimmer>
                                 <input cFormControl placeholder="MiddleName" formControlName="guarantorMiddleName"
-                                    maxlength="60">
+                                    maxlength="60" input-trimmer>
                                 <input cFormControl placeholder="LastName" formControlName="guarantorLastName"
                                     [ngClass]="{'is-invalid': this.form.get('basic')?.get('guarantorLastName')?.invalid
-                                && this.form.get('basic')?.get('guarantorLastName')?.touched}" maxlength="60">
+                                && this.form.get('basic')?.get('guarantorLastName')?.touched}" maxlength="60" input-trimmer>
                             </c-input-group>
                         </c-col>
                         <div *ngIf="this.form.get('basic')?.get('guarantorFirstName')?.errors?.['required'] && 

@@ -106,7 +106,7 @@
             <c-row class="mb-2">
                 <c-col xl="12">
                     <label for="dsds" class="form-label">
-                        guarantor Id Front<span class="text-danger">*</span>
+                        Guarantor ID Front<span class="text-danger">*</span>
                     </label>
                 </c-col>
                 <c-col xl="12">
@@ -117,7 +117,7 @@
                 <div *ngIf="this.form.get('document')?.get('guarantorIdFront')?.errors?.['required'] && 
                 (this.form.get('document')?.get('guarantorIdFront')?.dirty ||this.form.get('document')?.get('guarantorIdFront')?.touched) && !isMaxSize"
                     class="text-danger mx-1">
-                    Guarantor Id Front is required
+                    Guarantor ID Front is required
                 </div>
                 <div *ngIf="this.form.get('document')?.get('guarantorIdFront')?.errors?.['imageFile']"
                     class="text-danger mx-1">Images Only</div>
@@ -127,7 +127,7 @@
             <!--guarantor Id Back Document-->
             <c-row>
                 <c-col xl="12">
-                    <label for="dsds" class="form-label" style="font-size: medium;">guarantor Id Back<span
+                    <label for="dsds" class="form-label" style="font-size: medium;">guarantor ID Back<span
                             class="text-danger">*</span></label>
                 </c-col>
                 <c-col xl="12">
@@ -138,7 +138,7 @@
                 <div *ngIf="this.form.get('document')?.get('guarantorIdBack')?.errors?.['required'] && 
                 (this.form.get('document')?.get('guarantorIdBack')?.dirty ||this.form.get('document')?.get('guarantorIdBack')?.touched) && !isMaxSize"
                     class="text-danger mx-1">
-                    Guarantor Id Back is required
+                    Guarantor ID Back is required
                 </div>
                 <div *ngIf="this.form.get('document')?.get('guarantorIdBack')?.errors?.['imageFile']"
                     class="text-danger mx-1">Images Only</div>
