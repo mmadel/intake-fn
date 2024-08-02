@@ -13,7 +13,7 @@
             <c-col xl="4">
                 <c-row>
                     <c-col xs="12">
-                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="height" numbers
+                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="height" type="number"
                             onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;" [ngClass]="{'is-invalid': this.form.get('medicalhistory')?.get('height')?.invalid
                 && this.form.get('medicalhistory')?.get('height')?.touched}">
                     </c-col>
@@ -47,7 +47,7 @@
             <c-col xl="4">
                 <c-row>
                     <c-col xs="12">
-                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="weight" numbers
+                        <input class="form-control col-xs-2 mx-2" placeholder formControlName="weight" type="number"
                             onKeyDown="if(this.value.length==3 && event.keyCode!=8) return false;" [ngClass]="{'is-invalid': this.form.get('medicalhistory')?.get('weight')?.invalid
                             && this.form.get('medicalhistory')?.get('weight')?.touched}">
                     </c-col>
