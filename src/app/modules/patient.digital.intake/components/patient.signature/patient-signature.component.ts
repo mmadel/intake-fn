@@ -105,7 +105,7 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
   next() {
     var drawSign: string = this.form.get('signature')?.get('drawsign')?.value
     this.isDrawsign = false;
-    if (drawSign !== null && !drawSign.endsWith('=='))
+    if (!this.signaturePad.isEmpty())
       this.isDrawsign = true
     if (this.isGeneratesign || this.isDrawsign) {
       this.stepper.next();
