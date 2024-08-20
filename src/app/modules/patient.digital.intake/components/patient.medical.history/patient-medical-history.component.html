@@ -130,11 +130,11 @@
             <c-col xl="12">
                 <c-row>
                     <c-col xs="12">
-                        <c-multi-select multiple formControlName="patientConditions" [ngClass]="{'is-invalid': this.form.get('medicalhistory')?.get('patientConditions')?.invalid
-                        && this.form.get('medicalhistory')?.get('patientConditions')?.touched}">
-                            <c-multi-select-option *ngFor="let option of patientConditions"
-                                [value]="option.name">{{option.name}}</c-multi-select-option>
-                        </c-multi-select>
+                        <ng-multiselect-dropdown formControlName="patientConditions" [ngClass]="{'is-invalid': this.form.get('medicalhistory')?.get('patientConditions')?.invalid
+                        && this.form.get('medicalhistory')?.get('patientConditions')?.touched}"
+                        [settings]="dropdownSettings"
+                        [data]="patientConditions">
+                      </ng-multiselect-dropdown>
                     </c-col>
                     <c-col xs="12">
                         <div *ngIf="this.form.get('medicalhistory')?.get('patientConditions')?.errors?.['required'] === true && 

@@ -95,8 +95,9 @@
             <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.patientCondition">
                 <strong>
                     Conditions : </strong>
+                    {{pateint.patientMedical?.patientMedicalHistory?.patientCondition | json}}
                 <li *ngFor="let condition of pateint.patientMedical?.patientMedicalHistory?.patientCondition">
-                    {{condition }}
+                    {{condition.name}}
                 </li>
                 <br />
             </span>

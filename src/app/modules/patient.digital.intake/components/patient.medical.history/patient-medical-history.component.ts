@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { PatientConditions } from 'src/app/modules/patient.questionnaire/components/medical.history.information/create.patient.conditions/patient.conditions';
 import { IPatientCondition } from 'src/app/modules/patient.questionnaire/components/medical.history.information/patient.condition';
 import { ValidationExploder } from '../create/validators/validation.exploder';
@@ -19,6 +20,7 @@ export class PatientMedicalHistoryComponent implements OnInit {
   initHeight: number = 0;
   initWeight: number
   patientConditions: IPatientCondition[] = PatientConditions.create();
+  dropdownSettings :IDropdownSettings = {};
   ngOnInit(): void {
     this.form?.get('medicalhistory')?.get('heightUnit')?.valueChanges.subscribe(value => {
       this.convertHeight(value);
@@ -26,6 +28,13 @@ export class PatientMedicalHistoryComponent implements OnInit {
     this.form?.get('medicalhistory')?.get('weightUnit')?.valueChanges.subscribe(value => {
       this.convertWeight(value);
     })
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'name',
+      textField: 'name',
+      itemsShowLimit: 30,
+      allowSearchFilter: true
+    };
   }
   convertHeight(checked: boolean) {
     var heightValue: number = this.form?.get('medicalhistory')?.get('height')?.value;
