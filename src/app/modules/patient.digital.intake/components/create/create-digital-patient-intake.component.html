@@ -26,10 +26,6 @@
                         <ng-template matStepLabel>Insurance</ng-template>
                         <patient-insurance [form]="patientForm" [stepper]="patientStepper"></patient-insurance>
                     </mat-step>
-                    <mat-step completed="false" [stepControl]="patientForm.get('document')!" formGroupName="document">
-                        <ng-template matStepLabel>Documents</ng-template>
-                        <patient-document [form]="patientForm" [stepper]="patientStepper"></patient-document>
-                    </mat-step>
                     <mat-step completed="false" [stepControl]="patientForm.get('agreement')!" formGroupName="agreement">
                         <ng-template matStepLabel>Agreements</ng-template>
                         <patient-agreement [form]="patientForm" [stepper]="patientStepper"></patient-agreement>
@@ -37,6 +33,10 @@
                     <mat-step completed="false" [stepControl]="patientForm.get('signature')!" formGroupName="signature">
                         <ng-template matStepLabel>Signature</ng-template>
                         <patient-signature [form]="patientForm" [stepper]="patientStepper"></patient-signature>
+                    </mat-step>
+                    <mat-step completed="false" [stepControl]="patientForm.get('document')!" formGroupName="document">
+                        <ng-template matStepLabel>Documents</ng-template>
+                        <patient-document [form]="patientForm" [stepper]="patientStepper"></patient-document>
                     </mat-step>
                     <mat-step completed="false">
                         <ng-template matStepLabel>Summary</ng-template>

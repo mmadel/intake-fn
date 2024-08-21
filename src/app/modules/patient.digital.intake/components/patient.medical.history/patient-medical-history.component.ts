@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { PatientConditions } from 'src/app/modules/patient.questionnaire/components/medical.history.information/create.patient.conditions/patient.conditions';
 import { IPatientCondition } from 'src/app/modules/patient.questionnaire/components/medical.history.information/patient.condition';
 import { ValidationExploder } from '../create/validators/validation.exploder';
@@ -19,6 +20,7 @@ export class PatientMedicalHistoryComponent implements OnInit {
   initHeight: number = 0;
   initWeight: number
   patientConditions: IPatientCondition[] = PatientConditions.create();
+  dropdownSettings :IDropdownSettings = {};
   ngOnInit(): void {
     this.form?.get('medicalhistory')?.get('heightUnit')?.valueChanges.subscribe(value => {
       this.convertHeight(value);
@@ -26,16 +28,23 @@ export class PatientMedicalHistoryComponent implements OnInit {
     this.form?.get('medicalhistory')?.get('weightUnit')?.valueChanges.subscribe(value => {
       this.convertWeight(value);
     })
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'name',
+      textField: 'name',
+      itemsShowLimit: 30,
+      allowSearchFilter: true
+    };
   }
   convertHeight(checked: boolean) {
     var heightValue: number = this.form?.get('medicalhistory')?.get('height')?.value;
     if (checked) {
-      // Convert cm to inch (1 cm = 0.393701 inch)
-      heightValue = Number((heightValue * 0.393701).toFixed(1));
+      // Convert cm to inch (1 cm = 0.032808 feet)
+      heightValue = Number((heightValue * 0.032808).toFixed(1));
 
     } else {
-      // Convert inch to cm (1 inch = 2.54 cm)
-      heightValue = Math.round(heightValue / 0.393701)
+      // Convert inch to cm (1 feet = 2.54 cm)
+      heightValue = Math.round(heightValue / 0.032808)
     }
     this.form?.get('medicalhistory')?.get('height')?.setValue(heightValue, { emitEvent: false });
   }

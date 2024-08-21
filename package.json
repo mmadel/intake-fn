@@ -41,6 +41,7 @@
     "keycloak-js": "^18.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "ng-multiselect-dropdown": "^0.3.8",
     "ngx-image-compress": "^15.1.5",
     "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-spinner": "^14.0.0",

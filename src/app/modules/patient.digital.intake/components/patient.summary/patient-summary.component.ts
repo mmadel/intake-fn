@@ -60,9 +60,9 @@ export class PatientSummaryComponent implements OnInit {
     })
     this.pateint.clinicId = this.clinicId;
     imageFormData.append('patient', new Blob([JSON.stringify(this.pateint)], { type: 'application/json' }));
-    this.patientService.otherCreatPatient(imageFormData).subscribe(resuldd=>{
+    this.patientService.otherCreatPatient(imageFormData).subscribe(resuldd => {
       this.router.navigateByUrl('/digital-intake/done');
-    },error=>{
+    }, error => {
       console.log('Error During Creation ' + JSON.stringify(error))
     })
     // this.patientService.newCreatePatient(this.pateint).subscribe(response => {
@@ -211,9 +211,15 @@ export class PatientSummaryComponent implements OnInit {
     this.form.get('medicalhistory')?.valueChanges.forEach(select => {
       patientMedicalHistory.height = select.height
       patientMedicalHistory.heightUnit = select.heightUnit ? 'Inch' : 'cm'
+      var height :string[] = this.calculateHeight(select.heightUnit, select.height)
+      patientMedicalHistory.height = height[0]
+      patientMedicalHistory.heightFT = height[1]
       patientMedicalHistory.weight = select.weight
-      patientMedicalHistory.weightUnit = select.weightUnit ? 'kg' : 'pound',
-        patientMedicalHistory.evaluationSubmission = select.evaluationReason;
+      patientMedicalHistory.weightUnit = select.weightUnit ? 'kg' : 'pound'
+      var weight :string[] = this.calculateWeight(select.weightUnit, select.weight)
+      patientMedicalHistory.weight = weight[0]
+      patientMedicalHistory.weightPN = weight[1]
+      patientMedicalHistory.evaluationSubmission = select.evaluationReason;
       patientMedicalHistory.patientCondition = select.patientConditions
       patientMedicalHistory.medicationPrescription = select.prescriptionMedication
       patientMedicalHistory.scanningTest = select.isXRay
@@ -349,5 +355,36 @@ export class PatientSummaryComponent implements OnInit {
       this.pateint.signature = valu;
       this.patientSignature.signature = valu;
     })
+  }
+
+  private calculateHeight(unit: boolean, value: string): string[] {
+    var heightUnit:string = unit ? 'Inch' : 'cm'
+    var height: string[] = []
+    switch (heightUnit) {
+      case 'cm':
+        height[0] = value;
+        height[1] = Number((Number(value) * 0.032808).toFixed(1)).toString();
+        break;
+      case 'Inch':
+        height[0] = Math.round(Number(value) / 0.032808).toString();
+        height[1] = value;
+        break;
+    }
+    return height;
+  }
+  private calculateWeight(unit: boolean, value: string): string[] {
+    var weightUnit:string = unit ? 'kg' : 'pound'
+    var weight: string[] = []
+    switch (weightUnit) {
+      case 'kg':
+        weight[0] = value;
+        weight[1] = Number((Number(value) / 2.20462).toFixed(1)).toString();
+        break;
+      case 'pound':
+        weight[0] = Math.round(Number(value) * 2.20462).toString()
+        weight[1] = value
+        break;
+    }
+    return weight;
   }
 }

@@ -43,7 +43,7 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
       this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.valueChanges,
       this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.valueChanges
     ]).subscribe((pName: any) => {
-      this.patientFullName = pName[1] + ' ' + pName[0]
+      this.patientFullName = pName[0] + ' ' + pName[1]
     })
 
     this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('dob')!.valueChanges.subscribe(dob => {
@@ -56,7 +56,7 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
           this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorFirstName')?.valueChanges,
           this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('guarantorLastName')?.valueChanges
         ]).subscribe((pName: any) => {
-          this.gPatientFullName = pName[1] + ' ' + pName[0]
+          this.gPatientFullName = pName[0] + ' ' + pName[1]
         })
       else {
         this.gPatientFullName = undefined
@@ -64,7 +64,7 @@ export class PatientSignatureComponent implements OnInit, AfterViewInit {
           this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('firstname')?.valueChanges,
           this.componentReference.getPatientBasicComponent()?.form.get('basic')?.get('lastName')?.valueChanges
         ]).subscribe((pName: any) => {
-          this.patientFullName = pName[1] + ' ' + pName[0]
+          this.patientFullName = pName[0] + ' ' + pName[1]
         })
       }
 

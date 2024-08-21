@@ -20,6 +20,7 @@ import { PatientAgreementComponent } from './components/patient.agreement/patien
 import { PatientSignatureComponent } from './components/patient.signature/patient-signature.component';
 import { PatientSummaryComponent } from './components/patient.summary/patient-summary.component';
 import { PatientGreetingCreationComponent } from './components/greeting/patient-greeting-creation.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 const COREUI_MODULES = [
@@ -73,6 +74,7 @@ const COREUI_MODULES = [
     ...COREUI_MODULES,
     AccordionModule,
     AutocompleteLibModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
 })
 export class PatientDigitalIntakeModule { }
