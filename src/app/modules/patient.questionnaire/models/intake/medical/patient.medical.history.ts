@@ -3,8 +3,10 @@ import { IPatientCondition } from "../../../components/medical.history.informati
 
 export interface PatientMedicalHistory {
     height?: string;
+    heightFT?: string;
     heightUnit?: string;
     weight?: string;
+    weightPN?:string;
     weightUnit?: string;
     evaluationSubmission?: string;
     medicationPrescription?: string;

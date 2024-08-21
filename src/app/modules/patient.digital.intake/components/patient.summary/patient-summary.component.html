@@ -76,11 +76,13 @@
         <h5 cCardTitle>Medical History Information</h5>
         <p cCardText>
             <strong>
-                Height : </strong> {{pateint.patientMedical?.patientMedicalHistory?.height}}
-            {{pateint.patientMedical?.patientMedicalHistory?.heightUnit}}<br />
+                Height : </strong>
+            {{pateint.patientMedical?.patientMedicalHistory?.height}} CM ,
+            {{pateint.patientMedical?.patientMedicalHistory?.heightFT}} FT <br />
             <strong>
-                Weight : </strong> {{pateint.patientMedical?.patientMedicalHistory?.weight}}
-            {{pateint.patientMedical?.patientMedicalHistory?.weightUnit }}<br />
+                Weight : </strong>
+            {{pateint.patientMedical?.patientMedicalHistory?.weight}} KG,
+            {{pateint.patientMedical?.patientMedicalHistory?.weightPN}} Pound<br />
             <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.evaluationSubmission !== null">
                 <strong>
                     Reason for today’s evaluation : </strong>
@@ -95,7 +97,7 @@
             <span *ngIf="pateint.patientMedical?.patientMedicalHistory?.patientCondition">
                 <strong>
                     Conditions : </strong>
-                    {{pateint.patientMedical?.patientMedicalHistory?.patientCondition | json}}
+                {{pateint.patientMedical?.patientMedicalHistory?.patientCondition | json}}
                 <li *ngFor="let condition of pateint.patientMedical?.patientMedicalHistory?.patientCondition">
                     {{condition.name}}
                 </li>
