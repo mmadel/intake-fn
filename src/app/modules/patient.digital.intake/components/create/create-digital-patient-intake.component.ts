@@ -49,7 +49,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         'phoneType': new FormControl(null, [Validators.required]),
         'phone': new FormControl(null, [Validators.required, Validators.min(15), Validators.pattern(phoneRgx)]),
         'email': new FormControl(null, [Validators.required, EmailValidator()]),
-        'employment': new FormControl(null, [Validators.required]),
+        'employment': new FormControl(null),
         'employmentCompany': new FormControl(null),
 
         'guarantorFirstName': new FormControl(null),
@@ -191,7 +191,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.patientForm.valueChanges.subscribe((value: any) => {
       var employmentValue = value?.['basic'].employment
       if (employmentValue && employmentValue === 'Employed') {
-        this.patientForm.get('basic')?.get('employmentCompany')?.setValidators(Validators.required)
+        this.patientForm.get('basic')?.get('employmentCompany')?.setValidators(null)
       } else {
         this.patientForm.get('basic')?.get('employmentCompany')?.setValidators(null)
         this.patientForm.get('basic')?.get('employmentCompany')?.setErrors(null)
