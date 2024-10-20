@@ -226,8 +226,7 @@
         <!--Employment Status-->
         <c-row class="mb-2">
             <c-col xl="12">
-                <label for="dsds" class="form-label" style="font-size: medium;">Employment Status<span
-                        class="text-danger">*</span></label>
+                <label for="dsds" class="form-label" style="font-size: medium;">Employment Status</label>
             </c-col>
             <c-col xl="12">
                 <select cSelect formControlName="employment" sizing="sm" [ngClass]="{'is-invalid': this.form.get('basic')?.get('employment')?.invalid
@@ -247,8 +246,7 @@
         <!--Employment Status Company-->
         <c-row class="mb-2" *ngIf="this.form.get('basic')?.get('employment')?.value === 'Employed'">
             <c-col xl="12">
-                <label for="dsds" class="form-label" style="font-size: medium;">Company<span
-                        class="text-danger">*</span></label>
+                <label for="dsds" class="form-label" style="font-size: medium;">Employer</label>
             </c-col>
             <c-col xl="12">
                 <input cFormControl sizing="sm" class="form-control" placeholder formControlName="employmentCompany"
@@ -319,7 +317,7 @@
                     </c-col>
                     <div *ngIf="!this.form.get('basic')?.get('emergencyPhone')?.valid && 
                     (this.form.get('basic')?.get('emergencyPhone')?.touched)" class="text-danger mx-1">
-                    Emergency phone is required
+                        Emergency phone is required
                     </div>
                     <div *ngIf="this.form.get('basic')?.get('emergencyPhone')?.errors?.['pattern']"
                         class="text-danger mx-1">
