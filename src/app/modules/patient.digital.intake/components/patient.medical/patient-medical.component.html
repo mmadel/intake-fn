@@ -73,7 +73,8 @@
                                 </ng-template>
                             </c-col>
                             <c-col xs="4">
-                                <p><em>Type provider first name <strong>OR</strong> first name <strong>Space</strong> last name</em></p>
+                                <p><em>Type provider first name <strong>OR</strong> first name <strong>Space</strong>
+                                        last name</em></p>
                             </c-col>
                         </c-row>
                     </span>
@@ -104,7 +105,8 @@
                 <span *ngIf="this.form.get('medical')?.get('isReferring')?.value ==='no'">
                     <c-row>
                         <c-col xs="12">
-                            <label>How you heard about us, choose from the following?<span class="text-danger">*</span></label>
+                            <label>How you heard about us, choose from the following?<span
+                                    class="text-danger">*</span></label>
                         </c-col>
                         <c-col xs="12" class="mb-2">
                             <select cSelect sizing="sm" formControlName="referringEntity" [ngClass]="{'is-invalid': this.form.get('medical')?.get('referringEntity')?.invalid
@@ -114,12 +116,23 @@
                                     [selected]="entity.selected">{{entity.entityName}}</option>
                             </select>
                         </c-col>
-                        <c-col xs="12" *ngIf="this.form.get('medical')?.get('referringEntity')?.value ==='clinic_staff' ||
+                        <span *ngIf="this.form.get('medical')?.get('referringEntity')?.value ==='clinic_staff' ||
                         this.form.get('medical')?.get('referringEntity')?.value ==='word_Of_mouse' ||
                         this.form.get('medical')?.get('referringEntity')?.value ==='other'">
-                            <input class="form-control" placeholder formControlName="referringEntityOther"
-                                maxlength="60">
-                        </c-col>
+                            <c-col xs="12">
+                                <label style="width: 150px;">Other <span class="text-danger">*</span></label>
+                            </c-col>
+                            <div *ngIf="this.form.get('medical')?.get('referringEntityOther')?.errors?.['required'] && 
+            (this.form.get('medical')?.get('referringEntityOther')?.dirty ||this.form.get('medical')?.get('referringEntityOther')?.touched)"
+                                class="text-danger mx-1">
+                                Please enter other value
+                            </div>
+                            <c-col xs="12">
+                                <input class="form-control" placeholder formControlName="referringEntityOther"
+                                    maxlength="60">
+                            </c-col>
+                        </span>
+
                         <c-col xs="12">
                             <div *ngIf="this.form.get('medical')?.get('referringEntity')?.errors?.['required'] === true && 
                 (this.form.get('medical')?.get('referringEntity')?.dirty ||this.form.get('medical')?.get('referringEntity')?.touched)"
@@ -202,8 +215,8 @@
         <c-card>
             <c-card-header>
                 <label for="dsds" class="form-label">
-                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere else ?<span
-                            class="text-danger">*</span></strong>
+                    <strong style="font-size: medium;">Have you received physical therapy this year somewhere else
+                        ?<span class="text-danger">*</span></strong>
                 </label>
             </c-card-header>
             <c-card-body>
@@ -224,7 +237,8 @@
                         <c-col xs="12">
                             <input class="form-control" placeholder formControlName="PhysicalTherapyLocation"
                                 cFormControl sizing="sm" [ngClass]="{'is-invalid': this.form.get('medical')?.get('PhysicalTherapyLocation')?.invalid
-                                && this.form.get('medical')?.get('PhysicalTherapyLocation')?.touched}" maxlength="60" input-trimmer>
+                                && this.form.get('medical')?.get('PhysicalTherapyLocation')?.touched}" maxlength="60"
+                                input-trimmer>
                         </c-col>
                         <c-col xs="12">
                             <div *ngIf="this.form.get('medical')?.get('PhysicalTherapyLocation')?.errors?.['required'] === true && 

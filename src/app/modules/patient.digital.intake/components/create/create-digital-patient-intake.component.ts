@@ -180,6 +180,7 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     })
     this.setAddressConditionalValidators()
     this.setXRayValidator();
+    this.setReferringEntityOtherValidator();
     PatientSourceValidator.addValidator(this.patientForm);
     PhysicalTherapyValidator.addValidator(this.patientForm)
     InsuranceValidator.addValidator(this.patientForm)
@@ -208,6 +209,13 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
         this.patientForm.get('medicalhistory')?.get('isXRayValue')?.setErrors(null);
         this.patientForm.get('medicalhistory')?.get('isXRayValue')?.updateValueAndValidity();
       }
+    })
+  }
+  private setReferringEntityOtherValidator(){
+    this.patientForm.get('medical')?.get('referringEntity')?.valueChanges.subscribe((value: any)=>{
+        console.log('@@ ' + value)
+        if( value !== null && value ==='other')
+        this.patientForm.get('medical')?.get('referringEntityOther')?.setValidators(Validators.required)
     })
   }
 
