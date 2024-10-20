@@ -104,7 +104,7 @@
                 <span *ngIf="this.form.get('medical')?.get('isReferring')?.value ==='no'">
                     <c-row>
                         <c-col xs="12">
-                            <label>Choose from the following entities<span class="text-danger">*</span></label>
+                            <label>How you heard about us, choose from the following?<span class="text-danger">*</span></label>
                         </c-col>
                         <c-col xs="12" class="mb-2">
                             <select cSelect sizing="sm" formControlName="referringEntity" [ngClass]="{'is-invalid': this.form.get('medical')?.get('referringEntity')?.invalid
