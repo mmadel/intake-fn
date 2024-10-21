@@ -1,5 +1,5 @@
 const entityValues = [
-    { entityName: 'Google Ad', entityValue: 'googlead', selected: false },
+    { entityName: 'Google', entityValue: 'googlead', selected: false },
     { entityName: 'Zocdoc', entityValue: 'Zocdoc', selected: false },
     { entityName: 'Social media', entityValue: 'socialmedia', selected: false },
     { entityName: 'Flyer from doctor office', entityValue: 'flyers_doctor', selected: false },
