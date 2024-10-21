@@ -181,7 +181,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
     this.setXRayValidator();
     this.setReferringEntityOtherValidator();
     PatientSourceValidator.addValidator(this.patientForm);
-    PhysicalTherapyValidator.addValidator(this.patientForm)
     InsuranceValidator.addValidator(this.patientForm)
     DocumentValidator.addValidator(this.patientForm)
     GuarantorValidator.addValidator(this.patientForm);
