@@ -71,7 +71,8 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
       'medical': new FormGroup({
         'isReferring': new FormControl(null, [Validators.required]),
         'providerSearch': new FormControl(false),
-        'providerSearchNPI': new FormControl(null),
+        'referringSearchType': new FormControl("l-name"),
+        'referringSearch': new FormControl(null),
         'providerSearchName': new FormControl(null),
         'providerName': new FormControl(null),
         'providerNPI': new FormControl(null),
@@ -211,7 +212,6 @@ export class CreateDigitalPatientIntakeComponent implements OnInit {
   }
   private setReferringEntityOtherValidator(){
     this.patientForm.get('medical')?.get('referringEntity')?.valueChanges.subscribe((value: any)=>{
-        console.log('@@ ' + value)
         if( value !== null && value ==='other')
         this.patientForm.get('medical')?.get('referringEntityOther')?.setValidators(Validators.required)
     })

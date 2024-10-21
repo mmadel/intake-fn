@@ -6,7 +6,7 @@ import { CreateDigitalPatientIntakeComponent } from './components/create/create-
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AvatarModule, BadgeModule, BreadcrumbModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FooterModule, FormModule, GridModule, HeaderModule, ListGroupModule, NavModule, ProgressModule, SharedModule, SidebarModule, TabsModule, UtilitiesModule, DateRangePickerModule, AlertModule, MultiSelectModule, DatePickerModule, AccordionModule, CalloutModule } from '@coreui/angular-pro';
+import { AvatarModule, BadgeModule, BreadcrumbModule, ButtonGroupModule, ButtonModule, CardModule, DropdownModule, FooterModule, FormModule, GridModule, HeaderModule, ListGroupModule, NavModule, ProgressModule, SharedModule, SidebarModule, TabsModule, UtilitiesModule, DateRangePickerModule, AlertModule, MultiSelectModule, DatePickerModule, AccordionModule, CalloutModule, PopoverModule, LoadingButtonModule } from '@coreui/angular-pro';
 import { IconModule } from '@coreui/icons-angular';
 import { PatientBasicComponent } from './components/patient.basic/patient-basic.component';
 import { PatientCommonModule } from '../common';
@@ -48,6 +48,8 @@ const COREUI_MODULES = [
   MultiSelectModule,
   DatePickerModule,
   CalloutModule,
+  PopoverModule,
+  LoadingButtonModule
 ]
 @NgModule({
   declarations: [

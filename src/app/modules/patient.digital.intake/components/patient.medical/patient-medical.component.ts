@@ -22,6 +22,9 @@ export class PatientMedicalComponent implements OnInit {
   entityValues = entityValues;
   @Input() stepper: MatStepper
   isValidForm: boolean = false;
+  isReferringSearchNotValid: boolean = false;
+  referringSearchErrorMessage: string | undefined;
+  loadingProvider: boolean = false;
   constructor(private providersService: ProvidersService) { }
 
 
@@ -32,80 +35,73 @@ export class PatientMedicalComponent implements OnInit {
       if (this.form.get('medical')?.get('providerName')?.value)
         this.form.get('medical')?.get('providerName')?.setValue(null)
     })
-    this.providers = this.form.get('medical')?.get('providerSearchName')?.valueChanges
-      .pipe(
-        filter(text => {
-          if (text.includes(':'))
-            return false;
-          if (Number.isNaN(text)) {
-            return false;
-          }
-          if (text?.length > 1) {
-            return true
-          } else {
-            return false;
-          }
-        }),
-        debounceTime(1000),
-        switchMap((value: any) => {
-          return this.providersService.findProviderByName(value)
-        }), share()
-      )
+
     this.providers?.subscribe(data => {
       if (data === null) {
         this.form.get('medical')?.get('providerName')?.setValue(null);
         this.form.get('medical')?.get('providerNPI')?.setValue(null);
       }
     })
-    this.form.get('medical')?.get('providerSearchNPI')?.valueChanges
-      .pipe(
-        filter(text => {
-          if (!Number(text)) {
-            return false;
+  }
+  search() {
+    this.unpickProvider();
+    var referringType: string = this.form.get('medical')?.get('referringSearchType')?.value;
+    var referringSearch: string = this.form.get('medical')?.get('referringSearch')?.value;
+    this.loadingProvider = true
+    if (referringSearch === null || referringSearch === '') {
+      this.isReferringSearchNotValid = true;
+      this.referringSearchErrorMessage = 'Type Before hit'
+      this.loadingProvider = false
+    } else {
+      switch (referringType) {
+        case 'l-name':
+          this.providers = this.providersService.findProviderByLastName(referringSearch)
+          this.providers.subscribe(rr => {
+            this.loadingProvider = false
+          })
+          break;
+        case 'f-name':
+          this.providers = this.providersService.findProviderByLastName(referringSearch)
+          this.providers.subscribe(rr => {
+            this.loadingProvider = false
+          })
+          break;
+        case 'full-name':
+          var fullName: string[] = referringSearch.split(',');
+          if (fullName.length === 1) {
+            this.loadingProvider = false
+            this.isReferringSearchNotValid = true;
+            this.referringSearchErrorMessage = 'Please follow search criteria structure'
           }
-          if (text === '')
-            return false;
-          if (text === undefined) {
-            return false;
+          else {
+            this.providers = this.providersService.findProviderByFullName(fullName[0], fullName[1])
+            this.providers.subscribe(rr => {
+              this.loadingProvider = false
+            })
+            this.isReferringSearchNotValid = false;
+            this.referringSearchErrorMessage = undefined;
           }
-          if (text.length > 1) {
-            return true
-          } else {
-            return false;
+          break;
+        case 'npi':
+          var npi: number = Number(referringSearch);
+          if (!Number.isNaN(referringSearch)) {
+            this.loadingProvider = false
+            this.isReferringSearchNotValid = true;
+            this.referringSearchErrorMessage = 'Doctor NPI must be numbers only'
           }
-        }),
-        debounceTime(500),
-        tap((value) => {
-
-        }),
-        switchMap((value: any) => {
-          return this.providersService.findProviderByNPI(value)
-            .pipe(
-              finalize(() => {
-
-              }),
-            )
-        }
-        )
-      ).subscribe(data => {
-        this.provider = data
-        var name: string | undefined;
-        var npi: string | undefined;
-        if (this.provider !== null) {
-          name = this.provider.firstName?.toLowerCase() + ',' + this.provider.lastName?.toLowerCase();
-          npi = this.provider.npi;
-        } else {
-          name = undefined;
-          npi = undefined;
-        }
-        if (data !== '') {
-          this.form.get('medical')?.get('providerName')?.setValue(name);
-          this.form.get('medical')?.get('providerNPI')?.setValue(npi);
-        }
-      },
-        error => {
-          console.log(JSON.stringify(error))
-        });
+          else {
+            this.providers = this.providersService.findProviderByNPI(Number(referringSearch))
+            this.providers.subscribe(rr => {
+              this.loadingProvider = false
+            })
+            this.isReferringSearchNotValid = false;
+            this.referringSearchErrorMessage = undefined;
+          }
+          break;
+      }
+      this.isReferringSearchNotValid = false;
+      this.referringSearchErrorMessage = undefined;
+    }
   }
   next() {
     if (this.form.get('medical')?.valid) {
@@ -119,5 +115,9 @@ export class PatientMedicalComponent implements OnInit {
   pickProvider(event: any) {
     this.form.get('medical')?.get('providerName')?.setValue(event.split(':')[0]);
     this.form.get('medical')?.get('providerNPI')?.setValue(event.split(':')[1]);
+  }
+  unpickProvider() {
+    this.form.get('medical')?.get('providerName')?.setValue(null);
+    this.form.get('medical')?.get('providerNPI')?.setValue(null);
   }
 }
