@@ -47,6 +47,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }
             console.log('other error , please contact the administrator..!! ErrorCode :' + error.error.errorCode);
             console.log('Error:' + JSON.stringify(error.error));
+            throw error;
           }
           return [];
         }))
