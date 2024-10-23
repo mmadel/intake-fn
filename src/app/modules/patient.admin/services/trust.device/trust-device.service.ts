@@ -10,16 +10,22 @@ import { ClinicService } from '../clinic/clinic.service';
 })
 export class TrustDeviceService {
   private trustDeviceURL = environment.baseURL + 'trusted-device'
-  constructor(private http: HttpClient,private clinicService: ClinicService) { }
-  public list(){
+  constructor(private http: HttpClient, private clinicService: ClinicService) { }
+  public list() {
     return this.clinicService.selectedClinic$.pipe(
-      filter(clinic=> clinic !==null),
-      switchMap(clinicId =>  
+      filter(clinic => clinic !== null),
+      switchMap(clinicId =>
         this.http
           .get<TrustDevice[]>(`${this.trustDeviceURL}` + '/list/clinic-id/' + clinicId)
       ))
   }
-  private handleHttpError(error: HttpErrorResponse) {
-    return throwError(() => error);
+
+  public generateDeviceRequest() {
+    const headers = { 'content-type': 'application/json' }
+    return this.clinicService.selectedClinic$.pipe(
+      filter(clinic => clinic !== null),
+      switchMap(clinicId =>
+        this.http.post(`${this.trustDeviceURL}` + '/generate-token', JSON.stringify(clinicId), { 'headers': headers, observe: 'response' })
+      ))
   }
 }

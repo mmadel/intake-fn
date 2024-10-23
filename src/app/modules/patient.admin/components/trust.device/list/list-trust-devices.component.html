@@ -43,6 +43,6 @@
         <button (click)="toggleGenertaeRequest()" cButtonClose></button>
     </c-modal-header>
     <c-modal-body>
-        <generate-request></generate-request>
+        <generate-request *ngIf="genertaeRequestVisibility"></generate-request>
     </c-modal-body>
 </c-modal>
