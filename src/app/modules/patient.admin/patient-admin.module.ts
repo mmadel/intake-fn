@@ -64,6 +64,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { PatientCounterWidgetsComponent } from './components/dashboard/patient.counters.widgets/patient-counter-widgets.component';
 import { ClinicsPatientsChartComponent } from './components/dashboard/patients.clinics.chart/clinics-patients-chart.component';
+import { ListTrustDevicesComponent } from './components/trust.device/list/list-trust-devices.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { ClinicsPatientsChartComponent } from './components/dashboard/patients.c
     PatientCreateComponent,
     InsuranceCompanyCreateComponent,
     InsuranceCompanyListComponent,
-    UserUpdateComponent, UpdateClinicComponent, AuditComponent, UserAuditComponent, UserClinicAuditComponent, UserInsuranceCompanyAuditComponent, UserPatientAuditComponent, PatientCounterWidgetsComponent, ClinicsPatientsChartComponent
+    UserUpdateComponent, UpdateClinicComponent, AuditComponent, UserAuditComponent, UserClinicAuditComponent, UserInsuranceCompanyAuditComponent, UserPatientAuditComponent, PatientCounterWidgetsComponent, ClinicsPatientsChartComponent, ListTrustDevicesComponent
   ],
   imports: [
     CommonModule,

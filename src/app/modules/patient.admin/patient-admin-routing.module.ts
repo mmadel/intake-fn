@@ -12,6 +12,7 @@ import { InsuranceCompanyListComponent } from './components/insurance.company/li
 import { PatientCreateComponent } from './components/patient.create/patient-create.component';
 import { PatientListComponent } from './components/patient.list/patient.list.component';
 import { RecommendationReportComponent } from './components/reports/recommendation.report.component';
+import { ListTrustDevicesComponent } from './components/trust.device/list/list-trust-devices.component';
 import { UserCreationComponent } from './components/user/create/user-creation.component';
 import { UserListComponent } from './components/user/list/user-list.component';
 import { UserUpdateComponent } from './components/user/update/user-update.component';
@@ -116,6 +117,13 @@ const routes: Routes = [{
     {
       path: 'insurance/company/create',
       component: InsuranceCompanyCreateComponent,
+      data: {
+        title: 'insurance-company-create',
+      }
+    },
+    {
+      path: 'trust/devices/list',
+      component: ListTrustDevicesComponent,
       data: {
         title: 'insurance-company-create',
       }
