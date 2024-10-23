@@ -9,17 +9,24 @@ import { TrustDeviceService } from '../../../services/trust.device/trust-device.
   styleUrls: ['./list-trust-devices.component.css']
 })
 export class ListTrustDevicesComponent implements OnInit {
-  isError:boolean = false;
-  errorMessage:string;
+  isError: boolean = false;
+  errorMessage: string;
   trustDevices!: Observable<TrustDevice[]>;
-  constructor(private trustDeviceService:TrustDeviceService) { }
+  genertaeRequestVisibility: boolean = false;
+  constructor(private trustDeviceService: TrustDeviceService) { }
 
   ngOnInit(): void {
     this.trustDevices! = this.trustDeviceService.list();
-    this.trustDevices!.subscribe(result=>{
-    },error=>{
+    this.trustDevices!.subscribe(result => {
+    }, error => {
       this.isError = true;
       this.errorMessage = error.error.message;
     })
+  }
+  toggleGenertaeRequest() {
+    this.genertaeRequestVisibility = !this.genertaeRequestVisibility;
+  }
+  openGenertaeRequest() {
+    this.genertaeRequestVisibility = true;
   }
 }

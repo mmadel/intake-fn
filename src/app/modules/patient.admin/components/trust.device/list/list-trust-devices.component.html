@@ -5,7 +5,7 @@
     </c-col>
     <c-col xs="12">
         <div class="clinic-header" style="float: right;">
-            <button cButton color="primary" variant="outline">+ Add Device</button>
+            <button cButton color="primary" variant="outline" (click)="openGenertaeRequest()">+ Add Device</button>
         </div>
     </c-col>
 </c-row>
@@ -37,3 +37,12 @@
         <p>Please add new devices to start managing them here.</p>
     </div>
 </ng-template>
+<c-modal id="genertaeRequestModal" [visible]="genertaeRequestVisibility" size="xl" backdrop="static">
+    <c-modal-header>
+        <h3 cModalTitle>Add New Device</h3>
+        <button (click)="toggleGenertaeRequest()" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+        <generate-request></generate-request>
+    </c-modal-body>
+</c-modal>

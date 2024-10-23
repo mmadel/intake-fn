@@ -65,6 +65,7 @@ import { ChartjsModule } from '@coreui/angular-chartjs';
 import { PatientCounterWidgetsComponent } from './components/dashboard/patient.counters.widgets/patient-counter-widgets.component';
 import { ClinicsPatientsChartComponent } from './components/dashboard/patients.clinics.chart/clinics-patients-chart.component';
 import { ListTrustDevicesComponent } from './components/trust.device/list/list-trust-devices.component';
+import { GenerateRequestComponent } from './components/trust.device/generate.request/generate-request.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,7 @@ import { ListTrustDevicesComponent } from './components/trust.device/list/list-t
     PatientCreateComponent,
     InsuranceCompanyCreateComponent,
     InsuranceCompanyListComponent,
-    UserUpdateComponent, UpdateClinicComponent, AuditComponent, UserAuditComponent, UserClinicAuditComponent, UserInsuranceCompanyAuditComponent, UserPatientAuditComponent, PatientCounterWidgetsComponent, ClinicsPatientsChartComponent, ListTrustDevicesComponent
+    UserUpdateComponent, UpdateClinicComponent, AuditComponent, UserAuditComponent, UserClinicAuditComponent, UserInsuranceCompanyAuditComponent, UserPatientAuditComponent, PatientCounterWidgetsComponent, ClinicsPatientsChartComponent, ListTrustDevicesComponent, GenerateRequestComponent
   ],
   imports: [
     CommonModule,
