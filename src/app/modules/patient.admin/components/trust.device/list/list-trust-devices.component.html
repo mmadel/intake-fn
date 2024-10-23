@@ -1,1 +1,33 @@
-<p>list-trust-devices works!</p>
+<ngx-spinner></ngx-spinner>
+<c-row>
+    <c-col xs="12">
+        <h1>Trust Devices</h1>
+    </c-col>
+</c-row>
+<hr />
+
+<div class="clinic-container">
+    <!-- Clinic 1 -->
+    <div class="clinic">
+        <div class="clinic-header">
+            <span class="clinic-name">Clinic 1</span>
+            <button cButton color="primary" variant="outline" >+ Add Device</button>
+        </div>
+        <div class="device-list">
+            <!-- Device Card -->
+            <div class="device-card">
+                <div class="device-icon">📱</div>
+                <div class="device-name">Tablet A</div>
+                <div class="device-id">ID: 12345</div>
+                <button cButton color="danger" variant="outline">Remove</button>
+            </div>
+            <div class="device-card">
+                <div class="device-icon">💻</div>
+                <div class="device-name">Tablet B</div>
+                <div class="device-id">ID: 67890</div>
+                <button cButton color="danger" variant="outline" >Remove</button>
+            </div>
+            <!-- Add more device cards as needed -->
+        </div>
+    </div>
+</div>
